@@ -151,9 +151,6 @@
                                                         In order to join {{ cms_config('hotel.name.short') }} Club you need to <a
                                                             href="{{ url('/') }}/login">log in</a> first.
                                                     @else
-                                                        You has {{ user()->getSubscription()->daysRemaining() }} HC days
-
-
                                                         @if(user()->getSubscription()->neverSubscribed()) {{-- never been hc member --}}
                                                         <div id="subscription-meter-box2" style="left: 10px;">
                                                             <div id="pastmonthsVal">0</div>
