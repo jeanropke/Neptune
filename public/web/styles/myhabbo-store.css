@@ -1,0 +1,520 @@
+.topdialog {
+	text-align: left;
+	position: absolute;
+	width: 398px;
+	z-index: 9001
+}
+.topdialog-body {
+	padding: 10px 10px 0 10px
+}
+.topdialog .dialog-handle {
+	cursor: move
+}
+a.topdialog-exit {
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	right: 13px;
+	top: 9px;
+	text-indent: -10000px;
+	background: transparent url(../images/close_x.gif) no-repeat
+}
+.black a.topdialog-exit {
+	background: transparent url(../images/close_x_black.png) no-repeat
+}
+.topdialog .box-tabs {
+	border-bottom: 1px solid #000;
+	padding-bottom: 25px;
+	margin-top:0px;
+}
+.topdialog .box-tabs li {
+	float: left
+}
+.cbb {
+	margin: 8px;
+	padding: 0;
+	background: #fff
+}
+.bt {
+	height: 5px;
+	margin: 0 0 0 18px;
+	background: no-repeat 100% 0
+}
+.bt div {
+	position: relative;
+	left: -18px;
+	width: 18px;
+	height: 5px;
+	background: no-repeat 0 0;
+	font-size: 0;
+	line-height: 0;
+	z-index: 1
+}
+.bb {
+	height: 9px;
+	margin: 0 0 0 8px;
+	background: no-repeat 100% 100%;
+	position: relative
+}
+.bb div {
+	position: absolute;
+	left: -8px;
+	width: 8px;
+	height: 9px;
+	background: no-repeat 0 100%;
+	font-size: 0;
+	line-height: 0;
+	display: block
+}
+.i1 {
+	padding: 0 0 0 1px;
+	background: url(../images/borders.png) repeat-y
+}
+.i2 {
+	padding: 0 1px 0 0;
+	background: url(../images/borders.png) repeat-y top right
+}
+.i3 {
+	display: block;
+	/*margin: -11px 0 0 0;*/
+	padding: 0;
+	background: #fff;
+	z-index: 0
+}
+.i3:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+.i3 {
+	display: inline-block
+}
+.i3 {
+	display: block
+}
+.topdialog .bt, .topdialog .bt div, .topdialog .bb, .topdialog .bb div {
+	background-image: url(../images/box_black_borders.png)
+}
+.topdialog .i1, .topdialog .i2 {
+	background-image: url(../images/borders_black.png)
+}
+#content .bt {
+	background-image: url(../images/box.png)
+}
+#content .bt div {
+	background-image: url(../images/box.png)
+}
+#content .bb {
+	background-image: url(../images/box.png)
+}
+#content .bb div {
+	background-image: url(../images/box.png)
+}
+#content .i1 {
+	background-image: url(../images/borders.png)
+}
+#content .i2 {
+	background-image: url(../images/borders.png)
+}
+#content .cbb.gray {
+	background: #9a9a91
+}
+#content .cb.gray {
+	background: transparent
+}
+#content .gray .bt {
+	background-image: url(../images/box_gray.png)
+}
+#content .gray .bt div {
+	background-image: url(../images/box_gray.png)
+}
+#content .gray .bb {
+	background-image: url(../images/box_gray.png)
+}
+#content .gray .bb div {
+	background-image: url(../images/box_gray.png)
+}
+#content .gray .i3 {
+	background-color: #94948b
+}
+#content .cbb.lightgreen {
+	background: #d5e7d8
+}
+#content .cb.lightgreen {
+	background: transparent
+}
+#content .lightgreen .bt {
+	background-image: url(../images/box_lightgreen.png)
+}
+#content .lightgreen .bt div {
+	background-image: url(../images/box_lightgreen.png)
+}
+#content .lightgreen .bb {
+	background-image: url(../images/box_lightgreen.png)
+}
+#content .lightgreen .bb div {
+	background-image: url(../images/box_lightgreen.png)
+}
+#content .lightgreen .i3 {
+	background-color: #d5e7d8
+}
+#content .cbb.loginbox {
+	background: #b4b4ae
+}
+#content .cb.loginbox {
+	background: transparent
+}
+#content .loginbox .bt {
+	background-image: url(../images/box_loginbox.png)
+}
+#content .loginbox .bt div {
+	background-image: url(../images/box_loginbox.png)
+}
+#content .loginbox .bb {
+	background-image: url(../images/box_loginbox.png)
+}
+#content .loginbox .bb div {
+	background-image: url(../images/box_loginbox.png)
+}
+#content .loginbox .i3 {
+	background-color: #b4b4ae
+}
+#content .activehomes .bt {
+	background-image: url(../images/activehomes/boxblue.png)
+}
+#content .activehomes .bt div {
+	background-image: url(../images/activehomes/boxblue.png)
+}
+#content .activehomes .bb {
+	background-image: url(../images/activehomes/boxblue.png)
+}
+#content .activehomes .bb div {
+	background-image: url(../images/activehomes/boxblue.png)
+}
+#content .activehomes .i3 {
+	background-color: #99cadb
+}
+#content .black .bt {
+	background-image: url(../images/box_black.png)
+}
+#content .black .bt div {
+	background-image: url(../images/box_black.png)
+}
+#content .black .bb {
+	background-image: url(../images/box_black.png)
+}
+#content .black .bb div {
+	background-image: url(../images/box_black.png)
+}
+#content .black .i3 {
+	background-color: #000
+}
+#content .cbb.rooms {
+	background: #4596a9
+}
+#content .rooms .bt {
+	background-image: url(../images/welcome/roompattern_box.png)
+}
+#content .rooms .bt div {
+	background-image: url(../images/welcome/roompattern_box.png)
+}
+#content .rooms .bb {
+	background-image: url(../images/welcome/roompattern_box.png)
+}
+#content .rooms .bb div {
+	background-image: url(../images/welcome/roompattern_box.png)
+}
+#content .rooms .i3 {
+	background-color: #4596a9;
+	background-image: url(../images/welcome/roompattern_bg.png)
+}
+#content .cbb.darkgray {
+	background: #747474
+}
+#content .cb.darkgray {
+	background: transparent
+}
+#content .darkgray .bt {
+	background-image: url(../images/box_darkgray.png)
+}
+#content .darkgray .bt div {
+	background-image: url(../images/box_darkgray.png)
+}
+#content .darkgray .bb {
+	background-image: url(../images/box_darkgray.png)
+}
+#content .darkgray .bb div {
+	background-image: url(../images/box_darkgray.png)
+}
+#content .darkgray .i3 {
+	background-color: #747474;
+	color: #fff
+}
+form {
+	margin: 0;
+	padding: 0
+}
+ul.box-tabs li strong, ul.box-tabs li a, ul.box-tabs li span.tab-spacer {
+	top: 1px;
+	position: relative
+}
+ul.box-tabs li a:focus {
+	outline: 0
+}
+ul.box-tabs li strong, ul.box-tabs li a {
+	float: left;
+	height: 19px;
+	padding: 6px 10px 0 14px;
+	background-repeat: no-repeat;
+	background-image: url(../images/inner-tabs.png);
+	background-position: -16px -25px;
+	color: #fff;
+	font-weight: normal;
+	text-decoration: none;
+	max-width: 184px;
+	overflow: hidden
+}
+ul.box-tabs li span.tab-spacer {
+	float: left;
+	height: 25px;
+	width: 4px;
+	background: url(../images/inner-tabs.png) no-repeat -12px -25px
+}
+ul.box-tabs li.selected strong, ul.box-tabs li.selected a {
+	background-position: -16px 0;
+	color: #000;
+	font-weight: bold
+}
+ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px 0
+}
+ul.box-tabs li:hover a {
+	background-position: -16px -50px
+}
+ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -50px
+}
+ul.box-tabs li.selected:hover a {
+	background-position: -16px 0
+}
+ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px 0
+}
+div.box-tabs-container h2 {
+	position: absolute
+}
+div.box-tabs-container h2.page-owner {
+	position: relative;
+	float: left
+}
+div.box-tabs-left ul.box-tabs li {
+	float: left
+}
+div.blue a.secondary {
+	color: #2767a7
+}
+div.blue div.box-tabs-container h2 {
+	color: #009dff
+}
+div.blue ul.box-tabs {
+	border-bottom-color: #528dc9
+}
+div.blue ul.box-tabs li strong, div.blue ul.box-tabs li a {
+	background-position: -16px -100px
+}
+div.blue ul.box-tabs li span.tab-spacer {
+	background-position: -12px -100px
+}
+div.blue ul.box-tabs li.selected strong, div.blue ul.box-tabs li.selected a {
+	background-position: -16px -75px
+}
+div.blue ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -75px
+}
+div.blue ul.box-tabs li:hover a {
+	background-position: -16px -125px
+}
+div.blue ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -125px
+}
+div.blue ul.box-tabs li.selected:hover a {
+	background-position: -16px -75px
+}
+div.blue ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -75px
+}
+div.green a.secondary {
+	color: #4ab501
+}
+div.green div.box-tabs-container h2 {
+	color: #3ba800
+}
+div.green ul.box-tabs {
+	border-bottom-color: #3ba800
+}
+div.green ul.box-tabs li strong, div.green ul.box-tabs li a {
+	background-position: -16px -175px
+}
+div.green ul.box-tabs li span.tab-spacer {
+	background-position: -12px -175px
+}
+div.green ul.box-tabs li.selected strong, div.green ul.box-tabs li.selected a {
+	background-position: -16px -150px
+}
+div.green ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -150px
+}
+div.green ul.box-tabs li:hover a {
+	background-position: -16px -200px
+}
+div.green ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -200px
+}
+div.green ul.box-tabs li.selected:hover a {
+	background-position: -16px -150px
+}
+div.green ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -150px
+}
+div.red div.box-tabs-container h2 {
+	color: #d64242
+}
+div.red ul.box-tabs {
+	border-bottom-color: #d64242
+}
+div.red ul.box-tabs li strong, div.red ul.box-tabs li a {
+	background-position: -16px -325px
+}
+div.red ul.box-tabs li span.tab-spacer {
+	background-position: -12px -325px
+}
+div.red ul.box-tabs li.selected strong, div.red ul.box-tabs li.selected a {
+	background-position: -16px -300px
+}
+div.red ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -300px
+}
+div.red ul.box-tabs li:hover a {
+	background-position: -16px -350px
+}
+div.red ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -350px
+}
+div.red ul.box-tabs li.selected:hover a {
+	background-position: -16px -300px
+}
+div.red ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -300px
+}
+div.hcred div.box-tabs-container h2 {
+	color: #7a7a7a
+}
+div.hcred ul.box-tabs {
+	border-bottom-color: #7a7a7a
+}
+div.hcred ul.box-tabs li strong, div.hcred ul.box-tabs li a {
+	background-position: -16px -175px
+}
+div.hcred ul.box-tabs li span.tab-spacer {
+	background-position: -12px -175px
+}
+div.hcred ul.box-tabs li.selected strong, div.hcred ul.box-tabs li.selected a {
+	background-position: -16px -150px
+}
+div.hcred ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -150px
+}
+div.hcred ul.box-tabs li:hover a {
+	background-position: -16px -200px
+}
+div.hcred ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -200px
+}
+div.hcred ul.box-tabs li.selected:hover a {
+	background-position: -16px -150px
+}
+div.hcred ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -150px
+}
+div.lightbrown div.box-tabs-container h2 {
+	color: #cf9c44
+}
+div.lightbrown ul.box-tabs {
+	border-bottom-color: #cf9c44
+}
+div.lightbrown ul.box-tabs li strong, div.lightbrown ul.box-tabs li a {
+	background-position: -16px -175px
+}
+div.lightbrown ul.box-tabs li span.tab-spacer {
+	background-position: -12px -175px
+}
+div.lightbrown ul.box-tabs li.selected strong, div.lightbrown ul.box-tabs li.selected a {
+	background-position: -16px -150px
+}
+div.lightbrown ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -150px
+}
+div.lightbrown ul.box-tabs li:hover a {
+	background-position: -16px -200px
+}
+div.lightbrown ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -200px
+}
+div.lightbrown ul.box-tabs li.selected:hover a {
+	background-position: -16px -150px
+}
+div.lightbrown ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -150px
+}
+div.black div.box-tabs-container h2 {
+	color: #fff
+}
+div.black ul.box-tabs {
+	border-bottom-color: #000
+}
+div.black ul.box-tabs li strong, div.black ul.box-tabs li a {
+	background-position: -16px -250px
+}
+div.black ul.box-tabs li span.tab-spacer {
+	background-position: -12px -250px
+}
+div.black ul.box-tabs li.selected strong, div.black ul.box-tabs li.selected a {
+	background-position: -16px -225px
+}
+div.black ul.box-tabs li.selected span.tab-spacer {
+	background-position: -12px -225px
+}
+div.black ul.box-tabs li:hover a {
+	background-position: -16px -275px
+}
+div.black ul.box-tabs li:hover span.tab-spacer {
+	background-position: -12px -275px
+}
+div.black ul.box-tabs li.selected:hover a {
+	background-position: -16px -225px
+}
+div.black ul.box-tabs li.selected:hover span.tab-spacer {
+	background-position: -12px -225px
+}
+h2.title {
+margin: 0;
+padding: 4px 10px;
+font-size: 14px;
+background-color: #fc6204;
+position: relative;
+line-height: 17px;
+}
+.rounded-container h2.title {
+padding: 0 10px;
+height: 17px;
+}
+
+div.rounded-container {
+margin: 0 4px;
+}
+p.webstore-item-preview {
+	text-align:left;
+	margin-left:90px;
+}

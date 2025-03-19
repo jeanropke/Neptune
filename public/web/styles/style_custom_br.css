@@ -1,0 +1,11 @@
+body {
+	background-image: url(../images/bg_patterns/bg_pattern_clouds.gif);
+}
+/* --- Hotel view image on the top bar (image size - width: 928px, height: 154px) --- */
+#top {
+	background-image: url(../images/hotelviews/web_view_bg_br.gif);
+} 
+/* --- Enter hotel button on the right of the top bar (image size - width: 105px, height: 106px) --- */
+#top-elements #enter-hotel a#enter-hotel-link { 
+	background-image: url(../images/enterbuttons/enter_anim_br.gif);
+} 

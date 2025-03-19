@@ -1,0 +1,1107 @@
+#mypage-wrapper {
+	padding: 0 5px;
+}
+
+/** PANELS **/
+
+#mypage-top-nav {
+	height: 18px;
+}
+
+#mypage-top-error {
+	margin: 0 130px 15px 130px;
+}
+
+#mypage-top-spacer {
+	height: 4px;
+	font-size: 1%;
+}
+
+#mypage-bg {
+    position: relative;
+    padding: 0 3px;
+}
+
+body#editmode #playground-outer {
+	border: 1px dotted white;
+}
+
+body#editmode #playground {
+	border: 1px dotted black;
+}
+
+#mypage-ad {
+	position: absolute;
+	top: 0;
+	right: 3px;
+    z-index: 10000;
+}
+
+#header-bar {
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	margin: 0 3px;
+}
+
+#header-bar .box-content {
+	height: 23px;
+}
+
+#header-bar-text {
+	float: left;
+	padding: 3px 10px 0 5px;
+}
+
+#header-bar-warning {
+	float: left;
+	padding: 3px 10px 0 0;
+	font-size: 11px;
+	font-weight: normal;
+	color: yellow;
+}
+
+#editmode #header-bar-outer {
+	padding-bottom: 4px;
+}
+
+#top-toolbar {
+	margin: 0 3px 0 3px;
+}
+
+#top-toolbar div {
+	height: 29px;
+	background-image: url(../../images/myhabbo/tools_bg.gif);
+	background-repeat: no-repeat;
+	background-position: 0 1px;
+	padding: 0 4px;
+}
+
+#edit-page-button {
+	font-family: Veranda;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 1;
+	color: white;
+}
+
+#edit-page-button .button-content {
+	height: 14px;
+}
+
+/*** PROFILE BOX ***/
+
+.profile-info {
+	width: 90px;
+	margin-left: -3px;
+	float: left;
+}
+
+.profile-info .name-text {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.profile-info img {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.profile-figure {
+	float: left;
+	margin-left: 5px;
+}
+
+div.profile-motto {
+	clear: both;
+	margin-top: 5px;
+	padding-top: 5px;
+	border-top: 1px dashed black;
+}
+
+#loading {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px;
+}
+
+#editor, #bg-editor {
+	border: 2px solid black;
+	width: 250px;
+	position: absolute;
+	z-index: 1001;
+	display: none;
+	padding: 4px;
+	background-color: #EAEAEA;
+}
+
+#edit-bg-btn {
+	cursor: pointer;
+	width: 11px;
+	height: 10px;
+	background: url(../images/myhabbo/box_edit_btn_1.gif) no-repeat;
+	float: right;
+	margin-right: 20px;
+	margin-top: 7px;
+}
+
+div.myportlet {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+div.myportlet p {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+div.myportlet-header h3, div.stickie-header h3 {
+	margin: 0;
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+div.myportlet-content {
+}
+
+div.myportlet-bottom {
+	height: 15px;
+	position: relative;
+}
+
+div.myportlet-resize {
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	cursor: se-resize;
+	background: url(../images/myhabbo/resize.gif) no-repeat;
+	display: none;
+}
+
+div.myportlet-edit {
+	cursor: pointer;
+	width: 11px;
+	height: 10px;
+	background: url(../images/myhabbo/box_edit_btn_1.gif) no-repeat;
+	clear: both;
+}
+
+div.habboimg {
+	float: right;
+	background-position: 0 -20px;
+	background-repeat: no-repeat;
+	width: 64px;
+	height: 100px;
+}
+
+/*** STICKER ***/
+
+div.sticker {
+    background-repeat: no-repeat;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 1%;
+}
+
+#editmode div.sticker {
+	cursor: move;
+}
+
+#sticker-preview {
+    position: absolute;
+	z-index: 10000;
+	padding: 20px;
+	background-color: white;
+	cursor: default;
+}
+
+
+/*** STICKIE ***/
+
+div.stickie {
+	position: absolute;
+	top: 0;
+	left: -1500px;
+}
+
+#editmode div.stickie {
+	cursor: move;
+}
+
+div.stickie-header {
+	padding-left: 4px;
+}
+
+div.stickie-header h3 {
+	font-size: 1px;
+	height: 20px;
+	padding: 2px 7px 0px 3px;
+}
+
+div.stickie-body {
+	/*margin-top: -3px;*/
+	padding-left: 4px;
+}
+
+div.stickie-content {
+	padding: 3px 7px 4px 3px;
+ 	word-wrap: break-word;
+}
+
+div.stickie-footer {
+	padding: 0 15px 5px 0;
+}
+
+div.stickie ul {
+	padding-left: 12px;
+}
+
+div.stickie p {
+	overflow: hidden;
+}
+
+/*** GOLD ***/
+
+div.myportlet.gold {
+}
+
+div.myportlet.gold div.myportlet-header {
+	background: url(../images/box-scale/gold-top-l.gif) no-repeat;
+	border-bottom: 1px solid black;
+	padding-left: 7px;
+}
+
+div.myportlet.gold div.myportlet-header h3 {
+	background: url(../images/box-scale/gold-top.gif) no-repeat top right;
+	padding: 5px 7px 5px 0;
+}
+
+div.myportlet.gold div.myportlet-body {
+	background: url(../images/box-scale/gold-bottom-l.gif) no-repeat bottom left;
+	padding-left: 7px;
+}
+
+div.myportlet.gold div.myportlet-content {
+	background: url(../images/box-scale/gold-bottom.gif) no-repeat bottom right;
+	padding: 7px 7px 7px 0;
+}
+
+
+/*** GREY ***/
+
+div.myportlet.grey {
+	color: white;
+}
+
+div.myportlet.grey table.scores {
+	color: black;
+}
+
+div.myportlet.grey div.myportlet-header {
+	background: url(../images/myhabbo/box_02_top_left.gif) no-repeat;
+	padding-left: 4px;
+	height: 25px;
+}
+
+div.myportlet.grey div.myportlet-header h3 {
+	background: url(../images/myhabbo/box_02_top_right.gif) no-repeat top right;
+	padding: 6px 7px 6px 3px;
+	color: white;
+}
+
+div.myportlet.grey div.myportlet-body {
+	background: url(../images/myhabbo/box_02_mid_left.gif) no-repeat bottom left;
+	padding-left: 4px;
+}
+
+div.myportlet.grey div.myportlet-content {
+	background: url(../images/myhabbo/box_02_mid_right.gif) no-repeat bottom right;
+	padding: 7px 7px 4px 3px;
+}
+
+div.myportlet.grey div.myportlet-edit {
+	margin-top: 10px;
+	background: url(../images/myhabbo/box_edit_btn_2.gif) no-repeat;
+}
+
+
+/*** RED ***/
+
+div.myportlet.red {
+}
+
+div.myportlet.red div.myportlet-header {
+	background: url(../images/myhabbo/box_03_top_left.gif) no-repeat;
+	padding-left: 4px;
+	height: 25px;
+}
+
+div.myportlet.red div.myportlet-header h3 {
+	background: url(../images/myhabbo/box_03_top_right.gif) no-repeat top right;
+	padding: 6px 7px 6px 3px;
+	color: white;
+}
+
+div.myportlet.red div.myportlet-body {
+	background: url(../images/myhabbo/box_03_mid_left.gif) no-repeat bottom left;
+	padding-left: 4px;
+}
+
+div.myportlet.red div.myportlet-content {
+	background: url(../images/myhabbo/box_03_mid_right.gif) no-repeat bottom right;
+	padding: 7px 7px 4px 3px;
+}
+
+div.myportlet.red div.myportlet-edit {
+	margin-top: 10px;
+}
+
+
+/*** BLUE ***/
+
+div.myportlet.blue {
+}
+
+div.myportlet.blue div.myportlet-header {
+	background-color: #09C;
+	padding: 3px 7px;
+}
+
+div.myportlet.blue div.myportlet-body {
+	background: url(../images/myhabbo/blue-bg.png);
+	padding: 7px;
+}
+
+
+/*** PINK ***/
+
+div.myportlet.pink {
+	border: 2px solid white;
+}
+
+div.myportlet.pink div.myportlet-header {
+	border-bottom: 2px solid white;
+	background-color: #FF70A2;
+	padding: 3px 7px;
+}
+
+div.myportlet.pink div.myportlet-body {
+	background: url(../images/myhabbo/pink-bg.png);
+	padding: 7px;
+}
+
+
+/*** Dialogs ***/
+.dialog {
+	position: absolute;
+}
+
+/* ---- ban page ----------- */
+#user-banned-wrapper, #user-404-wrapper {
+	padding: 10px 250px;
+	text-align: center;
+}
+
+.widget {
+	position: absolute;
+}
+
+.widget h3 .widget-title {
+	float: left;
+}
+
+/*** friends widget styles ***/
+
+div#friends {
+	width: 240px;
+}
+div#slider {
+     margin: 10px 0 10px 30px !important;
+     margin: 10px 0 10px 10px;
+     float: left;
+}
+
+div#slider-bar {
+     width: 170px;
+     background-image: url(../../images/myhabbo/slider/slider_track_plain.gif);
+     background-repeat: repeat-x;
+     background-position: center left;
+     height: 18px;
+}
+
+div#slider-handle {
+     width: 18px;
+     height: 18px;
+     margin: 0;
+     cursor: pointer;
+     cursor: hand;
+}
+
+div#number {
+	width: 95%;
+	text-align: center;
+}
+
+.friend
+{
+    float: left;
+	width: 30px;
+	border: 1px solid #999;
+	margin: 0 5px 5px 0;
+	padding: 5px;
+}
+
+div.friend-selected
+{
+    border: 1px solid black;
+}
+
+.friend_info
+{
+	display: none;
+	width: 92%;
+	border: 1px solid black;
+	margin: 0 5px 5px 0;
+	padding: 5px;
+}
+
+ul.friendlist, ul.roomlist {
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.friendlist li, ul.roomlist li {
+	margin: 0 10px;
+	float: left;
+	text-align: center;
+}
+
+ul.friendlist li {
+	width: 100px;
+	padding: 60px 0 0 0;
+	background-position: 35px -60px;
+	background-repeat: no-repeat;
+}
+
+/*** rooms widget styles ***/
+div#room_wrapper {
+	overflow: auto;
+	max-height: 200px;
+}
+
+div.room_image {
+	float: left;
+	width: 50px;
+	padding: 5px 0 5px 0;
+}
+
+div.room_info {
+	float: left;
+	word-wrap: break-word;
+	padding: 5px 0 5px 0;
+}
+
+div.room_name {
+	float: left;
+	font-weight: bold;
+}
+
+td.dotted-line {
+	border-bottom: dotted 1px black;
+}
+
+hr.divider {
+	width: 90%;
+	height: 1px;
+}
+
+/* guestbook */
+
+.guestbook-entries {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 250px;
+	overflow: auto;
+}
+
+.guestbook-entries li {
+	list-style: none;
+	border-bottom: 1px dashed #000;
+	padding-bottom: 3px;
+	margin-bottom: 5px;
+	word-wrap: break-word;
+}
+
+* html .guestbook-entries li {
+	zoom : 1;
+}
+
+.guestbook-entries li p {
+	padding: 0;
+	margin: 0;
+}
+
+.guestbook-entries .guestbook-author {
+	float: left;
+	width: 30px;
+	margin-right: 8px;
+}
+
+.guestbook-entries .guestbook-message {
+	margin: 0 38px 0 38px;
+}
+
+.guestbook-entries .guestbook-actions {
+	float: right;
+	width: 30px;
+	margin-left: 0px;
+	margin-top: 15px;
+}
+
+.guestbook-entries .guestbook-cleaner {
+	clear:both;
+	height:1px;
+	font-size:1px;
+	border:none;
+	margin:0; padding:0;
+	background:transparent;
+}
+
+.guestbook-entries .guestbook-entry-footer {
+	color: #666;
+	font-size: 9px;
+	text-align: right;
+	padding-right: 30px;
+}
+
+#guestbook-form-dialog, #guestbook-delete-dialog {
+	width: 300px;
+    position: absolute;
+    left: -1500px;
+    top: 0;
+}
+#guestbook-form {
+	margin: 0;
+	padding: 0;
+}
+#guestbook-form textarea {
+	width: 98%;
+	font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#guestbook-form-preview.disabled span {
+	color: #888;
+}
+
+.guestbook-toolbar {
+	margin-top: 12px;
+}
+
+.guestbook-toolbar .colorlink span img {
+	margin-right: 10px;
+}
+
+.guestbook-message .offline, .guestbook-message .online {
+	text-indent: 17px;
+	height: 18px;
+}
+
+.guestbook-message .offline {
+	background: transparent url(../../images/myhabbo/habbo_offline.gif) no-repeat top left;
+}
+
+.guestbook-message .online {
+	background: transparent url(../../images/myhabbo/habbo_online_anim.gif) no-repeat top left;
+}
+
+.rating-unit-rating {
+	list-style:none;
+	margin: 0px;
+	padding:0px;
+	height: 30px;
+	position: relative;
+	background: url('../images/myhabbo/widgets/rating/starrating.gif') top left repeat-x;
+	}
+
+.rating-unit-rating li{
+    text-indent: -90000px;
+	padding:0px;
+	margin:0px;
+	float: left;
+	}
+
+.rating-unit-rating li a {
+	outline: none;
+	display:block;
+	width:30px;
+	height: 30px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+	}
+
+.rating-unit-rating li a:hover{
+	background: url('../images/myhabbo/widgets/rating/starrating.gif') left center;
+	z-index: 10;
+	left: 0px;
+	}
+
+.rating-unit-rating a.r1-unit{left: 0px;}
+.rating-unit-rating a.r1-unit:hover{width:30px;}
+.rating-unit-rating a.r2-unit{left:30px;}
+.rating-unit-rating a.r2-unit:hover{width: 60px;}
+.rating-unit-rating a.r3-unit{left: 60px;}
+.rating-unit-rating a.r3-unit:hover{width: 90px;}
+.rating-unit-rating a.r4-unit{left: 90px;}
+.rating-unit-rating a.r4-unit:hover{width: 120px;}
+.rating-unit-rating a.r5-unit{left: 120px;}
+.rating-unit-rating a.r5-unit:hover{width: 150px;}
+
+
+.rating-unit-rating li.rating-current-rating {
+	background: url('../images/myhabbo/widgets/rating/starrating.gif') left bottom;
+	position: absolute;
+	height: 30px;
+	display: block;
+	text-indent: -9000px;
+	z-index: 1;
+	}
+
+.rating-average {
+    width:160px;
+    margin:auto;
+    text-align: center;
+}
+
+.rating-unit-rating{
+    text-align: left;
+    width:150px;
+}
+
+.rating-stars{
+    margin-top:5px;
+    margin-bottom:5px;
+    text-align: center;
+}
+/* Movies widget */
+
+div#movies_wrapper {
+	overflow: auto;
+	height: 200px;
+}
+
+div.movie_genre_image {
+	float: left;
+	width: 50px;
+	padding: 5px 0 5px 0;
+}
+
+div.movie_info {
+	float: left;
+	word-wrap: break-word;
+	padding: 5px 0 5px 0;
+}
+
+div.movie_name {
+	float: left;
+	font-weight: bold;
+}
+
+div.movie_created {
+	font-size: 9px;
+	text-align: left;
+	padding-right: 0px;
+    clear: both;
+}
+
+/*
+* esticker editor styles
+*/
+
+div#avatarimage-preview-box {
+	width: 64px;
+	height: 110px;
+	float: left;
+}
+div#avatarimage-preview-box div#avatarimage-progressbar {
+	padding-top: 30px;
+	width: 64px;
+	text-align: center;
+}
+
+/* avatar list */
+
+div.avatar-widget-list-container {
+	height: 196px;
+	overflow: auto;
+}
+
+div.avatar-list-info-container {
+	height: 196px;
+	overflow: auto;
+}
+
+div.avatar-list-info {
+	display: none;
+}
+
+div.avatar-list-info-close-container {
+	float: right;
+	width: 18px;
+	height: 18px;
+}
+
+ul.avatar-widget-list {
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+ul.avatar-widget-list li {
+	margin: 2px 3px;
+	width: 47%;
+	height: 56px;
+	border: 1px dashed white;
+	overflow: hidden;
+	float: left;
+	font-size: 10px;
+	white-space: nowrap;
+	background-image: url(../../images/myhabbo/widgets/raster_unselected.gif);
+}
+
+ul.avatar-widget-list li:hover {
+	border: 1px solid white;
+	background-image: url(../../images/myhabbo/widgets/raster_selected.gif);
+}
+
+ul.avatar-widget-list li h4, ul.avatar-widget-list li p {
+	margin: 0;
+	font-size: 10px;
+	padding: 2px;
+	overflow: hidden;
+}
+
+div.avatar-list-info h4 {
+	font-size: 11px;
+}
+
+div.avatar-list-info h4 a {
+	color: black;
+}
+
+ul.avatar-widget-list li div.avatar-list-open {
+	display: none;
+	float: right;
+	width: 14px;
+	height: 14px;
+}
+
+ul.avatar-widget-list li:hover div.avatar-list-open {
+	display: block;
+}
+
+ul.avatar-widget-list li div.avatar-list-open a {
+	float: right;
+	width: 14px;
+	height: 14px;
+	background-repeat: no-repeat;
+	background-image: url(../../images/myhabbo/widgets/plus.gif);
+}
+
+div.avatar-list-avatar {
+	display: block;
+	float: left;
+	margin-right: 2px;
+}
+
+p.avatar-list-birthday {
+	font-style: italic;
+}
+
+a.avatar-list-info-close {
+	float: right;
+	width: 18px;
+	height: 18px;
+	background-repeat: no-repeat;
+	background-image: url(../../images/myhabbo/widgets/minus.gif);
+}
+
+div.avatar-info-basic {
+	padding: 0 0 4px 4px;
+	border: 1px solid white;
+	background-image: url(../../images/myhabbo/widgets/raster_selected.gif);
+	margin-bottom: 2px;
+	font-size: 10px;
+}
+
+div.avatar-info-basic h4 {
+	margin: 0;
+}
+
+div.avatar-info-rights {
+	padding: 4px;
+	border: 1px dashed black;
+	background-image: url(../../images/myhabbo/widgets/raster_unselected.gif);
+	font-size: 10px;
+	clear: both;
+}
+
+div.avatar-info-basic p, div.avatar-info-rights p {
+	margin: 6px 0 0 2px;
+}
+
+div.avatar-info-image {
+	float: right;
+	margin: 0 2px 0 7px;
+}
+
+div.avatar-info-basic p.avatar-info-motto {
+	clear: both;
+	border-top: 1px dashed black;
+	padding-top: 3px;
+	margin-right: 6px;
+	font-style: italic;
+}
+
+a.avatar-info-rights-revoke, a.avatar-info-rights-remove, a.avatar-info-rights-give, a.avatar-info-rights-leave {
+	float: left;
+	margin-left: 0;
+	margin-top: 4px;
+	clear: both;
+}
+
+img.avatar-list-groupstatus {
+	margin-right: 5px;
+}
+
+
+/* groups list */
+
+div.groups-list-container {
+	height: 196px;
+	overflow: auto;
+}
+
+ul.groups-list {
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+ul.groups-list li {
+	padding: 0;
+	margin-bottom: 2px;
+	border: 1px dashed white;
+	overflow: hidden;
+	background-image: url(../../images/myhabbo/widgets/raster_unselected.gif);
+}
+
+ul.groups-list li:hover {
+	border: 1px solid white;
+	background-image: url(../../images/myhabbo/widgets/raster_selected.gif);
+}
+
+ul.groups-list li h4, ul.groups-list li p {
+	margin: 0;
+	font-size: 1em;
+	padding: 2px;
+	overflow: hidden;
+}
+
+ul.groups-list li div.groups-list-icon {
+	float: left;
+	margin: 2px;
+}
+
+div.groups-info-icon {
+	float: right;
+	margin: 6px 2px 2px 2px;
+}
+
+ul.groups-list li div.groups-list-open {
+	visibility: hidden;
+	float: right;
+	width: 14px;
+	height: 14px;
+	background-repeat: no-repeat;
+	background-image: url(../../images/myhabbo/widgets/plus.gif);
+	cursor: pointer;
+}
+
+ul.groups-list li:hover div.groups-list-open {
+	visibility: visible;
+}
+
+div.groups-list-loading, div.groups-list-info {
+	display: none;
+}
+
+a.groups-loading-close, a.groups-info-close {
+	float: right;
+	width: 18px;
+	height: 18px;
+	background-repeat: no-repeat;
+	background-image: url(../../images/myhabbo/widgets/minus.gif);
+}
+
+div.groups-info-close-container {
+	float: right;
+	width: 18px;
+	height: 18px;
+}
+
+div.groups-list-info h4, div.groups-list-info p {
+	margin: 0;
+	font-size: 1em;
+	padding: 2px;
+}
+
+div.groups-list-info h4 a {
+	color: black;
+}
+
+div.groups-info-basic {
+	padding: 0 0 4px 4px;
+	border: 1px solid white;
+	background-image: url(../../images/myhabbo/widgets/raster_selected.gif);
+	margin-bottom: 2px;
+}
+
+div.groups-info-actions {
+	padding: 4px;
+	border: 1px dashed black;
+	background-image: url(../../images/myhabbo/widgets/raster_unselected.gif);
+	clear: both;
+}
+
+div.groups-info-description {
+	clear: both;
+	border-top: 1px dashed black;
+	padding-top: 2px;
+	margin-right: 6px;
+	overflow: auto;
+	height: 80px;
+}
+
+img.groups-list-icon, img.groups-info-favorite {
+	float: right;
+	margin-left: 5px;
+}
+
+a.groups-info-select-favorite, a.groups-info-deselect-favorite {
+	float: left;
+	margin-left: 0;
+}
+
+
+/* group info */
+
+div.GroupInfoWidget h4 {
+	font-size: 11px;
+}
+
+div.GroupInfoWidget h4, div.GroupInfoWidget p {
+	margin: 0;
+	padding-bottom: 4px;
+}
+
+div.group-info-icon {
+	float: right;
+	width: 48px;
+	height: 48px;
+	margin: 0 0 4px 4px;
+}
+
+div.group-info-description {
+	clear: both;
+	border-top: 1px dashed black;
+	padding-top: 2px;
+	overflow: auto;
+	max-height: 100px;
+}
+
+
+span.avatar-image-frame {
+     margin-right:15px;
+    margin-top:-20px;
+     float: left;
+}
+
+#dialog-group-settings {
+	width: 284px;
+    position: absolute;
+    left: -1500px;
+    top: 0;
+}
+
+#group-settings-close-button {
+    float: right;
+}
+
+#group-settings-update-button {
+    float: left;
+}
+
+#group-logo {
+    float: left;
+    margin-right: 11px;
+}
+
+#group-description-area, #group-settings-header, #group-urlsettings-header, #group-purchase-header, #group-name-area, #group-url-area {
+    padding-top: 4px;
+   margin-bottom: 8px;
+}
+
+#group_name_text, #group_url_text {
+   font-weight: bold;
+}
+
+#description_chars_left {
+    font-weight: normal;
+	float: right;
+	position: relative;
+    margin-right: 6px;
+    margin-bottom: 8px;
+}
+
+#description_text {
+    font-weight: bold;
+	float: left;
+}
+
+#group_name, #group_url {
+    width: 260px;
+}
+
+#group_description {
+    width: 260px;
+    height: 150px;
+}
+
+#group_description-counter {
+    background-color: #FC0;
+}
+
+#dialog-group-settings form {
+    margin: 0px;
+}
+
+#badge-editor-dialog{
+    width: 294px;
+}
+
+#badge-editor-dialog-body{
+   height: 363px;
+   width: 280px;
+}

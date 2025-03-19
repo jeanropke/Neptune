@@ -1,0 +1,69 @@
+/* --- page background image --- */
+
+/*body {
+	background-image: url("/web/images/backgrounds/4th_blk.gif");
+	background-color: #3d7aa4;
+}*/
+
+
+/* --- Hotel view image on the top bar (image size - width: 928px, height: 154px) --- */
+#top {
+	background-image: url(/web/images/hotelviews/web_view_bg_us.gif);
+}
+
+
+/* --- Habbo Hotel logo on the left on the top bar (image size - width: 160px, height: 66px) --- */
+a#logo-link { 
+	background-image: url(/web/images/WebLogos/habbo_logo_com.gif);
+}  
+
+ 
+/* --- Enter hotel button on the right of the top bar (image size - width: 105px, height: 106px) --- */
+#top-elements #enter-hotel a#enter-hotel-link { 
+	background-image: url(/web/images/enterbuttons/enterHH_uk.gif);
+} 
+
+
+/* --- background image for the leaderboard ad that is shown on the top of the page (image size - width: 755px, height: 98px). --- */ 
+#top-ad-container {
+	background-image: url(https://web.archive.org/web/20070711185133im_/http://images.habbohotel.ca/c_images/adframes/ad_728_ch.gif);
+}
+
+#moreWidgets { display:none; }
+.brown .purse-buymore { display: none; }
+
+/* --- Fix for home and group toplists ----*/
+ul.groups-toplist li.even {
+    background-color: #d5d5d5;
+}
+
+ul.groups-toplist li.even div.toplist-item {
+    background-color: transparent;
+}
+
+/* --- FIX for IE 6 bug with homes and groups list component, please do not remove without consultation of habbowebsupport team --- */
+* html div.toplist-item {
+font-size: 8pt;
+padding-left: 40px;
+}
+/*
+     FILE ARCHIVED ON 18:51:33 Jul 11, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:17:57 Apr 01, 2019.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  LoadShardBlock: 508.419 (3)
+  esindex: 0.015
+  captures_list: 541.334
+  CDXLines.iter: 20.524 (3)
+  PetaboxLoader3.datanode: 499.502 (4)
+  exclusion.robots: 0.305
+  exclusion.robots.policy: 0.288
+  RedisCDXSource: 6.83
+  PetaboxLoader3.resolve: 91.695 (2)
+  load_resource: 130.082
+*/

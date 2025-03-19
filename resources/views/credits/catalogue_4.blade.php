@@ -1,0 +1,80 @@
+@extends('layouts.master', ['menuId' => '4', 'submenuId' => 'credits_furniture', 'headline' => true])
+
+@section('title', 'Seasonals')
+
+@section('content')
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-2col">
+    <tbody>
+        <tr>
+            <td style="width: 8px;"></td>
+            @include('includes.furniture', ['page' => 'catalogue_4', 'menu' => 'credits'])
+            <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
+
+                <div class="v3box yellow">
+                    <div class="v3box-top">
+                        <h3>Seasonal Furni</h3>
+                    </div>
+                    <div class="v3box-content">
+                        <div class="v3box-body">
+
+                            <p>From time to time we will be releasing special 'seasonal' Furni. This furni is released
+                                only during Christmas, {{ cms_config('hotel.name.short') }}ween and Valentines day.</p><br><br>
+
+                            <p></p>
+                            <table width="100%" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="978"><strong>Christmas Furni<br></strong>Celebrate the spirit of the
+                                            yuletide season with three different Christmas trees, gingerbread houses,
+                                            stockings for your walls and plenty of holly! This furni is the <br>Also watch
+                                            out for the post-Christmas furni!<br></td>
+                                        <td><img width="32" height="51" border="0" src="{{ url('/') }}/web/images/credits/x_15.gif" alt="x-15" id="galleryImage"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table width="100%" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="975"><strong>Valentines Furni<br></strong>Share the love with Cupid
+                                            statues, pink Love ducks, giant red hearts and special love sofas! This furni is
+                                            only released during Valentines.<br></td>
+                                        <td>
+                                            <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="66" height="70" border="0" align="right" src="{{ url('/') }}/web/images/credits/giant_heart.gif" id="galleryImage12" alt=""></strong>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table width="100%" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="978"><strong>{{ cms_config('hotel.name.short') }}ween Furni<br></strong>Turn your room into a haunted
+                                            cave, or a vampires mansion with bat posters, wall chains, eerie Pumpkin Lamps,
+                                            dead ducks and more! This furni is only released during {{ cms_config('hotel.name.short') }}ween.<br></td>
+                                        <td>
+                                            <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="37" height="65" border="0" align="right" src="{{ url('/') }}/web/images/credits/flameSkull.gif" id="galleryImage13" alt=""></strong>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p></p>
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="v3box-bottom">
+                        <div></div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 4px;"></td>
+            <td valign="top" style="width: 176px;">
+                <div id="ad_sidebar">
+                    @include('includes.ad160')
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@stop

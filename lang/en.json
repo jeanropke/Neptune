@@ -1,0 +1,9 @@
+{
+    "currency.credits.singular": ":amount Credit",
+    "currency.credits.plural": ":amount Credits",
+    "currency.points_0.singular": ":amount Ducket",
+    "currency.points_0.plural": ":amount Duckets",
+    "currency.points_5.singular": ":amount Diamond",
+    "currency.points_5.plural": ":amount Diamonds"
+
+}
