@@ -69,8 +69,8 @@
                                                     var swfobj = new SWFObject("{{ url('/') }}/web/flash/register/HabboRegistration.swf", "habboreg", "406", "327", "7");
                                                     swfobj.addVariable("post_url", "{{ url('/') }}/register/step/2?");
                                                     swfobj.addVariable("back_url", "{{ url('/') }}");
-                                                    swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/flash/register/figure_data_xml.xml");
-                                                    swfobj.addVariable("localization_url", "{{ url('/') }}/web/flash/register/figure_editor.xml");
+                                                    swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml.xml");
+                                                    swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/figure_editor.xml");
                                                     swfobj.addVariable("post_figure", "figure");
                                                     swfobj.addVariable("post_gender", "gender");
                                                     swfobj.addVariable("required-birth", "{{ session('birthday') }}");

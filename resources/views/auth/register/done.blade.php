@@ -1,5 +1,5 @@
 @extends('layouts.login')
-@section('title', 'Register!')
+@section('title', 'Welcome!')
 @section('content')
     <div id="process-wrapper">
         <div id="process-header">
@@ -61,7 +61,7 @@
                                             <h4>Welcome!</h4>
 
                                             <div style="background: url({{ url('/') }}/web/images/register/hh_welcome.png); width: 410px; height: 280px">
-                                                <div style="background: url(https://www.habbo.com/habbo-imaging/avatarimage?figure={{ Auth::user()->look }}&gesture=sml&action=wav&direction=2&head_direction=3); position:relative; width: 64px; height: 110px;top: 91px; left: 65px;"></div>
+                                                <div style="background: url({{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=wav&direction=2&head_direction=3); position:relative; width: 64px; height: 110px;top: 91px; left: 65px;"></div>
                                             </div>
                                                 <a href="{{ url('/') }}/">Back to home</a> </div>
 

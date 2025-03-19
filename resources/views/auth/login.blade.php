@@ -34,7 +34,6 @@
                                 <br><br></p><p></p>
 
                         </div>
-asdsad
                         @if ($errors->any())
                             {{ $errors->first() }}
                         @endif

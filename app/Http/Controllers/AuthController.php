@@ -246,7 +246,7 @@ class AuthController extends Controller
 
         //Okay, here we'll check username and email values, again
         $validate = Validator::make($request->session()->all(), [
-            'username'  => 'required|min:3|max:30|unique:users,username|regex:/[^a-z\d\-=\?!@:\.]/i',
+            'username'  => 'required|min:3|max:30|unique:users,username|regex:/[a-zA-Z\d\-=\?!@:\.]/',
             'password'  => 'required|min:8|max:30',
             'email'     => 'required|email|unique:users,email',
             'figure'    => 'required',
@@ -256,15 +256,15 @@ class AuthController extends Controller
         ]);
 
         if ($validate->fails())
-            return redirect()->route('auth.login')->withErrors('Username or email already taken!', 'register');
+            return redirect()->route('auth.login')->withErrors('Username or email already taken!');
 
         if (preg_replace("/[^a-z\d\-=\?!@:\.]/i", "", $request->session()->get('username')) != $request->session()->get('username')) {
-            return redirect()->route('auth.login')->withErrors('Username invalid', 'register');
+            return redirect()->route('auth.login')->withErrors('Username invalid');
         }
         else {
             $first = substr($request->session()->get('username'), 0, 4);
             if (!strnatcasecmp($first, "MOD-") || !strnatcasecmp($first, "MOD_")) {
-                return redirect()->route('auth.login')->withErrors('You cannot use this username', 'register');
+                return redirect()->route('auth.login')->withErrors('You cannot use this username');
             }
         }
         $data = $validate->validated();
