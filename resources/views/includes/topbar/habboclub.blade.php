@@ -1,5 +1,5 @@
 @if (Auth::check())
-    @if (user()->getSubscription()->isExpired())
+    @if (!user()->getSubscription()->isExpired())
         <h3> {{ __('You has :days HC days', ['days' => user()->getSubscription()->daysRemaining()]) }}</h3>
     @else
         <h3> {{ __('You are not a member of :hotel Club', ['hotel' => cms_config('hotel.name.short')]) }}</h3>
