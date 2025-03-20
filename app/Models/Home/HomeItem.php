@@ -19,7 +19,7 @@ class HomeItem extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'type', 'skin', 'home_id', 'group_id'
+        'id', 'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'type', 'skin', 'home_id', 'group_id', 'is_deleted'
     ];
 
     public $timestamps = false;

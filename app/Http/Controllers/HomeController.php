@@ -53,7 +53,7 @@ class HomeController extends Controller
         }
 
         return view('home')->with([
-            'items'     => HomeItem::where('home_id', $user->id)->get(),
+            'items'     => HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get(),
             'user'      => $user,
             'isEdit'    => $isEdit
         ]);
@@ -339,6 +339,80 @@ class HomeController extends Controller
         return response('SUCCESS', 200)
                 ->header('Content-Type', 'application/json')
                 ->header('X-JSON', json_encode($sticker->id));
+    }
+
+    public function deleteStickie(Request $request)
+    {
+        $stickieId = $request->stickieId;
+        $stickie = HomeItem::find($stickieId);
+        if(!$stickie)
+            return 'ERROR';
+
+        if($stickie->owner_id != user()->id)
+            return 'ERROR';
+
+        $stickie->update([
+            'is_deleted' => '1'
+        ]);
+
+        return response('SUCCESS', 200)
+                ->header('Content-Type', 'application/json')
+                ->header('X-JSON', json_encode($stickieId));
+    }
+
+    public function skinEdit(Request $request)
+    {
+        $itemId = null;
+        $cssClass = null;
+        $type = null;
+        $skinId =  $request->skinId;
+
+        if ($request->stickieId) {
+            $itemId = $request->stickieId;
+            $cssClass =  'n_skin_';
+            $type = 'stickie';
+        }
+
+        if ($request->widgetId) {
+            $itemId = $request->widgetId;
+            $cssClass =  'w_skin_';
+            $type = 'widget';
+        }
+
+        switch ($skinId) {
+            case 1:
+                $skin = 'defaultskin';
+                break;
+            case 2:
+                $skin = 'speechbubbleskin';
+                break;
+            case 3:
+                $skin = 'metalskin';
+                break;
+            case 4:
+                $skin = 'noteitskin';
+                break;
+            case 5:
+                $skin = 'notepadskin';
+                break;
+            case 6:
+                $skin = 'goldenskin';
+                break;
+            case 7:
+                $skin = 'hc_machineskin';
+                break;
+            case 8:
+                $skin = 'hc_pillowskin';
+                break;
+            case 9:
+                $skin = 'nakedskin';
+                break;
+            default:
+                $skin = 'defaultskin';
+                break;
+        }
+        HomeItem::find($itemId)->update(['skin' => $skin]);
+        header('X-JSON: {"cssClass": "' . $cssClass . $skin . '", "type": "' . $type . '", "id": "' . $itemId . '"}');
     }
 
     public function purchaseConfirm(Request $request)

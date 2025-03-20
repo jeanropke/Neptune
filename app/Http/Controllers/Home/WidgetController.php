@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Guild;
 use App\Models\Home\Guestbook;
-use App\Models\Home\HomeData;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
 use App\Models\Home\HomeSong;
@@ -246,59 +245,22 @@ class WidgetController extends Controller
             ->header('X-JSON', json_encode($data));
     }
 
-    public function skinEdit(Request $request)
+    public function widgetDelete(Request $request)
     {
-        $itemId = null;
-        $cssClass = null;
-        $type = null;
-        $skinId =  $request->skinId;
+        $widgetId = $request->widgetId;
+        $widget = HomeItem::find($widgetId);
+        if(!$widget)
+            return 'ERROR';
 
-        if ($request->stickieId) {
-            $itemId = $request->stickieId;
-            $cssClass =  'n_skin_';
-            $type = 'stickie';
-        }
+        if($widget->owner_id != user()->id)
+            return 'ERROR';
 
-        if ($request->widgetId) {
-            $itemId = $request->widgetId;
-            $cssClass =  'w_skin_';
-            $type = 'widget';
-        }
+        $widget->update([
+            'home_id' => null
+        ]);
 
-        switch ($skinId) {
-            case 1:
-                $skin = 'defaultskin';
-                break;
-            case 2:
-                $skin = 'speechbubbleskin';
-                break;
-            case 3:
-                $skin = 'metalskin';
-                break;
-            case 4:
-                $skin = 'noteitskin';
-                break;
-            case 5:
-                $skin = 'notepadskin';
-                break;
-            case 6:
-                $skin = 'goldenskin';
-                break;
-            case 7:
-                $skin = 'hc_machineskin';
-                break;
-            case 8:
-                $skin = 'hc_pillowskin';
-                break;
-            case 9:
-                $skin = 'nakedskin';
-                break;
-            default:
-                $skin = 'defaultskin';
-                break;
-        }
-        HomeData::find($itemId)->update(['skin' => $skin]);
-        header('X-JSON: {"cssClass": "' . $cssClass . $skin . '", "type": "' . $type . '", "id": "' . $itemId . '"}');
+        return response('SUCCESS', 200)
+                ->header('Content-Type', 'application/json')
+                ->header('X-JSON', json_encode($widgetId));
     }
-
 }
