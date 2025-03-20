@@ -1,4 +1,4 @@
-@php($songs = \App\Models\Home\HomeTrax::get())
+@php($songs = $user->getTraxSongs())
 <div class="movable widget TraxPlayerWidget" id="widget-{{ $item->id }}"
     style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
     <div class="w_skin_{{ $item->skin }}">
@@ -25,7 +25,7 @@
                     <select id="trax-select-options-temp">
                         <option value="">-Choose song-</option>
                         @foreach($songs as $song)
-                        <option value="{{ $song->id }}">{{ $song->name }}</option>
+                        <option value="{{ $song->id }}">{{ !empty($song->title) ? $song->title : "Song #{$song->id}" }}</option>
                         @endforeach
                     </select>
                 </div>

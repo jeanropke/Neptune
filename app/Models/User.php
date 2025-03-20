@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\Hotel;
 use App\Models\Guild;
 use App\Models\GuildMember;
+use App\Models\Home\HomeSong;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\UserBadge;
@@ -236,5 +237,10 @@ class User extends Authenticatable
     public function getCmsSettings()
     {
         return CmsUserSettings::where('user_id', $this->id)->first();
+    }
+
+    public function getTraxSongs()
+    {
+        return HomeSong::where('user_id', $this->id)->get();
     }
 }

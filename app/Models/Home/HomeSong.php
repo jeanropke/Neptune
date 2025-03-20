@@ -4,14 +4,14 @@ namespace App\Models\Home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HomeTrax extends Model
+class HomeSong extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'soundtracks';
+    protected $table = 'soundmachine_songs';
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +19,8 @@ class HomeTrax extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'author', 'track'
+        'id', 'user_id', 'title', 'item_id', 'length', 'data', 'burnt'
     ];
 
     public $timestamps = false;
-
-
 }

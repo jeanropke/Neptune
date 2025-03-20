@@ -7,7 +7,7 @@ use App\Models\Home\Guestbook;
 use App\Models\Home\HomeData;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
-use App\Models\Home\HomeTrax;
+use App\Models\Home\HomeSong;
 use App\Models\Photo;
 use App\Models\PhotoLike;
 use App\Models\User;
@@ -183,26 +183,35 @@ class WidgetController extends Controller
             'widgetId'  => 'required|numeric'
         ]);
 
-        $widget = HomeData::find($request->widgetId);
+        $widget = HomeItem::find($request->widgetId);
+        $song = HomeSong::find($request->songId);
 
-        if ($widget->user_id == user()->id) {
-            $widget->update(['data' => $request->songId]);
+        if($song->user_id != user()->id)
+            return 'ERROR.SONG';
 
-            return view('home.ajax.traxplayer')->with(['widget' => $widget]);
-        }
+        if ($widget->home_id != user()->id)
+            return 'ERROR.WIDGET';
+
+        $widget->update(['data' => $request->songId]);
+
+        return view('home.ajax.traxplayer')->with([
+            'widget'    => $widget,
+            'item'      => $song
+        ]);
+
     }
 
     public function getTraxSong($id)
     {
-        $trax = HomeTrax::find($id);
+        $trax = HomeSong::find($id);
         if ($trax) {
-            $song = substr($trax->track, 0, -1);
+            $song = substr($trax->data, 0, -1);
             $song = str_replace(':meta', '&meta=', $song);
             $song = str_replace(':4:', '&track4=', $song);
             $song = str_replace(':3:', '&track3=', $song);
             $song = str_replace(':2:', '&track2=', $song);
             $song = str_replace('1:', '&track1=', $song);
-            $output = 'status=0&name=' . $trax->name . '&author=' . $trax->author . $song;
+            $output = 'status=0&name=' . (!empty($trax->title) ? $trax->title : "Song #{$id}") . '&author=' . $trax->user_id . $song;
             echo $output;
         }
     }
