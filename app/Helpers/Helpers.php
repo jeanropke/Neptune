@@ -3,7 +3,6 @@
 use App\Models\BoxPage;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
-use App\Models\User;
 
 function user()
 {
