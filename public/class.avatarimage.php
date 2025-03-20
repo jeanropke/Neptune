@@ -292,6 +292,10 @@ class AvatarImage
                 continue;
             }
 
+            if($this->isSmall && $type == 'hd') {
+                $drawPart['id'] = 1;
+            }
+
             $drawDirection  = $this->direction;
             $drawAction     = false;
             if (@$activeParts['rect'][$type]['active']) {
@@ -513,6 +517,7 @@ class AvatarImage
     }
     function getPartResource($action, $type, $partId, $direction)
     {
+
         $frame = $this->getFrameNumber($type, $action, @(int)$this->frame[$action]);
         $isFlip = false;
 
@@ -524,6 +529,7 @@ class AvatarImage
         $resourceName = $path;
         $resourceName .= $this->buildResourceName($action, $type, $partId, $resDirection, $frame);
         $resourceName .= ".png";
+
 
         if (!file_exists($resourceName) && $action == "std")
             $resourceName = $this->buildResourceName("spk", $type, $partId, $resDirection, $frame);
