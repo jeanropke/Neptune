@@ -7,7 +7,7 @@
     <table align="right">
         <tbody>
         <tr>
-            <td><a href="#" class="colorlink" onclick="closeSubscription(); return false;" style="margin-left: 5px;"><span><b>Ok</b></span><i></i></a></td>
+            <td><a href="#" class="colorlink" onclick="closeSubscriptionResult(); return false;" style="margin-left: 5px;"><span><b>Ok</b></span><i></i></a></td>
         </tr>
         </tbody>
     </table>

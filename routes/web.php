@@ -84,6 +84,7 @@ Route::middleware('user')->group(function () {
     Route::prefix('habboclub')->group(function () {
         Route::post('/habboclub_subscribe', [ClubController::class, 'clubSubscribe'])->name('club.subscribe');
         Route::post('/habboclub_subscribe_submit', [ClubController::class, 'clubSubscribeSubmit'])->name('club.subscribe.submit');
+        Route::post('/habboclub_meter_update', [ClubController::class, 'clubMeterUpdate'])->name('club.subscribe.submit');
     });
 
     Route::prefix('community')->group(function () {

@@ -834,32 +834,33 @@ function closeSubscription(e) {
 
 function showSubscriptionResult(optionNumber,res_dialog_header) {
 	new Ajax.Request(
-		habboReqPath + "/habboclub/habboclub_subscribe",
+		habboReqPath + "/habboclub/habboclub_subscribe_submit",
 		{ method: "post", parameters: "optionNumber="+encodeURIComponent(optionNumber), onComplete: function(req, json) {
    			if ($("subscription_dialog")) Element.remove("subscription_dialog");
-			var resultDialog = createDialog("subscription_result", res_dialog_header, "9003", 0, -1000, closeSubscription);
-			appendDialogBody(resultDialog, req.responseText, true);
-			moveDialogToCenter(resultDialog);
+			var resultDialog = Dialog.createDialog("subscription_result", res_dialog_header, "9003", 0, -1000, closeSubscriptionResult);
+            Dialog.appendDialogBody(resultDialog, req.responseText, true);
+            Dialog.moveDialogToCenter(resultDialog);
 		} }
 	);
 	Element.remove("hc_confirm_box");
 }
 
 function closeSubscriptionResult() {
+    console.log($("subscription_result"));
    	if ($("subscription_dialog")) {
    		Element.remove("subscription_dialog");
-   		hideOverlay();
+   		Overlay.hide();
    	}
    	if ($("subscription_result")) {
    		Element.remove("subscription_result");
-   		hideOverlay();
+   		Overlay.hide();
 		new Ajax.Updater($("hc_ajax_content"), habboReqPath + "/habboclub/habboclub_meter_update", {asynchronous:true});
    	}
 }
 
 function closeSubscriptionError() {
 	Element.remove("subscription_result");
-	hideOverlay();
+	Overlay.hide();
 }
 /* \habbo club subscription */
 

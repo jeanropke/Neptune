@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'username', 'email', 'password', 'motto', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active',
-        'battleball_points', 'snowstorm_points'
+        'battleball_points', 'snowstorm_points', 'club_subscribed', 'club_expiration', 'club_gift_due'
     ];
 
     protected $hidden = [
@@ -71,11 +71,8 @@ class User extends Authenticatable
      */
     public function updateCredits($amount)
     {
-        if ($this->isOnline()) {
-            Hotel::sendRconMessage('givecredits', ['user_id' => $this->id, 'credits' => $amount]);
-        } else {
-            $this->increment('credits', $amount);
-        }
+        $this->increment('credits', $amount);
+        mus("refresh_credits", ['userId' => $this->id]);
     }
 
     public function getSubscription()
@@ -90,26 +87,35 @@ class User extends Authenticatable
      */
     public function giveHCDays($days)
     {
-        $subscription = UserSubscription::where([['user_id', '=', $this->id], ['active', '=', '1']])->first();
+        $now = time();
+        if($this->club_subscribed == 0) {
+            $this->update([
+                'club_subscribed'   => $now,
+                'club_expiration'   => $now + ($days * 86400),
+                'club_gift_due'     => $now + (31 * 86400)
+            ]);
 
-        if($this->isOnline()) {
-            Hotel::sendRconMessage('modifysubscription', ['user_id' => $this->id, 'type' => 'HABBO_CLUB', 'action' => 'add', 'duration' => 86400 * $days]);
+            $this->giveGift(325, "From Habbo", "You have just received your monthly club gift!");
         }
-        else
-        {
-            if (!$subscription) {
-                UserSubscription::create([
-                    'user_id' => $this->id,
-                    'subscription_type' => 'HABBO_CLUB',
-                    'timestamp_start' => time(),
-                    'duration' => 86400 * $days,
-                    'active' => 1
-                ]);
-            }
-            else {
-                $subscription->increment('duration', 86400 * $days);
-            }
+        else {
+            $this->increment('club_expiration', $days * 86400);
         }
+        mus("refresh_club", ['userId' => $this->id]);
+    }
+
+    public function giveGift($cataItemId, $sender, $message, $unk = "-")
+    {
+        $now = time();
+        $message = str_replace('|', '', $message);
+        $wraps = explode(',', cms_config('hotel.gift.wraps'));
+        $wrap = $wraps[rand(0, 5)];
+        Furni::create([
+            'user_id'       => $this->id,
+            'definition_id' => $wrap,
+            'custom_data'   => "{$cataItemId}|{$sender}|{$message}|{$unk}|{$now}"
+        ]);
+
+        mus("refresh_hand", ['userId' => $this->id]);
     }
 
 

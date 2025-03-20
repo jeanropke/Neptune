@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,17 +14,41 @@ class ClubController extends Controller
         return view('club.index');
     }
 
+    private function getCurrentChoice($choice)
+    {
+        $credits = -1;
+        $days = -1;
+
+        switch ($choice) {
+            default:
+            case 1:
+                $credits = 25;
+                $days = 31;
+                break;
+            case 2:
+                $credits = 60;
+                $days = 93;
+                break;
+            case 3:
+                $credits = 105;
+                $days = 186;
+                break;
+        }
+
+        return array(
+            'credits'   => $credits,
+            'days'      => $days,
+        );
+    }
+
     public function clubSubscribe(Request $request)
     {
-        $subscription = DB::table('catalog_club_offers')->find($request->optionNumber);
-        if(!$subscription)
-            return 'Nice try!';
-
+        $choice = $this->getCurrentChoice($request->optionNumber);
         return view('club.ajax.subscribe_form')->with([
-            'month' => $subscription->days / 31,
-            'optionNumber' => $subscription->id,
-            'days'  => $subscription->days,
-            'price' => $subscription->credits
+            'month' => $choice['days'] / 31,
+            'optionNumber' => $request->optionNumber,
+            'days'  => $choice['days'],
+            'price' => $choice['credits']
         ]);
     }
 
@@ -32,21 +57,26 @@ class ClubController extends Controller
         if(!Auth::check())
             return redirect()->route('account.login');
 
-        $subscription = DB::table('catalog_club_offers')->find($request->optionNumber);
-        if(!$subscription)
-            return 'Nice try!';
+        $choice = $this->getCurrentChoice($request->optionNumber);
 
-        if(user()->credits >= $subscription->credits)
+        if(user()->credits >= $choice['credits'])
         {
-            user()->giveHCDays($subscription->days);
-            user()->updateCredits(-$subscription->credits);
+            user()->giveHCDays($choice['days']);
+            user()->updateCredits(-$choice['credits']);
 
             return view('club.ajax.subscribe_success');
         }
     }
 
+    public function clubMeterUpdate()
+    {
+        return view('club.ajax.habboclub_meter');
+    }
+
     public function join()
     {
+        $user = User::find(2);
+        $user->giveGift('96', 'Dev', 'mensagem|com<3', 2);
         return view('club.join');
     }
 
