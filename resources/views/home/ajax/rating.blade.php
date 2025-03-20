@@ -18,7 +18,4 @@
     {{ $rating->count() }} votes total
     <br/>
     ({{ $rating->where('rating', '>', '3')->count() }} users voted 4 or better)</div>
-
-
-
 </div>

@@ -19,9 +19,22 @@ class Room extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'owner_id', 'owner_name', 'name', 'state', 'users', 'users_max', 'password', 'description', 'is_public'
+        'id', 'owner_id', 'name', 'accesstype', 'visitors_now', 'visitors_max', 'password', 'description', 'is_public'
     ];
 
     public $timestamps = false;
+
+    public function getState()
+    {
+        switch($this->accesstype)
+        {
+            case 0:
+                return 'open';
+            case 1:
+                return 'locked';
+            case 2:
+                return 'password';
+        }
+    }
 
 }

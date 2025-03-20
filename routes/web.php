@@ -146,13 +146,13 @@ Route::middleware('user')->group(function () {
         Route::post('/guestbook/remove', [WidgetController::class, 'guestbookRemove'])->name('myhabbo.guestbook.remove');
         Route::post('/guestbook/list', [WidgetController::class, 'guestbookList'])->name('myhabbo.guestbook.list');
         Route::post('/groups/groupinfo', [WidgetController::class, 'groupInfo'])->name('myhabbo.groups.groupinfo');
+        Route::post('/rating/rate', [WidgetController::class, 'ratingsRate'])->name('myhabbo.rating.rate');
 
         Route::post('/noteeditor/editor', [HomeController::class, 'noteEditor'])->name('myhabbo.noteeditor.editor');
         Route::post('/sticker/place_sticker', [HomeController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
         Route::post('/sticker/remove_sticker', [HomeController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
         Route::post('/stickie/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.stickie.edit');
         Route::post('/widget/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.widget.edit');
-        Route::post('/rating/rate', [HomeController::class, 'ratingsRate'])->name('myhabbo.rating.rate');
         Route::post('/rating/reset_ratings', [HomeController::class, 'ratingsReset'])->name('myhabbo.rating.reset');
         Route::post('/save/{id}', [HomeController::class, 'saveHome'])->name('myhabbo.save');
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');

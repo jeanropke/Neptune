@@ -53,6 +53,16 @@
 	width: 350px;
 }
 
+/* notepad skin */
+.GuestbookWidget .w_skin_notepadskin, .MemberWidget .w_skin_notepadskin, .FriendsWidget .w_skin_notepadskin, .HighscoreListWidget .w_skin_notepadskin {
+	width: 326px;
+}
+.RatingWidget .w_skin_notepadskin {
+	width: 196px;
+}
+.GroupInfoWidget .w_skin_notepadskin, .ProfileWidget .w_skin_notepadskin, .RoomsWidget .w_skin_notepadskin, .GroupsWidget .w_skin_notepadskin, .HighScoresWidget .w_skin_notepadskin, .UserExpsWidget .w_skin_notepadskin, .HabboMoviesWidget .w_skin_notepadskin, .TraxPlayerWidget .w_skin_notepadskin, .BadgesWidget .w_skin_notepadskin {
+	width: 254px;
+}
 
 
 
@@ -281,14 +291,21 @@
 	margin: 0px 0px -3px 0px;
 }
 
-/*** Notepadskin ***/
-.w_skin_notepadskin{
 
+/*** Notepadskin ***/
+.w_skin_notepadskin .edit-button {
+	right: 2px;
+	top: 5px;
+}
+
+.w_skin_notepadskin a {
+	color: #2c303a;
 }
 
 .w_skin_notepadskin div.widget-content {
 	background: url(../../images/skins/Skin_Notepad_btmR.png) no-repeat bottom right;
-	padding: 4px 29px 27px 7px;
+	padding: 2px 7px 18px 2px;
+	color: #000;
 }
 
 .w_skin_notepadskin div.widget-body {
@@ -315,11 +332,13 @@
 	position: relative;
 	padding-top: 10px;
 	left: -4px;
+	color: #4c3a41;
 }
 
 * html .w_skin_notepadskin div.widget-headline h3 {
 	margin: 0px 0px -3px 0px;
 }
+
 
 /*** noteit ***/
 .w_skin_noteitskin{

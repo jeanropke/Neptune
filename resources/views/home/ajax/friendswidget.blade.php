@@ -1,8 +1,8 @@
 @forelse ($friends as $friend)
     <div class="friend" id="f{{ $loop->index }}">
         <a href="{{ url('/') }}/home/{{ $friend->username }}"><img
-                src="https://www.habbo.com/habbo-imaging/avatarimage?figure={{ $friend->look }}&amp;size=s&amp;direction=2&amp;head_direction=2&amp;gesture=sml"
-                alt="{{ $friend->username }}" width="30" height="56"></a>
+                src="{{ cms_config('site.avatarimage.url') }}{{ $friend->figure }}&amp;size=s&amp;direction=2&amp;head_direction=2&amp;gesture=sml"
+                alt="{{ $friend->username }}"{{-- width="30" height="56" --}}></a>
     </div>
 @empty
     Sem amigos
@@ -10,10 +10,11 @@
 <div class="clear"></div>
 
 @foreach ($friends as $friend)
-<div id="finf-{{ $loop->index }}" class="friend_info">
-    Name: <a href="{{ url('/') }}/home/{{ $friend->username }}">{{ $friend->username }}</a><br>Habbo
-    Birthday: {{ \Carbon\Carbon::createFromTimeStamp($friend->account_created)->format('M d, Y') }} <br>Motto: {{ $friend->motto }}<br>
-</div>
+    <div id="finf-{{ $loop->index }}" class="friend_info">
+        Name: <a href="{{ url('/') }}/home/{{ $friend->username }}">{{ $friend->username }}</a><br>
+        Habbo Birthday: {{ \Carbon\Carbon::parse($friend->created_at)->format('M d, Y') }} <br>
+        Motto: {{ $friend->motto }}<br>
+    </div>
 @endforeach
 
 <script language="JavaScript" type="text/javascript">

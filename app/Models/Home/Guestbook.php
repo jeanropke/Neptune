@@ -6,22 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guestbook extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'cms_homes_guestbook';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'user_id', 'message', 'widget_id', 'time', 'is_deleted'
+        'id', 'user_id', 'message', 'widget_id', 'is_deleted', 'created_at', 'updated_at'
     ];
 
-    public $timestamps = false;
-
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
 }

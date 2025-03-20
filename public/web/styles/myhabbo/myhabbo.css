@@ -629,7 +629,7 @@ hr.divider {
 	padding:0px;
 	height: 30px;
 	position: relative;
-	background: url('../images/myhabbo/widgets/rating/starrating.gif') top left repeat-x;
+	background: url('../../images/myhabbo/widgets/rating/starrating.gif') top left repeat-x;
 	}
 
 .rating-unit-rating li{
@@ -652,7 +652,7 @@ hr.divider {
 	}
 
 .rating-unit-rating li a:hover{
-	background: url('../images/myhabbo/widgets/rating/starrating.gif') left center;
+	background: url('../../images/myhabbo/widgets/rating/starrating.gif') left center;
 	z-index: 10;
 	left: 0px;
 	}
@@ -670,7 +670,7 @@ hr.divider {
 
 
 .rating-unit-rating li.rating-current-rating {
-	background: url('../images/myhabbo/widgets/rating/starrating.gif') left bottom;
+	background: url('../../images/myhabbo/widgets/rating/starrating.gif') left bottom;
 	position: absolute;
 	height: 30px;
 	display: block;
@@ -1104,4 +1104,18 @@ span.avatar-image-frame {
 #badge-editor-dialog-body{
    height: 363px;
    width: 280px;
+}
+#badgelist-content ul {
+	list-style: none
+}
+#badgelist-content ul li {
+    width: 53px;
+    height: 45px;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+div#member-list-paging, div#avatar-list-paging, div#badge-list-paging {
+    text-align: center;
 }

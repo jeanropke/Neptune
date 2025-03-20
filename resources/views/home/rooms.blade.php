@@ -23,7 +23,7 @@
                             <tr>
                                 <td valign="top" class="dotted-line">
                                     <div class="room_image">
-                                        <img src="{{ url('/') }}/web/images/myhabbo/rooms/room_icon_{{ $room->state }}.gif"
+                                        <img src="{{ url('/') }}/web/images/myhabbo/rooms/room_icon_{{ $room->getState() }}.gif"
                                             alt="" align="middle">
                                     </div>
                                 </td>
@@ -35,7 +35,7 @@
                                         <div class="clear"></div>
                                         <div>{{ $room->description }}
                                         </div>
-                                        @if($room->state != 'locked')
+                                        @if($room->getState() != 'locked')
                                         <a href="{{ url('/') }}/client?forwardId=2&amp;roomId={{ $room->id }}"
                                             target="client" id="room-navigation-link_11"
                                             onclick="roomForward(this, '11', 'private', false); return false;">

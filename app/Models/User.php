@@ -18,24 +18,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'username', 'email', 'password', 'motto', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
+    protected $dates = ['created_at'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -126,7 +117,7 @@ class User extends Authenticatable
      */
     public function getBadges()
     {
-        return UserBadge::select('badge_code')->where('user_id', $this->id)->orderBy('badge_code', 'ASC')->get();
+        return UserBadge::select('badge')->where('user_id', $this->id)->orderBy('badge', 'ASC')->get();
     }
 
     /**
@@ -178,8 +169,8 @@ class User extends Authenticatable
      */
     public function getFriends()
     {
-        return UserFriend::where('user_one_id', $this->id)->join('users', 'users.id', '=', 'user_two_id')
-            ->select('users.id', 'username', 'look', 'account_created', 'user_two_id')
+        return UserFriend::where('from_id', $this->id)->join('users', 'users.id', '=', 'to_id')
+            ->select('users.id', 'username', 'figure', 'created_at', 'to_id')
             ->orderBy('username', 'asc')->get();
     }
 

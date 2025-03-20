@@ -387,7 +387,7 @@ RatingObserver.prototype = {
 
         $(this.commonAjaxParams.elementToUpdate).innerHTML = "";
         new Ajax.Updater(this.commonAjaxParams.elementToUpdate, habboReqPath + this.urlToCall, {
-            method: "get",
+            method: "post",
             parameters: params,
             evalScripts: false,
             insertion: Insertion.Bottom,
@@ -741,7 +741,7 @@ BadgesWidget.prototype = {
 
         new Ajax.Updater(this.containerElement, habboReqPath + this.options.searchUrl, {
             method: "post",
-            parameters: "pageNumber=" + encodeURIComponent(c) + "&widgetId=" + this.widgetId + this.options.ownerParameter + this.ownerId + "&_token=" + document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            parameters: "pageNumber=" + encodeURIComponent(c) + "&widgetId=" + this.widgetId + this.options.ownerParameter + this.ownerId,
             onComplete: function (g) {
                 if (this.listHeight) {
                     var e = $(this.containerElement).down("ul");

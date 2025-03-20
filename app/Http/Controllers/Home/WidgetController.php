@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Guild;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeData;
+use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
 use App\Models\Home\HomeTrax;
 use App\Models\Photo;
@@ -30,11 +31,8 @@ class WidgetController extends Controller
         $totalPages = ceil($badges->count() / 16);
 
         return view('home.ajax.badgewidget')->with([
-            'badges'        => $badges->get(),
-            'pageBadge'     => $badges->skip(($page - 1) * 16)->take(16)->orderBy('badge_code', 'asc')->get(),
+            'badges'        => $badges->orderBy('badge', 'ASC')->get(),
             'totalPages'    => $totalPages,
-            'currentBadges' => ($page - 1) * 16 + 1,
-            'toBadges'      => (($page - 1) * 16) + 16,
             'page'          => $page
         ]);
     }
@@ -86,13 +84,12 @@ class WidgetController extends Controller
 
         $guestbook = Guestbook::create([
             'user_id'   => user()->id,
-            'message'   => Hotel::bb_format($message),
-            'widget_id' => $widgetId,
-            'time'      => time()
+            'message'   => bb_format($message),
+            'widget_id' => $widgetId
         ]);
 
-        return view('home.ajax.guestbookadd')->with([
-            'guestbook' => $guestbook
+        return view('home.ajax.guestbook.add')->with([
+            'message' => $guestbook
         ]);
     }
 
@@ -109,7 +106,7 @@ class WidgetController extends Controller
 
     public function guestbookRemove(Request $request)
     {
-        $guestbook = HomeData::find($request->widgetId);
+        $guestbook = HomeItem::find($request->widgetId);
         //if guestbook does not exists, exit
         //yes, there is a delete animation, but no data is deleted
         if (!$guestbook)
@@ -134,7 +131,7 @@ class WidgetController extends Controller
         $widgetId       = $request->widgetId;
         $lastEntryId    = $request->lastEntryId;
 
-        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['is_deleted', '=', '0'], ['id', '<', $lastEntryId]])->orderBy('time', 'desc')->take(20)->get();
+        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['is_deleted', '=', '0'], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
 
         return response(view('home.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')

@@ -15,31 +15,7 @@
         <div class="widget-body">
             <div class="widget-content">
                 <div id="badgelist-content">
-                    <ul class="clearfix" style="padding: 0; ">
-                        @forelse($user->getBadges()->take(16) as $badge)
-                        <li
-                            style="background-image: url({{ url('/') }}/gordon/c_images/album1584/{{ $badge->badge_code }}.png)">
-                        </li>
-                        @empty
-                        No badges
-                        @endforelse
-                    </ul>
-
-                    <div id="badge-list-paging">
-                        1 - {{ $user->getBadges()->count() >= 16 ? '16' : $user->getBadges()->count() }} /
-                        {{ $user->getBadges()->count() }}
-                        <br>
-                        @if($user->getBadges()->count() > 16)
-                        First |
-                        &lt;&lt; |
-                        <a href="#" id="badge-list-search-next">&gt;&gt;</a> |
-                        <a href="#" id="badge-list-search-last">Last</a>
-                        <input type="hidden" id="badgeListPageNumber" value="1">
-                        <input type="hidden" id="badgeListTotalPages"
-                            value="{{ ceil($user->getBadges()->count()/16) }}">
-                        @endif
-                    </div>
-
+                    @include('home.ajax.badgewidget', ['badges' => $user->getBadges(), 'page' => 1, 'totalPages' => ceil($user->getBadges()->count() / 16)])
                     <script type="text/javascript">
                         Event.onDOMReady(function() {
                             window.badgesWidget{{ $item->id }}= new BadgesWidget('{{ $user->id }}', '{{ $item->id }}');

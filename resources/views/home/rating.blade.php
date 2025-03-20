@@ -17,25 +17,20 @@
             <div class="widget-content">
                 <div id="rating-main">
                     @php($rating = \App\Models\Home\HomeRating::where('home_id', $user->id))
-                    @php($average = round(($rating->select(\Illuminate\Support\Facades\DB::raw("SUM(rating) AS
-                    rating"))->get()[0]->rating / ($rating->count() > 0 ? $rating->count() : 1)), 1))
-
-
+                    @php($average = round(($rating->select(\Illuminate\Support\Facades\DB::raw("SUM(rating) AS rating"))->get()[0]->rating / ($rating->count() > 0 ? $rating->count() : 1)), 1))
                     <script type="text/javascript">
                         var ratingWidget;
                         Event.onDOMReady(function() {
-                            ratingWidget = new RatingWidget({{ $item->id }}, {{ $user->id }});
+                            ratingWidget = new RatingWidget({{ $user->id }}, {{ $item->id }});
                         });
                     </script>
                     <div class="rating-average">
-
                         <b>Average votes: {{ $average }}</b>
                         <div id="rating-stars" class="rating-stars">
                             <ul id="rating-unit_ul1" class="rating-unit-rating">
                                 <li class="rating-current-rating" style="width:{{ ceil($average * 150)/5 }}px;" />
                                 @if(Auth::check())
-                                @if($user->id != Auth::user()->id && \App\Models\Home\HomeRating::where([['user_id',
-                                Auth::user()->id], ['home_id', $user->id]])->count() == 0)
+                                @if($user->id != user()->id && \App\Models\Home\HomeRating::where([['user_id', user()->id], ['home_id', $user->id]])->count() == 0)
                                 <li><a href="#" class="r1-unit rater">1</a></li>
                                 <li><a href="#" class="r2-unit rater">2</a></li>
                                 <li><a href="#" class="r3-unit rater">3</a></li>
