@@ -15,21 +15,32 @@
         <div class="widget-body">
             <div class="widget-content">
                 <table>
-
-                    @forelse($user->getGamesHighScore() as $score)
+                    @if($user->battleball_points > 0)
                     <tr colspan="2">
-                        <th>{{ $score->achievement_name }}</th>
+                        <th>Battleball points</th>
                     </tr>
                     <tr>
                         <td>Score</td>
                         <td>
-                            {{ $score->progress }}
+                            {{ $user->battleball_points }}
                         </td>
                     </tr>
+                    @endif
+                    @if($user->snowstorm_points > 0)
+                    <tr colspan="2">
+                        <th>Snowstorm points</th>
+                    </tr>
+                    <tr>
+                        <td>Score</td>
+                        <td>
+                            {{ $user->snowstorm_points }}
+                        </td>
+                    </tr>
+                    @endif
 
-                    @empty
+                    @if($user->battleball_points == 0 && $user->snowstorm_points == 0)
                     No games scores
-                    @endforelse
+                    @endif
                 </table>
 
                 <div class="clear"></div>

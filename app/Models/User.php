@@ -7,7 +7,6 @@ use App\Models\Guild;
 use App\Models\GuildMember;
 use App\Models\Permission;
 use App\Models\Room;
-use App\Models\UserAchievement;
 use App\Models\UserBadge;
 use App\Models\UserCurrency;
 use App\Models\UserFriend;
@@ -19,7 +18,8 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username', 'email', 'password', 'motto', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active'
+        'username', 'email', 'password', 'motto', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active',
+        'battleball_points', 'snowstorm_points'
     ];
 
     protected $hidden = [
@@ -172,22 +172,6 @@ class User extends Authenticatable
         return UserFriend::where('from_id', $this->id)->join('users', 'users.id', '=', 'to_id')
             ->select('users.id', 'username', 'figure', 'created_at', 'to_id')
             ->orderBy('username', 'asc')->get();
-    }
-
-    /**
-     * Get user high score games (FreezeWinner, FreezePlayer, BattleBallWinner, BattleBallPlayer)
-     *
-     * @return mixed
-     */
-    public function getGamesHighScore()
-    {
-        $highscore = UserAchievement::where([['achievement_name', 'FreezeWinner'], ['user_id',  $this->id]])
-            ->orWhere([['achievement_name', 'FreezePlayer'], ['user_id',  $this->id]])
-            ->orWhere([['achievement_name', 'BattleBallWinner'], ['user_id',  $this->id]])
-            ->orWhere([['achievement_name', 'BattleBallPlayer'], ['user_id',  $this->id]])
-            ->get();
-
-        return $highscore;
     }
 
     /**
