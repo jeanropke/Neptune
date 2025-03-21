@@ -87,15 +87,17 @@
                             <span id="header-bar-text">
                                 Habbo home: {{ $user->username }}
                             </span>
-                            @if (!$isEdit)
+                            @if (Auth::check() && $user->id == user()->id && !$isEdit)
                             <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}"
                                 class="toolbutton edit"><span>Edit</span></a>
+                            @endif
+                            @if(!$isEdit)
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $user->username }}"
                                 id="tell-button" class="toolbutton tell"><span>Tell a friend</span></a>
-                                @if($user->id != user()->id)
+                            @endif
+                            @if(Auth::check() && $user->id != user()->id)
                             <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
                                     Habbo Home</span></a>
-                                @endif
                             @endif
                         </div>
                     </div>
@@ -637,6 +639,7 @@
     {{--
     There is no script in waybackmachine to handle home inventory and webstore :(
     --}}
+    @if ($isEdit)
     <script>
         Event.observe('notes-button', 'click', openNoteEditor, false);
     </script>
@@ -645,4 +648,5 @@
             width: 345px;
         }
     </style>
+    @endif
 @stop

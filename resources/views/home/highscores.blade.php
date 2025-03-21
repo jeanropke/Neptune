@@ -15,7 +15,44 @@
         <div class="widget-body">
             <div class="widget-content">
                 <table>
-                    @if($user->battleball_points > 0)
+                    <tbody>
+                        <tr colspan="2">
+                            <th><a href="{{ url('/') }}/games/battleball/">Battle Ball</a></th>
+                        </tr>
+                        <tr>
+                            <td>Games played</td>
+                            <td>x</td>
+                        </tr>
+                        <tr>
+                            <td>Total score</td>
+                            <td>{{ $user->battleball_points }}</td>
+                        </tr>
+                        <tr colspan="2">
+                            <th><a href="{{ url('/') }}/games/snowstorm/">Snow Storm</a></th>
+                        </tr>
+                        <tr>
+                            <td>Games played</td>
+                            <td>x</td>
+                        </tr>
+                        <tr>
+                            <td>Total score</td>
+                            <td>{{ $user->snowstorm_points }}</td>
+                        </tr>
+
+                        <tr colspan="2">
+                            <th><a href="{{ url('/') }}/games/wobblesquabble/">Wobble Squabble</a></th>
+                        </tr>
+                        <tr>
+                            <td>Games played</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Total score</td>
+                            <td>79</td>
+                        </tr>
+                </tbody>
+
+                    {{--@if($user->battleball_points > 0)
                     <tr colspan="2">
                         <th>Battleball points</th>
                     </tr>
@@ -40,7 +77,7 @@
 
                     @if($user->battleball_points == 0 && $user->snowstorm_points == 0)
                     No games scores
-                    @endif
+                    @endif--}}
                 </table>
 
                 <div class="clear"></div>

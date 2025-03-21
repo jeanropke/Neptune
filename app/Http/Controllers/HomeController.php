@@ -16,6 +16,14 @@ class HomeController extends Controller
 {
     public function startSession(Request $request)
     {
+        if(!Auth::user()) {
+            if($request->groupId)
+                return redirect("groups/{$request->groupId}/id");
+            elseif($request->homeId)
+                return redirect("home/{$request->homeId}/id");
+            return redirect("/");
+        }
+
         $session = HomeSession::find(user()->id);
         if($session) {
             if($session->group_id)
@@ -36,7 +44,7 @@ class HomeController extends Controller
     public function home($username = null)
     {
         if (!$username)
-            return 'show my home';
+            $username = user()->username;
 
         $user = User::where('username', $username)->first();
         if (!$user)
@@ -70,6 +78,9 @@ class HomeController extends Controller
 
     public function saveHome($userId, Request $request)
     {
+        $session = HomeSession::find(user()->id);
+        if(!$session) return;
+
         $stickienotes = $request->stickienotes;
         $widgets = $request->widgets;
         $stickers = $request->stickers;
@@ -177,7 +188,10 @@ class HomeController extends Controller
             }
         }
 
-        echo '<script language="JavaScript" type="text/javascript">waitAndGo("../home/' . $userId . '/id");</script>';
+
+        $session->delete();
+
+        echo '<script language="JavaScript" type="text/javascript">waitAndGo("../../home/' . $userId . '/id");</script>';
     }
 
     public function cancelHome(Request $request)
