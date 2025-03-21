@@ -90,7 +90,8 @@ Route::middleware('user')->group(function () {
     Route::prefix('community')->group(function () {
         Route::get('/', [CommunityController::class, 'index'])->name('community.index');
         Route::get('/fansites', [CommunityController::class, 'fansites'])->name('community.fansites');
-        Route::get('/photos', [CommunityController::class, 'photos'])->name('community.photos');
+        //Route::get('/photos', [CommunityController::class, 'photos'])->name('community.photos');
+        //Route::get('/photo/{id}', [CommunityController::class, 'photo'])->name('community.photo');
     });
 
     Route::prefix('games')->group(function () {

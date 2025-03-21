@@ -19,7 +19,7 @@
                                     </div>
                                     <div class="v3box-content">
                                         <div class="v3box-body">
-                                            <div class="picture" style="background: url({{ $photo->url }})">
+                                            <div class="picture" style="background: url({{ $photo->getPhotoImage() }})">
                                                 {{--<div class="info">
                                                     <div class="likes" data-id="{{ $photo->id }}">
                                                         <div class="icon"></div>

@@ -6,36 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'camera_web';
+    protected $table = 'items_photos';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public $primaryKey = 'photo_id';
+
     protected $fillable = [
-        'id', 'user_id', 'room_id', 'timestamp', 'url'
+        'photo_id', 'photo_user_id', 'timestamp', 'photo_data', 'photo_checksum'
     ];
 
     public $timestamps = false;
 
-    public function getRoomName()
-    {
-        $room = Room::find($this->room_id);
-        if ($room)
-            return $room->name;
-
-        return null;
-    }
-
     public function getUserName()
     {
-        $user = User::find($this->user_id);
+        $user = User::find($this->photo_user_id);
         if ($user)
             return $user->username;
 
