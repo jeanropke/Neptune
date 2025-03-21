@@ -44,7 +44,9 @@
                 <script type="text/javascript">
                     Event.onDOMReady(function() {
                         var gb{{ $item->id }} = new GuestbookWidget('{{ $user->id }}', '{{ $item->id }}', 500);
+                        @if($guestbook->count() > 20)
                         gb{{ $item->id }}.monitorScrollPosition();
+                        @endif
                         var editMenuSection = $('guestbook-privacy-options');
                         if (editMenuSection) {
                             gb{{ $item->id }}.updateOptionsList('{{ $item->data }}');
