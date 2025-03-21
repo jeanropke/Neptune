@@ -183,10 +183,11 @@ Route::middleware('user')->group(function () {
     });
 });
 
+
+Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::middleware('auth')->group(function () {
     Route::get('/components/roomNavigation', [ClientController::class, 'roomNavigation'])->name('client.room.navigation');
     Route::prefix('client')->group(function () {
-        Route::get('/', [ClientController::class, 'index'])->name('client.index');
         Route::post('/', [ClientController::class, 'clientError'])->name('client.error');
         Route::get('/disconnected', [ClientController::class, 'disconnected'])->name('client.disconnected');
     });

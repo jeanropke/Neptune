@@ -75,9 +75,9 @@
             <param name="swStretchStyle" value="none">
             <param name="swText" value="">
             <param name="bgColor" value="#000000">
-            <param name="sw6" value="use.sso.ticket=1;sso.ticket={{ user()->setAuthTicket() }}">
+            <param name="sw6" value="{{ Auth::check() ? 'use.sso.ticket=1;sso.ticket=' . user()->setAuthTicket() : 'use.sso.ticket=0' }}">
             <param name="sw2" value="connection.info.host={{ cms_config('connection.info.host') }};connection.info.port={{ cms_config('connection.info.port') }}">
-            <param name="sw4" value="connection.mus.host={{ cms_config('connection.rcon.host') }};connection.mus.port={{ cms_config('connection.rcon.port') }}">
+            <param name="sw4" value="connection.mus.host={{ cms_config('connection.mus.host') }};connection.mus.port={{ cms_config('connection.mus.port') }}">
             <param name="sw3" value="client.reload.url={{ url('/') }}/account/reauthenticate?page=/client">
             <param name="sw1" value="site.url={{ url('/') }};url.prefix={{ url('/') }}">
             <param name="sw5" value="external.variables.txt={{ cms_config('external.variables.txt') }};external.texts.txt={{ cms_config('external.texts.txt') }}">
@@ -86,7 +86,7 @@
             <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,8,5,1,0" id="habbo" width="720" height="540">
             <embed src="{{ cms_config('habbo.dcr.url') }}" bgColor="#000000" width="720" height="540"
             swRemote="swSaveEnabled='true' swVolume='true' swRestart='false' swPausePlay='false' swFastForward='false' swTitle='Habbo Hotel' swContextMenu='true'"
-            swStretchStyle="none" swText="" type="application/x-director" pluginspage="https://www.macromedia.com/shockwave/download/" sw6="use.sso.ticket=1;sso.ticket={{ user()->setAuthTicket() }}"
+            swStretchStyle="none" swText="" type="application/x-director" pluginspage="https://www.macromedia.com/shockwave/download/" sw6="{{ Auth::check() ? 'use.sso.ticket=1;sso.ticket=' . user()->setAuthTicket() : 'use.sso.ticket=0' }}"
             @if ($shortcut == 'roomomatic') sw9="shortcut.id=1;account_id={{ user()->username }}"
             @elseif(isset($forwardId) && isset($roomId))
             sw9="forward.type={{ $forwardId }};forward.id={{ $roomId }};processlog.url=" @endif
@@ -98,7 +98,7 @@
 
 
      sw2="connection.info.host={{ cms_config('connection.info.host') }};connection.info.port={{ cms_config('connection.info.port') }}"
-     sw4="connection.mus.host={{ cms_config('connection.rcon.host') }};connection.mus.port={{ cms_config('connection.rcon.port') }}"
+     sw4="connection.mus.host={{ cms_config('connection.mus.host') }};connection.mus.port={{ cms_config('connection.mus.port') }}"
      sw3="client.reload.url={{ url('/') }}/account/reauthenticate?page=/client"
      sw1="site.url={{ url('/') }};url.prefix={{ url('/') }}"
      sw5="external.variables.txt={{ cms_config('external.variables.txt') }};external.texts.txt={{ cms_config('external.texts.txt') }}">
