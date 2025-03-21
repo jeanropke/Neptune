@@ -230,7 +230,7 @@ class AuthController extends Controller
     public function registerStepFourVerify(Request $request)
     {
         $request->validate([
-            'email'     => 'required|email|unique:users,email'
+            'email'     => 'required|email'
         ]);
 
         $request->session()->put('email', $request->email);
@@ -248,7 +248,7 @@ class AuthController extends Controller
         $validate = Validator::make($request->session()->all(), [
             'username'  => 'required|min:3|max:30|unique:users,username|regex:/[a-zA-Z\d\-=\?!@:\.]/',
             'password'  => 'required|min:6|max:30',
-            'email'     => 'required|email|unique:users,email',
+            'email'     => 'required|email',
             'figure'    => 'required',
             'gender'    => 'required|in:M,F',
             'birthday'  => 'required',
