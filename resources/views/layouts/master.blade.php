@@ -230,7 +230,7 @@
                 <div id="mainmenu">
                     <ul>
                         <li id="leftspacer">&nbsp;</li>
-                        @foreach(\App\Models\CmsMenu::where('parent_id', -1)->orderBy('order_num', 'ASC')->get() as $item)
+                        @foreach(\App\Models\CmsMenu::where([['parent_id', -1], ['min_rank', '<=', (Auth::check() ? user()->rank : 1)]])->orderBy('order_num', 'ASC')->get() as $item)
                         <li {{ $item->id == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
                             <span class="left"></span>
                             <a href="{{ url('/') }}/{{ $item->url }}"><img
@@ -243,7 +243,7 @@
                 </div>
                 <div id="submenu">
                     <div class="subnav">
-                        @foreach(\App\Models\CmsMenu::where('parent_id', $menuId)->orderBy('order_num', 'ASC')->get() as $subitem)
+                        @foreach(\App\Models\CmsMenu::where([['parent_id', $menuId], ['min_rank', '<=', (Auth::check() ? user()->rank : 1)]])->orderBy('order_num', 'ASC')->get() as $subitem)
                         @if($subitem->id == $submenuId)
                         {{ $subitem->caption }}
                         @else
