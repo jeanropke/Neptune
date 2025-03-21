@@ -88,8 +88,8 @@ class AuthController extends Controller
             return redirect()->route('auth.login');
 
         $request->validate([
-            'password'          => 'required|min:8|max:30',
-            'retypedPassword'   => 'required|min:8|max:30|same:password'
+            'password'          => 'required|min:6|max:30',
+            'retypedPassword'   => 'required|min:6|max:30|same:password'
         ]);
 
         $user = User::where('mail', $reset->first()->email)->first();
@@ -122,7 +122,7 @@ class AuthController extends Controller
 
         $validator = $request->validate([
             'username'  => 'required',
-            'password'  => 'required|min:8'
+            'password'  => 'required'
         ]);
 
         if (Auth::attempt($validator)) {
@@ -171,7 +171,7 @@ class AuthController extends Controller
             'year'  => 'required|numeric'
         ]);
 
-        $birthday = $request->day . '-' . $request->month . '-' . $request->year;
+        $birthday = str_pad($request->day, 2, 0, STR_PAD_LEFT) . '.' . str_pad($request->month, 2, 0, STR_PAD_LEFT)  . '.' . $request->year;
         $request->session()->put('birthday', $birthday);
         return view('auth.register.start');
     }
@@ -203,7 +203,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'username'  => 'required|min:3|max:30|unique:users,username',
-            'password'  => 'required|min:8|max:30'
+            'password'  => 'required|min:6|max:30'
         ]);
 
         if (preg_replace("/[^a-z\d\-=\?!@:\.]/i", "", $request->username) != $request->username) {
@@ -247,7 +247,7 @@ class AuthController extends Controller
         //Okay, here we'll check username and email values, again
         $validate = Validator::make($request->session()->all(), [
             'username'  => 'required|min:3|max:30|unique:users,username|regex:/[a-zA-Z\d\-=\?!@:\.]/',
-            'password'  => 'required|min:8|max:30',
+            'password'  => 'required|min:6|max:30',
             'email'     => 'required|email|unique:users,email',
             'figure'    => 'required',
             'gender'    => 'required|in:M,F',

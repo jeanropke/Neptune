@@ -244,7 +244,7 @@
 
                         if (!init) {
                             if (!value || value.length < 6) {
-                                showPasswordLengthMsg("Your password must be at least 8 characters long.", "error");
+                                showPasswordLengthMsg("Your password must be at least 6 characters long.", "error");
                                 pwTotal[0] = false;
                             } else {
                                 showPasswordLengthMsg("Password is securely long enough.", "ok");

@@ -74,9 +74,7 @@
                                                     swfobj.addVariable("post_figure", "figure");
                                                     swfobj.addVariable("post_gender", "gender");
                                                     swfobj.addVariable("required-birth", "{{ session('birthday') }}");
-                                                    swfobj.addVariable("figure", "");
                                                     swfobj.addVariable("_token", "{{ csrf_token() }}");
-                                                    swfobj.addVariable("gender", "");
                                                     swfobj.write("flashcontent");
                                                     </script>
                                             </div>
