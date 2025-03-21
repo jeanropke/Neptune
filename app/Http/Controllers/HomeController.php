@@ -180,6 +180,14 @@ class HomeController extends Controller
         echo '<script language="JavaScript" type="text/javascript">waitAndGo("../home/' . $userId . '/id");</script>';
     }
 
+    public function cancelHome(Request $request)
+    {
+        $session = HomeSession::find(user()->id);
+        if(!$session) return;
+
+        $session->delete();
+    }
+
     /**
      * WEBSTORE & INVENTORY FUNCTIONS
      */

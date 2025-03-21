@@ -157,6 +157,7 @@ Route::middleware('user')->group(function () {
         Route::post('/stickie/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.stickie.edit');
         Route::post('/stickie/delete', [HomeController::class, 'deleteStickie'])->name('myhabbo.stickie.delete');
         Route::post('/widget/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.widget.edit');
+        Route::post('/cancel', [HomeController::class, 'cancelHome'])->name('myhabbo.cancel');
         Route::post('/save/{id}', [HomeController::class, 'saveHome'])->name('myhabbo.save');
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');
 

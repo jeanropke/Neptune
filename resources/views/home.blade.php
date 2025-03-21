@@ -19,7 +19,12 @@
         }
 
         function cancelEditing(expired) {
-            location.replace("/home/{{ $user->id }}/id" + (expired ? "?expired=true" : ""));
+            new Ajax.Request(habboReqPath + "/myhabbo/cancel", {
+                parameters: {id: '{{ $user->id }}' },
+                    onSuccess: function(req) {
+                        window.location.reload();
+                }
+            });
         }
 
         function getSaveEditingActionName() {
@@ -82,49 +87,21 @@
                             <span id="header-bar-text">
                                 Habbo home: {{ $user->username }}
                             </span>
+                            @if (!$isEdit)
                             <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}"
                                 class="toolbutton edit"><span>Edit</span></a>
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $user->username }}"
                                 id="tell-button" class="toolbutton tell"><span>Tell a friend</span></a>
+                                @if($user->id != user()->id)
                             <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
                                     Habbo Home</span></a>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
-
-                {{-- <div id="header-bar" class="box dark-blue">
-                    <div class="box-header"><div></div></div>
-                    <div class="box-body">
-                        <div class="box-content">
-                            @if (!$isEdit)
-                            <span id="header-bar-text">Habbo home: {{ $user->username }}</span>
-                            @endif
-                            <div id="top-toolbar" style="padding: 0;">
-                                @if (Auth::check())
-                                    @if ((user()->id && $user->id) || user()->rank > 5)
-                                        @if (!$isEdit)
-                                            <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}" class="toolbutton edit"><span>Edit</span></a>
-                                        @else
-                                            <a href="#" id="inventory-button" class="toolbutton inventory"><span>Inventory</span></a>
-                                            <a href="#" id="webstore-button" class="toolbutton webstore"><span>Webstore</span></a>
-
-                                            <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
-                                            <a href="#" id="stickers-button" class="toolbutton stickers"><span>Stickers</span></a>
-                                            <a href="#" id="widgets-button" class="toolbutton widgets"><span>Widgets</span></a>
-                                            <a href="#" id="backgrounds-button" class="toolbutton backgrounds"><span>Backgrounds</span></a>
-                                            <ul>
-                                                <li><a id="save-button" href="#" class="toolbutton save"><span>Save</span></a></li>
-                                                <li><a id="cancel-button" href="#" class="toolbutton cancel"><span>Cancel</span></a></li>
-                                            </ul>
-
-                                        @endif
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
+            @if ($isEdit)
             <div id="top-toolbar">
                 <div>
                     <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
@@ -136,11 +113,12 @@
 
                 </div>
             </div>
+            @endif
             <div id="mypage-top-spacer"></div>
 
 
             <div id="mypage-bg"
-                class="b_{{ $items->where('type', 'background')->first() ? $items->where('type', 'background')->first()->getStoreItem()->class : '' }}">
+                class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
                 <div id="playground">
                     <!--div class="movable widget HighScoresWidget" id="widget-1585958" style=" left: 58px; top: 1160px; z-index: 4;">
                                 <div class="w_skin_hc_machineskin">
