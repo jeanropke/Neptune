@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -40,5 +41,15 @@ class ClientController extends Controller
     public function topbarHabboclub()
     {
         return view('includes.topbar.habboclub');
+    }
+
+    public function roomNavigation(Request $request)
+    {
+        //$request->roomType - private or public?
+        //$request->move - true
+        $room = Room::find($request->roomId);
+        if(!$room) return;
+
+        mus("enter_room", ['userId' => user()->id, 'roomId' => $room->id]);
     }
 }

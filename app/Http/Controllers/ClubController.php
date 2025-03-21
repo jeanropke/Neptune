@@ -75,8 +75,6 @@ class ClubController extends Controller
 
     public function join()
     {
-        $user = User::find(2);
-        $user->giveGift('96', 'Dev', 'mensagem|com<3', 2);
         return view('club.join');
     }
 
