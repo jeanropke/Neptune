@@ -36,7 +36,7 @@
                         @endif--}}
                         @if($user->badge_active)
                         <img
-                            src="{{ url('/') }}/c_images/Badges/{{ $user->badge }}.gif">
+                            src="{{ cms_config('site.badges.url') }}/{{ $user->badge }}.gif">
                         @endif
                     </div>
 

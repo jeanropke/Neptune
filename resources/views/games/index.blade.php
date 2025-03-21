@@ -90,7 +90,7 @@
                                             <br>
 
                                             <img width="37" vspace="0" hspace="5" height="37" border="0" align="left"
-                                                src="{{ url('/') }}/c_images/album1584/TC1.png" id="galleryImage"
+                                                src="{{ cms_config('site.badges.url') }}/TC1.gif" id="galleryImage"
                                                 alt="TC1">Each week, the top 20 Battle Ball players
                                             earn this special badge that you can't get anywhere else!
 

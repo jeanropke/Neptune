@@ -5,7 +5,7 @@
         </div>
         <div class="avatar-info-image">
             @if($badgeslot)
-            <img src="{{ url('/') }}/gordon/c_images/album1584/{{ $badgeslot->badge_code }}.png">
+            <img src="{{ cms_config('site.badges.url') }}/{{ $badgeslot->badge_code }}.gif">
             @endif
             <img src="{{ cms_config('site.avatarimage.url') }}?figure={{ $friend->look }}&size=n&direction=4&head_direction=4"
                 alt="{{ $friend->username }}" />
