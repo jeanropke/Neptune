@@ -3,6 +3,7 @@
 use App\Models\BoxPage;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
+use Illuminate\Support\Facades\Auth;
 
 function user()
 {
@@ -50,7 +51,13 @@ function format_prices($credits, $points, $type)
 
 function boxes($page, $column)
 {
-    return BoxPage::where([['page', $page], ['column', $column]])->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
+    $boxes = [];
+    if(Auth::check())
+        $boxes = BoxPage::where([['page', $page], ['column', $column], ['requirement', '!=', 'guest']])->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
+    else
+        $boxes = BoxPage::where([['page', $page], ['column', $column], ['requirement', '!=', 'auth']])->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
+
+    return $boxes;
 }
 
 function bb_format($str)

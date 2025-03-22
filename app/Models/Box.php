@@ -20,11 +20,8 @@ class Box extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'title', 'content', 'created_by'
+        'id', 'title', 'content', 'requirement', 'created_by'
     ];
 
     public $timestamps = false;
-
-
-
 }
