@@ -22,10 +22,13 @@ use Illuminate\Http\Request;
 use PayPal\Auth\OAuthTokenCredential;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Symfony\Component\Console\Input\Input;
+
+use function PHPUnit\Framework\isNumeric;
 
 class CreditsController extends Controller
 {
@@ -74,8 +77,17 @@ class CreditsController extends Controller
 
     public function collectibles()
     {
-        $item = Collectable::where([['start_at', '<', time()], ['end_at', '>', time()]])->first();
-        return view('credits.collectibles')->with('item', $item);
+        $tick = emu_config('rare.cycle.tick.time');
+        if(!$tick || !is_numeric($tick))
+            $tick = 0;
+
+        $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
+        $time = (24 * 60 * 60) - $tick;
+
+        return view('credits.collectibles')->with([
+            'collectable' => $collectable,
+            'time' => $time
+        ]);
     }
 
     public function mystery()
@@ -209,7 +221,30 @@ class CreditsController extends Controller
 
     public function habbletAjaxCollectiblesConfirm()
     {
-        $item = Collectable::where([['start_at', '<', time()], ['end_at', '>', time()]])->first();
-        return view('habblet.ajax.collectibles_confirm')->with('item', $item);
+        $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
+
+        return view('habblet.ajax.collectibles_confirm')->with([
+            'collectable' => $collectable
+        ]);
+    }
+
+    public function habbletAjaxCollectiblesPurchase()
+    {
+        $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
+
+        if(user()->credits >= $collectable->getPrice()) {
+            user()->updateCredits(-$collectable->getPrice());
+            user()->giveItem($collectable->getCatalogueItem()->definition_id);
+
+            return view('habblet.ajax.collectibles_success')->with([
+                'collectable'   => $collectable
+            ]);
+        }
+        else {
+            return view('habblet.ajax.collectibles_success')->with([
+                'collectable'   => $collectable,
+                'error' => true
+            ]);
+        }
     }
 }

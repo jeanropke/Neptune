@@ -13,7 +13,7 @@ class CatalogueItem extends Model
      *
      * @var string
      */
-    protected $table = 'catalog_items';
+    protected $table = 'catalogue_items';
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +21,8 @@ class CatalogueItem extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'page_id', 'item_ids', 'catalog_name', 'cost_credits', 'cost_points', 'points_type', 'amount', 'song_id',
-        'limited_stack', 'limited_sells', 'extradata', 'club_only', 'have_offer', 'offer_id', 'order_number'
+        'id', 'page_id', 'sale_code', 'order_id', 'price', 'is_hidden', 'amount', 'definition_id',
+        'item_specialspriteid', 'name', 'description', 'is_package', 'package_name', 'package_description'
     ];
 
     public $timestamps = false;
@@ -32,5 +32,10 @@ class CatalogueItem extends Model
         if(str_contains($this->item_ids, ';'))
             return Furniture::find($this->id);
         return Furniture::find($this->item_ids);
+    }
+
+    public function getNormalizedName()
+    {
+        return str_replace('*', '_', $this->sale_code);
     }
 }

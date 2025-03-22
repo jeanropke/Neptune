@@ -1,12 +1,10 @@
 <div id="collectables_confirm_box">
-    @php($cata = $item->getCatalogueItem())
-    @php($furni = $cata->getItemBase())
-    <img src="{{ cms_config('url.furni.large') }}/{{ $furni->getNormalizedName() }}.png" alt="" align="left" style="margin:10px;">
+    @php($cata = $collectable->getCatalogueItem())
+    <img src="{{ cms_config('furni.large.url') }}/{{ $cata->getNormalizedName() }}.png" alt="" align="left" style="margin:10px;">
     <p><b>Confirmation</b></p>
     <p>
-        Are you sure you want to purchase {{ $furni->public_name }}?
-        It will cost {{ $cata->cost_credits }} credits.
-        {{ format_prices($cata->cost_credits, $cata->cost_points, $cata->points_type) }}
+        Are you sure you want to purchase <b>{{ $cata->name }}</b>?
+        It will cost <b>{{ $collectable->getPrice() }}</b> credits.
     </p>
     <p>
     </p><table align="right">

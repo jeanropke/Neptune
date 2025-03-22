@@ -18,29 +18,29 @@
                                     </div>
                                     <div class="v3box-content">
                                         <div class="v3box-body" id="collectible-current">
-                                            @if ($item)
+                                            @if ($collectable)
                                             <div id="collectible-current-content">
-                                                @php($cata = $item->getCatalogueItem())
-                                                @php($furni = $cata->getItemBase())
+                                                @php($cata = $collectable->getCatalogueItem())
 
                                                 <div id="collectibles-current-img"
-                                                    style="background-image: url({{ cms_config('url.furni.large') }}/{{ $furni->getNormalizedName() }}.png)">
+                                                    style="background-image: url({{ cms_config('furni.large.url') }}/{{ $cata->getNormalizedName() }}.png)">
                                                 </div>
-                                                <h4>{{ $furni->public_name }}</h4>
-                                                <p>{{ $furni->description }}</p>
+                                                <h4>{{ $cata->name }}</h4>
+                                                <p>{{ $cata->description }}</p>
                                                 {{--<p class="last">1/3 of Totem</p>--}}
                                                 <p id="collectibles-purchase">
                                                     <a href="#" class="colorlink orange last collectibles-purchase-current"><span>Purchase</span></a>
 
                                                     <span class="collectibles-timeleft">Available Until: <span
-                                                            id="collectibles-timeleft-value">{{ Carbon\CarbonInterval::seconds($item->getRemainingTime())->cascade()->format('%dd %hh %imin %ss') }}</span></span>
+                                                            id="collectibles-timeleft-value">{{ Carbon\CarbonInterval::seconds($time)->cascade()->format('%dd %hh %imin %ss') }}</span></span>
                                                 </p>
 
                                                 <div class="clear"></div>
                                             </div>
 
                                             <script type="text/javascript">
-                                                Collectibles.init({{ $item->getRemainingTime() }});
+                                                L10N.put('collectibles.purchase.title', 'Confirm purchase');
+                                                Collectibles.init({{ $time }});
                                             </script>
                                             @else
                                                 No collectable
