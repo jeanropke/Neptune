@@ -118,6 +118,17 @@ class User extends Authenticatable
         mus("refresh_hand", ['userId' => $this->id]);
     }
 
+    public function giveItem($id)
+    {
+        Furni::create([
+            'user_id'       => $this->id,
+            'definition_id' => $id,
+            'custom_data'   => ''
+        ]);
+
+        mus("refresh_hand", ['userId' => $this->id]);
+    }
+
 
     /**
      * Get user badges
