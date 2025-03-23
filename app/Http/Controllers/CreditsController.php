@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Hotel;
+use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsOffer;
 use App\Models\Collectable;
+use App\Models\Furni;
 use PayPal\Api;
 use PayPal\Api\Cost;
 use PayPal\Api\Item;
@@ -17,6 +19,9 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Rest\ApiContext;
 use App\Models\UserTransaction;
+use App\Models\Voucher;
+use App\Models\VoucherHistory;
+use Carbon\Carbon;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use PayPal\Auth\OAuthTokenCredential;
@@ -78,7 +83,7 @@ class CreditsController extends Controller
     public function collectibles()
     {
         $tick = emu_config('rare.cycle.tick.time');
-        if(!$tick || !is_numeric($tick))
+        if (!$tick || !is_numeric($tick))
             $tick = 0;
 
         $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
@@ -232,19 +237,67 @@ class CreditsController extends Controller
     {
         $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
 
-        if(user()->credits >= $collectable->getPrice()) {
+        if (user()->credits >= $collectable->getPrice()) {
             user()->updateCredits(-$collectable->getPrice());
             user()->giveItem($collectable->getCatalogueItem()->definition_id);
 
             return view('habblet.ajax.collectibles_success')->with([
                 'collectable'   => $collectable
             ]);
-        }
-        else {
+        } else {
             return view('habblet.ajax.collectibles_success')->with([
                 'collectable'   => $collectable,
                 'error' => true
             ]);
         }
+    }
+
+    public function redeemVoucher(Request $request)
+    {
+        if(!Auth::check())
+            return view('habblet.ajax.redeem_voucher')->with(['status' => 'Error', 'message' => 'You need login to redeem a voucher']);
+
+        $voucher = Voucher::find($request->code);
+
+        if (!$voucher)
+            return view('habblet.ajax.redeem_voucher')->with(['status' => 'Error', 'message' => 'This vouches is invalid']);
+
+        if (Carbon::now() >= $voucher->expiry_date)
+            return view('habblet.ajax.redeem_voucher')->with(['status' => 'Error', 'message' => 'This voucher is expired']);
+
+        user()->updateCredits($voucher->credits);
+
+        $itemsRedeemed = [];
+        foreach ($voucher->getItems() as $item) {
+            $cataItem = CatalogueItem::where('sale_code', $item->catalogue_sale_code)->first();
+            user()->giveItem($cataItem->definition_id);
+            if (isset($itemsRedeemed[$item->catalogue_sale_code])) {
+                $itemsRedeemed[$item->catalogue_sale_code] += 1;
+            } else {
+                $itemsRedeemed[$item->catalogue_sale_code] = 1;
+            }
+        }
+
+        $itemsRedeemedString = "";
+        foreach ($itemsRedeemed as $key => $value) {
+            $itemsRedeemedString .= "{$value},{$key}|";
+        }
+
+        $itemsRedeemedString = rtrim($itemsRedeemedString, '|');
+
+        $history = VoucherHistory::create([
+            'voucher_code'      => $request->code,
+            'user_id'           => user()->id,
+            'used_at'           => Carbon::now(),
+            'credits_redeemed'  => $voucher->credits,
+            'items_redeemed'    => $itemsRedeemedString
+        ]);
+
+        if ($voucher->is_single_use > 0) {
+            $voucher->deleteItems();
+            $voucher->delete();
+        }
+
+        return view('habblet.ajax.redeem_voucher')->with(['status' => 'Success', 'message' => 'You redeemed a valid voucher!', 'history' => $history]);
     }
 }

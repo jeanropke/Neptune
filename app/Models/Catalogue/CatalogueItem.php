@@ -7,19 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CatalogueItem extends Model
 {
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'catalogue_items';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'id', 'page_id', 'sale_code', 'order_id', 'price', 'is_hidden', 'amount', 'definition_id',
         'item_specialspriteid', 'name', 'description', 'is_package', 'package_name', 'package_description'

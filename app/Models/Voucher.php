@@ -3,25 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Voucher extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'vouchers';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'code', 'credits', 'points', 'points_type', 'catalog_item_id'
+        'voucher_code',
+        'credits',
+        'expiry_date',
+        'is_single_use'
     ];
+
+    public $primaryKey = 'voucher_code';
 
     public $timestamps = false;
 
+    public function getItems()
+    {
+        return VoucherItem::where('voucher_code', $this->voucher_code)->get();
+    }
+
+    public function deleteItems() {
+        DB::table('vouchers_items')->where('voucher_code', $this->voucher_code)->delete();
+    }
 }
