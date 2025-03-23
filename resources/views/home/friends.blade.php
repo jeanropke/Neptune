@@ -1,5 +1,5 @@
 <div class="movable widget FriendsWidget" id="widget-{{ $item->id }}" style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
-    <div class="w_skin_goldenskin">
+    <div class="w_skin_{{ $item->skin }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3><span class="header-left">&nbsp;</span><span class="header-middle">MY FRIENDS</span><span class="header-right">&nbsp;@if($isEdit)<img
