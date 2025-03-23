@@ -131,3 +131,17 @@ function build_mus($header, $parameters) {
     $buffer .= $message;
     return $buffer;
 }
+
+function is_hotel_online() {
+    $errNo = 0;
+    $f = @fsockopen(cms_config('connection.rcon.host'), cms_config('connection.rcon.port'), $errNo, $errNo, 0.01);
+    if(!$f) {
+        return false;
+    }
+    else {
+        fclose($f);
+        return true;
+    }
+
+
+}

@@ -135,35 +135,40 @@
                 <div id="top-elements">
                     <table id="topbar">
                         <tr>
-                            <td id="topbar-count">{{ emu_config('players.online') }}
-                                {{ __('members online', ['hotel' => cms_config('hotel.name.short')]) }}</td>
+                            <td id="topbar-count">
+                                @if(is_hotel_online())
+                                {{ emu_config('players.online') }} members online
+                                @else
+                                Hotel is offline
+                                @endif
+                            </td>
                             <td id="topbar-menu" align="center">
                                 <ul>
                                     <li id="myhabbo" class="selected" onmouseover="switchTab('myhabbo')">
                                         <div><a href="/" class="topbar-menu-link"
-                                                onclick="return false;">{{ __('My Habbo', ['hotel' => cms_config('hotel.name.short')]) }}</a>
+                                                onclick="return false;">My Habbo</a>
                                         </div>
                                     </li>
                                     <li id="mycredits"
                                         onmouseover="if (switchTab('mycredits') && document.habboLoggedIn) updateCredits()"
                                         onmouseout="fadeTab('myhabbo')">
-                                <div><a href="/credits" class="topbar-menu-link" onclick="return false;">{{ __('My Credits') }}</a></div>
+                                <div><a href="/credits" class="topbar-menu-link" onclick="return false;">My Credits</a></div>
                                     </li>
                                     <li id="habboclub"
                                         onmouseover="if (switchTab('habboclub') && document.habboLoggedIn) updateHabboClub()"
                                         onmouseout="fadeTab('myhabbo')">
                                         <div><a href="/club" class="topbar-menu-link" onclick="return false;">
-                                            {{ __(':hotel Club', ['hotel' => cms_config('hotel.name.short')]) }}</a></div>
+                                            Habbo Club</a></div>
                                     </li>
                                 </ul>
                             </td>
                             @if(Auth::check())
                             <td id="topbar-status" class="loggedin">
-                                {{ __('Welcome :user!', ['user' => user()->username]) }}
+                                Welcome {{ user()->username }}
                             </td>
                             @else
                             <td id="topbar-status" class="notloggedin">
-                                {{ __('Not logged in', ['hotel' => cms_config('hotel.name.short')]) }}
+                                Not logged in
                             </td>
                             @endif
                         </tr>
@@ -179,7 +184,7 @@
                                 @if(Auth::check())
                                 <img src="{{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=wav&direction=3&head_direction=3"
                                     alt="" width="64" height="110" class="tabmenu-image">
-                                <h3>{{ __('Hello :user! Enter and have fun!', ['user' => user()->username]) }}</h3>
+                                <h3>Hello {{ user()->username }}! Enter and have fun!</h3>
                                 <div class="tabmenu-inner-content">
                                     @if(user()->hasPermission('can_access_housekeeping'))
                                     <p> <a href="/housekeeping" class="arrow"><span>Housekeeping</span></a> </p>
@@ -197,13 +202,13 @@
                                 @else
                                 <img src="/web/images/top_bar/myhabbo_frank.gif" alt="" width="60" height="85"
                                 class="tabmenu-image" />
-                                <h3>{{ __('Welcome! Please sign in or register') }}</h3>
+                                <h3>Welcome! Please sign in or register</h3>
                                 <div class="tabmenu-inner-content">
                                     <p>
-                                    <a href="/login" class="colorlink orange"><span>{{ __('Register Now, it\'s free!') }}</span></a>
+                                    <a href="/login" class="colorlink orange"><span>Register Now, it's free!</span></a>
                                     </p>
                                     <p>
-                                        <a href="/login" class="colorlink orange last"><span>{{ __('Sign In') }}</span></a>
+                                        <a href="/login" class="colorlink orange last"><span>Sign In</span></a>
                                     </p>
                                 </div>
                                 @endif
