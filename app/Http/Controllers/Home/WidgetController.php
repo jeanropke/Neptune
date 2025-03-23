@@ -25,12 +25,14 @@ class WidgetController extends Controller
 
     public function badgePaging(Request $request)
     {
+        $user = User::find($request->_mypage_requested_account);
+        if(!$user) return;
         $page = $request->pageNumber;
-        $badges = UserBadge::where([['user_id', $request->_mypage_requested_account]]);
+        $badges = $user->getBadges();
         $totalPages = ceil($badges->count() / 16);
 
         return view('home.ajax.badgewidget')->with([
-            'badges'        => $badges->orderBy('badge', 'ASC')->get(),
+            'badges'        => $badges,
             'totalPages'    => $totalPages,
             'page'          => $page
         ]);

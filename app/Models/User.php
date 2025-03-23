@@ -13,6 +13,7 @@ use App\Models\UserCurrency;
 use App\Models\UserFriend;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -135,8 +136,21 @@ class User extends Authenticatable
      */
     public function getBadges()
     {
-        return UserBadge::select('badge')->where('user_id', $this->id)->orderBy('badge', 'ASC')->get();
+        $badges = array();
+
+        foreach(UserBadge::select('users_badges.badge')->where('user_id', $this->id)->get() as $badge) {
+            array_push($badges, array('badge' => $badge->badge));
+        }
+
+        foreach(DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
+            array_push($badges, array('badge' => $badge->badge));
+        }
+
+        sort($badges);
+
+        return collect($badges);
     }
+
 
     /**
      * Get user rooms

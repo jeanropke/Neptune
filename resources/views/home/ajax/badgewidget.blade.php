@@ -1,6 +1,6 @@
 <ul class="clearfix" style="padding: 0; min-height: 182px; height: 180px;">
     @forelse($badges->skip(($page - 1) * 16)->take(16) as $badge)
-    <li style="background-image: url({{ cms_config('site.badges.url') }}/{{ $badge->badge }}.gif)"></li>
+    <li style="background-image: url({{ cms_config('site.badges.url') }}/{{ $badge['badge'] }}.gif)"></li>
     @empty
     No badges
     @endforelse
