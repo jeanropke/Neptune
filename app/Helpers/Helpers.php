@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\BoxPage;
+use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
 use Illuminate\Support\Facades\Auth;
@@ -26,27 +27,10 @@ function emu_config($key)
     return "Value {$key} not found";
 }
 
-function format_prices($credits, $points, $type)
-{
-    return trans('currency.credits.singular');
-    $data = [];
-    if ($credits > 0) {
-        if ($credits == 1) {
-            array_push($data, trans('currency.credits.singular', ['amount' => $credits]));
-        } else {
-            array_push($data, trans('currency.credits.plural', ['amount' => $credits]));
-        }
-    }
-
-    if ($points > 0) {
-        if ($points == 1) {
-            array_push($data, trans("currency.points_{$type}.singular", ['amount' => $points]));
-        } else {
-            array_push($data, trans("currency.points_{$type}.plural", ['amount' => $points]));
-        }
-    }
-
-    return json_encode($data);
+function get_cata_item($sale) {
+    $cata =  CatalogueItem::where('sale_code', $sale)->first();
+    if($cata)
+        return $cata->name;
 }
 
 function boxes($page, $column)
