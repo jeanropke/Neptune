@@ -14,33 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function startSession(Request $request)
-    {
-        if(!Auth::user()) {
-            if($request->groupId)
-                return redirect("groups/{$request->groupId}/id");
-            elseif($request->homeId)
-                return redirect("home/{$request->homeId}/id");
-            return redirect("/");
-        }
-
-        $session = HomeSession::find(user()->id);
-        if($session) {
-            if($session->group_id)
-                return redirect("groups/{$session->group_id}/id");
-            return redirect("home/{$session->home_id}/id");
-        }
-
-        HomeSession::create([
-            'user_id'       => user()->id,
-            'home_id'       => $request->homeId,
-            'group_id'      => $request->groupId,
-            'expires_at'    => time() + 60 * 60 //1 hour
-        ]);
-
-        return redirect()->back();
-    }
-
     public function home($username = null)
     {
         if (!$username)
@@ -60,8 +33,25 @@ class HomeController extends Controller
             $isEdit = $session && ((user()->rank > 5 && $session->home_id) || (user()->id == $user->id && $session->home_id));
         }
 
+        $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get();
+
+        if ($items->count() == 0) {
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '4',  'data' => 'Remember!<br>Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.<br>Deleted notes will not be funded.<br><br>', 'skin' => 'noteitskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '4',  'data' => 'Welcome to a brand new Habbo Home page!<br>This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo <br>trap off with colourful notes and showcase your Habbo rooms! To <br>start editing just click the edit button.<br><br>', 'skin' => 'speechbubbleskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '4',  'data' => 'Where are my friends?<br>To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '455',    'y' => '27',    'z' => '129', 'item_id' => '5', 'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '440',    'y' => '321',   'z' => '177', 'item_id' => '10', 'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '383',    'y' => '491',   'z' => '179', 'item_id' => '11', 'skin' => 'goldenskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '109',    'y' => '19',    'z' => '134', 'item_id' => '3']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '275',    'y' => '367',   'z' => '152', 'item_id' => '14']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '183',    'y' => '373',   'z' => '171', 'item_id' => '15']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '0',      'y' => '0',     'z' => '0',   'item_id' => '17',  'data' => 'background']);
+
+            $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get();
+        }
+
         return view('home')->with([
-            'items'     => HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get(),
+            'items'     => $items,
             'user'      => $user,
             'isEdit'    => $isEdit
         ]);
@@ -76,10 +66,37 @@ class HomeController extends Controller
         return $this->home($userinfo->username);
     }
 
+    public function startSession(Request $request)
+    {
+        if (!Auth::user()) {
+            if ($request->groupId)
+                return redirect("groups/{$request->groupId}/id");
+            elseif ($request->homeId)
+                return redirect("home/{$request->homeId}/id");
+            return redirect("/");
+        }
+
+        $session = HomeSession::find(user()->id);
+        if ($session) {
+            if ($session->group_id)
+                return redirect("groups/{$session->group_id}/id");
+            return redirect("home/{$session->home_id}/id");
+        }
+
+        HomeSession::create([
+            'user_id'       => user()->id,
+            'home_id'       => $request->homeId,
+            'group_id'      => $request->groupId,
+            'expires_at'    => time() + 60 * 60 //1 hour
+        ]);
+
+        return redirect()->back();
+    }
+
     public function saveHome($userId, Request $request)
     {
         $session = HomeSession::find(user()->id);
-        if(!$session) return;
+        if (!$session) return;
 
         $stickienotes = $request->stickienotes;
         $widgets = $request->widgets;
@@ -197,7 +214,7 @@ class HomeController extends Controller
     public function cancelHome(Request $request)
     {
         $session = HomeSession::find(user()->id);
-        if(!$session) return;
+        if (!$session) return;
 
         $session->delete();
     }
@@ -269,13 +286,13 @@ class HomeController extends Controller
         $firstSticker = $stickers->first();
 
         $data = [
-            ['Inventory','Web Store']
+            ['Inventory', 'Web Store']
         ];
 
         if ($firstSticker) {
             $item = StoreItem::find($firstSticker->item_id);
-            if($item) {
-                array_push($data, ["s_{$item->class}_pre","{$item->class}","{$item->caption}","Stickers",null,1]);
+            if ($item) {
+                array_push($data, ["s_{$item->class}_pre", "{$item->class}", "{$item->caption}", "Stickers", null, 1]);
             }
         }
         return response(view('home.store.main', [
@@ -307,7 +324,7 @@ class HomeController extends Controller
             return "Invalid item id: '{$request->itemId}'";
 
         $store = $item->getStoreItem();
-        $data = ["{$store->type}_{$store->class}_pre","{$store->type}_{$store->class}","{$store->caption}","{$item->getFullType()}",null,$item->amount];
+        $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
 
         return response(view('home.inventory.preview', [
             'item' => $item
@@ -323,7 +340,7 @@ class HomeController extends Controller
             return "Invalid item id: '{$request->itemId}'";
 
         $session = HomeSession::find(user()->id);
-        if(!$session)
+        if (!$session)
             return 'error: placeSticker > session expired';
 
         $item->update([
@@ -347,10 +364,10 @@ class HomeController extends Controller
     {
         $stickerId = $request->stickerId;
         $sticker = HomeItem::find($stickerId);
-        if(!$sticker)
+        if (!$sticker)
             return 'ERROR';
 
-        if($sticker->owner_id != user()->id)
+        if ($sticker->owner_id != user()->id)
             return 'ERROR';
 
         $sticker->update([
@@ -359,18 +376,18 @@ class HomeController extends Controller
         ]);
 
         return response('SUCCESS', 200)
-                ->header('Content-Type', 'application/json')
-                ->header('X-JSON', json_encode($sticker->id));
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode($sticker->id));
     }
 
     public function deleteStickie(Request $request)
     {
         $stickieId = $request->stickieId;
         $stickie = HomeItem::find($stickieId);
-        if(!$stickie)
+        if (!$stickie)
             return 'ERROR';
 
-        if($stickie->owner_id != user()->id)
+        if ($stickie->owner_id != user()->id)
             return 'ERROR';
 
         $stickie->update([
@@ -378,8 +395,8 @@ class HomeController extends Controller
         ]);
 
         return response('SUCCESS', 200)
-                ->header('Content-Type', 'application/json')
-                ->header('X-JSON', json_encode($stickieId));
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode($stickieId));
     }
 
     public function skinEdit(Request $request)
