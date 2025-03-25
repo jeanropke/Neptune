@@ -754,3 +754,121 @@ BadgesWidget.prototype = {
     }
 }
 
+var WidgetRegistry = {
+    _widgetsById: [],
+    _widgetsByType: [],
+    add: function(A, D, C) {
+        WidgetRegistry._widgetsById[A + ""] = C;
+        if (!WidgetRegistry._widgetsByType[D]) {
+            WidgetRegistry._widgetsByType[D] = []
+        }
+        WidgetRegistry._widgetsByType[D].push(C)
+    },
+    getWidgetById: function(A) {
+        return WidgetRegistry._widgetsById[A + ""]
+    },
+    getWidgetsByType: function(A) {
+        return WidgetRegistry._widgetsByType[A]
+    }
+};
+var HighscoreListWidget = Class.create();
+Object.extend(HighscoreListWidget, {
+    handleEditMenu: function(C) {
+        if (chosenElement && chosenElement.id) {
+            var A = WidgetRegistry.getWidgetById(chosenElement.id);
+            if (A) {
+                var D = Event.element(C);
+                A.setGameId(D.options[D.selectedIndex].value)
+            }
+        }
+    }
+});
+HighscoreListWidget.prototype = {
+    initialize: function(D, A, C) {
+        this.widgetId = D;
+        this.gameId = A;
+        this.type = C;
+        this.period = null;
+        this.scoresEl = $("highscorelist-scores-" + this.widgetId);
+        if (this.scoresEl) {
+            this.scoresEl.onclick = this.handleScoresClick.bindAsEventListener(this)
+        }
+    },
+    selectGameId: function() {
+        var A = $("highscorelist-game");
+        $A(A.options).each(function(C) {
+            if (C.value == this.gameId) {
+                A.selectedIndex = C.index
+            }
+        }.bind(this))
+    },
+    handleScoresClick: function(E) {
+        var C = Event.element(E);
+        if (C.nodeName.toLowerCase() == "li" && C.id) {
+            var A = this.type;
+            var F = this.period;
+            var D = -1;
+            if (C.id.indexOf("highscorelist-period") != -1) {
+                F = C.id.substring(("highscorelist-period-" + this.widgetId).length + 1)
+            } else {
+                if (C.id.indexOf("highscorelist-type") != -1) {
+                    A = C.id.split("-").last();
+                    if (A == this.type) {
+                        return
+                    }
+                } else {
+                    if (C.id.indexOf("highscorelist-page") != -1) {
+                        D = C.id.split("-").last()
+                    }
+                }
+            }
+            this._loadScores(A, F, D)
+        }
+    },
+    setGameId: function(A) {
+        if (A != "" && A != this.gameId) {
+            closeEditMenu();
+            Element.wait(this.scoresEl);
+            new Ajax.Request(habboReqPath + "/myhabbo/highscorelist/setGameId", {
+                method: "post",
+                parameters: {
+                    widgetId: this.widgetId,
+                    gameId: A,
+					_token: _token
+                },
+                onComplete: function(C) {
+                    this.scoresEl.innerHTML = C.responseText;
+                    this.gameId = A
+                }.bind(this)
+            })
+        }
+    },
+    _loadScores: function(C, E, D) {
+        var A = habboReqPath + "/myhabbo/highscorelist/scores";
+        if (D != -1) {
+            A = habboReqPath + "/myhabbo/highscorelist/page"
+        } else {
+            Element.wait(this.scoresEl)
+        }
+        new Ajax.Request(habboReqPath + A, {
+            method: "post",
+            parameters: {
+                widgetId: this.widgetId,
+                gameId: this.gameId,
+                type: C,
+                period: E,
+                page: ((D != -1) ? D : 0),
+				_token: _token
+            },
+            onComplete: function(F) {
+                if (D != -1) {
+                    $("highscorelist-page-" + this.widgetId).innerHTML = F.responseText
+                } else {
+                    this.scoresEl.innerHTML = F.responseText;
+                    this.type = C;
+                    this.period = E
+                }
+            }.bind(this)
+        })
+    }
+};

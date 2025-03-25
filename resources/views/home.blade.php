@@ -20,9 +20,11 @@
 
         function cancelEditing(expired) {
             new Ajax.Request(habboReqPath + "/myhabbo/cancel", {
-                parameters: {id: '{{ $user->id }}' },
-                    onSuccess: function(req) {
-                        window.location.reload();
+                parameters: {
+                    id: '{{ $user->id }}'
+                },
+                onSuccess: function(req) {
+                    window.location.reload();
                 }
             });
         }
@@ -88,87 +90,85 @@
                                 Habbo home: {{ $user->username }}
                             </span>
                             @if (Auth::check() && $user->id == user()->id && !$isEdit)
-                            <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}"
-                                class="toolbutton edit"><span>Edit</span></a>
+                                <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}" class="toolbutton edit"><span>Edit</span></a>
                             @endif
-                            @if(!$isEdit)
-                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $user->username }}"
-                                id="tell-button" class="toolbutton tell"><span>Tell a friend</span></a>
+                            @if (!$isEdit)
+                                <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $user->username }}" id="tell-button"
+                                    class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
-                            @if(Auth::check() && $user->id != user()->id)
-                            <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
-                                    Habbo Home</span></a>
+                            @if (Auth::check() && $user->id != user()->id)
+                                <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
+                                        Habbo Home</span></a>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
             @if ($isEdit)
-            <div id="top-toolbar">
-                <div>
-                    <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
-                    <a href="#" id="stickers-button" class="toolbutton stickers"><span>Stickers</span></a>
-                    <a href="#" id="widgets-button" class="toolbutton widgets"><span>Widgets</span></a>
-                    <a href="#" id="backgrounds-button" class="toolbutton backgrounds"><span>Backgrounds</span></a>
-                    <a id="cancel-button" href="#" class="toolbutton cancel"><span>Cancel</span></a>
-                    <a id="save-button" href="#" class="toolbutton save"><span>Save</span></a>
+                <div id="top-toolbar">
+                    <div>
+                        <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
+                        <a href="#" id="stickers-button" class="toolbutton stickers"><span>Stickers</span></a>
+                        <a href="#" id="widgets-button" class="toolbutton widgets"><span>Widgets</span></a>
+                        <a href="#" id="backgrounds-button" class="toolbutton backgrounds"><span>Backgrounds</span></a>
+                        <a id="cancel-button" href="#" class="toolbutton cancel"><span>Cancel</span></a>
+                        <a id="save-button" href="#" class="toolbutton save"><span>Save</span></a>
 
+                    </div>
                 </div>
-            </div>
             @endif
             <div id="mypage-top-spacer"></div>
 
 
-            <div id="mypage-bg"
-                class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
+            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
                 <div id="playground">
                     <!--div class="movable widget HighScoresWidget" id="widget-1585958" style=" left: 58px; top: 1160px; z-index: 4;">
-                                <div class="w_skin_hc_machineskin">
-                                    <div class="widget-corner" id="widget-1585958-handle">
-                                        <div class="widget-headline"><h3><span class="header-left">&nbsp;</span><span class="header-middle">HIGH SCORES</span><span class="header-right">&nbsp;</span></h3>
+                                        <div class="w_skin_hc_machineskin">
+                                            <div class="widget-corner" id="widget-1585958-handle">
+                                                <div class="widget-headline"><h3><span class="header-left">&nbsp;</span><span class="header-middle">HIGH SCORES</span><span class="header-right">&nbsp;</span></h3>
+                                                </div>
+                                            </div>
+                                            <div class="widget-body">
+                                                <div class="widget-content">
+                                            <table>
+                                                    <tbody><tr colspan="2">
+                                                        <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/battleball/">Battle Ball</a></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Games played</td>
+                                                        <td>79</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total score</td>
+                                                        <td>402346</td>
+                                                    </tr>
+                                                    <tr colspan="2">
+                                                        <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/wobblesquabble/">Wobble Squabble</a></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Games played</td>
+                                                        <td>8</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total score</td>
+                                                        <td>79</td>
+                                                    </tr>
+                                            </tbody></table>
+                                                <div class="clear"></div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-content">
-                                    <table>
-                                            <tbody><tr colspan="2">
-                                                <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/battleball/">Battle Ball</a></th>
-                                            </tr>
-                                            <tr>
-                                                <td>Games played</td>
-                                                <td>79</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total score</td>
-                                                <td>402346</td>
-                                            </tr>
-                                            <tr colspan="2">
-                                                <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/wobblesquabble/">Wobble Squabble</a></th>
-                                            </tr>
-                                            <tr>
-                                                <td>Games played</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total score</td>
-                                                <td>79</td>
-                                            </tr>
-                                    </tbody></table>
-                                        <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div-->
+                                        </div-->
                     @foreach ($items as $item)
                         @php($itemStore = $item->getStoreItem())
                         @switch($itemStore->type)
-                            @case('s') {{-- sticker --}}
-                                <div class="movable sticker s_{{ $itemStore->class }}"
-                                    style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}"
+                            @case('s')
+                                {{-- sticker --}}
+                                <div class="movable sticker s_{{ $itemStore->class }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}"
                                     id="sticker-{{ $item->id }}">
                                     @if ($isEdit)
-                                        <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19"
-                                            height="18" class="edit-button" id="sticker-{{ $item->id }}-edit" />
+                                        <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
+                                            id="sticker-{{ $item->id }}-edit" />
                                         <script language="JavaScript" type="text/javascript">
                                             Event.observe('sticker-{{ $item->id }}-edit', 'click', function(e) {
                                                 openEditMenu(e, {{ $item->id }}, 'sticker', 'sticker-{{ $item->id }}-edit');
@@ -178,16 +178,16 @@
                                 </div>
                             @break
 
-                            @case('commodity') {{-- stickie --}}
-                                <div class="movable stickie"
-                                    style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};"
+                            @case('commodity')
+                                {{-- stickie --}}
+                                <div class="movable stickie" style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};"
                                     id="stickie-{{ $item->id }}">
                                     <div class="n_skin_{{ $item->skin }}">
                                         <div class="stickie-header">
                                             <h3>
                                                 @if ($isEdit)
-                                                    <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19"
-                                                        height="18" class="edit-button" id="stickie-{{ $item->id }}-edit" />
+                                                    <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
+                                                        id="stickie-{{ $item->id }}-edit" />
                                                     <script language="JavaScript" type="text/javascript">
                                                         Event.observe('stickie-{{ $item->id }}-edit', 'click', function(e) {
                                                             openEditMenu(e, {{ $item->id }}, 'stickie', 'stickie-{{ $item->id }}-edit');
@@ -199,7 +199,9 @@
                                         </div>
                                         <div class="stickie-body">
                                             <div class="stickie-content">
-                                                <div class="stickie-markup"><p>{!! $item->data !!}</p></div>
+                                                <div class="stickie-markup">
+                                                    <p>{!! $item->data !!}</p>
+                                                </div>
                                                 <div class="stickie-footer">
                                                 </div>
                                             </div>
@@ -208,7 +210,8 @@
                                 </div>
                             @break
 
-                            @case('w') {{-- widget --}}
+                            @case('w')
+                                {{-- widget --}}
                                 @include('home.' . strtolower($itemStore->class))
                             @break
                         @endswitch
@@ -473,10 +476,8 @@
                     <input type="hidden" name="entryId" id="guestbook-delete-id" value="" />
                     <p>Tem certeza que quer apagar sua mensagem?</p>
                     <p>
-                        <a href="#" id="guestbook-delete-cancel"
-                            class="toolbutton"><span><b>Cancel</b></span><i></i></a>
-                        <a href="#" id="guestbook-delete"
-                            class="toolbutton cancel"><span><b>Delete</b></span><i></i></a>
+                        <a href="#" id="guestbook-delete-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
+                        <a href="#" id="guestbook-delete" class="toolbutton cancel"><span><b>Delete</b></span><i></i></a>
                     </p>
                     <br style="clear: both">
                 </form>
@@ -515,10 +516,8 @@
                     </div>
 
                     <div class="guestbook-toolbar clearfix">
-                        <a href="#" id="guestbook-form-cancel"
-                            class="toolbutton"><span><b>Cancel</b></span><i></i></a>
-                        <a href="#" id="guestbook-form-preview" class="toolbutton notes"
-                            style="float: right"><span><b>Preview</b></span><i></i></a>
+                        <a href="#" id="guestbook-form-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
+                        <a href="#" id="guestbook-form-preview" class="toolbutton notes" style="float: right"><span><b>Preview</b></span><i></i></a>
                     </div>
 
                 </form>
@@ -546,9 +545,7 @@
 
         <div id="edit-menu" class="menu">
             <div class="menu-header">
-                <div class="menu-exit" id="edit-menu-exit"><img
-                        src="{{ url('/') }}/web/images/dialogs/menu-exit.gif" alt="" width="11"
-                        height="11" /></div>
+                <div class="menu-exit" id="edit-menu-exit"><img src="{{ url('/') }}/web/images/dialogs/menu-exit.gif" alt="" width="11" height="11" /></div>
                 <h3>Edit</h3>
             </div>
             <div class="menu-body">
@@ -567,8 +564,7 @@
                                     <option value="7" id="edit-menu-skins-select-hc_machineskin">HC Scifi</option>
                                 @endif
                                 @if (user()->rank > 5)
-                                    <option value="9" id="edit-menu-skins-select-nakedskin">Staff - Naked Skin
-                                    </option>
+                                    <option value="9" id="edit-menu-skins-select-nakedskin">Staff - Naked Skin</option>
                                 @endif
                             </select>
                         </div>
@@ -640,13 +636,13 @@
     There is no script in waybackmachine to handle home inventory and webstore :(
     --}}
     @if ($isEdit)
-    <script>
-        Event.observe('notes-button', 'click', openNoteEditor, false);
-    </script>
-    <style>
-        #note_editor_dialog {
-            width: 345px;
-        }
-    </style>
+        <script>
+            Event.observe('notes-button', 'click', openNoteEditor, false);
+        </script>
+        <style>
+            #note_editor_dialog {
+                width: 345px;
+            }
+        </style>
     @endif
 @stop

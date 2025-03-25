@@ -341,6 +341,10 @@ function openEditMenu(e, id, type, elementId, ownerId) {
 			$("edit-menu-gb-availability").style.display = "block";
 		}
 
+		if (Element.hasClassName(element, "HighScoresWidget")) {
+			$("highscorelist-edit-menu").style.display = "block";
+		}
+
 		if (Element.hasClassName(element, "TraxPlayerWidget")) {
 			$("edit-menu-trax-select").style.display = "block";
 			populateTraxSelect();
@@ -365,6 +369,7 @@ function closeEditMenu() {
 	$("edit-menu-skins").style.display = "none";
 	$("edit-menu-stickie").style.display = "none";
 	$("rating-edit-menu").style.display = "none";
+	$("highscorelist-edit-menu").style.display = "none";
 	$("edit-menu-remove-group-warning").style.display = "none";
 	$("edit-menu-gb-availability").style.display = "none";
 	$("edit-menu-trax-select").style.display = "none";

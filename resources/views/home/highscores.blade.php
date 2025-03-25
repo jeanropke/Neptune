@@ -80,6 +80,11 @@
                     @endif--}}
                 </table>
 
+                <script type="text/javascript">
+                    Event.onDOMReady(function() {
+                        new HighscoreListWidget({{ $item->id }}, 1, 1);
+                    });
+                </script>
                 <div class="clear"></div>
             </div>
         </div>
