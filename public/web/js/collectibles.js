@@ -1,6 +1,7 @@
 var Collectibles = function () {
     var D;
     var B = function () {
+        if($("collectibles-dialog")) return;
         Overlay.show();
         D = Dialog.createDialog("collectibles-dialog", L10N.get("collectibles.purchase.title"), 9001, 0, -1000, C);
         Dialog.setAsWaitDialog(D);

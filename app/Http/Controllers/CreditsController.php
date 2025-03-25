@@ -83,11 +83,16 @@ class CreditsController extends Controller
     public function collectibles()
     {
         $tick = emu_config('rare.cycle.tick.time');
+        $interval = emu_config('rare.cycle.refresh.interval');
+
         if (!$tick || !is_numeric($tick))
             $tick = 0;
 
+        if (!$interval || !is_numeric($interval))
+            $interval = 1;
+
         $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
-        $time = (24 * 60 * 60) - $tick;
+        $time = ($interval * 24 * 60 * 60) - $tick;
 
         return view('credits.collectibles')->with([
             'collectable' => $collectable,
@@ -235,6 +240,9 @@ class CreditsController extends Controller
 
     public function habbletAjaxCollectiblesPurchase()
     {
+        if(!Auth::check())
+            return;
+
         $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
 
         if (user()->credits >= $collectable->getPrice()) {
@@ -255,7 +263,7 @@ class CreditsController extends Controller
     public function redeemVoucher(Request $request)
     {
         if(!Auth::check())
-            return view('habblet.ajax.redeem_voucher')->with(['status' => 'Error', 'message' => 'You need login to redeem a voucher']);
+            return;
 
         $voucher = Voucher::find($request->code);
 
