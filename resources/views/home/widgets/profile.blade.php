@@ -17,7 +17,7 @@
             <div class="widget-content">
                 <div class="profile-info">
                     <div class="name" style="float: left">
-                        <span class="name-text">{{ $user->username }}</span>
+                        <span class="name-text">{{ $owner->username }}</span>
                     </div>
 
                     <br class="clear">
@@ -27,27 +27,27 @@
                         Habbo Created On:
                     </div>
                     <div class="birthday date">
-                        {{ $user->created_at->format('d-M-Y') }}
+                        {{ $owner->created_at->format('d-M-Y') }}
                     </div>
                     <div>
-                        {{--@if($user->getFavoriteGroup())
-                        <a href="{{ url('/') }}/groups/{{ $user->getFavoriteGroup()->id }}/id" title="VIVA MEXICO"><img
-                                src="{{ url('/') }}/gordon/c_images/Badgeparts/generated/{{ $user->getFavoriteGroup()->badge }}.png"></a>
+                        {{--@if($owner->getFavoriteGroup())
+                        <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="VIVA MEXICO"><img
+                                src="{{ url('/') }}/gordon/c_images/Badgeparts/generated/{{ $owner->getFavoriteGroup()->badge }}.png"></a>
                         @endif--}}
-                        @if($user->badge_active)
+                        @if($owner->badge_active)
                         <img
-                            src="{{ cms_config('site.badges.url') }}/{{ $user->badge }}.gif">
+                            src="{{ cms_config('site.badges.url') }}/{{ $owner->badge }}.gif">
                         @endif
                     </div>
 
 
                 </div>
                 <div class="profile-figure">
-                    <img alt="{{ $user->username }}"
-                        src="{{ cms_config('site.avatarimage.url') }}?hb=image&figure={{ $user->figure }}&headonly=0&direction=4&head_direction=4&action=&gesture=sml&size=m">
+                    <img alt="{{ $owner->username }}"
+                        src="{{ cms_config('site.avatarimage.url') }}?hb=image&figure={{ $owner->figure }}&headonly=0&direction=4&head_direction=4&action=&gesture=sml&size=m">
                 </div>
                 <div class="profile-motto">
-                    {{ $user->motto }}
+                    {{ $owner->motto }}
                     <div class="clear"></div>
                 </div>
                 <div class="profile-friend-request">
@@ -69,7 +69,7 @@
                 </div>
                 <script type="text/javascript">
                     Event.onDOMReady(function() {
-                        new ProfileWidget({{ $user->id }}, {{ user()->id ?? -1 }});
+                        new ProfileWidget({{ $owner->id }}, {{ user()->id ?? -1 }});
                     });
                 </script>
                 <div class="clear"></div>

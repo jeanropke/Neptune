@@ -5,7 +5,6 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3>
-
                     <span class="header-left">&nbsp;</span><span class="header-middle">Guestbook(<span
                             id="guestbook-size">{{ $guestbook->count() }}</span>)
                         <span id="guestbook-type" class="{{ $item->data }}">
@@ -27,7 +26,7 @@
                 <div id="guestbook-wrapper" class="gb-public">
                     <ul class="guestbook-entries" id="guestbook-entry-container">
                         @php($messages = $guestbook->take(20))
-                        @include('home.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $user->id])
+                        @include('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $owner->id])
                     </ul>
                 </div>
 
@@ -43,7 +42,7 @@
                 @endif
                 <script type="text/javascript">
                     Event.onDOMReady(function() {
-                        var gb{{ $item->id }} = new GuestbookWidget('{{ $user->id }}', '{{ $item->id }}', 500);
+                        var gb{{ $item->id }} = new GuestbookWidget('{{ $owner->id }}', '{{ $item->id }}', 500);
                         @if($guestbook->count() > 20)
                         gb{{ $item->id }}.monitorScrollPosition();
                         @endif

@@ -1,11 +1,11 @@
 @extends('layouts.master', ['body' => $isEdit ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'submenuId' => 'home', 'headline' => false])
 
-@section('title', 'Habbo Home: ' . $user->username)
+@section('title', 'Habbo Home: ' . $owner->username)
 
 @section('content')
     <script language="JavaScript" type="text/javascript">
         Event.onDOMReady(function() {
-            initView({{ $user->id }}, {{ $user->id }});
+            initView({{ $owner->id }}, {{ $owner->id }});
         });
 
         function isElementLimitReached() {
@@ -21,7 +21,7 @@
         function cancelEditing(expired) {
             new Ajax.Request(habboReqPath + "/myhabbo/cancel", {
                 parameters: {
-                    id: '{{ $user->id }}'
+                    id: '{{ $owner->id }}'
                 },
                 onSuccess: function(req) {
                     window.location.reload();
@@ -30,7 +30,7 @@
         }
 
         function getSaveEditingActionName() {
-            return '/myhabbo/save/{{ $user->id }}';
+            return '/myhabbo/save/{{ $owner->id }}';
         }
 
         function showEditErrorDialog() {
@@ -72,7 +72,7 @@
         #playground,
         #playground-outer {
             margin-left: -2px;
-            /* width: {{ $user->getSubscription()->isExpired() == 0 ? '752' : '915' }}px;*/
+            /* width: {{ $owner->getSubscription()->isExpired() == 0 ? '752' : '915' }}px;*/
             height: 1360px;
         }
     </style>
@@ -87,16 +87,16 @@
                     <div class="box-body">
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
-                                Habbo home: {{ $user->username }}
+                                Habbo home: {{ $owner->username }}
                             </span>
-                            @if (Auth::check() && $user->id == user()->id && !$isEdit)
-                                <a href="{{ url('/') }}/myhabbo/startSession/{{ $user->id }}" class="toolbutton edit"><span>Edit</span></a>
+                            @if (Auth::check() && $owner->id == user()->id && !$isEdit)
+                                <a href="{{ url('/') }}/myhabbo/startSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                             @endif
                             @if (!$isEdit)
-                                <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $user->username }}" id="tell-button"
+                                <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $owner->username }}" id="tell-button"
                                     class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
-                            @if (Auth::check() && $user->id != user()->id)
+                            @if (Auth::check() && $owner->id != user()->id)
                                 <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
                                         Habbo Home</span></a>
                             @endif
@@ -122,43 +122,6 @@
 
             <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
                 <div id="playground">
-                    <!--div class="movable widget HighScoresWidget" id="widget-1585958" style=" left: 58px; top: 1160px; z-index: 4;">
-                                        <div class="w_skin_hc_machineskin">
-                                            <div class="widget-corner" id="widget-1585958-handle">
-                                                <div class="widget-headline"><h3><span class="header-left">&nbsp;</span><span class="header-middle">HIGH SCORES</span><span class="header-right">&nbsp;</span></h3>
-                                                </div>
-                                            </div>
-                                            <div class="widget-body">
-                                                <div class="widget-content">
-                                            <table>
-                                                    <tbody><tr colspan="2">
-                                                        <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/battleball/">Battle Ball</a></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Games played</td>
-                                                        <td>79</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Total score</td>
-                                                        <td>402346</td>
-                                                    </tr>
-                                                    <tr colspan="2">
-                                                        <th><a href="https://web.archive.org/web/20071015094213/http://www.habbo.com/games/wobblesquabble/">Wobble Squabble</a></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Games played</td>
-                                                        <td>8</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Total score</td>
-                                                        <td>79</td>
-                                                    </tr>
-                                            </tbody></table>
-                                                <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div-->
                     @foreach ($items as $item)
                         @php($itemStore = $item->getStoreItem())
                         @switch($itemStore->type)
@@ -212,7 +175,7 @@
 
                             @case('w')
                                 {{-- widget --}}
-                                @include('home.' . strtolower($itemStore->class))
+                                @include('home.widgets.' . strtolower($itemStore->class))
                             @break
                         @endswitch
                     @endforeach

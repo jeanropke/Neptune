@@ -71,11 +71,11 @@
 
                             <ul class="groups-toplist toplist">
                                 @foreach($guilds as $key => $group)
-                                    <li class="{!! round(($key+1)/2) % 2 ? 'even' : 'odd' !!}" style="background-image: url({{ url('/') }}/c_images/Badgeparts/generated/{{ $group->badge }}.png)">
+                                    <li class="{!! round(($key+1)/2) % 2 ? 'even' : 'odd' !!}" style="background-image: url({{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.gif)">
                                         <div class="toplist-item">
                                             <div class="group-index">{{ $key+1 }}.</div>
                                             <div class="group-link">
-                                                <a href="{{ url('/') }}/groups/{{ $group->id }}/id" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
+                                                <a href="{{ url('/') }}/groups/{{ $group->getUrl() }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
                                                     {{ $group->name }}
                                                 </a>
                                             </div>
@@ -95,12 +95,12 @@
                         <div class="v3box-body">
 
                             <ul class="groups-toplist recentlist">
-                                @foreach($latest as $key => $group)
-                                    <li class="{!! round(($key+1)/2) % 2 ? 'even' : 'odd' !!}" style="background-image: url({{ url('/') }}/c_images/Badgeparts/generated/{{ $group->badge }}.png)">
+                                @foreach($latest as $group)
+                                    <li class="{!! round(($loop->index+1)/2) % 2 ? 'even' : 'odd' !!}" style="background-image: url({{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.gif)">
                                         <div class="toplist-item">
-                                            <div class="group-index">{{ $key+1 }}.</div>
+                                            <div class="group-index">{{ $loop->index+1 }}.</div>
                                             <div class="group-link">
-                                                <a href="{{ url('/') }}/groups/{{ $group->id }}/id" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
+                                                <a href="{{ url('/') }}/groups/{{ $group->getUrl() }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
                                                     {{ $group->name }}
                                                 </a>
                                             </div>

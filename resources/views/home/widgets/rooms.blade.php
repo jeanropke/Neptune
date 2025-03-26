@@ -19,7 +19,7 @@
                 <div id="room_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
-                            @forelse($user->getRooms() as $room)
+                            @forelse($owner->getRooms() as $room)
                             <tr>
                                 <td valign="top" class="dotted-line">
                                     <div class="room_image">

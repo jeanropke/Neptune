@@ -4,7 +4,7 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3><span class="header-left">&nbsp;</span><span class="header-middle">My Groups (<span
-                            id="groups-list-size">{{ $user->getGroups()->count() }}</span>)</span><span
+                            id="groups-list-size">{{ $owner->getGroups()->count() }}</span>)</span><span
                         class="header-right">@if($isEdit)<img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif"
                             width="19" height="18" class="edit-button" id="widget-{{ $item->id }}-edit" />
                         <script language="JavaScript" type="text/javascript">
@@ -17,7 +17,7 @@
             <div class="widget-content">
                 <div class="groups-list-container">
                     <ul class="groups-list">
-                        @forelse($user->getGroups() as $group)
+                        @forelse($owner->getGroups() as $group)
                         <li title="{{ $group->name }}" id="groups-list-1-{{ $group->id }}">
                             <div class="groups-list-icon"><a href="{{ url('/') }}/groups/{{ $group->id }}/id"><img
                                         src="{{ url('/') }}/gordon/c_images/Badgeparts/generated/{{ $group->badge }}.png"></a>
@@ -29,11 +29,11 @@
                             <p>
                                 Group created: <br>
 
-                                @if($user->getSettings()->guild_id == $group->id)
+                                @if($owner->getSettings()->guild_id == $group->id)
                                 <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" width="15"
                                     height="15" class="groups-list-icon" alt="Favorite" title="Favorite">
                                 @endif
-                                @if($user->id == $group->id)
+                                @if($owner->id == $group->id)
                                 <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15"
                                     class="groups-list-icon" alt="Owner" title="Owner">
                                 @endif
@@ -57,7 +57,7 @@
 
                 <script type="text/javascript">
                     Event.onDOMReady(function() {
-                        new GroupsWidget('{{ $user->id }}', '{{ $item->id }}');
+                        new GroupsWidget('{{ $owner->id }}', '{{ $item->id }}');
                     });
                 </script>
 

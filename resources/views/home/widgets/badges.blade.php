@@ -15,10 +15,10 @@
         <div class="widget-body">
             <div class="widget-content">
                 <div id="badgelist-content">
-                    @include('home.ajax.badgewidget', ['badges' => $user->getBadges(), 'page' => 1, 'totalPages' => ceil($user->getBadges()->count() / 16)])
+                    @include('home.widgets.ajax.badgewidget', ['badges' => $owner->getBadges(), 'page' => 1, 'totalPages' => ceil($owner->getBadges()->count() / 16)])
                     <script type="text/javascript">
                         Event.onDOMReady(function() {
-                            window.badgesWidget{{ $item->id }}= new BadgesWidget('{{ $user->id }}', '{{ $item->id }}');
+                            window.badgesWidget{{ $item->id }}= new BadgesWidget('{{ $owner->id }}', '{{ $item->id }}');
                         });
                     </script>
                 </div>

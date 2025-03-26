@@ -52,7 +52,7 @@ class HomeController extends Controller
 
         return view('home')->with([
             'items'     => $items,
-            'user'      => $user,
+            'owner'     => $user,
             'isEdit'    => $isEdit
         ]);
     }

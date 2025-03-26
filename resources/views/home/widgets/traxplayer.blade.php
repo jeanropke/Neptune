@@ -1,4 +1,4 @@
-@php($songs = $user->getTraxSongs())
+@php($songs = $owner->getTraxSongs())
 <div class="movable widget TraxPlayerWidget" id="widget-{{ $item->id }}"
     style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
     <div class="w_skin_{{ $item->skin }}">

@@ -117,7 +117,8 @@ Route::middleware('user')->group(function () {
 
     //GroupController
     Route::prefix('groups')->group(function () {
-        Route::get('/{id}/id', [GroupController::class, 'index'])->name('groups.page');
+        Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
+        Route::get('/{id}/id', [GroupController::class, 'groupId'])->name('groups.page.id');
         Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
         Route::get('/{id}/id/discussions/{discussionId}/id', [GroupController::class, 'thread'])->name('groups.thread');
     });
@@ -185,21 +186,24 @@ Route::middleware('user')->group(function () {
 
         Route::post('/ajax/redeemVoucher', [CreditsController::class, 'redeemVoucher'])->name('habblet.ajax.redeem.voucher');
     });
-});
 
-Route::post('/grouppurchase/group_create_form', [GroupController::class, 'groupCreateForm'])->name('grouppurchase.group_create_form');
-Route::post('/grouppurchase/purchase_confirmation', [GroupController::class, 'groupPurchaseConfirmation'])->name('grouppurchase.purchase_confirmation');
-Route::post('/grouppurchase/purchase_ajax', [GroupController::class, 'groupPurchaseAjax'])->name('grouppurchase.purchase_ajax');
-Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-Route::middleware('auth')->group(function () {
+
+    Route::post('/grouppurchase/group_create_form', [GroupController::class, 'groupCreateForm'])->name('grouppurchase.group_create_form');
+    Route::post('/grouppurchase/purchase_confirmation', [GroupController::class, 'groupPurchaseConfirmation'])->name('grouppurchase.purchase_confirmation');
+    Route::post('/grouppurchase/purchase_ajax', [GroupController::class, 'groupPurchaseAjax'])->name('grouppurchase.purchase_ajax');
+
     Route::get('/components/roomNavigation', [ClientController::class, 'roomNavigation'])->name('client.room.navigation');
+
     Route::prefix('client')->group(function () {
+        Route::get('/', [ClientController::class, 'index'])->name('client.index');
         Route::post('/', [ClientController::class, 'clientError'])->name('client.error');
         Route::get('/disconnected', [ClientController::class, 'disconnected'])->name('client.disconnected');
     });
 
     Route::post('/habblet/ajax/updateHabboCount', [ClientController::class, 'updateHabboCount'])->name('client.updateHabboCount');
+});
 
+Route::middleware('auth')->group(function () {
     Route::post('/topbar/credits', [ClientController::class, 'topbarCredits'])->name('topbar.credits');
     Route::post('/topbar/habboclub', [ClientController::class, 'topbarHabboclub'])->name('topbar.habboclub');
 

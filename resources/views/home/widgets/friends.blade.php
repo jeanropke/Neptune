@@ -14,9 +14,9 @@
             <div class="widget-content">
                 <div id="friends">
                     @php($friendsPerPage = 2)
-                    @php($friends = $user->getFriends()->take($friendsPerPage))
-                    @php($friendsCount = $user->getFriends()->count())
-                    @include('home.ajax.friendswidget')
+                    @php($friends = $owner->getFriends()->take($friendsPerPage))
+                    @php($friendsCount = $owner->getFriends()->count())
+                    @include('home.widgets.ajax.friendswidget')
                 </div>
 
                 <div class="clear"></div>
@@ -32,7 +32,7 @@
 
                 {{-- Habbo uses account name instead id --}}
                 <script language="JavaScript" type="text/javascript">
-                    FriendsWidget.init({{ ceil($friendsCount / $friendsPerPage) }}, {{ json_encode(range(1, ceil($friendsCount / $friendsPerPage))) }}, {{ $user->id }});
+                    FriendsWidget.init({{ ceil($friendsCount / $friendsPerPage) }}, {{ json_encode(range(1, ceil($friendsCount / $friendsPerPage))) }}, {{ $owner->id }});
                 </script>
 
                 <div class="clear"></div>

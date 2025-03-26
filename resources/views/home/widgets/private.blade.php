@@ -42,7 +42,7 @@
                                     <div class="v3box-content">
                                         <div class="v3box-body">
                                             <img vspace="0" hspace="0" border="0" align="right" src="https://web.archive.org/web/20061212014939im_/http://images.habbo.com.br/c_images/album1358/frank_stop_001.gif" alt="">
-                                            <p><b>{{ $user->username }}</b> tem a página marcada como privada.</p>
+                                            <p><b>{{ $owner->username }}</b> tem a página marcada como privada.</p>
                                             <br><br>Desculpe.<br><br><a
                                                 href="/web/20061212014939/http://www.habbo.com.br/hotel/"
                                                 target="_self">Primeira vez por aqui?</a><br><br><a

@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <td>Total score</td>
-                            <td>{{ $user->battleball_points }}</td>
+                            <td>{{ $owner->battleball_points }}</td>
                         </tr>
                         <tr colspan="2">
                             <th><a href="{{ url('/') }}/games/snowstorm/">Snow Storm</a></th>
@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td>Total score</td>
-                            <td>{{ $user->snowstorm_points }}</td>
+                            <td>{{ $owner->snowstorm_points }}</td>
                         </tr>
 
                         <tr colspan="2">
@@ -52,30 +52,30 @@
                         </tr>
                 </tbody>
 
-                    {{--@if($user->battleball_points > 0)
+                    {{--@if($owner->battleball_points > 0)
                     <tr colspan="2">
                         <th>Battleball points</th>
                     </tr>
                     <tr>
                         <td>Score</td>
                         <td>
-                            {{ $user->battleball_points }}
+                            {{ $owner->battleball_points }}
                         </td>
                     </tr>
                     @endif
-                    @if($user->snowstorm_points > 0)
+                    @if($owner->snowstorm_points > 0)
                     <tr colspan="2">
                         <th>Snowstorm points</th>
                     </tr>
                     <tr>
                         <td>Score</td>
                         <td>
-                            {{ $user->snowstorm_points }}
+                            {{ $owner->snowstorm_points }}
                         </td>
                     </tr>
                     @endif
 
-                    @if($user->battleball_points == 0 && $user->snowstorm_points == 0)
+                    @if($owner->battleball_points == 0 && $owner->snowstorm_points == 0)
                     No games scores
                     @endif--}}
                 </table>

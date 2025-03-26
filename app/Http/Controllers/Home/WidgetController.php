@@ -17,7 +17,7 @@ class WidgetController extends Controller
 {
     public function avatarInfo(Req $request)
     {
-        return view('home.ajax.avatarinfo')->with([
+        return view('home.widgets.ajax.avatarinfo')->with([
             'friend'    => User::find($request->anAccountId),
             'badgeslot' => UserBadge::where([['user_id', $request->anAccountId], ['slot_id', '1']])->first()
         ]);
@@ -31,7 +31,7 @@ class WidgetController extends Controller
         $badges = $user->getBadges();
         $totalPages = ceil($badges->count() / 16);
 
-        return view('home.ajax.badgewidget')->with([
+        return view('home.widgets.ajax.badgewidget')->with([
             'badges'        => $badges,
             'totalPages'    => $totalPages,
             'page'          => $page
@@ -47,7 +47,7 @@ class WidgetController extends Controller
             ->where('users.username', 'like', '%' . $search . '%');
         $totalPages = ceil($friends->count() / 20);
 
-        return view('home.ajax.friendswidget')->with([
+        return view('home.widgets.ajax.friendswidget')->with([
             'friends'           => $friends->get(),
             'pageFriends'       => $friends->skip(($page - 1) * 20)->take(20)->get(),
             'totalPages'        => $totalPages,
@@ -65,14 +65,14 @@ class WidgetController extends Controller
 
         $friends = User::find($accountId)->getFriends();
 
-        return view('home.ajax.friendswidget')->with([
+        return view('home.widgets.ajax.friendswidget')->with([
             'friends'   => $friends->skip(($index) * 2)->take(2)
         ]);
     }
 
     public function groupInfo(Request $request)
     {
-        return view('home.ajax.groupinfo')->with([
+        return view('home.widgets.ajax.groupinfo')->with([
             'group' => Guild::find($request->groupId)
         ]);
     }
@@ -89,7 +89,7 @@ class WidgetController extends Controller
             'widget_id' => $widgetId
         ]);
 
-        return view('home.ajax.guestbook.add')->with([
+        return view('home.widgets.ajax.guestbook.add')->with([
             'message' => $guestbook
         ]);
     }
@@ -99,7 +99,7 @@ class WidgetController extends Controller
         $ownerId = $request->ownerId;
         $message = $request->message;
 
-        return view('home.ajax.guestbookpreview')->with([
+        return view('home.widgets.ajax.guestbook.preview')->with([
             'ownerId'   => $ownerId,
             'message'   => bb_format($message)
         ]);
@@ -134,7 +134,7 @@ class WidgetController extends Controller
 
         $messages = Guestbook::where([['widget_id', '=', $widgetId], ['is_deleted', '=', '0'], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
 
-        return response(view('home.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
+        return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(['lastPage' => (20 > $messages->count()) ? 'true': 'false']));
     }
@@ -156,7 +156,7 @@ class WidgetController extends Controller
             'rating'    => $request->givenRate
         ]);
 
-        return view('home.ajax.rating')->with([
+        return view('home.widgets.ajax.rating')->with([
             'widgetId'  => $request->widgetId,
             'homeId'    => $request->ownerId,
             'userId'    => user()->id
@@ -170,7 +170,7 @@ class WidgetController extends Controller
 
         HomeRating::where('home_id', $request->ownerId)->delete();
 
-        return view('home.ajax.rating')->with([
+        return view('home.widgets.ajax.rating')->with([
             'homeId'    => $request->ownerId,
             'widgetId'  => $request->widgetId,
             'userId'    => user()->id
@@ -195,7 +195,7 @@ class WidgetController extends Controller
 
         $widget->update(['data' => $request->songId]);
 
-        return view('home.ajax.traxplayer')->with([
+        return view('home.widgets.ajax.traxplayer')->with([
             'widget'    => $widget,
             'item'      => $song
         ]);

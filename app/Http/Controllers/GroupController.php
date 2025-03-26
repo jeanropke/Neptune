@@ -5,16 +5,49 @@ namespace App\Http\Controllers;
 use App\Models\Catalogue\CatalogueItem;
 use App\Models\Group;
 use App\Models\GroupMember;
+use App\Models\Home\HomeItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    public function index($id)
+    public function groupUrl($url)
     {
+        $group = Group::where('url', $url)->first();
+
+        if (!$group)
+            return abort(404);
+
+        if($group->getItems()->count() == 0)
+        {
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '7',   'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '433',    'y' => '40',    'z' => '3', 'item_id' => '18',  'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '0',      'y' => '0',     'z' => '0', 'item_id' => '17',  'data' => 'background']);
+        }
+
         return view('groups.page')->with([
             'isEdit'    => false,
-            'group'     => Group::find($id)
+            'owner'     => $group
+        ]);
+    }
+
+    public function groupId($id)
+    {
+        $group = Group::find($id);
+
+        if (!$group)
+            return abort(404);
+
+        if($group->getItems()->count() == 0)
+        {
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '7',   'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '433',    'y' => '40',    'z' => '3', 'item_id' => '18',  'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '0',      'y' => '0',     'z' => '0', 'item_id' => '17',  'data' => 'background']);
+        }
+
+        return view('groups.page')->with([
+            'isEdit'    => false,
+            'owner'     => Group::find($id)
         ]);
     }
 
@@ -25,6 +58,9 @@ class GroupController extends Controller
         ]);
     }
 
+
+
+    #region Group purchase
     public function groupCreateForm(Request $request)
     {
         if (!Auth::check())
@@ -78,23 +114,24 @@ class GroupController extends Controller
         if (strlen($request->name) > 30)
             return view('habblet.ajax.grouppurchase.purchase_result')->with('message', 'The Group name is too long');
 
-        //$group = Group::create([
-        //    'user_id'       => user()->id,
-        //    'name'          => $request->name,
-        //    'description'   => $request->description,
-        //    'badge'         => 'b0503Xs09114s05013s05015',
-        //    'date_created'  => time()
-        //]);
-        //
-        //GroupMember::insert([
-        //    'guild_id'      => $group->id,
-        //    'user_id'       => user()->id,
-        //    'level_id'      => 1,
-        //    'member_since'  => time()
-        //]);
+        $group = Group::create([
+            'user_id'       => user()->id,
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'badge'         => 'b0503Xs09114s05013s05015',
+            'date_created'  => time()
+        ]);
+
+        GroupMember::insert([
+            'guild_id'      => $group->id,
+            'user_id'       => user()->id,
+            'level_id'      => 1,
+            'member_since'  => time()
+        ]);
 
         return view('habblet.ajax.grouppurchase.purchase_ajax')->with([
             'group' => Group::find(1)
         ]);
     }
+    #endregion
 }
