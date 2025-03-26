@@ -16,6 +16,7 @@ use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
@@ -186,7 +187,9 @@ Route::middleware('user')->group(function () {
     });
 });
 
-
+Route::post('/grouppurchase/group_create_form', [GroupController::class, 'groupCreateForm'])->name('grouppurchase.group_create_form');
+Route::post('/grouppurchase/purchase_confirmation', [GroupController::class, 'groupPurchaseConfirmation'])->name('grouppurchase.purchase_confirmation');
+Route::post('/grouppurchase/purchase_ajax', [GroupController::class, 'groupPurchaseAjax'])->name('grouppurchase.purchase_ajax');
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::middleware('auth')->group(function () {
     Route::get('/components/roomNavigation', [ClientController::class, 'roomNavigation'])->name('client.room.navigation');

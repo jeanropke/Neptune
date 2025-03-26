@@ -896,13 +896,13 @@ function showGroupPurchaseResult(productCode, name, description, dialog_title) {
     $("group-confirmation-button-area").innerHTML = getProgressNode();
     new Ajax.Request(
 		habboReqPath + "/grouppurchase/purchase_ajax",
-		{ method: "post", parameters: "product="+encodeURIComponent(productCode)+"&name="+encodeURIComponent(name)+"&description="+encodeURIComponent(description)+"&webwork.token.name=webwork.token&webwork.token"+"="+document.getElementsByName("webwork.token").item(0).value, onComplete: function(req, json) {
+		{ method: "post", parameters: "product="+encodeURIComponent(productCode)+"&name="+encodeURIComponent(name)+"&description="+encodeURIComponent(description), onComplete: function(req, json) {
    			if ($("group_purchase_form")) { Element.remove("group_purchase_form");}
             if ($("group_purchase_confirmation")) Element.remove("group_purchase_confirmation");
             if (!$("group_purchase_result")) {
-                var resultDialog = createDialog("group_purchase_result", dialog_title, "9003", 0, -1000, closeGroupPurchase);
-			    appendDialogBody(resultDialog, req.responseText, true);
-			    moveDialogToCenter(resultDialog);
+                var resultDialog = Dialog.createDialog("group_purchase_result", dialog_title, "9003", 0, -1000, closeGroupPurchase);
+			    Dialog.appendDialogBody(resultDialog, req.responseText, true);
+			    Dialog.moveDialogToCenter(resultDialog);
             }
 		} }
 	);
@@ -915,11 +915,11 @@ function showGroupPurchaseConfirmation(productCode, dialog_title) {
             onComplete: function(req) {
                 var groupPurchaseDialog = $('group_purchase_form');
                 if (req.responseText.indexOf('purchase-group-form-id') < 0) {
-                    moveOverlay('9002');
-                    groupPurchaseDialog = createDialog("group_purchase_confirmation", dialog_title, "9003", 0, -1000, cancelGroupPurchase);
+                    Overlay.move('9002');
+                    groupPurchaseDialog = Dialog.createDialog("group_purchase_confirmation", dialog_title, "9003", 0, -1000, cancelGroupPurchase);
                 }
-                setDialogBody(groupPurchaseDialog, req.responseText);
-                moveDialogToCenter(groupPurchaseDialog);
+                Dialog.setDialogBody(groupPurchaseDialog, req.responseText);
+                Dialog.moveDialogToCenter(groupPurchaseDialog);
             }
 
         }
@@ -927,15 +927,16 @@ function showGroupPurchaseConfirmation(productCode, dialog_title) {
 }
 
 function closeGroupPurchase() {
+    console.log('closeGroupPurchase');
     if ($("group_purchase_result")) {Element.remove("group_purchase_result");}
     if ($("group_purchase_confirmation")) Element.remove("group_purchase_confirmation");
-    moveOverlay('9000');
+    Overlay.move('9000');
 }
 
 function cancelGroupPurchase() {
    	closeGroupPurchase();
     if ($("group_purchase_form")) Element.remove("group_purchase_form");
-    hideOverlay();
+    Overlay.hide();
 }
 
 function validateGroupElements(fieldId, maxLength, message) {

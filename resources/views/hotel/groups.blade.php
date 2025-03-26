@@ -43,30 +43,19 @@
                                     Event.observe(groupPurchaseButton, "click", function(e) {
                                         Event.stop(e);
                                         dialog = Dialog.createDialog("group_purchase_form", "Create a Group", 9001, 0, -1000, cancelGroupPurchase);
-                                        Dialog.appendDialogBody(dialog, "<p style=\"text-align:center\">Group purchase only avaliable in game!</p><div style=\"clear\"></div>", true);
-                                        {{--                                         Dialog.appendDialogBody(dialog, "<p style=\"text-align:center\"><img src=\"http://images.habbohotel.com/web/web-R13.2-b41/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>", true); --}}
+                                        Dialog.appendDialogBody(dialog, "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>", true);
                                         Dialog.moveDialogToCenter(dialog);
                                         Dialog.makeDialogDraggable(dialog);
                                         Overlay.show();
-                                        {{-- new Ajax.Request(
+                                        new Ajax.Request(
                                                 habboReqPath + "/grouppurchase/group_create_form",
                                                 { method: "post", parameters: "product="+encodeURIComponent("g0 group_product"), onComplete: function(req, json) {
                                                     Dialog.setDialogBody(dialog, req.responseText);
                                                 } }
-                                        );--}}
+                                        );
                                     }, false);
 
                                 </script>
-                                <noscript>
-                                    <form action="/web/20070702072656/http://www.habbo.com/groups#group_purchase_2" method="post">
-                                        <input type="hidden" name="webwork.token.name" value="webwork.token"/>
-                                        <input type="hidden" name="webwork.token" value="JMUOSC3DC9DW2CHXKE2IJM67R3IXY3ZD"/>
-                                        <input type="hidden" name="group_purchase_2_task" value="purchase"/>
-                                        <input type="hidden" name="group_purchase_2_product" value="g0 group_product"/>
-                                        <input type="hidden" name="__app_key" value=""/>
-                                        <input type="submit" value="Purchase" class="process-button"/>
-                                    </form>
-                                </noscript>
                             </div>
 
                             <p></p>
