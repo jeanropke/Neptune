@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guild extends Model
+class GroupMember extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'guilds';
+    protected $table = 'cms_groups_members';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class Guild extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'name', 'description', 'room_id', 'badge', 'date_created'
+        'id', 'guild_id', 'user_id', 'level_id', 'member_since'
     ];
 
     public $timestamps = false;
