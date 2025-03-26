@@ -421,6 +421,11 @@ Route::middleware('admin')->group(function () {
     });
 });
 
+
+Route::prefix('habbo-imaging')->group(function() {
+    Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
+});
+
 Route::fallback(function(){
     return view('errors.404');
 });
