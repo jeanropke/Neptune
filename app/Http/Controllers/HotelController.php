@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Guild;
-use App\Models\GuildMember;
+use App\Models\Group;
+use App\Models\GroupMember;
 use App\Models\Permission;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
@@ -40,13 +40,13 @@ class HotelController extends Controller
     public function groups()
     {
         $guilds = [];
-        foreach(GuildMember::groupBy('guild_id')->select('guild_id', DB::raw('count(guild_id) as total'))->take(10)->orderBy('total', 'desc')->get() as $guild) {
-            array_push($guilds, Guild::find($guild->guild_id));
+        foreach(GroupMember::groupBy('guild_id')->select('guild_id', DB::raw('count(guild_id) as total'))->take(10)->orderBy('total', 'desc')->get() as $guild) {
+            array_push($guilds, Group::find($guild->guild_id));
         }
 
         return view('hotel.groups')->with([
             'guilds'      => $guilds,
-            'latest'      => Guild::take(10)->orderBy('date_created', 'desc')->get()
+            'latest'      => Group::take(10)->orderBy('date_created', 'desc')->get()
 
         ]);
     }
