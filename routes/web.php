@@ -424,6 +424,7 @@ Route::middleware('admin')->group(function () {
 
 Route::prefix('habbo-imaging')->group(function() {
     Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
+    Route::get('/badge/{badge}', [HabboImaging::class, 'badge'])->name('habboimaging.badge');
 });
 
 Route::fallback(function(){

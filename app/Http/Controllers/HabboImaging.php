@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\AvatarImage;
+use App\Classes\BadgeImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -65,5 +66,19 @@ class HabboImaging extends Controller
             }
             exit;
         }
+    }
+
+    public function badge(Request $request)
+    {
+        $badge = new BadgeImage($request->badge);
+        $image = $badge->Generate();
+
+        return response($image, 200)
+                ->header('Process-Time', $badge->processTime)
+                //->header('Error-Message', $avatarImage->error)
+                //->header('Debug-Message', $avatarImage->debug)
+                //->header('Generator-Version', $avatarImage->version)
+                ->header('Content-Type', 'image/gif');
+
     }
 }
