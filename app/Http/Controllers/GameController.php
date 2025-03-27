@@ -38,4 +38,19 @@ class GameController extends Controller
     {
         return view('games.battleball.challenge');
     }
+
+    public function snowstormIndex()
+    {
+        return view('games.snowstorm.index');
+    }
+
+    public function snowstormRules()
+    {
+        return view('games.snowstorm.rules');
+    }
+
+    public function snowstormHighScores()
+    {
+        return view('games.snowstorm.high_scores');
+    }
 }

@@ -99,11 +99,18 @@ Route::middleware('user')->group(function () {
 
     Route::prefix('games')->group(function () {
         Route::get('/', [GameController::class, 'index'])->name('games.index');
+
         Route::prefix('battleball')->group(function () {
             Route::get('/', [GameController::class, 'battleballIndex'])->name('games.battleball.index');
             Route::get('/how_to_play', [GameController::class, 'battleballHowToPlay'])->name('games.battleball.how_to_play');
             Route::get('/high_scores', [GameController::class, 'battleballHighScores'])->name('games.battleball.high_scores');
             Route::get('/challenge', [GameController::class, 'battleballChallenge'])->name('games.battleball.challenge');
+        });
+
+        Route::prefix('snowstorm')->group(function () {
+            Route::get('/', [GameController::class, 'snowstormIndex'])->name('games.snowstorm.index');
+            Route::get('/rules', [GameController::class, 'snowstormRules'])->name('games.snowstorm.rules');
+            Route::get('/high_scores', [GameController::class, 'snowstormHighScores'])->name('games.snowstorm.high_scores');
         });
     });
 
