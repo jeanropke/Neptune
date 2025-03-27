@@ -1,0 +1,96 @@
+{
+        "success" : {
+               "title" : "Sucesso",
+               "message" : "Iremos analisar seu reporte e tomaremos medidas se necessário. Obrigado!",
+               "btnText" : "Fechar"
+           },
+
+        "error" : {
+               "title" : "Aconteceu um erro",
+               "message" : "Aconteceu um erro ao tentar enviar esse reporte. Tenta novamente em alguns minutos.",
+               "btnText" : "Fechar"
+           },
+
+        "spam" : {
+               "title" : "Spam",
+               "message" : "Você fez muitos reportes ao mesmo tempo.",
+               "btnText" : "Fechar"
+           },
+
+        "name" : {
+               "title" : "Reportar Nome",
+               "message" : "Esse nome é ofensivo ou inapropriado?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "room" : {
+               "title" : "Reportar Quarto",
+               "message" : "O nome do quarto ou descrição é ofensivo ou inapropriado?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "motto" : {
+               "title" : "Reportar Missão",
+               "message" : "Essa missão é ofensiva ou inapropriada?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "stickie" : {
+               "title" : "Reportar Colante",
+               "message" : "Esse colante tem alguma informação pessoal de alguém? Ou pode ser golpe?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "animator" : {
+               "title" : "Reportar Animação",
+               "message" : "Você quer reportar essa animação para a moderação?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "habbomovie" : {
+               "title" : "Reportar Filme",
+               "message" : "Esse filme contém algo ofensivo ou inapropriado?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "groupname" : {
+               "title" : "Reportar Grupo",
+               "message" : "Esse grupo contém algo ofensivo ou inapropriado?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "url" : {
+               "title" : "myhabbo.dialogs.groupurlreport.title",
+               "message" : "myhabbo.dialogs.groupurlreport.text",
+               "btnCancelText" : "myhabbo.dialogs.groupurlreport.cancel",
+               "btnReportText" : "myhabbo.dialogs.groupurlreport.report"
+           },
+
+        "groupdesc" : {
+               "title" : "Reportar Descrição de Grupo",
+               "message" : "A descrição desse grupo contém algo ofensivo ou inapropriado?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "guestbook" : {
+               "title" : "Reportar Livro de Mensagem",
+               "message" : "Essa mensagem é ofensiva ou inapropriada?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           },
+
+        "discussionpost" : {
+               "title" : "Reportar mensagem",
+               "message" : "Você tem certeza que deseja reportar essa mensagem?",
+               "btnCancelText" : "Cancelar",
+               "btnReportText" : "Reportar"
+           }
+       }

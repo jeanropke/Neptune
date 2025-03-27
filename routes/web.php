@@ -15,6 +15,7 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\Group\DiscussionController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HelpController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
@@ -120,7 +122,18 @@ Route::middleware('user')->group(function () {
         Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
         Route::get('/{id}/id', [GroupController::class, 'groupId'])->name('groups.page.id');
         Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
-        Route::get('/{id}/id/discussions/{discussionId}/id', [GroupController::class, 'thread'])->name('groups.thread');
+        Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
+    });
+
+    Route::prefix('discussions')->group(function() {
+        Route::prefix('actions')->group(function() {
+            Route::post('/newtopic', [DiscussionController::class, 'newTopic'])->name('discussions.actions.newtopic');
+            Route::post('/previewtopic', [DiscussionController::class, 'previewTopic'])->name('discussions.actions.previewtopic');
+            Route::post('/savetopic', [DiscussionController::class, 'saveTopic'])->name('discussions.actions.savetopic');
+            Route::post('/previewpost', [DiscussionController::class, 'previewPost'])->name('discussions.actions.previewpost');
+            Route::post('/savepost', [DiscussionController::class, 'savePost'])->name('discussions.actions.savepost');
+            Route::post('/deletepost', [DiscussionController::class, 'deletePost'])->name('discussions.actions.deletepost');
+        });
     });
 
     //HelpController
@@ -178,6 +191,8 @@ Route::middleware('user')->group(function () {
         Route::post('/traxplayer/select_song', [WidgetController::class, 'saveTraxSong'])->name('myhabbo.trax_song.select_song');
 
         Route::post('/photo/like', [WidgetController::class, 'photoLike'])->name('myhabbo.photo.like');
+
+        Route::post('/linktool/search', [CommunityController::class, 'linktoolSearch'])->name('myhabbo.linktool.search');
     });
 
     Route::prefix('habblet')->group(function() {
@@ -211,6 +226,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/{page?}', [ProfileController::class, 'figure'])->name('profile.figure');
         Route::post('/{page?}', [ProfileController::class, 'save'])->name('profile.save');
     });
+
+    Route::prefix('mod')->group(function() {
+        Route::post('/add_discussionpost_report', [ReportController::class, 'addDiscussionpostReport'])->name('mod.add_discussionpost_report');
+    });
+
 });
 
 Route::middleware('guest')->group(function () {

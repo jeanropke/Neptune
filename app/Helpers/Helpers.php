@@ -61,7 +61,8 @@ function bb_format($str)
         '/\[habbo\=(.*?)\](.*?)\[\/habbo\]/is',
         '/\[room\=(.*?)\](.*?)\[\/room\]/is',
         '/\[group\=(.*?)\](.*?)\[\/group\]/is',
-        '/\[br]/is'
+        '/\[br]/is',
+        '/\\n/is'
     );
 
     $simple_replace = array(
@@ -79,6 +80,7 @@ function bb_format($str)
         "<a href='" . url('/') . "/home/$1/id'>$2</a>",
         "<a onclick=\"roomForward(this, '$1', 'private'); return false;\" target=\"client\" href=\"" . url('/') . "/client?forwardId=2&roomId=$1\">$2</a>",
         "<a href='" . url('/') . "/group/$1/id'>$2</a>",
+        '<br />',
         '<br />'
     );
 

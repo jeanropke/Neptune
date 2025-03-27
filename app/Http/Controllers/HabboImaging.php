@@ -25,10 +25,7 @@ class HabboImaging extends Controller
         $inputFormat        = $inputFormat == "gif" ? "gif" : "png";
         $inputFrame         = explode(",", $inputFrame);
 
-        $avatarImage = new AvatarImage($inputFigure, $inputDirection, $inputHeadDirection, $inputAction, $inputGesture, $inputFrame, $inputHeadOnly, $inputSize);
-        $image = $avatarImage->Generate($inputFormat);
-
-        $expandedstyle = $inputFigure . ".s-" . (($inputSize == "s" || $inputSize == "l") ? "n" : $inputSize) . ($inputHeadOnly ? "h" : "") . ".g-" . $inputGesture . ".d-" . $inputDirection . ".h-" . $inputHeadDirection . ".a-" . implode("-", str_replace("=", "", $inputAction)) . ".f-" . implode("-", str_replace("=", "", $inputFrame));
+        $expandedstyle = $inputFigure . ".s-" . (($inputSize == "s" || $inputSize == "l") ? $inputSize : 'n') . ($inputHeadOnly ? "h" : "") . ".g-" . $inputGesture . ".d-" . $inputDirection . ".h-" . $inputHeadDirection . ".a-" . implode("-", str_replace("=", "", $inputAction)) . ".f-" . implode("-", str_replace("=", "", $inputFrame));
         $hash = md5($expandedstyle);
         $path = storage_path('habboimaging/figure');
 
@@ -36,7 +33,7 @@ class HabboImaging extends Controller
             File::makeDirectory($path, 0755, true);
 
 
-        $cacheName =  $path . "/avatar_" . $hash . "." . $inputFormat;
+        $cacheName =  $path . "/avatar_" . $expandedstyle . "." . $inputFormat;
         $resourceCache = true;
 
         if ($resourceCache && file_exists($cacheName)) {

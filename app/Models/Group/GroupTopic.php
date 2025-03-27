@@ -10,7 +10,7 @@ class GroupTopic extends Model
     protected $table = 'cms_groups_topics';
 
     protected $fillable = [
-        'id', 'group_id', 'user_id', 'title', 'content', 'views', 'replies', 'created_at', 'updated_at'
+        'id', 'group_id', 'user_id', 'subject', 'views', 'replies', 'latest_comment', 'created_at', 'updated_at'
     ];
 
     protected $casts = [
@@ -21,5 +21,15 @@ class GroupTopic extends Model
     public function getAuthor()
     {
         return User::find($this->user_id);
+    }
+
+    public function getLatestPost()
+    {
+        return GroupReply::where([['topic_id', '=', $this->id], ['is_deleted', '=', '0']])->orderBy('created_at', 'DESC')->first();
+    }
+
+    public function getReplies()
+    {
+        return GroupReply::where([['topic_id', '=', $this->id], ['is_deleted', '=', '0']])->orderBy('created_at', 'ASC')->paginate(10);
     }
 }

@@ -9,7 +9,7 @@ class CmsUserSettings extends Model
     protected $table = 'cms_users_settings';
 
     protected $fillable = [
-        'id', 'user_id', 'home_public'
+        'id', 'user_id', 'home_public', 'favorite_group', 'discussions_posts'
     ];
 
     public $timestamps = false;

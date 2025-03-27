@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Photo;
+use Illuminate\Http\Request;
 
 class CommunityController extends Controller
 {
@@ -25,5 +26,10 @@ class CommunityController extends Controller
         return view('community.photos')->with([
             'photos'    => Photo::orderBy('timestamp', 'DESC')->limit(20)->get()
         ]);
+    }
+
+    public function linktoolSearch(Request $request)
+    {
+        return $request->all();
     }
 }

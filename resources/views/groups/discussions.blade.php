@@ -36,6 +36,10 @@
             <br clear="all">
             <div id="mypage-top-spacer"></div>
             <link href="{{ url('/') }}/web/styles/discussions.css" type="text/css" rel="stylesheet" />
+            <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
+            <input type="hidden" id="group-id" value="{{ $group->id }}">
+            <input type="hidden" id="group-url" value="{{ $group->url }}">
+            @php($topics = $group->getTopics())
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-1col">
                 <tbody>
                     <tr>
@@ -55,15 +59,22 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                        <input name="email-verfication-ok" id="email-verfication-ok" value="1" hidden>
-                                                        <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left"><b><span></span>New Thread</b><i></i></a>
+                                                        <input type="hidden" id="email-verfication-ok" value="1"/>
+                                                        <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
                                                         @endauth
                                                         @guest()
                                                         Please sign in to post new threads
                                                         @endguest
                                                     </td>
-                                                    <td class="topiclist-viewpage" colspan="3" style="text-align: right">View page:
-                                                        <span style="font-weight: bold">1</span>
+
+                                                    <td class="topiclist-viewpage" colspan="3" align="right">View page:
+                                                        @for ($i = 1; $i <= $topics->lastPage(); $i++)
+                                                            @if ($i == $topics->currentPage())
+                                                            <span style="font-weight: bold">{{ $i }}</span>
+                                                            @else
+                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions?page={{ $i }}">{{ $i }}</a>
+                                                            @endif
+                                                        @endfor
                                                     </td>
                                                 </tr>
 
@@ -80,27 +91,30 @@
                                                     </td>
                                                 </tr>
 
-                                                @forelse ($group->getTopics() as $topic)
-                                                <tr class="topiclist-row-even">
+                                                @forelse ($topics as $topic)
+                                                <tr class="topiclist-row-{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                                     <td class="topiclist-rowtopic" valign="top">
                                                         <div class="topiclist-row-content">
-                                                            <a class="topic-list-link" href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id">War on Iraq
-                                                                [Debate]</a>
+                                                            <a class="topic-list-link" href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id">{{ $topic->subject }}</a>
                                                             (page
-                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id?page=1">1</a>
+                                                            @php($replies = $topic->getReplies())
+                                                            @for ($i = 1; $i <= $replies->lastPage(); $i++)
+                                                                <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
+                                                            @endfor
                                                             )
                                                             <br>
                                                             <span><a class="topiclist-row-openername"
                                                                     href="{{ url('/') }}/home/{{ $topic->getAuthor()->username }}">{{ $topic->getAuthor()->username }}</a></span>
 
-                                                            <span class="topiclist-row-latestpost-date">10/13/07</span>
-                                                            <span class="topiclist-row-latestpost-date">(3:31 PM)</span>
+                                                            <span class="topiclist-row-latestpost-date">{{ $topic->created_at->format('d/m/y') }}</span>
+                                                            <span class="topiclist-row-latestpost-date">({{ $topic->created_at->format('h:i A') }})</span>
                                                         </div>
                                                     </td>
                                                     <td class="topiclist-lastpost" valign="top">
-                                                        10/13/07 <span class="topiclist-lastpost-time">3:31 PM</span><br>
+                                                        @php($latest = $topic->getLatestPost())
+                                                        {{ $latest->created_at->format('d/m/y') }} <span class="topiclist-lastpost-time">{{ $latest->created_at->format('h:i A') }}</span><br>
                                                         <span class="topiclist-row-writtenby">by:</span> <a class="topiclist-row-openername"
-                                                            href="{{ url('/') }}/home/{{ $topic->getAuthor()->username }}">{{ $topic->getAuthor()->username }}</a>
+                                                            href="{{ url('/') }}/home/{{ $latest->getAuthor()->username }}">{{ $latest->getAuthor()->username }}</a>
                                                     </td>
                                                     <td class="topiclist-replies" valign="top">{{ $topic->replies }}</td>
                                                     <td class="topiclist-views" valign="top">{{ $topic->views }}</td>
@@ -109,63 +123,40 @@
 
                                                 @endforelse
 
-{{--
-                                                <tr class="topiclist-row-even">
-                                                    <td class="topiclist-rowtopic" valign="top">
-                                                        <div class="topiclist-row-content">
-                                                            <a class="topic-list-link" href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/1889/id">War on Iraq
-                                                                [Debate]</a>
-                                                            (page
-                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/1889/id?page=1">1</a>
-                                                            )
-                                                            <br>
-                                                            <span><a class="topiclist-row-openername"
-                                                                    href="{{ url('/') }}/home/TechJunkie">TechJunkie</a></span>
-
-                                                            <span class="topiclist-row-latestpost-date">10/13/07</span>
-                                                            <span class="topiclist-row-latestpost-date">(3:31 PM)</span>
-                                                        </div>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="topiclist-divider"></div>
                                                     </td>
-                                                    <td class="topiclist-lastpost" valign="top">
-                                                        10/13/07 <span class="topiclist-lastpost-time">3:31 PM</span><br>
-                                                        <span class="topiclist-row-writtenby">by:</span> <a class="topiclist-row-openername"
-                                                            href="{{ url('/') }}/home/TechJunkie">TechJunkie</a>
-                                                    </td>
-                                                    <td class="topiclist-replies" valign="top">0</td>
-                                                    <td class="topiclist-views" valign="top">5</td>
                                                 </tr>
-                                                <tr class="topiclist-row-odd">
-                                                    <td class="topiclist-rowtopic" valign="top">
-                                                        <div class="topiclist-row-content">
-                                                            <a class="topic-list-link" href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/298/id">Habbo Update
-                                                                Opinons!</a>
-                                                            (page
-                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/298/id?page=1">1</a>
 
-                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/298/id?page=2">2</a>
-                                                            )
-                                                            <br>
-                                                            <span><a class="topiclist-row-openername" href="{{ url('/') }}/home/Frafty">Frafty</a></span>
-
-                                                            <span class="topiclist-row-latestpost-date">10/2/07</span>
-                                                            <span class="topiclist-row-latestpost-date">(12:07 AM)</span>
-                                                        </div>
-                                                    </td>
-                                                    <td class="topiclist-lastpost" valign="top">
-                                                        10/4/07 <span class="topiclist-lastpost-time">1:31 AM</span><br>
-                                                        <span class="topiclist-row-writtenby">by:</span> <a class="topiclist-row-openername"
-                                                            href="{{ url('/') }}/home/Frafty">Frafty</a>
-                                                    </td>
-                                                    <td class="topiclist-replies" valign="top">15</td>
-                                                    <td class="topiclist-views" valign="top">156</td>
-                                                </tr>
                                                 <tr class="topiclist-index">
-                                                    <td></td>
+                                                    <td class="topiclist-newtopic">
+                                                        @auth
+                                                        <input type="hidden" id="email-verfication-ok" value="1"/>
+                                                        <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
+                                                        @endauth
+                                                        @guest()
+                                                        Please sign in to post new threads
+                                                        @endguest
+                                                    </td>
+
                                                     <td class="topiclist-viewpage" colspan="3" align="right">View page:
-                                                        <span style="font-weight: bold">1</span>
+                                                        @for ($i = 1; $i <= $topics->lastPage(); $i++)
+                                                            @if ($i == $topics->currentPage())
+                                                            <span style="font-weight: bold">{{ $i }}</span>
+                                                            @else
+                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions?page={{ $i }}">{{ $i }}</a>
+                                                            @endif
+                                                        @endfor
                                                     </td>
                                                 </tr>
-                                                --}}
+
+                                                <tr class="topiclist-columncaption">
+                                                    <td class="topiclist-columncaption-topic">Thread/Thread Starter</td>
+                                                    <td class="topiclist-columncaption-lastpost">Last Post</td>
+                                                    <td class="topiclist-columncaption-replies">Replies</td>
+                                                    <td class="topiclist-columncaption-views">Views</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

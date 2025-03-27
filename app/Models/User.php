@@ -165,7 +165,7 @@ class User extends Authenticatable
      */
     public function getGroups()
     {
-        return GuildMember::where('guilds_members.user_id', $this->id)->join('guilds', 'guilds_members.guild_id', '=', 'guilds.id')->get();
+        return GroupMember::where('guilds_members.user_id', $this->id)->join('guilds', 'guilds_members.guild_id', '=', 'guilds.id')->get();
     }
 
     /**
@@ -173,25 +173,15 @@ class User extends Authenticatable
      */
     public function getFavoriteGroup()
     {
-        if (!$this->getSettings() || $this->getSettings()->guild_id == 0)
+        if (!$this->getCmsSettings() || !$this->getCmsSettings()->favorite_group)
             return;
 
-        $group = Guild::find($this->getSettings()->guild_id);
+        $group = Group::find($this->getCmsSettings()->favorite_group);
 
         if(!$group)
             return;
 
         return $group;
-    }
-
-    /**
-     * Get user settings
-     *
-     * @return mixed
-     */
-    public function getSettings()
-    {
-        return UserSettings::where('user_id', $this->id)->first();
     }
 
     /**

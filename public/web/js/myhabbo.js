@@ -1060,7 +1060,7 @@ LinkTool.prototype = {
         });
         new Ajax.Updater("linktool-results",
             habboReqPath + "/myhabbo/linktool/search",
-            { method: "get", parameters: "query=" + encodeURIComponent(query) + "&scope=" + encodeURIComponent(scope) });
+            { method: "post", parameters: "query=" + encodeURIComponent(query) + "&scope=" + encodeURIComponent(scope) });
     }
 };
 
