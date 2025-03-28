@@ -99,6 +99,7 @@ Route::middleware('user')->group(function () {
 
     Route::prefix('games')->group(function () {
         Route::get('/', [GameController::class, 'index'])->name('games.index');
+        Route::get('/dive', [GameController::class, 'dive'])->name('games.dive');
 
         Route::prefix('battleball')->group(function () {
             Route::get('/', [GameController::class, 'battleballIndex'])->name('games.battleball.index');

@@ -11,6 +11,11 @@ class GameController extends Controller
         return view('games.index');
     }
 
+    public function dive()
+    {
+        return view('games.dive');
+    }
+
     public function scores(Request $request)
     {
         return view('games.scores')->with([
