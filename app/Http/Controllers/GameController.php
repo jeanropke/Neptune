@@ -53,4 +53,13 @@ class GameController extends Controller
     {
         return view('games.snowstorm.high_scores');
     }
+
+    public function wobblesquabbleIndex()
+    {
+        return view('games.wobblesquabble.index');
+    }
+    public function wobblesquabbleHighScores()
+    {
+        return view('games.wobblesquabble.high_scores');
+    }
 }

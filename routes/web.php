@@ -112,6 +112,11 @@ Route::middleware('user')->group(function () {
             Route::get('/rules', [GameController::class, 'snowstormRules'])->name('games.snowstorm.rules');
             Route::get('/high_scores', [GameController::class, 'snowstormHighScores'])->name('games.snowstorm.high_scores');
         });
+
+        Route::prefix('wobblesquabble')->group(function () {
+            Route::get('/', [GameController::class, 'wobblesquabbleIndex'])->name('games.wobblesquabble.index');
+            Route::get('/high_scores', [GameController::class, 'wobblesquabbleHighScores'])->name('games.wobblesquabble.high_scores');
+        });
     });
 
     //CreditsController
