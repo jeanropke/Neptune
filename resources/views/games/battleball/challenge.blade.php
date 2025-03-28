@@ -66,11 +66,8 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </td>
-
                 <td rowspan="2" style="width: 4px;"></td>
-
                 <td rowspan="2" valign="top" style="width: 176px;">
                     <div id="ad_sidebar">
                         @include('includes.partners')

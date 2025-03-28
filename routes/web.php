@@ -126,10 +126,15 @@ Route::middleware('user')->group(function () {
         Route::get('/status', [CreditsController::class, 'getPaymentStatus'])->name('credits.status');
         Route::get('/buy/{offer?}', [CreditsController::class, 'buySetup'])->name('credits.buy.setup');
         Route::get('/transactions', [CreditsController::class, 'transactions'])->name('credits.transactions');
-        Route::get('/furniture', [CreditsController::class, 'furniture'])->name('credits.furniture');
-        Route::get('/furniture/catalogue', [CreditsController::class, 'catalogue'])->name('credits.furniture.catalogue');
-        Route::get('/furniture/catalogue/{id}', [CreditsController::class, 'catalogue']);
-        Route::get('/furniture/decoration_examples', [CreditsController::class, 'decorationExamples']);
+        Route::prefix('furniture')->group(function () {
+            Route::get('/', [CreditsController::class, 'furniture'])->name('credits.furniture');
+            Route::get('/catalogue', [CreditsController::class, 'catalogue'])->name('credits.furniture.catalogue');
+            Route::get('/catalogue/{id}', [CreditsController::class, 'catalogue']);
+            Route::get('/decoration_examples', [CreditsController::class, 'decorationExamples']);
+            Route::get('/starterpacks', [CreditsController::class, 'starterPacks']);
+            Route::get('/trading', [CreditsController::class, 'trading']);
+            Route::get('/exchange', [CreditsController::class, 'exchange']);
+        });
         Route::get('/currency', [CreditsController::class, 'currency']);
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
         Route::get('/mystery', [CreditsController::class, 'mystery']);
@@ -221,6 +226,8 @@ Route::middleware('user')->group(function () {
         Route::post('/ajax/redeemVoucher', [CreditsController::class, 'redeemVoucher'])->name('habblet.ajax.redeem.voucher');
     });
 
+    Route::post('/furnipurchase/purchase_confirmation', [CreditsController::class, 'purchaseConfirmation'])->name('furnipurchase.purchase_confirmation');
+    Route::post('/furnipurchase/purchase', [CreditsController::class, 'purchase'])->name('furnipurchase.purchase');
 
     Route::post('/grouppurchase/group_create_form', [GroupController::class, 'groupCreateForm'])->name('grouppurchase.group_create_form');
     Route::post('/grouppurchase/purchase_confirmation', [GroupController::class, 'groupPurchaseConfirmation'])->name('grouppurchase.purchase_confirmation');

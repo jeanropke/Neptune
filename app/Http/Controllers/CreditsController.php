@@ -7,17 +7,7 @@ use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsOffer;
 use App\Models\Collectable;
 use App\Models\Furni;
-use PayPal\Api;
-use PayPal\Api\Cost;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
-use PayPal\Api\Amount;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\Transaction;
-use PayPal\Api\PaymentExecution;
-use PayPal\Api\RedirectUrls;
-use PayPal\Rest\ApiContext;
+use App\Models\StarterPack;
 use App\Models\UserTransaction;
 use App\Models\Voucher;
 use App\Models\VoucherHistory;
@@ -37,16 +27,6 @@ use function PHPUnit\Framework\isNumeric;
 
 class CreditsController extends Controller
 {
-    //public function __construct()
-    //{
-    //    $paypal_conf = Config::get('paypal');
-    //    $this->_api_context = new ApiContext(new OAuthTokenCredential(
-    //        $paypal_conf['client_id'],
-    //        $paypal_conf['secret']
-    //    ));
-    //    $this->_api_context->setConfig($paypal_conf['settings']);
-    //}
-
     public function index()
     {
         return view('credits.index');
@@ -62,17 +42,32 @@ class CreditsController extends Controller
 
     public function furniture()
     {
-        return view('credits.furniture');
+        return view('credits.furniture.index');
     }
 
     public function catalogue($id = null)
     {
-        return view('credits.catalogue' . ($id ? '_' . $id : ''));
+        return view('credits.furniture.catalogue' . ($id ? '_' . $id : ''));
     }
 
     public function decorationExamples()
     {
-        return view('credits.decorationexamples');
+        return view('credits.furniture.decorationexamples');
+    }
+
+    public function starterPacks()
+    {
+        return view('credits.furniture.starterpacks');
+    }
+
+    public function trading()
+    {
+        return view('credits.furniture.trading');
+    }
+
+    public function exchange()
+    {
+        return view('credits.furniture.exchange');
     }
 
     public function currency()
@@ -108,125 +103,6 @@ class CreditsController extends Controller
     public function mysteryRedeem()
     {
         return view('credits.ajax.redeem_mystery');
-    }
-
-    public function buySetup($offer = null)
-    {
-        if (!Auth::check())
-            return redirect()->route('auth.login');
-
-        if (!Hotel::sendRconMessage('teststatus'))
-            return redirect()->back()->with('message', 'ERROR');
-
-        $offer = CmsOffer::find($offer);
-        if (!$offer)
-            return view('errors.404');
-
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
-
-        $item_1 = new Item();
-        $item_1->setName($offer->name)
-            ->setCurrency('BRL')
-            ->setDescription($offer->description)
-            ->setQuantity(1)
-            ->setPrice($offer->price);
-
-        /** unit price **/
-        $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
-
-        $amount = new Amount();
-        $amount->setCurrency('BRL')
-            ->setTotal($offer->price);
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription($offer->description);
-
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('credits.status'))
-            /** Specify return URL **/
-            ->setCancelUrl(URL::route('credits.status'));
-
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-
-        try {
-            $payment->create($this->_api_context);
-        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            if (Config::get('app.debug')) {
-                Session::put('error', 'Connection timeout');
-                return Redirect::route('credits.index');
-            } else {
-                Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::route('credits.index');
-            }
-        }
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-
-
-        Session::put('offer_id', $offer->id);
-
-        /** add payment ID to session **/
-        Session::put('paypal_payment_id', $payment->getId());
-        if (isset($redirect_url)) {
-            /** redirect to paypal **/
-            return Redirect::away($redirect_url);
-        }
-        Session::put('error', 'Unknown error occurred');
-        return Redirect::route('credits.index');
-    }
-
-    public function getPaymentStatus(Request $request)
-    {
-        /** Get the payment ID before session clear **/
-        $payment_id = Session::get('paypal_payment_id');
-        /** clear the session payment ID **/
-        Session::forget('paypal_payment_id');
-        if (empty($request->PayerID) || empty($request->token)) {
-            Session::put('error', 'Payment failed');
-            return redirect()->route('credits.index');
-        }
-        $payment = Payment::get($payment_id, $this->_api_context);
-        $execution = new PaymentExecution();
-        $execution->setPayerId($request->PayerID);
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->_api_context);
-        if ($result->getState() == 'approved') {
-
-            $offer = CmsOffer::find(Session::get('offer_id'));
-            Session::forget('offer_id');
-            $rewards = json_decode($offer->reward);
-            if (isset($rewards->credits)) {
-                Hotel::sendRconMessage('givecredits', ['user_id' => Auth::user()->id, 'credits' => $rewards->credits]);
-            }
-
-            if (isset($rewards->points)) {
-                foreach ($rewards->points as $points) {
-                    Hotel::sendRconMessage('givepoints', ['user_id' => Auth::user()->id, 'points' => $points->amount, 'type' => $points->type]);
-                }
-            }
-
-            if (isset($rewards->furnis)) {
-                foreach ($rewards->furnis as $furni) {
-                    Hotel::sendRconMessage('giveitem', ['user_id' => Auth::user()->id, 'item_id' => $furni->id, 'amount' => $furni->amount]);
-                }
-            }
-
-            return redirect()->route('credits.index')->with('message', 'OK');
-        }
-
-        return redirect()->route('credits.index')->with('message', 'ERROR');
     }
 
     public function habbletAjaxCollectiblesConfirm()
@@ -307,5 +183,37 @@ class CreditsController extends Controller
         }
 
         return view('habblet.ajax.redeem_voucher')->with(['status' => 'Success', 'message' => 'You redeemed a valid voucher!', 'history' => $history]);
+    }
+
+    public function purchaseConfirmation(Request $request)
+    {
+        if(!Auth::check())
+            return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
+
+        $pack = StarterPack::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
+
+        if(!$pack)
+            return view('credits.ajax.purchase_result')->with(['message' => 'Invalid starter pack.', 'status' => 'error']);
+
+        if(!$pack->price > user()->credits)
+            return view('credits.ajax.purchase_result')->with(['message' => 'You don\'t have enough credits to purchase this pack.', 'status' => 'error']);
+
+        return view('credits.ajax.purchase_confirm')->with('pack', $pack);
+    }
+
+    public function purchase(Request $request)
+    {
+        if(!Auth::check())
+            return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
+
+        $pack = StarterPack::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
+
+        if(!$pack)
+            return view('credits.ajax.purchase_result')->with(['message' => 'Invalid starter pack.', 'status' => 'error']);
+
+        if(!$pack->price > user()->credits)
+            return view('credits.ajax.purchase_result')->with(['message' => 'You don\'t have enough credits to purchase this pack.', 'status' => 'error']);
+
+        return view('credits.ajax.purchase_result')->with(['message' => 'Purchase successful! Your items are on their way!']);
     }
 }
