@@ -57,9 +57,9 @@
                 <img src="{{ url('/') }}/web/housekeeping/images/catalogue.png" style="vertical-align:middle" />
                 <a href="/housekeeping/catalogue">Catalogue & Furnis</a>
             </div>
-            <div class="tab{{ $menu == 'solariumcms' ? 'on' : 'off' }}-main">
+            <div class="tab{{ $menu == 'neptunecms' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/components.png" style="vertical-align:middle" />
-                <a href="/housekeeping/solariumcms">SolariumCMS</a></div>
+                <a href="/housekeeping/neptunecms">NeptuneCMS</a></div>
             <div class="tab{{ $menu == 'users' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/admin.png" style="vertical-align:middle" />
                 <a href="/housekeeping/users">Users & Moderation</a></div>

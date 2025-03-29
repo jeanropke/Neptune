@@ -416,12 +416,8 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('neptunecms')->group(function () {
             //NeptuneCMS pages
-            Route::get('/', function () {
-                return view('housekeeping.neptunecms.index');
-            })->name('housekeeping.neptunecms');
-            Route::get('/credits', function () {
-                return view('housekeeping.neptunecms.credits');
-            })->name('housekeeping.neptunecms.credits');
+            Route::get('/', function () { return view('housekeeping.neptunecms.index'); })->name('housekeeping.neptunecms');
+            Route::get('/credits', function () { return view('housekeeping.neptunecms.credits'); })->name('housekeeping.neptunecms.credits');
         });
 
         Route::prefix('users')->group(function () {

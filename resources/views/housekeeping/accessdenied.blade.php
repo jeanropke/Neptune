@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'accessdenied'])
+@extends('layouts.housekeeping', ['menu' => 'accessdenied'])
 
 @section('title', 'Access Denied')
 

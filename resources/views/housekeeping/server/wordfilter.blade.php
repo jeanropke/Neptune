@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'server'])
+@extends('layouts.housekeeping', ['menu' => 'server'])
 
 @section('title', 'Wordfilter Options')
 

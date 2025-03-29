@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'site'])
+@extends('layouts.housekeeping', ['menu' => 'site'])
 
 @section('title', 'Site Configuration')
 

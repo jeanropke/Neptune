@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'server'])
+@extends('layouts.housekeeping', ['menu' => 'server'])
 
 @section('title', 'General Configuration')
 
@@ -8,7 +8,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('layouts.housekeeping.server', ['submenu' => 'server'])
+                @include('housekeeping.server.include.menu', ['submenu' => 'server'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">

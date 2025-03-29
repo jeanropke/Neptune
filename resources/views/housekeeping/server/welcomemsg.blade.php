@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'server'])
+@extends('layouts.housekeeping', ['menu' => 'server'])
 
 @section('title', 'Welcome Message Options')
 
@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('layouts.housekeeping.server', ['submenu' => 'welcomemsg'])
+                    @include('housekeeping.server.include.menu', ['submenu' => 'welcomemsg'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">

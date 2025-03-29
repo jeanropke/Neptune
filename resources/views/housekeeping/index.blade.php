@@ -1,4 +1,4 @@
-@extends('layouts.housekeeping.master', ['menu' => 'dashboard', 'submenu' => 'dashboard'])
+@extends('layouts.housekeeping', ['menu' => 'dashboard', 'submenu' => 'dashboard'])
 
 @section('title', 'Housekeeping')
 
