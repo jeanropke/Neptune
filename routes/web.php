@@ -360,25 +360,7 @@ Route::middleware('admin')->group(function () {
             Route::get('/furni/edit/{id}', [CatalogueController::class, 'catalogFurniEdit'])->name('housekeeping.catalogue.furni.edit');
             Route::post('/furni/save', [CatalogueController::class, 'catalogFurniSave'])->name('housekeeping.catalogue.furni.save');
 
-
             Route::post('/furni/search', [CatalogueController::class, 'furniSearch'])->name('housekeeping.catalogue.furni.search');
-
-            Route::get('/furni/clothing', [CatalogueController::class, 'clothing'])->name('housekeeping.catalogue.clothing');
-            Route::post('/furni/clothing', [CatalogueController::class, 'clothingFix'])->name('housekeeping.catalogue.clothing.fix');
-
-            Route::get('/furni/missing', [CatalogueController::class, 'missingFurni'])->name('housekeeping.catalogue.furni.missing');
-            Route::post('/furni/missing', [CatalogueController::class, 'missingFurniChecker'])->name('housekeeping.catalogue.furni.missing.check');
-
-            Route::get('/crafting', [CatalogueController::class, 'crafting'])->name('housekeeping.catalogue.crafting');
-            Route::get('/crafting/{altar}', [CatalogueController::class, 'showRecipes'])->name('housekeeping.catalogue.crafting.recipes');
-            Route::get('/crafting/recipe/{id}', [CatalogueController::class, 'showRecipe'])->name('housekeeping.catalogue.crafting.recipe');
-            Route::get('/crafting/{altar}/add', [CatalogueController::class, 'addCrafting'])->name('housekeeping.catalogue.crafting.recipe.add');
-            Route::post('/crafting/save', [CatalogueController::class, 'saveCrafting'])->name('housekeeping.catalogue.crafting.recipe.save');
-            Route::post('/crafting/reward/select', [CatalogueController::class, 'rewardSelect'])->name('housekeeping.catalogue.crafting.reward.select');
-
-            Route::get('/crackables', [CatalogueController::class, 'crackables'])->name('housekeeping.catalogue.crackables');
-            Route::get('/crackable/{id}', [CatalogueController::class, 'crackables'])->name('housekeeping.catalogue.crackable');
-            Route::get('/crackables/add', [CatalogueController::class, 'crackablesAdd'])->name('housekeeping.catalogue.crackables.add');
         });
 
         Route::prefix('site')->group(function () {
@@ -432,14 +414,14 @@ Route::middleware('admin')->group(function () {
             Route::post('/box/pages/delete', [BoxController::class, 'boxPageDelete'])->name('housekeeping.site.box.pages.delete');
         });
 
-        Route::prefix('solariumcms')->group(function () {
-            //SolariumCMS pages
+        Route::prefix('neptunecms')->group(function () {
+            //NeptuneCMS pages
             Route::get('/', function () {
-                return view('housekeeping.solariumcms.index');
-            })->name('housekeeping.solariumcms');
+                return view('housekeeping.neptunecms.index');
+            })->name('housekeeping.neptunecms');
             Route::get('/credits', function () {
-                return view('housekeeping.solariumcms.credits');
-            })->name('housekeeping.solariumcms.credits');
+                return view('housekeeping.neptunecms.credits');
+            })->name('housekeeping.neptunecms.credits');
         });
 
         Route::prefix('users')->group(function () {
