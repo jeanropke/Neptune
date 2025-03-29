@@ -23,6 +23,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
+use App\Http\Controllers\Housekeeping\Site\BoxController;
 use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -408,25 +409,26 @@ Route::middleware('admin')->group(function () {
             //Route::post('/site/faq', 'welcomemsgSave')->name('admin.site.faq.save');
             //Route::get('/site/newsletter', 'welcomemsg')->name('admin.site.newsletter');
             //Route::post('/site/newsletter', 'welcomemsgSave')->name('admin.site.newsletter.save');
-            Route::get('/news/compose', [HousekeepingArticleController::class, 'newsCompose'])->name('housekeeping.site.news_compose');
-            Route::post('/news/compose', [HousekeepingArticleController::class, 'newsComposeSave'])->name('housekeeping.site.news_compose.save');
-            Route::get('/news', [HousekeepingArticleController::class, 'newsManage'])->name('housekeeping.site.news_manage');
-            Route::get('/news/edit/{id}/edit', [HousekeepingArticleController::class, 'newsEdit'])->name('housekeeping.site.news_edit');
-            Route::post('/news/edit/{id}', [HousekeepingArticleController::class, 'newsEditSave'])->name('housekeeping.site.news_edit.save');
-            Route::post('/news/delete', [HousekeepingArticleController::class, 'newsDelete'])->name('housekeeping.site.news_delete');
+            Route::get('/article/create', [HousekeepingArticleController::class, 'articleCreate'])->name('housekeeping.site.article.create');
+            Route::post('/article/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.article.create.save');
+            Route::get('/article', [HousekeepingArticleController::class, 'articleManage'])->name('housekeeping.site.article.manage');
+            Route::get('/article/edit/{id}', [HousekeepingArticleController::class, 'articleEdit'])->name('housekeeping.site.article.edit');
+            Route::post('/article/edit/{id}', [HousekeepingArticleController::class, 'articleEditSave'])->name('housekeeping.site.article.edit.save');
+            Route::post('/article/delete', [HousekeepingArticleController::class, 'articleDelete'])->name('housekeeping.site.article.delete');
 
-            Route::get('/box_create', [SiteController::class, 'boxCreate'])->name('housekeeping.site.box_create');
-            Route::post('/box_create', [SiteController::class, 'boxCreateSave'])->name('housekeeping.site.box_create.save');
-            Route::get('/box_edit', [SiteController::class, 'boxEdit'])->name('housekeeping.site.box_edit');
-            Route::get('/box_edit/{boxId}', [SiteController::class, 'boxEdit'])->name('housekeeping.site.box_edit');
-            Route::post('/box_edit/{boxId}', [SiteController::class, 'boxEditSave'])->name('housekeeping.site.box_edit.save');
-            Route::get('/box_delete/{boxId}', [SiteController::class, 'boxDelete'])->name('housekeeping.site.box_delete');
-            Route::get('/box_pages', [SiteController::class, 'boxPages'])->name('housekeeping.site.box_pages');
-            Route::get('/box_pages/new', [SiteController::class, 'boxPagesNew'])->name('housekeeping.site.box_pages.new');
-            Route::post('/box_pages/new', [SiteController::class, 'boxPagesCreate'])->name('housekeeping.site.box_pages.create');
-            Route::get('/box_pages/{boxId}', [SiteController::class, 'boxPages'])->name('housekeeping.site.box_pages');
-            Route::post('/box_pages/{boxId}', [SiteController::class, 'boxPagesSave'])->name('housekeeping.site.box_pages.save');
-            Route::get('/box_pages/{boxId}/delete', [SiteController::class, 'boxPageDelete'])->name('housekeeping.site.box_pages.delete');
+            Route::get('/box/create', [BoxController::class, 'boxCreate'])->name('housekeeping.site.box.create');
+            Route::post('/box/create', [BoxController::class, 'boxCreateSave'])->name('housekeeping.site.box.create.save');
+            Route::get('/box/manage', [BoxController::class, 'boxManage'])->name('housekeeping.site.box.manage');
+            Route::get('/box/edit/{id}', [BoxController::class, 'boxEdit'])->name('housekeeping.site.box.edit');
+            Route::post('/box/edit/save', [BoxController::class, 'boxEditSave'])->name('housekeeping.site.box.edit.save');
+            Route::post('/box/delete', [BoxController::class, 'boxDelete'])->name('housekeeping.site.box.delete');
+
+            Route::get('/box/pages/create', [BoxController::class, 'boxPagesCreate'])->name('housekeeping.site.box.pages.create');
+            Route::post('/box/pages/create', [BoxController::class, 'boxPagesCreateSave'])->name('housekeeping.site.box.pages.create.save');
+            Route::get('/box/pages/manage', [BoxController::class, 'boxPagesManage'])->name('housekeeping.site.box.pages.manage');
+            Route::get('/box/pages/edit/{id}', [BoxController::class, 'boxPagesEdit'])->name('housekeeping.site.box.pages.edit');
+            Route::post('/box/pages/save', [BoxController::class, 'boxPagesSave'])->name('housekeeping.site.box.pages.edit.save');
+            Route::post('/box/pages/delete', [BoxController::class, 'boxPageDelete'])->name('housekeeping.site.box.pages.delete');
         });
 
         Route::prefix('solariumcms')->group(function () {

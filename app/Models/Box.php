@@ -24,4 +24,13 @@ class Box extends Model
     ];
 
     public $timestamps = false;
+
+    public function getCreator()
+    {
+        $user = User::find($this->created_by);
+        if($user)
+            return $user->username;
+
+        return 'Unknown creator';
+    }
 }

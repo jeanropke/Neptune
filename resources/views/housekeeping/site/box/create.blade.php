@@ -1,9 +1,9 @@
-@extends('layouts.admin.master', ['menu' => 'site'])
+@extends('layouts.housekeeping.master', ['menu' => 'site'])
 
 @section('title', 'Create New Box')
 
 @section('content')
-<script src="{{ url('/') }}/web/admin/js/tiny_mce.js"></script>
+<script src="{{ url('/') }}/web/housekeeping/js/tiny_mce.js"></script>
 <script type="text/javascript">
     tinyMCE.init({
             // General options
@@ -21,7 +21,7 @@
             theme_advanced_resizing : true,
 
             // Example content CSS (should be your site CSS)
-            content_css : "{{ url('/') }}/web/admin/js/themes/advanced/skins/default/content.css",
+            content_css : "{{ url('/') }}/web/housekeeping/js/themes/advanced/skins/default/content.css",
 
             // Drop lists for link/image/media/template dialogs
             template_external_list_url : "lists/template_list.js",
@@ -47,7 +47,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('layouts.admin.site', ['submenu' => 'box_create'])
+                @include('housekeeping.site.include.menu', ['submenu' => 'box.create'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">
@@ -58,7 +58,7 @@
                 @if (session('message'))
                 <p><strong>{{ session('message') }}</strong></p>
                 @endif
-                <form action="{{ route('admin.site.box_create.save') }}" method="post" name="theAdminForm"
+                <form action="{{ route('housekeeping.site.box.create.save') }}" method="post" name="theAdminForm"
                     id="theAdminForm" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="tableborder">
@@ -81,6 +81,18 @@
                                 <td class="tablerow2" width="60%" valign="middle">
                                     <textarea name="content" cols="60" rows="5" wrap="soft" id="article"
                                         class="multitext">{{ old('content') }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tablerow1" width="40%" valign="middle"><b>Requirement</b>
+                                    <div class="graytext">Who can see this box</div>
+                                </td>
+                                <td class="tablerow2" width="60%" valign="middle">
+                                    <select name="requirement" class="textinput" style="margin-top: 5px;" size="1">
+                                        <option value="guest">Only guest users</option>
+                                        <option value="auth">Only logged users</option>
+                                        <option value="both" selected>Both</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>

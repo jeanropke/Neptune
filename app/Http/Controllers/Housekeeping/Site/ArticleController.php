@@ -11,17 +11,17 @@ use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
-    public function newsCompose()
+    public function articleCreate()
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.news_compose')->with([
+        return view('housekeeping.site.article.create')->with([
             'ts_images' => File::allFiles('web/images/top_story_images')
         ]);
     }
 
-    public function newsComposeSave(Request $request)
+    public function articleCreateSave(Request $request)
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
@@ -52,22 +52,22 @@ class ArticleController extends Controller
         ]);
 
         unset($request['_token']);
-        StaffLog::createLog('site.news_compose', json_encode($request->post()));
+        StaffLog::createLog('site.article.create', json_encode($request->post()));
 
-        return redirect()->route('housekeeping.site.news_manage')->with('message', 'Article created!');
+        return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article created!');
     }
 
-    public function newsManage()
+    public function articleManage()
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.news_manage')->with([
+        return view('housekeeping.site.article.manage')->with([
             'articles'  => Article::where('is_deleted', user()->hasPermission('can_restore_site_news') ? '>=' : '=', '0')->orderBy('created_at', 'desc')->paginate(15)
         ]);
     }
 
-    public function newsEdit(Request $request)
+    public function articleEdit(Request $request)
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
@@ -75,15 +75,15 @@ class ArticleController extends Controller
         $article = Article::find($request->id);
 
         if (!$article)
-            return redirect()->route('housekeeping.site.news_manage')->with('message', 'Article not found!');
+            return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article not found!');
 
-        return view('housekeeping.site.news_edit')->with([
+        return view('housekeeping.site.article.edit')->with([
             'ts_images' => File::allFiles('web/images/top_story_images'),
             'article'   => $article
         ]);
     }
 
-    public function newsEditSave(Request $request)
+    public function articleEditSave(Request $request)
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
@@ -98,7 +98,7 @@ class ArticleController extends Controller
         $article = Article::find($request->id);
 
         if (!$article)
-            return redirect()->route('housekeeping.site.news_manage')->with('message', 'Article not found!');
+            return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article not found!');
 
 
         $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
@@ -118,12 +118,12 @@ class ArticleController extends Controller
         ]);
 
         unset($request['_token']);
-        StaffLog::createLog('site.news_edit', json_encode($request->post()));
+        StaffLog::createLog('site.article.edit', json_encode($request->post()));
 
-        return redirect()->route('housekeeping.site.news_edit', $article->id)->with('message', 'Article updated!');
+        return redirect()->route('housekeeping.site.article.edit', $article->id)->with('message', 'Article updated!');
     }
 
-    public function newsDelete(Request $request)
+    public function articleDelete(Request $request)
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.ajax.accessdenied_dialog');
@@ -134,9 +134,11 @@ class ArticleController extends Controller
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This article does not exist!']);
 
         $article->update([
-            'is_deleted'        => '1',
+            'is_deleted' => '1',
         ]);
 
+        unset($request['_token']);
+        StaffLog::createLog('site.article.delete', json_encode($request->post()));
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Article deleted!']);
     }
 }

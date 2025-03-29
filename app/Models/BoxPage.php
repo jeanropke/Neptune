@@ -29,4 +29,13 @@ class BoxPage extends Model
         return BoxPage::where('page', $page)->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
     }
 
+    public function getTitle()
+    {
+        $box = Box::find($this->box_id);
+        if($box)
+            return $box->title;
+
+        return "Box {$this->box_id} not found!";
+    }
+
 }

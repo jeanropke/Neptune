@@ -12,7 +12,49 @@ var NewsManage = {
     delete: function(id)
     {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "site/news/delete", {
+        $.ajax(habboReqPath + "site/article/delete", {
+            data: {id: id},
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
+var BoxManage = {
+    initialise: function() {
+        $('.delete-box').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.delete-box');
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => {this.delete($this.data('id'))});
+        });
+    },
+    delete: function(id)
+    {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "site/box/delete", {
+            data: {id: id},
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
+var BoxPagesManage = {
+    initialise: function() {
+        $('.delete-box-page').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.delete-box-page');
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => {this.delete($this.data('id'))});
+        });
+    },
+    delete: function(id)
+    {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "site/box/pages/delete", {
             data: {id: id},
             method: "post"
         }).done((html, status) => {
@@ -107,7 +149,6 @@ var Dialog = {
         var el = $(dialog);
         if (el) {
             var el2 = $("#"+el[0].id + "-body");
-            console.log(el2);
             el2.html(bodyEl);
         }
     },
