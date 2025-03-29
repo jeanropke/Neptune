@@ -5,11 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatalogueController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Admin\ModerationController;
 use App\Http\Controllers\Admin\ServerController;
 use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\SiteController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
@@ -22,6 +21,9 @@ use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
+use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
+use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Models\Room;
@@ -380,9 +382,10 @@ Route::middleware('admin')->group(function () {
         Route::prefix('site')->group(function () {
             Route::get('/', [SiteController::class, 'index'])->name('housekeeping.site');
             Route::post('/', [SiteController::class, 'siteSave'])->name('housekeeping.site.save');
-            Route::get('/ads', [SiteController::class, 'siteAds'])->name('housekeeping.site.ads');
-            Route::post('/ads', [SiteController::class, 'siteAdsSave'])->name('housekeeping.site.ads.save');
-            Route::post('/tracking', [SiteController::class, 'siteTrackingSave'])->name('housekeeping.site.tracking.save');
+
+            Route::get('/ads', [AdvertisementController::class, 'siteAds'])->name('housekeeping.site.ads');
+            Route::post('/ads', [AdvertisementController::class, 'siteAdsSave'])->name('housekeeping.site.ads.save');
+            Route::post('/tracking', [AdvertisementController::class, 'siteTrackingSave'])->name('housekeeping.site.tracking.save');
 
             Route::get('/maintenance', [SiteController::class, 'maintenance'])->name('housekeeping.site.maintenance');
             Route::post('/maintenance', [SiteController::class, 'maintenanceSave'])->name('housekeeping.site.maintenance.save');
@@ -405,12 +408,12 @@ Route::middleware('admin')->group(function () {
             //Route::post('/site/faq', 'welcomemsgSave')->name('admin.site.faq.save');
             //Route::get('/site/newsletter', 'welcomemsg')->name('admin.site.newsletter');
             //Route::post('/site/newsletter', 'welcomemsgSave')->name('admin.site.newsletter.save');
-            Route::get('/news_compose', [SiteController::class, 'newsCompose'])->name('housekeeping.site.news_compose');
-            Route::post('/news_compose', [SiteController::class, 'newsComposeSave'])->name('housekeeping.site.news_compose.save');
-            Route::get('/news_manage', [SiteController::class, 'newsManage'])->name('housekeeping.site.news_manage');
-            Route::get('/news_manage/{articleId}', [SiteController::class, 'newsManage'])->name('housekeeping.site.news_manage');
-            Route::post('/news_manage/{articleId}', [SiteController::class, 'newsManageSave'])->name('housekeeping.site.news_manage.save');
-            Route::get('/news_manage/{articleId}/delete', [SiteController::class, 'newsManageDelete'])->name('housekeeping.site.news_manage.delete');
+            Route::get('/news/compose', [HousekeepingArticleController::class, 'newsCompose'])->name('housekeeping.site.news_compose');
+            Route::post('/news/compose', [HousekeepingArticleController::class, 'newsComposeSave'])->name('housekeeping.site.news_compose.save');
+            Route::get('/news', [HousekeepingArticleController::class, 'newsManage'])->name('housekeeping.site.news_manage');
+            Route::get('/news/edit/{id}/edit', [HousekeepingArticleController::class, 'newsEdit'])->name('housekeeping.site.news_edit');
+            Route::post('/news/edit/{id}', [HousekeepingArticleController::class, 'newsEditSave'])->name('housekeeping.site.news_edit.save');
+            Route::post('/news/delete', [HousekeepingArticleController::class, 'newsDelete'])->name('housekeeping.site.news_delete');
 
             Route::get('/box_create', [SiteController::class, 'boxCreate'])->name('housekeeping.site.box_create');
             Route::post('/box_create', [SiteController::class, 'boxCreateSave'])->name('housekeeping.site.box_create.save');

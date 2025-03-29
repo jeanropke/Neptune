@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
-
     public function show($url)
     {
         $article = Article::where('url', $url)->first();
