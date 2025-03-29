@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Housekeeping\Server;
 
 use App\Http\Controllers\Controller;
 use App\Models\StaffLog;
 use Illuminate\Http\Request;
 
-class ServerController extends Controller
+class ServerGeneralController extends Controller
 {
     public function index()
     {

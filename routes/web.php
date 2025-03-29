@@ -21,6 +21,7 @@ use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
@@ -330,8 +331,8 @@ Route::middleware('admin')->group(function () {
         Route::get('/theme/update', [AdminController::class, 'themeUpdate']);
 
         Route::prefix('server')->group(function () {
-            Route::get('/', [ServerController::class, 'index'])->name('housekeeping.server');
-            Route::post('/', [ServerController::class, 'serverSave'])->name('housekeeping.server.save');
+            Route::get('/', [ServerGeneralController::class, 'index'])->name('housekeeping.server');
+            Route::post('/', [ServerGeneralController::class, 'serverSave'])->name('housekeeping.server.save');
 
             //Route::get('/startup', [ServerController::class, 'serverStartup'])->name('housekeeping.server.startup');
             //Route::post('/startup', [ServerController::class, 'serverStartupInit'])->name('housekeeping.server.startup');
@@ -344,8 +345,8 @@ Route::middleware('admin')->group(function () {
             //Route::get('/wordfilter/{word}', [ServerController::class, 'wordfilter'])->name('housekeeping.server.wordfilter.edit');
             //Route::post('/wordfilter/{word}', [ServerController::class, 'wordfilterEditSave'])->name('housekeeping.server.wordfilter_edit.save');
             //Route::get('/wordfilter/{word}/delete', [ServerController::class, 'wordfilterDelete'])->name('housekeeping.server.wordfilter.delete');
-            Route::get('/welcomemsg', [ServerController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
-            Route::post('/welcomemsg', [ServerController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
+            Route::get('/welcomemsg', [ServerGeneralController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
+            Route::post('/welcomemsg', [ServerGeneralController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
         });
         Route::prefix('catalogue')->group(function () {
             Route::get('/', [CatalogueController::class, 'index'])->name('housekeeping.catalogue');
