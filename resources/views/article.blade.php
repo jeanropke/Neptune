@@ -18,8 +18,8 @@
                                 <ul>
                                     @foreach($articles as $art)
                                     <li>
-                                        <span class="articledate">{{ $art->created_at->format('d/m/y') }}</span>
-                                        <a href="/article/{{ $art->url }}">{{ $art->title }}</a>
+                                        <span class="articledate">{{ $art->getPublishDate()->format('d/m/y') }}</span>
+                                        <a href="/article/{{ $art->url }}">{{ $art->getTitle() }}</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -36,20 +36,20 @@
             <td valign="top" style="width: 539px; padding-top: 3px;" class="habboPage-col rightmost">
                 <div class="v3box yellow">
                     <div class="v3box-top">
-                        <h3>{{ $article->title }}</h3>
+                        <h3>{{ $article->getTitle() }}</h3>
                     </div>
                     <div class="v3box-content">
                         <div class="v3box-body">
                             <div class="article-full">
                                 <i class="article-author">Published at
-                                    {{ $article->created_at->format('F j, Y') }}</i><br><br>
+                                    {{ $article->getPublishDate()->format('F j, Y') }}</i><br><br>
                                 <p class="teaser"><b>{{ $article->short_text }}</b></p><br>
                                 <div>
                                     {!! $article->long_text !!}
                                 </div>
 
                                 <br />
-                                <b style="float: right; margin-right: 25px;">{{ $article->author }}</b>
+                                <b style="float: right; margin-right: 25px;">{{ $article->getAuthor() }}</b>
                             </div>
                             <div class="clear"></div>
                         </div>

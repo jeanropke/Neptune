@@ -3,7 +3,6 @@
 @section('title', 'Credits')
 
 @section('content')
-
     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-section-2col">
         <tbody>
             <tr>

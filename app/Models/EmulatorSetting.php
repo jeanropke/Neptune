@@ -11,7 +11,7 @@ class EmulatorSetting extends Model
      *
      * @var string
      */
-    protected $table = 'emulator_settings';
+    protected $table = 'settings';
 
     /**
      * The attributes that are mass assignable.
@@ -19,14 +19,9 @@ class EmulatorSetting extends Model
      * @var array
      */
     protected $fillable = [
-        'key', 'value'
+        'setting', 'value'
     ];
 
     public $timestamps = false;
-    public $primaryKey = "key";
-
-    public static function getsSetting($key)
-    {
-        return EmulatorSetting::where('key', $key)->first()->value;
-    }
+    public $primaryKey = 'setting';
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\CmsSetting;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +16,9 @@ class UserGroup
      */
     public function handle($request, Closure $next)
     {
-        $maintenance = cms_config('hotel.maintenance');
-        if ($maintenance == 1) {
+        if (cms_config('site.maintenance.enabled')) {
             if (Auth::check()) {
-                if (Auth::user()->hasPermission('can_housekeeping')) {
+                if (user()->hasPermission('can_access_housekeeping')) {
                     return $next($request);
                 }
                 return redirect('maintenance');

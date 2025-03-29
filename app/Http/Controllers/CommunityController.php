@@ -10,10 +10,7 @@ class CommunityController extends Controller
 {
     public function index()
     {
-        return view('community.index')->with([
-            'top_stories' => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->take(3)->get(),
-            'articles'    => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->skip(3)->take(5)->get()
-        ]);
+        return view('community.index');
     }
 
     public function fansites()

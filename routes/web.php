@@ -71,6 +71,15 @@ Route::middleware('user')->group(function () {
         Route::get('/welcome_to_habbo_hotel/navigator', [HotelController::class, 'welcomeNavigator'])->name('hotel.welcome.navigator');
         Route::get('/welcome_to_habbo_hotel/your_own_room', [HotelController::class, 'welcomeRoom'])->name('hotel.welcome.room');
         Route::get('/welcome_to_habbo_hotel/help_safety', [HotelController::class, 'welcomeHelp'])->name('hotel.welcome.help');
+
+        Route::prefix('trax')->group(function () {
+            Route::get('/', function() { return view('hotel.trax.index'); })->name('hotel.trax.index');
+            Route::get('/store', function() { return view('hotel.trax.store'); })->name('hotel.trax.store');
+
+            Route::prefix('masterclass')->group(function () {
+                Route::get('/', function() { return view('hotel.trax.masterclass.index'); })->name('hotel.trax.masterclass.index');
+            });
+        });
     });
 
     //ClubController
@@ -134,6 +143,8 @@ Route::middleware('user')->group(function () {
             Route::get('/starterpacks', [CreditsController::class, 'starterPacks']);
             Route::get('/trading', [CreditsController::class, 'trading']);
             Route::get('/exchange', [CreditsController::class, 'exchange']);
+            Route::get('/cameras', [CreditsController::class, 'cameras']);
+            Route::get('/ecotronfaq', [CreditsController::class, 'ecotronfaq']);
         });
         Route::get('/currency', [CreditsController::class, 'currency']);
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
@@ -316,73 +327,67 @@ Route::middleware('admin')->group(function () {
         Route::get('/theme/update', [AdminController::class, 'themeUpdate']);
 
         Route::prefix('server')->group(function () {
-            Route::get('/', [ServerController::class, 'index'])->name('admin.server');
-            Route::post('/', [ServerController::class, 'serverSave'])->name('admin.server.save');
+            Route::get('/', [ServerController::class, 'index'])->name('housekeeping.server');
+            Route::post('/', [ServerController::class, 'serverSave'])->name('housekeeping.server.save');
 
-            Route::get('/startup', [ServerController::class, 'serverStartup'])->name('admin.server.startup');
-            Route::post('/startup', [ServerController::class, 'serverStartupInit'])->name('admin.server.startup');
+            //Route::get('/startup', [ServerController::class, 'serverStartup'])->name('housekeeping.server.startup');
+            //Route::post('/startup', [ServerController::class, 'serverStartupInit'])->name('housekeeping.server.startup');
 
-            Route::get('/wordfilter', [ServerController::class, 'wordfilter'])->name('admin.server.wordfilter');
-            Route::post('/wordfilter', [ServerController::class, 'wordfilterSave'])->name('admin.server.wordfilter.save');
-            Route::get('/wordfilter/add', [ServerController::class, 'wordfilterAdd'])->name('admin.server.wordfilter.add');
-            Route::post('/wordfilter/add', [ServerController::class, 'wordfilterCreate'])->name('admin.server.wordfilter.add');
-            Route::get('/wordfilter/{word}', [ServerController::class, 'wordfilter'])->name('admin.server.wordfilter.edit');
-            Route::post('/wordfilter/{word}', [ServerController::class, 'wordfilterEditSave'])->name('admin.server.wordfilter_edit.save');
-            Route::get('/wordfilter/{word}/delete', [ServerController::class, 'wordfilterDelete'])->name('admin.server.wordfilter.delete');
-            Route::get('/welcomemsg', [ServerController::class, 'welcomemsg'])->name('admin.server.welcomemsg');
-            Route::post('/welcomemsg', [ServerController::class, 'welcomemsgSave'])->name('admin.server.welcomemsg.save');
-
-            Route::get('/furnidata', [ServerController::class, 'furnidata'])->name('admin.server.furnidata');
-            Route::post('/furnidata', [ServerController::class, 'furnidataGenerate'])->name('admin.server.furnidata.generate');
-            Route::get('/productdata', [ServerController::class, 'productdata'])->name('admin.server.productdata');
-            Route::post('/productdata', [ServerController::class, 'productdataGenerate'])->name('admin.server.productdata.generate');
-            Route::get('/texts', [ServerController::class, 'textsOverride'])->name('admin.server.texts');
-            Route::post('/texts/add', [ServerController::class, 'textsAdd'])->name('admin.server.texts.add');
-            Route::get('/texts/{id}', [ServerController::class, 'textsOverride'])->name('admin.server.texts.edit');
-            Route::get('/texts/delete/{id}', [ServerController::class, 'textsDelete'])->name('admin.server.texts.delete');
-            Route::post('/texts', [ServerController::class, 'textsGenerate'])->name('admin.server.texts.generate');
+            // Kepler does not have wordfilter
+            //Route::get('/wordfilter', [ServerController::class, 'wordfilter'])->name('housekeeping.server.wordfilter');
+            //Route::post('/wordfilter', [ServerController::class, 'wordfilterSave'])->name('housekeeping.server.wordfilter.save');
+            //Route::get('/wordfilter/add', [ServerController::class, 'wordfilterAdd'])->name('housekeeping.server.wordfilter.add');
+            //Route::post('/wordfilter/add', [ServerController::class, 'wordfilterCreate'])->name('housekeeping.server.wordfilter.add');
+            //Route::get('/wordfilter/{word}', [ServerController::class, 'wordfilter'])->name('housekeeping.server.wordfilter.edit');
+            //Route::post('/wordfilter/{word}', [ServerController::class, 'wordfilterEditSave'])->name('housekeeping.server.wordfilter_edit.save');
+            //Route::get('/wordfilter/{word}/delete', [ServerController::class, 'wordfilterDelete'])->name('housekeeping.server.wordfilter.delete');
+            Route::get('/welcomemsg', [ServerController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
+            Route::post('/welcomemsg', [ServerController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
         });
         Route::prefix('catalogue')->group(function () {
-            Route::get('/', [CatalogueController::class, 'index'])->name('admin.catalogue');
-            Route::get('/pages/edit/{id}', [CatalogueController::class, 'catalogPageEdit'])->name('admin.catalogue.pages.edit');
-            Route::post('/pages/save', [CatalogueController::class, 'catalogPageSave'])->name('admin.catalogue.pages.save');
+            Route::get('/', [CatalogueController::class, 'index'])->name('housekeeping.catalogue');
+            Route::get('/pages/edit/{id}', [CatalogueController::class, 'catalogPageEdit'])->name('housekeeping.catalogue.pages.edit');
+            Route::post('/pages/save', [CatalogueController::class, 'catalogPageSave'])->name('housekeeping.catalogue.pages.save');
 
-            Route::get('/items/{id?}', [CatalogueController::class, 'catalogItems'])->name('admin.catalogue.items');
-            Route::get('/items/edit/{id}', [CatalogueController::class, 'catalogItemsEdit'])->name('admin.catalogue.items.edit');
-            Route::post('/items/save', [CatalogueController::class, 'catalogItemsSave'])->name('admin.catalogue.items.save');
+            Route::get('/items/{id?}', [CatalogueController::class, 'catalogItems'])->name('housekeeping.catalogue.items');
+            Route::get('/items/edit/{id}', [CatalogueController::class, 'catalogItemsEdit'])->name('housekeeping.catalogue.items.edit');
+            Route::post('/items/save', [CatalogueController::class, 'catalogItemsSave'])->name('housekeeping.catalogue.items.save');
 
-            Route::get('/furni/edit/{id}', [CatalogueController::class, 'catalogFurniEdit'])->name('admin.catalogue.furni.edit');
-            Route::post('/furni/save', [CatalogueController::class, 'catalogFurniSave'])->name('admin.catalogue.furni.save');
+            Route::get('/furni/edit/{id}', [CatalogueController::class, 'catalogFurniEdit'])->name('housekeeping.catalogue.furni.edit');
+            Route::post('/furni/save', [CatalogueController::class, 'catalogFurniSave'])->name('housekeeping.catalogue.furni.save');
 
 
-            Route::post('/furni/search', [CatalogueController::class, 'furniSearch'])->name('admin.catalogue.furni.search');
+            Route::post('/furni/search', [CatalogueController::class, 'furniSearch'])->name('housekeeping.catalogue.furni.search');
 
-            Route::get('/furni/clothing', [CatalogueController::class, 'clothing'])->name('admin.catalogue.clothing');
-            Route::post('/furni/clothing', [CatalogueController::class, 'clothingFix'])->name('admin.catalogue.clothing.fix');
+            Route::get('/furni/clothing', [CatalogueController::class, 'clothing'])->name('housekeeping.catalogue.clothing');
+            Route::post('/furni/clothing', [CatalogueController::class, 'clothingFix'])->name('housekeeping.catalogue.clothing.fix');
 
-            Route::get('/furni/missing', [CatalogueController::class, 'missingFurni'])->name('admin.catalogue.furni.missing');
-            Route::post('/furni/missing', [CatalogueController::class, 'missingFurniChecker'])->name('admin.catalogue.furni.missing.check');
+            Route::get('/furni/missing', [CatalogueController::class, 'missingFurni'])->name('housekeeping.catalogue.furni.missing');
+            Route::post('/furni/missing', [CatalogueController::class, 'missingFurniChecker'])->name('housekeeping.catalogue.furni.missing.check');
 
-            Route::get('/crafting', [CatalogueController::class, 'crafting'])->name('admin.catalogue.crafting');
-            Route::get('/crafting/{altar}', [CatalogueController::class, 'showRecipes'])->name('admin.catalogue.crafting.recipes');
-            Route::get('/crafting/recipe/{id}', [CatalogueController::class, 'showRecipe'])->name('admin.catalogue.crafting.recipe');
-            Route::get('/crafting/{altar}/add', [CatalogueController::class, 'addCrafting'])->name('admin.catalogue.crafting.recipe.add');
-            Route::post('/crafting/save', [CatalogueController::class, 'saveCrafting'])->name('admin.catalogue.crafting.recipe.save');
-            Route::post('/crafting/reward/select', [CatalogueController::class, 'rewardSelect'])->name('admin.catalogue.crafting.reward.select');
+            Route::get('/crafting', [CatalogueController::class, 'crafting'])->name('housekeeping.catalogue.crafting');
+            Route::get('/crafting/{altar}', [CatalogueController::class, 'showRecipes'])->name('housekeeping.catalogue.crafting.recipes');
+            Route::get('/crafting/recipe/{id}', [CatalogueController::class, 'showRecipe'])->name('housekeeping.catalogue.crafting.recipe');
+            Route::get('/crafting/{altar}/add', [CatalogueController::class, 'addCrafting'])->name('housekeeping.catalogue.crafting.recipe.add');
+            Route::post('/crafting/save', [CatalogueController::class, 'saveCrafting'])->name('housekeeping.catalogue.crafting.recipe.save');
+            Route::post('/crafting/reward/select', [CatalogueController::class, 'rewardSelect'])->name('housekeeping.catalogue.crafting.reward.select');
 
-            Route::get('/crackables', [CatalogueController::class, 'crackables'])->name('admin.catalogue.crackables');
-            Route::get('/crackable/{id}', [CatalogueController::class, 'crackables'])->name('admin.catalogue.crackable');
-            Route::get('/crackables/add', [CatalogueController::class, 'crackablesAdd'])->name('admin.catalogue.crackables.add');
+            Route::get('/crackables', [CatalogueController::class, 'crackables'])->name('housekeeping.catalogue.crackables');
+            Route::get('/crackable/{id}', [CatalogueController::class, 'crackables'])->name('housekeeping.catalogue.crackable');
+            Route::get('/crackables/add', [CatalogueController::class, 'crackablesAdd'])->name('housekeeping.catalogue.crackables.add');
         });
 
         Route::prefix('site')->group(function () {
-            Route::get('/', [SiteController::class, 'index'])->name('admin.site');
-            Route::post('/', [SiteController::class, 'siteSave'])->name('admin.site.save');
-            Route::post('/ads', [SiteController::class, 'siteAdsSave'])->name('admin.site.ads.save');
-            Route::get('/maintenance', [SiteController::class, 'maintenance'])->name('admin.site.maintenance');
-            Route::post('/maintenance', [SiteController::class, 'maintenanceSave'])->name('admin.site.maintenance.save');
-            Route::get('/loader', [SiteController::class, 'loader'])->name('admin.site.loader');
-            Route::post('/loader', [SiteController::class, 'loaderSave'])->name('admin.site.loader.save');
+            Route::get('/', [SiteController::class, 'index'])->name('housekeeping.site');
+            Route::post('/', [SiteController::class, 'siteSave'])->name('housekeeping.site.save');
+            Route::get('/ads', [SiteController::class, 'siteAds'])->name('housekeeping.site.ads');
+            Route::post('/ads', [SiteController::class, 'siteAdsSave'])->name('housekeeping.site.ads.save');
+            Route::post('/tracking', [SiteController::class, 'siteTrackingSave'])->name('housekeeping.site.tracking.save');
+
+            Route::get('/maintenance', [SiteController::class, 'maintenance'])->name('housekeeping.site.maintenance');
+            Route::post('/maintenance', [SiteController::class, 'maintenanceSave'])->name('housekeeping.site.maintenance.save');
+            Route::get('/loader', [SiteController::class, 'loader'])->name('housekeeping.site.loader');
+            Route::post('/loader', [SiteController::class, 'loaderSave'])->name('housekeeping.site.loader.save');
 
             //Maybe in future :v
             //Route::get('/site/collectables', 'welcomemsg')->name('admin.site.collectables');
@@ -400,77 +405,77 @@ Route::middleware('admin')->group(function () {
             //Route::post('/site/faq', 'welcomemsgSave')->name('admin.site.faq.save');
             //Route::get('/site/newsletter', 'welcomemsg')->name('admin.site.newsletter');
             //Route::post('/site/newsletter', 'welcomemsgSave')->name('admin.site.newsletter.save');
-            Route::get('/news_compose', [SiteController::class, 'newsCompose'])->name('admin.site.news_compose');
-            Route::post('/news_compose', [SiteController::class, 'newsComposeSave'])->name('admin.site.news_compose.save');
-            Route::get('/news_manage', [SiteController::class, 'newsManage'])->name('admin.site.news_manage');
-            Route::get('/news_manage/{articleId}', [SiteController::class, 'newsManage'])->name('admin.site.news_manage');
-            Route::post('/news_manage/{articleId}', [SiteController::class, 'newsManageSave'])->name('admin.site.news_manage.save');
-            Route::get('/news_manage/{articleId}/delete', [SiteController::class, 'newsManageDelete'])->name('admin.site.news_manage.delete');
+            Route::get('/news_compose', [SiteController::class, 'newsCompose'])->name('housekeeping.site.news_compose');
+            Route::post('/news_compose', [SiteController::class, 'newsComposeSave'])->name('housekeeping.site.news_compose.save');
+            Route::get('/news_manage', [SiteController::class, 'newsManage'])->name('housekeeping.site.news_manage');
+            Route::get('/news_manage/{articleId}', [SiteController::class, 'newsManage'])->name('housekeeping.site.news_manage');
+            Route::post('/news_manage/{articleId}', [SiteController::class, 'newsManageSave'])->name('housekeeping.site.news_manage.save');
+            Route::get('/news_manage/{articleId}/delete', [SiteController::class, 'newsManageDelete'])->name('housekeeping.site.news_manage.delete');
 
-            Route::get('/box_create', [SiteController::class, 'boxCreate'])->name('admin.site.box_create');
-            Route::post('/box_create', [SiteController::class, 'boxCreateSave'])->name('admin.site.box_create.save');
-            Route::get('/box_edit', [SiteController::class, 'boxEdit'])->name('admin.site.box_edit');
-            Route::get('/box_edit/{boxId}', [SiteController::class, 'boxEdit'])->name('admin.site.box_edit');
-            Route::post('/box_edit/{boxId}', [SiteController::class, 'boxEditSave'])->name('admin.site.box_edit.save');
-            Route::get('/box_delete/{boxId}', [SiteController::class, 'boxDelete'])->name('admin.site.box_delete');
-            Route::get('/box_pages', [SiteController::class, 'boxPages'])->name('admin.site.box_pages');
-            Route::get('/box_pages/new', [SiteController::class, 'boxPagesNew'])->name('admin.site.box_pages.new');
-            Route::post('/box_pages/new', [SiteController::class, 'boxPagesCreate'])->name('admin.site.box_pages.create');
-            Route::get('/box_pages/{boxId}', [SiteController::class, 'boxPages'])->name('admin.site.box_pages');
-            Route::post('/box_pages/{boxId}', [SiteController::class, 'boxPagesSave'])->name('admin.site.box_pages.save');
-            Route::get('/box_pages/{boxId}/delete', [SiteController::class, 'boxPageDelete'])->name('admin.site.box_pages.delete');
+            Route::get('/box_create', [SiteController::class, 'boxCreate'])->name('housekeeping.site.box_create');
+            Route::post('/box_create', [SiteController::class, 'boxCreateSave'])->name('housekeeping.site.box_create.save');
+            Route::get('/box_edit', [SiteController::class, 'boxEdit'])->name('housekeeping.site.box_edit');
+            Route::get('/box_edit/{boxId}', [SiteController::class, 'boxEdit'])->name('housekeeping.site.box_edit');
+            Route::post('/box_edit/{boxId}', [SiteController::class, 'boxEditSave'])->name('housekeeping.site.box_edit.save');
+            Route::get('/box_delete/{boxId}', [SiteController::class, 'boxDelete'])->name('housekeeping.site.box_delete');
+            Route::get('/box_pages', [SiteController::class, 'boxPages'])->name('housekeeping.site.box_pages');
+            Route::get('/box_pages/new', [SiteController::class, 'boxPagesNew'])->name('housekeeping.site.box_pages.new');
+            Route::post('/box_pages/new', [SiteController::class, 'boxPagesCreate'])->name('housekeeping.site.box_pages.create');
+            Route::get('/box_pages/{boxId}', [SiteController::class, 'boxPages'])->name('housekeeping.site.box_pages');
+            Route::post('/box_pages/{boxId}', [SiteController::class, 'boxPagesSave'])->name('housekeeping.site.box_pages.save');
+            Route::get('/box_pages/{boxId}/delete', [SiteController::class, 'boxPageDelete'])->name('housekeeping.site.box_pages.delete');
         });
 
         Route::prefix('solariumcms')->group(function () {
             //SolariumCMS pages
             Route::get('/', function () {
-                return view('admin.solariumcms.index');
-            })->name('admin.solariumcms');
+                return view('housekeeping.solariumcms.index');
+            })->name('housekeeping.solariumcms');
             Route::get('/credits', function () {
-                return view('admin.solariumcms.credits');
-            })->name('admin.solariumcms.credits');
+                return view('housekeeping.solariumcms.credits');
+            })->name('housekeeping.solariumcms.credits');
         });
 
         Route::prefix('users')->group(function () {
             //User Moderation pages
-            Route::get('/', [ModerationController::class, 'index'])->name('admin.users');
-            Route::post('/edit', [ModerationController::class, 'usersEditSearch'])->name('admin.users.edituser.save');
-            Route::get('/edit', [ModerationController::class, 'usersEdit'])->name('admin.users.edituser');
-            Route::get('/edit/{user}', [ModerationController::class, 'usersEdit'])->name('admin.users.edituser');
-            Route::get('/edit/{user}/client', [ModerationController::class, 'usersClient'])->name('admin.users.client');
-            Route::get('/ip', [ModerationController::class, 'usersIp'])->name('admin.users.ip');
-            Route::post('/ip', [ModerationController::class, 'usersIpSearch'])->name('admin.users.ip');
-            Route::get('/search/{value}/ip', [ModerationController::class, 'usersSearch'])->name('admin.users.search.ip');
-            Route::get('/search/{value}/machine', [ModerationController::class, 'usersSearch'])->name('admin.users.search.machine');
-            Route::get('/search/{value}/username', [ModerationController::class, 'usersSearch'])->name('admin.users.search.username');
-            Route::post('/edit/{user}', [ModerationController::class, 'usersEditSave'])->name('admin.users.edituser.save');
-            Route::get('/online', [ModerationController::class, 'usersOnline'])->name('admin.users.online');
+            Route::get('/', [ModerationController::class, 'index'])->name('housekeeping.users');
+            Route::post('/edit', [ModerationController::class, 'usersEditSearch'])->name('housekeeping.users.edituser.save');
+            Route::get('/edit', [ModerationController::class, 'usersEdit'])->name('housekeeping.users.edituser');
+            Route::get('/edit/{user}', [ModerationController::class, 'usersEdit'])->name('housekeeping.users.edituser');
+            Route::get('/edit/{user}/client', [ModerationController::class, 'usersClient'])->name('housekeeping.users.client');
+            Route::get('/ip', [ModerationController::class, 'usersIp'])->name('housekeeping.users.ip');
+            Route::post('/ip', [ModerationController::class, 'usersIpSearch'])->name('housekeeping.users.ip');
+            Route::get('/search/{value}/ip', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.ip');
+            Route::get('/search/{value}/machine', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.machine');
+            Route::get('/search/{value}/username', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.username');
+            Route::post('/edit/{user}', [ModerationController::class, 'usersEditSave'])->name('housekeeping.users.edituser.save');
+            Route::get('/online', [ModerationController::class, 'usersOnline'])->name('housekeeping.users.online');
 
-            Route::get('/badge', [ModerationController::class, 'userBadge'])->name('admin.users.badgetool');
-            Route::post('/badge', [ModerationController::class, 'userGiveBadge'])->name('admin.users.badgetool.give');
-            Route::get('/mass', [ModerationController::class, 'userMass'])->name('admin.users.massstuff');
-            Route::post('/mass/credits', [ModerationController::class, 'userMassCredits'])->name('admin.users.massstuff.credits');
-            Route::post('/mass/points', [ModerationController::class, 'userMassPoints'])->name('admin.users.massstuff.points');
-            Route::post('/mass/badge', [ModerationController::class, 'userMassBadge'])->name('admin.users.massstuff.badge');
-            Route::post('/badge/remove', [ModerationController::class, 'userRemoveBadge'])->name('admin.users.remove.badge');
-            Route::post('/mass/removebadge', [ModerationController::class, 'userMassRemoveBadge'])->name('admin.users.massstuff.removebadge');
+            Route::get('/badge', [ModerationController::class, 'userBadge'])->name('housekeeping.users.badgetool');
+            Route::post('/badge', [ModerationController::class, 'userGiveBadge'])->name('housekeeping.users.badgetool.give');
+            Route::get('/mass', [ModerationController::class, 'userMass'])->name('housekeeping.users.massstuff');
+            Route::post('/mass/credits', [ModerationController::class, 'userMassCredits'])->name('housekeeping.users.massstuff.credits');
+            Route::post('/mass/points', [ModerationController::class, 'userMassPoints'])->name('housekeeping.users.massstuff.points');
+            Route::post('/mass/badge', [ModerationController::class, 'userMassBadge'])->name('housekeeping.users.massstuff.badge');
+            Route::post('/badge/remove', [ModerationController::class, 'userRemoveBadge'])->name('housekeeping.users.remove.badge');
+            Route::post('/mass/removebadge', [ModerationController::class, 'userMassRemoveBadge'])->name('housekeeping.users.massstuff.removebadge');
 
-            Route::get('/editor/guestroom', [ModerationController::class, 'userEditorGuestroom'])->name('admin.users.editor.guestroom');
-            Route::get('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroom'])->name('admin.users.editor.guestroom');
-            Route::post('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroomSave'])->name('admin.users.editor.guestroom.save');
+            Route::get('/editor/guestroom', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');
+            Route::get('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');
+            Route::post('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroomSave'])->name('housekeeping.users.editor.guestroom.save');
         });
 
         Route::prefix('credits')->group(function () {
-            Route::get('/transactions', [ModerationController::class, 'creditsTransactions'])->name('admin.credits.transactions');
-            Route::post('/transactions', [ModerationController::class, 'getCreditsTransactions'])->name('admin.credits.transactions.post');
-            Route::get('/vouchers', [ModerationController::class, 'creditsVoucher'])->name('admin.credits.vouchers');
-            Route::post('/vouchers', [ModerationController::class, 'createCreditsVoucher'])->name('admin.credits.vouchers.post');
+            Route::get('/transactions', [ModerationController::class, 'creditsTransactions'])->name('housekeeping.credits.transactions');
+            Route::post('/transactions', [ModerationController::class, 'getCreditsTransactions'])->name('housekeeping.credits.transactions.post');
+            Route::get('/vouchers', [ModerationController::class, 'creditsVoucher'])->name('housekeeping.credits.vouchers');
+            Route::post('/vouchers', [ModerationController::class, 'createCreditsVoucher'])->name('housekeeping.credits.vouchers.post');
         });
 
         //Route::get('/users/editor/catalogue', 'Admin\CatalogueController@show')->name('admin.users.editor.catalogue');
 
         Route::prefix('help')->group(function () {
-            Route::get('/', [HelpController::class, 'index'])->name('admin.help.index');
+            Route::get('/', [HelpController::class, 'index'])->name('housekeeping.help.index');
         });
     });
 });

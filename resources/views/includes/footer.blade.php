@@ -36,7 +36,7 @@
 <div id="outer-bottom">
     <div id="outer-bottom-content"></div>
 </div>
-@if(cms_config('site.ads.enabled') == '1')
+@if(cms_config('site.ads_footer.enabled'))
 <div id="ad-leader" align="center">
     <div class="ad-scale ad-leader">
         <table>
@@ -51,7 +51,7 @@
                     @if(config('app.debug'))
                     <img src="{{ url('/') }}/web/images/ads/728/{{ mt_rand(1, 5) }}.gif">
                     @else
-                    {!! cms_config('site.ads.footer') !!}
+                    {!! cms_config('site.ads_footer.content') !!}
                     @endif
                 </td>
                 <td class="ad-content-mr"></td>
@@ -69,14 +69,6 @@
 if($('ad-leader').offsetHeight == 0) $('footer-message').style.display = 'block';
 </script>
 @endif
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-39999584-3"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-39999584-3');
-
-</script>
+@if(cms_config('site.tracking.enabled'))
+{{ cms_config('site.tracking.content') }}
+@endif

@@ -1,3 +1,14 @@
+@php
+    $articles = App\Models\Article::where([['is_deleted', '=', '0'], ['publish_date', '<', Carbon\Carbon::now()]])->orderBy('created_at', 'desc')->take(8);
+    if (Auth::check()) {
+        if (user()->hasPermission('can_create_site_news')) {
+            $articles = App\Models\Article::where([['is_deleted', '=', '0']])->orderBy('created_at', 'desc')->take(8);
+        }
+    }
+    $top_stories    = $articles->take(3)->get();
+    $articles       = $articles->skip(3)->take(5)->get();
+@endphp
+
 <script type="text/javascript">
     var promoPages = [
             @foreach($top_stories as $article)

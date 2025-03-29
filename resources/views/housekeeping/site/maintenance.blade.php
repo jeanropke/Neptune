@@ -1,4 +1,4 @@
-@extends('layouts.admin.master', ['menu' => 'site'])
+@extends('layouts.housekeeping.master', ['menu' => 'site'])
 
 @section('title', 'Maintenance Configuration')
 
@@ -7,7 +7,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('layouts.admin.site', ['submenu' => 'maintenance'])
+                @include('housekeeping.site.include.menu', ['submenu' => 'maintenance'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">
@@ -15,7 +15,10 @@
                 @if (session('message'))
                 <p><strong>{{ session('message') }}</strong></p>
                 @endif
-                <form action="{{ route('admin.site.maintenance') }}" method="post" name="theAdminForm"
+                @if ($errors->any())
+                <p><strong>{{ $errors->first() }}</strong></p>
+                @endif
+                <form action="{{ route('housekeeping.site.maintenance') }}" method="post" name="theAdminForm"
                     id="theAdminForm">
                     {{ csrf_field() }}
                     <div class="tableborder">
@@ -27,11 +30,9 @@
                                         page to regular users.</div>
                                 </td>
                                 <td class="tablerow2" width="60%" valign="middle">
-                                    <select name="hotel_maintenance" class="dropdown">
-                                        <option value="1" @if($settings['hotel.maintenance']==1) selected="selected"
-                                            @endif>Site Closed</option>
-                                        <option value="0" @if($settings['hotel.maintenance']==0) selected="selected"
-                                            @endif>Site Open</option>
+                                    <select name="site.maintenance.enabled" class="dropdown">
+                                        <option value="1" {{ cms_config('site.maintenance.enabled') ? 'selected="selected"' : '' }}>Site Closed</option>
+                                        <option value="0" {{ cms_config('site.maintenance.enabled') ? '' : 'selected="selected"' }}>Site Open</option>
                                     </select>
                                 </td>
                             </tr>

@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-
 class HelpController extends Controller
 {
     public function index()
     {
-        return view('help.index')->with([
-            'top_stories' => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->take(3)->get(),
-            'articles'    => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->skip(3)->take(5)->get()
-        ]);
+        return view('help.index');
     }
 
     public function hotelWay() {

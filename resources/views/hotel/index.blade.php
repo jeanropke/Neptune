@@ -48,9 +48,7 @@
                                 @endforeach
                             </td>
                             <td valign="top" style="width: 310px; height: 400px;" class="habboPage-col rightmost">
-                                <div class="ad-scale ad300">
-                                    @include('includes.ad300')
-                                </div>
+                                @include('includes.ad300')
                                 @foreach(boxes('hotel', 3) as $box)
                                 <div class="v3box {{ $box->color }}">
                                     <div class="v3box-top">

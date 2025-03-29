@@ -11,7 +11,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tbody>
                             <tr>
-                                <td valign="top" style="width: 215px; height: 400px;" class="habboPage-col">
+                                <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('credits.furniture.include.menu', ['page' => 'catalogue_4'])
                                     @foreach (boxes('credits.furniture.catalogue_4', 1) as $box)
                                         <div class="v3box {{ $box->color }}">

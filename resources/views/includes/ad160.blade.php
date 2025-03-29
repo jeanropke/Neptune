@@ -1,4 +1,4 @@
-@if(cms_config('site.ads.enabled') == '1')
+@if(cms_config('site.ads_160.enabled'))
 <div class="ad-scale ad160" id="ad160">
     <table>
         <tbody>
@@ -13,7 +13,7 @@
                     @if(config('app.debug'))
                     <img src="{{ url('/') }}/web/images/ads/160/{{ mt_rand(1, 4) }}.gif">
                     @else
-                    {!! cms_config('site.ads.160') !!}
+                    {!! cms_config('site.ads_160.content') !!}
                     @endif
                 </td>
                 <td class="ad-content-mr"></td>

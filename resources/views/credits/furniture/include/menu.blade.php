@@ -92,19 +92,28 @@
             </li>
         @endif
 
-        <li class="@if ($page == 'cameras') active @else inactive @endif">
-            @if ($page == 'cameras')
+        @if ($page == 'cameras')
+            <li class="active">
                 Cameras
-            @else
+            </li>
+        @else
+            <li class="inactive">
                 <a href="{{ url('/') }}/credits/furniture/cameras">Cameras</a>
-            @endif
-        </li>
-        <li class="@if ($page == 'ecotronfaq') active @else inactive @endif">
-            @if ($page == 'ecotronfaq')
+            </li>
+        @endif
+
+        @if ($page == 'ecotronfaq')
+            <li class="active">
                 Ecotron - Furni Recycling
-            @else
+            </li>
+        @else
+            <li class="inactive">
                 <a href="{{ url('/') }}/credits/furniture/ecotronfaq">Ecotron - Furni Recycling</a>
-            @endif
+            </li>
+        @endif
+
+        <li class="inactive">
+            <a href="{{ url('/') }}/hotel/trax">Trax Machine</a>
         </li>
     </ul>
     <div class="clear"></div>

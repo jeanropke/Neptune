@@ -8,8 +8,10 @@ use App\Models\Box;
 use App\Models\BoxPage;
 use App\Models\CmsSetting;
 use App\Models\StaffLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class SiteController extends Controller
@@ -27,27 +29,10 @@ class SiteController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->hasPermission('can_edit_site_settings'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_settings'))
+            return view('housekeeping.accessdenied');
 
-        $settings = [
-            'hotel.name.short'      => CmsSetting::getSetting('hotel.name.short'),
-            'hotel.name.full'       => CmsSetting::getSetting('hotel.name.full'),
-            'hotel.credits.start'   => CmsSetting::getSetting('hotel.credits.start'),
-            'hotel.diamonds.start'  => CmsSetting::getSetting('hotel.diamonds.start'),
-            'hotel.duckets.start'   => CmsSetting::getSetting('hotel.duckets.start'),
-            'site.style.background' => CmsSetting::getSetting('site.style.background'),
-            'site.style.enter'      => CmsSetting::getSetting('site.style.enter'),
-            'site.style.hotelview'  => CmsSetting::getSetting('site.style.hotelview'),
-
-            'site.ads.enabled'      => CmsSetting::getSetting('site.ads.enabled'),
-            'site.ads.160'          => CmsSetting::getSetting('site.ads.160'),
-            'site.ads.300'          => CmsSetting::getSetting('site.ads.300'),
-            'site.ads.footer'       => CmsSetting::getSetting('site.ads.footer')
-        ];
-
-        return view('admin.site.index')->with([
-            'settings'      => $settings,
+        return view('housekeeping.site.index')->with([
             'backgrounds'   => File::allFiles('web/images/bg_patterns'),
             'enterbuttons'  => File::allFiles('web/images/enterbuttons'),
             'hotelviews'    => File::allFiles('web/images/hotelviews')
@@ -56,162 +41,181 @@ class SiteController extends Controller
 
     public function siteSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_settings'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_settings'))
+            return view('housekeeping.accessdenied');
 
-        CmsSetting::where('key', 'hotel.name.short')->first()->update(['value' => $request->shortname]);
-        CmsSetting::where('key', 'hotel.name.full')->first()->update(['value' => $request->sitename]);
-        CmsSetting::where('key', 'hotel.credits.start')->first()->update(['value' => $request->credits]);
-        CmsSetting::where('key', 'hotel.duckets.start')->first()->update(['value' => $request->duckets]);
-        CmsSetting::where('key', 'hotel.diamonds.start')->first()->update(['value' => $request->diamonds]);
-        CmsSetting::where('key', 'site.style.background')->first()->update(['value' => $request->background]);
-        CmsSetting::where('key', 'site.style.enter')->first()->update(['value' => $request->enterbutton]);
-        CmsSetting::where('key', 'site.style.hotelview')->first()->update(['value' => $request->hotelview]);
+        $request->validate([
+            'register_default_credits'  => 'required|numeric',
+            'register_default_film'     => 'required|numeric',
+            'register_default_tickets'  => 'required|numeric'
+        ]);
+
+        set_cms_config('hotel.name.full', $request->hotel_name_full);
+        set_cms_config('hotel.name.short', $request->hotel_name_short);
+        set_cms_config('register.default.console_motto', $request->register_default_console_motto);
+        set_cms_config('register.default.credits', $request->register_default_credits);
+        set_cms_config('register.default.film', $request->register_default_film);
+        set_cms_config('register.default.motto', $request->register_default_motto);
+        set_cms_config('register.default.tickets', $request->register_default_tickets);
+        set_cms_config('site.style.enter', $request->site_style_enter);
+        set_cms_config('site.style.background', $request->site_style_background);
+        set_cms_config('site.style.hotelview', $request->site_style_hotelview);
+
+        DB::statement("ALTER TABLE users ALTER COLUMN credits SET DEFAULT '{$request->register_default_credits}'");
+        DB::statement("ALTER TABLE users ALTER COLUMN film SET DEFAULT '{$request->register_default_film}'");
+        DB::statement("ALTER TABLE users ALTER COLUMN tickets SET DEFAULT '{$request->register_default_tickets}'");
+        DB::statement("ALTER TABLE users ALTER COLUMN console_motto SET DEFAULT '{$request->register_default_console_motto}'");
+        DB::statement("ALTER TABLE users ALTER COLUMN motto SET DEFAULT '{$request->register_default_motto}'");
 
         unset($request['_token']);
-        $message = Auth::user()->username . ' changed \'site\' values to ' . json_encode($request->post());
-        StaffLog::createLog('site', $message);
-        return redirect()->route('admin.site')->with('message',  'Site settings updated!');
+        StaffLog::createLog('site', json_encode($request->post()));
+        return redirect()->route('housekeeping.site')->with('message', 'Site settings updated!');
+    }
+
+    public function siteAds()
+    {
+        if (!user()->hasPermission('can_edit_site_ads'))
+            return view('housekeeping.accessdenied');
+
+        return view('housekeeping.site.ads');
     }
 
     public function siteAdsSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_settings'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_ads'))
+            return view('housekeeping.accessdenied');
 
-
-        CmsSetting::where('key', 'site.ads.enabled')->first()->update(['value' => $request->ads_enabled]);
-        CmsSetting::where('key', 'site.ads.160')->first()->update(['value' => $request->ads_160.'']);
-        CmsSetting::where('key', 'site.ads.300')->first()->update(['value' => $request->ads_300.'']);
-        CmsSetting::where('key', 'site.ads.footer')->first()->update(['value' => $request->ads_footer.'']);
+        set_cms_config('site.ads_160.enabled', $request->site_ads_160_enabled);
+        set_cms_config('site.ads_160.content', $request->site_ads_160_content);
+        set_cms_config('site.ads_300.enabled', $request->site_ads_300_enabled);
+        set_cms_config('site.ads_300.content', $request->site_ads_300_content);
+        set_cms_config('site.ads_footer.enabled', $request->site_ads_footer_enabled);
+        set_cms_config('site.ads_footer.content', $request->site_ads_footer_content);
 
         unset($request['_token']);
-        $message = Auth::user()->username . ' changed \'ads\' values to ' . json_encode($request->post());
-        StaffLog::createLog('site', $message);
-        return redirect()->route('admin.site')->with('message',  'Ads settings updated!');
+        StaffLog::createLog('site.ads', json_encode($request->post()));
+        return redirect()->route('housekeeping.site.ads')->with('message', 'Settings updated!');
+    }
+
+    public function siteTrackingSave(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_site_ads'))
+            return view('housekeeping.accessdenied');
+
+        set_cms_config('site.tracking.enabled', $request->site_tracking_enabled);
+        set_cms_config('site.tracking.content', $request->site_tracking_content);
+
+        unset($request['_token']);
+        StaffLog::createLog('site.tracking', json_encode($request->post()));
+        return redirect()->route('housekeeping.site.ads')->with('message', 'Settings updated!');
     }
 
     public function maintenance()
     {
-        if (!Auth::user()->hasPermission('can_edit_site_maintenance'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_maintenance'))
+            return view('housekeeping.accessdenied');
 
-        $settings = [
-            'hotel.maintenance' => CmsSetting::getSetting('hotel.maintenance')
-        ];
-
-        return view('admin.site.maintenance')->with([
-            'settings'  => $settings
-        ]);
+        return view('housekeeping.site.maintenance');
     }
 
     public function maintenanceSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_maintenance'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_maintenance'))
+            return view('housekeeping.accessdenied');
 
-        CmsSetting::where('key', 'hotel.maintenance')->first()->update(['value' => $request->hotel_maintenance]);
+        $request->validate([
+            'site_maintenance_enabled' => 'required|boolean'
+        ]);
+
+        set_cms_config('site.maintenance.enabled', $request->site_maintenance_enabled);
 
         unset($request['_token']);
-        $message = Auth::user()->username . ' changed \'maintenance\' values to ' . json_encode($request->post());
-        StaffLog::createLog('maintenance', $message);
-        return redirect()->route('admin.site.maintenance')->with('message',  'Maintenance settings updated!');
+        StaffLog::createLog('site.maintenance', json_encode($request->post()));
+        return redirect()->route('housekeeping.site.maintenance')->with('message', 'Maintenance settings updated!');
     }
 
     public function loader()
     {
-        if (!Auth::user()->hasPermission('can_edit_site_loader'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_loader'))
+            return view('housekeeping.accessdenied');
 
-        $settings = [
-            'client.external.texts'             => CmsSetting::getSetting('client.external.texts'),
-            'client.external.texts.override'    => CmsSetting::getSetting('client.external.texts.override'),
-            'client.external.vars'              => CmsSetting::getSetting('client.external.vars'),
-            'client.external.vars.override'     => CmsSetting::getSetting('client.external.vars.override'),
-            'client.swf.file'                   => CmsSetting::getSetting('client.swf.file'),
-            'client.swf.folder'                 => CmsSetting::getSetting('client.swf.folder'),
-            'client.gamedata.prefix'            => CmsSetting::getSetting('client.gamedata.prefix'),
-        ];
-
-        return view('admin.site.loader')->with([
-            'settings'  => $settings
-        ]);
+        return view('housekeeping.site.loader');
     }
 
     public function loaderSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_loader'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_loader'))
+            return view('housekeeping.accessdenied');
 
-        CmsSetting::where('key', 'client.external.texts')->first()->update(['value' => $request->texts]);
-        CmsSetting::where('key', 'client.external.texts.override')->first()->update(['value' => $request->texts_override]);
-        CmsSetting::where('key', 'client.external.vars')->first()->update(['value' => $request->vars]);
-        CmsSetting::where('key', 'client.external.vars.override')->first()->update(['value' => $request->vars_override]);
-        CmsSetting::where('key', 'client.swf.file')->first()->update(['value' => $request->swf_file]);
-        CmsSetting::where('key', 'client.swf.folder')->first()->update(['value' => $request->swf_folder]);
-        CmsSetting::where('key', 'client.gamedata.prefix')->first()->update(['value' => $request->gamedata_prefix]);
+        $request->validate([
+            'external_texts_txt'        => 'required',
+            'external_variables_txt'    => 'required',
+            'habbo_dcr_url'             => 'required'
+        ]);
+
+        set_cms_config('external.texts.txt', $request->external_texts_txt);
+        set_cms_config('external.variables.txt', $request->external_variables_txt);
+        set_cms_config('habbo.dcr.url', $request->habbo_dcr_url);
 
         unset($request['_token']);
-        $message = Auth::user()->username . ' changed \'loader\' values to ' . json_encode($request->post());
-        StaffLog::createLog('loader', $message);
-        return redirect()->route('admin.site.loader')->with('message',  'Loader settings updated!');
+        StaffLog::createLog('loader', json_encode($request->post()));
+        return redirect()->route('housekeeping.site.loader')->with('message', 'Loader settings updated!');
     }
 
     public function newsCompose()
     {
-        if (!Auth::user()->hasPermission('can_create_site_news'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_news'))
+            return view('housekeeping.accessdenied');
 
-        return view('admin.site.news_compose')->with([
+        return view('housekeeping.site.news_compose')->with([
             'ts_images' => File::allFiles('web/images/top_story_images')
         ]);
     }
 
     public function newsComposeSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_create_site_news'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_news'))
+            return view('housekeeping.accessdenied');
 
         $request->validate([
-            'title'         => 'required|max:55',
-            'topstory'      => 'required|max:125',
-            'short_story'   => 'required|max:255',
-            'story'         => 'required',
-            'author'        => 'required|max:55',
+            'title'             => 'required|max:255',
+            'topstory'          => 'required|max:255',
+            'short_text'        => 'required|max:255',
+            'long_text'         => 'required'
         ]);
-
 
         $article = Article::create([
-            'title'      => $request->title,
-            'image'      => $request->topstory,
-            'short_text' => $request->short_story,
-            'long_text'  => $request->story,
-            'author'     => $request->author
+            'title'             => $request->title,
+            'image'             => $request->topstory,
+            'short_text'        => $request->short_text,
+            'long_text'         => $request->long_text,
+            'author_id'         => user()->id,
+            'author_override'   => $request->author_override,
+            'publish_date'      => Carbon::parse($request->publish_date)
         ]);
-
 
         $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
         $url = str_replace(" ", "_", $url);
         $url = strtolower($url);
 
         $article->update([
-            'url'       => $article->id . '_' . $url
+            'url' => $article->id . '_' . $url
         ]);
 
-        $message = Auth::user()->username . ' created an article called \'' . $request->title . '\'';
-        StaffLog::createLog('article', $message);
+        unset($request['_token']);
+        StaffLog::createLog('site.news_compose', json_encode($request->post()));
 
-        return redirect()->route('admin.site.news_compose')->with('message',  'Article created!');
+        return redirect()->route('housekeeping.site.news_compose')->with('message', 'Article created!');
     }
 
     public function newsManage($articleId = null)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_news'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_news'))
+            return view('housekeeping.accessdenied');
 
 
-        return view('admin.site.news_manage')->with([
-            'articles'  => Article::where('is_deleted', Auth::user()->hasPermission('can_restore_site_news') ? '>=' : '=', '0')->orderBy('created_at', 'desc')->paginate(15),
+        return view('housekeeping.site.news_manage')->with([
+            'articles'  => Article::where('is_deleted', user()->hasPermission('can_restore_site_news') ? '>=' : '=', '0')->orderBy('created_at', 'desc')->paginate(15),
             'article'   => Article::find($articleId),
             'ts_images' => File::allFiles('web/images/top_story_images')
         ]);
@@ -219,8 +223,8 @@ class SiteController extends Controller
 
     public function newsManageSave(Request $request, $articleId)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_news'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_news'))
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'title'         => 'required|max:55',
@@ -229,7 +233,7 @@ class SiteController extends Controller
             'story'         => 'required'
         ]);
 
-        $article = Article::where('id', $articleId)->first();
+        $article = Article::find($articleId);
 
         $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
         $url = str_replace(" ", "_", $url);
@@ -244,38 +248,37 @@ class SiteController extends Controller
             'is_deleted'    => $request->deleted ?? 0
         ]);
 
-        $message = Auth::user()->username . ' edited an article called \'' . $request->title . '\'';
-        StaffLog::createLog('article', $message);
+        unset($request['_token']);
+        StaffLog::createLog('site.news_edit', json_encode($request->post()));
 
-        return redirect()->route('admin.site.news_manage', $articleId)->with('message',  'Article edited!');
+        return redirect()->route('housekeeping.site.news_manage', $articleId)->with('message', 'Article edited!');
     }
 
     public function newsManageDelete($articleId)
     {
-        if (!Auth::user()->hasPermission('can_delete_site_news'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_news'))
+            return view('housekeeping.accessdenied');
 
         $article = Article::find($articleId);
         $article->update(['is_deleted' => '1']);
 
-        $message = Auth::user()->username . ' deleted an article called \'' . $article . '\'';
-        StaffLog::createLog('article', $message);
+        StaffLog::createLog('site.news_delete', '{"id":"{'.$articleId.'}"');
 
-        return redirect()->route('admin.site.news_manage', false)->with('message',  'Article deleted!');
+        return redirect()->route('housekeeping.site.news_manage', false)->with('message',  'Article deleted!');
     }
 
     public function boxCreate()
     {
-        if (!Auth::user()->hasPermission('can_create_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_box'))
+            return view('housekeeping.accessdenied');
 
-        return view('admin.site.box_create');
+        return view('housekeeping.site.box_create');
     }
 
     public function boxCreateSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_create_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_box'))
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'title'         => 'required|max:125',
@@ -286,23 +289,23 @@ class SiteController extends Controller
             'title'         => $request->title,
             'content'       => $request->content,
             'column'        => $request->column,
-            'created_by'    => Auth::user()->id,
+            'created_by'    => user()->id,
         ]);
 
-        $message = Auth::user()->username . ' created a box with title \'' . $request->title . '\'';
+        $message = user()->username . ' created a box with title \'' . $request->title . '\'';
         StaffLog::createLog('box', $message);
 
-        return redirect()->route('admin.site.box_create')->with('message',  'Box created!');
+        return redirect()->route('housekeeping.site.box_create')->with('message',  'Box created!');
     }
 
     public function boxDelete($boxId = null)
     {
-        if (!Auth::user()->hasPermission('can_delete_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_delete_site_box'))
+            return view('housekeeping.accessdenied');
 
         $box = Box::find($boxId);
 
-        $message = Auth::user()->username . ' deleted a box ' . json_encode($box);
+        $message = user()->username . ' deleted a box ' . json_encode($box);
         $box->delete();
 
         StaffLog::createLog('box', $message);
@@ -314,10 +317,10 @@ class SiteController extends Controller
 
     public function boxEdit($boxId = null)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_box'))
+            return view('housekeeping.accessdenied');
 
-        return view('admin.site.box_edit')->with([
+        return view('housekeeping.site.box_edit')->with([
             'boxes' => Box::paginate(15),
             'box'   => Box::where('id', $boxId)->first()
         ]);
@@ -325,8 +328,8 @@ class SiteController extends Controller
 
     public function boxEditSave(Request $request, $boxId)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_box'))
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'title'           => 'required|max:125',
@@ -340,18 +343,18 @@ class SiteController extends Controller
             'content'       => $request->content
         ]);
 
-        $message = Auth::user()->username . ' edited a box with title \'' . $request->title . '\'';
+        $message = user()->username . ' edited a box with title \'' . $request->title . '\'';
         StaffLog::createLog('box', $message);
 
-        return redirect()->route('admin.site.box_edit', $boxId)->with('message',  'Box edited!');
+        return redirect()->route('housekeeping.site.box_edit', $boxId)->with('message',  'Box edited!');
     }
 
     public function boxPages($boxId = null)
     {
-        if (!Auth::user()->hasPermission('can_create_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_box'))
+            return view('housekeeping.accessdenied');
 
-        return view('admin.site.box_pages')->with([
+        return view('housekeeping.site.box_pages')->with([
             'boxpages'  => BoxPage::paginate(15),
             'box'       => BoxPage::find($boxId),
             'boxes'     => Box::all(),
@@ -361,10 +364,10 @@ class SiteController extends Controller
 
     public function boxPagesNew()
     {
-        if (!Auth::user()->hasPermission('can_create_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_create_site_box'))
+            return view('housekeeping.accessdenied');
 
-        return view('admin.site.box_pages')->with([
+        return view('housekeeping.site.box_pages')->with([
             'boxpages'  => BoxPage::all(),
             'boxes'     => Box::all(),
             'box'       => 'new',
@@ -374,8 +377,8 @@ class SiteController extends Controller
 
     public function boxPagesCreate(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_box'))
+            return view('housekeeping.accessdenied');
 
         $boxpage = BoxPage::create([
             'box_id'   => $request->box_id,
@@ -384,16 +387,16 @@ class SiteController extends Controller
             'color'    => $request->override_color
         ]);
 
-        $message = Auth::user()->username . ' created a box page with id \'' . $boxpage->id . '\'';
+        $message = user()->username . ' created a box page with id \'' . $boxpage->id . '\'';
         StaffLog::createLog('box_pages', $message);
 
-        return redirect()->route('admin.site.box_pages', false)->with('message',  'Box Page created!');
+        return redirect()->route('housekeeping.site.box_pages', false)->with('message',  'Box Page created!');
     }
 
     public function boxPagesSave($boxId, Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_edit_site_box'))
+            return view('housekeeping.accessdenied');
 
         $box = BoxPage::find($boxId);
 
@@ -404,20 +407,20 @@ class SiteController extends Controller
             'color'     => $request->override_color
         ]);
 
-        $message = Auth::user()->username . ' edited a box page with id \'' . $request->box_id . '\'';
+        $message = user()->username . ' edited a box page with id \'' . $request->box_id . '\'';
         StaffLog::createLog('box_pages', $message);
 
-        return redirect()->route('admin.site.box_pages', $boxId)->with('message',  'Box Page edited!');
+        return redirect()->route('housekeeping.site.box_pages', $boxId)->with('message',  'Box Page edited!');
     }
 
     public function boxPageDelete($boxId)
     {
-        if (!Auth::user()->hasPermission('can_delete_site_box'))
-            return view('admin.accessdenied');
+        if (!user()->hasPermission('can_delete_site_box'))
+            return view('housekeeping.accessdenied');
 
         $box = BoxPage::find($boxId);
 
-        $message = Auth::user()->username . ' deleted a box page ' . json_encode($box);
+        $message = user()->username . ' deleted a box page ' . json_encode($box);
         $box->delete();
 
         StaffLog::createLog('box', $message);

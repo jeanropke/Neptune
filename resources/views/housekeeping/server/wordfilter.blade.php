@@ -1,4 +1,4 @@
-@extends('layouts.admin.master', ['menu' => 'server'])
+@extends('layouts.housekeeping.master', ['menu' => 'server'])
 
 @section('title', 'Wordfilter Options')
 
@@ -7,7 +7,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('layouts.admin.server', ['submenu' => 'wordfilter'])
+                @include('layouts.housekeeping.server', ['submenu' => 'wordfilter'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">
@@ -17,7 +17,7 @@
                 @endif
 
                 @if($word)
-                <form action="{{ route('admin.server.wordfilter_edit.save', $word->key) }}" method="post"
+                <form action="{{ route('housekeeping.server.wordfilter_edit.save', $word->key) }}" method="post"
                     name="theAdminForm" id="theAdminForm">
                     {{ csrf_field() }}
                     <div class="tableborder">
@@ -88,7 +88,7 @@
                     </div>
                 </form>
                 @else
-                <form action="{{ route('admin.server.wordfilter.save') }}" method="post" name="theAdminForm"
+                <form action="{{ route('housekeeping.server.wordfilter.save') }}" method="post" name="theAdminForm"
                     id="theAdminForm">
                     {{ csrf_field() }}
                     <div class="tableborder">
@@ -155,10 +155,10 @@
                                 {{ $w->mute ? 'yes' : 'no'  }}
                             </td>
                             <td class="tablerow2" align="center"><a
-                                    href="{{ route('admin.server.wordfilter.edit', $w->key) }}"><img
+                                    href="{{ route('housekeeping.server.wordfilter.edit', $w->key) }}"><img
                                         src="{{ url('/') }}/web/admin/images/edit.gif" alt="Edit"></a></td>
                             <td class="tablerow2" align="center"><a
-                                    href="{{ route('admin.server.wordfilter.delete', $w->key) }}"><img
+                                    href="{{ route('housekeeping.server.wordfilter.delete', $w->key) }}"><img
                                         src="{{ url('/') }}/web/admin/images/delete.gif" alt="Delete"></a></td>
                         </tr>
                         @empty
@@ -169,7 +169,7 @@
                     </table>
                     <div class="tablefooter" align="center">
                         <div class="fauxbutton-wrapper"><span class="fauxbutton"><a
-                                    href="{{ route('admin.server.wordfilter.add') }}">Add New Word</a></span></div>
+                                    href="{{ route('housekeeping.server.wordfilter.add') }}">Add New Word</a></span></div>
                     </div>
                 </div>
             </div>

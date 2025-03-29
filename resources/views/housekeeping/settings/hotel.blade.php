@@ -27,7 +27,6 @@
                                 {{ session()->get('message') }}
                             </div>
                         @endif
-
                         <div class="settings">
                             <form name="settings" action="{{ url('/') }}/housekeeping/settings/hotel" method="POST" autocomplete="off">
                                 @csrf

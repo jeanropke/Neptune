@@ -19,12 +19,26 @@ function cms_config($key)
     return "Value {$key} not found";
 }
 
+function set_cms_config($key, $value)
+{
+    $setting = CmsSetting::where('key', $key)->first();
+    if (!$setting) return;
+    $setting->update(['value' => $value]);
+}
+
 function emu_config($key)
 {
     $setting = EmuSetting::where('setting', $key)->first();
     if ($setting)
         return $setting->value;
     return "Value {$key} not found";
+}
+
+function set_emu_config($key, $value)
+{
+    $setting = EmuSetting::where('setting', $key)->first();
+    if(!$setting) return;
+    $setting->update(['value' => $value]);
 }
 
 function get_cata_item($sale) {

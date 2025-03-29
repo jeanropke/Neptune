@@ -1,4 +1,4 @@
-@extends('layouts.admin.master', ['menu' => 'site'])
+@extends('layouts.housekeeping.master', ['menu' => 'site'])
 
 @section('title', 'Manage Existing Articles')
 
@@ -7,7 +7,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('layouts.admin.site', ['submenu' => 'news_manage'])
+                @include('housekeeping.site.include.menu', ['submenu' => 'news_manage'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">
@@ -59,7 +59,7 @@
                 <p><strong>{{ $errors->first() }}</strong></p>
                 @endif
 
-                <form action="{{ route('admin.site.news_manage.save', $article->id) }}" method="post"
+                <form action="{{ route('housekeeping.site.news_manage.save', $article->id) }}" method="post"
                     name="theAdminForm" id="theAdminForm">
                     {{ csrf_field() }}
                     <div class="tableborder">
@@ -112,14 +112,13 @@
                                         class="multitext">{!!  $article->long_text  !!}</textarea>
                                 </td>
                             </tr>
-                            @if($article->is_deleted && Auth::user()->hasPermission('can_restore_site_news'))
+                            @if($article->is_deleted && user()->hasPermission('can_restore_site_news'))
                             <tr>
                                 <td class="tablerow1" width="40%" valign="middle"><b>Restore</b>
                                     <div class="graytext">This article is deleted... almost deleted.</div>
                                 </td>
                                 <td class="tablerow2" width="60%" valign="middle">
-                                    <select name="deleted" onchange="changePreviewImage()" id="ts_image"
-                                        class="textinput" style="margin-top: 5px;" size="1">
+                                    <select name="deleted" id="deleted" class="textinput" style="margin-top: 5px;" size="1">
                                         <option value="1" @if($article->is_deleted == 1) selected="selected" @endif>Keep
                                             deleted</option>
                                         <option value="0" @if($article->is_deleted == 0) selected="selected"
@@ -147,7 +146,7 @@
                 <form action="index.php?p=news_manage&do=save" method="post" name="theAdminForm" id="theAdminForm">
                     <div class="tableborder">
                         <div class="tableheaderalt">News Articles</div>
-                        <div style="text-align: center; vertical-align: middle;">{{ $articles->links('layouts.admin.pagination') }}</div>
+                        <div style="text-align: center; vertical-align: middle;">{{ $articles->links('layouts.housekeeping.pagination') }}</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="1%" align="center">ID</td>
@@ -176,10 +175,10 @@
                                     {{ $article->author }}
                                 </td>
                                 <td class="tablerow2" align="center"><a
-                                        href="{{ route('admin.site.news_manage', $article->id) }}"><img
+                                        href="{{ route('housekeeping.site.news_manage', $article->id) }}"><img
                                             src="{{ url('/') }}/web/admin/images/edit.gif" alt="Edit"></a></td>
                                 <td class="tablerow2" align="center"><a
-                                        href="{{ route('admin.site.news_manage.delete', $article->id) }}"><img
+                                        href="{{ route('housekeeping.site.news_manage.delete', $article->id) }}"><img
                                             src="{{ url('/') }}/web/admin/images/delete.gif" alt="Delete"></a></td>
                             </tr>
                             @empty
@@ -190,7 +189,7 @@
                         </table>
                         <div class="tablefooter" align="center">
                             <div class="fauxbutton-wrapper"><span class="fauxbutton"><a
-                                        href="{{ route('admin.site.news_compose') }}">Compose New News Item</a></span>
+                                        href="{{ route('housekeeping.site.news_compose') }}">Compose New News Item</a></span>
                             </div>
                         </div>
                     </div>

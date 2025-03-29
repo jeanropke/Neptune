@@ -19,7 +19,7 @@ class CatalogueController extends Controller
 {
     public function index()
     {
-        if (!Auth::user()->hasPermission('can_edit_catalog'))
+        if (!user()->hasPermission('can_edit_catalog'))
             return view('admin.accessdenied');
 
         return view('admin.catalogue.index')->with([
@@ -29,7 +29,7 @@ class CatalogueController extends Controller
 
     public function catalogPageEdit($id)
     {
-        if (!Auth::user()->hasPermission('can_edit_catalog'))
+        if (!user()->hasPermission('can_edit_catalog'))
             return view('admin.accessdenied');
 
         $page = CataloguePage::find($id);
@@ -55,7 +55,7 @@ class CatalogueController extends Controller
 
     public function catalogPageSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_catalog'))
+        if (!user()->hasPermission('can_edit_catalog'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -75,7 +75,7 @@ class CatalogueController extends Controller
 
     public function catalogItems($id = null, Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $page = CataloguePage::find($id);
@@ -98,7 +98,7 @@ class CatalogueController extends Controller
 
     public function catalogItemsEdit($id)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $item = CatalogueItem::find($id);
@@ -113,7 +113,7 @@ class CatalogueController extends Controller
 
     public function catalogItemsSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -142,7 +142,7 @@ class CatalogueController extends Controller
 
     public function catalogFurniEdit($id)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $furni = Furniture::find($id);
@@ -157,7 +157,7 @@ class CatalogueController extends Controller
 
     public function catalogFurniSave(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -189,7 +189,7 @@ class CatalogueController extends Controller
 
     public function clothing()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         return view('admin.catalogue.furni.clothing')->with([
@@ -200,7 +200,7 @@ class CatalogueController extends Controller
 
     public function clothingFix()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $clothingData = DB::table('catalog_clothing')->get();
@@ -220,7 +220,7 @@ class CatalogueController extends Controller
 
     public function missingFurni()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         return view('admin.catalogue.furni.missing');
@@ -228,7 +228,7 @@ class CatalogueController extends Controller
 
     public function missingFurniChecker()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $url = 'https://www.habbo.com/gamedata/furnidata_xml/60ee4a6063559330ac98bb908a79c596b4cd474b';
@@ -262,7 +262,7 @@ class CatalogueController extends Controller
 
     public function furniSearch(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         if (strlen($request->furni) <= 2)
@@ -275,7 +275,7 @@ class CatalogueController extends Controller
 
     public function crafting()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $altars = CraftingAltar::distinct()->get(['altar_id']);
@@ -284,7 +284,7 @@ class CatalogueController extends Controller
 
     public function showRecipes($altarId)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $recipes = CraftingAltar::where('altar_id', $altarId)->get();
@@ -294,7 +294,7 @@ class CatalogueController extends Controller
 
     public function showRecipe($recipeId)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $recipe = CraftingRecipe::find($recipeId);
@@ -304,7 +304,7 @@ class CatalogueController extends Controller
 
     public function addCrafting($altarId)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $altar = CraftingAltar::where('altar_id', $altarId)->first();
@@ -314,7 +314,7 @@ class CatalogueController extends Controller
 
     public function rewardSelect(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         return view('admin.catalogue.crafting.furni_select')->with('slot', $request->slot);
@@ -322,7 +322,7 @@ class CatalogueController extends Controller
 
     public function saveCrafting(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $reward = Furniture::find($request->result);
@@ -358,7 +358,7 @@ class CatalogueController extends Controller
 
     public function crackables()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $crackables = Crackable::orderBy('item_name')->get();
@@ -367,7 +367,7 @@ class CatalogueController extends Controller
 
     public function crackablesAdd()
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         return view('admin.catalogue.crackables.add');
@@ -375,7 +375,7 @@ class CatalogueController extends Controller
 
     public function getCatalogByTabId(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_furni'))
+        if (!user()->hasPermission('can_edit_furni'))
             return view('admin.accessdenied');
 
         $tab = $request->tab;

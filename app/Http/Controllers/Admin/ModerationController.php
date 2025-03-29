@@ -18,7 +18,7 @@ class ModerationController extends Controller
 {
     public function index()
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         return view('admin.users.index')->with([
@@ -28,7 +28,7 @@ class ModerationController extends Controller
 
     public function usersEdit($userId = null)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         return view('admin.users.edituser')->with([
@@ -38,7 +38,7 @@ class ModerationController extends Controller
 
     public function usersClient($user)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         $user = User::find($user);
@@ -46,7 +46,7 @@ class ModerationController extends Controller
         if (!$user)
             return redirect()->back();
 
-        if ($user->rank >= Auth::user()->rank && Auth::user()->id != 1)
+        if ($user->rank >= user()->rank && user()->id != 1)
             return redirect()->back();
 
         return view('admin.users.client')->with([
@@ -56,7 +56,7 @@ class ModerationController extends Controller
 
     public function usersEditSave(Request $request, $userId)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -81,7 +81,7 @@ class ModerationController extends Controller
         ]);
 
         unset($request['_token']);
-        $message = Auth::user()->username . ' changed \'user\' values to ' . json_encode($request->post());
+        $message = user()->username . ' changed \'user\' values to ' . json_encode($request->post());
         StaffLog::createLog('user_edit', $message);
 
         return redirect()->route('admin.users.edituser', $userId)->with('message', 'User changed!');
@@ -89,7 +89,7 @@ class ModerationController extends Controller
 
     public function usersEditSearch(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -103,7 +103,7 @@ class ModerationController extends Controller
 
     public function usersIp()
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         return view('admin.users.searchip');
@@ -111,7 +111,7 @@ class ModerationController extends Controller
 
     public function usersIpSearch(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -125,7 +125,7 @@ class ModerationController extends Controller
 
     public function usersSearch($value)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         return view('admin.users.index')->with([
@@ -135,7 +135,7 @@ class ModerationController extends Controller
 
     public function userBadge()
     {
-        if (!Auth::user()->hasPermission('can_give_users_badge'))
+        if (!user()->hasPermission('can_give_users_badge'))
             return view('admin.accessdenied');
 
         return view('admin.users.badge');
@@ -143,7 +143,7 @@ class ModerationController extends Controller
 
     public function userGiveBadge(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_users'))
+        if (!user()->hasPermission('can_edit_users'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -161,7 +161,7 @@ class ModerationController extends Controller
         if ($badge)
             return redirect()->route('admin.users.badgetool')->withErrors([$request->username . ' already owns ' . $request->badge]);
 
-        $message = Auth::user()->username . ' given \'' . $request->badge . '\' to \'' . $request->username . '\'';
+        $message = user()->username . ' given \'' . $request->badge . '\' to \'' . $request->username . '\'';
         StaffLog::createLog('givebadge', $message);
 
         if ($user->isOnline()) {
@@ -177,7 +177,7 @@ class ModerationController extends Controller
 
     public function userRemoveBadge(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -195,12 +195,12 @@ class ModerationController extends Controller
             return redirect()->route('admin.users.badgetool')->withErrors(['Badge not found in this user!']);
 
         if ($user->isOnline()) {
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':takebadge ' . $request->username . ' ' . $request->code]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':takebadge ' . $request->username . ' ' . $request->code]);
         } else {
             $badge->delete();
         }
 
-        $message = Auth::user()->username . ' removed badge \'' . $request->code . '\' from \'' . $request->username . '\'';
+        $message = user()->username . ' removed badge \'' . $request->code . '\' from \'' . $request->username . '\'';
         StaffLog::createLog('badgetool', $message);
 
         return redirect()->route('admin.users.badgetool')->with('message', 'Removed badge \'' . $request->code . '\' from \'' . $request->username . '\'');
@@ -208,7 +208,7 @@ class ModerationController extends Controller
 
     public function userMass()
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         return view('admin.users.mass');
@@ -216,7 +216,7 @@ class ModerationController extends Controller
 
     public function userMassCredits(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -225,7 +225,7 @@ class ModerationController extends Controller
 
         $count = 0;
         if ($request->online == 1) {
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':masscredits ' . $request->credits]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':masscredits ' . $request->credits]);
             $count = User::where('online', '1')->count();
         } else {
             $users = User::select(['id', 'credits'])->where('online', '0')->get();
@@ -234,11 +234,11 @@ class ModerationController extends Controller
                 $user->increment('credits', $request->credits);
             }
             //Give credits only for online users
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':masscredits ' . $request->credits]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':masscredits ' . $request->credits]);
             $count = User::count();
         }
 
-        $message = Auth::user()->username . ' given \'' . $request->credits . '\' credits to \'' . $count . '\' users';
+        $message = user()->username . ' given \'' . $request->credits . '\' credits to \'' . $count . '\' users';
         StaffLog::createLog('masscredits', $message);
 
         return redirect()->route('admin.users.massstuff')->with('message', 'Given \'' . $request->credits . '\' credits to \'' . $count . '\' users!');
@@ -246,7 +246,7 @@ class ModerationController extends Controller
 
     public function userMassPoints(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -255,7 +255,7 @@ class ModerationController extends Controller
 
         $count = 0;
         if ($request->online == 1) {
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':masspoints ' . $request->points . ' ' . $request->type]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':masspoints ' . $request->points . ' ' . $request->type]);
             $count = User::where('online', '1')->count();
         } else {
             $users = User::select(['id'])->where('online', '0')->get();
@@ -264,11 +264,11 @@ class ModerationController extends Controller
                 $user->setPoints($request->points, $request->type);
             }
             //Give points only for online users
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':masspoints ' . $request->points . ' ' . $request->type]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':masspoints ' . $request->points . ' ' . $request->type]);
             $count = User::count();
         }
 
-        $message = Auth::user()->username . ' given \'' . $request->points . '\' points of type ' . $request->type . ' to \'' . $count . '\' users';
+        $message = user()->username . ' given \'' . $request->points . '\' points of type ' . $request->type . ' to \'' . $count . '\' users';
         StaffLog::createLog('masspoints', $message);
 
         return redirect()->route('admin.users.massstuff')->with('message', 'Given \'' . $request->points . '\' points of type ' . $request->type . ' to \'' . $count . '\' users!');
@@ -276,7 +276,7 @@ class ModerationController extends Controller
 
     public function userMassBadge(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -285,7 +285,7 @@ class ModerationController extends Controller
 
         $count = 0;
         if ($request->online == 1) {
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':massbadge ' . $request->code]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':massbadge ' . $request->code]);
             $count = User::where('online', '1')->count();
         } else {
             $users = User::select(['id'])->where('online', '0')->get();
@@ -301,11 +301,11 @@ class ModerationController extends Controller
                 }
             }
             //Give badge only for online users
-            Hotel::sendRconMessage('executecommand', ['user_id' => Auth::user()->id, 'command' => ':massbadge ' . $request->code]);
+            Hotel::sendRconMessage('executecommand', ['user_id' => user()->id, 'command' => ':massbadge ' . $request->code]);
             $count = User::where('online', '1')->count() + $count;
         }
 
-        $message = Auth::user()->username . ' given badge \'' . $request->code . '\'  to \'' . $count . '\' users';
+        $message = user()->username . ' given badge \'' . $request->code . '\'  to \'' . $count . '\' users';
         StaffLog::createLog('massbadge', $message);
 
         return redirect()->route('admin.users.massstuff')->with('message', 'Given badge \'' . $request->code . '\'  to \'' . $count . '\' users!');
@@ -313,7 +313,7 @@ class ModerationController extends Controller
 
     public function userMassRemoveBadge(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_give_users_mass'))
+        if (!user()->hasPermission('can_give_users_mass'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -335,7 +335,7 @@ class ModerationController extends Controller
 
 
 
-        $message = Auth::user()->username . ' removed badge \'' . $request->code . '\' from \'' . $usersBadges->count() . '\' users';
+        $message = user()->username . ' removed badge \'' . $request->code . '\' from \'' . $usersBadges->count() . '\' users';
         StaffLog::createLog('massbadge', $message);
 
         return redirect()->route('admin.users.massstuff')->with('message', 'Removed badge \'' . $request->code . '\' from \'' . $usersBadges->count() . '\' users');
@@ -343,7 +343,7 @@ class ModerationController extends Controller
 
     public function userEditorGuestroom($roomId = null)
     {
-        if (!Auth::user()->hasPermission('can_edit_users_guestroom'))
+        if (!user()->hasPermission('can_edit_users_guestroom'))
             return view('admin.accessdenied');
 
         return view('admin.users.editor.guestroom')->with([
@@ -354,7 +354,7 @@ class ModerationController extends Controller
 
     public function userEditorGuestroomSave($roomId, Request $request)
     {
-        if (!Auth::user()->hasPermission('can_edit_users_guestroom'))
+        if (!user()->hasPermission('can_edit_users_guestroom'))
             return view('admin.accessdenied');
 
         $request->validate([
@@ -378,7 +378,7 @@ class ModerationController extends Controller
             'users_max'     => $request->visitors_max
         ]);
 
-        $message = Auth::user()->username . ' edited room ID \'' . $roomId . '\'';
+        $message = user()->username . ' edited room ID \'' . $roomId . '\'';
         StaffLog::createLog('massbadge', $message);
 
         return redirect()->route('admin.users.editor.guestroom', false)->with('message', 'Room edited!');
@@ -386,7 +386,7 @@ class ModerationController extends Controller
 
     public function creditsTransactions()
     {
-        if (!Auth::user()->hasPermission('can_check_transactions'))
+        if (!user()->hasPermission('can_check_transactions'))
             return view('admin.accessdenied');
 
         return view('admin.credits.transactions');
@@ -394,7 +394,7 @@ class ModerationController extends Controller
 
     public function getCreditsTransactions(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_check_transactions'))
+        if (!user()->hasPermission('can_check_transactions'))
             return view('admin.accessdenied');
 
         $user = User::where('id', $request->user_id)->first();
@@ -412,7 +412,7 @@ class ModerationController extends Controller
 
     public function creditsVoucher()
     {
-        if (!Auth::user()->hasPermission('can_create_vouchers'))
+        if (!user()->hasPermission('can_create_vouchers'))
             return view('admin.accessdenied');
 
         return view('admin.credits.vouchers')->with([
@@ -423,7 +423,7 @@ class ModerationController extends Controller
 
     public function createCreditsVoucher(Request $request)
     {
-        if (!Auth::user()->hasPermission('can_create_vouchers'))
+        if (!user()->hasPermission('can_create_vouchers'))
             return view('admin.accessdenied');
 
 
