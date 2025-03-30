@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class AdminGroup
 {
     /**
      * Handle an incoming request.
@@ -24,6 +24,10 @@ class Admin
             }
             abort(404);
         }
+
+        if (cms_config('site.maintenance.enabled'))
+            return redirect('maintenance');
+
         abort(404);
     }
 }

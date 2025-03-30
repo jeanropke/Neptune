@@ -21,6 +21,7 @@ use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
@@ -307,6 +308,12 @@ Route::middleware('guest')->group(function () {
         Route::get('/forgot', [AuthController::class, 'emailForgotPassword'])->name('auth.forgot');
         Route::post('submit', [AuthController::class, 'doLogin'])->name('account.submit');
     });
+
+    Route::prefix('housekeeping')->group(function () {
+        Route::get('login', [HousekeepingAuthController::class, 'login'])->name('housekeeping.account.login');
+        Route::post('account/submit', [HousekeepingAuthController::class, 'doLogin'])->name('housekeeping.account.submit');
+    });
+
 });
 
 //Admin routes
@@ -456,8 +463,6 @@ Route::middleware('admin')->group(function () {
             Route::post('/vouchers', [ModerationController::class, 'createCreditsVoucher'])->name('housekeeping.credits.vouchers.post');
         });
 
-        //Route::get('/users/editor/catalogue', 'Admin\CatalogueController@show')->name('admin.users.editor.catalogue');
-
         Route::prefix('help')->group(function () {
             Route::get('/', [HelpController::class, 'index'])->name('housekeeping.help.index');
         });
@@ -468,8 +473,4 @@ Route::middleware('admin')->group(function () {
 Route::prefix('habbo-imaging')->group(function() {
     Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
     Route::get('/badge/{badge}', [HabboImaging::class, 'badge'])->name('habboimaging.badge');
-});
-
-Route::fallback(function(){
-    return view('errors.404');
 });

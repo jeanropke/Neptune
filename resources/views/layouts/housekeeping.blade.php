@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
-    <title>{{ env('APP_NAME') }} ~ @yield('title')</title>
+    <title>{{ config('cms.name') }} ~ @yield('title')</title>
     <link href="/web/housekeeping/styles/style.css" type="text/css" rel="stylesheet" />
     <script src="/web/housekeeping/js/scripts.js"></script>
     <script src="/web/housekeeping/js/jquery-3.5.1.min.js"></script>

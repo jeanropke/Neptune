@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Middleware\Admin;
+use App\Http\Middleware\AdminGroup;
+use App\Http\Middleware\GuestGroup;
 use App\Http\Middleware\UserGroup;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Application;
@@ -16,8 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->alias([
-            'admin' => Admin::class,
+            'admin' => AdminGroup::class,
             'user'  => UserGroup::class,
+            'guest' => GuestGroup::class
         ]);
         //$middleware->append(Admin::class);
         //$middleware->append(UserGroup::class);
