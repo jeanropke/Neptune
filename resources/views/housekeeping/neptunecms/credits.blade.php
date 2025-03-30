@@ -1,4 +1,4 @@
-@extends('layouts.admin.master', ['menu' => 'solariumcms'])
+@extends('layouts.housekeeping', ['menu' => 'neptunecms'])
 
 @section('title', 'Credits')
 
@@ -10,18 +10,19 @@
                     <!-- RIGHT CONTENT BLOCK -->
                     <div id="acp-update-wrapper">
                         <div class="homepage_pane_border" id="acp-update-normal">
-                            <div class="homepage_section">SolariumCMS - Development Credits</div>
+                            <div class="homepage_section">{{ config('cms.name') }} - Development Credits</div>
                             <div style="font-size:12px;padding:4px; text-align:left">
                                 <p>
                                 <div align="center">
-                                    <img src="{{ url('/') }}/web/admin/images/holocms-logo.png" border="0" alt="SolariumCMS"><br />
-                                    v{{ config('app.version') }} <br />
+                                    <img src="{{ url('/') }}/web/housekeeping/images/cms-logo.png" border="0" alt="{{ config('cms.name') }}"><br />
+                                    v{{ config('cms.version') }} {{ config('cms.stable') }} <br />
+                                    Codename '{{ config('cms.title') }}'<br />
                                     <br />
                                 </div>
                                 </p>
                                 <p>
                                     <strong>Development & Coding</strong><br />
-                                    Jean<br />
+                                    Jean Ropke<br />
                                     <i>Lead Developer & coder</i>
                                 </p>
                                 <p>
@@ -41,7 +42,7 @@
 
                                 </p>
                                 <p>
-                                    <a href="{{ route('admin.solariumcms') }}">Return to <strong>SolariumCMS Information Page</strong></a>
+                                    <a href="{{ route('housekeeping.neptunecms') }}">Return to <strong>{{ config('cms.name') }} Information Page</strong></a>
                                 </p>
                                 <hr />
                                 <center>
