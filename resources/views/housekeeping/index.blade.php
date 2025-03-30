@@ -42,9 +42,7 @@
                                                                     <td class="homepage_sub_row">
                                                                         <strong>Members</strong></td>
                                                                     <td class="homepage_sub_row">
-                                                                         {{ $users_total }} (<a
-                                                                            href="{{ route('housekeeping.users.online') }}"> $stats['users_online'] }}
-                                                                            online</a>)
+                                                                         {{ $users_total }} (<a href="">{{ emu_config('players.online') }} online</a>)
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -181,7 +179,7 @@
                                                                 <tr>
                                                                     <td class="tablerow1" align="center">
                                                                         <div style="font-size:12px">
-                                                                            <a href="{{ route('housekeeping.users.edituser', $staff->id) }}"
+                                                                            <a href="{{ route('housekeeping.users.edit', $staff->id) }}"
                                                                                 target="_blank">
                                                                                 <strong>{{ $staff->username }}</strong>
                                                                             </a> (ID: {{ $staff->id }})

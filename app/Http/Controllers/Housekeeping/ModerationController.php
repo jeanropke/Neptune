@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Housekeeping;
 
 use App\Helpers\Hotel;
 use App\Http\Controllers\Controller;
@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\StaffLog;
 use App\Models\User;
 use App\Models\UserBadge;
+use App\Models\UserIPLog;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,30 +17,11 @@ use Illuminate\Support\Str;
 
 class ModerationController extends Controller
 {
-    public function index()
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
-
-        return view('admin.users.index')->with([
-            'users' => User::orderby('id', 'desc')->paginate(15)
-        ]);
-    }
-
-    public function usersEdit($userId = null)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
-
-        return view('admin.users.edituser')->with([
-            'user' => User::find($userId)
-        ]);
-    }
 
     public function usersClient($user)
     {
         if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $user = User::find($user);
 
@@ -54,43 +36,10 @@ class ModerationController extends Controller
         ]);
     }
 
-    public function usersEditSave(Request $request, $userId)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
-
-        $request->validate([
-            'username'  => 'required|max:25|unique:users,username,' . $userId,
-            'mail'      => 'required|max:25|unique:users,mail,' . $userId,
-            'motto'     => 'max:127',
-            'look'      => 'required|max:256',
-            'rank'      => 'required|max:2',
-            'credits'   => 'required|max:11'
-        ]);
-
-        $edit = User::where('id', $userId)->first();
-
-        $edit->update([
-            'username'  => $request->username,
-            'mail'      => $request->mail,
-            'motto'     => $request->motto . '',
-            'look'      => $request->look,
-            'gender'    => $request->gender,
-            'rank'      => $request->rank,
-            'credits'   => $request->credits
-        ]);
-
-        unset($request['_token']);
-        $message = user()->username . ' changed \'user\' values to ' . json_encode($request->post());
-        StaffLog::createLog('user_edit', $message);
-
-        return redirect()->route('admin.users.edituser', $userId)->with('message', 'User changed!');
-    }
-
     public function usersEditSearch(Request $request)
     {
         if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'username' => 'required'
@@ -104,39 +53,16 @@ class ModerationController extends Controller
     public function usersIp()
     {
         if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.users.searchip');
     }
 
-    public function usersIpSearch(Request $request)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
-
-        $request->validate([
-            'ip' => 'required'
-        ]);
-
-        return view('admin.users.index')->with([
-            'users' => User::where('ip_current', $request->ip)->orWhere('ip_register', $request->ip)->paginate(15)
-        ]);
-    }
-
-    public function usersSearch($value)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
-
-        return view('admin.users.index')->with([
-            'users' => User::where('ip_current', $value)->orWhere('ip_register', $value)->orWhere('machine_id', $value)->orWhere('username', 'like', '%' . $value . '%')->paginate(15)
-        ]);
-    }
 
     public function userBadge()
     {
         if (!user()->hasPermission('can_give_users_badge'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.users.badge');
     }
@@ -144,7 +70,7 @@ class ModerationController extends Controller
     public function userGiveBadge(Request $request)
     {
         if (!user()->hasPermission('can_edit_users'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'username'  => 'required',
@@ -178,7 +104,7 @@ class ModerationController extends Controller
     public function userRemoveBadge(Request $request)
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'code'      => 'required',
@@ -209,7 +135,7 @@ class ModerationController extends Controller
     public function userMass()
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.users.mass');
     }
@@ -217,7 +143,7 @@ class ModerationController extends Controller
     public function userMassCredits(Request $request)
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'credits'   => 'required|numeric'
@@ -247,7 +173,7 @@ class ModerationController extends Controller
     public function userMassPoints(Request $request)
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'points'    => 'required|numeric'
@@ -277,7 +203,7 @@ class ModerationController extends Controller
     public function userMassBadge(Request $request)
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'code'    => 'required'
@@ -314,7 +240,7 @@ class ModerationController extends Controller
     public function userMassRemoveBadge(Request $request)
     {
         if (!user()->hasPermission('can_give_users_mass'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'code'      => 'required',
@@ -344,7 +270,7 @@ class ModerationController extends Controller
     public function userEditorGuestroom($roomId = null)
     {
         if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.users.editor.guestroom')->with([
             'room'  => Room::find($roomId),
@@ -355,7 +281,7 @@ class ModerationController extends Controller
     public function userEditorGuestroomSave($roomId, Request $request)
     {
         if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $request->validate([
             'owner'         => 'required|exists:users,username',
@@ -387,7 +313,7 @@ class ModerationController extends Controller
     public function creditsTransactions()
     {
         if (!user()->hasPermission('can_check_transactions'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.credits.transactions');
     }
@@ -395,7 +321,7 @@ class ModerationController extends Controller
     public function getCreditsTransactions(Request $request)
     {
         if (!user()->hasPermission('can_check_transactions'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         $user = User::where('id', $request->user_id)->first();
 
@@ -413,7 +339,7 @@ class ModerationController extends Controller
     public function creditsVoucher()
     {
         if (!user()->hasPermission('can_create_vouchers'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
         return view('admin.credits.vouchers')->with([
             'rnd_voucher' => Str::lower(Str::random(8)),
@@ -424,7 +350,7 @@ class ModerationController extends Controller
     public function createCreditsVoucher(Request $request)
     {
         if (!user()->hasPermission('can_create_vouchers'))
-            return view('admin.accessdenied');
+            return view('housekeeping.accessdenied');
 
 
         $request->validate([

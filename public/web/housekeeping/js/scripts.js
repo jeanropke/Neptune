@@ -64,6 +64,30 @@ var BoxPagesManage = {
     }
 }
 
+var BadgesManager = {
+    initialise: function(url) {
+        $('.slot').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.slot');
+            var code = $this.data('code');
+            var userId = $this.data('user-id');
+            var el = $('<div>', { style: "display: flex; margin: 5px" }).append($('<img>', { src: url + code + '.gif' })).append($('<p>', { text: 'Are you sure you want to remove this badge?' }));
+            Dialog.showConfirmDialog(el, () => {this.remove(userId, code)});
+        });
+    },
+    remove: function(id, code)
+    {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "users/badges/remove", {
+            data: {id: id, code: code},
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;

@@ -53,7 +53,9 @@
 /* Used: Alert boxes and stuff (used in JS)
 /* -------------------------------- */
 
-.alert-box, .alert-box-js, .alert-box-noimg {
+.alert-box,
+.alert-box-js,
+.alert-box-noimg {
     background-image: url(../images/js_alert.gif);
     background-repeat: no-repeat;
     color: #000;
@@ -103,7 +105,9 @@
     text-align: left;
 }
 
-.warning-box, .information-box, .help-box {
+.warning-box,
+.information-box,
+.help-box {
     color: #000;
     border: 1px solid #000;
     -moz-border-radius: 5px;
@@ -112,7 +116,9 @@
     text-align: left;
 }
 
-.warning-box img, .information-box img, .help-box img {
+.warning-box img,
+.information-box img,
+.help-box img {
     float: left;
     margin-top: 10px;
     margin-right: 5px;
@@ -120,13 +126,20 @@
     border: 0px;
 }
 
-.warning-box h2, .warning-box p, .information-box h2, .information-box p, .help-box h2, .help-box p {
+.warning-box h2,
+.warning-box p,
+.information-box h2,
+.information-box p,
+.help-box h2,
+.help-box p {
     padding: 0px;
     margin: 0px;
     margin-left: 60px;
 }
 
-.warning-box h2, .information-box h2, .help-box h2 {
+.warning-box h2,
+.information-box h2,
+.help-box h2 {
     padding-bottom: 4px;
     font-size: 14px;
     border-bottom: 1px solid #000;
@@ -150,7 +163,10 @@
 * link underline
 */
 
-.content-page-links, .content-page-links a:active, .content-page-links a:visited, .content-page-links a:link {
+.content-page-links,
+.content-page-links a:active,
+.content-page-links a:visited,
+.content-page-links a:link {
     text-decoration: none;
 }
 
@@ -162,11 +178,13 @@
     color: #3A4F6C;
 }
 
-.input-warn, .input-warn-content {
+.input-warn,
+.input-warn-content {
     border: 1px solid #C00;
 }
 
-.input-ok, .input-ok-content {
+.input-ok,
+.input-ok-content {
     border: 1px solid #0C0;
 }
 
@@ -193,7 +211,8 @@ html {
     /* fixes MSIE scrollbar bug DO NOT REMOVE */
 }
 
-body, .body-bg {
+body,
+.body-bg {
     /*background-repeat: repeat-x;
     background-image: url(images/acp_logo_strip.gif);*/
     background-color: #F3F3F3;
@@ -206,7 +225,9 @@ body, .body-bg {
     /* centers board in MSIE known bug workaround */
 }
 
-table, tr, td {
+table,
+tr,
+td {
     color: #000;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Arial, Verdana, "Trebuchet MS";
     font-size: 11px;
@@ -219,14 +240,17 @@ form {
     padding: 0px;
 }
 
-textarea, input, select {
+textarea,
+input,
+select {
     border: 1px solid #999999;
     color: #555;
     font-size: 11px;
     padding: 2px
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     background: #e9f6fd;
     border: 1px solid black;
 }
@@ -236,7 +260,10 @@ input:focus, select:focus {
     border: 1px solid #999;
 }
 
-.inputtext, .inputtextgreen, .inputtextred, .inputtextmini {
+.inputtext,
+.inputtextgreen,
+.inputtextred,
+.inputtextmini {
     font-size: 11px;
     border: 1px solid #999;
 }
@@ -265,7 +292,9 @@ input:focus, select:focus {
     font-weight: bold;
 }
 
-a:link, a:visited, a:active {
+a:link,
+a:visited,
+a:active {
     background-color: transparent;
     color: #000;
     text-decoration: underline;
@@ -285,7 +314,9 @@ a:hover {
     text-align: center;
 }
 
-.global-copyright a:link, .global-copyright a:visited, .global-copyright a:active {
+.global-copyright a:link,
+.global-copyright a:visited,
+.global-copyright a:active {
     color: #3363A1;
     text-decoration: underline;
 }
@@ -332,7 +363,9 @@ img.calendar {
 
 /* ======================================== */
 
-.pagelink, .pagelinklast, .pagecurrent {
+.pagelink,
+.pagelinklast,
+.pagecurrent {
     background: #F0F5FA;
     border: 1px solid #072A66;
     padding: 1px 3px 1px 3px;
@@ -346,7 +379,15 @@ img.calendar {
     background: #FFC9A5;
 }
 
-.pagelink a:active, .pagelink a:visited, .pagelink a:link, .pagelinklast a:active, .pagelinklast a:visited, .pagelinklast a:link, .pagecurrent a:active, .pagecurrent a:visited, .pagecurrent a:link {
+.pagelink a:active,
+.pagelink a:visited,
+.pagelink a:link,
+.pagelinklast a:active,
+.pagelinklast a:visited,
+.pagelinklast a:link,
+.pagecurrent a:active,
+.pagecurrent a:visited,
+.pagecurrent a:link {
     text-decoration: none;
 }
 
@@ -409,7 +450,9 @@ img.calendar {
     float: right;
 }
 
-.global-memberbar a:active, .global-memberbar a:visited, .global-memberbar a:link {
+.global-memberbar a:active,
+.global-memberbar a:visited,
+.global-memberbar a:link {
     color: #FFF;
     text-decoration: none;
 }
@@ -426,7 +469,9 @@ img.calendar {
     float: left;
 }
 
-.navwrap a:active, .navwrap a:visited, .navwrap a:link {
+.navwrap a:active,
+.navwrap a:visited,
+.navwrap a:link {
     color: #FFF;
     font-weight: bold;
     text-decoration: none;
@@ -460,7 +505,9 @@ img.calendar {
     border-bottom: 1px solid #E3E3E3;
 }
 
-.menulinkwrap a:link, .menulinkwrap a:visited, .menulinkwrap a:active {
+.menulinkwrap a:link,
+.menulinkwrap a:visited,
+.menulinkwrap a:active {
     color: #000;
 }
 
@@ -484,7 +531,8 @@ img.calendar {
     background-position: left bottom;
 }
 
-.tabon-main, .tabon {
+.tabon-main,
+.tabon {
     border-top: 1px solid #3363A1;
     border-left: 1px solid #3363A1;
     border-right: 1px solid #3363A1;
@@ -499,7 +547,8 @@ img.calendar {
     margin-top: 3px;
 }
 
-.taboff-main, .taboff {
+.taboff-main,
+.taboff {
     border-top: 1px solid #759BC7;
     border-left: 1px solid #759BC7;
     border-right: 1px solid #759BC7;
@@ -514,16 +563,27 @@ img.calendar {
     margin-top: 3px;
 }
 
-.tabon-main, .taboff-main {
+.tabon-main,
+.taboff-main {
     padding: 4px 8px 4px 8px;
 }
 
-.tabon-main a:link, .tabon-main a:visited, .tabon-main a:active, .tabon a:link, .tabon a:visited, .tabon a:active {
+.tabon-main a:link,
+.tabon-main a:visited,
+.tabon-main a:active,
+.tabon a:link,
+.tabon a:visited,
+.tabon a:active {
     text-decoration: none;
     color: #FFFFFF;
 }
 
-.taboff-main a:link, .taboff-main a:visited, .taboff-main a:active, .taboff a:link, .taboff a:visited, .taboff a:active {
+.taboff-main a:link,
+.taboff-main a:visited,
+.taboff-main a:active,
+.taboff a:link,
+.taboff a:visited,
+.taboff a:active {
     text-decoration: none;
     color: #3363A1;
 }
@@ -586,7 +646,9 @@ img.calendar {
 
 /* MIGHT WANT TO CHANGE THIS AT SOME POINT */
 
-.tableheader, .tableheaderalt, .tableheader2 {
+.tableheader,
+.tableheaderalt,
+.tableheader2 {
     font-size: 12px;
     vertical-align: middle;
     font-weight: bold;
@@ -597,12 +659,15 @@ img.calendar {
     background-color: #3363A1;
 }
 
-.tableheaderalt a:link, .tableheaderalt a:visited, .tableheaderalt a:active {
+.tableheaderalt a:link,
+.tableheaderalt a:visited,
+.tableheaderalt a:active {
     text-decoration: none;
     color: #FFF;
 }
 
-.tablefooter, .tablesubheader {
+.tablefooter,
+.tablesubheader {
     background-color: #ACBFD9;
     font-size: 10px;
     color: #3363A1;
@@ -614,7 +679,9 @@ img.calendar {
     background-color: #999;
 }
 
-.tablerow1 img, .tablerow2 img, .tablerow3 img {
+.tablerow1 img,
+.tablerow2 img,
+.tablerow3 img {
     vertical-align: middle;
     border: 0px;
 }
@@ -638,7 +705,8 @@ img.calendar {
     height: 32px;
 }
 
-.formbutton-on, .formbutton-off {
+.formbutton-on,
+.formbutton-off {
     padding: 6px;
     font-size: 10px;
     font-weight: bold;
@@ -801,7 +869,12 @@ img.calendar {
     color: #000;
 }
 
-.menusep a:link, .menusep a:visited, .menusep a:active, .menuseplast a:link, .menuseplast a:visited, .menuseplast a:active {
+.menusep a:link,
+.menusep a:visited,
+.menusep a:active,
+.menuseplast a:link,
+.menuseplast a:visited,
+.menuseplast a:active {
     text-decoration: none;
     font-weight: bold;
     color: #000000;
@@ -817,12 +890,21 @@ img.calendar {
     margin: 0px;
 }
 
-.fauxdropdown a:link, .fauxdropdown a:visited, .fauxdropdown a:active, .fauxbutton a:link, .fauxbutton a:visited, .fauxbutton a:active, .fauxredbutton a:link, .fauxredbutton a:visited, .fauxredbutton a:active {
+.fauxdropdown a:link,
+.fauxdropdown a:visited,
+.fauxdropdown a:active,
+.fauxbutton a:link,
+.fauxbutton a:visited,
+.fauxbutton a:active,
+.fauxredbutton a:link,
+.fauxredbutton a:visited,
+.fauxredbutton a:active {
     text-decoration: none;
     color: #333;
 }
 
-.fauxredbutton a:hover, .fauxbutton a:hover {
+.fauxredbutton a:hover,
+.fauxbutton a:hover {
     margin: 0px;
 }
 
@@ -861,7 +943,9 @@ input[type="text"] {
     color: #3363A1;
 }
 
-.mininav a:link, .mininav a:visited, .mininav a:active {
+.mininav a:link,
+.mininav a:visited,
+.mininav a:active {
     text-decoration: none;
     font-weight: bold;
     color: #3363A1;
@@ -932,12 +1016,14 @@ input[type="text"] {
 /* DIFF STYLES
 /* ============================================================== */
 
-del, .diffred {
+del,
+.diffred {
     background-color: #D7BBC8;
     text-decoration: none;
 }
 
-ins, .diffgreen {
+ins,
+.diffgreen {
     background-color: #BBD0C8;
     text-decoration: none;
 }
@@ -1008,7 +1094,8 @@ ins, .diffgreen {
     background-repeat: repeat-y;
 }
 
-.attach-menu-row-over, .attach-menu-row {
+.attach-menu-row-over,
+.attach-menu-row {
     padding: 1px 1px 4px 1px;
     width: 100%;
     cursor: pointer;
@@ -1044,7 +1131,10 @@ ins, .diffgreen {
     letter-spacing: 0;
 }
 
-.rte-buttonbar tbody tr td, .rte-buttonbar tr td, .rteBack tbody tr td, .rteBack tr td {
+.rte-buttonbar tbody tr td,
+.rte-buttonbar tr td,
+.rteBack tbody tr td,
+.rteBack tr td {
     padding: 0;
 }
 
@@ -1054,7 +1144,10 @@ ins, .diffgreen {
     margin-top: 4px;
 }
 
-.rte-menu-button, .rte-selected-menubutton, .rte-hover-menubutton, .rte-normal-menubutton {
+.rte-menu-button,
+.rte-selected-menubutton,
+.rte-hover-menubutton,
+.rte-normal-menubutton {
     border: 1px solid #7585B8;
     -moz-border-radius: 3px;
     padding: 2px 1px 2px 4px;
@@ -1067,12 +1160,17 @@ ins, .diffgreen {
     width: auto;
 }
 
-.rte-selected-menubutton, .rte-hover-menubutton {
+.rte-selected-menubutton,
+.rte-hover-menubutton {
     border: 1px solid #95C4F7;
     background-color: #FFFFFF;
 }
 
-.rte-menu-face, .rte-menu-size, .rte-selected-menu, .rte-hover-menu, .rte-normal-menu {
+.rte-menu-face,
+.rte-menu-size,
+.rte-selected-menu,
+.rte-hover-menu,
+.rte-normal-menu {
     background-color: #EFF3F7;
     border-bottom: 1px dotted #999;
     padding: 1px 1px 4px 1px;
@@ -1081,7 +1179,10 @@ ins, .diffgreen {
     cursor: hand;
 }
 
-.rte-selected-menu-color, .rte-hover-menu-color, .rte-normal-menu-color, .rte-menu-color {
+.rte-selected-menu-color,
+.rte-hover-menu-color,
+.rte-normal-menu-color,
+.rte-menu-color {
     width: 10px;
     border: 1px solid #FFFFFF;
     cursor: pointer;
@@ -1100,13 +1201,16 @@ ins, .diffgreen {
     padding: 3px 5px 3px 3px;
 }
 
-.rte-selected, .rte-hover, .rte-normal {
+.rte-selected,
+.rte-hover,
+.rte-normal {
     cursor: pointer;
     cursor: hand;
     padding: 1px;
 }
 
-.rte-selected-menu, .rte-hover-menu {
+.rte-selected-menu,
+.rte-hover-menu {
     background: #D3D3D3;
 }
 
@@ -1208,7 +1312,12 @@ ins, .diffgreen {
     height: 26px;
 }
 
-.rtebuttonbar1 tbody tr td, .rtebuttonbar1 tr td, .rtebuttonbar2 tbody tr td, .rtebuttonbar2 tr td, .rteBack tbody tr td, .rteBack tr td {
+.rtebuttonbar1 tbody tr td,
+.rtebuttonbar1 tr td,
+.rtebuttonbar2 tbody tr td,
+.rtebuttonbar2 tr td,
+.rteBack tbody tr td,
+.rteBack tr td {
     /*background: #D3D3D3;*/
     padding: 0;
 }
@@ -1293,7 +1402,8 @@ ins, .diffgreen {
 
 /* new homepage styles */
 
-.homepage_section_warning, .homepage_section {
+.homepage_section_warning,
+.homepage_section {
     background-color: #344966;
     font-size: 14px;
     color: #fff;
@@ -1304,7 +1414,10 @@ ins, .diffgreen {
     background-color: #66343e;
 }
 
-.homepage_pane_warning_border, .homepage_pane_warning, .homepage_pane_border, .homepage_pane {
+.homepage_pane_warning_border,
+.homepage_pane_warning,
+.homepage_pane_border,
+.homepage_pane {
     background-color: #e2e2e0;
     padding: 4px;
 }
@@ -1317,7 +1430,8 @@ ins, .diffgreen {
     border: 1px solid #344966;
 }
 
-.homepage_pane_warning_border, .homepage_pane_warning {
+.homepage_pane_warning_border,
+.homepage_pane_warning {
     background-color: #F3e2e0;
 }
 
@@ -1465,6 +1579,7 @@ ins, .diffgreen {
     opacity: .50;
     filter: alpha(opacity=50);
 }
+
 .dialog-default {
     position: absolute;
     border: 1px solid #5D789C;
@@ -1500,12 +1615,38 @@ div.dialog-defaulttab {
     z-index: 9001;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-div.dialog-default-body, div.dialog-defaulttab-body {
+
+div.dialog-default-body,
+div.dialog-defaulttab-body {
     background-position: top right;
     background-repeat: repeat-y;
     padding: 7px;
     text-align: left;
 }
+
 .clear {
     clear: both;
+}
+
+#badge-manager {
+    background: #eaedf0;
+    padding: 5px;
+}
+
+#badge-manager .slot {
+    background: #F1F1F1;
+    margin: 5px;
+    border-bottom: 1px solid #C1BEBE;
+    border-right: 1px solid #C1BEBE;
+    border-top: 1px solid #FFF;
+    border-left: 1px solid #FFF;
+    float: left;
+}
+
+#badge-manager .slot .badge {
+    width: 50px;
+    height: 50px;
+}
+#badge-manager .slot .code {
+    text-align: center;
 }

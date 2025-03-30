@@ -6,8 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Housekeeping\DashboardController;
-use App\Http\Controllers\Admin\ModerationController;
-use App\Http\Controllers\Admin\ServerController;
+use App\Http\Controllers\Housekeeping\ModerationController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
@@ -22,6 +21,7 @@ use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
+use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
@@ -429,22 +429,22 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('users')->group(function () {
             //User Moderation pages
-            Route::get('/', [ModerationController::class, 'index'])->name('housekeeping.users');
-            Route::post('/edit', [ModerationController::class, 'usersEditSearch'])->name('housekeeping.users.edituser.save');
-            Route::get('/edit', [ModerationController::class, 'usersEdit'])->name('housekeeping.users.edituser');
-            Route::get('/edit/{user}', [ModerationController::class, 'usersEdit'])->name('housekeeping.users.edituser');
-            Route::get('/edit/{user}/client', [ModerationController::class, 'usersClient'])->name('housekeeping.users.client');
-            Route::get('/ip', [ModerationController::class, 'usersIp'])->name('housekeeping.users.ip');
-            Route::post('/ip', [ModerationController::class, 'usersIpSearch'])->name('housekeeping.users.ip');
-            Route::get('/search/{value}/ip', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.ip');
-            Route::get('/search/{value}/machine', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.machine');
-            Route::get('/search/{value}/username', [ModerationController::class, 'usersSearch'])->name('housekeeping.users.search.username');
-            Route::post('/edit/{user}', [ModerationController::class, 'usersEditSave'])->name('housekeeping.users.edituser.save');
-            Route::get('/online', [ModerationController::class, 'usersOnline'])->name('housekeeping.users.online');
+            Route::get('/listing', [UserController::class, 'usersListing'])->name('housekeeping.users.listing');
+            Route::get('/edit/{id}', [UserController::class, 'usersEdit'])->name('housekeeping.users.edit');
+            Route::post('/edit', [UserController::class, 'usersEditSave'])->name('housekeeping.users.edit.save');
+            Route::get('/search/{value}/{type}', [UserController::class, 'usersSearchResult'])->name('housekeeping.users.search.result');
+            Route::get('/ips/{value}', [UserController::class, 'usersIPs'])->name('housekeeping.users.ips');
+            Route::get('/search', [UserController::class, 'usersSearch'])->name('housekeeping.users.search');
+            Route::post('/search', [UserController::class, 'usersSearchPost'])->name('housekeeping.users.search.post');
 
-            Route::get('/badge', [ModerationController::class, 'userBadge'])->name('housekeeping.users.badgetool');
-            Route::post('/badge', [ModerationController::class, 'userGiveBadge'])->name('housekeeping.users.badgetool.give');
-            Route::get('/mass', [ModerationController::class, 'userMass'])->name('housekeeping.users.massstuff');
+            Route::get('/badges', [UserController::class, 'toolsBadge'])->name('housekeeping.users.tools.badge');
+            Route::get('/badges/{id}', [UserController::class, 'toolsBadge'])->name('housekeeping.users.badges');
+            Route::post('/badges/give', [UserController::class, 'toolsBadgeGive'])->name('housekeeping.users.badges.give');
+            Route::post('/badges/remove', [UserController::class, 'toolsBadgeRemove'])->name('housekeeping.users.badges.remove');
+
+            Route::get('/mass', [UserController::class, 'toolsMass'])->name('housekeeping.users.tools.mass');
+            Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass');
+/*
             Route::post('/mass/credits', [ModerationController::class, 'userMassCredits'])->name('housekeeping.users.massstuff.credits');
             Route::post('/mass/points', [ModerationController::class, 'userMassPoints'])->name('housekeeping.users.massstuff.points');
             Route::post('/mass/badge', [ModerationController::class, 'userMassBadge'])->name('housekeeping.users.massstuff.badge');
@@ -452,8 +452,8 @@ Route::middleware('admin')->group(function () {
             Route::post('/mass/removebadge', [ModerationController::class, 'userMassRemoveBadge'])->name('housekeeping.users.massstuff.removebadge');
 
             Route::get('/editor/guestroom', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');
-            Route::get('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');
-            Route::post('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroomSave'])->name('housekeeping.users.editor.guestroom.save');
+            Route::get('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');*/
+
         });
 
         Route::prefix('credits')->group(function () {
@@ -473,4 +473,8 @@ Route::middleware('admin')->group(function () {
 Route::prefix('habbo-imaging')->group(function() {
     Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
     Route::get('/badge/{badge}', [HabboImaging::class, 'badge'])->name('habboimaging.badge');
+});
+
+Route::fallback(function(){
+    return view('errors.404');
 });

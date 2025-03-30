@@ -1,4 +1,4 @@
-@extends('layouts.admin.master', ['menu' => 'users'])
+@extends('layouts.housekeeping', ['menu' => 'users'])
 
 @section('title', 'Massa Management')
 
@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('layouts.admin.users', ['submenu' => 'massa_stuff'])
+                    @include('housekeeping.users.include.menu', ['submenu' => 'tools.mass'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -18,7 +18,7 @@
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
-                    <form action="{{ route('admin.users.massstuff.credits') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.users.tools.mass') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="tableborder">
                             <div class="tableheaderalt">Massa credits</div>
@@ -51,63 +51,7 @@
                         </div>
                     </form>
                     <br />
-                    <form action="{{ route('admin.users.massstuff.points') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
-                        {{ csrf_field() }}
-                        <div class="tableborder">
-                            <div class="tableheaderalt">Massa points</div>
-                            <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
-                                <tr>
-                                    <td class="tablerow1" width="40%" valign="middle"><strong>Amount</strong>
-                                        <div class="graytext">The amount of points everybody gets.</div>
-                                    </td>
-                                    <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="points" value="" size="3" maxlength="5" class="textinput">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="tablerow1" width="40%" valign="middle"><strong>Users online</strong>
-                                        <div class="graytext">Only users online will receive points or everyone.</div>
-                                    </td>
-                                    <td class="tablerow2" width="60%" valign="middle">
-                                        <select name="online">
-                                            <option value="1">Only users online</option>
-                                            <option value="0">Everyone</option>
-                                        </select>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="tablerow1" width="40%" valign="middle"><strong>Points type</strong>
-                                        <div class="graytext">Some types are disabled and need some configurations.</div>
-                                    </td>
-                                    <td class="tablerow2" width="60%" valign="middle">
-                                        <select name="type">
-                                            <option value="0">Duckets</option>
-                                            <option value="1">Snowflakes</option>
-                                            <option value="2">Hearts</option>
-                                            <option value="3">MadCoins</option>
-                                            <option value="4">Shells</option>
-                                            <option value="5">Diamonds</option>
-                                            <option value="100">Pumpkins</option>
-                                            <option value="101">Horseshoes</option>
-                                            <option value="102">Nuts</option>
-                                            <option value="103">Stars</option>
-                                            <option value="104">Clouds</option>
-                                            <option value="105">Loyalty</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center" class="tablesubheader" colspan="2">
-                                        <input type="submit" value="Give" class="realbutton" accesskey="s">
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
-
-                    <br />
-                    <form action="{{ route('admin.users.massstuff.badge') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.users.tools.mass') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="tableborder">
                             <div class="tableheaderalt">Massa badge</div>
@@ -140,7 +84,7 @@
                         </div>
                     </form>
                     <br />
-                    <form action="{{ route('admin.users.massstuff.removebadge') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.users.tools.mass') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="tableborder">
                             <div class="tableheaderalt">Take badge from all users</div>

@@ -2,9 +2,9 @@
 
 return [
     'name'      => 'NeptuneCMS',
-    'version'   => '0.1',
+    'version'   => '0.2',
     'title'     => 'Goldfish',
     'stable'    => 'UNSTABLE',
-    'build'     => '28 Mar 2025 17:02:54',
+    'build'     => '30 Mar 2025 15:10:17',
     'gmt'       => 'GMT-3 (Brasília time)'
 ];

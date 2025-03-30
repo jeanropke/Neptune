@@ -62,7 +62,7 @@
                 <a href="/housekeeping/neptunecms">NeptuneCMS</a></div>
             <div class="tab{{ $menu == 'users' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/admin.png" style="vertical-align:middle" />
-                <a href="/housekeeping/users">Users & Moderation</a></div>
+                <a href="/housekeeping/users/listing">Users & Moderation</a></div>
 
             {{--<div class="tab{{ $menu == 'help' ? 'on' : 'off' }}-main">
             <img src="{{ url('/') }}/web/housekeeping/images/help.png" style="vertical-align:middle" />

@@ -20,8 +20,8 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username', 'email', 'password', 'motto', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active',
-        'battleball_points', 'snowstorm_points', 'club_subscribed', 'club_expiration', 'club_gift_due'
+        'username', 'email', 'password', 'motto', 'console_motto', 'credits', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking',
+        'allow_friend_requests', 'badge', 'badge_active', 'battleball_points', 'snowstorm_points', 'club_subscribed', 'club_expiration', 'club_gift_due'
     ];
 
     protected $hidden = [
@@ -130,11 +130,19 @@ class User extends Authenticatable
         mus("refresh_hand", ['userId' => $this->id]);
     }
 
+    public function getLatestIP()
+    {
+        $ip = UserIPLog::where('user_id', $this->id)->orderBy('created_at', 'DESC')->first();
+        if($ip)
+            return $ip->ip_address;
+
+        return '0.0.0.0';
+    }
 
     /**
      * Get user badges
      */
-    public function getBadges()
+    public function getBadges($skipRankBadge = false)
     {
         $badges = array();
 
@@ -142,13 +150,29 @@ class User extends Authenticatable
             array_push($badges, array('badge' => $badge->badge));
         }
 
-        foreach(DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
-            array_push($badges, array('badge' => $badge->badge));
+        if(!$skipRankBadge) {
+            foreach(DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
+                array_push($badges, array('badge' => $badge->badge));
+            }
         }
 
         sort($badges);
 
         return collect($badges);
+    }
+
+    public function giveBadge($code)
+    {
+        $badge = UserBadge::where([['user_id', '=', $this->id], ['badge', '=', $code]])->get();
+        if($badge->count() > 0)
+            return false;
+
+        UserBadge::insert([
+            'user_id'   => $this->id,
+            'badge'     => $code
+        ]);
+
+        return true;
     }
 
 
