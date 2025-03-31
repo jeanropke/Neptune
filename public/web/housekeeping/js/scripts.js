@@ -153,7 +153,8 @@ var FurniPicker = {
         });
     },
 
-    closeDialog: function () {
+    closeDialog: function (e) {
+        e.preventDefault();
         $('#furni-picker-dialog').remove();
         Overlay.hide();
     },
@@ -193,8 +194,7 @@ var FurniPicker = {
                 });
         });
     },
-    removeFurni: function(e)
-    {
+    removeFurni: function (e) {
         var $el = $(e.target).closest('.slot');
         var furni = $el.data('furni');
         FurniPicker.picked.splice(FurniPicker.picked.indexOf(furni), 1);
