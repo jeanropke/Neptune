@@ -86,11 +86,11 @@
                                     </td>
                                 </tr>
                             @empty
-                            <tr>
-                                <td class="tablerow1" align="center" colspan="6">
-                                No rooms found
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="tablerow1" align="center" colspan="6">
+                                        No rooms found
+                                    </td>
+                                </tr>
                             @endforelse
                         </table>
                     </div>

@@ -1646,6 +1646,7 @@ div.dialog-defaulttab-body {
     border-top: 1px solid #FFF;
     border-left: 1px solid #FFF;
     float: left;
+    cursor: pointer;
 }
 
 #badge-manager .slot .badge {

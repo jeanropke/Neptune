@@ -8,13 +8,9 @@ use App\Models\RoomCategory;
 use App\Models\StaffLog;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class EditorController extends Controller
 {
-
     public function guestroomListing(Request $request)
     {
         if (!user()->hasPermission('can_edit_users_guestroom'))

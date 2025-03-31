@@ -152,7 +152,7 @@ class CreditsController extends Controller
         if(!Auth::check())
             return;
 
-        $voucher = Voucher::find($request->code);
+        $voucher = Voucher::where('voucher_code', $request->code)->first();
 
         if (!$voucher)
             return view('habblet.ajax.redeem_voucher')->with(['status' => 'Error', 'message' => 'This vouches is invalid']);
@@ -190,7 +190,7 @@ class CreditsController extends Controller
 
         if ($voucher->is_single_use > 0) {
             $voucher->deleteItems();
-            $voucher->delete();
+            Voucher::where('voucher_code', $request->code)->delete();
         }
 
         return view('habblet.ajax.redeem_voucher')->with(['status' => 'Success', 'message' => 'You redeemed a valid voucher!', 'history' => $history]);

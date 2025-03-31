@@ -2,18 +2,17 @@
     News
 */
 var NewsManage = {
-    initialise: function() {
+    initialise: function () {
         $('.delete-article').click((e) => {
             e.preventDefault();
             $this = $(e.target).closest('.delete-article');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this article?</p>', () => {this.delete($this.data('id'))});
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this article?</p>', () => { this.delete($this.data('id')) });
         });
     },
-    delete: function(id)
-    {
+    delete: function (id) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(habboReqPath + "site/article/delete", {
-            data: {id: id},
+            data: { id: id },
             method: "post"
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
@@ -23,18 +22,17 @@ var NewsManage = {
 }
 
 var BoxManage = {
-    initialise: function() {
+    initialise: function () {
         $('.delete-box').click((e) => {
             e.preventDefault();
             $this = $(e.target).closest('.delete-box');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => {this.delete($this.data('id'))});
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => { this.delete($this.data('id')) });
         });
     },
-    delete: function(id)
-    {
+    delete: function (id) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(habboReqPath + "site/box/delete", {
-            data: {id: id},
+            data: { id: id },
             method: "post"
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
@@ -44,18 +42,17 @@ var BoxManage = {
 }
 
 var BoxPagesManage = {
-    initialise: function() {
+    initialise: function () {
         $('.delete-box-page').click((e) => {
             e.preventDefault();
             $this = $(e.target).closest('.delete-box-page');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => {this.delete($this.data('id'))});
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => { this.delete($this.data('id')) });
         });
     },
-    delete: function(id)
-    {
+    delete: function (id) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(habboReqPath + "site/box/pages/delete", {
-            data: {id: id},
+            data: { id: id },
             method: "post"
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
@@ -65,21 +62,20 @@ var BoxPagesManage = {
 }
 
 var BadgesManager = {
-    initialise: function(url) {
+    initialise: function (url) {
         $('.slot').click((e) => {
             e.preventDefault();
             $this = $(e.target).closest('.slot');
             var code = $this.data('code');
             var userId = $this.data('user-id');
             var el = $('<div>', { style: "display: flex; margin: 5px" }).append($('<img>', { src: url + code + '.gif' })).append($('<p>', { text: 'Are you sure you want to remove this badge?' }));
-            Dialog.showConfirmDialog(el, () => {this.remove(userId, code)});
+            Dialog.showConfirmDialog(el, () => { this.remove(userId, code) });
         });
     },
-    remove: function(id, code)
-    {
+    remove: function (id, code) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(habboReqPath + "users/badges/remove", {
-            data: {id: id, code: code},
+            data: { id: id, code: code },
             method: "post"
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
@@ -89,18 +85,54 @@ var BadgesManager = {
 }
 
 var PublicRoomManager = {
-    initialise: function() {
+    initialise: function () {
         $('.delete-publicroom').click((e) => {
             e.preventDefault();
             $this = $(e.target).closest('.delete-publicroom');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this public room?</p>', () => {this.delete($this.data('id'))});
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this public room?</p>', () => { this.delete($this.data('id')) });
         });
     },
-    delete: function(id)
-    {
+    delete: function (id) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(habboReqPath + "editors/publicroom/delete", {
-            data: {id: id},
+            data: { id: id },
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
+var VoucherManager = {
+    initialise: function(length)
+    {
+        $('#random-code').click((e) => {
+            e.preventDefault();
+            $('input[name=voucher]').val(this.generate(length));
+        });
+        $('input[name=voucher]').val(this.generate(length));
+
+        $('.delete-voucher').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.delete-voucher');
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this voucher?</p>', () => { this.delete($this.data('voucher')) });
+        });
+
+    },
+    generate: function(length)
+    {
+        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var code = '';
+        for (let i = 0; i < length; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return code;
+    },
+    delete: function (voucher) {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "credits/vouchers/delete", {
+            data: { voucher: voucher },
             method: "post"
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
@@ -177,23 +209,22 @@ var Dialog = {
         return dialog;
     },
 
-    closeConfirmDialog: function()
-    {
+    closeConfirmDialog: function () {
         var el = $("#confirm-dialog");
-        if(!el) return;
+        if (!el) return;
         el.remove();
         Overlay.hide();
     },
 
     appendDialogBody: function (dialog, bodyEl, useInnerHTML) {
         var el = $(dialog);
-        if (el) { var el2 = $("#"+el.prop('id') + "-body"); (useInnerHTML) ? el2.append(bodyEl) : el2.html(bodyEl); if (bodyEl.innerHTML) bodyEl.innerHTML.evalScripts(); }
+        if (el) { var el2 = $("#" + el.prop('id') + "-body"); (useInnerHTML) ? el2.append(bodyEl) : el2.html(bodyEl); if (bodyEl.innerHTML) bodyEl.innerHTML.evalScripts(); }
     },
 
     setDialogBody: function (dialog, bodyEl) {
         var el = $(dialog);
         if (el) {
-            var el2 = $("#"+el[0].id + "-body");
+            var el2 = $("#" + el[0].id + "-body");
             el2.html(bodyEl);
         }
     },
@@ -256,8 +287,8 @@ var Dialog = {
     setAsWaitDialog: function (a) {
         var b = $(a);
         if (b) {
-            var el = $("<center>").append($("<img>", { src: habboStaticFilePath + "housekeeping/images/loading_anim.gif"}));
-            $("#" +b.prop('id') + "-body").html(el);
+            var el = $("<center>").append($("<img>", { src: habboStaticFilePath + "housekeeping/images/loading_anim.gif" }));
+            $("#" + b.prop('id') + "-body").html(el);
         }
     }
 }

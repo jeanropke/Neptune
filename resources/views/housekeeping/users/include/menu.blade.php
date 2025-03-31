@@ -1,16 +1,16 @@
 <div class="menuouterwrap">
-    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> User Management</div>
+    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> User management</div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.listing') }}" style="text-decoration:none;{{ $submenu == 'users.listing' ? 'font-weight: bold;' : '' }}">User Listing</a>
+        <a href="{{ route('housekeeping.users.listing') }}" style="text-decoration:none;{{ $submenu == 'users.listing' ? 'font-weight: bold;' : '' }}">User listing</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.search') }}" style="text-decoration:none; {{ $submenu == 'users.search' ? 'font-weight: bold;' : '' }}" >Search User</a>
+        <a href="{{ route('housekeeping.users.search') }}" style="text-decoration:none; {{ $submenu == 'users.search' ? 'font-weight: bold;' : '' }}" >Search user</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.tools.badge') }}" style="text-decoration:none;{{ $submenu == 'tools.badge' ? 'font-weight: bold;' : '' }}">Give User Badge</a>
+        <a href="{{ route('housekeeping.users.tools.badge') }}" style="text-decoration:none;{{ $submenu == 'tools.badge' ? 'font-weight: bold;' : '' }}">Give user badge</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
@@ -31,7 +31,7 @@
     {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.editor_categoriesh') }}" style="text-decoration:none;{{ $submenu == 'editor_categoriesh' ? 'font-weight: bold;' : '' }}">Category editor - hotel</a>
+        <a href="{{ route('housekeeping.editor.navigator') }}" style="text-decoration:none;{{ $submenu == 'editor_categoriesh' ? 'font-weight: bold;' : '' }}">Category editor - Navigator</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
@@ -69,14 +69,16 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Credits</div>
-    {{--<div class="menulinkwrap">&nbsp;
+    {{--
+    <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.credits.transactions') }}" style="text-decoration:none;{{ $submenu == 'transactions' ? 'font-weight: bold;' : '' }}">Transaction logs</a>
     </div>
+    --}}
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.credits.vouchers') }}" style="text-decoration:none;{{ $submenu == 'vouchers' ? 'font-weight: bold;' : '' }}">Voucher Management</a>
-    </div>--}}
+    </div>
 </div>
 <br />
 <div class="menuouterwrap">

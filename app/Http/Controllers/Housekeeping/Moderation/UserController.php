@@ -185,7 +185,7 @@ class UserController extends Controller
     public function toolsMass()
     {
         if (!user()->hasPermission('can_edit_users'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+            return view('housekeeping.ajax.accessdenied');
 
         return view('housekeeping.users.mass');
     }

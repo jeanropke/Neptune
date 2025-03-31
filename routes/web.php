@@ -21,6 +21,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
+use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
@@ -457,13 +458,14 @@ Route::middleware('admin')->group(function () {
             Route::get('/publicroom/add', [HousekeepingEditorController::class, 'publicroomAdd'])->name('housekeeping.editor.publicroom.add');
             Route::post('/publicroom/add', [HousekeepingEditorController::class, 'publicroomAddSave'])->name('housekeeping.editor.publicroom.add.save');
             Route::post('/publicroom/delete', [HousekeepingEditorController::class, 'publicroomDelete'])->name('housekeeping.editor.publicroom.delete');
+
+            Route::get('/navigator', [HousekeepingEditorController::class, 'publicroomAdd'])->name('housekeeping.editor.navigator');
         });
 
         Route::prefix('credits')->group(function () {
-            Route::get('/transactions', [ModerationController::class, 'creditsTransactions'])->name('housekeeping.credits.transactions');
-            Route::post('/transactions', [ModerationController::class, 'getCreditsTransactions'])->name('housekeeping.credits.transactions.post');
-            Route::get('/vouchers', [ModerationController::class, 'creditsVoucher'])->name('housekeeping.credits.vouchers');
-            Route::post('/vouchers', [ModerationController::class, 'createCreditsVoucher'])->name('housekeeping.credits.vouchers.post');
+            Route::get('/vouchers', [HousekeepingCreditsController::class, 'vouchers'])->name('housekeeping.credits.vouchers');
+            Route::post('/vouchers', [HousekeepingCreditsController::class, 'vouchersAdd'])->name('housekeeping.credits.vouchers.post');
+            Route::post('/vouchers/delete', [HousekeepingCreditsController::class, 'vouchersDelete'])->name('housekeeping.credits.vouchers.delete');
         });
 
         Route::prefix('help')->group(function () {

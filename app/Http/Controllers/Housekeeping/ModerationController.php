@@ -310,31 +310,7 @@ class ModerationController extends Controller
         return redirect()->route('admin.users.editor.guestroom', false)->with('message', 'Room edited!');
     }
 
-    public function creditsTransactions()
-    {
-        if (!user()->hasPermission('can_check_transactions'))
-            return view('housekeeping.accessdenied');
 
-        return view('admin.credits.transactions');
-    }
-
-    public function getCreditsTransactions(Request $request)
-    {
-        if (!user()->hasPermission('can_check_transactions'))
-            return view('housekeeping.accessdenied');
-
-        $user = User::where('id', $request->user_id)->first();
-
-        if (!$user)
-            return redirect()->route('admin.credits.transactions', false)->with('message', 'User not found!');
-
-        return view('admin.credits.transactions')->with(
-            [
-                'results' => DB::table('cms_transactions')->limit(100)->orderby('timestamp', 'desc')->get(),
-                'user'    => $user
-            ]
-        );
-    }
 
     public function creditsVoucher()
     {
