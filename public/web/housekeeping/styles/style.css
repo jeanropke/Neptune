@@ -9,7 +9,7 @@
 }
 
 .shadow-ie {
-    filter: shadow(color:gray, direction:135, strength:3);
+    filter: shadow(color: gray, direction:135, strength:3);
 }
 
 /* -------------------------------- */
@@ -1235,8 +1235,7 @@ ins,
 
 .rteimage {
     /*background: #D3D3D3;*/
-    /*border: 1px outset transparent*/
-    ;
+    /*border: 1px outset transparent;*/
     cursor: pointer;
     cursor: hand;
     padding: 1px;
