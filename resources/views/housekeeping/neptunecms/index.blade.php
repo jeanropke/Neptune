@@ -20,8 +20,8 @@
                                     <br />
                                 </div>
                                 <br />
-                                <br /> {{ config('cms.name') }} is web interface for Holograph Emulator, or, to promote it a little: {{ config('cms.name') }} a free, advanced and
-                                complete website and content management solution for Holograph Emulator, published under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/"
+                                <br /> {{ config('cms.name') }} is web interface for <a href="https://github.com/Quackster/Kepler" target="_target">Kepler Emulator</a> or, to promote it a little: {{ config('cms.name') }} a free, advanced and
+                                complete website and content management solution for <a href="https://github.com/Quackster/Kepler" target="_target">Kepler Emulator</a>, published under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/"
                                     target="_blank">Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported license</a>. Current development is handled by Jean
                                 Ropke.
                                 <br />

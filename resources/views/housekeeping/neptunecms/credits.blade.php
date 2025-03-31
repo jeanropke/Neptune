@@ -28,9 +28,9 @@
                                 <p>
                                     <strong>Contributers</strong>
                                     <br />
-                                    <a href="https://github.com/MiguelGonzalezAravena/HoloCMS">Miguel González Aravena / HoloCMS</a><br />
+                                    <a href="https://github.com/MiguelGonzalezAravena/HoloCMS">Miguel González Aravena / HoloCMS Housekeeping</a><br />
                                     <i>Supporting and maintaining HoloCMS</i><br />
-                                    <a href="http://www.daneyb.com">Roy aka Meth0d</a><br />
+                                    <a href="http://www.daneyb.com">Roy aka Meth0d / HoloCMS Housekeeping</a><br />
                                     <i>Orginal HoloCMS developer and a great programmer</i>
                                 </p>
                                 <p>
