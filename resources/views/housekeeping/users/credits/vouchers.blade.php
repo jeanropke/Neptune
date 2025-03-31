@@ -1,6 +1,6 @@
 @extends('layouts.housekeeping', ['menu' => 'users'])
 
-@section('title', 'Transactions Management')
+@section('title', 'Voucher Management')
 
 @section('content')
     <table cellpadding="0" cellspacing="8" width="100%" id="tablewrap">
