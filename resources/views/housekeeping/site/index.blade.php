@@ -144,16 +144,16 @@
                         </div>
                     </form>
                     <script>
-                        $J('select[name=site\\.style\\.background]').change(e => {
-                            $('background-preview').src = "{{ url('/') }}" + $J('select[name=site\\.style\\.background]').val();
+                        $('select[name=site\\.style\\.background]').change(e => {
+                            $('#background-preview').attr('src', "{{ url('/') }}" + $('select[name=site\\.style\\.background]').val());
                         });
 
-                        $J('select[name=site\\.style\\.enter]').change(e => {
-                            $('enterbutton-preview').src = "{{ url('/') }}" + $J('select[name=site\\.style\\.enter]').val();
+                        $('select[name=site\\.style\\.enter]').change(e => {
+                            $('#enterbutton-preview').attr('src', "{{ url('/') }}" + $('select[name=site\\.style\\.enter]').val());
                         });
 
-                        $J('select[name=site\\.style\\.hotelview]').change(e => {
-                            $('hotelview-preview').src = "{{ url('/') }}" + $J('select[name=site\\.style\\.hotelview]').val();
+                        $('select[name=site\\.style\\.hotelview]').change(e => {
+                            $('#hotelview-preview').attr('src', "{{ url('/') }}" + $('select[name=site\\.style\\.hotelview]').val());
                         });
                     </script>
                     <br />
