@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Voucher;
+use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 
 class CreditsController extends Controller
@@ -64,6 +65,13 @@ class CreditsController extends Controller
             'expiry_date'   => $request->expiry_date,
             'is_single_use' => $request->is_single_use
         ]);
+
+        foreach (explode(';', $request->items) as $item) {
+            VoucherItem::insert([
+                'voucher_code'          => $request->voucher,
+                'catalogue_sale_code'   => $item
+            ]);
+        }
 
         return redirect()->route('housekeeping.credits.vouchers')->with('message', 'Voucher created!');
     }

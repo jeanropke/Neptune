@@ -2,7 +2,6 @@
 
 namespace App\Models\Catalogue;
 
-use App\Models\Furniture;
 use Illuminate\Database\Eloquent\Model;
 
 class CatalogueItem extends Model
@@ -15,13 +14,6 @@ class CatalogueItem extends Model
     ];
 
     public $timestamps = false;
-
-    public function getItemBase()
-    {
-        if(str_contains($this->item_ids, ';'))
-            return Furniture::find($this->id);
-        return Furniture::find($this->item_ids);
-    }
 
     public function getNormalizedName()
     {

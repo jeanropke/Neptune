@@ -1655,3 +1655,32 @@ div.dialog-defaulttab-body {
 #badge-manager .slot .code {
     text-align: center;
 }
+.ui-draggable-handle h3 {
+    cursor:move;
+}
+#furni-picker-form {
+
+}
+#furni-picker-form #furni-name {
+    float: right;
+}
+#furni-picker-listing {
+
+}
+#furni-picker-listing .slot, #furni-picked .slot {
+    background: #F1F1F1;
+    margin: 2px;
+    border-bottom: 1px solid #C1BEBE;
+    border-right: 1px solid #C1BEBE;
+    border-top: 1px solid #FFF;
+    border-left: 1px solid #FFF;
+    float: left;
+    cursor: pointer;
+}
+#furni-picker-listing .slot .image, #furni-picked .slot .image {
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

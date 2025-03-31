@@ -60,6 +60,16 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><strong>Items</strong>
+                                        <div class="graytext">Which items this voucher will give?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <a href="{{ route('furnipicker.listing') }}" id="furni-picker">Pick</a>
+                                        <div id="furni-picked"></div>
+                                        <input name="items" value="" type="text" hidden>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
                                         <input type="submit" name="submit" value="Create Voucher" class="realbutton" accesskey="s">
                                     </td>
@@ -79,37 +89,38 @@
                                 <td class="tablesubheader" width="20%" align="center">Items</td>
                                 <td class="tablesubheader" width="20%" align="center">Delete</td>
                             </tr>
-                                @forelse ($vouchers as $voucher)
-                                    <tr>
-                                        <td class="tablerow1" align="center">
-                                            {{ $voucher->voucher_code }}
-                                        </td>
-                                        <td class="tablerow2" align="center">
-                                            {{ $voucher->credits }}
-                                        </td>
-                                        <td class="tablerow2" align="center">
-                                            {{ $voucher->expiry_date }}
-                                        </td>
-                                        <td class="tablerow2" align="center">
-                                            {{ $voucher->is_single_use ? 'Yes' : 'No' }}
-                                        </td>
-                                        <td class="tablerow2" align="center">
-                                            {{ $voucher->getItems() }}
-                                        </td>
-                                        <td class="tablerow2" align="center">
-                                            <a href="#" class="delete-voucher" data-voucher="{{ $voucher->voucher_code }}">
-                                                <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @empty
+                            @forelse ($vouchers as $voucher)
+                                <tr>
+                                    <td class="tablerow1" align="center">
+                                        {{ $voucher->voucher_code }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $voucher->credits }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $voucher->expiry_date }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $voucher->is_single_use ? 'Yes' : 'No' }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $voucher->getItems() }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        <a href="#" class="delete-voucher" data-voucher="{{ $voucher->voucher_code }}">
+                                            <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
                                 <tr align="center">
                                     <td colspan="6" class="tablerow1"><strong>No vouchers.</strong></td>
                                 </tr>
-                                @endforelse
+                            @endforelse
                         </table>
                     </div>
                     <script>
+                        FurniPicker.initialise();
                         VoucherManager.initialise(12);
                     </script>
                 </div>

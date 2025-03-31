@@ -20,6 +20,7 @@ use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
+use App\Http\Controllers\Housekeeping\FurniPickerController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
@@ -336,8 +337,6 @@ Route::middleware('admin')->group(function () {
 
         Route::get('/logs', [AdminController::class, 'logs'])->name('housekeeping.logs');
 
-        Route::get('/theme/update', [AdminController::class, 'themeUpdate']);
-
         Route::prefix('server')->group(function () {
             Route::get('/', [ServerGeneralController::class, 'index'])->name('housekeeping.server');
             Route::post('/', [ServerGeneralController::class, 'serverSave'])->name('housekeeping.server.save');
@@ -471,6 +470,9 @@ Route::middleware('admin')->group(function () {
         Route::prefix('help')->group(function () {
             Route::get('/', [HelpController::class, 'index'])->name('housekeeping.help.index');
         });
+
+        Route::post('furnipicker', [FurniPickerController::class, 'listing'])->name('furnipicker.listing');
+        Route::post('furnipicker/search', [FurniPickerController::class, 'search'])->name('furnipicker.search');
     });
 });
 

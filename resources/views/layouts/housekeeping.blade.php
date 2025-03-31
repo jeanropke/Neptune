@@ -8,6 +8,7 @@
     <link href="/web/housekeeping/styles/style.css" type="text/css" rel="stylesheet" />
     <script src="/web/housekeeping/js/scripts.js"></script>
     <script src="/web/housekeeping/js/jquery-3.5.1.min.js"></script>
+    <script src="/web/housekeeping/js/jquery-ui.js"></script>
     <script>
         var habboReqPath = "{{ url('/') }}/housekeeping/";
         var habboStaticFilePath = "/web/";

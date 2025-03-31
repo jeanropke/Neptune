@@ -105,8 +105,7 @@ var PublicRoomManager = {
 }
 
 var VoucherManager = {
-    initialise: function(length)
-    {
+    initialise: function (length) {
         $('#random-code').click((e) => {
             e.preventDefault();
             $('input[name=voucher]').val(this.generate(length));
@@ -120,8 +119,7 @@ var VoucherManager = {
         });
 
     },
-    generate: function(length)
-    {
+    generate: function (length) {
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var code = '';
         for (let i = 0; i < length; i++) {
@@ -138,6 +136,70 @@ var VoucherManager = {
             Dialog.setDialogBody($("#confirm-dialog"), html);
             $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
         });
+    }
+}
+
+var FurniPicker = {
+    initialise: function () {
+        this.picked = [];
+        $('#furni-picker').click((e) => {
+            e.preventDefault();
+            if ($('#furni-picker-dialog').length > 0) return;
+            this.dialog = Dialog.createDialog("furni-picker-dialog", "Furni Picker", 9001, null, null, this.closeDialog);
+            Overlay.show();
+            Dialog.makeDialogDraggable(this.dialog);
+            Dialog.moveDialogToCenter(this.dialog);
+            this.listing($(e.target).attr('href'));
+        });
+    },
+
+    closeDialog: function () {
+        $('#furni-picker-dialog').remove();
+        Overlay.hide();
+    },
+    listing: function (url) {
+        Dialog.setAsWaitDialog(this.dialog);
+        $.ajax(url, { method: 'post' })
+            .done((html, status) => {
+                Dialog.setDialogBody(this.dialog, html);
+                this.setupForm();
+            });
+    },
+    setupForm: function () {
+        var $el = $('#furni-picker-form');
+        $el.find('input[type=submit]').click((e) => {
+            e.preventDefault();
+            var url = $el.attr('action');
+            var furni = $el.find('input[name=furni-picker-input]').val();
+
+            $.ajax(url, { method: 'post', data: { furni: furni } })
+                .done((html, status) => {
+                    $('#furni-picker-listing').html(html);
+
+                    $('.slot').hover((e) => {
+                        var furni = $(e.target).closest('.slot').data('furni');
+                        $('#furni-name').text(furni);
+                    });
+
+                    $('.slot').click((e) => {
+                        var slot = $(e.target).closest('.slot');
+                        var furni = slot.data('furni');
+                        this.picked.push(furni);
+                        var clone = slot.clone();
+                        clone.click(this.removeFurni);
+                        $('#furni-picked').append(clone);
+                        $('input[name=items]').val(FurniPicker.picked.join(';'));
+                    });
+                });
+        });
+    },
+    removeFurni: function(e)
+    {
+        var $el = $(e.target).closest('.slot');
+        var furni = $el.data('furni');
+        FurniPicker.picked.splice(FurniPicker.picked.indexOf(furni), 1);
+        $el.remove();
+        $('input[name=items]').val(FurniPicker.picked.join(';'));
     }
 }
 
@@ -230,14 +292,7 @@ var Dialog = {
     },
 
     makeDialogDraggable: function (dialog) {
-        if (typeof Draggable != 'undefined') {
-            new Draggable(dialog, {
-                handle: 'dialog-grey-handle',
-                starteffect: Prototype.emptyFunction,
-                endeffect: Prototype.emptyFunction,
-                zindex: 9100
-            });
-        }
+        dialog.draggable();
     },
 
     moveDialogToView: function (dialog, e, coordinates) {
