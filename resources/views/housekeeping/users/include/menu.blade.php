@@ -79,6 +79,10 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.credits.vouchers') }}" style="text-decoration:none;{{ $submenu == 'vouchers' ? 'font-weight: bold;' : '' }}">Voucher Management</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.credits.vouchers.history') }}" style="text-decoration:none;{{ $submenu == 'vouchers_history' ? 'font-weight: bold;' : '' }}">Voucher History</a>
+    </div>
 </div>
 <br />
 <div class="menuouterwrap">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Voucher;
+use App\Models\VoucherHistory;
 use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 
@@ -97,5 +99,17 @@ class CreditsController extends Controller
         }
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'Voucher deleted!']);
+    }
+
+    public function vouchersHistory(Request $request)
+    {
+        if (!user()->hasPermission('can_create_vouchers'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $user = User::where('username', $request->username)->first();
+        if ($user)
+            return view('housekeeping.users.credits.vouchers_history')->with('vouchers', VoucherHistory::where('user_id', $user->id)->paginate(15));
+
+        return view('housekeeping.users.credits.vouchers_history')->with('vouchers', VoucherHistory::paginate(15));
     }
 }

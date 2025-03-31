@@ -465,6 +465,8 @@ Route::middleware('admin')->group(function () {
             Route::get('/vouchers', [HousekeepingCreditsController::class, 'vouchers'])->name('housekeeping.credits.vouchers');
             Route::post('/vouchers', [HousekeepingCreditsController::class, 'vouchersAdd'])->name('housekeeping.credits.vouchers.post');
             Route::post('/vouchers/delete', [HousekeepingCreditsController::class, 'vouchersDelete'])->name('housekeeping.credits.vouchers.delete');
+
+            Route::get('/vouchers/history', [HousekeepingCreditsController::class, 'vouchersHistory'])->name('housekeeping.credits.vouchers.history');
         });
 
         Route::prefix('help')->group(function () {
