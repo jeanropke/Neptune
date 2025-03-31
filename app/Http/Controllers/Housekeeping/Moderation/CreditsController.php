@@ -59,6 +59,9 @@ class CreditsController extends Controller
             'is_single_use' => 'required|boolean'
         ]);
 
+        if($request->credits <= 0 && !$request->items)
+            return redirect()->route('housekeeping.credits.vouchers')->with('message', 'You can\'t create a voucher without rewards!');
+
         Voucher::insert([
             'voucher_code'  => $request->voucher,
             'credits'       => $request->credits,
