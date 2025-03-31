@@ -18,9 +18,8 @@
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
-                    <form action="{{ route('housekeeping.editor.publicroom.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.editor.publicroom.add.save') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
-                        <input type="number" name="id" value="{{ $room->id }}" hidden>
                         <div class="tableborder">
                             <div class="tableheaderalt">Edit publicroom</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
@@ -29,7 +28,7 @@
                                         <div class="graytext">What's the name of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="name" value="{{ old('name') ?? $room->name }}">
+                                        <input type="text" name="name" value="{{ old('name') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -37,7 +36,7 @@
                                         <div class="graytext">What's the description of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="description" value="{{ old('description') ?? $room->description }}">
+                                        <input type="text" name="description" value="{{ old('description') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -45,7 +44,7 @@
                                         <div class="graytext">What's the model of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="model" value="{{ old('model') ?? $room->model }}">
+                                        <input type="text" name="model" value="{{ old('model') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -53,7 +52,7 @@
                                         <div class="graytext">What's the ccts of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="ccts" value="{{ old('ccts') ?? $room->ccts }}">
+                                        <input type="text" name="ccts" value="{{ old('ccts') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -61,7 +60,7 @@
                                         <div class="graytext">How many visitors are inside right now (you're faking data).</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="visitors_now" value="{{ old('visitors_now') ?? $room->visitors_now }}">
+                                        <input type="number" name="visitors_now" value="{{ old('visitors_now') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -69,7 +68,7 @@
                                         <div class="graytext">How many visitors may come inside the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="visitors_max" value="{{ old('visitors_max') ?? $room->visitors_max }}">
+                                        <input type="number" name="visitors_max" value="{{ old('visitors_max') }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -78,8 +77,8 @@
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <select style="color: black; font-family: Verdana" name="is_hidden">
-                                            <option value="0" {{ old('is_hidden') ?? $room->is_hidden == 0 ? 'selected="selected"' : '' }}>No</option>
-                                            <option value="1" {{ old('is_hidden') ?? $room->is_hidden == 1 ? 'selected="selected"' : '' }}>Yes</option>
+                                            <option value="0" {{ old('is_hidden') == 0 ? 'selected="selected"' : '' }}>No</option>
+                                            <option value="1" {{ old('is_hidden') == 1 ? 'selected="selected"' : '' }}>Yes</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -90,7 +89,7 @@
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <select style="color: black; font-family: Verdana" name="category">
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == (old('category') ?? $room->category) ? 'selected="selected"' : '' }}>{{ $category->name }}
+                                                <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected="selected"' : '' }}>{{ $category->name }}
                                                 </option>
                                             @endforeach
                                         </select>

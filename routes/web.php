@@ -454,6 +454,9 @@ Route::middleware('admin')->group(function () {
             Route::get('/publicroom/listing', [HousekeepingEditorController::class, 'publicroomListing'])->name('housekeeping.editor.publicroom.listing');
             Route::get('/publicroom/edit/{id}', [HousekeepingEditorController::class, 'publicroomEdit'])->name('housekeeping.editor.publicroom.edit');
             Route::post('/publicroom/edit', [HousekeepingEditorController::class, 'publicroomSave'])->name('housekeeping.editor.publicroom.edit.save');
+            Route::get('/publicroom/add', [HousekeepingEditorController::class, 'publicroomAdd'])->name('housekeeping.editor.publicroom.add');
+            Route::post('/publicroom/add', [HousekeepingEditorController::class, 'publicroomAddSave'])->name('housekeeping.editor.publicroom.add.save');
+            Route::post('/publicroom/delete', [HousekeepingEditorController::class, 'publicroomDelete'])->name('housekeeping.editor.publicroom.delete');
         });
 
         Route::prefix('credits')->group(function () {

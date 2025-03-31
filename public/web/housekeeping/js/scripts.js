@@ -88,6 +88,27 @@ var BadgesManager = {
     }
 }
 
+var PublicRoomManager = {
+    initialise: function() {
+        $('.delete-publicroom').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.delete-publicroom');
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this public room?</p>', () => {this.delete($this.data('id'))});
+        });
+    },
+    delete: function(id)
+    {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "editors/publicroom/delete", {
+            data: {id: id},
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;

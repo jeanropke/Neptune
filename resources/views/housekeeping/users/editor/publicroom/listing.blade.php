@@ -34,17 +34,21 @@
                         </div>
                     </form>
                     <br />
-
                     <div class="tableborder">
-                        <div class="tableheaderalt">Publicrooms editor</div>
+                        <div class="tableheaderalt">Publicrooms editor
+                            <div class="tableheaderalt-right">
+                                <a href="{{ route('housekeeping.editor.publicroom.add') }}">Add new public room</a>
+                            </div>
+                        </div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="6%" align="center">Room ID</td>
                                 <td class="tablesubheader" width="20%" align="center">Roomname</td>
                                 <td class="tablesubheader" width="10%" align="center">Category</td>
                                 <td class="tablesubheader" width="20%" align="center">CCTs</td>
-                                <td class="tablesubheader" width="40%" align="center">Description</td>
-                                <td class="tablesubheader" width="4%" align="center">Edit</td>
+                                <td class="tablesubheader" width="34%" align="center">Description</td>
+                                <td class="tablesubheader" width="5%" align="center">Edit</td>
+                                <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
                             @forelse ($rooms as $room)
                                 <tr>
@@ -68,6 +72,11 @@
                                             <img src=" {{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit publicroom">
                                         </a>
                                     </td>
+                                    <td class="tablerow2" align="center">
+                                        <a href="#" class="delete-publicroom" data-id="{{ $room->id }}">
+                                            <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
+                                        </a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -77,6 +86,9 @@
                                 </tr>
                             @endforelse
                         </table>
+                        <script>
+                            PublicRoomManager.initialise();
+                        </script>
                     </div>
                     <div style="text-align: center; vertical-align: middle;">{!! $rooms->links('layouts.housekeeping.pagination') !!}</div>
                 </div>

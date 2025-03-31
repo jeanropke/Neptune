@@ -101,10 +101,9 @@ class EditorController extends Controller
             return view('housekeeping.accessdenied');
 
         $rooms = [];
-        if($request->value) {
+        if ($request->value) {
             $rooms = Room::where([['name', 'LIKE', "%{$request->value}%"], ['owner_id', '=', 0]]);
-        }
-        else {
+        } else {
             $rooms = Room::where('owner_id', 0);
         }
 
@@ -136,6 +135,8 @@ class EditorController extends Controller
         $request->validate([
             'id'            => 'required|numeric',
             'name'          => 'required|max:128',
+            'model'         => 'required|max:128',
+            'ccts'          => 'required|max:128',
             'description'   => 'max:255',
             'visitors_now'  => 'required|numeric',
             'visitors_max'  => 'required|numeric',
@@ -150,6 +151,8 @@ class EditorController extends Controller
 
         $room->update([
             'name'          => $request->name,
+            'model'         => $request->model,
+            'ccts'          => $request->ccts,
             'description'   => $request->description ?? '',
             'visitors_now'  => $request->visitors_now,
             'visitors_max'  => $request->visitors_max,
@@ -158,5 +161,66 @@ class EditorController extends Controller
         ]);
 
         return redirect()->route('housekeeping.editor.publicroom.edit', $room->id)->with('message', 'Public room edited!');
+    }
+
+    public function publicroomAdd()
+    {
+        if (!user()->hasPermission('can_edit_users_guestroom'))
+            return view('housekeeping.accessdenied');
+
+        return view('housekeeping.users.editor.publicroom.add')->with([
+            'categories'    => RoomCategory::where('public_spaces', '1')->get()
+        ]);
+    }
+
+    public function publicroomAddSave(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users_guestroom'))
+            return view('housekeeping.accessdenied');
+
+        $request->validate([
+            'name'          => 'required|max:128',
+            'model'         => 'required|max:128',
+            'ccts'          => 'required|max:128',
+            'description'   => 'max:255',
+            'visitors_now'  => 'required|numeric',
+            'visitors_max'  => 'required|numeric',
+            'is_hidden'     => 'required|in:0,1',
+            'category'      => 'required|numeric'
+        ]);
+
+        $room = Room::create([
+            'name'          => $request->name,
+            'owner_id'      => '0',
+            'model'         => $request->model,
+            'ccts'          => $request->ccts,
+            'description'   => $request->description ?? '',
+            'visitors_now'  => $request->visitors_now,
+            'visitors_max'  => $request->visitors_max,
+            'is_hidden'     => $request->is_hidden,
+            'category'      => $request->category
+        ]);
+
+        return redirect()->route('housekeeping.editor.publicroom.edit', $room->id)->with('message', 'Public room added!');
+    }
+
+    public function publicroomDelete(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users_guestroom'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $room = Room::find($request->id);
+
+        if (!$room)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This public room does not exist!']);
+
+        if ($room->owner_id > 0)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This room is not a public room!']);
+
+        $room->delete();
+
+        unset($request['_token']);
+        StaffLog::createLog('editor.publicroom.delete', json_encode($request->post()));
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Public room deleted!']);
     }
 }

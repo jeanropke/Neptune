@@ -665,6 +665,11 @@ img.calendar {
     text-decoration: none;
     color: #FFF;
 }
+.tableheaderalt-right {
+    font-size: 11px;
+    padding-right: 10px;
+    float: right;
+}
 
 .tablefooter,
 .tablesubheader {
