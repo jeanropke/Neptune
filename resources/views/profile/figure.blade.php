@@ -12,7 +12,7 @@
     swfobj.addParam("base", "/profile/");
     swfobj.addVariable("post_url", "figure?");
     swfobj.addVariable("back_url", "");
-    @if(user()->isHC())
+    @if(!user()->getSubscription()->isExpired())
     swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
     @else
     swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml.xml");

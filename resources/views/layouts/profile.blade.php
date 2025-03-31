@@ -124,7 +124,7 @@
 
                         <div class="figure">
                             <img
-                                src="{{ cms_config('site.avatarimage.url') }}?figure={{ Auth::user()->figure }}&action=std&frame=3&direction=4&head_direction=3&gesture=sml&img_format=gif" />
+                                src="{{ cms_config('site.avatarimage.url') }}{{ Auth::user()->figure }}&action=std&frame=3&direction=4&head_direction=3&gesture=sml&img_format=gif" />
                         </div>
                         <div>
                             <div class="content-blue">
