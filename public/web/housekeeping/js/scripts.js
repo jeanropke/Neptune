@@ -120,7 +120,7 @@ var VoucherManager = {
 
     },
     generate: function (length) {
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
         var code = '';
         for (let i = 0; i < length; i++) {
             code += chars.charAt(Math.floor(Math.random() * chars.length));
