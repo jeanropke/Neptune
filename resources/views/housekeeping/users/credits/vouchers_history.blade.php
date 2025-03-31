@@ -32,7 +32,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
-                                        <input type="submit" value="Create Voucher" class="realbutton" accesskey="s">
+                                        <input type="submit" value="Search" class="realbutton" accesskey="s">
                                     </td>
                                 </tr>
                             </table>
