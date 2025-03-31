@@ -6,7 +6,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Housekeeping\DashboardController;
-use App\Http\Controllers\Housekeeping\ModerationController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
@@ -21,6 +20,7 @@ use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
+use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
@@ -444,16 +444,16 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/mass', [UserController::class, 'toolsMass'])->name('housekeeping.users.tools.mass');
             Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass');
-/*
-            Route::post('/mass/credits', [ModerationController::class, 'userMassCredits'])->name('housekeeping.users.massstuff.credits');
-            Route::post('/mass/points', [ModerationController::class, 'userMassPoints'])->name('housekeeping.users.massstuff.points');
-            Route::post('/mass/badge', [ModerationController::class, 'userMassBadge'])->name('housekeeping.users.massstuff.badge');
-            Route::post('/badge/remove', [ModerationController::class, 'userRemoveBadge'])->name('housekeeping.users.remove.badge');
-            Route::post('/mass/removebadge', [ModerationController::class, 'userMassRemoveBadge'])->name('housekeeping.users.massstuff.removebadge');
+        });
 
-            Route::get('/editor/guestroom', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');
-            Route::get('/editor/guestroom/{roomId}', [ModerationController::class, 'userEditorGuestroom'])->name('housekeeping.users.editor.guestroom');*/
+        Route::prefix('editors')->group(function() {
+            Route::get('/guestroom/listing', [HousekeepingEditorController::class, 'guestroomListing'])->name('housekeeping.editor.guestroom.listing');
+            Route::get('/guestroom/edit/{id}', [HousekeepingEditorController::class, 'guestroomEdit'])->name('housekeeping.editor.guestroom.edit');
+            Route::post('/guestroom/edit', [HousekeepingEditorController::class, 'guestroomSave'])->name('housekeeping.editor.guestroom.edit.save');
 
+            Route::get('/publicroom/listing', [HousekeepingEditorController::class, 'publicroomListing'])->name('housekeeping.editor.publicroom.listing');
+            Route::get('/publicroom/edit/{id}', [HousekeepingEditorController::class, 'publicroomEdit'])->name('housekeeping.editor.publicroom.edit');
+            Route::post('/publicroom/edit', [HousekeepingEditorController::class, 'publicroomSave'])->name('housekeeping.editor.publicroom.edit.save');
         });
 
         Route::prefix('credits')->group(function () {

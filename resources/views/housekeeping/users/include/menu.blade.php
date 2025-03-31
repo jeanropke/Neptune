@@ -20,16 +20,15 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Editors</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.editor.guestroom.listing', false) }}" style="text-decoration:none;{{ $submenu == 'guestroom.listing' ? 'font-weight: bold;' : '' }}">Guestroom editor</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.editor.publicroom.listing') }}" style="text-decoration:none;{{ $submenu == 'publicroom.listing' ? 'font-weight: bold;' : '' }}">Publicroom editor</a>
+    </div>
     {{--
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.editor.guestroom', false) }}" style="text-decoration:none;{{ $submenu == 'editor_guestroom' ? 'font-weight: bold;' : '' }}">Guestroom editor</a>
-    </div>
-
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.editor_publicrooms') }}" style="text-decoration:none;{{ $submenu == 'editor_publicrooms' ? 'font-weight: bold;' : '' }}">Publicroom editor</a>
-    </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.editor_categoriesh') }}" style="text-decoration:none;{{ $submenu == 'editor_categoriesh' ? 'font-weight: bold;' : '' }}">Category editor - hotel</a>

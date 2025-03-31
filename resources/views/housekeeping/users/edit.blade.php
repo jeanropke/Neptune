@@ -116,6 +116,15 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="10%" valign="middle">
+                                        <b>Rooms</b>
+                                        <div class="graytext"><a href="{{ route('housekeeping.editor.guestroom.listing') }}?type=owner&value={{ $user->username }}">See user rooms</a></div>
+                                    </td>
+                                    <td class="tablerow2" width="40%" valign="middle">
+                                        {{ $user->getRooms()->count() }} rooms
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="10%" valign="middle">
                                         <b>Latest IP Address</b>
                                         <div class="graytext">
                                             <a href="{{ route('housekeeping.users.search.result', [$user->getLatestIP(), 'ip']) }}">Look up for this IP</a> -

@@ -6,20 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'rooms';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'owner_id', 'name', 'accesstype', 'visitors_now', 'visitors_max', 'password', 'description', 'is_public'
+        'id', 'owner_id', 'category', 'name', 'description', 'model', 'ccts', 'wallpaper', 'floor', 'showname', 'superusers', 'accesstype', 'password', 'visitors_now', 'visitors_max', 'rating', 'is_hidden'
     ];
 
     public $timestamps = false;
@@ -35,6 +25,17 @@ class Room extends Model
             case 2:
                 return 'password';
         }
+    }
+
+    public function getOwner()
+    {
+
+        $user = User::find($this->owner_id);
+        if ($user)
+            return $user->username;
+
+        return "Owner ID {$this->owner_id}";
+
     }
 
 }

@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
-use App\Helpers\Hotel;
 use App\Http\Controllers\Controller;
-use App\Models\Room;
 use App\Models\StaffLog;
 use App\Models\User;
 use App\Models\UserBadge;
 use App\Models\UserIPLog;
-use App\Models\Voucher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {

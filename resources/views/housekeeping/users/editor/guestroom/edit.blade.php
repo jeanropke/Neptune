@@ -1,27 +1,26 @@
-@extends('layouts.admin.master', ['menu' => 'users'])
+@extends('layouts.housekeeping', ['menu' => 'users'])
 
-@section('title', 'Edit guestroom')
+@section('title', 'Guestroom Editor')
 
 @section('content')
     <table cellpadding="0" cellspacing="8" width="100%" id="tablewrap">
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('layouts.admin.users', ['submenu' => 'editor_guestroom'])
+                    @include('housekeeping.users.include.menu', ['submenu' => 'guestroom.edit'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
                 <div>
-                    @if($errors->any())
+                    @if ($errors->any())
                         <p><strong>{{ $errors->first() }}</strong></p>
                     @endif
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
-
-                    @if($room)
-                    <form action="" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.editor.guestroom.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
+                        <input type="number" name="id" value="{{ $room->id }}" hidden>
                         <div class="tableborder">
                             <div class="tableheaderalt">Edit guestroom</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
@@ -30,7 +29,7 @@
                                         <div class="graytext">Who's the owner of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="owner" maxlength="20" value="{{ $room->owner_name }}">
+                                        <input type="text" name="owner_id" maxlength="20" value="{{ $room->owner_id }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,15 +49,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tablerow1" width="40%" valign="middle"><b>State</b>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Access type</b>
                                         <div class="graytext">What's the state of the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <select style="color: black; font-family: Verdana" name="state">
-                                            <option value="open" @if($room->state == 'open') selected="selected" @endif>Open</option>
-                                            <option value="locked" @if($room->state == 'locked') selected="selected" @endif>Closed (bell)</option>
-                                            <option value="password" @if($room->state == 'password') selected="selected" @endif>Password protected</option>
-                                            <option value="invisible" @if($room->state == 'invisible') selected="selected" @endif>Invisible</option>
+                                        <select style="color: black; font-family: Verdana" name="accesstype">
+                                            <option value="0" {{ $room->accesstype == 0 ? 'selected="selected"' : '' }}>Open</option>
+                                            <option value="1" {{ $room->accesstype == 1 ? 'selected="selected"' : '' }}>Closed (bell)</option>
+                                            <option value="2" {{ $room->accesstype == 2 ? 'selected="selected"' : '' }}>Password protected</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -75,7 +73,7 @@
                                         <div class="graytext">How many visitors are inside right now (you're faking data).</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="visitors_now" value="{{ $room->users }}">
+                                        <input type="text" name="visitors_now" value="{{ $room->visitors_now }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,7 +81,38 @@
                                         <div class="graytext">How many visitors may come inside the room?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="visitors_max" value="{{ $room->users_max }}">
+                                        <input type="text" name="visitors_max" value="{{ $room->visitors_max }}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Rating</b>
+                                        <div class="graytext">How many votes this room received?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="rating" value="{{ $room->rating }}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Hidden</b>
+                                        <div class="graytext">Is this room hidden?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select style="color: black; font-family: Verdana" name="is_hidden">
+                                            <option value="0" {{ $room->is_hidden == 0 ? 'selected="selected"' : '' }}>No</option>
+                                            <option value="1" {{ $room->is_hidden == 1 ? 'selected="selected"' : '' }}>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Category</b>
+                                        <div class="graytext">What's the category of the room?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select style="color: black; font-family: Verdana" name="category">
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" {{ $category->id == $room->category ? 'selected="selected"' : '' }}>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,44 +123,6 @@
                             </table>
                         </div>
                     </form>
-                    @else
-                    <div class="tableborder">
-                        <div class="tableheaderalt">Habbo guestrooms editor</div>
-                        <table cellpadding="4" cellspacing="0" width="100%">
-                            <tr>
-                                <td class="tablesubheader" width="1%" align="center">Room ID</td>
-                                <td class="tablesubheader" width="14%" align="center">Owner</td>
-                                <td class="tablesubheader" width="30%" align="center">Roomname</td>
-                                <td class="tablesubheader" width="30%" align="center">Description</td>
-                                <td class="tablesubheader" width="23%" align="center">Type</td>
-                                <td class="tablesubheader" width="2%" align="center">Edit</td>
-                            </tr>
-
-                            @foreach($rooms as $room)
-                            <tr>
-                                <td class="tablerow1" align="center">
-                                     {{ $room->id }}
-                                </td>
-                                <td class="tablerow2">
-                                    {{ $room->owner_name }}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {!! $room->name ? $room->name : '<b><i>No room name</i></b>'  !!}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {!! $room->description ? $room->description : '<b><i>No room description</i></b>'  !!}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {{ $room->state }}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    <a href="{{ route('admin.users.editor.guestroom', $room->id) }}"><img src=" {{ url('/') }}/web/admin/images/edit.gif" alt="Edit guestroom"></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                    @endif
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>
