@@ -80,6 +80,8 @@ class CreditsController extends Controller
             }
         }
 
+        create_staff_log('credits.vouchers.add', $request);
+
         return redirect()->route('housekeeping.credits.vouchers')->with('message', 'Voucher created!');
     }
 
@@ -97,6 +99,8 @@ class CreditsController extends Controller
             $voucher->deleteItems();
             Voucher::where('voucher_code', $request->voucher)->delete();
         }
+
+        create_staff_log('credits.vouchers.delete', $request);
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'Voucher deleted!']);
     }

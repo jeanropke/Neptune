@@ -4,6 +4,7 @@ use App\Models\BoxPage;
 use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
+use App\Models\StaffLog;
 use Illuminate\Support\Facades\Auth;
 
 function user()
@@ -142,6 +143,15 @@ function is_hotel_online() {
         fclose($f);
         return true;
     }
+}
 
-
+function create_staff_log($page, $request) {
+    unset($request['_token']);
+    $message = json_encode($request->post());
+    StaffLog::create([
+        'user_id'       => user()->id,
+        'page'          => $page,
+        'message'       => $message,
+        'ip_address'    => request()->ip()
+    ]);
 }

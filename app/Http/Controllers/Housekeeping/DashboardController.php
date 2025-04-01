@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Housekeeping;
 
 use App\Http\Controllers\Controller;
-use App\Models\CmsSetting;
 use App\Models\Group;
 use App\Models\Room;
 use App\Models\StaffLog;
@@ -39,6 +38,8 @@ class DashboardController extends Controller
             return view('housekeeping.accessdenied');
 
         set_cms_config('site.admin.notes', $request->notes ?? '');
+
+        create_staff_log('dashboard.note.save', $request);
 
         return redirect()->route('housekeeping.index')->with('message', 'Housekeeping notes saved successfully.');
     }

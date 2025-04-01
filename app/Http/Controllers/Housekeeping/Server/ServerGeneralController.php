@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Housekeeping\Server;
 
 use App\Http\Controllers\Controller;
-use App\Models\StaffLog;
 use Illuminate\Http\Request;
 
 class ServerGeneralController extends Controller
@@ -37,8 +36,7 @@ class ServerGeneralController extends Controller
         set_cms_config('connection.rcon.host', $request->connection_rcon_host);
         set_cms_config('connection.rcon.port', $request->connection_rcon_port);
 
-        unset($request['_token']);
-        StaffLog::createLog('server', json_encode($request->post()));
+        ucreate_staff_log('server.general.save', $request);
 
         return redirect()->route('housekeeping.server')->with('message',  'Server settings updated!');
     }
@@ -180,8 +178,7 @@ class ServerGeneralController extends Controller
         set_emu_config('welcome.message.enabled', $request->welcome_message_enabled ? 'true' : 'false');
         set_emu_config('welcome.message.content', $request->welcome_message_content ?? '');
 
-        unset($request['_token']);
-        StaffLog::createLog('server.welcomemsg', json_encode($request->post()));
+        ucreate_staff_log('server.welcomemsg.save', $request);
 
         return redirect()->route('housekeeping.server.welcomemsg')->with('message',  'Welcome message settings updated!');
     }

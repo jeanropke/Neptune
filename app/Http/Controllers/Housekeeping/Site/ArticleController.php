@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\Models\StaffLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -51,8 +50,7 @@ class ArticleController extends Controller
             'url' => $article->id . '_' . $url
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.article.create', json_encode($request->post()));
+        create_staff_log('site.article.create', $request);
 
         return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article created!');
     }
@@ -100,7 +98,6 @@ class ArticleController extends Controller
         if (!$article)
             return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article not found!');
 
-
         $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
         $url = str_replace(" ", "_", $url);
         $url = strtolower($url);
@@ -117,8 +114,7 @@ class ArticleController extends Controller
             'url'               => $article->id . '_' . $url
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.article.edit', json_encode($request->post()));
+        create_staff_log('site.article.edit.save', $request);
 
         return redirect()->route('housekeeping.site.article.edit', $article->id)->with('message', 'Article updated!');
     }
@@ -137,8 +133,8 @@ class ArticleController extends Controller
             'is_deleted' => '1',
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.article.delete', json_encode($request->post()));
+        create_staff_log('site.article.delete', $request);
+
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Article deleted!']);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\RoomCategory;
-use App\Models\StaffLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -88,6 +87,8 @@ class EditorController extends Controller
             'category'      => $request->category
         ]);
 
+        create_staff_log('editor.guestroom.save', $request);
+
         return redirect()->route('housekeeping.editor.guestroom.edit', $room->id)->with('message', 'Room edited!');
     }
 
@@ -156,6 +157,8 @@ class EditorController extends Controller
             'category'      => $request->category
         ]);
 
+        create_staff_log('editor.publicroom.save', $request);
+
         return redirect()->route('housekeeping.editor.publicroom.edit', $room->id)->with('message', 'Public room edited!');
     }
 
@@ -197,6 +200,8 @@ class EditorController extends Controller
             'category'      => $request->category
         ]);
 
+        create_staff_log('editor.publicroom.add', $request);
+
         return redirect()->route('housekeeping.editor.publicroom.edit', $room->id)->with('message', 'Public room added!');
     }
 
@@ -215,8 +220,7 @@ class EditorController extends Controller
 
         $room->delete();
 
-        unset($request['_token']);
-        StaffLog::createLog('editor.publicroom.delete', json_encode($request->post()));
+        create_staff_log('editor.publicroom.delete', $request);
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Public room deleted!']);
     }
 }

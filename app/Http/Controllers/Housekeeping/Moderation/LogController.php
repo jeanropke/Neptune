@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\StaffLog;
-use App\Models\User;
-use App\Models\Voucher;
-use App\Models\VoucherHistory;
-use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 
 class LogController extends Controller

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Housekeeping\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Box;
 use App\Models\BoxPage;
-use App\Models\StaffLog;
 use Illuminate\Http\Request;
 
 class BoxController extends Controller
@@ -55,8 +54,7 @@ class BoxController extends Controller
             'created_by'    => user()->id
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.create', json_encode($request->post()));
+        create_staff_log('site.box.create.save', $request);
 
         return redirect()->route('housekeeping.site.box.create')->with('message',  'Box created!');
     }
@@ -79,8 +77,7 @@ class BoxController extends Controller
         if (!$box)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This box does not exist!']);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.delete', json_encode($box));
+        create_staff_log('site.box.delete', $request);
         $box->delete();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Box deleted!']);
@@ -124,8 +121,7 @@ class BoxController extends Controller
             'requirement'   => $request->requirement
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.edit', json_encode($box));
+        create_staff_log('site.box.edit.save', $request);
 
         return redirect()->route('housekeeping.site.box.edit', $request->id)->with('message', 'Box updated!');
     }
@@ -163,8 +159,7 @@ class BoxController extends Controller
             'color'    => $request->override_color
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.pages.create.save', json_encode($request->post()));
+        create_staff_log('site.box.pages.create.save', $request);
 
         return redirect()->route('housekeeping.site.box.pages.manage')->with('message',  'Box Page created!');
     }
@@ -204,8 +199,7 @@ class BoxController extends Controller
             'color'     => $request->override_color
         ]);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.pages.save', json_encode($request->post()));
+        create_staff_log('site.box.pages.save', $request);
 
         return redirect()->route('housekeeping.site.box.pages.edit', $box->id)->with('message',  'Box Page edited!');
     }
@@ -220,8 +214,7 @@ class BoxController extends Controller
         if (!$box)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This box page does not exist!']);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.box.pages.delete', json_encode($box));
+        create_staff_log('site.box.pages.delete', $request);
         $box->delete();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Box page deleted!']);

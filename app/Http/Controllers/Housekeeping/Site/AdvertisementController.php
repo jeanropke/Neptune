@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\StaffLog;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
@@ -28,8 +27,7 @@ class AdvertisementController extends Controller
         set_cms_config('site.ads_footer.enabled', $request->site_ads_footer_enabled);
         set_cms_config('site.ads_footer.content', $request->site_ads_footer_content);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.ads', json_encode($request->post()));
+        create_staff_log('site.ads.save', $request);
         return redirect()->route('housekeeping.site.ads')->with('message', 'Settings updated!');
     }
 
@@ -41,8 +39,8 @@ class AdvertisementController extends Controller
         set_cms_config('site.tracking.enabled', $request->site_tracking_enabled);
         set_cms_config('site.tracking.content', $request->site_tracking_content);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.tracking', json_encode($request->post()));
+        create_staff_log('site.tracking.save', $request);
+
         return redirect()->route('housekeeping.site.ads')->with('message', 'Settings updated!');
     }
 }

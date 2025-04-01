@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
-use App\Models\StaffLog;
 use App\Models\User;
 use App\Models\UserBadge;
 use App\Models\UserIPLog;
@@ -83,8 +82,7 @@ class UserController extends Controller
         mus("refresh_looks", ['userId' => $user->id]);
         mus("refresh_credits", ['userId' => $user->id]);
 
-        unset($request['_token']);
-        StaffLog::createLog('user_edit', json_encode($request->post()));
+        create_staff_log('users.edit.save', $request);
 
         return redirect()->route('housekeeping.users.edit', $user->id)->with('message', 'User changed!');
     }
@@ -138,6 +136,8 @@ class UserController extends Controller
         if (!$result)
             return redirect()->back()->with('message', 'User already have this badge!');
 
+        create_staff_log('users.badge.give', $request);
+
         return redirect()->route('housekeeping.users.badges', $user->id)->with('message', 'Badge given to user!');
     }
 
@@ -157,8 +157,8 @@ class UserController extends Controller
 
         UserBadge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->delete();
 
-        unset($request['_token']);
-        StaffLog::createLog('users.badges.remove', json_encode($request->post()));
+        create_staff_log('users.badge.remove', $request);
+
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Badge removed!']);
     }
 

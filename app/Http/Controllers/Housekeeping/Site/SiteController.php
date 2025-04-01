@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\StaffLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -50,8 +49,7 @@ class SiteController extends Controller
         DB::statement("ALTER TABLE users ALTER COLUMN console_motto SET DEFAULT '{$request->register_default_console_motto}'");
         DB::statement("ALTER TABLE users ALTER COLUMN motto SET DEFAULT '{$request->register_default_motto}'");
 
-        unset($request['_token']);
-        StaffLog::createLog('site', json_encode($request->post()));
+        create_staff_log('site.general.save', $request);
         return redirect()->route('housekeeping.site')->with('message', 'Site settings updated!');
     }
 
@@ -74,8 +72,7 @@ class SiteController extends Controller
 
         set_cms_config('site.maintenance.enabled', $request->site_maintenance_enabled);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.maintenance', json_encode($request->post()));
+        create_staff_log('site.maintenance.save', $request);
         return redirect()->route('housekeeping.site.maintenance')->with('message', 'Maintenance settings updated!');
     }
 
@@ -102,8 +99,7 @@ class SiteController extends Controller
         set_cms_config('external.variables.txt', $request->external_variables_txt);
         set_cms_config('habbo.dcr.url', $request->habbo_dcr_url);
 
-        unset($request['_token']);
-        StaffLog::createLog('site.loader', json_encode($request->post()));
+        create_staff_log('site.loader.save', $request);
         return redirect()->route('housekeeping.site.loader')->with('message', 'Loader settings updated!');
     }
 }
