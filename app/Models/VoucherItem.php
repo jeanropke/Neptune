@@ -14,4 +14,9 @@ class VoucherItem extends Model
 
     public $timestamps = false;
 
+    public function getNormalizedName()
+    {
+        return str_replace('*', '_', $this->catalogue_sale_code);
+    }
+
 }

@@ -103,8 +103,12 @@
                                     <td class="tablerow2" align="center">
                                         {{ $voucher->is_single_use ? 'Yes' : 'No' }}
                                     </td>
-                                    <td class="tablerow2" align="center">
-                                        {{ $voucher->getItems() }}
+                                    <td class="tablerow2" align="center" id="furni-picker-listing">
+                                        @foreach ($voucher->getItems() as $item)
+                                            <div class="slot" style="height: 56px; line-height: 9;">
+                                                <div class="image" style="background-image: url({{ cms_config('furni.small.url') }}/{{ $item->getNormalizedName() }}_icon.png)"><b>x{{ $item->amount }}</b></div>
+                                            </div>
+                                        @endforeach
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="#" class="delete-voucher" data-voucher="{{ $voucher->voucher_code }}">
