@@ -3,9 +3,6 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CatalogueController;
-use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
@@ -20,7 +17,9 @@ use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
+use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\FurniPickerController;
+use App\Http\Controllers\Housekeeping\Furniture\CatalogueController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
@@ -354,19 +353,15 @@ Route::middleware('admin')->group(function () {
             Route::get('/welcomemsg', [ServerGeneralController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
             Route::post('/welcomemsg', [ServerGeneralController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
         });
-        Route::prefix('catalogue')->group(function () {
-            Route::get('/', [CatalogueController::class, 'index'])->name('housekeeping.catalogue');
-            Route::get('/pages/edit/{id}', [CatalogueController::class, 'catalogPageEdit'])->name('housekeeping.catalogue.pages.edit');
-            Route::post('/pages/save', [CatalogueController::class, 'catalogPageSave'])->name('housekeeping.catalogue.pages.save');
 
-            Route::get('/items/{id?}', [CatalogueController::class, 'catalogItems'])->name('housekeeping.catalogue.items');
-            Route::get('/items/edit/{id}', [CatalogueController::class, 'catalogItemsEdit'])->name('housekeeping.catalogue.items.edit');
-            Route::post('/items/save', [CatalogueController::class, 'catalogItemsSave'])->name('housekeeping.catalogue.items.save');
-
-            Route::get('/furni/edit/{id}', [CatalogueController::class, 'catalogFurniEdit'])->name('housekeeping.catalogue.furni.edit');
-            Route::post('/furni/save', [CatalogueController::class, 'catalogFurniSave'])->name('housekeeping.catalogue.furni.save');
-
-            Route::post('/furni/search', [CatalogueController::class, 'furniSearch'])->name('housekeeping.catalogue.furni.search');
+        Route::prefix('furniture')->group(function() {
+            Route::get('/catalogue', [CatalogueController::class, 'catalogue'])->name('housekeeping.furniture.catalogue.pages');
+            Route::get('/catalogue/edit/{id}', [CatalogueController::class, 'catalogueEdit'])->name('housekeeping.furniture.catalogue.pages.edit');
+            Route::post('/catalogue/save', [CatalogueController::class, 'catalogueSave'])->name('housekeeping.furniture.catalogue.pages.save');
+            Route::get('/catalogue/add', [CatalogueController::class, 'catalogueAdd'])->name('housekeeping.furniture.catalogue.pages.add');
+            Route::post('/catalogue/add', [CatalogueController::class, 'catalogueAddSave'])->name('housekeeping.furniture.catalogue.pages.add');
+            Route::post('/catalogue/delete', [CatalogueController::class, 'catalogueDelete'])->name('housekeeping.furniture.catalogue.pages.delete');
+            Route::get('/catalogue/items', [CatalogueController::class, 'catalogueItems'])->name('housekeeping.furniture.catalogue.items');
         });
 
         Route::prefix('site')->group(function () {

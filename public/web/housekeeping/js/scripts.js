@@ -253,6 +253,26 @@ var StaffLogManager = {
     }
 }
 
+var CatalogueManager = {
+    initialise: function () {
+        $('.delete-cataloguepage').click((e) => {
+            e.preventDefault();
+            $this = $(e.target).closest('.delete-cataloguepage');
+            Dialog.showConfirmDialog('<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>', () => { this.delete($this.data('id')) });
+        });
+    },
+    delete: function (id) {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(habboReqPath + "furniture/catalogue/delete", {
+            data: { id: id },
+            method: "post"
+        }).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;

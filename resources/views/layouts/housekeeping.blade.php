@@ -56,7 +56,7 @@
             </div>
             <div class="tab{{ $menu == 'catalogue' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/catalogue.png" style="vertical-align:middle" />
-                <a href="/housekeeping/catalogue">Catalogue & Furnis</a>
+                <a href="{{ route('housekeeping.furniture.catalogue.pages') }}">Furniture & Catalogue</a>
             </div>
             <div class="tab{{ $menu == 'neptunecms' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/components.png" style="vertical-align:middle" />
