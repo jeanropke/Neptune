@@ -25,7 +25,7 @@ class UserController extends Controller
                 break;
             default:
                 $users = User::orderby('id', 'DESC');
-            break;
+                break;
         }
 
         return view('housekeeping.moderation.users.listing')->with([
@@ -79,8 +79,10 @@ class UserController extends Controller
             'credits'       => $request->credits
         ]);
 
-        mus("refresh_looks", ['userId' => $user->id]);
-        mus("refresh_credits", ['userId' => $user->id]);
+        if (is_hotel_online()) {
+            mus("refresh_looks", ['userId' => $user->id]);
+            mus("refresh_credits", ['userId' => $user->id]);
+        }
 
         create_staff_log('users.edit.save', $request);
 
