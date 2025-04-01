@@ -104,35 +104,6 @@ function bb_format($str)
     return $str;
 }
 
-function mus($key, $data = [])
-{
-    $command = build_mus($key, $data);
-    $socket = @socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
-    @socket_connect($socket, cms_config('connection.rcon.host'), cms_config('connection.rcon.port'));
-    @socket_send($socket, $command, strlen($command), MSG_DONTROUTE);
-    @socket_close($socket);
-}
-
-function build_mus($header, $parameters) {
-    $message = "";
-    $message .= pack('N', strlen($header));
-    $message .= $header;
-    $message .= pack('N', count($parameters));
-
-    foreach ($parameters as $key => $value) {
-        $message .= pack('N', strlen($key));
-        $message .= $key;
-
-        $message .= pack('N', strlen($value));
-        $message .= $value;
-    }
-
-    $buffer = "";
-    $buffer .= pack('N', strlen($message));
-    $buffer .= $message;
-    return $buffer;
-}
-
 function is_hotel_online() {
     $errNo = 0;
     $f = @fsockopen(cms_config('connection.rcon.host'), cms_config('connection.rcon.port'), $errNo, $errNo, 0.01);
@@ -154,4 +125,64 @@ function create_staff_log($page, $request) {
         'message'       => $message,
         'ip_address'    => request()->ip()
     ]);
+}
+
+function rcon($key, $data = [])
+{
+    $command = build_rcon($key, $data);
+    $socket = @socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
+    @socket_connect($socket, cms_config('connection.rcon.host'), cms_config('connection.rcon.port'));
+    @socket_send($socket, $command, strlen($command), MSG_DONTROUTE);
+    @socket_close($socket);
+}
+
+function build_rcon($header, $parameters) {
+    $message = "";
+    $message .= pack('N', strlen($header));
+    $message .= $header;
+    $message .= pack('N', count($parameters));
+
+    foreach ($parameters as $key => $value) {
+        $message .= pack('N', strlen($key));
+        $message .= $key;
+
+        $message .= pack('N', strlen($value));
+        $message .= $value;
+    }
+
+    $buffer = "";
+    $buffer .= pack('N', strlen($message));
+    $buffer .= $message;
+    return $buffer;
+}
+
+
+#[\Deprecated(message: "use rcon() instead")]
+function mus($key, $data = [])
+{
+    $command = build_mus($key, $data);
+    $socket = @socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
+    @socket_connect($socket, cms_config('connection.rcon.host'), cms_config('connection.rcon.port'));
+    @socket_send($socket, $command, strlen($command), MSG_DONTROUTE);
+    @socket_close($socket);
+}
+#[\Deprecated("use build_rcon() instead")]
+function build_mus($header, $parameters) {
+    $message = "";
+    $message .= pack('N', strlen($header));
+    $message .= $header;
+    $message .= pack('N', count($parameters));
+
+    foreach ($parameters as $key => $value) {
+        $message .= pack('N', strlen($key));
+        $message .= $key;
+
+        $message .= pack('N', strlen($value));
+        $message .= $value;
+    }
+
+    $buffer = "";
+    $buffer .= pack('N', strlen($message));
+    $buffer .= $message;
+    return $buffer;
 }
