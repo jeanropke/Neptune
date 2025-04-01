@@ -203,6 +203,38 @@ var FurniPicker = {
     }
 }
 
+var LogManager = {
+    initialise: function () {
+        this.picked = [];
+        $('.message-details').click((e) => {
+            e.preventDefault();
+            if ($('#message-details-dialog').length > 0) return;
+            this.dialog = Dialog.createDialog("message-details-dialog", "Message Details", 9001, null, null, this.closeDialog);
+            this.dialog.css('width', '1000px');
+            Overlay.show();
+            Dialog.makeDialogDraggable(this.dialog);
+            Dialog.moveDialogToCenter(this.dialog);
+            Dialog.setAsWaitDialog(this.dialog);
+
+            var id = $(e.target).closest('.message-details').data('id');
+
+            $.ajax(habboReqPath + "logs/staff/details", {
+                data: { id: id },
+                method: "post"
+            }).done((html, status) => {
+                Dialog.setDialogBody(this.dialog, html);
+                $("#confirm-dialog-close").click((e) => { this.closeDialog(e); });
+            });
+        });
+    },
+
+    closeDialog: function (e) {
+        e.preventDefault();
+        $('#message-details-dialog').remove();
+        Overlay.hide();
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;
@@ -260,8 +292,8 @@ var Dialog = {
         }
         this.appendDialogBody(dialog, $("<div>", { id: options.dialogId + "content" }));
         $('#' + options.dialogId + "content").html(message);
-        var link = $("<input>", { type: "submit", class: "realbutton", value: options.buttonText }).css('float', 'right');
-        var cancelLink = $("<input>", { type: "submit", class: "realbutton", value: options.cancelButtonText });
+        var link = $("<input>", { type: "submit", class: "realbutton", value: options.buttonText, style: "margin: 7px; float: right" });
+        var cancelLink = $("<input>", { type: "submit", class: "realbutton", value: options.cancelButtonText, style: "margin: 7px;" });
         this.appendDialogBody(dialog, $("<div>").append(cancelLink).append(link), true);
         link.click(options.okHandler);
         cancelLink.click(options.cancelHandler);

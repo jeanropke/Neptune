@@ -9,15 +9,24 @@ class StaffLog extends Model
     protected $table = 'cms_stafflogs';
 
     protected $fillable = [
-        'id', 'user_id', 'page', 'message'
+        'id', 'user_id', 'page', 'message', 'ip_address'
     ];
+
+
+    public function getUsername()
+    {
+        $user = User::find($this->user_id);
+        if ($user)
+            return $user->username;
+    }
 
     public static function createLog($page, $message)
     {
         StaffLog::create([
-            'user_id'   => user()->id,
-            'page'      => $page,
-            'message'   => $message
+            'user_id'       => user()->id,
+            'page'          => $page,
+            'message'       => $message,
+            'ip_address'    => request()->ip()
         ]);
     }
 }

@@ -23,6 +23,7 @@ use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthControll
 use App\Http\Controllers\Housekeeping\FurniPickerController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
+use App\Http\Controllers\Housekeeping\Moderation\LogController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
@@ -335,8 +336,6 @@ Route::middleware('admin')->group(function () {
             Route::post('/site', [SettingsController::class, 'siteSave'])->name('housekeeping.settings.site.save');
         });
 
-        Route::get('/logs', [AdminController::class, 'logs'])->name('housekeeping.logs');
-
         Route::prefix('server')->group(function () {
             Route::get('/', [ServerGeneralController::class, 'index'])->name('housekeeping.server');
             Route::post('/', [ServerGeneralController::class, 'serverSave'])->name('housekeeping.server.save');
@@ -467,6 +466,11 @@ Route::middleware('admin')->group(function () {
             Route::post('/vouchers/delete', [HousekeepingCreditsController::class, 'vouchersDelete'])->name('housekeeping.credits.vouchers.delete');
 
             Route::get('/vouchers/history', [HousekeepingCreditsController::class, 'vouchersHistory'])->name('housekeeping.credits.vouchers.history');
+        });
+
+        Route::prefix('logs')->group(function() {
+            Route::get('staff', [LogController::class, 'staff'])->name('housekeeping.logs.staff');
+            Route::post('staff/details', [LogController::class, 'staffDetails'])->name('housekeeping.logs.staff.details');
         });
 
         Route::prefix('help')->group(function () {

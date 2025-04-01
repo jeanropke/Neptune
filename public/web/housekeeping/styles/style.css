@@ -1624,8 +1624,10 @@ div.dialog-default-body,
 div.dialog-defaulttab-body {
     background-position: top right;
     background-repeat: repeat-y;
-    padding: 7px;
     text-align: left;
+}
+#confirm-dialogcontent {
+    padding: 7px;
 }
 
 .clear {
