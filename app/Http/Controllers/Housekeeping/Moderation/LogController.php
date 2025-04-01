@@ -10,13 +10,15 @@ class LogController extends Controller
 {
     public function staff()
     {
+        if (!user()->hasPermission('can_view_stafflogs'))
+            return view('housekeeping.accessdenied');
         return view('housekeeping.moderation.logs.staff')->with('logs', StaffLog::orderBy('created_at', 'DESC')->paginate(15));
     }
 
     public function staffMessageDetails(Request $request)
     {
-        //if (!user()->hasPermission('can_edit_users_guestroom'))
-        //return view('housekeeping.ajax.accessdenied_dialog');
+        if (!user()->hasPermission('can_view_stafflogs'))
+            return view('housekeeping.ajax.accessdenied_dialog');
 
         $log = StaffLog::find($request->id);
         if (!$log)
