@@ -87,7 +87,7 @@
                             @endforelse
                         </table>
                         <script>
-                            PublicRoomManager.initialise();
+                            GenericManager.initialise('.delete-publicroom', '<p>Are you sure you want to delete this public room? This cannot be undone!</p>', '{{ route('housekeeping.editor.publicroom.delete') }}');
                         </script>
                     </div>
                     <div style="text-align: center; vertical-align: middle;">{!! $rooms->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>

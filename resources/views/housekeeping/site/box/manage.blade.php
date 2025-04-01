@@ -60,9 +60,7 @@
                         </div>
                     </div>
                     <script>
-                        $(window).on('load', function() {
-                            BoxManage.initialise();
-                        });
+                        GenericManager.initialise('.delete-box', '<p>Are you sure you want to delete this box? This cannot be undone!</p>', '{{ route('housekeeping.site.box.delete') }}');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

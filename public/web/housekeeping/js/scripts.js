@@ -1,65 +1,3 @@
-/*
-    News
-*/
-var NewsManage = {
-    initialise: function () {
-        $('.delete-article').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-article');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this article?</p>', () => { this.delete($this.data('id')) });
-        });
-    },
-    delete: function (id) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "site/article/delete", {
-            data: { id: id },
-            method: "post"
-        }).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
-    }
-}
-
-var BoxManage = {
-    initialise: function () {
-        $('.delete-box').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-box');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => { this.delete($this.data('id')) });
-        });
-    },
-    delete: function (id) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "site/box/delete", {
-            data: { id: id },
-            method: "post"
-        }).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
-    }
-}
-
-var BoxPagesManage = {
-    initialise: function () {
-        $('.delete-box-page').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-box-page');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this box?</p>', () => { this.delete($this.data('id')) });
-        });
-    },
-    delete: function (id) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "site/box/pages/delete", {
-            data: { id: id },
-            method: "post"
-        }).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
-    }
-}
 
 var BadgesManager = {
     initialise: function (url) {
@@ -84,26 +22,6 @@ var BadgesManager = {
     }
 }
 
-var PublicRoomManager = {
-    initialise: function () {
-        $('.delete-publicroom').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-publicroom');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this public room?</p>', () => { this.delete($this.data('id')) });
-        });
-    },
-    delete: function (id) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "editors/publicroom/delete", {
-            data: { id: id },
-            method: "post"
-        }).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
-    }
-}
-
 var VoucherManager = {
     initialise: function (length) {
         $('#random-code').click((e) => {
@@ -111,13 +29,6 @@ var VoucherManager = {
             $('input[name=voucher]').val(this.generate(length));
         });
         $('input[name=voucher]').val(this.generate(length));
-
-        $('.delete-voucher').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-voucher');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this voucher?</p>', () => { this.delete($this.data('voucher')) });
-        });
-
     },
     generate: function (length) {
         var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -126,16 +37,6 @@ var VoucherManager = {
             code += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return code;
-    },
-    delete: function (voucher) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "credits/vouchers/delete", {
-            data: { voucher: voucher },
-            method: "post"
-        }).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
     }
 }
 
@@ -235,35 +136,17 @@ var LogManager = {
     }
 }
 
-var StaffLogManager = {
-    initialise: function()
-    {
-        $('#clear-logs').click((e) => {
+var GenericManager = {
+    initialise: function (div, message, url) {
+        $(div).click((e) => {
             e.preventDefault();
-            var url = $(e.currentTarget).attr('href');
-            Dialog.showConfirmDialog('Are you sure you want to clear all staff logs?', () => {this.confirm(url)});
+            $this = $(e.target).closest(div);
+            Dialog.showConfirmDialog(message, () => { this.delete($this.data('id'), url) });
         });
     },
-    confirm: function(url) {
+    delete: function (id, url) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(url, { method: 'post'}).done((html, status) => {
-            Dialog.setDialogBody($("#confirm-dialog"), html);
-            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
-        });
-    }
-}
-
-var CatalogueManager = {
-    initialise: function () {
-        $('.delete-cataloguepage').click((e) => {
-            e.preventDefault();
-            $this = $(e.target).closest('.delete-cataloguepage');
-            Dialog.showConfirmDialog('<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>', () => { this.delete($this.data('id')) });
-        });
-    },
-    delete: function (id) {
-        Dialog.setAsWaitDialog($("#confirm-dialog"));
-        $.ajax(habboReqPath + "furniture/catalogue/delete", {
+        $.ajax(url, {
             data: { id: id },
             method: "post"
         }).done((html, status) => {

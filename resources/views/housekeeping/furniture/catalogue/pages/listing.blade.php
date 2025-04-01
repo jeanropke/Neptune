@@ -102,7 +102,7 @@
                             @endforelse
                         </table>
                         <script>
-                            CatalogueManager.initialise();
+                            GenericManager.initialise('.delete-cataloguepage', '<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>', '{{ route('housekeeping.furniture.catalogue.pages.delete') }}');
                         </script>
                     </div>
 

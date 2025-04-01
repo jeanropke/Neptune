@@ -70,9 +70,7 @@
                         </div>
                     </div>
                     <script>
-                        $(window).on('load', function() {
-                            NewsManage.initialise();
-                        });
+                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.article.delete') }}');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

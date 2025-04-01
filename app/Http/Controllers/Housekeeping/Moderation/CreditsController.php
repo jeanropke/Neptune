@@ -90,14 +90,14 @@ class CreditsController extends Controller
         if (!user()->hasPermission('can_create_vouchers'))
             return view('housekeeping.ajax.accessdenied_dialog');
 
-        $voucher = Voucher::where('voucher_code', $request->voucher)->first();
+        $voucher = Voucher::where('voucher_code', $request->id)->first();
 
         if (!$voucher)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This voucher does not exist!']);
 
         if ($voucher->is_single_use > 0) {
             $voucher->deleteItems();
-            Voucher::where('voucher_code', $request->voucher)->delete();
+            Voucher::where('voucher_code', $request->id)->delete();
         }
 
         create_staff_log('credits.vouchers.delete', $request);

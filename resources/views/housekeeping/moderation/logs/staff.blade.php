@@ -60,10 +60,10 @@
                     <div style="text-align: center; vertical-align: middle;">{!! $logs->links('layouts.housekeeping.pagination') !!}</div>
 
                     @if(cms_config('clear.staff_logs.user_id') == user()->id)
-                        <div align="center">(<a href="{{ route('housekeeping.logs.staff.clear') }}" id="clear-logs"><b>Clear Logs</b></a>)</div>
+                        <div align="center">(<a href="#" id="clear-logs"><b>Clear Logs</b></a>)</div>
 
                         <script>
-                            StaffLogManager.initialise();
+                            GenericManager.initialise('#clear-logs', '<p>Are you sure you want to clear all staff logs?</p>', '{{ route('housekeeping.logs.staff.clear') }}');
                         </script>
                     @endif
                 </div>

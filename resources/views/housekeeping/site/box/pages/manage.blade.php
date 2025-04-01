@@ -20,7 +20,6 @@
                     @endif
                     <div class="tableborder">
                         <div class="tableheaderalt">Boxes</div>
-                        <div style="text-align: center; vertical-align: middle;">{!! $boxpages->links('layouts.housekeeping.pagination') !!}</div>
                         <div style="text-align: center; vertical-align: middle;"></div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tbody>
@@ -64,10 +63,9 @@
                             <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.box.pages.create') }}">Create New Box</a></span></div>
                         </div>
                     </div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $boxpages->links('layouts.housekeeping.pagination') !!}</div>
                     <script>
-                        $(window).on('load', function() {
-                            BoxPagesManage.initialise();
-                        });
+                        GenericManager.initialise('.delete-box-page', '<p>Are you sure you want to delete this box page? This cannot be undone!</p>', '{{ route('housekeeping.site.box.pages.delete') }}');
                     </script>
                 </div>
             </td>

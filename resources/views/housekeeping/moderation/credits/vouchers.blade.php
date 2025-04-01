@@ -111,7 +111,7 @@
                                         @endforeach
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="#" class="delete-voucher" data-voucher="{{ $voucher->voucher_code }}">
+                                        <a href="#" class="delete-voucher" data-id="{{ $voucher->voucher_code }}">
                                             <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
                                         </a>
                                     </td>
@@ -126,6 +126,7 @@
                     <script>
                         FurniPicker.initialise();
                         VoucherManager.initialise(12);
+                        GenericManager.initialise('.delete-voucher', '<p>Are you sure you want to delete this voucher? This cannot be undone!</p>', '{{ route('housekeeping.credits.vouchers.delete') }}');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
