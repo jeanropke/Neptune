@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.users.include.menu', ['submenu' => 'tools.mass'])
+                    @include('housekeeping.moderation.include.menu', ['submenu' => 'tools.mass'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">

@@ -29,7 +29,7 @@ class UserController extends Controller
             break;
         }
 
-        return view('housekeeping.users.listing')->with([
+        return view('housekeeping.moderation.users.listing')->with([
             'users' => $users->paginate(15)
         ]);
     }
@@ -43,7 +43,7 @@ class UserController extends Controller
         if (!$user)
             return redirect()->route('housekeeping.users.listing')->with('message',  'User not found!');
 
-        return view('housekeeping.users.edit')->with([
+        return view('housekeeping.moderation.users.edit')->with([
             'user' => $user
         ]);
     }
@@ -98,7 +98,7 @@ class UserController extends Controller
         if (!$user)
             return redirect()->route('housekeeping.users.listing')->with('message', 'User not found');
 
-        return view('housekeeping.users.listingip')->with([
+        return view('housekeeping.moderation.users.listingip')->with([
             'ips'   => UserIPLog::where('user_id', $user->id)->paginate(15),
             'user'  => $user
         ]);
@@ -110,13 +110,13 @@ class UserController extends Controller
             return view('housekeeping.accessdenied');
 
         if (!$request->id)
-            return view('housekeeping.users.badges');
+            return view('housekeeping.moderation.users.badges');
 
         $user = User::find($request->id);
         if (!$user)
-            return view('housekeeping.users.badges')->with('message', 'User not found');
+            return view('housekeeping.moderation.users.badges')->with('message', 'User not found');
 
-        return view('housekeeping.users.badges')->with('user', $user);
+        return view('housekeeping.moderation.users.badges')->with('user', $user);
     }
 
     public function toolsBadgeGive(Request $request)
@@ -167,7 +167,7 @@ class UserController extends Controller
         if (!user()->hasPermission('can_edit_users'))
             return view('housekeeping.ajax.accessdenied');
 
-        return view('housekeeping.users.mass');
+        return view('housekeeping.moderation.users.mass');
     }
 
     public function toolsMassPost(Request $request)

@@ -1626,7 +1626,7 @@ div.dialog-defaulttab-body {
     background-repeat: repeat-y;
     text-align: left;
 }
-#confirm-dialogcontent {
+#confirm-dialogcontent, #furni-picker-dialog-body {
     padding: 7px;
 }
 

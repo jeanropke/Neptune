@@ -32,7 +32,7 @@ class EditorController extends Controller
                 break;
         }
 
-        return view('housekeeping.users.editor.guestroom.listing')->with([
+        return view('housekeeping.moderation.editor.guestroom.listing')->with([
             'rooms' => $rooms->paginate(15)
         ]);
     }
@@ -46,7 +46,7 @@ class EditorController extends Controller
         if (!$room)
             return redirect()->route('housekeeping.editor.guestroom.listing')->with('message', 'Room not found!');
 
-        return view('housekeeping.users.editor.guestroom.edit')->with([
+        return view('housekeeping.moderation.editor.guestroom.edit')->with([
             'room'          => $room,
             'categories'    => RoomCategory::where('public_spaces', '0')->get()
         ]);
@@ -103,7 +103,7 @@ class EditorController extends Controller
             $rooms = Room::where('owner_id', 0);
         }
 
-        return view('housekeeping.users.editor.publicroom.listing')->with([
+        return view('housekeeping.moderation.editor.publicroom.listing')->with([
             'rooms' => $rooms->paginate(15)
         ]);
     }
@@ -117,7 +117,7 @@ class EditorController extends Controller
         if (!$room)
             return redirect()->route('housekeeping.editor.publicroom.listing')->with('message', 'Public room not found!');
 
-        return view('housekeeping.users.editor.publicroom.edit')->with([
+        return view('housekeeping.moderation.editor.publicroom.edit')->with([
             'room'          => $room,
             'categories'    => RoomCategory::where('public_spaces', '1')->get()
         ]);
@@ -164,7 +164,7 @@ class EditorController extends Controller
         if (!user()->hasPermission('can_edit_users_guestroom'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.users.editor.publicroom.add')->with([
+        return view('housekeeping.moderation.editor.publicroom.add')->with([
             'categories'    => RoomCategory::where('public_spaces', '1')->get()
         ]);
     }

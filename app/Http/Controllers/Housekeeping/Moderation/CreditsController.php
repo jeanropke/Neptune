@@ -44,7 +44,7 @@ class CreditsController extends Controller
         if (!user()->hasPermission('can_create_vouchers'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.users.credits.vouchers')->with([
+        return view('housekeeping.moderation.credits.vouchers')->with([
             'vouchers' => Voucher::all()
         ]);
     }
@@ -108,8 +108,8 @@ class CreditsController extends Controller
 
         $user = User::where('username', $request->username)->first();
         if ($user)
-            return view('housekeeping.users.credits.vouchers_history')->with('vouchers', VoucherHistory::where('user_id', $user->id)->paginate(15));
+            return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', VoucherHistory::where('user_id', $user->id)->paginate(15));
 
-        return view('housekeeping.users.credits.vouchers_history')->with('vouchers', VoucherHistory::paginate(15));
+        return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', VoucherHistory::paginate(15));
     }
 }
