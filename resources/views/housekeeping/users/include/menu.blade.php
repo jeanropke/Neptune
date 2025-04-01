@@ -6,10 +6,6 @@
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.search') }}" style="text-decoration:none; {{ $submenu == 'users.search' ? 'font-weight: bold;' : '' }}" >Search user</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.tools.badge') }}" style="text-decoration:none;{{ $submenu == 'tools.badge' ? 'font-weight: bold;' : '' }}">Give user badge</a>
     </div>
     <div class="menulinkwrap">&nbsp;
@@ -22,11 +18,13 @@
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Editors</div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.editor.guestroom.listing', false) }}" style="text-decoration:none;{{ $submenu == 'guestroom.listing' ? 'font-weight: bold;' : '' }}">Guestroom editor</a>
+        <a href="{{ route('housekeeping.editor.guestroom.listing', false) }}"
+            style="text-decoration:none;{{ $submenu == 'guestroom.listing' ? 'font-weight: bold;' : '' }}">Guestroom editor</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.editor.publicroom.listing') }}" style="text-decoration:none;{{ $submenu == 'publicroom.listing' ? 'font-weight: bold;' : '' }}">Publicroom editor</a>
+        <a href="{{ route('housekeeping.editor.publicroom.listing') }}" style="text-decoration:none;{{ $submenu == 'publicroom.listing' ? 'font-weight: bold;' : '' }}">Publicroom
+            editor</a>
     </div>
     {{--
     <div class="menulinkwrap">&nbsp;
@@ -54,8 +52,9 @@
 <br />
 
 <div class="menuouterwrap">
-    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Application management</div>
-    {{--<div class="menulinkwrap">&nbsp;
+    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Application management
+    </div>
+    {{-- <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.application_edit') }}" style="text-decoration:none;{{ $submenu == 'application_edit' ? 'font-weight: bold;' : '' }}">Application forms</a>
     </div>
@@ -81,7 +80,8 @@
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.credits.vouchers.history') }}" style="text-decoration:none;{{ $submenu == 'vouchers_history' ? 'font-weight: bold;' : '' }}">Voucher History</a>
+        <a href="{{ route('housekeeping.credits.vouchers.history') }}" style="text-decoration:none;{{ $submenu == 'vouchers_history' ? 'font-weight: bold;' : '' }}">Voucher
+            History</a>
     </div>
 </div>
 <br />
@@ -127,11 +127,11 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Logs & Statistics</div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.logs') }}" style="text-decoration:none;{{ $submenu == 'logs' ? 'font-weight: bold;' : '' }}">Staff Logs</a>
+        <a href="{{ route('housekeeping.logs.staff') }}" style="text-decoration:none;{{ $submenu == 'logs.staff' ? 'font-weight: bold;' : '' }}">Staff Logs</a>
     </div>
+    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.banlist') }}" style="text-decoration:none;{{ $submenu == 'banlist' ? 'font-weight: bold;' : '' }}">Ban Listing</a>

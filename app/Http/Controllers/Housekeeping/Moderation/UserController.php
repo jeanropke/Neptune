@@ -11,13 +11,26 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function usersListing()
+    public function usersListing(Request $request)
     {
         if (!user()->hasPermission('can_edit_users'))
             return view('housekeeping.accessdenied');
 
+        $users = [];
+        switch ($request->type) {
+            case 'ip':
+                $users = User::join('users_ip_logs', 'users.id', '=', 'users_ip_logs.user_id')->where('ip_address', $request->value)->select(['users_ip_logs.created_at AS ip_created_at', 'users.*']);
+                break;
+            case 'username':
+                $users = User::where('username', 'like', '%' . $request->value . '%');
+                break;
+            default:
+                $users = User::orderby('id', 'DESC');
+            break;
+        }
+
         return view('housekeeping.users.listing')->with([
-            'users' => User::orderby('id', 'DESC')->paginate(15)
+            'users' => $users->paginate(15)
         ]);
     }
 
@@ -76,39 +89,6 @@ class UserController extends Controller
         return redirect()->route('housekeeping.users.edit', $user->id)->with('message', 'User changed!');
     }
 
-    public function usersSearch()
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('housekeeping.accessdenied');
-
-        return view('housekeeping.users.search');
-    }
-
-    public function usersSearchPost(Request $request)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('housekeeping.accessdenied');
-
-        return redirect()->route('housekeeping.users.search.result', [$request->value, $request->type]);
-    }
-
-    public function usersSearchResult(Request $request)
-    {
-        if (!user()->hasPermission('can_edit_users'))
-            return view('housekeeping.accessdenied');
-
-        $users = [];
-        if ($request->type == 'ip') {
-            $users = User::join('users_ip_logs', 'users.id', '=', 'users_ip_logs.user_id')->where('ip_address', $request->value)->select(['users_ip_logs.created_at AS ip_created_at', 'users.*']);
-        } else {
-            $users = User::where('username', 'like', '%' . $request->value . '%');
-        }
-
-        return view('housekeeping.users.listing')->with([
-            'users' => $users->paginate(15)
-        ]);
-    }
-
     public function usersIPs(Request $request)
     {
         if (!user()->hasPermission('can_edit_users'))
@@ -129,11 +109,11 @@ class UserController extends Controller
         if (!user()->hasPermission('can_edit_users'))
             return view('housekeeping.accessdenied');
 
-        if(!$request->id)
+        if (!$request->id)
             return view('housekeeping.users.badges');
 
         $user = User::find($request->id);
-        if(!$user)
+        if (!$user)
             return view('housekeeping.users.badges')->with('message', 'User not found');
 
         return view('housekeeping.users.badges')->with('user', $user);
@@ -150,12 +130,12 @@ class UserController extends Controller
         ]);
 
         $user = User::where('username', $request->username)->first();
-        if(!$user)
+        if (!$user)
             return redirect()->back()->with('message', 'User no found!');
 
         $result = $user->giveBadge($request->badge);
 
-        if(!$result)
+        if (!$result)
             return redirect()->back()->with('message', 'User already have this badge!');
 
         return redirect()->route('housekeeping.users.badges', $user->id)->with('message', 'Badge given to user!');
@@ -172,7 +152,7 @@ class UserController extends Controller
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This user does not exist!']);
 
         $badge = UserBadge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->get();
-        if($badge->count() == '0')
+        if ($badge->count() == '0')
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This user does not have this badge!']);
 
         UserBadge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->delete();

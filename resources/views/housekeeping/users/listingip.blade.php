@@ -33,7 +33,7 @@
                                     <td class="tablerow2"><strong>{{ $user->username }}</strong>
                                         <div class="desctext">
                                             {{ $ip->ip_address }} [<a href="http://who.is/whois-ip/ip-address/{{ $ip->ip_address }}/" target="_blank">WHOIS</a>]
-                                            <a href="{{ route('housekeeping.users.search', [$ip->ip_address, 'ip']) }}">Look up for this IP</a>
+                                            <a href="{{ route('housekeeping.users.listing') }}?value={{ $user->getLatestIP() }}&type=ip">Look up for this IP</a>
                                         </div>
                                     </td>
                                     <td class="tablerow2" align="center">

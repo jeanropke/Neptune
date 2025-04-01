@@ -431,10 +431,7 @@ Route::middleware('admin')->group(function () {
             Route::get('/listing', [UserController::class, 'usersListing'])->name('housekeeping.users.listing');
             Route::get('/edit/{id}', [UserController::class, 'usersEdit'])->name('housekeeping.users.edit');
             Route::post('/edit', [UserController::class, 'usersEditSave'])->name('housekeeping.users.edit.save');
-            Route::get('/search/{value}/{type}', [UserController::class, 'usersSearchResult'])->name('housekeeping.users.search.result');
             Route::get('/ips/{value}', [UserController::class, 'usersIPs'])->name('housekeeping.users.ips');
-            Route::get('/search', [UserController::class, 'usersSearch'])->name('housekeeping.users.search');
-            Route::post('/search', [UserController::class, 'usersSearchPost'])->name('housekeeping.users.search.post');
 
             Route::get('/badges', [UserController::class, 'toolsBadge'])->name('housekeeping.users.tools.badge');
             Route::get('/badges/{id}', [UserController::class, 'toolsBadge'])->name('housekeeping.users.badges');
@@ -470,7 +467,7 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('logs')->group(function() {
             Route::get('staff', [LogController::class, 'staff'])->name('housekeeping.logs.staff');
-            Route::post('staff/details', [LogController::class, 'staffDetails'])->name('housekeeping.logs.staff.details');
+            Route::post('staff/details', [LogController::class, 'staffMessageDetails'])->name('housekeeping.logs.staff.details');
         });
 
         Route::prefix('help')->group(function () {

@@ -127,7 +127,7 @@
                                     <td class="tablerow1" width="10%" valign="middle">
                                         <b>Latest IP Address</b>
                                         <div class="graytext">
-                                            <a href="{{ route('housekeeping.users.search.result', [$user->getLatestIP(), 'ip']) }}">Look up for this IP</a> -
+                                            <a href="{{ route('housekeeping.users.listing') }}?value={{ $user->getLatestIP() }}&type=ip">Look up for this IP</a> -
                                             <a href="{{ route('housekeeping.users.ips', $user->id) }}">All user IPs address</a>
                                         </div>
                                     </td>
