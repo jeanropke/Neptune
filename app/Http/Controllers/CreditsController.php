@@ -200,7 +200,7 @@ class CreditsController extends Controller
     public function purchaseConfirmation(Request $request)
     {
         if (!Auth::check())
-            return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
+            return view('credits.ajax.purchase_result')->with(['message' => 'In order to purchase a starter pack you need to log in first.', 'status' => 'error']);
 
         $pack = ItemOffer::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
 
@@ -216,7 +216,7 @@ class CreditsController extends Controller
     public function purchase(Request $request)
     {
         if (!Auth::check())
-            return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
+            return view('credits.ajax.purchase_result')->with(['message' => 'In order to purchase a starter pack you need to log in first.', 'status' => 'error']);
 
         $pack = ItemOffer::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
 
