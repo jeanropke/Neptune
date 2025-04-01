@@ -7,6 +7,7 @@ use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsOffer;
 use App\Models\Collectable;
 use App\Models\Furni;
+use App\Models\ItemDefination;
 use App\Models\ItemOffer;
 use App\Models\StarterPack;
 use App\Models\UserTransaction;
@@ -127,7 +128,7 @@ class CreditsController extends Controller
 
     public function habbletAjaxCollectiblesPurchase()
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $collectable = Collectable::orderBy('reuse_time', 'DESC')->first();
@@ -149,7 +150,7 @@ class CreditsController extends Controller
 
     public function redeemVoucher(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $voucher = Voucher::where('voucher_code', $request->code)->first();
@@ -198,15 +199,15 @@ class CreditsController extends Controller
 
     public function purchaseConfirmation(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
 
         $pack = ItemOffer::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
 
-        if(!$pack)
+        if (!$pack)
             return view('credits.ajax.purchase_result')->with(['message' => 'Invalid starter pack.', 'status' => 'error']);
 
-        if(!$pack->price > user()->credits)
+        if (!$pack->price > user()->credits)
             return view('credits.ajax.purchase_result')->with(['message' => 'You don\'t have enough credits to purchase this pack.', 'status' => 'error']);
 
         return view('credits.ajax.purchase_confirm')->with('pack', $pack);
@@ -214,16 +215,26 @@ class CreditsController extends Controller
 
     public function purchase(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return view('credits.ajax.purchase_result')->with(['message' => 'In order purchase a starter pack you need to log in first.', 'status' => 'error']);
 
         $pack = ItemOffer::where([['salecode', '=', $request->product], ['enabled', '=', '1']])->first();
 
-        if(!$pack)
+        if (!$pack)
             return view('credits.ajax.purchase_result')->with(['message' => 'Invalid starter pack.', 'status' => 'error']);
 
-        if(!$pack->price > user()->credits)
+        if (!$pack->price > user()->credits)
             return view('credits.ajax.purchase_result')->with(['message' => 'You don\'t have enough credits to purchase this pack.', 'status' => 'error']);
+
+
+        if (!$pack->isValid())
+            return view('credits.ajax.purchase_result')->with(['message' => "Unable to purchase this pack.", 'status' => 'error']);
+
+        $itemsIds = explode(',', $pack->items);
+        foreach ($itemsIds as $itemId) {
+            user()->giveItem($itemId);
+        }
+        user()->updateCredits(-$pack->price);
 
         return view('credits.ajax.purchase_result')->with(['message' => 'Purchase successful! Your items are on their way!']);
     }
