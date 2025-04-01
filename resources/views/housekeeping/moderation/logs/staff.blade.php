@@ -58,8 +58,14 @@
                     </div>
 
                     <div style="text-align: center; vertical-align: middle;">{!! $logs->links('layouts.housekeeping.pagination') !!}</div>
-                    <br />
-                    <div align="center">(<a href="index.php?p=logs&do=prune"><b>Prune Logs</b></a>)</div>
+
+                    @if(cms_config('clear.staff_logs.user_id') == user()->id)
+                        <div align="center">(<a href="{{ route('housekeeping.logs.staff.clear') }}" id="clear-logs"><b>Clear Logs</b></a>)</div>
+
+                        <script>
+                            StaffLogManager.initialise();
+                        </script>
+                    @endif
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

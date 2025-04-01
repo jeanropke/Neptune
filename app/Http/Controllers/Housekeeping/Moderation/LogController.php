@@ -19,9 +19,19 @@ class LogController extends Controller
         //return view('housekeeping.ajax.accessdenied_dialog');
 
         $log = StaffLog::find($request->id);
-        if(!$log)
+        if (!$log)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This log does not exist!']);
 
         return view('housekeeping.ajax.logs_details')->with('log', $log);
+    }
+
+    public function staffClear()
+    {
+        if (cms_config('clear.staff_logs.user_id') != user()->id)
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        StaffLog::truncate();
+
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Staff logs cleared!']);
     }
 }

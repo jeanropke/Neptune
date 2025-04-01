@@ -235,6 +235,24 @@ var LogManager = {
     }
 }
 
+var StaffLogManager = {
+    initialise: function()
+    {
+        $('#clear-logs').click((e) => {
+            e.preventDefault();
+            var url = $(e.currentTarget).attr('href');
+            Dialog.showConfirmDialog('Are you sure you want to clear all staff logs?', () => {this.confirm(url)});
+        });
+    },
+    confirm: function(url) {
+        Dialog.setAsWaitDialog($("#confirm-dialog"));
+        $.ajax(url, { method: 'post'}).done((html, status) => {
+            Dialog.setDialogBody($("#confirm-dialog"), html);
+            $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;
