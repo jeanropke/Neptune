@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'box.manage'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'boxes'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -18,7 +18,6 @@
 
                     <div class="tableborder">
                         <div class="tableheaderalt">Boxes</div>
-                        <div style="text-align: center; vertical-align: middle;">{!! $boxes->links('layouts.housekeeping.pagination') !!}</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="1%" align="center">ID</td>
@@ -39,7 +38,7 @@
                                         {{ $box->getCreator() }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.site.box.edit', $box->id) }}">
+                                        <a href="{{ route('housekeeping.site.boxes.edit', $box->id) }}">
                                             <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit">
                                         </a>
                                     </td>
@@ -56,11 +55,12 @@
                             @endforelse
                         </table>
                         <div class="tablefooter" align="center">
-                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.box.create') }}">Create New Box</a></span></div>
+                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.boxes.create') }}">Create New Box</a></span></div>
                         </div>
                     </div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $boxes->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                     <script>
-                        GenericManager.initialise('.delete-box', '<p>Are you sure you want to delete this box? This cannot be undone!</p>', '{{ route('housekeeping.site.box.delete') }}');
+                        GenericManager.initialise('.delete-box', '<p>Are you sure you want to delete this box? This cannot be undone!</p>', '{{ route('housekeeping.site.boxes.delete') }}');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'article.manage'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'articles'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -17,7 +17,6 @@
                     @endif
                     <div class="tableborder">
                         <div class="tableheaderalt">News Articles</div>
-                        <div style="text-align: center; vertical-align: middle;">{{ $articles->links('layouts.housekeeping.pagination') }}</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="1%" align="center">ID</td>
@@ -48,7 +47,7 @@
                                         {{ $article->author }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.site.article.edit', $article->id) }}">
+                                        <a href="{{ route('housekeeping.site.articles.edit', $article->id) }}">
                                             <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit">
                                         </a>
                                     </td>
@@ -65,12 +64,13 @@
                             @endforelse
                         </table>
                         <div class="tablefooter" align="center">
-                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.article.create') }}">Compose New News Item</a></span>
+                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.articles.create') }}">Compose New News Item</a></span>
                             </div>
                         </div>
+                        <div style="text-align: center; vertical-align: middle;">{{ $articles->withQueryString()->links('layouts.housekeeping.pagination') }}</div>
                     </div>
                     <script>
-                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.article.delete') }}');
+                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.articles.delete') }}');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

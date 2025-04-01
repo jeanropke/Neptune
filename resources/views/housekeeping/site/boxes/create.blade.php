@@ -47,7 +47,7 @@
     <tr>
         <td width="22%" valign="top" id="leftblock">
             <div>
-                @include('housekeeping.site.include.menu', ['submenu' => 'box.create'])
+                @include('housekeeping.site.include.menu', ['submenu' => 'boxes.create'])
             </div>
         </td>
         <td width="78%" valign="top" id="rightblock">
@@ -58,7 +58,7 @@
                 @if (session('message'))
                 <p><strong>{{ session('message') }}</strong></p>
                 @endif
-                <form action="{{ route('housekeeping.site.box.create.save') }}" method="post" name="theAdminForm"
+                <form action="{{ route('housekeeping.site.boxes.create.save') }}" method="post" name="theAdminForm"
                     id="theAdminForm" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="tableborder">

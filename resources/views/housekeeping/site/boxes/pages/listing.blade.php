@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'box.pages.manage'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'boxes.pages'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -46,7 +46,7 @@
                                             {{ $box->page }}
                                         </td>
                                         <td class="tablerow2" align="center">
-                                            <a href="{{ route('housekeeping.site.box.pages.edit', $box->id) }}">
+                                            <a href="{{ route('housekeeping.site.boxes.pages.edit', $box->id) }}">
                                                 <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit">
                                             </a>
                                         </td>
@@ -60,12 +60,12 @@
                             </tbody>
                         </table>
                         <div class="tablefooter" align="center">
-                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.box.pages.create') }}">Create New Box</a></span></div>
+                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.boxes.pages.create') }}">Create New Box</a></span></div>
                         </div>
                     </div>
                     <div style="text-align: center; vertical-align: middle;">{!! $boxpages->links('layouts.housekeeping.pagination') !!}</div>
                     <script>
-                        GenericManager.initialise('.delete-box-page', '<p>Are you sure you want to delete this box page? This cannot be undone!</p>', '{{ route('housekeeping.site.box.pages.delete') }}');
+                        GenericManager.initialise('.delete-box-page', '<p>Are you sure you want to delete this box page? This cannot be undone!</p>', '{{ route('housekeeping.site.boxes.pages.delete') }}');
                     </script>
                 </div>
             </td>

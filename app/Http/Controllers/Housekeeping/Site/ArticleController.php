@@ -15,7 +15,7 @@ class ArticleController extends Controller
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.article.create')->with([
+        return view('housekeeping.site.articles.create')->with([
             'ts_images' => File::allFiles('web/images/top_story_images')
         ]);
     }
@@ -50,17 +50,17 @@ class ArticleController extends Controller
             'url' => $article->id . '_' . $url
         ]);
 
-        create_staff_log('site.article.create', $request);
+        create_staff_log('site.articles.create', $request);
 
-        return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article created!');
+        return redirect()->route('housekeeping.site.articles')->with('message', 'Article created!');
     }
 
-    public function articleManage()
+    public function articles()
     {
         if (!user()->hasPermission('can_create_site_news'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.article.manage')->with([
+        return view('housekeeping.site.articles.listing')->with([
             'articles'  => Article::where('is_deleted', user()->hasPermission('can_restore_site_news') ? '>=' : '=', '0')->orderBy('created_at', 'desc')->paginate(15)
         ]);
     }
@@ -73,9 +73,9 @@ class ArticleController extends Controller
         $article = Article::find($request->id);
 
         if (!$article)
-            return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article not found!');
+            return redirect()->route('housekeeping.site.article')->with('message', 'Article not found!');
 
-        return view('housekeeping.site.article.edit')->with([
+        return view('housekeeping.site.articles.edit')->with([
             'ts_images' => File::allFiles('web/images/top_story_images'),
             'article'   => $article
         ]);
@@ -96,7 +96,7 @@ class ArticleController extends Controller
         $article = Article::find($request->id);
 
         if (!$article)
-            return redirect()->route('housekeeping.site.article.manage')->with('message', 'Article not found!');
+            return redirect()->route('housekeeping.site.article')->with('message', 'Article not found!');
 
         $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
         $url = str_replace(" ", "_", $url);
@@ -114,9 +114,9 @@ class ArticleController extends Controller
             'url'               => $article->id . '_' . $url
         ]);
 
-        create_staff_log('site.article.edit.save', $request);
+        create_staff_log('site.articles.edit.save', $request);
 
-        return redirect()->route('housekeeping.site.article.edit', $article->id)->with('message', 'Article updated!');
+        return redirect()->route('housekeeping.site.articles.edit', $article->id)->with('message', 'Article updated!');
     }
 
     public function articleDelete(Request $request)
@@ -133,7 +133,7 @@ class ArticleController extends Controller
             'is_deleted' => '1',
         ]);
 
-        create_staff_log('site.article.delete', $request);
+        create_staff_log('site.articles.delete', $request);
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Article deleted!']);
     }

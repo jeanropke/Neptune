@@ -393,26 +393,26 @@ Route::middleware('admin')->group(function () {
             //Route::post('/site/faq', 'welcomemsgSave')->name('admin.site.faq.save');
             //Route::get('/site/newsletter', 'welcomemsg')->name('admin.site.newsletter');
             //Route::post('/site/newsletter', 'welcomemsgSave')->name('admin.site.newsletter.save');
-            Route::get('/article/create', [HousekeepingArticleController::class, 'articleCreate'])->name('housekeeping.site.article.create');
-            Route::post('/article/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.article.create.save');
-            Route::get('/article', [HousekeepingArticleController::class, 'articleManage'])->name('housekeeping.site.article.manage');
-            Route::get('/article/edit/{id}', [HousekeepingArticleController::class, 'articleEdit'])->name('housekeeping.site.article.edit');
-            Route::post('/article/edit/{id}', [HousekeepingArticleController::class, 'articleEditSave'])->name('housekeeping.site.article.edit.save');
-            Route::post('/article/delete', [HousekeepingArticleController::class, 'articleDelete'])->name('housekeeping.site.article.delete');
+            Route::get('/articles/create', [HousekeepingArticleController::class, 'articleCreate'])->name('housekeeping.site.articles.create');
+            Route::post('/articles/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.articles.create.save');
+            Route::get('/articles', [HousekeepingArticleController::class, 'articles'])->name('housekeeping.site.articles');
+            Route::get('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEdit'])->name('housekeeping.site.articles.edit');
+            Route::post('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEditSave'])->name('housekeeping.site.articles.edit.save');
+            Route::post('/articles/delete', [HousekeepingArticleController::class, 'articleDelete'])->name('housekeeping.site.articles.delete');
 
-            Route::get('/box/create', [BoxController::class, 'boxCreate'])->name('housekeeping.site.box.create');
-            Route::post('/box/create', [BoxController::class, 'boxCreateSave'])->name('housekeeping.site.box.create.save');
-            Route::get('/box/manage', [BoxController::class, 'boxManage'])->name('housekeeping.site.box.manage');
-            Route::get('/box/edit/{id}', [BoxController::class, 'boxEdit'])->name('housekeeping.site.box.edit');
-            Route::post('/box/edit/save', [BoxController::class, 'boxEditSave'])->name('housekeeping.site.box.edit.save');
-            Route::post('/box/delete', [BoxController::class, 'boxDelete'])->name('housekeeping.site.box.delete');
+            Route::get('/boxes/create', [BoxController::class, 'boxCreate'])->name('housekeeping.site.boxes.create');
+            Route::post('/boxes/create', [BoxController::class, 'boxCreateSave'])->name('housekeeping.site.boxes.create.save');
+            Route::get('/boxes/manage', [BoxController::class, 'boxManage'])->name('housekeeping.site.boxes');
+            Route::get('/boxes/edit/{id}', [BoxController::class, 'boxEdit'])->name('housekeeping.site.boxes.edit');
+            Route::post('/boxes/edit/save', [BoxController::class, 'boxEditSave'])->name('housekeeping.site.boxes.edit.save');
+            Route::post('/boxes/delete', [BoxController::class, 'boxDelete'])->name('housekeeping.site.boxes.delete');
 
-            Route::get('/box/pages/create', [BoxController::class, 'boxPagesCreate'])->name('housekeeping.site.box.pages.create');
-            Route::post('/box/pages/create', [BoxController::class, 'boxPagesCreateSave'])->name('housekeeping.site.box.pages.create.save');
-            Route::get('/box/pages/manage', [BoxController::class, 'boxPagesManage'])->name('housekeeping.site.box.pages.manage');
-            Route::get('/box/pages/edit/{id}', [BoxController::class, 'boxPagesEdit'])->name('housekeeping.site.box.pages.edit');
-            Route::post('/box/pages/save', [BoxController::class, 'boxPagesSave'])->name('housekeeping.site.box.pages.edit.save');
-            Route::post('/box/pages/delete', [BoxController::class, 'boxPageDelete'])->name('housekeeping.site.box.pages.delete');
+            Route::get('/boxes/pages/create', [BoxController::class, 'boxPagesCreate'])->name('housekeeping.site.boxes.pages.create');
+            Route::post('/boxes/pages/create', [BoxController::class, 'boxPagesCreateSave'])->name('housekeeping.site.boxes.pages.create.save');
+            Route::get('/boxes/pages', [BoxController::class, 'boxPagesManage'])->name('housekeeping.site.boxes.pages');
+            Route::get('/boxes/pages/edit/{id}', [BoxController::class, 'boxPagesEdit'])->name('housekeeping.site.boxes.pages.edit');
+            Route::post('/boxes/pages/save', [BoxController::class, 'boxPagesSave'])->name('housekeeping.site.boxes.pages.edit.save');
+            Route::post('/boxes/pages/delete', [BoxController::class, 'boxPageDelete'])->name('housekeeping.site.boxes.pages.delete');
         });
 
         Route::prefix('neptunecms')->group(function () {

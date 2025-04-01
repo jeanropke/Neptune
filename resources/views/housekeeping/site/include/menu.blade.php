@@ -58,11 +58,11 @@
     --}}
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.article.create') }}" style="text-decoration:none;{{ $submenu == 'article.create' ? 'font-weight: bold;' : '' }}">Compose News Item</a>
+        <a href="{{ route('housekeeping.site.articles.create') }}" style="text-decoration:none;{{ $submenu == 'articles.create' ? 'font-weight: bold;' : '' }}">Compose News Item</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.article.manage', false) }}" style="text-decoration:none;{{ $submenu == 'article.manage' ? 'font-weight: bold;' : '' }}">Manage Existing News Items</a>
+        <a href="{{ route('housekeeping.site.articles', false) }}" style="text-decoration:none;{{ $submenu == 'articles' ? 'font-weight: bold;' : '' }}">Manage Existing News Items</a>
     </div>
 </div>
 <br />
@@ -70,19 +70,19 @@
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Box Management</div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.box.create') }}" style="text-decoration:none;{{ $submenu == 'box.create' ? 'font-weight: bold;' : '' }}">Create Boxes</a>
+        <a href="{{ route('housekeeping.site.boxes.create') }}" style="text-decoration:none;{{ $submenu == 'boxes.create' ? 'font-weight: bold;' : '' }}">Create Boxes</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.box.manage', false) }}" style="text-decoration:none;{{ $submenu == 'box.manage' ? 'font-weight: bold;' : '' }}">Manage Existing Boxes</a>
+        <a href="{{ route('housekeeping.site.boxes', false) }}" style="text-decoration:none;{{ $submenu == 'boxes' ? 'font-weight: bold;' : '' }}">Manage Existing Boxes</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.box.pages.create', false) }}" style="text-decoration:none;{{ $submenu == 'box.pages.create' ? 'font-weight: bold;' : '' }}">Create Box Pages</a>
+        <a href="{{ route('housekeeping.site.boxes.pages.create', false) }}" style="text-decoration:none;{{ $submenu == 'boxes.pages.create' ? 'font-weight: bold;' : '' }}">Create Box Pages</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.box.pages.manage', false) }}" style="text-decoration:none;{{ $submenu == 'box.pages.manage' ? 'font-weight: bold;' : '' }}">Manage Existing Box Pages</a>
+        <a href="{{ route('housekeeping.site.boxes.pages', false) }}" style="text-decoration:none;{{ $submenu == 'boxes.pages' ? 'font-weight: bold;' : '' }}">Manage Existing Box Pages</a>
     </div>
 </div>
 <br />

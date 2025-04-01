@@ -33,7 +33,7 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.box.create');
+        return view('housekeeping.site.boxes.create');
     }
 
     public function boxCreateSave(Request $request)
@@ -54,9 +54,9 @@ class BoxController extends Controller
             'created_by'    => user()->id
         ]);
 
-        create_staff_log('site.box.create.save', $request);
+        create_staff_log('site.boxes.create.save', $request);
 
-        return redirect()->route('housekeeping.site.box.create')->with('message',  'Box created!');
+        return redirect()->route('housekeeping.site.boxes.create')->with('message',  'Box created!');
     }
 
     public function boxManage()
@@ -64,7 +64,7 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.box.manage')->with('boxes', Box::paginate(15));
+        return view('housekeeping.site.boxes.listing')->with('boxes', Box::paginate(15));
     }
 
     public function boxDelete(Request $request)
@@ -77,7 +77,7 @@ class BoxController extends Controller
         if (!$box)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This box does not exist!']);
 
-        create_staff_log('site.box.delete', $request);
+        create_staff_log('site.boxes.delete', $request);
         $box->delete();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Box deleted!']);
@@ -91,9 +91,9 @@ class BoxController extends Controller
         $box = Box::find($request->id);
 
         if (!$box)
-            return redirect()->route('housekeeping.site.box_manage')->with(['status' => 'error', 'message' => 'This box does not exist!']);
+            return redirect()->route('housekeeping.site.boxes')->with(['status' => 'error', 'message' => 'This box does not exist!']);
 
-        return view('housekeeping.site.box.edit')->with([
+        return view('housekeeping.site.boxes.edit')->with([
             'box'   => $box
         ]);
     }
@@ -113,7 +113,7 @@ class BoxController extends Controller
         $box = Box::find($request->id);
 
         if (!$box)
-            return redirect()->route('housekeeping.site.box_manage')->with('message', 'Box not found!');
+            return redirect()->route('housekeeping.site.boxes')->with('message', 'Box not found!');
 
         $box->update([
             'title'         => $request->title,
@@ -121,9 +121,9 @@ class BoxController extends Controller
             'requirement'   => $request->requirement
         ]);
 
-        create_staff_log('site.box.edit.save', $request);
+        create_staff_log('site.boxes.edit.save', $request);
 
-        return redirect()->route('housekeeping.site.box.edit', $request->id)->with('message', 'Box updated!');
+        return redirect()->route('housekeeping.site.boxes.edit', $request->id)->with('message', 'Box updated!');
     }
 
     public function boxPagesManage()
@@ -131,7 +131,7 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.box.pages.manage')->with([
+        return view('housekeeping.site.boxes.pages.listing')->with([
             'boxpages'  => BoxPage::paginate(15)
         ]);
     }
@@ -141,7 +141,7 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.box.pages.create')->with([
+        return view('housekeeping.site.boxes.pages.create')->with([
             'boxes'     => Box::all(),
             'pages'     => $this->availablePages
         ]);
@@ -159,9 +159,9 @@ class BoxController extends Controller
             'color'    => $request->override_color
         ]);
 
-        create_staff_log('site.box.pages.create.save', $request);
+        create_staff_log('site.boxes.pages.create.save', $request);
 
-        return redirect()->route('housekeeping.site.box.pages.manage')->with('message',  'Box Page created!');
+        return redirect()->route('housekeeping.site.boxes.pages')->with('message',  'Box Page created!');
     }
 
     public function boxPagesEdit(Request $request)
@@ -172,9 +172,9 @@ class BoxController extends Controller
         $box = BoxPage::find($request->id);
 
         if (!$box)
-            return redirect()->route('housekeeping.site.box.pages.manage')->with('message',  'Box Page not found!');
+            return redirect()->route('housekeeping.site.boxes.pages')->with('message',  'Box Page not found!');
 
-        return view('housekeeping.site.box.pages.edit')->with([
+        return view('housekeeping.site.boxes.pages.edit')->with([
             'boxes'     => Box::all(),
             'pages'     => $this->availablePages,
             'box'       => $box
@@ -199,9 +199,9 @@ class BoxController extends Controller
             'color'     => $request->override_color
         ]);
 
-        create_staff_log('site.box.pages.save', $request);
+        create_staff_log('site.boxes.pages.save', $request);
 
-        return redirect()->route('housekeeping.site.box.pages.edit', $box->id)->with('message',  'Box Page edited!');
+        return redirect()->route('housekeeping.site.boxes.pages.edit', $box->id)->with('message',  'Box Page edited!');
     }
 
     public function boxPageDelete(Request $request)
@@ -214,7 +214,7 @@ class BoxController extends Controller
         if (!$box)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This box page does not exist!']);
 
-        create_staff_log('site.box.pages.delete', $request);
+        create_staff_log('site.boxes.pages.delete', $request);
         $box->delete();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Box page deleted!']);

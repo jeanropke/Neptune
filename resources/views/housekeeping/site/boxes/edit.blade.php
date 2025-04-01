@@ -59,7 +59,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'box.edit'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'boxes.edit'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -70,7 +70,7 @@
                     @if ($errors->any())
                         <p><strong>{{ $errors->first() }}</strong></p>
                     @endif
-                    <form action="{{ route('housekeeping.site.box.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm">
+                    <form action="{{ route('housekeeping.site.boxes.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm">
                         {{ csrf_field() }}
                         <div class="tableborder">
                             <div class="tableheaderalt">Create Box</div>

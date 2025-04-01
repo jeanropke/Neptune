@@ -7,7 +7,7 @@
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'box.pages.edit'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'boxes.pages.edit'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
@@ -19,7 +19,7 @@
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
 
-                    <form action="{{ route('housekeeping.site.box.pages.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.site.boxes.pages.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <input type="number" value="{{ $box->id }}" name="id" hidden>
                         <div class="tableborder">

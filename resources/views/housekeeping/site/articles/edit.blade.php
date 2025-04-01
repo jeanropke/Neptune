@@ -1,6 +1,6 @@
 @extends('layouts.housekeeping', ['menu' => 'site'])
 
-@section('title', 'Compose New Article')
+@section('title', 'Manage Existing Articles')
 
 @section('content')
     <script src="{{ url('/') }}/web/housekeeping/js/tiny_mce.js"></script>
@@ -55,33 +55,37 @@
             }
         });
     </script>
-
     <table cellpadding="0" cellspacing="8" width="100%" id="tablewrap">
         <tr>
             <td width="22%" valign="top" id="leftblock">
                 <div>
-                    @include('housekeeping.site.include.menu', ['submenu' => 'article.create'])
+                    @include('housekeeping.site.include.menu', ['submenu' => 'articles'])
                 </div>
             </td>
             <td width="78%" valign="top" id="rightblock">
                 <div>
-                    @if ($errors->any())
-                        <p><strong>{{ $errors->first() }}</strong></p>
-                    @endif
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
-                    <form action="{{ route('housekeeping.site.article.create') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    @if ($errors->any())
+                        <p><strong>{{ $errors->first() }}</strong></p>
+                    @endif
+                    <form action="{{ route('housekeeping.site.articles.edit.save', $article->id) }}" method="post" name="theAdminForm" id="theAdminForm">
                         {{ csrf_field() }}
                         <div class="tableborder">
-                            <div class="tableheaderalt">Compose News Article</div>
+                            <div class="tableheaderalt">Edit News Article ({{ $article->title }}) -
+                                @if ($article->is_deleted)
+                                    <i>(Deleted)</i>
+                                @endif
+                            </div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
+                                <input type="number" value="{{ $article->id }}" name="id" hidden>
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Title</b>
                                         <div class="graytext">The full title of your article.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="title" value="{{ old('title') }}" size="30" class="textinput">
+                                        <input type="text" name="title" value="{{ old('title') ?? $article->title }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -89,11 +93,12 @@
                                         <div class="graytext">The URL to the topstory image.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ url('/') . '/' . $ts_images[0] }}" id="ts_preview">
+                                        <img src="{{ $article->image }}" id="ts_preview">
                                         <br>
                                         <select name="topstory" onchange="changePreviewImage()" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($ts_images as $ts_img)
-                                                <option value="{{ url('/') }}/{{ str_replace('\\', '/', $ts_img) }}" @if (url('/') . '/' . str_replace('\\', '/', $ts_img) == old('topstory')) selected="selected" @endif>
+                                                <option value="{{ url('/') }}/{{ str_replace('\\', '/', $ts_img) }}"
+                                                    @if (url('/') . '/' . str_replace('\\', '/', $ts_img) == $article->image) selected="selected" @endif>
                                                     {{ explode('/', $ts_img)[2] }}</option>
                                             @endforeach
                                         </select>
@@ -106,7 +111,7 @@
                                         </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <textarea name="short_text" cols="60" rows="5" wrap="soft" id="sub_desc" class="multitext">{{ old('short_text') }}</textarea>
+                                        <textarea name="short_text" cols="60" rows="5" wrap="soft" id="sub_desc" class="multitext">{{ old('short_text') ?? $article->short_text }}</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -116,7 +121,7 @@
                                         </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <textarea name="long_text" cols="60" rows="5" wrap="soft" id="article" class="multitext">{{ old('long_text') }}</textarea>
+                                        <textarea name="long_text" cols="60" rows="5" wrap="soft" id="article" class="multitext">{{ old('long_text') ?? $article->long_text }}</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -124,7 +129,8 @@
                                         <div class="graytext">If you want to use 'Hotel Management' or something like that.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="author_override" value="" size="30" class="textinput">
+                                        <input type="text" name="author_override" value="{{ old('author_override') ?? $article->author_override }}" size="30"
+                                            class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -132,12 +138,27 @@
                                         <div class="graytext">In case you want to set a release date for the article.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="datetime-local" name="publish_date" value="" size="30" class="textinput">
+                                        <input type="datetime-local" name="publish_date" value="{{ old('publish_date') ?? $article->publish_date }}" size="30"
+                                            class="textinput">
                                     </td>
                                 </tr>
+                                @if ($article->is_deleted && user()->hasPermission('can_restore_site_news'))
+                                    <tr>
+                                        <td class="tablerow1" width="40%" valign="middle"><b>Restore</b>
+                                            <div class="graytext">This article is deleted... almost deleted.</div>
+                                        </td>
+                                        <td class="tablerow2" width="60%" valign="middle">
+                                            <select name="deleted" id="deleted" class="textinput" style="margin-top: 5px;" size="1">
+                                                <option value="1" @if ($article->is_deleted == 1) selected="selected" @endif>Keep
+                                                    deleted</option>
+                                                <option value="0" @if ($article->is_deleted == 0) selected="selected" @endif>Restore</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
-                                        <input type="submit" value="Publish Article" class="realbutton" accesskey="s">
+                                        <input type="submit" value="Update Article" class="realbutton" accesskey="s">
                                     </td>
                                 </tr>
                             </table>
@@ -149,8 +170,8 @@
                             document.getElementById('ts_preview').src = tsImg.value;
                         }
                     </script>
-                    <br />
                 </div>
+                <!-- / RIGHT CONTENT BLOCK -->
             </td>
         </tr>
     </table>

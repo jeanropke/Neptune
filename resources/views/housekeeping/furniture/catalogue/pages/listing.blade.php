@@ -41,11 +41,7 @@
                     </div>
                     <br />
                     <div class="tableborder">
-                        <div class="tableheaderalt">Catalogue Pages
-                            <div class="tableheaderalt-right">
-                                <a href="{{ route('housekeeping.furniture.catalogue.pages.add') }}">Add new catalogue page</a>
-                            </div>
-                        </div>
+                        <div class="tableheaderalt">Catalogue Pages</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
@@ -78,9 +74,9 @@
                                     <td class="tablerow2">
                                         {{ $page->image_teasers }}
                                     </td>
-                                    </td>
                                     <td class="tablerow2">
-                                        {{ $page->getCatalogueItems()->count() }} furnis - <a href="{{ route('housekeeping.furniture.catalogue.items') }}?page={{ $page->id }}"><i>See them</i></a>
+                                        {{ $page->getCatalogueItems()->count() }} furnis - <a
+                                            href="{{ route('housekeeping.furniture.catalogue.items') }}?page={{ $page->id }}"><i>See them</i></a>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.furniture.catalogue.pages.edit', $page->id) }}">
@@ -101,10 +97,15 @@
                                 </tr>
                             @endforelse
                         </table>
-                        <script>
-                            GenericManager.initialise('.delete-cataloguepage', '<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>', '{{ route('housekeeping.furniture.catalogue.pages.delete') }}');
-                        </script>
+                        <div class="tablefooter" align="center">
+                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.furniture.catalogue.pages.add') }}">Create New Page</a></span>
+                            </div>
+                        </div>
                     </div>
+                    <script>
+                        GenericManager.initialise('.delete-cataloguepage', '<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>',
+                            '{{ route('housekeeping.furniture.catalogue.pages.delete') }}');
+                    </script>
 
                     <div style="text-align: center; vertical-align: middle;">{!! $pages->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>
