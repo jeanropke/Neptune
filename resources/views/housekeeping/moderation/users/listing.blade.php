@@ -19,7 +19,6 @@
                         <p><strong>{{ $errors->first() }}</strong></p>
                     @endif
                     <!-- RIGHT CONTENT BLOCK -->
-
                     <div class="tableborder">
                         <form action="{{ route('housekeeping.users.listing') }}" method="get" name="theAdminForm" id="theAdminForm" autocomplete="off">
                             <div class="tableheaderalt">Search User</div>
@@ -52,7 +51,6 @@
                         </form>
                     </div>
                     <br />
-
                     <div class="tableborder">
                         <div class="tableheaderalt">
                             Habbo User Listing
@@ -93,7 +91,7 @@
                             @endforeach
                         </table>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $users->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $users->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>
