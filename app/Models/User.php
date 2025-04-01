@@ -20,12 +20,33 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username', 'email', 'password', 'motto', 'console_motto', 'credits', 'last_online', 'sso_ticket', 'created_at', 'birthday', 'sex', 'figure', 'rank', 'allow_stalking',
-        'allow_friend_requests', 'badge', 'badge_active', 'battleball_points', 'snowstorm_points', 'club_subscribed', 'club_expiration', 'club_gift_due'
+        'username',
+        'email',
+        'password',
+        'motto',
+        'console_motto',
+        'credits',
+        'last_online',
+        'sso_ticket',
+        'created_at',
+        'birthday',
+        'sex',
+        'figure',
+        'rank',
+        'allow_stalking',
+        'allow_friend_requests',
+        'badge',
+        'badge_active',
+        'battleball_points',
+        'snowstorm_points',
+        'club_subscribed',
+        'club_expiration',
+        'club_gift_due'
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     protected $dates = ['created_at'];
@@ -55,14 +76,16 @@ class User extends Authenticatable
         $this->figure   = $figure;
         $this->sex      = $sex;
         $this->save();
-        mus("refresh_looks", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_looks", ['userId' => $this->id]);
     }
 
     public function setMotto($motto)
     {
         $this->motto   = $motto;
         $this->save();
-        mus("refresh_looks", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_looks", ['userId' => $this->id]);
     }
 
     /**
@@ -73,7 +96,8 @@ class User extends Authenticatable
     public function updateCredits($amount)
     {
         $this->increment('credits', $amount);
-        mus("refresh_credits", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_credits", ['userId' => $this->id]);
     }
 
     public function getSubscription()
@@ -89,7 +113,7 @@ class User extends Authenticatable
     public function giveHCDays($days)
     {
         $now = time();
-        if($this->club_subscribed == 0) {
+        if ($this->club_subscribed == 0) {
             $this->update([
                 'club_subscribed'   => $now,
                 'club_expiration'   => $now + ($days * 86400),
@@ -97,11 +121,11 @@ class User extends Authenticatable
             ]);
 
             $this->giveGift(325, "From Habbo", "You have just received your monthly club gift!");
-        }
-        else {
+        } else {
             $this->increment('club_expiration', $days * 86400);
         }
-        mus("refresh_club", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_club", ['userId' => $this->id]);
     }
 
     public function giveGift($cataItemId, $sender, $message, $unk = "-")
@@ -116,7 +140,8 @@ class User extends Authenticatable
             'custom_data'   => "{$cataItemId}|{$sender}|{$message}|{$unk}|{$now}"
         ]);
 
-        mus("refresh_hand", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_hand", ['userId' => $this->id]);
     }
 
     public function giveItem($id)
@@ -127,13 +152,14 @@ class User extends Authenticatable
             'custom_data'   => ''
         ]);
 
-        mus("refresh_hand", ['userId' => $this->id]);
+        if (is_hotel_online())
+            rcon("refresh_hand", ['userId' => $this->id]);
     }
 
     public function getLatestIP()
     {
         $ip = UserIPLog::where('user_id', $this->id)->orderBy('created_at', 'DESC')->first();
-        if($ip)
+        if ($ip)
             return $ip->ip_address;
 
         return '0.0.0.0';
@@ -146,12 +172,12 @@ class User extends Authenticatable
     {
         $badges = array();
 
-        foreach(UserBadge::select('users_badges.badge')->where('user_id', $this->id)->get() as $badge) {
+        foreach (UserBadge::select('users_badges.badge')->where('user_id', $this->id)->get() as $badge) {
             array_push($badges, array('badge' => $badge->badge));
         }
 
-        if(!$skipRankBadge) {
-            foreach(DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
+        if (!$skipRankBadge) {
+            foreach (DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
                 array_push($badges, array('badge' => $badge->badge));
             }
         }
@@ -164,7 +190,7 @@ class User extends Authenticatable
     public function giveBadge($code)
     {
         $badge = UserBadge::where([['user_id', '=', $this->id], ['badge', '=', $code]])->get();
-        if($badge->count() > 0)
+        if ($badge->count() > 0)
             return false;
 
         UserBadge::insert([
@@ -202,7 +228,7 @@ class User extends Authenticatable
 
         $group = Group::find($this->getCmsSettings()->favorite_group);
 
-        if(!$group)
+        if (!$group)
             return;
 
         return $group;
