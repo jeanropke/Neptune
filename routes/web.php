@@ -361,7 +361,23 @@ Route::middleware('admin')->group(function () {
             Route::get('/catalogue/add', [CatalogueController::class, 'catalogueAdd'])->name('housekeeping.furniture.catalogue.pages.add');
             Route::post('/catalogue/add', [CatalogueController::class, 'catalogueAddSave'])->name('housekeeping.furniture.catalogue.pages.add');
             Route::post('/catalogue/delete', [CatalogueController::class, 'catalogueDelete'])->name('housekeeping.furniture.catalogue.pages.delete');
+
             Route::get('/catalogue/items', [CatalogueController::class, 'catalogueItems'])->name('housekeeping.furniture.catalogue.items');
+            Route::get('/catalogue/items/edit/{id}', [CatalogueController::class, 'catalogueItemsEdit'])->name('housekeeping.furniture.catalogue.items.edit');
+            Route::post('/catalogue/items/save', [CatalogueController::class, 'catalogueItemsSave'])->name('housekeeping.furniture.catalogue.items.save');
+            Route::get('/catalogue/items/add', [CatalogueController::class, 'catalogueItemsAdd'])->name('housekeeping.furniture.catalogue.items.add');
+            Route::post('/catalogue/items/add', [CatalogueController::class, 'catalogueItemsAddSave'])->name('housekeeping.furniture.catalogue.items.add');
+            Route::post('/catalogue/items/delete', [CatalogueController::class, 'catalogueItemsDelete'])->name('housekeeping.furniture.catalogue.items.delete');
+
+            Route::get('/catalogue/packages', [CatalogueController::class, 'cataloguePackages'])->name('housekeeping.furniture.catalogue.packages');
+            Route::get('/catalogue/packages/edit/{id}', [CatalogueController::class, 'cataloguePackagesEdit'])->name('housekeeping.furniture.catalogue.packages.edit');
+            Route::post('/catalogue/packages/save', [CatalogueController::class, 'cataloguePackagesSave'])->name('housekeeping.furniture.catalogue.packages.save');
+            Route::get('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAdd'])->name('housekeeping.furniture.catalogue.packages.add');
+            Route::post('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAddSave'])->name('housekeeping.furniture.catalogue.packages.add');
+            Route::post('/catalogue/packages/delete', [CatalogueController::class, 'cataloguePackagesDelete'])->name('housekeeping.furniture.catalogue.packages.delete');
+
+            Route::get('/items/edit/{id}', [CatalogueController::class, 'furnitureEdit'])->name('housekeeping.furniture.items.edit');
+
         });
 
         Route::prefix('site')->group(function () {

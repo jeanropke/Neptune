@@ -19,4 +19,29 @@ class CatalogueItem extends Model
     {
         return str_replace('*', '_', $this->sale_code);
     }
+
+    public function getName()
+    {
+        if($this->is_package)
+            return $this->package_name;
+
+        return $this->name;
+    }
+
+    public function getDescription()
+    {
+        if($this->is_package)
+            return $this->package_description;
+
+        return $this->description;
+    }
+
+    public function getPackage()
+    {
+        if($this->is_package)
+        {
+            $package = CataloguePackage::where('salecode', $this->sale_code)->first();
+            return $package;
+        }
+    }
 }

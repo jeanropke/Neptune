@@ -4,12 +4,14 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.furniture.catalogue.pages') }}" style="text-decoration:none;{{ $submenu == 'catalogue.pages' ? 'font-weight: bold;' : '' }}">Catalogue Editor</a>
     </div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('admin.catalogue.items') }}" style="text-decoration:none;{{ $submenu == 'catalogue.items' ? 'font-weight: bold;' : '' }}">Catalogue Items</a>
+        <a href="{{ route('housekeeping.furniture.catalogue.items') }}" style="text-decoration:none;{{ $submenu == 'catalogue.items' ? 'font-weight: bold;' : '' }}">Catalogue Items</a>
     </div>
-    --}}
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.furniture.catalogue.packages') }}" style="text-decoration:none;{{ $submenu == 'catalogue.packages' ? 'font-weight: bold;' : '' }}">Catalogue Packages</a>
+    </div>
 </div>
 <br>
 <div class="menuouterwrap">
