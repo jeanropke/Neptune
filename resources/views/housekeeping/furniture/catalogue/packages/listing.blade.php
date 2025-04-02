@@ -83,8 +83,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="tablerow1" align="center" colspan="4">
-                                        <strong>No logs.</strong>
+                                    <td class="tablerow1" align="center" colspan="7">
+                                        <strong>No items found.</strong>
                                     </td>
                                 </tr>
                             @endforelse
