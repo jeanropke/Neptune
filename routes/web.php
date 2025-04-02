@@ -20,6 +20,7 @@ use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthControll
 use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\FurniPickerController;
 use App\Http\Controllers\Housekeeping\Furniture\CatalogueController;
+use App\Http\Controllers\Housekeeping\Furniture\FurnitureController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
@@ -376,7 +377,12 @@ Route::middleware('admin')->group(function () {
             Route::post('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAddSave'])->name('housekeeping.furniture.catalogue.packages.add');
             Route::post('/catalogue/packages/delete', [CatalogueController::class, 'cataloguePackagesDelete'])->name('housekeeping.furniture.catalogue.packages.delete');
 
-            Route::get('/items/edit/{id}', [CatalogueController::class, 'furnitureEdit'])->name('housekeeping.furniture.items.edit');
+            Route::get('/items', [FurnitureController::class, 'items'])->name('housekeeping.furniture.items');
+            Route::get('/items/edit/{id}', [FurnitureController::class, 'furnitureEdit'])->name('housekeeping.furniture.items.edit');
+            Route::post('/items/save', [FurnitureController::class, 'furnitureSave'])->name('housekeeping.furniture.items.save');
+            Route::get('/items/add', [FurnitureController::class, 'furnitureAdd'])->name('housekeeping.furniture.items.add');
+            Route::post('/items/add', [FurnitureController::class, 'furnitureAddSave'])->name('housekeeping.furniture.items.add');
+            Route::post('/items/delete', [FurnitureController::class, 'furnitureDelete'])->name('housekeeping.furniture.items.delete');
 
         });
 
