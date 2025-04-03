@@ -30,7 +30,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <meta name="build" content="{{ config('app.version') }} - {{ config('app.build') }} - {{ config('app.locale') }}" />
+    <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
 </head>
 </head>
 

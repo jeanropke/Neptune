@@ -19,8 +19,7 @@
             { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
         });
     </script>
-    <meta name="build"
-        content="{{ Config::get('app.version') }} - {{ Config::get('app.build') }} - {{ Config::get('app.locale') }}" />
+    <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
     <link rel="icon" href="{{ url('/') }}/web/housekeeping/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ url('/') }}/web/housekeeping/images/favicon.png" type="image/x-icon">
 
