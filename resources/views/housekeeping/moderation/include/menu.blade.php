@@ -37,15 +37,7 @@
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.editor_ads') }}" style="text-decoration:none;{{ $submenu == 'editor_ads' ? 'font-weight: bold;' : '' }}">Public Room ads editor</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.editor_deals') }}" style="text-decoration:none;{{ $submenu == 'editor_deals' ? 'font-weight: bold;' : '' }}">"Deals" editor (catalogue)</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.editor.catalogue') }}" style="text-decoration:none;{{ $submenu == 'editor_catalogue' ? 'font-weight: bold;' : '' }}">Catalogue editor</a>
     </div>
     --}}
 </div>
@@ -99,24 +91,6 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.moderation.unban') }}" style="text-decoration:none;{{ $submenu == 'moderation.unban' ? 'font-weight: bold;' : '' }}">Unbanning</a>
     </div>
-    {{--
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.alert') }}" style="text-decoration:none;{{ $submenu == 'alert' ? 'font-weight: bold;' : '' }}">Site/Remote Alert</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.massalert') }}" style="text-decoration:none;{{ $submenu == 'massalert' ? 'font-weight: bold;' : '' }}">Mass Site/Remote Alert</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.minimail') }}" style="text-decoration:none;{{ $submenu == 'minimail' ? 'font-weight: bold;' : '' }}">Send minimail</a>
-    </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.massmail') }}" style="text-decoration:none;{{ $submenu == 'massmail' ? 'font-weight: bold;' : '' }}">Mass minimail</a>
-    </div>
-    --}}
 </div>
 <br />
 <div class="menuouterwrap">
