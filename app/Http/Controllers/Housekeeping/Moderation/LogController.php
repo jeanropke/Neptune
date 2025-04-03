@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
+use App\Models\RoomChatLog;
 use App\Models\StaffLog;
+use App\Models\User;
 use App\Models\UserBan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,5 +51,35 @@ class LogController extends Controller
     {
         $alerts = DB::table('housekeeping_audit_log')->paginate(25);
         return view('housekeeping.moderation.logs.alerts')->with('alerts', $alerts);
+    }
+
+    public function chats(Request $request)
+    {
+        $chats = [];
+        switch ($request->type) {
+            case 'username':
+                $user = User::where('username', $request->value)->first();
+                if (!$user)
+                    return redirect()->route('housekeeping.logs.chats')->with('message', 'User not found!');
+                $chats = RoomChatLog::where('user_id', $user->id);
+                break;
+            case 'roomname':
+                $room = Room::where('name', $request->value)->first();
+                if (!$room)
+                    return redirect()->route('housekeeping.logs.chats')->with('message', 'Room not found!');
+                $chats = RoomChatLog::where('room_id', $room->id);
+                break;
+            case 'room_id':
+                $chats = RoomChatLog::where('room_id', $request->value);
+                break;
+            case 'user_id':
+                $chats = RoomChatLog::where('user_id', $request->value);
+                break;
+            default:
+                $chats = RoomChatLog::where([['message', 'LIKE', "%{$request->value}%"]]);
+                break;
+        }
+
+        return view('housekeeping.moderation.logs.chats')->with('chats', $chats->orderBy('timestamp', 'DESC')->paginate(25));
     }
 }
