@@ -21,6 +21,7 @@ use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\FurniPickerController;
 use App\Http\Controllers\Housekeeping\Furniture\CatalogueController;
 use App\Http\Controllers\Housekeeping\Furniture\FurnitureController;
+use App\Http\Controllers\Housekeeping\Furniture\WebOfferController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
@@ -383,6 +384,13 @@ Route::middleware('admin')->group(function () {
             Route::get('/items/add', [FurnitureController::class, 'furnitureAdd'])->name('housekeeping.furniture.items.add');
             Route::post('/items/add', [FurnitureController::class, 'furnitureAddSave'])->name('housekeeping.furniture.items.add');
             Route::post('/items/delete', [FurnitureController::class, 'furnitureDelete'])->name('housekeeping.furniture.items.delete');
+
+            Route::get('/weboffers', [WebOfferController::class, 'webOffers'])->name('housekeeping.furniture.weboffers');
+            Route::get('/weboffers/edit/{id}', [WebOfferController::class, 'webOffersEdit'])->name('housekeeping.furniture.weboffers.edit');
+            Route::post('/weboffers/save', [WebOfferController::class, 'webOffersSave'])->name('housekeeping.furniture.weboffers.save');
+            Route::get('/weboffers/add', [WebOfferController::class, 'webOffersAdd'])->name('housekeeping.furniture.weboffers.add');
+            Route::post('/weboffers/add', [WebOfferController::class, 'webOffersAddSave'])->name('housekeeping.furniture.weboffers.add');
+            Route::post('/weboffers/delete', [WebOfferController::class, 'webOffersDelete'])->name('housekeeping.furniture.weboffers.delete');
 
         });
 

@@ -52,6 +52,11 @@ var FurniPicker = {
             Dialog.moveDialogToCenter(this.dialog);
             this.listing($(e.target).attr('href'));
         });
+
+        $('#furni-picked .slot').each((i, e) => {
+            $(e).click(this.removeFurni);
+            this.picked.push($(e).data('furni'));
+        });
     },
 
     closeDialog: function (e) {
@@ -78,12 +83,12 @@ var FurniPicker = {
                 .done((html, status) => {
                     $('#furni-picker-listing').html(html);
 
-                    $('.slot').hover((e) => {
+                    $('#furni-picker-listing .slot').hover((e) => {
                         var furni = $(e.target).closest('.slot').data('furni');
                         $('#furni-name').text(furni);
                     });
 
-                    $('.slot').click((e) => {
+                    $('#furni-picker-listing .slot').click((e) => {
                         var slot = $(e.target).closest('.slot');
                         var furni = slot.data('furni');
                         this.picked.push(furni);
@@ -91,9 +96,12 @@ var FurniPicker = {
                         clone.click(this.removeFurni);
                         $('#furni-picked').append(clone);
                         $('input[name=items]').val(FurniPicker.picked.join(';'));
+                        console.log('????');
                     });
                 });
         });
+
+
     },
     removeFurni: function (e) {
         var $el = $(e.target).closest('.slot');
