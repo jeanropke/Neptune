@@ -327,8 +327,6 @@ Route::middleware('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.index');
         Route::post('/dashboard', [DashboardController::class, 'saveNote'])->name('housekeeping.save_note');
-        Route::get('/updates', [DashboardController::class, 'updates'])->name('housekeeping.updates');
-        Route::get('/about', [DashboardController::class, 'about'])->name('housekeeping.about');
 
         Route::prefix('settings')->group(function() {
             Route::get('/hotel', [SettingsController::class, 'hotel'])->name('housekeeping.settings.hotel');
