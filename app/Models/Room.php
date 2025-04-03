@@ -29,13 +29,10 @@ class Room extends Model
 
     public function getOwner()
     {
-
         $user = User::find($this->owner_id);
         if ($user)
             return $user->username;
 
         return "Owner ID {$this->owner_id}";
-
     }
-
 }
