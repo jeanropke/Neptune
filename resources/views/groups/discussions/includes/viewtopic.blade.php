@@ -90,16 +90,22 @@
                             <tr>
                                 <td valign="top">
                                     <div class="post-list-report-element">
-                                        @if ($author->id == user()->id)
-                                        <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
-                                        @else
-                                        <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
+                                        @if(!$reply->hidden_by_staff)
+                                            @if ($author->id == user()->id)
+                                            <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
+                                            @else
+                                            <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
+                                            @endif
                                         @endif
                                     </div>
+                                    @if($reply->hidden_by_staff)
+                                    <i>Message removed by Hotel Staff</i>
+                                    @else
                                     <div class="post-list-content-element">
                                         {!! bb_format($reply->message) !!}
                                         <input type="hidden" id="{{ $reply->id }}-message" value="{{ $reply->message }}">
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>

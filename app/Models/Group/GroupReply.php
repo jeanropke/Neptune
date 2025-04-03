@@ -10,7 +10,7 @@ class GroupReply extends Model
     protected $table = 'cms_groups_replies';
 
     protected $fillable = [
-        'id', 'topic_id', 'user_id', 'message', 'is_edited', 'is_deleted', 'created_at', 'updated_at'
+        'id', 'topic_id', 'user_id', 'message', 'is_edited', 'is_deleted', 'hidden_by_staff', 'created_at', 'updated_at'
     ];
 
     protected $casts = [
@@ -21,5 +21,12 @@ class GroupReply extends Model
     public function getAuthor()
     {
         return User::find($this->user_id);
+    }
+
+    public function getTopic()
+    {
+        $topic = GroupTopic::find($this->topic_id);
+        if($topic)
+            return $topic;
     }
 }

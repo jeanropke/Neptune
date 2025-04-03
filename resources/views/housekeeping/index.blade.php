@@ -81,7 +81,7 @@
                                                                         <td class="homepage_sub_row"><strong>Active
                                                                                 Bans</strong></td>
                                                                         <td class="homepage_sub_row">
-                                                                            <a href="/users/banlist">
+                                                                            <a href="{{ route('housekeeping.logs.bans') }}">
                                                                                 {{ $bans }}
                                                                             </a>
                                                                         </td>

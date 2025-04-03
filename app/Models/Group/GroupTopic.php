@@ -2,6 +2,7 @@
 
 namespace App\Models\Group;
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,5 +32,12 @@ class GroupTopic extends Model
     public function getReplies()
     {
         return GroupReply::where([['topic_id', '=', $this->id], ['is_deleted', '=', '0']])->orderBy('created_at', 'ASC')->paginate(10);
+    }
+
+    public function getGroup()
+    {
+        $group = Group::find($this->group_id);
+        if ($group)
+            return $group;
     }
 }

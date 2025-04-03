@@ -25,6 +25,7 @@ use App\Http\Controllers\Housekeeping\Furniture\WebOfferController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
+use App\Http\Controllers\Housekeeping\Moderation\ReportController as HouseekeepingReportController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
@@ -486,6 +487,17 @@ Route::middleware('admin')->group(function () {
             Route::post('/vouchers/delete', [HousekeepingCreditsController::class, 'vouchersDelete'])->name('housekeeping.credits.vouchers.delete');
 
             Route::get('/vouchers/history', [HousekeepingCreditsController::class, 'vouchersHistory'])->name('housekeeping.credits.vouchers.history');
+        });
+
+        Route::prefix('moderation')->group(function() {
+            Route::get('/reports/website', [HouseekeepingReportController::class, 'website'])->name('housekeeping.moderation.reports.website');
+            Route::get('/reports/website/view/{id}', [HouseekeepingReportController::class, 'websiteView'])->name('housekeeping.moderation.reports.website.view');
+            Route::post('/reports/website/save', [HouseekeepingReportController::class, 'websiteViewSave'])->name('housekeeping.moderation.reports.website.save');
+            Route::post('/reports/website/hide', [HouseekeepingReportController::class, 'websiteHide'])->name('housekeeping.moderation.reports.website.hide');
+
+
+
+            Route::post('/ban', [HouseekeepingReportController::class, 'a'])->name('housekeeping.moderation.ban');
         });
 
         Route::prefix('logs')->group(function() {

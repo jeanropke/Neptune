@@ -87,10 +87,14 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Moderation</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.moderation.reports.website') }}" style="text-decoration:none;{{ $submenu == 'reports.website' ? 'font-weight: bold;' : '' }}">Website Reports</a>
+    </div>
     {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.ban') }}" style="text-decoration:none;{{ $submenu == 'ban' ? 'font-weight: bold;' : '' }}">Remote Banning</a>
+        <a href="{{ route('housekeeping.moderation.ban') }}" style="text-decoration:none;{{ $submenu == 'ban' ? 'font-weight: bold;' : '' }}">Remote Banning</a>
     </div>
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
