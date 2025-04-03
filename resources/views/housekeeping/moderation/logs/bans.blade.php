@@ -12,12 +12,6 @@
             </td>
             <td width="78%" valign="top" id="rightblock">
                 <div>
-                    @if (session('message'))
-                        <p><strong>{{ session('message') }}</strong></p>
-                    @endif
-                    @if ($errors->any())
-                        <p><strong>{{ $errors->first() }}</strong></p>
-                    @endif
                     <!-- RIGHT CONTENT BLOCK -->
                     <div class="tableborder">
                         <div class="tableheaderalt">Active Ban Listing</div>
