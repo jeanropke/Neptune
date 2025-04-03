@@ -11,12 +11,18 @@ class RemoteController extends Controller
 {
     public function ban()
     {
+        if (!user()->hasPermission('can_user_ban'))
+            return view('housekeeping.accessdenied');
+
         $lengths = array('2 Hours', '4 Hours', '12 Hours', '24 Hours', '2 Days', '7 Days', '2 Weeks', '1 Month', '6 Month', '1 Year', 'Permenantly (25 Years)');
         return view('housekeeping.moderation.remote.ban')->with('lengths', $lengths);
     }
 
     public function banPost(Request $request)
     {
+        if (!user()->hasPermission('can_user_ban'))
+            return view('housekeeping.accessdenied');
+
         $request->validate([
             'id'        => 'required|numeric',
             'reason'    => 'required'
@@ -46,21 +52,31 @@ class RemoteController extends Controller
             'banned_until'  => time() + $lengths[$request->length]
         ]);
 
+        create_staff_log('moderation.remote.ban', $request);
+
         return redirect()->route('housekeeping.moderation.remote.ban')->with('message', 'User banned!');
     }
 
     public function unban()
     {
+        if (!user()->hasPermission('can_user_unban'))
+            return view('housekeeping.accessdenied');
+
         return view('housekeeping.moderation.remote.unban');
     }
 
     public function unbanPost(Request $request)
     {
+        if (!user()->hasPermission('can_user_unban'))
+            return view('housekeeping.accessdenied');
+
         $ban = UserBan::find($request->input);
         if(!$ban)
             return redirect()->route('housekeeping.moderation.unban')->with('message', 'User not found!');
 
         $ban->delete();
+
+        create_staff_log('moderation.remote.unban', $request);
 
         return redirect()->route('housekeeping.moderation.unban')->with('message', 'User unbanned!');
     }

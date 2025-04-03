@@ -18,6 +18,7 @@ class LogController extends Controller
     {
         if (!user()->hasPermission('can_view_stafflogs'))
             return view('housekeeping.accessdenied');
+
         return view('housekeeping.moderation.logs.staff')->with('logs', StaffLog::orderBy('created_at', 'DESC')->paginate(15));
     }
 
@@ -45,17 +46,26 @@ class LogController extends Controller
 
     public function bans()
     {
+        if (!user()->hasPermission('can_view_bans'))
+            return view('housekeeping.accessdenied');
+
         return view('housekeeping.moderation.logs.bans')->with('bans', UserBan::paginate(25));
     }
 
     public function alerts()
     {
+        if (!user()->hasPermission('can_view_alertlogs'))
+            return view('housekeeping.accessdenied');
+
         $alerts = DB::table('housekeeping_audit_log')->paginate(25);
         return view('housekeeping.moderation.logs.alerts')->with('alerts', $alerts);
     }
 
     public function chats(Request $request)
     {
+        if (!user()->hasPermission('can_view_chatlogs'))
+            return view('housekeeping.accessdenied');
+
         $chats = [];
         switch ($request->type) {
             case 'username':
@@ -86,6 +96,9 @@ class LogController extends Controller
 
     public function console(Request $request)
     {
+        if (!user()->hasPermission('can_view_consolelogs'))
+            return view('housekeeping.accessdenied');
+
         $messages = [];
 
         switch ($request->type) {
