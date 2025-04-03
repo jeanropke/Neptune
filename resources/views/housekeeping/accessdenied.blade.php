@@ -10,7 +10,7 @@
                 <!-- RIGHT CONTENT BLOCK -->
                 <div id="acp-update-wrapper">
                     <div class="homepage_pane_border" id="acp-update-normal">
-                        <div class="homepage_section">SolariumCMS</div>
+                        <div class="homepage_section">{{ config('cms.name') }}</div>
                         <div style="font-size:12px;padding:4px; text-align:left">
                             <p>
                             <h3>Access Denied</h3> Sorry, but you do not have access to this page. This could be due to one of the several reasons:
