@@ -63,8 +63,8 @@
                                     <td class="tablerow1" align="center">
                                         {{ $report->id }}
                                     </td>
-                                    <td class="tablerow2">{{ $report->getUsername() }}
-
+                                    <td class="tablerow2">
+                                        {{ $report->getUsername() }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $report->type }}
@@ -82,8 +82,9 @@
                                         {{ $report->created_at->format('d/m/Y H:i') }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.moderation.reports.website.view', $report->id) }}"><img src="{{ url('/') }}/web/housekeeping/images/edit.gif"
-                                                alt="View Report"></a>
+                                        <a href="{{ route('housekeeping.moderation.reports.website.view', $report->id) }}">
+                                            <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="View Report">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -95,5 +96,4 @@
             </td>
         </tr>
     </table>
-
 @stop
