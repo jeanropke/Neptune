@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StaffLog;
 use App\Models\UserBan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LogController extends Controller
 {
@@ -41,5 +42,11 @@ class LogController extends Controller
     public function bans()
     {
         return view('housekeeping.moderation.logs.bans')->with('bans', UserBan::paginate(25));
+    }
+
+    public function alerts()
+    {
+        $alerts = DB::table('housekeeping_audit_log')->paginate(25);
+        return view('housekeeping.moderation.logs.alerts')->with('alerts', $alerts);
     }
 }

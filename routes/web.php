@@ -496,6 +496,8 @@ Route::middleware('admin')->group(function () {
             Route::post('staff/clear', [LogController::class, 'staffClear'])->name('housekeeping.logs.staff.clear');
 
             Route::get('bans', [LogController::class, 'bans'])->name('housekeeping.logs.bans');
+
+            Route::get('alerts', [LogController::class, 'alerts'])->name('housekeeping.logs.alerts');
         });
 
         Route::prefix('help')->group(function () {
