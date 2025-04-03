@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserBan;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RemoteController extends Controller
