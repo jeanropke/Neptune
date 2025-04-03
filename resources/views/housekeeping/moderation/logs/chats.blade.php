@@ -88,7 +88,7 @@
                                 </tr>
                             @empty
                                 <tr align="center">
-                                    <td colspan="4" class="tablerow1"><strong>No chats.</strong></td>
+                                    <td colspan="5" class="tablerow1"><strong>No chats.</strong></td>
                                 </tr>
                             @endforelse
                         </table>

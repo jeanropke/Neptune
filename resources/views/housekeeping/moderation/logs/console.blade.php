@@ -97,7 +97,7 @@
                                 </tr>
                             @empty
                                 <tr align="center">
-                                    <td colspan="4" class="tablerow1"><strong>No console logs.</strong></td>
+                                    <td colspan="7" class="tablerow1"><strong>No console logs.</strong></td>
                                 </tr>
                             @endforelse
                         </table>

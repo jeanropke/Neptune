@@ -47,7 +47,7 @@
                                 </tr>
                             @empty
                                 <tr align="center">
-                                    <td colspan="4" class="tablerow1"><strong>No alerts.</strong></td>
+                                    <td colspan="6" class="tablerow1"><strong>No alerts.</strong></td>
                                 </tr>
                             @endforelse
                         </table>
