@@ -13,6 +13,7 @@
             <td width="78%" valign="top" id="rightblock">
                 <div>
                     <!-- RIGHT CONTENT BLOCK -->
+                    <p>Notice: Expired bans will be automaticly removed upon login of the previously banned user.</p>
                     <div class="tableborder">
                         <div class="tableheaderalt">Active Ban Listing</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
@@ -33,7 +34,7 @@
                                         {{ $ban->message }}
                                     </td>
                                     <td class="tablerow1" align="center">
-                                        {{ \Carbon\Carbon::createFromTimestamp($ban->banned_until)->format('d/m/Y H:i') }}
+                                        {{ \Carbon\Carbon::createFromTimestamp($ban->banned_until, date_default_timezone_get())->format('d/m/Y H:i') }}
                                     </td>
                                 </tr>
                             @empty

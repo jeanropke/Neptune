@@ -25,6 +25,7 @@ use App\Http\Controllers\Housekeeping\Furniture\WebOfferController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
+use App\Http\Controllers\Housekeeping\Moderation\RemoteController;
 use App\Http\Controllers\Housekeeping\Moderation\ReportController as HouseekeepingReportController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
@@ -495,9 +496,8 @@ Route::middleware('admin')->group(function () {
             Route::post('/reports/website/save', [HouseekeepingReportController::class, 'websiteViewSave'])->name('housekeeping.moderation.reports.website.save');
             Route::post('/reports/website/hide', [HouseekeepingReportController::class, 'websiteHide'])->name('housekeeping.moderation.reports.website.hide');
 
-
-
-            Route::post('/ban', [HouseekeepingReportController::class, 'a'])->name('housekeeping.moderation.ban');
+            Route::get('/remote/ban', [RemoteController::class, 'ban'])->name('housekeeping.moderation.remote.ban');
+            Route::post('/remote/ban', [RemoteController::class, 'banPost'])->name('housekeeping.moderation.remote.ban');
         });
 
         Route::prefix('logs')->group(function() {

@@ -91,11 +91,11 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.moderation.reports.website') }}" style="text-decoration:none;{{ $submenu == 'reports.website' ? 'font-weight: bold;' : '' }}">Website Reports</a>
     </div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.moderation.ban') }}" style="text-decoration:none;{{ $submenu == 'ban' ? 'font-weight: bold;' : '' }}">Remote Banning</a>
+        <a href="{{ route('housekeeping.moderation.remote.ban') }}" style="text-decoration:none;{{ $submenu == 'moderation.ban' ? 'font-weight: bold;' : '' }}">Remote Banning</a>
     </div>
+    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.unban') }}" style="text-decoration:none;{{ $submenu == 'unban' ? 'font-weight: bold;' : '' }}">Unbanning</a>

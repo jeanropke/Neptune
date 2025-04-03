@@ -14,6 +14,6 @@ class UserBan extends Model
 
     public $timestamps = false;
 
-    protected $primaryKey = false;
+    protected $primaryKey = 'banned_value';
 
 }
