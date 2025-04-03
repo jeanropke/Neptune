@@ -11,34 +11,6 @@ use Illuminate\Http\Request;
 
 class CreditsController extends Controller
 {
-    /*
-    public function creditsTransactions()
-    {
-        if (!user()->hasPermission('can_check_transactions'))
-            return view('housekeeping.accessdenied');
-
-        return view('housekeeping.users.credits.transactions');
-    }
-
-    public function getCreditsTransactions(Request $request)
-    {
-        if (!user()->hasPermission('can_check_transactions'))
-            return view('housekeeping.accessdenied');
-
-        $user = User::where('id', $request->user_id)->first();
-
-        if (!$user)
-            return redirect()->route('admin.credits.transactions', false)->with('message', 'User not found!');
-
-        return view('housekeeping.users.credits.transactions')->with(
-            [
-                'results' => DB::table('cms_transactions')->limit(100)->orderby('timestamp', 'desc')->get(),
-                'user'    => $user
-            ]
-        );
-    }
-    */
-
     public function vouchers()
     {
         if (!user()->hasPermission('can_create_vouchers'))
