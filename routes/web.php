@@ -494,6 +494,8 @@ Route::middleware('admin')->group(function () {
             Route::get('staff', [LogController::class, 'staff'])->name('housekeeping.logs.staff');
             Route::post('staff/details', [LogController::class, 'staffMessageDetails'])->name('housekeeping.logs.staff.details');
             Route::post('staff/clear', [LogController::class, 'staffClear'])->name('housekeeping.logs.staff.clear');
+
+            Route::get('bans', [LogController::class, 'bans'])->name('housekeeping.logs.bans');
         });
 
         Route::prefix('help')->group(function () {

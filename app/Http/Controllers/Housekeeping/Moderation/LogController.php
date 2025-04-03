@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\StaffLog;
+use App\Models\UserBan;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -35,5 +36,10 @@ class LogController extends Controller
         StaffLog::truncate();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Staff logs cleared!']);
+    }
+
+    public function bans()
+    {
+        return view('housekeeping.moderation.logs.bans')->with('bans', UserBan::paginate(25));
     }
 }

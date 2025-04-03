@@ -131,11 +131,11 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.logs.staff') }}" style="text-decoration:none;{{ $submenu == 'logs.staff' ? 'font-weight: bold;' : '' }}">Staff Logs</a>
     </div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.banlist') }}" style="text-decoration:none;{{ $submenu == 'banlist' ? 'font-weight: bold;' : '' }}">Ban Listing</a>
+        <a href="{{ route('housekeeping.logs.bans') }}" style="text-decoration:none;{{ $submenu == 'logs.bans' ? 'font-weight: bold;' : '' }}">Ban Listing</a>
     </div>
+    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.users.alertlist') }}" style="text-decoration:none;{{ $submenu == 'alertlist' ? 'font-weight: bold;' : '' }}">Alert Listing</a>
