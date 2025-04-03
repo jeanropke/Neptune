@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function website()
+    public function website(Request $request)
     {
+        if(isset($request->status)) {
+            $reports = Report::where('closed', $request->status)->paginate(25);
+            return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
+        }
+
         $reports = Report::paginate(25);
         return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
     }

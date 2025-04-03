@@ -21,24 +21,16 @@
                     <!-- RIGHT CONTENT BLOCK -->
                     <div class="tableborder">
                         <form action="{{ route('housekeeping.moderation.reports.website') }}" method="get" name="theAdminForm" id="theAdminForm" autocomplete="off">
-                            <div class="tableheaderalt">Search User</div>
+                            <div class="tableheaderalt">Search by Status</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <tr>
-                                    <td class="tablerow1" width="30%" valign="middle"><b>Value</b>
-                                        <div class="graytext">Search by username or IP address</div>
-                                    </td>
-                                    <td class="tablerow2" width="70%" valign="middle">
-                                        <input type="text" name="value" value="" size="30" class="textinput">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="tablerow1" width="30%" valign="middle"><b>Type</b>
+                                    <td class="tablerow1" width="30%" valign="middle"><b>Status</b>
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="70%" valign="middle">
-                                        <select name="type" class="textinput" style="margin-top: 5px;" size="1">
-                                            <option value="username">Username</option>
-                                            <option value="ip">IP</option>
+                                        <select name="status" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ request()->status == '0' ? 'selected' : '' }}>Opened</option>
+                                            <option value="1" {{ request()->status == '1' ? 'selected' : '' }}>Closed</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -53,7 +45,7 @@
                     <br />
                     <div class="tableborder">
                         <div class="tableheaderalt">
-                            Habbo User Listing
+                            Web Reports Listing
                         </div>
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
