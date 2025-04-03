@@ -498,6 +498,8 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/remote/ban', [RemoteController::class, 'ban'])->name('housekeeping.moderation.remote.ban');
             Route::post('/remote/ban', [RemoteController::class, 'banPost'])->name('housekeeping.moderation.remote.ban');
+            Route::get('/unban', [RemoteController::class, 'unban'])->name('housekeeping.moderation.unban');
+            Route::post('/unban', [RemoteController::class, 'unbanPost'])->name('housekeeping.moderation.unban');
         });
 
         Route::prefix('logs')->group(function() {

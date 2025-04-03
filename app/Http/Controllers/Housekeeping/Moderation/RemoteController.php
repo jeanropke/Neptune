@@ -49,4 +49,20 @@ class RemoteController extends Controller
 
         return redirect()->route('housekeeping.moderation.remote.ban')->with('message', 'User banned!');
     }
+
+    public function unban()
+    {
+        return view('housekeeping.moderation.remote.unban');
+    }
+
+    public function unbanPost(Request $request)
+    {
+        $ban = UserBan::find($request->input);
+        if(!$ban)
+            return redirect()->route('housekeeping.moderation.unban')->with('message', 'User not found!');
+
+        $ban->delete();
+
+        return redirect()->route('housekeeping.moderation.unban')->with('message', 'User unbanned!');
+    }
 }
