@@ -22,7 +22,7 @@
                     <form action="{{ route('housekeeping.moderation.remote.ban') }}" method="post" name="theAdminForm" id="theAdminForm">
                         {{ csrf_field() }}
                         <div class="tableborder">
-                            <div class="tableheaderalt">(Remote) Banning </div>
+                            <div class="tableheaderalt">(Remote) Banning</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>User ID</b>
@@ -30,7 +30,7 @@
                                                 User Tool</a>.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="id" value="{{ old('id') }}" size="30" class="textinput">
+                                        <input type="text" name="id" value="{{ $user ? $user->id : old('id') }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -45,9 +45,17 @@
                                     <td class="tablerow1" width="40%" valign="middle"><b>Ban Length</b></td>
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <select name="length" class="dropdown">
-                                            @foreach ($lengths as $length)
-                                                <option value="{{ $loop->index }}" {{ old('length') == $loop->index ? 'selected' : '' }}>{{ $length }}</option>
-                                            @endforeach
+                                            <option value="7200" {{ old('length') == 7200 ? 'selected' : '' }}>2 Hours</option>
+                                            <option value="14400" {{ old('length') == 14400 ? 'selected' : '' }}>4 Hours</option>
+                                            <option value="43200" {{ old('length') == 43200 ? 'selected' : '' }}>12 Hours</option>
+                                            <option value="86400" {{ old('length') == 86400 ? 'selected' : '' }}>24 Hours</option>
+                                            <option value="172800" {{ old('length') == 172800 ? 'selected' : '' }}>2 Days</option>
+                                            <option value="604800" {{ old('length') == 604800 ? 'selected' : '' }}>7 Days</option>
+                                            <option value="1209600" {{ old('length') == 1209600 ? 'selected' : '' }}>2 Weeks</option>
+                                            <option value="2678400" {{ old('length') == 2678400 ? 'selected' : '' }}>1 Month</option>
+                                            <option value="16070400" {{ old('length') == 16070400 ? 'selected' : '' }}>6 Months</option>
+                                            <option value="31536000" {{ old('length') == 31536000 ? 'selected' : '' }}>1 Year</option>
+                                            <option value="788400000" {{ old('length') == 788400000 ? 'selected' : '' }}>Permenantly (25 Years)</option>
                                         </select>
                                     </td>
                                 </tr>

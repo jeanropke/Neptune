@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 
 class RemoteController extends Controller
 {
-    public function ban()
+    public function ban(Request $request)
     {
         if (!user()->hasPermission('can_user_ban'))
             return view('housekeeping.accessdenied');
 
-        $lengths = array('2 Hours', '4 Hours', '12 Hours', '24 Hours', '2 Days', '7 Days', '2 Weeks', '1 Month', '6 Month', '1 Year', 'Permenantly (25 Years)');
-        return view('housekeeping.moderation.remote.ban')->with('lengths', $lengths);
+        $user = User::where('username', $request->username)->first();
+
+        return view('housekeeping.moderation.remote.ban')->with('user', $user);
     }
 
     public function banPost(Request $request)
@@ -25,7 +26,8 @@ class RemoteController extends Controller
 
         $request->validate([
             'id'        => 'required|numeric',
-            'reason'    => 'required'
+            'reason'    => 'required',
+            'length'    => 'required|numeric'
         ]);
 
         $ban = UserBan::find($request->id);
@@ -42,14 +44,11 @@ class RemoteController extends Controller
         if($user->rank >= user()->rank)
             return redirect()->route('housekeeping.moderation.remote.ban')->with('message', 'You can\'t ban a user with a rank equal to or higher than yours!');
 
-        // Lengths in seconds
-        $lengths = array(7200, 14400, 43200, 86400, 172800, 604800, 1209600, 2678400, 16070400, 31536000, 788400000);
-
         UserBan::insert([
             'ban_type'      => 'USER_ID',
             'banned_value'  => $user->id,
             'message'       => $request->reason,
-            'banned_until'  => time() + $lengths[$request->length]
+            'banned_until'  => time() + $request->length
         ]);
 
         create_staff_log('moderation.remote.ban', $request);

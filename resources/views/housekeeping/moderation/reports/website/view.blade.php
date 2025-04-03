@@ -48,7 +48,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $report->getObjectAuthor() }} - <a href="{{ route('housekeeping.moderation.ban') }}?username={{ $report->getObjectAuthor() }}">Remote ban</a>
+                                        {{ $report->getObjectAuthor() }} - <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $report->getObjectAuthor() }}">Remote ban</a>
                                     </td>
                                 </tr>
                                 <tr>
