@@ -499,6 +499,7 @@ Route::middleware('admin')->group(function () {
             Route::get('alerts', [LogController::class, 'alerts'])->name('housekeeping.logs.alerts');
 
             Route::get('chats', [LogController::class, 'chats'])->name('housekeeping.logs.chats');
+            Route::get('console', [LogController::class, 'console'])->name('housekeeping.logs.console');
         });
 
         Route::prefix('help')->group(function () {

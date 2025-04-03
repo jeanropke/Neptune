@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
+use App\Models\ConsoleMessage;
 use App\Models\Room;
 use App\Models\RoomChatLog;
 use App\Models\StaffLog;
@@ -81,5 +82,33 @@ class LogController extends Controller
         }
 
         return view('housekeeping.moderation.logs.chats')->with('chats', $chats->orderBy('timestamp', 'DESC')->paginate(25));
+    }
+
+    public function console(Request $request)
+    {
+        $messages = [];
+
+        switch ($request->type) {
+            case 'username':
+                $user = User::where('username', $request->value)->first();
+                if (!$user)
+                    return redirect()->route('housekeeping.logs.console')->with('message', 'User not found!');
+                $messages = ConsoleMessage::where('sender_id', $user->id);
+                break;
+            case 'sender_id':
+                $messages = ConsoleMessage::where('sender_id', $request->value);
+                break;
+            case 'receiver_id':
+                $messages = ConsoleMessage::where('receiver_id', $request->value);
+                break;
+            default:
+                if ($request->user_one && $request->user_two) {
+                    $messages = ConsoleMessage::whereIn('sender_id', [$request->user_one, $request->user_two])->whereIn('receiver_id', [$request->user_one, $request->user_two]);
+                } else {
+                    $messages = ConsoleMessage::where([['body', 'LIKE', "%{$request->value}%"]]);
+                }
+                break;
+        }
+        return view('housekeeping.moderation.logs.console')->with('messages', $messages->orderBy('date', 'DESC')->paginate(25));
     }
 }

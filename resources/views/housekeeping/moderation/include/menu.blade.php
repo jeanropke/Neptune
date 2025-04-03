@@ -143,6 +143,10 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.logs.chats') }}" style="text-decoration:none;{{ $submenu == 'logs.chats' ? 'font-weight: bold;' : '' }}">Chatlogs</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.logs.console') }}" style="text-decoration:none;{{ $submenu == 'logs.console' ? 'font-weight: bold;' : '' }}">Console logs</a>
+    </div>
     {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
