@@ -133,7 +133,7 @@ class User extends Authenticatable
         $now = time();
         $message = str_replace('|', '', $message);
         $wraps = explode(',', cms_config('hotel.gift.wraps'));
-        $wrap = $wraps[rand(0, count($wraps))];
+        $wrap = $wraps[rand(0, count($wraps)-1)];
         Furni::create([
             'user_id'       => $this->id,
             'definition_id' => $wrap,
