@@ -200,8 +200,10 @@ class CreditsController extends Controller
         if (!$pack->isValid())
             return view('credits.ajax.purchase_result')->with(['message' => "Unable to purchase this pack.", 'status' => 'error']);
 
-        foreach ($pack->getItems() as $item) {
-            user()->giveItem($item->definition_id, $item->item_specialspriteid);
+        $items = $pack->getItems();
+        $lastItem = $items->last();
+        foreach ($items as $item) {
+            user()->giveItem($item->definition_id, $item->item_specialspriteid, $item === $lastItem);
         }
         user()->updateCredits(-$pack->price);
 
