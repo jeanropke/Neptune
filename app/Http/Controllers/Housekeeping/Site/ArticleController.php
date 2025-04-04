@@ -16,7 +16,7 @@ class ArticleController extends Controller
             return view('housekeeping.accessdenied');
 
         return view('housekeeping.site.articles.create')->with([
-            'ts_images' => File::allFiles('web/images/top_story_images')
+            'ts_images' => array_map('basename', File::files('web/images/top_story_images')),
         ]);
     }
 
@@ -76,7 +76,7 @@ class ArticleController extends Controller
             return redirect()->route('housekeeping.site.article')->with('message', 'Article not found!');
 
         return view('housekeeping.site.articles.edit')->with([
-            'ts_images' => File::allFiles('web/images/top_story_images'),
+            'ts_images' => array_map('basename', File::files('web/images/top_story_images')),
             'article'   => $article
         ]);
     }

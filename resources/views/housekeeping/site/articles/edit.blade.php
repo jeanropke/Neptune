@@ -90,16 +90,14 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Topstory Image</b>
-                                        <div class="graytext">The URL to the topstory image.</div>
+                                        <div class="graytext">The URL to the topstory image. </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ $article->image }}" id="ts_preview">
+                                        <img src="{{ url('/') }}/web/images/top_story_images/{{ $article->image }}" id="ts_preview" data-url="{{ url('/') }}/web/images/top_story_images/%icon%">
                                         <br>
-                                        <select name="topstory" onchange="changePreviewImage()" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
+                                        <select name="topstory" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($ts_images as $ts_img)
-                                                <option value="{{ url('/') }}/{{ str_replace('\\', '/', $ts_img) }}"
-                                                    @if (url('/') . '/' . str_replace('\\', '/', $ts_img) == $article->image) selected="selected" @endif>
-                                                    {{ explode('/', $ts_img)[2] }}</option>
+                                                <option value="{{ $ts_img }}" {{ $ts_img == (old('topstory') ?? $article->image) ? 'selected' : '' }}>{{ $ts_img }}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -165,10 +163,7 @@
                         </div>
                     </form>
                     <script>
-                        function changePreviewImage() {
-                            var tsImg = document.getElementById('ts_image');
-                            document.getElementById('ts_preview').src = tsImg.value;
-                        }
+                        SelectorPreview.initialise($('#ts_image'), $('#ts_preview'));
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
