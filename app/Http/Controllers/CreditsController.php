@@ -2,28 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Hotel;
 use App\Models\Catalogue\CatalogueItem;
-use App\Models\CmsOffer;
 use App\Models\Collectable;
-use App\Models\Furni;
-use App\Models\ItemDefination;
 use App\Models\ItemOffer;
-use App\Models\StarterPack;
 use App\Models\UserTransaction;
 use App\Models\Voucher;
 use App\Models\VoucherHistory;
 use Carbon\Carbon;
-use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
-use PayPal\Auth\OAuthTokenCredential;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
-use Symfony\Component\Console\Input\Input;
 
 use function PHPUnit\Framework\isNumeric;
 
@@ -47,9 +34,9 @@ class CreditsController extends Controller
         return view('credits.furniture.index');
     }
 
-    public function catalogue($id = null)
+    public function catalogue(Request $request)
     {
-        return view('credits.furniture.catalogue' . ($id ? '_' . $id : ''));
+        return view('credits.furniture.catalogue' . ($request->id ? '_' . $request->id : ''));
     }
 
     public function decorationExamples()
