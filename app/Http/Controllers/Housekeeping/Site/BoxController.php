@@ -186,7 +186,6 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
-
         $box = BoxPage::find($request->id);
 
         if (!$box)
