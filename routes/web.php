@@ -32,6 +32,7 @@ use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
+use App\Http\Controllers\Housekeeping\Site\MenuController;
 use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -440,6 +441,21 @@ Route::middleware('admin')->group(function () {
             Route::get('/boxes/pages/edit/{id}', [BoxController::class, 'boxPagesEdit'])->name('housekeeping.site.boxes.pages.edit');
             Route::post('/boxes/pages/save', [BoxController::class, 'boxPagesSave'])->name('housekeeping.site.boxes.pages.edit.save');
             Route::post('/boxes/pages/delete', [BoxController::class, 'boxPageDelete'])->name('housekeeping.site.boxes.pages.delete');
+
+            Route::get('/menu/categories', [MenuController::class, 'menuCategoriesListing'])->name('housekeeping.site.menu.categories.listing');
+            Route::get('/menu/categories/create', [MenuController::class, 'menuCategoriesCreate'])->name('housekeeping.site.menu.categories.create');
+            Route::post('/menu/categories/create', [MenuController::class, 'menuCategoriesCreateSave'])->name('housekeeping.site.menu.categories.create');
+            Route::get('/menu/categories/edit/{id}', [MenuController::class, 'menuCategoriesEdit'])->name('housekeeping.site.menu.categories.edit');
+            Route::post('/menu/categories/save', [MenuController::class, 'menuCategoriesSave'])->name('housekeeping.site.menu.categories.save');
+            Route::post('/menu/categories/delete', [MenuController::class, 'menuCategoriesDelete'])->name('housekeeping.site.menu.categories.delete');
+
+
+            Route::get('/menu/subcategories', [MenuController::class, 'menuSubcategoriesListing'])->name('housekeeping.site.menu.subcategories.listing');
+            Route::get('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreate'])->name('housekeeping.site.menu.subcategories.create');
+            Route::post('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreateSave'])->name('housekeeping.site.menu.subcategories.create');
+            Route::get('/menu/subcategories/edit/{id}', [MenuController::class, 'menuSubcategoriesEdit'])->name('housekeeping.site.menu.subcategories.edit');
+            Route::post('/menu/subcategories/save', [MenuController::class, 'menuSubcategoriesSave'])->name('housekeeping.site.menu.subcategories.save');
+            Route::post('/menu/subcategories/delete', [MenuController::class, 'menuSubcategoriesDelete'])->name('housekeeping.site.menu.subcategories.delete');
         });
 
         Route::prefix('neptunecms')->group(function () {

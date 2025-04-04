@@ -86,6 +86,18 @@
     </div>
 </div>
 <br />
+<div class="menuouterwrap">
+    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Website Menu</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.menu.categories.listing') }}" style="text-decoration:none;{{ $submenu == 'menu.categories.listing' ? 'font-weight: bold;' : '' }}">Main Categories</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.menu.subcategories.listing') }}" style="text-decoration:none;{{ $submenu == 'menu.subcategories.listing' ? 'font-weight: bold;' : '' }}">Sub Categories</a>
+    </div>
+</div>
+<br />
 {{--<div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Database Tools</div>
     <div class="menulinkwrap">&nbsp;
@@ -101,4 +113,3 @@
         <a href="{{ route('housekeeping.site.dbquery') }}" style="text-decoration:none;{{ $submenu == 'dbquery' ? 'font-weight: bold;' : '' }}">Database Query</a>
     </div>
 </div>--}}
-<br />
