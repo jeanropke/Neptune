@@ -157,10 +157,7 @@ Route::middleware('user')->group(function () {
             Route::get('/cameras', [CreditsController::class, 'cameras']);
             Route::get('/ecotronfaq', [CreditsController::class, 'ecotronfaq']);
         });
-        Route::get('/currency', [CreditsController::class, 'currency']);
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
-        Route::get('/mystery', [CreditsController::class, 'mystery']);
-        Route::post('/mystery/redeem', [CreditsController::class, 'mysteryRedeem']);
     });
 
     //GroupController

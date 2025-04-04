@@ -82,11 +82,6 @@ class CreditsController extends Controller
         return view('credits.furniture.ecotronfaq');
     }
 
-    public function currency()
-    {
-        return view('credits.currency');
-    }
-
     public function collectibles()
     {
         $tick = emu_config('rare.cycle.tick.time');
@@ -105,16 +100,6 @@ class CreditsController extends Controller
             'collectable' => $collectable,
             'time' => $time
         ]);
-    }
-
-    public function mystery()
-    {
-        return view('credits.mystery');
-    }
-
-    public function mysteryRedeem()
-    {
-        return view('credits.ajax.redeem_mystery');
     }
 
     public function habbletAjaxCollectiblesConfirm()
