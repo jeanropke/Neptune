@@ -46,8 +46,8 @@
 
          <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
     {{--<!--link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet"/-->
-    <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" />
-    <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" /> --}}
+    <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" /> --}}
+    <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
 
         <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/myhabbo/skins.css" type="text/css" rel="stylesheet" />
