@@ -4,26 +4,26 @@
             <div id="footer-top">
                 <div id="footer-content">
                     <p>
-                    <a href="/">{{ __('HOME') }}</a>
+                    <a href="/">HOME</a>
                         |
-                        <a href="/hotel">{{ __('New?') }}</a>
+                        <a href="/hotel">New?</a>
                         |
-                        <a href="/club">{{ __('Habbo Club', ['hotel' => cms_config('hotel.name.short')]) }}</a>
+                        <a href="/club">Habbo Club</a>
                         |
-                        <a href="/credits">{{ __('Coins') }}</a>
+                        <a href="/credits">Coins</a>
                         |
-                        <a href="/community">{{ __('Community') }}</a>
+                        <a href="/community">Community</a>
                         |
-                        <a href="/groups">{{ __('Groups') }}</a>
+                        <a href="/groups">Groups</a>
                         |
-                        <a href="/games">{{ __('Games') }}</a>
+                        <a href="/games">Games</a>
                         |
-                        <a href="/help">{{ __('Help') }}</a>
+                        <a href="/help">Help</a>
                     </p>
                     {{--<p><a href="/footer_pages/privacy_policy.html">Privacy Policy</a> | <a href="/footer_pages/terms_and_conditions.html">Terms &amp; Conditions of Use</a> |
-                        <a href="/footer_pages/terms_of_sale.html">Terms &amp; Conditions of Sale</a> |<a href="/help/lawenforcementcontact.html">Law Enforcement</a> | <a href="/footer_pages/atlas.html">Other {{ cms_config('hotel.name.short') }} sites</a> |<a href="/footer_pages/advertise_in_habbo.html">Advertise in Habbo</a> | <a href="https://web.archive.org/web/20071001095005/http://www.sulake.com/">Sulake</a>
+                        <a href="/footer_pages/terms_of_sale.html">Terms &amp; Conditions of Sale</a> |<a href="/help/lawenforcementcontact.html">Law Enforcement</a> | <a href="/footer_pages/atlas.html">Other {{ cms_config('hotel.name.short sites</a> |<a href="/footer_pages/advertise_in_habbo.html">Advertise in Habbo</a> | <a href="https://web.archive.org/web/20071001095005/http://www.sulake.com/">Sulake</a>
                     </p>--}}
-                    <p class="footer-legal">© {{ date('Y') }} {{ __('Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and :hotel is not affiliated with Sulake.', ['hotel' => cms_config('hotel.name.short')]) }}</p>
+                    <p class="footer-legal">© {{ date('Y') }} Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and :hotel is not affiliated with Sulake.</p>
                 </div>
             </div>
             <div id="footer-bottom">

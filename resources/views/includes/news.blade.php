@@ -14,12 +14,10 @@
             @foreach($top_stories as $article)
             {
             text: "{{ $article->short_text }}",
-
-            image: "<img width=\"425\" height=\"178\" border=\"0\" src=\"{{ $article->image }}\" /\>",
+            image: "<img width=\"425\" height=\"178\" border=\"0\" src=\"{{ url('/') }}/web/images/top_story_images/{{ $article->image }}\" /\>",
             links: [
-                "<a href=\"/article/{{ $article->url }}\">{{ __('Read More!') }}</a>",
-                "<a href=\"/client\" target=\"client\" onclick=\"openOrFocusHabbo(this); return false;\"\>{{ __('Enter Hotel') }}</a\>"
-
+                "<a href=\"/article/{{ $article->url }}\">Read More!</a>",
+                "<a href=\"/client\" target=\"client\" onclick=\"openOrFocusHabbo(this); return false;\"\>Enter Hotel</a\>"
             ]
         },
         @endforeach
@@ -28,7 +26,7 @@
 
 <div id="promoarea">
     <div id="promoheader">
-    <h2>{{ __('Top stories') }}</h2>
+    <h2>Top stories</h2>
         <ul style="display: block;" id="promoheader-selectors">
             <li><a href="#" class="selected" onclick="showPromo(0); return false;">1</a></li>
             @for($i = 1; $i < $top_stories->count(); $i++)
@@ -43,7 +41,7 @@
         <div id="promobody">
             @if($top_stories->count() > 0)
             <p id="promoimage">
-                <img width="425" height="178" border="0" src="{{ $top_stories[0]->image }}"></a>
+                <img width="425" height="178" border="0" src="{{ url('/') }}/web/images/top_story_images/{{ $top_stories[0]->image }}"></a>
             </p>
 
             <div class="promotext">
@@ -51,8 +49,8 @@
             </div>
             <div id="promolinks">
                 <ul id="promolinks-list">
-                <li><a href="/article/{{ $top_stories[0]->url }}">{{ __('Read More!') }}</a></li>
-                    <li><a href="/client" target="client" onclick="openOrFocusHabbo(this); return false;">{{ __('Enter Hotel') }}</a>
+                <li><a href="/article/{{ $top_stories[0]->url }}">Read More!</a></li>
+                    <li><a href="/client" target="client" onclick="openOrFocusHabbo(this); return false;">Enter Hotel</a>
                     </li>
                 </ul>
             </div>
@@ -62,7 +60,7 @@
 </div>
 <div id="newsbox">
     <div id="newsbox-header">
-    <h2>{{ __('What\'s New') }}</h2>
+    <h2>What's New</h2>
     </div>
     <div id="newsbox-text">
         @foreach($articles as $article)
@@ -78,6 +76,6 @@
 
     </div>
     <div id="newsbox-footer">
-        <div class="promo-button"><a href="/articles" alt="">{{ __('More News') }}</a></div>
+        <div class="promo-button"><a href="/articles" alt="">More News</a></div>
     </div>
 </div>

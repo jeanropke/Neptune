@@ -1,19 +1,16 @@
 @if (Auth::check())
     @if (!user()->getSubscription()->isExpired())
-        <h3> {{ __('You has :days HC days', ['days' => user()->getSubscription()->daysRemaining()]) }}</h3>
+        <h3> You has {{ user()->getSubscription()->daysRemaining() }} HC days</h3>
     @else
-        <h3> {{ __('You are not a member of :hotel Club', ['hotel' => cms_config('hotel.name.short')]) }}</h3>
+        <h3> You are not a member of {{ cms_config('hotel.name.short') }} Club</h3>
     @endif
 @else
-    <h3>{!! __('Please <a href="/login">sign in</a> to see your Club status', [
-        'hotel' => cms_config('hotel.name.short'),
-    ]) !!}</h3>
+    <h3>Please <a href="/login">sign in</a> to see your {{ cms_config('hotel.name.short') }} Club status</h3>
 @endif
 <div class="tabmenu-inner-content">
-    <p>{{ __(':hotel Club gives you access to the full benefits on :fullhotel.', ['hotel' => cms_config('hotel.name.short'), 'fullhotel' => cms_config('hotel.name.full')]) }}
+    <p>{{ cms_config('hotel.name.short') }} Club gives you access to the full benefits on {{ cms_config('hotel.name.full') }}.
     </p>
-    <p> <a href="/club"
-            class="arrow"><span>{{ __('More about :hotel Club', ['hotel' => cms_config('hotel.name.short')]) }}</span></a>
+    <p> <a href="/club" class="arrow"><span>More about {{ cms_config('hotel.name.short') }} Club</span></a>
     </p>
 </div>
 <script>
