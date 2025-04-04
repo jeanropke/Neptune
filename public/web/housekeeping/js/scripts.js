@@ -164,6 +164,14 @@ var GenericManager = {
     }
 }
 
+var SelectorPreview = {
+    initialise: function (selector, preview) {
+        selector.change((e) => {
+            preview.attr('src', preview.data('url').replace('%icon%', $(e.target).val()));
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;
