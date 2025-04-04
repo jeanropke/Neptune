@@ -72,10 +72,10 @@
                     @endif
                     <form action="{{ route('housekeeping.site.boxes.edit.save') }}" method="post" name="theAdminForm" id="theAdminForm">
                         {{ csrf_field() }}
+                        <input type="number" name="id" value="{{ $box->id }}" hidden>
                         <div class="tableborder">
-                            <div class="tableheaderalt">Create Box</div>
+                            <div class="tableheaderalt">Edit Box</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
-                                <input type="number" name="id" value="{{ $box->id }}" hidden>
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Title</b>
                                         <div class="graytext">The full title of the new box.</div>
