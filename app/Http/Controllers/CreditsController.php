@@ -12,8 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\isNumeric;
-
 class CreditsController extends Controller
 {
     public function index()
