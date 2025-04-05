@@ -134,6 +134,11 @@ class AuthController extends Controller
         }
     }
 
+    public function accountDisconnected()
+    {
+        return view('auth.disconnected');
+    }
+
     public function checkUsername(Request $request)
     {
         $username = $request->username;

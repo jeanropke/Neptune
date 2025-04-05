@@ -284,8 +284,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-
     Route::prefix('register')->group(function () {
         Route::get('/username', [AuthController::class, 'checkUsername']);
         Route::post('/start', [AuthController::class, 'registerStart'])->name('auth.register.start');
@@ -311,6 +309,9 @@ Route::middleware('guest')->group(function () {
         Route::post('/forgot', [AuthController::class, 'forgotPasswordMyAccounts'])->name('auth.password.forgot');
         Route::get('/forgot', [AuthController::class, 'emailForgotPassword'])->name('auth.forgot');
         Route::post('submit', [AuthController::class, 'doLogin'])->name('account.submit');
+
+        Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+        Route::get('/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
     });
 
     Route::prefix('housekeeping')->group(function () {
