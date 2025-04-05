@@ -69,13 +69,17 @@
         }
     </script>
     <style type="text/css">
-        #playground,
-        #playground-outer {
+        #playground, #playground-outer {
             margin-left: -2px;
-            /* width: {{ $owner->getSubscription()->isExpired() == 0 ? '752' : '915' }}px;*/
             height: 1360px;
         }
     </style>
+    {{-- I dont like this, but otherwise will broke visual studio code colors --}}
+    @if($owner->getSubscription()->isExpired())
+    <style type="text/css">#playground, #playground-outer { width: 752px }</style>
+    @else
+    <style type="text/css">#playground, #playground-outer { width: 915px }</style>
+    @endif
     <div id="mypage-wrapper">
         <div id="mypage-left-panel">
             <div id="mypage-top-nav"></div>
@@ -97,8 +101,9 @@
                                     class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
                             @if (Auth::check() && $owner->id != user()->id)
-                                <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right"><span>Get your own
-                                        Habbo Home</span></a>
+                                <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right">
+                                    <span>Get your own Habbo Home</span>
+                                </a>
                             @endif
                         </div>
                     </div>
