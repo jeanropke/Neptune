@@ -291,8 +291,8 @@ class AuthController extends Controller
             'credits'       => cms_config('register.default.credits'),
             'film'          => cms_config('register.default.film'),
             'tickets'       => cms_config('register.default.tickets'),
-            'motto'         => cms_config('register.default.motto'),
-            'console_motto' => cms_config('register.default.console_motto')
+            'motto'         => cms_config('register.default.motto') ?? '',
+            'console_motto' => cms_config('register.default.console_motto') ?? ''
         ]);
 
         CmsUserSettings::create([
