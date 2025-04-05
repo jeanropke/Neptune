@@ -15,7 +15,6 @@
         </div>
         <div class="widget-body">
             <div class="widget-content">
-
                 <div id="room_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
@@ -43,6 +42,7 @@
                                         </a>
                                         @endif
                                     </div>
+                                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-r" id="name-{{ $room->id }}-report" style="display: none;margin-top: -1px;">
                                     <br class="clear">
 
                                 </td>

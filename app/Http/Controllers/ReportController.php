@@ -6,6 +6,7 @@ use App\Models\Group\GroupReply;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
 use App\Models\Report;
+use App\Models\Room;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -92,6 +93,20 @@ class ReportController extends Controller
         $user = User::find($request->objectId);
 
         return $this->createReport($request->objectId, 'name', $user->username, $user->id);
+    }
+
+    public function addRoomReport(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $request->validate([
+            'objectId'  => 'required|numeric'
+        ]);
+
+        $room = Room::find($request->objectId);
+
+        return $this->createReport($request->objectId, 'room', "Name: {$room->name}[br]Desc: {$room->description}", $room->id);
     }
 
     public function addStickieReport(Request $request)
