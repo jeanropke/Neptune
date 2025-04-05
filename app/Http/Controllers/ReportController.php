@@ -66,6 +66,20 @@ class ReportController extends Controller
         return $this->createReport($request->objectId, 'guestbook', $guestbook->message, $guestbook->user_id);
     }
 
+    public function addMottoReport(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $request->validate([
+            'objectId'  => 'required|numeric'
+        ]);
+
+        $user = User::find($request->objectId);
+
+        return $this->createReport($request->objectId, 'motto', $user->motto, $user->id);
+    }
+
     public function addNameReport(Request $request)
     {
         if (!Auth::check())

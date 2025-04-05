@@ -21,9 +21,6 @@
                         <span class="name-text">{{ $owner->username }}</span>
                         <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-n" id="name-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     </div>
-
-
-
                     <br class="clear">
 
                     <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_offline.gif">
@@ -49,6 +46,7 @@
                 </div>
                 <div class="profile-motto">
                     {{ $owner->motto }}
+                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-m" id="motto-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     <div class="clear"></div>
                 </div>
                 <div class="profile-friend-request">
