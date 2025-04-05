@@ -5,7 +5,7 @@
 @section('content')
     <script language="JavaScript" type="text/javascript">
         Event.onDOMReady(function() {
-            initView({{ $owner->id }}, {{ $owner->id }});
+            initView({{ $owner->id }});
         });
 
         function isElementLimitReached() {
@@ -69,16 +69,27 @@
         }
     </script>
     <style type="text/css">
-        #playground, #playground-outer {
+        #playground,
+        #playground-outer {
             margin-left: -2px;
             height: 1360px;
         }
     </style>
     {{-- I dont like this, but otherwise will broke visual studio code colors --}}
-    @if($owner->getSubscription()->isExpired())
-    <style type="text/css">#playground, #playground-outer { width: 752px }</style>
+    @if ($owner->getSubscription()->isExpired())
+        <style type="text/css">
+            #playground,
+            #playground-outer {
+                width: 752px
+            }
+        </style>
     @else
-    <style type="text/css">#playground, #playground-outer { width: 915px }</style>
+        <style type="text/css">
+            #playground,
+            #playground-outer {
+                width: 915px
+            }
+        </style>
     @endif
     <div id="mypage-wrapper">
         <div id="mypage-left-panel">
@@ -93,25 +104,26 @@
                             <span id="header-bar-text">
                                 Habbo home: {{ $owner->username }}
                             </span>
-                            @if (Auth::check() && $owner->id == user()->id && !$isEdit)
-                                <a href="{{ url('/') }}/myhabbo/startSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
-                            @endif
+                            @auth
+                                @if ($owner->id != user()->id)
+                                    <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right">
+                                        <span>Get your own Habbo Home</span>
+                                    </a>
+                                @endif
+                                @if ($owner->id == user()->id && !$isEdit)
+                                    <a href="{{ url('/') }}/myhabbo/startSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
+                                @endif
+                                <a href="#" class="toolbutton" id="reporting-button" style="float: right">
+                                    <span>Report</span>
+                                </a>
+                                <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
+                                    <span>Stop reporting</span>
+                                </a>
+                            @endauth
                             @if (!$isEdit)
                                 <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $owner->username }}" id="tell-button"
                                     class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
-                            @if (Auth::check() && $owner->id != user()->id)
-                                <a href="{{ url('/') }}/home" class="toolbutton" id="gethome-button" style="float: right">
-                                    <span>Get your own Habbo Home</span>
-                                </a>
-                            @endif
-
-                            <a href="#" class="toolbutton" id="reporting-button" style="float: right">
-                                <span>Report</span>
-                            </a>
-                            <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
-                                <span>Stop reporting</span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +176,7 @@
                             @break
                         @endswitch
                     @endforeach
-{{--
+                    {{--
                     @if (Auth::check())
                         <div id="dialog-stickie-report" class="menu">
                             <div class="menu-header">
@@ -590,7 +602,6 @@
             Event.observe('guestbook-privacy-options', 'change', handleGuestbookPrivacySettings, false);
             Event.observe('trax-select-options', 'click', Event.stop, false);
             Event.observe('trax-select-options', 'change', handleTraxplayerTrackChange, false);
-
         </script>
     @endif
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Group\GroupReply;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
@@ -51,6 +52,34 @@ class ReportController extends Controller
         $post = GroupReply::find($request->objectId);
 
         return $this->createReport($request->objectId, 'discussionpost', $post->message, $post->user_id);
+    }
+
+    public function addGroupdescReport(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $request->validate([
+            'objectId'  => 'required|numeric'
+        ]);
+
+        $group = Group::find($request->objectId);
+
+        return $this->createReport($request->objectId, 'groupdesc', $group->description, $group->user_id);
+    }
+
+    public function addGroupnameReport(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $request->validate([
+            'objectId'  => 'required|numeric'
+        ]);
+
+        $group = Group::find($request->objectId);
+
+        return $this->createReport($request->objectId, 'groupname', $group->name, $group->user_id);
     }
 
     public function addGuestbookReport(Request $request)

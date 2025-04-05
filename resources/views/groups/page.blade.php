@@ -3,6 +3,11 @@
 @section('title', 'Group Home: ' . $owner->name)
 
 @section('content')
+    <script language="JavaScript" type="text/javascript">
+        Event.onDOMReady(function() {
+            initView({{ $owner->id }});
+        });
+    </script>
     <div id="mypage-wrapper">
         <div id="mypage-left-panel">
             <div id="mypage-top-nav"></div>
@@ -20,10 +25,20 @@
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/groups/{{ $owner->getUrl() }}" id="tell-button" class="toolbutton tell"><span>Tell
                                     a friend</span></a>
 
+                            @auth
+                                <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button"><span>Create your own Group</span></a>
 
-                            <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button"><span>Create your own Group</span></a>
-                            <a href="{{ url('/') }}/groups/actions/joinAfterLogin?groupId={{ $owner->id }}" class="toolbutton" id="join-button"><span>Log in to join this
-                                    Group</span></a>
+                                <a href="#" class="toolbutton" id="reporting-button" style="float: right">
+                                    <span>Report</span>
+                                </a>
+                                <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
+                                    <span>Stop reporting</span>
+                                </a>
+                            @endauth
+                            @guest
+                                <a href="{{ url('/') }}/groups/actions/joinAfterLogin?groupId={{ $owner->id }}" class="toolbutton" id="join-button"><span>Log in to join this
+                                        Group</span></a>
+                            @endguest
                         </div>
                     </div>
                 </div>
