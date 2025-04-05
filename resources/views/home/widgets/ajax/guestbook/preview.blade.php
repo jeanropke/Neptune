@@ -11,7 +11,7 @@
                 </a>
             </div>
             <p>
-                {!! $message !!}
+                {!! bb_format($message) !!}
             </p>
         </div>
         <div class="guestbook-cleaner">&nbsp;</div>

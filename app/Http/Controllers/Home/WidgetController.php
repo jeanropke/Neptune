@@ -104,7 +104,7 @@ class WidgetController extends Controller
 
         $guestbook = Guestbook::create([
             'user_id'   => user()->id,
-            'message'   => bb_format($message),
+            'message'   => $message,
             'widget_id' => $widgetId
         ]);
 
@@ -120,7 +120,7 @@ class WidgetController extends Controller
 
         return view('home.widgets.ajax.guestbook.preview')->with([
             'ownerId'   => $ownerId,
-            'message'   => bb_format($message)
+            'message'   => $message
         ]);
     }
 

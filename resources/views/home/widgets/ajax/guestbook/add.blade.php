@@ -8,9 +8,12 @@
     <div class="guestbook-actions">
         @if (Auth::check())
             @if (user()->id == $message->user_id || user()->id == $ownerId || user()->hasPermission('cms_home_can_delete_message'))
-                <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" id="gbentry-delete-{{ $message->id }}" class="gbentry-delete"
-                    style="cursor:pointer" alt="" /><br />
+                <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" id="gbentry-delete-{{ $message->id }}" class="gbentry-delete" style="cursor:pointer; float: right" alt="" /><br />
             @endif
+
+            <div class="report-button" style="display: none">
+                <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="gbentry-report" id="gbentry-report-{{ $message->id }}" />
+            </div>
         @endif
     </div>
 
@@ -18,12 +21,12 @@
         <div class="{{ $gbUser->isOnline() ? 'online' : 'offline' }}">
             <a href="{{ url('/') }}/home/{{ $gbUser->username }}">{{ $gbUser->username }}</a>
         </div>
-        <p>{!! $message->message !!}</p>
+        <p>{!! bb_format($message->message) !!}</p>
     </div>
 
 
     <div class="guestbook-cleaner">&nbsp;</div>
     <div class="guestbook-entry-footer metadata">
-        {{ $message->created_at->format('M d, Y h:i:s') }}
+        {{ $message->created_at->format('M d, Y H:i:s') }}
     </div>
 </li>
