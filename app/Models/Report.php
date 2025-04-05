@@ -14,6 +14,8 @@ class Report extends Model
         'reported_by',
         'object_id',
         'type',
+        'message',
+        'author_id',
         'picked_by',
         'closed',
         'created_at',
@@ -27,34 +29,11 @@ class Report extends Model
             return $user->username;
     }
 
-    public function getObjectMessage()
+    public function getAuthor()
     {
-        switch ($this->type) {
-            case 'discussionpost':
-                $reply = GroupReply::find($this->object_id);
-                if ($reply)
-                    return bb_format($reply->message);
-                break;
-
-            default:
-                return $this->type;
-                break;
-        }
-    }
-
-    public function getObjectAuthor()
-    {
-        switch ($this->type) {
-            case 'discussionpost':
-                $reply = GroupReply::find($this->object_id);
-                if ($reply)
-                    return $reply->getAuthor()->username;
-                break;
-
-            default:
-                return $this->type;
-                break;
-        }
+        $user = User::find($this->author_id);
+        if ($user)
+            return $user->username;
     }
 
     public function hideObject()

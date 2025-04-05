@@ -48,7 +48,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $report->getObjectAuthor() }} - <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $report->getObjectAuthor() }}">Remote ban</a>
+                                        {{ $report->getAuthor() }} - <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $report->getAuthor() }}">Remote ban</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -57,7 +57,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {!! $report->getObjectMessage() !!}
+                                        {!! bb_format($report->message) !!}
                                     </td>
                                 </tr>
                                 <tr>

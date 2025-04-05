@@ -52,7 +52,8 @@
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
                                 <td class="tablesubheader" width="15%">Reported by</td>
                                 <td class="tablesubheader" width="10%" align="center">Type</td>
-                                <td class="tablesubheader" width="30%">Message</td>
+                                <td class="tablesubheader" width="25%">Message</td>
+                                <td class="tablesubheader" width="5%">Author</td>
                                 <td class="tablesubheader" width="7%">Picked by</td>
                                 <td class="tablesubheader" width="7%">Status</td>
                                 <td class="tablesubheader" width="10%" align="center">Created at</td>
@@ -70,7 +71,10 @@
                                         {{ $report->type }}
                                     </td>
                                     <td class="tablerow2">
-                                        {!! $report->getObjectMessage() !!}
+                                        {!! bb_format($report->message) !!}
+                                    </td>
+                                    <td class="tablerow2">
+                                        {{ $report->getAuthor() }}
                                     </td>
                                     <td class="tablerow2">
                                         {{ $report->getPickedBy() }}
