@@ -14,8 +14,8 @@ a.topdialog-exit {
 	height: 15px;
 	width: 15px;
 	position: absolute;
-	right: 13px;
-	top: 9px;
+    right: 11px;
+    top: 7px;
 	text-indent: -10000px;
 	background: transparent url(../images/close_x.gif) no-repeat
 }
