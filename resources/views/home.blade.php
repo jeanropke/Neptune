@@ -428,13 +428,16 @@
         </div>
     </div>
     --}}
-    <div class="topdialog dialog" id="guestbook-delete-dialog">
-        <div class="dialog-header dialog-handle">
-            <h3>Delete message</h3>
+
+    <div id="guestbook-delete-dialog" class="dialog-grey" style="display:none">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Are you sure?</span></h3>
+            </div>
         </div>
         <a class="topdialog-exit" href="#" id="guestbook-delete-dialog-exit"></a>
-        <div class="dialog-body" id="guestbook-delete-dialog-body">
-            <div class="dialog-content">
+        <div class="dialog-grey-content">
+            <div id="confirm-dialog-body" class="dialog-grey-body">
                 <form method="post" id="guestbook-delete-form">
                     <input type="hidden" name="entryId" id="guestbook-delete-id" value="" />
                     <p>Tem certeza que quer apagar sua mensagem?</p>
@@ -444,7 +447,11 @@
                     </p>
                     <br style="clear: both">
                 </form>
+                <div class="clear"></div>
             </div>
+        </div>
+        <div class="dialog-grey-bottom">
+            <div></div>
         </div>
     </div>
     <div class="dialog topdialog" id="guestbook-form-dialog" style="width: auto">
