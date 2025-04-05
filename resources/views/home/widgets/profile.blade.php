@@ -30,16 +30,14 @@
                         {{ $owner->created_at->format('d-M-Y') }}
                     </div>
                     <div>
-                        {{--@if($owner->getFavoriteGroup())
-                        <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="VIVA MEXICO"><img
-                                src="{{ url('/') }}/gordon/c_images/Badgeparts/generated/{{ $owner->getFavoriteGroup()->badge }}.png"></a>
-                        @endif--}}
+                        @if($owner->getFavoriteGroup())
+                        <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="{{ $owner->getFavoriteGroup()->name }}"><img
+                                src="{{ cms_config('site.groupbadge.url') }}{{ $owner->getFavoriteGroup()->badge }}.png"></a>
+                        @endif
                         @if($owner->badge)
                         <img src="{{ cms_config('site.badges.url') }}/{{ $owner->badge }}.gif">
                         @endif
                     </div>
-
-
                 </div>
                 <div class="profile-figure">
                     <img alt="{{ $owner->username }}"
