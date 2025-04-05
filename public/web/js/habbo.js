@@ -573,6 +573,11 @@ function createDialog(dialogId, header, dialogZIndex, dialogLeft, dialogTop, exi
     return dialog;
 }
 
+function setAsWaitDialog(dialog)
+{
+    $($(dialog).id +  "-body").innerHTML = getProgressNode();
+}
+
 function showInfoDialog(dialogId, message, buttonText, buttonOnClick) {
     showOverlay();
     var dialog = createDialog(dialogId, "", "9003");
