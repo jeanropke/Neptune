@@ -41,6 +41,14 @@ function initView(id) {
 			loadWebStore(function() { if (window.WebStore) WebStore.open("webstore-inventory"); });
 		});
 	}
+    var reportingButton = $("reporting-button");
+    if (reportingButton) {
+        Event.observe("reporting-button", "click", startReportingModeObserver, false);
+    }
+    var stopReportingButton = $("stop-reporting-button");
+    if (stopReportingButton) {
+        Event.observe("stop-reporting-button", "click", stopReportingModeObserver, false)
+    }
 }
 
 var startReportingModeObserver = function(e) {
@@ -203,7 +211,6 @@ var startReportingModeObserver = function(e) {
 
 var stopReportingModeObserver = function(e) {
 	Event.stop(e);
-
 	document.getElementsByClassName("report-button", "playground").each(
 		function (el) {
 			Element.hide(el);

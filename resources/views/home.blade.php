@@ -502,8 +502,6 @@
         Event.onDOMReady(initDraggableDialogs);
         //Utils.setAllEmbededObjectsVisibility('hidden');
         //Pinger.start();
-
-        Event.observe("reporting-button", "click", startReportingModeObserver, false);
     </script>
     @if ($isEdit)
         <div id="edit-save" style="display:none;"></div>
