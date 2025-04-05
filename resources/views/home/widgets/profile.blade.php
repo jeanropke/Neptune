@@ -34,9 +34,8 @@
                         <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="VIVA MEXICO"><img
                                 src="{{ url('/') }}/gordon/c_images/Badgeparts/generated/{{ $owner->getFavoriteGroup()->badge }}.png"></a>
                         @endif--}}
-                        @if($owner->badge_active)
-                        <img
-                            src="{{ cms_config('site.badges.url') }}/{{ $owner->badge }}.gif">
+                        @if($owner->badge)
+                        <img src="{{ cms_config('site.badges.url') }}/{{ $owner->badge }}.gif">
                         @endif
                     </div>
 
