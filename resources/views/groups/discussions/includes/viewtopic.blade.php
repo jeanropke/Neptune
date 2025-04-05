@@ -57,10 +57,12 @@
                                         alt="" class="tabmenu-image myimage" id="myimage"></td>
                                 <td class="post-list-creator-badge">
                                     <div class="group-badges-container">
-                                        @if($author->getFavoriteGroup())
-                                        <img src="{{ cms_config('site.groupbadge.url') }}{{ $author->getFavoriteGroup()->badge }}.gif"><br>
+                                        @if(user()->getFavoriteGroup())
+                                        <img src="{{ cms_config('site.groupbadge.url') }}{{ user()->getFavoriteGroup()->badge }}.gif"><br>
                                         @endif
-                                        <img src="{{ cms_config('site.badges.url') }}/{{ $author->badge }}.gif">
+                                        @if(user()->badge)
+                                        <img src="{{ cms_config('site.badges.url') }}/{{ user()->badge }}.gif">
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

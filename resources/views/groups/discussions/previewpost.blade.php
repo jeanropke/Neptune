@@ -17,8 +17,12 @@
                             class="tabmenu-image myimage" id="myimage"></td>
                     <td class="post-list-creator-badge">
                         <div class="group-badges-container">
+                            @if(user()->getFavoriteGroup())
                             <img src="{{ cms_config('site.groupbadge.url') }}{{ user()->getFavoriteGroup()->badge }}.gif"><br>
+                            @endif
+                            @if(user()->badge)
                             <img src="{{ cms_config('site.badges.url') }}/{{ user()->badge }}.gif">
+                            @endif
                         </div>
                     </td>
                 </tr>
