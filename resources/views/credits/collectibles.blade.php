@@ -41,8 +41,7 @@
                                             </div>
 
                                             <script type="text/javascript">
-                                                L10N.put('collectibles.purchase.title', 'Confirm purchase');
-                                                Collectibles.init({{ $time }});
+                                                Collectibles.init({{ $time }}, 'Confirm purchase');
                                             </script>
                                             @else
                                                 No collectable

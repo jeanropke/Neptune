@@ -1,15 +1,15 @@
-var Collectibles = function () {
+var Collectibles = function (title) {
     var D;
     var B = function () {
         if($("collectibles-dialog")) return;
-        Overlay.show();
-        D = Dialog.createDialog("collectibles-dialog", L10N.get("collectibles.purchase.title"), 9001, 0, -1000, C);
-        Dialog.setAsWaitDialog(D);
-        Dialog.moveDialogToCenter(D);
-        Dialog.makeDialogDraggable(D);
+        showOverlay();
+        D = createDialog("collectibles-dialog", title, 9001, 0, -1000, C);
+        setAsWaitDialog(D);
+        moveDialogToCenter(D);
+        makeDialogDraggable(D);
         new Ajax.Request(habboReqPath + "/habblet/ajax/collectiblesConfirm", {
             onComplete: function (E) {
-                Dialog.setDialogBody(D, E.responseText);
+                setDialogBody(D, E.responseText);
                 if (!!$("collectibles-close")) {
                     $("collectibles-close").observe("click", C)
                 }
@@ -23,10 +23,10 @@ var Collectibles = function () {
         })
     };
     var A = function () {
-        Dialog.setAsWaitDialog(D);
+        setAsWaitDialog(D);
         new Ajax.Request(habboReqPath + "/habblet/ajax/collectiblesPurchase", {
             onComplete: function (E) {
-                Dialog.setDialogBody(D, E.responseText);
+                setDialogBody(D, E.responseText);
                 if (!!$("collectibles-close")) {
                     $("collectibles-close").observe("click", C)
                 }
@@ -38,7 +38,7 @@ var Collectibles = function () {
             Event.stop(E)
         }
         $("collectibles-dialog").remove();
-        Overlay.hide();
+        hideOverlay();
         D = null
     };
     return {
