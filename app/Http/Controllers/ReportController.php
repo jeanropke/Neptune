@@ -6,6 +6,7 @@ use App\Models\Group\GroupReply;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
 use App\Models\Report;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,20 @@ class ReportController extends Controller
         $guestbook = Guestbook::find($request->objectId);
 
         return $this->createReport($request->objectId, 'guestbook', $guestbook->message, $guestbook->user_id);
+    }
+
+    public function addNameReport(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $request->validate([
+            'objectId'  => 'required|numeric'
+        ]);
+
+        $user = User::find($request->objectId);
+
+        return $this->createReport($request->objectId, 'name', $user->username, $user->id);
     }
 
     public function addStickieReport(Request $request)

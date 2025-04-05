@@ -15,7 +15,6 @@
             </div>
         @endif
     </div>
-
     <div class="guestbook-message">
         <div class="{{ $gbUser->isOnline() ? 'online' : 'offline' }}">
             <a href="{{ url('/') }}/home/{{ $gbUser->username }}">{{ $gbUser->username }}</a>

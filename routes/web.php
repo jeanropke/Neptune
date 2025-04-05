@@ -282,6 +282,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('mod')->group(function() {
         Route::post('/add_discussionpost_report', [ReportController::class, 'addDiscussionpostReport'])->name('mod.add_discussionpost_report');
         Route::post('/add_guestbook_report', [ReportController::class, 'addGuestbookReport'])->name('mod.add_guestbook_report');
+        Route::post('/add_name_report', [ReportController::class, 'addNameReport'])->name('mod.add_name_report');
         Route::post('/add_stickie_report', [ReportController::class, 'addStickieReport'])->name('mod.add_stickie_report');
     });
 
