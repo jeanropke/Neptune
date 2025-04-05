@@ -66,7 +66,13 @@
                 </div>
                 <script type="text/javascript">
                     Event.onDOMReady(function() {
-                        new ProfileWidget({{ $owner->id }}, {{ user()->id ?? -1 }});
+                        new ProfileWidget({{ $owner->id }}, {{ user()->id ?? -1 }}, {
+                            headerText: "Are you sure?",
+                            messageText: "Are you sure you want to ask <strong\>{{ $owner->username }}</strong\> to be your friend? Think twice before you hit OK!",
+                            loginText: "You must sign in before sending a friend request.",
+                            buttonText: "Ok",
+                            cancelButtonText: "Cancel"
+                        });
                     });
                 </script>
                 <div class="clear"></div>

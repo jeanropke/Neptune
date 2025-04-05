@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +13,8 @@ use App\Models\PhotoLike;
 use App\Models\User;
 use App\Models\UserBadge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WidgetController extends Controller
 {
@@ -23,10 +26,26 @@ class WidgetController extends Controller
         ]);
     }
 
+    public function friendsAdd(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $table = DB::table('messenger_requests');
+        $pending = $table->where([['from_id', user()->id], ['to_id', $request->accountId]])->count();
+        if ($pending > 0)
+            return;
+
+        $table->insert([
+            'from_id'   => user()->id,
+            'to_id'     => $request->accountId,
+        ]);
+    }
+
     public function badgePaging(Request $request)
     {
         $user = User::find($request->_mypage_requested_account);
-        if(!$user) return;
+        if (!$user) return;
         $page = $request->pageNumber;
         $badges = $user->getBadges();
         $totalPages = ceil($badges->count() / 16);
@@ -136,7 +155,7 @@ class WidgetController extends Controller
 
         return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')
-            ->header('X-JSON', json_encode(['lastPage' => (20 > $messages->count()) ? 'true': 'false']));
+            ->header('X-JSON', json_encode(['lastPage' => (20 > $messages->count()) ? 'true' : 'false']));
     }
 
     public function ratingsRate(Request $request)
@@ -187,7 +206,7 @@ class WidgetController extends Controller
         $widget = HomeItem::find($request->widgetId);
         $song = HomeSong::find($request->songId);
 
-        if($song->user_id != user()->id)
+        if ($song->user_id != user()->id)
             return 'ERROR.SONG';
 
         if ($widget->home_id != user()->id)
@@ -199,7 +218,6 @@ class WidgetController extends Controller
             'widget'    => $widget,
             'item'      => $song
         ]);
-
     }
 
     public function getTraxSong($id)
@@ -220,7 +238,7 @@ class WidgetController extends Controller
     public function photoLike(Request $request)
     {
         $photo = Photo::find($request->photoId);
-        if(!$photo) return 'ERROR';
+        if (!$photo) return 'ERROR';
 
         $likes = PhotoLike::where('photo_id', $photo->id)->get();
 
@@ -228,13 +246,12 @@ class WidgetController extends Controller
 
         $data = ['likes' => $likes->count()];
 
-        if($userLike) {
+        if ($userLike) {
             PhotoLike::where('photo_id', '=', $userLike->photo_id, 'and')
                 ->where('user_id', '=', $userLike->user_id)->delete();
 
             $data = ['likes' => ($likes->count() - 1)];
-        }
-        else {
+        } else {
             PhotoLike::create([
                 'photo_id'  => $photo->id,
                 'user_id'   => user()->id,
@@ -251,10 +268,10 @@ class WidgetController extends Controller
     {
         $widgetId = $request->widgetId;
         $widget = HomeItem::find($widgetId);
-        if(!$widget)
+        if (!$widget)
             return 'ERROR';
 
-        if($widget->owner_id != user()->id)
+        if ($widget->owner_id != user()->id)
             return 'ERROR';
 
         $widget->update([
@@ -262,7 +279,7 @@ class WidgetController extends Controller
         ]);
 
         return response('SUCCESS', 200)
-                ->header('Content-Type', 'application/json')
-                ->header('X-JSON', json_encode($widgetId));
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode($widgetId));
     }
 }
