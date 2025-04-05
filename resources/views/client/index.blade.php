@@ -64,7 +64,14 @@
                 HabboCounter.init(600);
             </script>
         </div>
-        <div class="logout"><a href="{{ url('/') }}/account/disconnected?origin=popup">logout</a></div>
+        <div class="logout">
+            @auth
+                <a href="{{ url('/') }}/account/disconnected?origin=popup">logout</a>
+            @endauth
+            @guest
+                <a href="#" onclick="javascript:window.close(); return false;">close</a>
+            @endguest
+        </div>
     </div>
     <div>
         <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,8,5,1,0" id="habbo"
