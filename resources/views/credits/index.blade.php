@@ -158,10 +158,7 @@
                             </div>
                             <br>
                             --}}
-                                    <div class="ad-scale ad300">
-                                        @include('includes.ad300')
-                                    </div>
-
+                                    @include('includes.ad300')
                                     <div class="v3box green">
                                         <div class="v3box-top">
                                             <h3>{{ cms_config('hotel.name.short') }} Coins</h3>

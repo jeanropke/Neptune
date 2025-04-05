@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -34,12 +35,11 @@
 </head>
 </head>
 
-<body id="process">
+<body id="{{ isset($body) ? $body : 'process' }}">
     <div id="overlay"></div>
     <h1 id="main-header">{{ cms_config('hotel.name.short') }}</h1>
-    <div id="wrapper">
+    <div id="process-wrapper">
         @yield('content')
-        @include('includes.footer')
     </div>
 </body>
 

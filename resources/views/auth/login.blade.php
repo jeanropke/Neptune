@@ -1,7 +1,6 @@
-@extends('layouts.login')
+@extends('layouts.login', ['body' => 'process'])
 @section('title', 'Welcome to ' . cms_config('hotel.name.short') . '!')
 @section('content')
-<div id="process-wrapper">
     <div id="process-header">
         <div id="process-header-body">
             <div id="process-header-content">
@@ -12,18 +11,26 @@
     <div id="outer">
         <div id="outer-content">
             <div class="processbox left">
-                <div class="headline"><div class="headline-content"><div class="headline-wrapper">
+                <div class="headline">
+                    <div class="headline-content">
+                        <div class="headline-wrapper">
                             <h2>New to {{ cms_config('hotel.name.short') }}? Register Here!</h2>
-                        </div></div></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="content-top">
                     <div class="content">
 
                         <div class="processbox-inner">
 
-                            <h4><font style="font-size: 11pt">JOIN NOW - IT'S EASY AND FREE!</font></h4>
+                            <h4>
+                                <font style="font-size: 11pt">JOIN NOW - IT'S EASY AND FREE!</font>
+                            </h4>
                             <p>
-                            </p><p><img vspace="10" hspace="10" border="0" align="right" src="{{ url('/') }}/web/images/login/bandg.gif" alt="">
-                            </p><ol type="1">
+                            </p>
+                            <p><img vspace="10" hspace="10" border="0" align="right" src="{{ url('/') }}/web/images/login/bandg.gif" alt="">
+                            </p>
+                            <ol type="1">
                                 <li>Type Your Birthday</li>
                                 <li>Create Your {{ cms_config('hotel.name.short') }}</li>
                                 <li>Enter {{ cms_config('hotel.name.full') }}</li>
@@ -31,13 +38,15 @@
                                 <li>Have Fun!</li>
                             </ol>
                             <p>
-                                <br><br></p><p></p>
+                                <br><br>
+                            </p>
+                            <p></p>
 
                         </div>
                         @if ($errors->any())
                             {{ $errors->first() }}
                         @endif
-                        @if(session('status'))
+                        @if (session('status'))
                             <div id="login-errors" style="display: block">
                                 <div class="content-red">
                                     <div class="content-red-body" id="login-errors-content"> {{ session('status') }}
@@ -55,7 +64,9 @@
                                     <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="content-red-bottom"><div class="content-red-bottom-body"></div></div>
+                            <div class="content-red-bottom">
+                                <div class="content-red-bottom-body"></div>
+                            </div>
                         </div>
 
                         <div class="content-white-outer" id="registration-start">
@@ -88,15 +99,15 @@
                                                 </select>
                                                 <select name="day" id="day" class="dateselector">
                                                     <option value="">--</option>
-@for($i = 1; $i <= 31; $i++)
-                                                    <option value="{{ $i }}">{{$i}}</option>
-@endfor
+                                                    @for ($i = 1; $i <= 31; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                                 <select name="year" id="year" class="dateselector">
                                                     <option value="">--</option>
-@for($i = date('Y'); $i >= 1900; $i--)
-                                                    <option value="{{ $i }}">{{$i}}</option>
-@endfor
+                                                    @for ($i = date('Y'); $i >= 1900; $i--)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                             </div>
 
@@ -121,7 +132,9 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                <div class="content-bottom"><div class="content-bottom-content"></div></div>
+                <div class="content-bottom">
+                    <div class="content-bottom-content"></div>
+                </div>
             </div>
             <div class="processbox right blue">
                 <div class="headline">
@@ -134,101 +147,121 @@
                 <div class="content-top">
                     <div class="content">
                         <div class="processbox-inner">
-                            <p>If you already have a {{ cms_config('hotel.name.short') }} account then log in here using your {{ cms_config('hotel.name.short') }} user name and your password. Your user name and password are the same for here as they are in the Hotel.
+                            <p>If you already have a {{ cms_config('hotel.name.short') }} account then log in here using your {{ cms_config('hotel.name.short') }} user name and
+                                your password. Your user name and password are the same for here as they are in the Hotel.
                                 <br />
                                 <br />
                             </p>
                         </div>
-                        @if($errors->any())
-                        <div id="login-errors" style="display: block">
-                            <div class="content-red">
-                                <div class="content-red-body" id="login-errors-content"> {{ $errors->first() }}
+                        @if ($errors->any())
+                            <div id="login-errors" style="display: block">
+                                <div class="content-red">
+                                    <div class="content-red-body" id="login-errors-content"> {{ $errors->first() }}
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="content-red-bottom">
+                                    <div class="content-red-bottom-body"></div>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="content-white-outer" id="login">
+                            <div class="content-white">
+                                <div class="content-white-body">
+                                    <div class="content-white-content">
+                                        <form action="{{ route('account.submit') }}" method="post" id="login-form">
+                                            {{ csrf_field() }}
+                                            <p id="login-username-area">
+                                                <label for="login-username" class="registration-text">My {{ cms_config('hotel.name.short') }} name</label>
+                                                <br />
+                                                <input type="text" class="required-username" name="username" id="login-username" value="" />
+                                            </p>
+                                            <script type="text/javascript" language="JavaScript">
+                                                $("login-username").focus();
+                                            </script>
+                                            <p id="login-password-area">
+                                                <label for="login-password" class="registration-text">Password</label>
+                                                <br />
+                                                <input type="password" class="required-password" name="password" id="login-password" value="" />
+                                            </p>
+                                            <p id="login-username-area">
+                                                <label for="login-remember" class="registration-text">
+                                                    <input id="login-remember" type="checkbox" name="remember" /> Remember me
+                                                </label>
+
+                                            </p>
+                                            <p class="last">
+                                                <input type="submit" value="Log in" class="process-button" id="login-submit" />
+                                            </p>
+                                        </form>
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="content-red-bottom">
-                                <div class="content-red-bottom-body"></div>
+                            <div class="content-white-bottom">
+                                <div class="content-white-bottom-body"></div>
                             </div>
                         </div>
-                        @endif
-                    <div class="content-white-outer" id="login">
-                        <div class="content-white">
-                            <div class="content-white-body">
-                                <div class="content-white-content">
-                                    <form action="{{ route('account.submit') }}" method="post" id="login-form">
-                                        {{ csrf_field() }}
-                                        <p id="login-username-area">
-                                            <label for="login-username" class="registration-text">My {{ cms_config('hotel.name.short') }} name</label>
-                                            <br/>
-                                            <input type="text" class="required-username" name="username" id="login-username" value="" />
-                                        </p>
-                                        <script type="text/javascript" language="JavaScript">
-                                            $("login-username").focus();
-                                        </script>
-                                        <p id="login-password-area">
-                                            <label for="login-password" class="registration-text">Password</label>
-                                            <br/>
-                                            <input type="password" class="required-password" name="password" id="login-password" value="" />
-                                        </p>
-                                        <p id="login-username-area">
-                                            <label for="login-remember" class="registration-text">
-                                                <input id="login-remember" type="checkbox" name="remember" /> Remember me
-                                            </label>
-
-                                        </p>
-                                        <p class="last">
-                                            <input type="submit" value="Log in" class="process-button" id="login-submit" />
-                                        </p>
-                                    </form>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
+                        <div class="processbox-inner">
+                            <p> <br />
+                                <span style="font-weight: bold;">FORGOT YOUR PASSWORD?</span><br />
+                                <br />
+                                If you have forgotten your password please use the <a href="/account/password/forgot">Password Retrieval System</a>.<br />
+                                <br />
+                            </p>
                         </div>
-                        <div class="content-white-bottom">
-                            <div class="content-white-bottom-body"></div>
-                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="processbox-inner">
-                        <p> <br />
-                            <span style="font-weight: bold;">FORGOT YOUR PASSWORD?</span><br />
-                            <br />
-                            If you have forgotten your password please use the <a href="/account/password/forgot">Password Retrieval System</a>.<br />
-                            <br />
-                        </p>
-                    </div>
-                    <div class="clear"></div>
+                </div>
+                <div class="content-bottom">
+                    <div class="content-bottom-content"></div>
                 </div>
             </div>
-            <div class="content-bottom">
-                <div class="content-bottom-content"></div>
+            <script type="text/javascript" language="JavaScript">
+                Event.observe($("registration-form"), "submit", function(e) {
+                    if ($("day").selectedIndex == 0 || $("month").selectedIndex == 0 || $("year").selectedIndex == 0) {
+                        validatorBeforeSubmit("registration-errors");
+                        validatorAddError(false, false, "Coloque uma data válida", "registration-errors");
+                        $("required-birthday").className = "validation-failed";
+                        Event.stop(e);
+                    } else {
+                        $("registration-submit").disabled = 'true';
+                    }
+                }, false);
+                Event.observe($("login-form"), "submit", function(e) {
+                    if ($F("login-username") == "" || $F("login-password") == "") {
+                        validatorBeforeSubmit("login-errors");
+                        validatorAddError(false, false, "Digite seu nome e sua senha", "login-errors");
+                        if ($F("login-password") == "") {
+                            $("login-password").className = "validation-failed";
+                            $("login-password").focus();
+                        } else {
+                            Element.removeClassName($("login-password"), "validation-failed");
+                        }
+                        if ($F("login-username") == "") {
+                            $("login-username").className = "validation-failed";
+                            $("login-username").focus();
+                        } else {
+                            Element.removeClassName($("login-username"), "validation-failed");
+                        }
+                        Event.stop(e);
+                    } else {
+                        $("login-submit").disabled = 'true';
+                    }
+                }, false);
+            </script>
+            <div id="footer">
+                <div id="footer-top">
+                    <div id="footer-content">© 2005 Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy in the European Union, the USA, Japan, the
+                        People's Republic of China and various other jurisdictions. All rights reserved.</div>
+                </div>
+                <div id="footer-bottom">
+                    <div id="footer-bottom-content"></div>
+                </div>
             </div>
         </div>
-        <script type="text/javascript" language="JavaScript">
-            Event.observe($("registration-form"), "submit", function(e) {
-                if ($("day").selectedIndex == 0 || $("month").selectedIndex == 0 || $("year").selectedIndex == 0) {
-                    validatorBeforeSubmit("registration-errors");
-                    validatorAddError(false, false, "Coloque uma data válida", "registration-errors");
-                    $("required-birthday").className = "validation-failed";
-                    Event.stop(e);
-                } else {
-                    $("registration-submit").disabled = 'true';
-                }
-            }, false);
-            Event.observe($("login-form"), "submit", function(e) {
-                if ($F("login-username") == "" || $F("login-password") == "") {
-                    validatorBeforeSubmit("login-errors");
-                    validatorAddError(false, false, "Digite seu nome e sua senha", "login-errors");
-                    if ($F("login-password") == "") { $("login-password").className = "validation-failed"; $("login-password").focus(); }
-                    else { Element.removeClassName($("login-password"), "validation-failed"); }
-                    if ($F("login-username") == "") { $("login-username").className = "validation-failed"; $("login-username").focus(); }
-                    else { Element.removeClassName($("login-username"), "validation-failed"); }
-                    Event.stop(e);
-                } else {
-                    $("login-submit").disabled = 'true';
-                }
-            }, false);
-        </script>
     </div>
-</div>
-
+    <div id="outer-bottom">
+        <div id="outer-bottom-content"></div>
+    </div>
 @stop
