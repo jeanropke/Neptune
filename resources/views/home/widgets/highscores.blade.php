@@ -44,11 +44,11 @@
                         </tr>
                         <tr>
                             <td>Games played</td>
-                            <td>8</td>
+                            <td>x</td>
                         </tr>
                         <tr>
                             <td>Total score</td>
-                            <td>79</td>
+                            <td>y</td>
                         </tr>
                 </tbody>
 
