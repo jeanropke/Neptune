@@ -191,10 +191,10 @@
                                     <h3>Welcome! Please sign in or register</h3>
                                     <div class="tabmenu-inner-content">
                                         <p>
-                                            <a href="/login" class="colorlink orange"><span>Register Now, it's free!</span></a>
+                                            <a href="{{ route('auth.login') }}" class="colorlink orange"><span>Register Now, it's free!</span></a>
                                         </p>
                                         <p>
-                                            <a href="/login" class="colorlink orange last"><span>Sign In</span></a>
+                                            <a href="{{ route('auth.login') }}" class="colorlink orange last"><span>Sign In</span></a>
                                         </p>
                                     </div>
                                 @endif
