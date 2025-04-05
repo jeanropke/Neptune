@@ -435,7 +435,7 @@
             <div>
                 <h3><span>Create a message</span></h3>
             </div>
-            <a href="#" class="dialog-grey-exit">
+            <a href="#" class="dialog-grey-exit" id="guestbook-form-dialog-exit">
                 <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
@@ -492,9 +492,6 @@
     </script>
     @if ($isEdit)
         <div id="edit-save" style="display:none;"></div>
-
-
-
         <div id="edit-menu" class="menu">
             <div class="menu-header">
                 <div class="menu-exit" id="edit-menu-exit"><img src="{{ url('/') }}/web/images/dialogs/menu-exit.gif" alt="" width="11" height="11" /></div>
