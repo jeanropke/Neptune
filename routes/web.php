@@ -60,6 +60,7 @@ Route::middleware('user')->group(function () {
     Route::get('/articles', [ArticleController::class, 'articles'])->name('article.articles');
 
     Route::get('account/logout', [AuthController::class, 'logout'])->name('account.logout');
+    Route::get('/account/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
 
 
     Route::get('room/{id}', function ($id) {
@@ -309,7 +310,6 @@ Route::middleware('guest')->group(function () {
         Route::post('submit', [AuthController::class, 'doLogin'])->name('account.submit');
 
         Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-        Route::get('/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
     });
 
     Route::prefix('housekeeping')->group(function () {

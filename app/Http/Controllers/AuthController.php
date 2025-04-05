@@ -136,6 +136,7 @@ class AuthController extends Controller
 
     public function accountDisconnected()
     {
+        Auth::logout();
         return view('auth.disconnected');
     }
 
