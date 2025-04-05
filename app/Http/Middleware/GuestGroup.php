@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class GuestGroup
 {
@@ -19,6 +20,10 @@ class GuestGroup
         //if (cms_config('site.maintenance.enabled') && !in_array($request->path(), $housekeepingPages)) {
         //    return redirect('maintenance');
         //}
-        return $next($request);
+
+        if(!Auth::check())
+            return $next($request);
+
+        return redirect()->route('index.home');
     }
 }
