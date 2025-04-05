@@ -143,34 +143,7 @@
 
                             @case('commodity')
                                 {{-- stickie --}}
-                                <div class="movable stickie" style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};"
-                                    id="stickie-{{ $item->id }}">
-                                    <div class="n_skin_{{ $item->skin }}">
-                                        <div class="stickie-header">
-                                            <h3>
-                                                @if ($isEdit)
-                                                    <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
-                                                        id="stickie-{{ $item->id }}-edit" />
-                                                    <script language="JavaScript" type="text/javascript">
-                                                        Event.observe('stickie-{{ $item->id }}-edit', 'click', function(e) {
-                                                            openEditMenu(e, {{ $item->id }}, 'stickie', 'stickie-{{ $item->id }}-edit');
-                                                        }, false);
-                                                    </script>
-                                                @endif
-                                            </h3>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <div class="stickie-body">
-                                            <div class="stickie-content">
-                                                <div class="stickie-markup">
-                                                    <p>{!! $item->data !!}</p>
-                                                </div>
-                                                <div class="stickie-footer">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('home.stickie')
                             @break
 
                             @case('w')
@@ -434,8 +407,10 @@
             <div>
                 <h3><span>Are you sure?</span></h3>
             </div>
+            <a href="#" class="dialog-grey-exit" id="guestbook-delete-dialog-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
         </div>
-        <a class="topdialog-exit" href="#" id="guestbook-delete-dialog-exit"></a>
         <div class="dialog-grey-content">
             <div id="confirm-dialog-body" class="dialog-grey-body">
                 <form method="post" id="guestbook-delete-form">
@@ -454,49 +429,56 @@
             <div></div>
         </div>
     </div>
-    <div class="dialog topdialog" id="guestbook-form-dialog" style="width: auto">
-        <div class="dialog-header dialog-handle">
-            <h3>Create a message</h3>
-        </div>
-        <a class="topdialog-exit" href="#" id="guestbook-form-dialog-exit"></a>
-        <div class="dialog-body" id="guestbook-form-dialog-body">
-            <div id="guestbook-form-tab" class="dialog-content">
-                <form method="post" id="guestbook-form">
-                    <p>
-                        Warning: max 200 characters
-                        <input type="hidden" name="ownerId" value="441794" />
-                    </p>
-                    <div>
-                        <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
-                        <script type="text/javascript">
-                            bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("guestbook-message");
-                            bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
-                            var colors = {
-                                "red": ["#d80000", "Vermelho"],
-                                "orange": ["#fe6301", "Laranja"],
-                                "yellow": ["#ffce00", "Amarelo"],
-                                "green": ["#6cc800", "Verde"],
-                                "cyan": ["#00c6c4", "Azul-claro"],
-                                "blue": ["#0070d7", "Azul-escuro"],
-                                "gray": ["#828282", "Cinza"],
-                                "black": ["#000000", "Preto"]
-                            };
-                            bbcodeToolbar.addColorSelect("Cores", colors, true);
-                        </script>
-                    </div>
 
-                    <div class="guestbook-toolbar clearfix">
-                        <a href="#" id="guestbook-form-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
-                        <a href="#" id="guestbook-form-preview" class="toolbutton notes" style="float: right"><span><b>Preview</b></span><i></i></a>
-                    </div>
-
-                </form>
+    <div id="guestbook-form-dialog" class="dialog-grey">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Create a message</span></h3>
             </div>
-            <div id="guestbook-preview-tab" class="dialog-content">&nbsp;</div>
+            <a href="#" class="dialog-grey-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
+        </div>
+        <div class="dialog-grey-content">
+            <div id="confirm-dialog-body" class="dialog-grey-body">
+                <div id="guestbook-form-tab" class="dialog-content">
+                    <form method="post" id="guestbook-form">
+                        <p>
+                            Warning: max 200 characters
+                            <input type="hidden" name="ownerId" value="441794" />
+                        </p>
+                        <div>
+                            <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
+                            <script type="text/javascript">
+                                bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("guestbook-message");
+                                bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
+                                var colors = {
+                                    "red": ["#d80000", "Red"],
+                                    "orange": ["#fe6301", "Orange"],
+                                    "yellow": ["#ffce00", "Yellow"],
+                                    "green": ["#6cc800", "Green"],
+                                    "cyan": ["#00c6c4", "Cyan"],
+                                    "blue": ["#0070d7", "Blue"],
+                                    "gray": ["#828282", "Gray"],
+                                    "black": ["#000000", "Black"]
+                                };
+                                bbcodeToolbar.addColorSelect("Colours", colors, true);
+                            </script>
+                        </div>
+                        <div class="guestbook-toolbar clearfix">
+                            <a href="#" id="guestbook-form-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
+                            <a href="#" id="guestbook-form-preview" class="toolbutton notes" style="float: right"><span><b>Preview</b></span><i></i></a>
+                        </div>
+                    </form>
+                </div>
+                <div id="guestbook-preview-tab" class="dialog-content">&nbsp;</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="dialog-grey-bottom">
+            <div></div>
         </div>
     </div>
-
-
 
     <script language="JavaScript" type="text/javascript">
         Event.observe(window, "load", observeAnim);
@@ -607,11 +589,25 @@
     --}}
     @if ($isEdit)
         <script>
-            Event.observe('notes-button', 'click', openNoteEditor, false);
+            NoteEditor.initialise();
         </script>
         <style>
             #note_editor_dialog {
                 width: 345px;
+            }
+
+            #note-editor-container {
+                position: relative;
+                margin: 0 0 1em 25px;
+            }
+
+            #note-editor-container div.stickie {
+                position: relative;
+                cursor: default;
+            }
+
+            #note-editor-container div.stickie h3 img {
+                display: none;
             }
         </style>
     @endif

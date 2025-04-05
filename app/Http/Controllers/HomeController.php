@@ -36,9 +36,9 @@ class HomeController extends Controller
         $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get();
 
         if ($items->count() == 0) {
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '4',  'data' => 'Remember!<br>Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.<br>Deleted notes will not be funded.<br><br>', 'skin' => 'noteitskin']);
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '4',  'data' => 'Welcome to a brand new Habbo Home page!<br>This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo <br>trap off with colourful notes and showcase your Habbo rooms! To <br>start editing just click the edit button.<br><br>', 'skin' => 'speechbubbleskin']);
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '4',  'data' => 'Where are my friends?<br>To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '4',  'data' => 'Remember![br]Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.[br]Deleted notes will not be funded.[br][br]', 'skin' => 'noteitskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '4',  'data' => 'Welcome to a brand new Habbo Home page![br]This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo [br]trap off with colourful notes and showcase your Habbo rooms! To [br]start editing just click the edit button.[br][br]', 'skin' => 'speechbubbleskin']);
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '4',  'data' => 'Where are my friends?[br]To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin']);
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '455',    'y' => '27',    'z' => '129', 'item_id' => '5', 'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '440',    'y' => '321',   'z' => '177', 'item_id' => '10', 'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '383',    'y' => '491',   'z' => '179', 'item_id' => '11', 'skin' => 'goldenskin']);
@@ -474,10 +474,5 @@ class HomeController extends Controller
         ]);
         user()->updateCredits(-$store->price);
         return 'OK';
-    }
-
-    public function noteEditor()
-    {
-        return view('home.inventory.editor');
     }
 }

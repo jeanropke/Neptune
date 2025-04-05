@@ -13,6 +13,7 @@ use App\Http\Controllers\Group\DiscussionController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HelpController;
+use App\Http\Controllers\Home\NoteEditorController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
@@ -210,7 +211,9 @@ Route::middleware('user')->group(function () {
         Route::post('/widget/delete', [WidgetController::class, 'widgetDelete'])->name('myhabbo.widget.delete');
         Route::post('/rating/reset_ratings', [WidgetController::class, 'ratingsReset'])->name('myhabbo.rating.reset');
 
-        Route::post('/noteeditor/editor', [HomeController::class, 'noteEditor'])->name('myhabbo.noteeditor.editor');
+        Route::post('/noteeditor/editor', [NoteEditorController::class, 'editor'])->name('myhabbo.noteeditor.editor');
+        Route::post('/noteeditor/preview', [NoteEditorController::class, 'preview'])->name('myhabbo.noteeditor.preview');
+        Route::post('/noteeditor/place', [NoteEditorController::class, 'place'])->name('myhabbo.noteeditor.place');
         Route::post('/sticker/place_sticker', [HomeController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
         Route::post('/sticker/remove_sticker', [HomeController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
         Route::post('/stickie/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.stickie.edit');

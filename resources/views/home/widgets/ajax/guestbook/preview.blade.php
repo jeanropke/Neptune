@@ -19,6 +19,6 @@
     </li>
 </ul>
 <div class="guestbook-toolbar clearfix">
-    <a href="#" class="new-button" id="guestbook-form-continue"><b>Editar</b><i></i></a>
-    <a href="#" class="new-button" id="guestbook-form-post"><b>Salvar</b><i></i></a>
+    <a href="#" class="toolbutton" id="guestbook-form-continue"><span><b>Edit</b></span><i></i></a>
+    <a href="#" class="toolbutton save" id="guestbook-form-post" style="float: right"><span><b>Save</b></span><i></i></a>
 </div>

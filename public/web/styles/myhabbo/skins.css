@@ -1,56 +1,62 @@
-/*** WIDGETS ***/
-
-/** widget sizes */
-.widget {
-    width: 250px;
-}
 
 .FriendsWidget {
-    width: 290px;
-}
-
-.ProfileWidget {
-    width: 240px;
-}
-
-.GuestbookWidget {
-    width: 360px;
+    width: 290px!important;
 }
 
 .FriendsWidget .w_skin_goldenskin {
-    width: 315px;
+    width: 315px!important;
 }
 
 * html .FriendsWidget .w_skin_notepadskin {
-    width: 305px;
+    width: 305px!important;
 }
 
 .FriendsWidget .w_skin_noteitskin {
-    width: 310px;
+    width: 310px!important;
 }
 
 .FriendsWidget .w_skin_speechbubbleskin {
-    width: 265px;
+    width: 265px!important;
 }
 
 * html .FriendsWidget .w_skin_metalskin {
-    width: 305px;
+    width: 305px!important;
 }
 
 .FriendsWidget .w_skin_defaultskin {
-    width: 280px;
+    width: 280px!important;
 }
 
 .FriendsWidget .w_skin_hc_machineskin {
-    width: 340px;
+    width: 340px!important;
 }
 
 .FriendsWidget .w_skin_hc_pillowskin {
-    width: 335px;
+    width: 335px!important;
 }
 
-.GuestbookWidget .w_skin_hc_pillowskin {
-    width: 350px;
+/* content sizes */
+.GuestbookWidget .widget-content,
+.MemberWidget .widget-content,
+.HighscoreListWidget .widget-content {
+    width: 290px;
+}
+
+.RatingWidget .widget-content {
+    width: 160px;
+}
+
+.GroupInfoWidget .widget-content,
+.ProfileWidget .widget-content,
+.RoomsWidget .widget-content,
+.GroupsWidget .widget-content,
+.HighScoresWidget .widget-content,
+.UserExpsWidget .widget-content,
+.stickie-content,
+.HabboMoviesWidget .widget-content,
+.TraxPlayerWidget .widget-content,
+.BadgesWidget .widget-content {
+    width: 218px;
 }
 
 /* golden skin */
@@ -245,15 +251,52 @@
 }
 
 
-
-
-.stickie .edit-button,
-.stickie .report-button {
-    position: absolute;
-    right: 0;
-    top: -5px;
-    float: right;
+/*Widths for bestexps and halloffame widget. Once the design has been done, unused configuration can be removed*/
+.HallOfFameWidget .widget-content,
+BestExpsWidget .widget-content {
+    width: 457px;
 }
+
+.HallOfFameWidget .w_skin_goldenskin,
+.BestExpsWidget .w_skin_goldenskin {
+    width: 526px;
+}
+
+.HallOfFameWidget .w_skin_metalskin,
+.BestExpsWidget .w_skin_metalskin {
+    width: 512px;
+}
+
+.HallOfFameWidget .w_skin_defaultskin,
+.BestExpsWidget .w_skin_defaultskin {
+    width: 491px;
+}
+
+.HallOfFameWidget .w_skin_notepadskin,
+.BestExpsWidget .w_skin_notepadskin {
+    width: 493px;
+}
+
+.HallOfFameWidget .w_skin_noteitskin,
+.BestExpsWidget .w_skin_noteitskin {
+    width: 476px;
+}
+
+.HallOfFameWidget .w_skin_speechbubbleskin,
+.BestExpsWidget .w_skin_speechbubbleskin {
+    width: 477px;
+}
+
+.HallOfFameWidget .w_skin_hc_machineskin,
+.BestExpsWidget .w_skin_hc_machineskin {
+    width: 552px;
+}
+
+.HallOfFameWidget .w_skin_hc_pillowskin,
+.BestExpsWidget .w_skin_hc_pillowskin {
+    width: 543px;
+}
+
 
 /** common widget stuff */
 .widget div.widget-headline h3 {
@@ -267,7 +310,7 @@
 .widget .edit-button {
     position: absolute;
     right: 0;
-    top: -5px;
+    top: 0;
 }
 
 .widget.ProfileWidget .report-button {
@@ -287,16 +330,23 @@
 
 
 /*** GOLDENSKIN ***/
-.widget .w_skin_goldenskin {}
+.w_skin_goldenskin .edit-button {
+    right: -10px;
+}
+
+.w_skin_goldenskin a {
+    color: #391c00;
+}
 
 .w_skin_goldenskin div.widget-content {
     background: url(../../images/skins/Skin_Goldenframe_btmlR.png) no-repeat bottom right;
-    padding: 4px 35px 35px 9px;
+    padding: 4px 35px 35px 4px;
+    color: #000;
 }
 
 .w_skin_goldenskin div.widget-body {
     background: url(../../images/skins/Skin_Goldenframe_btmlL.png) no-repeat bottom left;
-    padding-left: 31px;
+    padding-left: 30px;
 }
 
 .w_skin_goldenskin div.widget-headline {
@@ -343,16 +393,28 @@
 }
 
 /*** metalskin ***/
-.w_skin_metalskin {}
+.w_skin_metalskin .edit-button {
+    right: -18px;
+    top: -1px;
+}
+
+.w_skin_metalskin a {
+    color: #41404a;
+}
+
+.w_skin_metalskin .metadata {
+    color: #484848;
+}
 
 .w_skin_metalskin div.widget-content {
     background: url(../../images/skins/Skin_Metal_btmR.png) no-repeat bottom right;
-    padding: 2px 27px 24px 5px;
+    padding: 1px 26px 23px 7px;
+    color: #000;
 }
 
 .w_skin_metalskin div.widget-body {
     background: url(../../images/skins/Skin_Metal_btmL.png) no-repeat bottom left;
-    padding-left: 24px;
+    padding-left: 22px;
 }
 
 .w_skin_metalskin div.widget-headline {
@@ -373,7 +435,7 @@
     top: 3px;
     height: 33px;
     text-align: center;
-    color: #565663;
+    color: #41404a;
     padding-top: 2px;
     margin: 2px 40px 0 0;
     position: relative;
@@ -384,12 +446,23 @@
 }
 
 /*** HCmacnihe ***/
-.w_skin_hc_machineskin {}
+.w_skin_hc_machineskin .edit-button {
+    right: -47 px;
+    top: 17 px;
+}
+
+.w_skin_hc_machineskin a {
+    color: #163004;
+}
+
+.w_skin_hc_machineskin .metadata {
+    color: #5fe800;
+}
 
 .w_skin_hc_machineskin div.widget-content {
     background: url(../../images/skins/Skin_HCmachine_btmR.png) no-repeat bottom right;
-    padding: 2px 40px 40px 0;
-    color: #5adc00;
+    padding: 0 46px 31px 0;
+    color: #fff;
 }
 
 .w_skin_hc_machineskin div.widget-body {
@@ -399,7 +472,7 @@
 
 .w_skin_hc_machineskin div.widget-headline {
     background: url(../../images/skins/Skin_HCmachine_topRh.png) no-repeat top right;
-    height: 54px;
+    height: 42px;
 }
 
 .w_skin_hc_machineskin div.widget-corner {
@@ -413,9 +486,8 @@
     font-size: x-small;
     position: relative;
     top: 3px;
-    height: 33px;
     text-align: center;
-    color: white;
+    color: #fff;
     padding-top: 2px;
     margin: 2px 61px 0 0;
     position: relative;
@@ -426,11 +498,19 @@
 }
 
 /*** golden pipes and marmor ***/
-.w_skin_defaultskin {}
+.w_skin_defaultskin .edit-button {
+    right: -18px;
+    top: 8px;
+}
+
+.w_skin_defaultskin a {
+    color: #222;
+}
 
 .w_skin_defaultskin div.widget-content {
     background: url(../../images/skins/Skin_HabboHomes_btmR.png) no-repeat bottom right;
-    padding: 2px 14px 20px 10px;
+    padding: 4px 16px 19px 4px;
+    color: #000;
 }
 
 .w_skin_defaultskin div.widget-body {
@@ -463,7 +543,6 @@
 * html .w_skin_defaultskin div.widget-headline h3 {
     margin: 0px 0px -3px 0px;
 }
-
 
 /*** Notepadskin ***/
 .w_skin_notepadskin .edit-button {
@@ -512,18 +591,29 @@
     margin: 0px 0px -3px 0px;
 }
 
-
 /*** noteit ***/
-.w_skin_noteitskin {}
+.w_skin_noteitskin .edit-button {
+    right: 4px;
+    top: 6px;
+}
+
+.w_skin_noteitskin a {
+    color: #000;
+}
+
+.w_skin_noteitskin .metadata {
+    color: #475665;
+}
 
 .w_skin_noteitskin div.widget-content {
     background: url(../../images/skins/Skin_Stickienote_btmR.png) no-repeat bottom right;
-    padding: 4px 30px 27px 7px;
+    padding: 7px 9px 30px 9px;
+    color: #000;
 }
 
 .w_skin_noteitskin div.widget-body {
     background: url(../../images/skins/Skin_Stickienote_btmL.png) no-repeat bottom left;
-    padding-left: 30px;
+    padding-left: 1px;
 }
 
 .w_skin_noteitskin div.widget-headline {
@@ -534,7 +624,7 @@
 
 .w_skin_noteitskin div.widget-corner {
     background: url(../../images/skins/Skin_Stickienote_topL.png) no-repeat top left;
-    padding-left: 30px;
+    padding-left: 5px;
     height: 30px;
 }
 
@@ -545,6 +635,7 @@
     position: relative;
     padding-top: 10px;
     left: -4px;
+    color: #202933;
 }
 
 * html .w_skin_noteitskin div.widget-headline h3 {
@@ -552,11 +643,19 @@
 }
 
 /*** speechbubbleskin ***/
-.w_skin_speechbubbleskin {}
+.w_skin_speechbubbleskin .edit-button {
+    right: 4px;
+    top: 5px;
+}
+
+.w_skin_speechbubbleskin a {
+    color: #2D2D2D;
+}
 
 .w_skin_speechbubbleskin div.widget-content {
     background: url(../../images/skins/Skin_Speechbubble_btmR.png) no-repeat bottom right;
-    padding: 10px 10px 25px 5px;
+    padding: 17px 10px 22px 0;
+    color: #000;
 }
 
 .w_skin_speechbubbleskin div.widget-body {
@@ -582,6 +681,7 @@
     position: relative;
     padding-top: 4px;
     left: -4px;
+    color: #666;
 }
 
 * html .w_skin_speechbubbleskin div.widget-headline h3 {
@@ -594,9 +694,13 @@ div.stickie {
     width: 250px;
 }
 
+#stickie-preview-window div.stickie {
+    width: auto;
+}
+
 /*** GOLDSKIN ***/
 .n_skin_goldenskin .stickie-header {
-    background: url(../../images/skins/Skin_Goldenframe_topL.png) no-repeat;
+    background: url(../../images/skins/Skin_Goldenframe_topL.png) no-repeat top left;
     padding-left: 31px;
     height: 31px;
     font-size: 1%;
@@ -619,15 +723,27 @@ div.stickie {
 
 .n_skin_goldenskin .stickie-content {
     background: url(../../images/skins/Skin_Goldenframe_btmlR.png) no-repeat bottom right;
+    padding: 3px 30px 5px 2px;
 }
 
-.n_skin_goldenskin .stickie-content p {
+.n_skin_goldenskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin: 5px 28px 5px 5px;
-    padding-bottom: 28px;
+    margin: 0px 0px 5px 2px;
+    padding: 0 0 19px 0;
+    color: #000;
+}
+
+.stickie .n_skin_goldenskin,
+#stickie-preview-window .n_skin_goldenskin {
+    width: 281px;
 }
 
 /*** BLUESKIN ***/
+.stickie .n_skin_defaultskin,
+#stickie-preview-window .n_skin_defaultskin {
+    width: 250px;
+}
+
 .n_skin_defaultskin .stickie-header {
     background: url(../../images/skins/Skin_HabboHomes_topL.png) no-repeat;
     padding-left: 14px;
@@ -652,17 +768,24 @@ div.stickie {
     padding-left: 14px;
 }
 
-.n_skin_defaultskin .stickie-content {
+.n_skin_defaultskin div.stickie-content {
     background: url(../../images/skins/Skin_HabboHomes_btmR.png) no-repeat bottom right;
+    padding: 1px 15px 4px 3px;
 }
 
-.n_skin_defaultskin .stickie-content p {
+.n_skin_defaultskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin: 5px;
-    padding-bottom: 5px;
+    margin: 0;
+    padding-bottom: 7px;
+    color: #000;
 }
 
 /*** metalskin ***/
+.stickie .n_skin_metalskin,
+#stickie-preview-window .n_skin_metalskin {
+    width: 259px;
+}
+
 .n_skin_metalskin .stickie-header {
     background: url(../../images/skins/Skin_Metal_topL.png) no-repeat;
     padding-left: 24px;
@@ -686,23 +809,31 @@ div.stickie {
 
 .n_skin_metalskin .stickie-body {
     background: url(../../images/skins/Skin_Metal_btmL.png) no-repeat bottom left;
-    padding-left: 24px;
+    padding-left: 21px;
 }
 
 .n_skin_metalskin .stickie-content {
     background: url(../../images/skins/Skin_Metal_btmR.png) no-repeat bottom right;
+    padding: 1px 20px 1px 0;
 }
 
-.n_skin_metalskin .stickie-content p {
+.n_skin_metalskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin: 2px 12px 20px 2px;
+    margin: 0 0 13px 0;
+    color: #000;
 }
 
 /*** hc_machineskin ***/
+
+.stickie .n_skin_hc_machineskin,
+#stickie-preview-window .n_skin_hc_machineskin {
+    width: 293px;
+}
+
 .n_skin_hc_machineskin .stickie-header {
     background: url(../../images/skins/Skin_HCmachine_topL.png) no-repeat;
     padding-left: 49px;
-    height: 44px;
+    height: 42px;
     padding-bottom: 0;
     margin: 0;
     font-size: 1%;
@@ -714,7 +845,7 @@ div.stickie {
 
 .n_skin_hc_machineskin .stickie-header h3 {
     background: url(../../images/skins/Skin_HCmachine_topR.png) no-repeat top right;
-    height: 44px;
+    height: 42px;
     margin: 0;
     padding-bottom: 0;
     font-size: 1%;
@@ -722,20 +853,26 @@ div.stickie {
 
 .n_skin_hc_machineskin .stickie-body {
     background: url(../../images/skins/Skin_HCmachine_btmL.png) no-repeat bottom left;
-    padding-left: 44px;
+    padding-left: 49px;
 }
 
 .n_skin_hc_machineskin .stickie-content {
     background: url(../../images/skins/Skin_HCmachine_btmR.png) no-repeat bottom right;
+    padding: 3px 28px 4px 0;
 }
 
-.n_skin_hc_machineskin .stickie-content p {
+.n_skin_hc_machineskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin: 2px 40px 40px 4px;
-    color: #5adc00;
+    margin: 2px 15px 29px 4px;
+    color: #fff;
 }
 
 /*** notepadskin***/
+.stickie .n_skin_notepadskin,
+#stickie-preview-window .n_skin_notepadskin {
+    width: 253px;
+}
+
 .n_skin_notepadskin .stickie-header {
     background: url(../../images/skins/Skin_Notepad_topL.png) no-repeat;
     padding-left: 20px;
@@ -764,17 +901,24 @@ div.stickie {
 
 .n_skin_notepadskin .stickie-content {
     background: url(../../images/skins/Skin_Notepad_btmR.png) no-repeat bottom right;
+    padding: 3px 5px 4px 3px;
 }
 
-.n_skin_notepadskin .stickie-content p {
+.n_skin_notepadskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin-top: 2px;
+    margin: 2px 0 0 0;
+    color: #000;
 }
 
 /*** noteitskin***/
+.stickie .n_skin_noteitskin,
+#stickie-preview-window .n_skin_noteitskin {
+    width: 254px;
+}
+
 .n_skin_noteitskin .stickie-header {
     background: url(../../images/skins/Skin_Stickienote_topL.png) no-repeat;
-    padding-left: 30px;
+    padding-left: 5px;
     height: 30px;
     padding-bottom: 0;
     margin: 0;
@@ -795,24 +939,31 @@ div.stickie {
 
 .n_skin_noteitskin .stickie-body {
     background: url(../../images/skins/Skin_Stickienote_btmL.png) no-repeat bottom left;
-    padding-left: 30px;
+    padding-left: 5px;
 }
 
 .n_skin_noteitskin .stickie-content {
     background: url(../../images/skins/Skin_Stickienote_btmR.png) no-repeat bottom right;
-    padding-bottom: 15px;
+    padding: 1px 28px 23px 3px;
 }
 
-.n_skin_noteitskin .stickie-content p {
+.n_skin_noteitskin .stickie-content .stickie-markup {
     vertical-align: top;
     margin-top: 2px;
+    margin-bottom: 0;
+    color: #000;
 }
 
 /*** speechbubleskin***/
+.stickie .n_skin_speechbubbleskin,
+#stickie-preview-window .n_skin_speechbubbleskin {
+    width: 236px;
+}
+
 .n_skin_speechbubbleskin .stickie-header {
     background: url(../../images/skins/Skin_Speechbubble_topL.png) no-repeat;
     padding-left: 10px;
-    height: 10px;
+    height: 8px;
     padding-bottom: 0;
     margin: 0;
     font-size: 1%;
@@ -824,7 +975,7 @@ div.stickie {
 
 .n_skin_speechbubbleskin .stickie-header h3 {
     background: url(../../images/skins/Skin_Speechbubble_topR.png) no-repeat top right;
-    height: 10px;
+    height: 8px;
     margin: 0;
     padding-bottom: 0;
     font-size: 1%;
@@ -837,9 +988,10 @@ div.stickie {
 
 .n_skin_speechbubbleskin .stickie-content {
     background: url(../../images/skins/Skin_Speechbubble_btmR.png) no-repeat bottom right;
+    padding: 1px 5px 6px 3px;
 }
 
-.n_skin_speechbubbleskin .stickie-content p {
+.n_skin_speechbubbleskin .stickie-content .stickie-markup {
     vertical-align: top;
     margin-top: 2px;
     margin-bottom: 10px;
@@ -912,10 +1064,16 @@ div.stickie {
 }
 
 /***  Stickie note ***/
+
+.stickie .n_skin_hc_pillowskin,
+#stickie-preview-window .n_skin_hc_pillowskin {
+    width: 300px;
+}
+
 .n_skin_hc_pillowskin .stickie-header {
     background: url(../../images/skins/girl/Skin_HCpillow_topL.png) no-repeat;
     padding-left: 40px;
-    height: 59px;
+    height: 49px;
     padding-bottom: 0;
     margin: 0;
     font-size: 1%;
@@ -927,7 +1085,7 @@ div.stickie {
 
 .n_skin_hc_pillowskin .stickie-header h3 {
     background: url(../../images/skins/girl/Skin_HCpillow_topR.png) no-repeat top right;
-    height: 59px;
+    height: 49px;
     margin: 0;
     padding-bottom: 0;
     font-size: 1%;
@@ -935,19 +1093,38 @@ div.stickie {
 
 .n_skin_hc_pillowskin .stickie-body {
     background: url(../../images/skins/girl/Skin_HCpillow_btmL.png) no-repeat bottom left;
-    padding-left: 30px;
+    padding-left: 41px;
 }
 
 .n_skin_hc_pillowskin .stickie-content {
     background: url(../../images/skins/girl/Skin_HCpillow_btmR.png) no-repeat bottom right;
-    padding-left: 3px;
-    padding-bottom: 40px;
+    padding: 0 35px 36px 3px;
     margin-left: 4px;
-    padding-right: 49px;
 }
 
-.n_skin_hc_pillowskin .stickie-content p {
+.n_skin_hc_pillowskin .stickie-content .stickie-markup {
     vertical-align: top;
-    margin-top: 0px;
-    padding-left: 15px;
+    margin-top: 0;
+    padding-left: 0;
+    color: #000;
+}
+
+div.stickie.n_skin_nakedskin-c,
+.n_skin_nakedskin div.stickie-content {
+    width: auto;
+}
+
+.n_skin_nakedskin div.stickie-header h3 {
+    height: auto;
+}
+
+.n_skin_nakedskin div.stickie-header .clear {
+    display: none;
+}
+
+.n_skin_nakedskin div.stickie-header h3,
+.n_skin_nakedskin div.stickie-body,
+.n_skin_nakedskin div.stickie-content,
+.n_skin_nakedskin div.stickie-footer {
+    padding: 0;
 }
