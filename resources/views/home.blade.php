@@ -105,6 +105,13 @@
                                     <span>Get your own Habbo Home</span>
                                 </a>
                             @endif
+
+                            <a href="#" class="toolbutton" id="reporting-button" style="float: right">
+                                <span>Report</span>
+                            </a>
+                            <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
+                                <span>Stop reporting</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -157,7 +164,7 @@
                             @break
                         @endswitch
                     @endforeach
-
+{{--
                     @if (Auth::check())
                         <div id="dialog-stickie-report" class="menu">
                             <div class="menu-header">
@@ -385,6 +392,7 @@
                             <div class="menu-bottom"></div>
                         </div>
                     @endif
+--}}
                 </div>
                 <div id="mypage-ad">
                     <div id="ad_sidebar">
@@ -494,6 +502,8 @@
         Event.onDOMReady(initDraggableDialogs);
         //Utils.setAllEmbededObjectsVisibility('hidden');
         //Pinger.start();
+
+        Event.observe("reporting-button", "click", startReportingModeObserver, false);
     </script>
     @if ($isEdit)
         <div id="edit-save" style="display:none;"></div>
@@ -582,6 +592,7 @@
             Event.observe('guestbook-privacy-options', 'change', handleGuestbookPrivacySettings, false);
             Event.observe('trax-select-options', 'click', Event.stop, false);
             Event.observe('trax-select-options', 'change', handleTraxplayerTrackChange, false);
+
         </script>
     @endif
 
