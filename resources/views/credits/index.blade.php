@@ -57,18 +57,18 @@
                                                                 Event.observe($("redeem-button"), "click", function(e) {
                                                                     Event.stop(e);
 
-                                                                    var dialog = Dialog.createDialog("voucher_dialog", "Redeem voucher", 9001, 0, -1000, closeVoucherDialog);
-                                                                    Dialog.setAsWaitDialog(dialog);
-                                                                    Dialog.moveDialogToCenter(dialog);
-                                                                    Overlay.show();
-                                                                    Dialog.makeDialogDraggable(dialog);
+                                                                    var dialog = createDialog("voucher_dialog", "Redeem voucher", 9001, 0, -1000, closeVoucherDialog);
+                                                                    setAsWaitDialog(dialog);
+                                                                    moveDialogToCenter(dialog);
+                                                                    showOverlay();
+                                                                    makeDialogDraggable(dialog);
                                                                     new Ajax.Request(habboReqPath + "/habblet/ajax/redeemVoucher", {
                                                                         parameters: {
                                                                             code: $("redeem-code").value
                                                                         },
                                                                         method: "post",
                                                                         onComplete: function(req, json) {
-                                                                            Dialog.setDialogBody(dialog, req.responseText);
+                                                                            setDialogBody(dialog, req.responseText);
 
                                                                             Event.observe($("voucher-dialog-ok"), "click", closeVoucherDialog);
                                                                         },
@@ -79,7 +79,7 @@
                                                                 function closeVoucherDialog(e) {
                                                                     Event.stop(e);
                                                                     Element.remove("voucher_dialog");
-                                                                    Overlay.hide();
+                                                                    hideOverlay();
                                                                 }
                                                             </script>
                                                         @else

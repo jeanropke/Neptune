@@ -15,14 +15,13 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra
-                                clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra
-                                hair<br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Club
-                                badge<br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra
+                                clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Extra
+                                hair<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Club
+                                badge<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Extra
                                 dances<br><br><a target="_self" href="{{ url('/') }}/club/benefits/habbo">Find out more
                                     &gt;&gt;</a><br>
                                 <div class="clear"></div>
@@ -39,20 +38,20 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Monthly free
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Monthly free
                                 furni
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra Guest
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra
+                                Guest
                                 Rooms
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> VIP Public
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> VIP
+                                Public
                                 Rooms
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Priority
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Priority
                                 access<br><br><a href="{{ url('/') }}/club/benefits/room" target="_self">Find out more
                                     &gt;&gt;</a><br>
                                 <div class="clear"></div>
@@ -69,16 +68,14 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New widget
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New
+                                widget
                                 skins
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New
                                 Backgrounds
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> No
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> No
                                 ads!<br><br>
                                 <a href="{{ url('/') }}/club/benefits/home" target="_self">Find out more
                                     &gt;&gt;</a><br>
@@ -96,16 +93,16 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Huge
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                Huge
                                 Friends List
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> :chooser
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                :chooser
                                 command
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle"
-                                    src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> :furni
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                                :furni
                                 command<br><br><a href="{{ url('/') }}/club/benefits/extras" target="_self">Find out
                                     more &gt;&gt;</a><br>
                                 <div class="clear"></div>
@@ -131,10 +128,8 @@
                                 </div>
                                 <div class="body">
 
-                                    <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt=""
-                                        align="left" style="margin:10px;">
-                                    <img src="{{ url('/') }}/web/images/credits/hc_badge.gif" alt=""
-                                        align="right">
+                                    <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
+                                    <img src="{{ url('/') }}/web/images/credits/hc_badge.gif" alt="" align="right">
                                     <p>{{ cms_config('hotel.name.short') }} Club is {{ cms_config('hotel.name.full') }}'s exclusive club, and as a member
                                         of this club you get
                                         privileges that are not available to non-{{ cms_config('hotel.name.short') }} Club Habbos. As a
@@ -161,47 +156,50 @@
                                         <div style="margin-top: 10px;">
                                             <table width="100%">
                                                 <tbody>
-                                                        <tr>
-                                                            <td width="60%">
-                                                                <span class="habboclub-buy-details">31 days = 25 Credits</span></td>
-                                                            <td>
-                                                                <a class="colorlink noarrow" onclick="openClubSubscribe(1)"><span>Buy 1 month</span></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="60%">
-                                                                <span class="habboclub-buy-details">93 days = 60 Credits</span></td>
-                                                            <td>
-                                                                <a class="colorlink noarrow" onclick="openClubSubscribe(2)"><span>Buy 3 months</span></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="60%">
-                                                                <span class="habboclub-buy-details">186 days = 105 Credits</span></td>
-                                                            <td>
-                                                                <a class="colorlink noarrow" onclick="openClubSubscribe(3)"><span>Buy 6 months</span></a>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td width="60%">
+                                                            <span class="habboclub-buy-details">31 days = 25 Credits</span>
+                                                        </td>
+                                                        <td>
+                                                            <a class="colorlink noarrow" onclick="openClubSubscribe(1)"><span>Buy 1 month</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="60%">
+                                                            <span class="habboclub-buy-details">93 days = 60 Credits</span>
+                                                        </td>
+                                                        <td>
+                                                            <a class="colorlink noarrow" onclick="openClubSubscribe(2)"><span>Buy 3 months</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="60%">
+                                                            <span class="habboclub-buy-details">186 days = 105 Credits</span>
+                                                        </td>
+                                                        <td>
+                                                            <a class="colorlink noarrow" onclick="openClubSubscribe(3)"><span>Buy 6 months</span></a>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <script>
                                             function openClubSubscribe(id) {
-                                                var dialog = Dialog.createDialog("subscription_dialog", "{{ cms_config('hotel.name.short') }} Club", 9001, 0, -1000,
-                                                closeSubscription);
-                                                Dialog.appendDialogBody(dialog,
+                                                var dialog = createDialog("subscription_dialog", "{{ cms_config('hotel.name.short') }} Club", 9001, 0, -1000,
+                                                    closeSubscription);
+                                                appendDialogBody(dialog,
                                                     "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_habbos.gif\" alt=\"\" /></p><div style=\"clear\"></div>",
                                                     true);
-                                                    Dialog.moveDialogToCenter(dialog);
-                                                    Overlay.show();
-                                                Dialog.makeDialogDraggable(dialog);
+                                                moveDialogToCenter(dialog);
+                                                showOverlay();
+                                                makeDialogDraggable(dialog);
                                                 new Ajax.Request("{{ url('/') }}/habboclub/habboclub_subscribe", {
                                                     method: "post",
                                                     parameters: {
                                                         optionNumber: encodeURIComponent(id)
                                                     },
                                                     onComplete: function(req, json) {
-                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                        setDialogBody(dialog, req.responseText);
                                                     }
                                                 });
                                             };

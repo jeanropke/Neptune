@@ -39,15 +39,15 @@
                     Event.stop(e);
                 }
                 Element.remove($("myhabbo-error"));
-                Overlay.hide();
+                hideOverlay();
             };
-            var dialog = Dialog.createDialog("myhabbo-error", "", false, false, false, closeEditErrorDialog);
-            Dialog.setDialogBody(dialog,
+            var dialog = createDialog("myhabbo-error", "", false, false, false, closeEditErrorDialog);
+            setDialogBody(dialog,
                 '<p>Erro. Tente novamente daqui a pouco.</p><p><a href="#" class="new-button" id="myhabbo-error-close"><b>Fechar</b><i></i></a></p><div class="clear"></div>'
             );
             Event.observe($("myhabbo-error-close"), "click", closeEditErrorDialog);
-            Dialog.moveDialogToCenter(dialog);
-            Dialog.makeDialogDraggable(dialog);
+            moveDialogToCenter(dialog);
+            makeDialogDraggable(dialog);
         }
 
 
@@ -63,7 +63,7 @@
                     "Fechar");
                 return false;
             } else {
-                Overlay.show(null, 'Salvando');
+                showOverlay(null, 'Salvando');
                 return true;
             }
         }

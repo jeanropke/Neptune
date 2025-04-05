@@ -42,15 +42,15 @@
                                     var dialog;
                                     Event.observe(groupPurchaseButton, "click", function(e) {
                                         Event.stop(e);
-                                        dialog = Dialog.createDialog("group_purchase_form", "Create a Group", 9001, 0, -1000, cancelGroupPurchase);
-                                        Dialog.appendDialogBody(dialog, "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>", true);
-                                        Dialog.moveDialogToCenter(dialog);
-                                        Dialog.makeDialogDraggable(dialog);
-                                        Overlay.show();
+                                        dialog = createDialog("group_purchase_form", "Create a Group", 9001, 0, -1000, cancelGroupPurchase);
+                                        appendDialogBody(dialog, "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>", true);
+                                        moveDialogToCenter(dialog);
+                                        makeDialogDraggable(dialog);
+                                        showOverlay();
                                         new Ajax.Request(
                                                 habboReqPath + "/grouppurchase/group_create_form",
                                                 { method: "post", parameters: "product="+encodeURIComponent("g0 group_product"), onComplete: function(req, json) {
-                                                    Dialog.setDialogBody(dialog, req.responseText);
+                                                    setDialogBody(dialog, req.responseText);
                                                 } }
                                         );
                                     }, false);

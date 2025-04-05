@@ -50,14 +50,14 @@
                                                 <br>
                                                 <script>
                                                     function purchaseFurnitureResult(code) {
-                                                        Dialog.setDialogBody($("purchase_dialog"),
+                                                        setDialogBody($("purchase_dialog"),
                                                             "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                             true);
                                                         new Ajax.Request(habboReqPath + "/furnipurchase/purchase", {
                                                             method: "post",
                                                             parameters: "product=" + code,
                                                             onComplete: function(req, json) {
-                                                                Dialog.setDialogBody($("purchase_dialog"), req.responseText);
+                                                                setDialogBody($("purchase_dialog"), req.responseText);
                                                             }
                                                         });
                                                     }
@@ -84,18 +84,18 @@
                                                                         $("purchase_1_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_mode"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -132,18 +132,18 @@
                                                                         $("purchase_2_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_tv"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -187,18 +187,18 @@
                                                                         $("purchase_3_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_green"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -235,18 +235,18 @@
                                                                         $("purchase_4_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_home"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -290,18 +290,18 @@
                                                                         $("purchase_5_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_candy"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -338,18 +338,18 @@
                                                                         $("purchase_6_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_plastic1"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -394,18 +394,18 @@
                                                                         $("purchase_7_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_bedroom"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -442,18 +442,18 @@
                                                                         $("purchase_8_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("starter_kitchen"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
