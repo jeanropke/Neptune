@@ -78,7 +78,7 @@ Object.extend(Control.TextArea.ToolBar.BBCode.prototype,{
     addColorSelect: function(initial_text,colors,autowidth){
         var select = document.createElement('select');
         if (autowidth){
-            var buttonsWidth = 170;
+            var buttonsWidth = 171;
             if (navigator.appVersion.match(/\bMSIE\b/)) {
                 buttonsWidth += 4;
             }
