@@ -105,7 +105,9 @@ class CreditsController extends Controller
 
         if (user()->credits >= $collectable->getPrice()) {
             user()->updateCredits(-$collectable->getPrice());
-            user()->giveItem($collectable->getCatalogueItem()->definition_id);
+
+            $cataItem = $collectable->getCatalogueItem();
+            user()->giveItem($cataItem->definition_id, $cataItem->item_specialspriteid, true);
 
             return view('habblet.ajax.collectibles_success')->with([
                 'collectable'   => $collectable
