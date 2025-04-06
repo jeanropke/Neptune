@@ -57,7 +57,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {!! bb_format($report->message) !!}
+                                        <textarea cols="80" rows="4">{{ $report->message }}</textarea>
                                     </td>
                                 </tr>
                                 <tr>
