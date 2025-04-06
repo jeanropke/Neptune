@@ -135,7 +135,7 @@ class ReportController extends Controller
 
         $room = Room::find($request->objectId);
 
-        return $this->createReport($request->objectId, 'room', "Name: {$room->name}[br]Desc: {$room->description}", $room->owner_id);
+        return $this->createReport($request->objectId, 'room', "Name: {$room->name}\nDesc: {$room->description}", $room->owner_id);
     }
 
     public function addStickieReport(Request $request)
