@@ -71,19 +71,23 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="homepage_sub_row"><strong>Stafflog
-                                                                                Entries</strong></td>
+                                                                        <td class="homepage_sub_row"><strong>Stafflog Entries</strong></td>
                                                                         <td class="homepage_sub_row">
                                                                             {{ $stafflogs }}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="homepage_sub_row"><strong>Active
-                                                                                Bans</strong></td>
+                                                                        <td class="homepage_sub_row"><strong>Active Bans</strong></td>
                                                                         <td class="homepage_sub_row">
                                                                             <a href="{{ route('housekeeping.logs.bans') }}">
                                                                                 {{ $bans }}
                                                                             </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="homepage_sub_row"><strong>Website Reports</strong></td>
+                                                                        <td class="homepage_sub_row">
+                                                                            {{ $reports_total }} ({{ $reports_closed }} closed)
                                                                         </td>
                                                                     </tr>
                                                                 </table>
