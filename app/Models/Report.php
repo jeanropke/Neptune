@@ -44,6 +44,14 @@ class Report extends Model
                 $reply->update(['hidden_by_staff' => '1']);
                 break;
 
+            case 'room':
+                $room = Room::find($this->object_id);
+                $room->update([
+                    'name'          => 'Inappropriate to management.',
+                    'description'   => 'Inappropriate to management.'
+                ]);
+                break;
+
             default:
                 return $this->type;
                 break;
