@@ -21,7 +21,7 @@
                     <!-- RIGHT CONTENT BLOCK -->
                     <div class="tableborder">
                         <form action="{{ route('housekeeping.moderation.reports.website') }}" method="get" name="theAdminForm" id="theAdminForm" autocomplete="off">
-                            <div class="tableheaderalt">Search by Status</div>
+                            <div class="tableheaderalt">Search</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <tr>
                                     <td class="tablerow1" width="30%" valign="middle"><b>Status</b>
@@ -29,8 +29,27 @@
                                     </td>
                                     <td class="tablerow2" width="70%" valign="middle">
                                         <select name="status" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="-1" {{ request()->status == '0' ? 'selected' : '' }}>Ignore</option>
                                             <option value="0" {{ request()->status == '0' ? 'selected' : '' }}>Opened</option>
                                             <option value="1" {{ request()->status == '1' ? 'selected' : '' }}>Closed</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="30%" valign="middle"><b>Type</b>
+                                        <div class="graytext"></div>
+                                    </td>
+                                    <td class="tablerow2" width="70%" valign="middle">
+                                        <select name="type" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="all" {{ request()->type == 'all' ? 'selected' : '' }}>All</option>
+                                            <option value="discussionpost" {{ request()->type == 'discussionpost' ? 'selected' : '' }}>Discussion Post</option>
+                                            <option value="groupdesc" {{ request()->type == 'groupdesc' ? 'selected' : '' }}>Group Description</option>
+                                            <option value="groupname" {{ request()->type == 'groupname' ? 'selected' : '' }}>Group Name</option>
+                                            <option value="guestbook" {{ request()->type == 'guestbook' ? 'selected' : '' }}>Guestbook</option>
+                                            <option value="motto" {{ request()->type == 'motto' ? 'selected' : '' }}>Motto</option>
+                                            <option value="name" {{ request()->type == 'name' ? 'selected' : '' }}>Name</option>
+                                            <option value="room" {{ request()->type == 'room' ? 'selected' : '' }}>Room</option>
+                                            <option value="stickie" {{ request()->type == 'stickie' ? 'selected' : '' }}>Stickie</option>
                                         </select>
                                     </td>
                                 </tr>
