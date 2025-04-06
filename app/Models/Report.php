@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Group\GroupReply;
+use App\Models\Home\Guestbook;
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
@@ -42,6 +43,11 @@ class Report extends Model
             case 'discussionpost':
                 $reply = GroupReply::find($this->object_id);
                 $reply->update(['hidden_by_staff' => '1']);
+                break;
+
+            case 'guestbook':
+                $guestbook = Guestbook::find($this->object_id);
+                $guestbook->update(['is_deleted' => '1']);
                 break;
 
             case 'room':
