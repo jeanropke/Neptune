@@ -46,6 +46,16 @@ class Report extends Model
                 $reply->update(['hidden_by_staff' => '1']);
                 break;
 
+            case 'groupdesc':
+                $group = Group::find($this->object_id);
+                $group->update(['description' => 'Inappropriate to management.']);
+                break;
+
+            case 'groupname':
+                $group = Group::find($this->object_id);
+                $group->update(['name' => 'Inappropriate to management.']);
+                break;
+
             case 'guestbook':
                 $guestbook = Guestbook::find($this->object_id);
                 $guestbook->update(['is_deleted' => '1']);
