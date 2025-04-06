@@ -50,6 +50,11 @@ class Report extends Model
                 $guestbook->update(['is_deleted' => '1']);
                 break;
 
+            case 'motto':
+                $user = User::find($this->object_id);
+                $user->setMotto('');
+                break;
+
             case 'room':
                 $room = Room::find($this->object_id);
                 $room->update([
