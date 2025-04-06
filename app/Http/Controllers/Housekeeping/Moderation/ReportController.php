@@ -14,11 +14,11 @@ class ReportController extends Controller
             return view('housekeeping.accessdenied');
 
         if(isset($request->status)) {
-            $reports = Report::where('closed', $request->status)->paginate(25);
+            $reports = Report::where('closed', $request->status)->orderBy('created_at', 'DESC')->paginate(25);
             return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
         }
 
-        $reports = Report::paginate(25);
+        $reports = Report::orderBy('created_at', 'DESC')->paginate(25);
         return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
     }
 
