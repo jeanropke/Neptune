@@ -13,8 +13,12 @@ class ReportController extends Controller
         if (!user()->hasPermission('can_view_reports'))
             return view('housekeeping.accessdenied');
 
-        if(isset($request->status) && $request->status > -1) {
+        if(isset($request->status) && $request->status > -1 && isset($request->type) && $request->type != 'all') {
             $reports = Report::where([['closed', $request->status], ['type', $request->type]])->orderBy('created_at', 'DESC')->paginate(25);
+            return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
+        }
+        if(isset($request->status) && $request->status > -1) {
+            $reports = Report::where([['closed', $request->status]])->orderBy('created_at', 'DESC')->paginate(25);
             return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
         }
         if(isset($request->type) && $request->type != 'all')
