@@ -17,15 +17,15 @@ class ReportController extends Controller
 {
     private function createReport($objectId, $type, $message, $author)
     {
-        //$alreadyReported = Report::where([['reported_by', '=', user()->id], ['object_id', '=', $objectId], ['type', '=', $type]])->count() > 0;
-//
-        //if ($alreadyReported)
-        //    return 'SPAM';
-//
-        //$reportsByUser = Report::where([['reported_by', '=', user()->id], ['created_at', '>', Carbon::now()->subMinutes(5)->toDateTimeString()]])->count();
-//
-        //if ($reportsByUser > 3)
-        //    return "SPAM";
+        $alreadyReported = Report::where([['reported_by', '=', user()->id], ['object_id', '=', $objectId], ['type', '=', $type]])->count() > 0;
+
+        if ($alreadyReported)
+            return 'SPAM';
+
+        $reportsByUser = Report::where([['reported_by', '=', user()->id], ['created_at', '>', Carbon::now()->subMinutes(5)->toDateTimeString()]])->count();
+
+        if ($reportsByUser > 3)
+            return "SPAM";
 
         Report::create([
             'reported_by'   => user()->id,
