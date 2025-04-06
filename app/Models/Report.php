@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Group\GroupReply;
 use App\Models\Home\Guestbook;
+use App\Models\Home\HomeItem;
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
@@ -61,6 +62,11 @@ class Report extends Model
                     'name'          => 'Inappropriate to management.',
                     'description'   => 'Inappropriate to management.'
                 ]);
+                break;
+
+            case 'stickie':
+                $stickie = HomeItem::find($this->object_id);
+                $stickie->update(['is_deleted' => '1']);
                 break;
 
             default:
