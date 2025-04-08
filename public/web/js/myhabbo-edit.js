@@ -288,6 +288,8 @@ function doPlaceImageOnPage(code, placeAll) {
 					editModeDisabledDialog.show();
 				} else {
 					new Insertion.Bottom("playground", req.responseText);
+                    console.log(json);
+                    console.log(json.length);
 					for (var i = 0; i < json.length; i++) {
 						Element.hide($("sticker-"+json[i]));
 						new Effect.Appear($("sticker-"+json[i]));

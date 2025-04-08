@@ -48,6 +48,7 @@
     {{--<!--link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet"/-->
     <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" /> --}}
     <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
+    <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
 
         <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/myhabbo/skins.css" type="text/css" rel="stylesheet" />
@@ -76,6 +77,7 @@
         <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.bbcode.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-noteeditor.js"></script>
+        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-inventory.js"></script>
 
         @if ($submenuId == 'groups')
             <link href="{{ url('/') }}/web/styles/grouptabs.css" type="text/css" rel="stylesheet" />

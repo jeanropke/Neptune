@@ -14,6 +14,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\NoteEditorController;
+use App\Http\Controllers\Home\WebInventoryController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
@@ -214,8 +215,7 @@ Route::middleware('user')->group(function () {
         Route::post('/noteeditor/editor', [NoteEditorController::class, 'editor'])->name('myhabbo.noteeditor.editor');
         Route::post('/noteeditor/preview', [NoteEditorController::class, 'preview'])->name('myhabbo.noteeditor.preview');
         Route::post('/noteeditor/place', [NoteEditorController::class, 'place'])->name('myhabbo.noteeditor.place');
-        Route::post('/sticker/place_sticker', [HomeController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
-        Route::post('/sticker/remove_sticker', [HomeController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
+        Route::post('/noteeditor/purchase', [NoteEditorController::class, 'purchase'])->name('myhabbo.noteeditor.purchase');
         Route::post('/stickie/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.stickie.edit');
         Route::post('/stickie/delete', [HomeController::class, 'deleteStickie'])->name('myhabbo.stickie.delete');
         Route::post('/widget/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.widget.edit');
@@ -223,6 +223,13 @@ Route::middleware('user')->group(function () {
         Route::post('/save/{id}', [HomeController::class, 'saveHome'])->name('myhabbo.save');
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');
 
+        Route::post('/inventory/preview', [WebInventoryController::class, 'preview'])->name('myhabbo.inventory.preview');
+        Route::post('/inventory/{type}', [WebInventoryController::class, 'loadInventory'])->name('myhabbo.inventory.load');
+
+        Route::post('/sticker/place_sticker', [WebInventoryController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
+        Route::post('/sticker/remove_sticker', [WebInventoryController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
+
+        //Old stuff
         Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
         Route::post('/store/main', [HomeController::class, 'storeMain'])->name('myhabbo.store.main');
         Route::post('/store/inventory', [HomeController::class, 'inventoryMain'])->name('myhabbo.inventory.main');

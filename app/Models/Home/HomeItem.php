@@ -19,44 +19,33 @@ class HomeItem extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'type', 'skin', 'home_id', 'group_id', 'is_deleted'
+        'id', 'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'skin', 'home_id', 'group_id', 'is_deleted'
     ];
 
     public $timestamps = false;
 
     public function getStoreItem()
     {
-        $item = StoreItem::find($this->item_id);
-        if (!$item)
+        $store = StoreItem::find($this->item_id);
+        if (!$store)
             return 'not found';
-        return $item;
+        return $store;
     }
 
     public function getShortType()
     {
-        switch ($this->type) {
-            case 'background';
-                return 'b';
-            case 'sticker';
-                return 's';
-            case 'widget';
-                return 'w';
-            case 'note';
-                return 'commodity';
-            default:
-                return $this->type . ' not found?';
-        }
+        return $this->getStoreItem()->type;
     }
 
     public function getFullType() {
-        switch ($this->type) {
-            case 'background';
+        switch ($this->getStoreItem()->type) {
+            case 'b';
                 return 'Backgrounds';
-            case 'sticker';
+            case 's';
                 return 'Stickers';
-            case 'widget';
+            case 'w';
                 return 'Widgets';
-            case 'note';
+            case 'commodity';
                 return 'commodity';
             default:
                 return $this->type . ' not found?';

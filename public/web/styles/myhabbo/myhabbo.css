@@ -1123,3 +1123,88 @@ span.avatar-image-frame {
 div#member-list-paging, div#avatar-list-paging, div#badge-list-paging {
     text-align: center;
 }
+
+
+/* Web Inventory */
+#webstore-categories-container, #webstore-items-container, #webstore-preview-container, #webstore-close-container, #inventory-categories-container, #inventory-items-container, #inventory-preview-container {
+    position: relative;
+    top: 0;
+}
+#webstore-items-container, #inventory-items-container {
+    width: 263px;
+    float: left;
+}
+#inventory-items {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 306px;
+}
+#inventory-items ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#inventory-items ul li {
+    float: left;
+    width: 61px;
+    height: 61px;
+    background: url(../../images/myhabbo/store/slot.gif) no-repeat 1px 1px;
+}
+#webstore-items ul li:hover, #webstore-items ul li.selected, #inventory-items ul li:hover, #inventory-items ul li.selected {
+    background: url(../../images/myhabbo/store/highlight_slot.gif) no-repeat 1px 1px;
+}
+#webstore-items ul li div.webstore-item-preview, #inventory-items ul li div.webstore-item-preview {
+    float: left;
+    width: 61px;
+    height: 61px;
+}
+li.selected div.webstore-item-preview div.webstore-item-mask {
+    background: url(../../images/myhabbo/store/selector.png) no-repeat 0 0;
+}
+div.webstore-item-preview div.webstore-item-mask {
+    background: url(../../images/myhabbo/store/slot_mask.png) no-repeat 0 0;
+    width: 61px;
+    height: 61px;
+}
+#webstore-items ul li.webstore-item-empty, #webstore-items ul li.webstore-item-empty:hover, #inventory-items ul li.webstore-item-empty, #inventory-items ul li.webstore-item-empty:hover {
+    background: url(../../images/myhabbo/store/empty_slot.gif) no-repeat 1px 1px;
+    cursor: default;
+}
+#webstore-preview-container, #inventory-preview-container {
+    width: 120px;
+    left: 264px;
+}
+#webstore-preview-box, #inventory-preview-box {
+    border: 1px solid black;
+    height: 120px;
+    background: url(../../images/myhabbo/store/preview_background.gif) no-repeat 50% 50%;
+}
+#webstore-preview-pre, #inventory-preview-pre {
+    height: 100%;
+    position: relative;
+}
+#inventory-preview {
+    width: 120px;
+    float: right;
+    position: absolute;
+}
+
+#inventory-preview-place {
+    float: right;
+}
+
+div.webstore-item-count {
+    padding: 5px 5px 0 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+}
+div.webstore-item-count div {
+    text-align: center;
+    float: right;
+    width: 32px;
+    height: 17px;
+    padding-top: 2px;
+    background: url(../../images/myhabbo/dialogs/item_count_label.gif) no-repeat;
+}

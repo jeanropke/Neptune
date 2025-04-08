@@ -597,6 +597,7 @@ function showInfoDialog(dialogId, message, buttonText, buttonOnClick) {
 
     moveOverlay("9002");
     moveDialogToCenter(dialog);
+    return dialog;
 }
 
 function showConfirmDialog(message) {

@@ -21,7 +21,6 @@ var NoteEditor = {
     },
     _loadEditor: function (noteParams, backFromPreview) {
         NoteEditor.noteParams = noteParams || "";
-        console.log(noteParams);
 
         new Ajax.Request(habboReqPath + "/myhabbo/noteeditor/editor", {
             method: "post", parameters: NoteEditor.noteParams, onComplete: function (req, json) {
@@ -29,7 +28,6 @@ var NoteEditor = {
                     setDialogBody(NoteEditor.dialog, req.responseText);
                     req.responseText.evalScripts();
 
-                    console.log('a');
                     var limitCallback = function (limitReached) {
                         try {
                             var currentLength = $F("webstore-notes-text").length;
@@ -38,7 +36,6 @@ var NoteEditor = {
                             else { NoteEditor._disableContinue(); }
                         } catch (e) { }
                     };
-                    console.log('b');
 
                     if (backFromPreview || NoteEditor.id) {
                         window.setTimeout(function () {
@@ -46,7 +43,6 @@ var NoteEditor = {
                             limitCallback();
                         }, 100);
                     }
-                    console.log('c');
 
                     var maxLength = $F("webstore-notes-maxlength");
                     limitTextarea($("webstore-notes-text"), maxLength, limitCallback);
@@ -96,31 +92,62 @@ var NoteEditor = {
                             }
                         });
                     }
+                    if ($("note-editor-purchase")) {
+                        Event.observe($("note-editor-purchase"), "click", NoteEditor.openPurchaseDialog);
+                    }
                 }
             }
         });
     },
-    _place: function(e) {
-      if (NoteEditor.noteParams) {
-        new Ajax.Request(habboReqPath + "/myhabbo/noteeditor/place", {
-          method: "post", parameters: NoteEditor.noteParams, onComplete: function(req, json) {
-            if (NoteEditor._checkResponse(req.responseText)) {
-              if (req.responseText.strip() == "BACK") {
-                NoteEditor._loadEditor(NoteEditor.noteParams, true);
-              } else if (req.responseText.strip() != "") {
-                $("playground").insert(req.responseText);
-                var note = $("stickie-" + json);
-                Element.hide(note);
-                note.style.top = "10px";
-                note.style.left = "10px";
-                Effect.BlindDown(note, {scaleX:true, scaleY:true});
-                initMovableItems();
-                NoteEditor.close(e);
-              }
+    _place: function (e) {
+        if (NoteEditor.noteParams) {
+            new Ajax.Request(habboReqPath + "/myhabbo/noteeditor/place", {
+                method: "post", parameters: NoteEditor.noteParams, onComplete: function (req, json) {
+                    if (NoteEditor._checkResponse(req.responseText)) {
+                        if (req.responseText.strip() == "BACK") {
+                            NoteEditor._loadEditor(NoteEditor.noteParams, true);
+                        } else if (req.responseText.strip() != "") {
+                            $("playground").insert(req.responseText);
+                            var note = $("stickie-" + json);
+                            Element.hide(note);
+                            note.style.top = "10px";
+                            note.style.left = "10px";
+                            Effect.BlindDown(note, { scaleX: true, scaleY: true });
+                            initMovableItems();
+                            NoteEditor.close(e);
+                        }
+                    }
+                }
+            });
+        }
+    },
+    openPurchaseDialog: function (e) {
+        Event.stop(e);
+        var dialog = createDialog("purchase-note-dialog", "Purchase Notes", 9004, null, null, NoteEditor.closePurchaseDialog);
+        makeDialogDraggable(dialog);
+        setAsWaitDialog(dialog);
+        moveDialogToCenter(dialog);
+        moveOverlay(9004);
+        new Ajax.Request(habboReqPath + "/myhabbo/noteeditor/purchase", {
+            method: "post", parameters: NoteEditor.noteParams, onComplete: function (req, json) {
+                if (NoteEditor._checkResponse(req.responseText)) {
+                    setDialogBody(dialog, req.responseText);
+                    req.responseText.evalScripts();
+
+                    if ($("webstore-confirm-cancel")) { Event.observe($("webstore-confirm-cancel"), "click", NoteEditor.closePurchaseDialog); }
+                    if ($("webstore-confirm-submit")) {
+                        Event.observe($("webstore-confirm-submit"), "click", function (e) {
+                            Event.stop(e);
+                        });
+                    }
+                }
             }
-          }
         });
-      }
+    },
+    closePurchaseDialog: function (e) {
+        Event.stop(e);
+        Element.remove($("purchase-note-dialog"));
+        moveOverlay(9003);
     },
     _checkResponse: function (responseText) {
         if (responseText.strip() == "REFRESH") {

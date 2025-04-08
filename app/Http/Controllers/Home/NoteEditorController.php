@@ -128,4 +128,9 @@ class NoteEditorController extends Controller
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($item->id));
     }
+
+    public function purchase()
+    {
+        return view('home.noteeditor.purchase');
+    }
 }
