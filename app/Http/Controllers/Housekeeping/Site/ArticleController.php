@@ -110,7 +110,6 @@ class ArticleController extends Controller
             'author_id'         => user()->id,
             'author_override'   => $request->author_override,
             'publish_date'      => Carbon::parse($request->publish_date),
-            'is_deleted'        => $request->deleted ?? '0',
             'url'               => $article->id . '_' . $url
         ]);
 
