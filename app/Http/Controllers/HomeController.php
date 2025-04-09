@@ -209,19 +209,22 @@ class HomeController extends Controller
         if (!empty($background[1])) {
             $bg = str_replace('b_', '', $background[1]);
             $storeItem = StoreItem::where([
-                ['type', '=', 'b'],
-                ['class', '=', $bg]
+                ['type', 'b'],
+                ['class', $bg]
             ])->first();
             if (!$storeItem)
                 return;
 
-            $homeInventory = HomeInventory::where([['type', '=', 'background'], ['user_id', '=', $userId], ['item_id', '=', $storeItem->id]])->first();
-            if ($homeInventory) {
-                $home = HomeItem::where([['type', 'background'], ['user_id', $userId]])->first();
-                $home->update([
-                    'data' => $bg
-                ]);
-            }
+            $bgInUse = HomeItem::where([['data', 'background'], ['home_id', $session->user_id]])->first();
+            $bgInUse->update([
+                'home_id'   => null,
+                'group_id'  => null
+            ]);
+            $home = HomeItem::where([['data', 'background'], ['owner_id', $session->user_id], ['item_id', $storeItem->id]])->first();
+            $home->update([
+                'home_id'   => $session->home_id,
+                'group_id'  => $session->group_id
+            ]);
         }
 
 

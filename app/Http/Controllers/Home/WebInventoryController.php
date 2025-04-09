@@ -15,7 +15,7 @@ class WebInventoryController extends Controller
         switch ($request->type) {
 
             case 'backgrounds':
-                $items = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 'b']])->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')->get();
+                $items = HomeItem::where([['owner_id', user()->id], ['type', 'b']])->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')->select('cms_homes.*', 'cms_homes_store_items.class')->get();
                 break;
             case 'widgets':
                 $widgets = HomeItem::where([['owner_id', user()->id], ['type', 'w'], ['class', '!=', 'profilewidget']])
