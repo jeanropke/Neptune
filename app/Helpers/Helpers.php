@@ -38,23 +38,43 @@ function emu_config($key)
 function set_emu_config($key, $value)
 {
     $setting = EmuSetting::where('setting', $key)->first();
-    if(!$setting) return;
+    if (!$setting) return;
     $setting->update(['value' => $value]);
 }
 
-function get_cata_item($sale) {
+function get_cata_item($sale)
+{
     $cata =  CatalogueItem::where('sale_code', $sale)->first();
-    if($cata)
+    if ($cata)
         return $cata->name;
 }
 
 function boxes($page, $column)
 {
     $boxes = [];
-    if(Auth::check())
+    if (Auth::check())
         $boxes = BoxPage::where([['page', $page], ['column', $column], ['requirement', '!=', 'guest']])->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
     else
         $boxes = BoxPage::where([['page', $page], ['column', $column], ['requirement', '!=', 'auth']])->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
+
+    $search = array(
+        '/%username%/',
+        '/%url%/',
+        '/%badges%/',
+        '/%groupbadge%/',
+        '/%c_images%/'
+    );
+    $replace = array(
+        user() ? user()->username : '',
+        url('/'),
+        cms_config('site.badges.url'),
+        cms_config('site.groupbadge.url'),
+        cms_config('site.c_images.url')
+    );
+
+    foreach ($boxes as $box) {
+        $box->content = preg_replace($search, $replace, $box->content);
+    }
 
     return $boxes;
 }
@@ -104,19 +124,20 @@ function bb_format($str)
     return $str;
 }
 
-function is_hotel_online() {
+function is_hotel_online()
+{
     $errNo = 0;
     $f = @fsockopen(cms_config('connection.rcon.host'), cms_config('connection.rcon.port'), $errNo, $errNo, 0.01);
-    if(!$f) {
+    if (!$f) {
         return false;
-    }
-    else {
+    } else {
         fclose($f);
         return true;
     }
 }
 
-function create_staff_log($page, $request) {
+function create_staff_log($page, $request)
+{
     unset($request['_token']);
     $message = json_encode($request->post());
     StaffLog::create([
@@ -136,7 +157,8 @@ function rcon($key, $data = [])
     @socket_close($socket);
 }
 
-function build_rcon($header, $parameters) {
+function build_rcon($header, $parameters)
+{
     $message = "";
     $message .= pack('N', strlen($header));
     $message .= $header;
@@ -167,7 +189,8 @@ function mus($key, $data = [])
     @socket_close($socket);
 }
 #[\Deprecated("use build_rcon() instead")]
-function build_mus($header, $parameters) {
+function build_mus($header, $parameters)
+{
     $message = "";
     $message .= pack('N', strlen($header));
     $message .= $header;
