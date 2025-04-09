@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserBadge;
 use App\Models\UserIPLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -129,11 +130,17 @@ class UserController extends Controller
             'username'  => 'required'
         ]);
 
+        $badgeCode = strtoupper($request->badge);
+
         $user = User::where('username', $request->username)->first();
         if (!$user)
             return redirect()->back()->with('message', 'User no found!');
 
-        $result = $user->giveBadge($request->badge);
+        $rankBadge = DB::table('rank_badges')->where('badge', $badgeCode)->first();
+        if($rankBadge)
+            return redirect()->back()->with('message', 'Cannot give a rank badge!');
+
+        $result = $user->giveBadge($badgeCode);
 
         if (!$result)
             return redirect()->back()->with('message', 'User already have this badge!');
