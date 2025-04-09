@@ -20,7 +20,7 @@ class GroupController extends Controller
 
         if($group->getItems()->count() == 0)
         {
-            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '7',   'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '38',   'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '433',    'y' => '40',    'z' => '3', 'item_id' => '18',  'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '0',      'y' => '0',     'z' => '0', 'item_id' => '17',  'data' => 'background']);
         }
@@ -40,7 +40,7 @@ class GroupController extends Controller
 
         if($group->getItems()->count() == 0)
         {
-            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '7',   'skin' => 'defaultskin']);
+            HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '38',   'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '433',    'y' => '40',    'z' => '3', 'item_id' => '18',  'skin' => 'defaultskin']);
             HomeItem::insert(['owner_id' => $group->user_id, 'group_id' => $group->id, 'x' => '0',      'y' => '0',     'z' => '0', 'item_id' => '17',  'data' => 'background']);
         }
