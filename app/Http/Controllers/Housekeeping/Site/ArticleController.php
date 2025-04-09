@@ -61,7 +61,7 @@ class ArticleController extends Controller
             return view('housekeeping.accessdenied');
 
         return view('housekeeping.site.articles.listing')->with([
-            'articles'  => Article::where('is_deleted', user()->hasPermission('can_restore_site_news') ? '>=' : '=', '0')->orderBy('created_at', 'desc')->paginate(15)
+            'articles'  => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->paginate(15)
         ]);
     }
 
@@ -136,5 +136,34 @@ class ArticleController extends Controller
         create_staff_log('site.articles.delete', $request);
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Article deleted!']);
+    }
+
+    public function articlesRestore()
+    {
+        if (!user()->hasPermission('can_restore_site_news'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        return view('housekeeping.site.articles.restore')->with([
+            'articles'   => Article::where('is_deleted', '1')->orderBy('created_at', 'desc')->paginate(15)
+        ]);
+    }
+
+    public function articleRestore(Request $request)
+    {
+        if (!user()->hasPermission('can_restore_site_news'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $article = Article::find($request->id);
+
+        if (!$article)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This article does not exist!']);
+
+        $article->update([
+            'is_deleted' => '0',
+        ]);
+
+        create_staff_log('site.articles.restore', $request);
+
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Article restored!']);
     }
 }

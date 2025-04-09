@@ -140,20 +140,6 @@
                                             class="textinput">
                                     </td>
                                 </tr>
-                                @if ($article->is_deleted && user()->hasPermission('can_restore_site_news'))
-                                    <tr>
-                                        <td class="tablerow1" width="40%" valign="middle"><b>Restore</b>
-                                            <div class="graytext">This article is deleted... almost deleted.</div>
-                                        </td>
-                                        <td class="tablerow2" width="60%" valign="middle">
-                                            <select name="deleted" id="deleted" class="textinput" style="margin-top: 5px;" size="1">
-                                                <option value="1" @if ($article->is_deleted == 1) selected="selected" @endif>Keep
-                                                    deleted</option>
-                                                <option value="0" @if ($article->is_deleted == 0) selected="selected" @endif>Restore</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                @endif
                                 <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
                                         <input type="submit" value="Update Article" class="realbutton" accesskey="s">
