@@ -19,7 +19,7 @@ class GroupMember extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'guild_id', 'user_id', 'level_id', 'member_since'
+        'id', 'group_id', 'user_id', 'level_id', 'member_since'
     ];
 
     public $timestamps = false;

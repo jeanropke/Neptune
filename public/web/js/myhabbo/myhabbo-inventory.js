@@ -17,11 +17,11 @@ var WebInventory = {
     open: function (e, type) {
         Event.stop(e);
         showOverlay();
-        WebInventory._createInventoryDialog();
+        WebInventory._createInventoryDialog("dialog.title." + type);
         WebInventory._loadInventory(type);
     },
-    _createInventoryDialog: function () {
-        WebInventory.dialog = createDialog("stickers_dialog", "Stickers Inventory", "9003", -1500, 0, WebInventory.close);
+    _createInventoryDialog: function (title) {
+        WebInventory.dialog = createDialog("stickers_dialog", title, "9003", -1500, 0, WebInventory.close);
         makeDialogDraggable(WebInventory.dialog);
         setAsWaitDialog(WebInventory.dialog);
         moveDialogToCenter(WebInventory.dialog);
@@ -37,7 +37,11 @@ var WebInventory = {
                 if ($("purchase-stickers")) { Event.observe($("purchase-stickers"), "click", WebStore.open) }
 
                 var el = $A($("inventory-item-list").getElementsByTagName("li")).first();
-                if (el) { WebInventory._selectItem(el); }
+                if (el) {
+                    WebInventory._selectItem(el);
+                    var temp = el.id.split("-");
+                    WebInventory._loadPreview(temp.last(), WebInventory.selectedCategory, temp[2] == "p");
+                }
 
                 WebInventory._setEventHandlers();
             }
@@ -49,8 +53,6 @@ var WebInventory = {
                 Element.removeClassName(WebInventory.selectedItem, "selected");
                 Element.addClassName(el, "selected");
                 WebInventory.selectedItem = el;
-                var temp = el.id.split("-");
-                WebInventory._loadPreview(temp.last(), WebInventory.selectedCategory, temp[2] == "p");
             }
         } catch (ex) { }
     },
@@ -65,7 +67,6 @@ var WebInventory = {
     },
     _handleItemClick: function (e) {
         Event.stop(e);
-        console.log(e);
         var el = Event.findElement(e, "li");
         if (el && el.id && el != WebInventory.selectedItem && (!el.className || !Element.hasClassName(el, "webstore-widget-disabled"))) {
             WebInventory._selectItem(el);
@@ -76,7 +77,6 @@ var WebInventory = {
     _loadPreview: function (itemId, type, privileged) {
         WebInventory._clearPreview();
         $("inventory-preview").innerHTML = getProgressNode();
-        WebInventory._showPreview();
         var qs = { itemId: itemId, type: type };
         if (type == "widgets") {
             qs.privileged = privileged;
@@ -85,11 +85,9 @@ var WebInventory = {
             habboReqPath + "/myhabbo/inventory/preview", {
             method: "post", parameters: qs,
             onComplete: function (req, json) {
-                console.log(json);
                 if (WebInventory._checkResponse(req.responseText)) {
                     WebInventory.previewItem = json;
                     WebInventory._showPreview(req.responseText);
-                    console.log(WebInventory.previewItem);
                 }
 
                 // make sure webstore is hidden
@@ -125,7 +123,6 @@ var WebInventory = {
 
     _setPreviewItem: function () {
         var pre = $("inventory-preview-pre");
-        console.log();
         pre.className = WebInventory.previewItem[0];
         pre.title = WebInventory.previewItem[2];
         if (WebInventory.previewItem[3] == "DynamicSticker") {

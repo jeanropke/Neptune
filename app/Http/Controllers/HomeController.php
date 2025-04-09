@@ -23,7 +23,7 @@ class HomeController extends Controller
         if (!$user)
             return 'home 404';
 
-        if (!$user->getCmsSettings()->home_public) //habbo home disable
+        if (!$user->getCmsSettings()->home_public) //habbo home disabled
             return view('home.private')->with(['user' => $user]);
 
         $isEdit = false;
@@ -36,19 +36,28 @@ class HomeController extends Controller
         $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get();
 
         if ($items->count() == 0) {
+            //Stickie notes
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '4',  'data' => 'Remember![br]Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.[br]Deleted notes will not be funded.[br][br]', 'skin' => 'noteitskin']);
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '4',  'data' => 'Welcome to a brand new Habbo Home page![br]This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo [br]trap off with colourful notes and showcase your Habbo rooms! To [br]start editing just click the edit button.[br][br]', 'skin' => 'speechbubbleskin']);
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '4',  'data' => 'Where are my friends?[br]To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin']);
+            //Profile Widget
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '455',    'y' => '27',    'z' => '129', 'item_id' => '5', 'skin' => 'defaultskin']);
+            //Rooms Widget
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '440',    'y' => '321',   'z' => '177', 'item_id' => '10', 'skin' => 'defaultskin']);
+            //High Scores Widget
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '383',    'y' => '491',   'z' => '179', 'item_id' => '11', 'skin' => 'goldenskin']);
+            //needle_3
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '109',    'y' => '19',    'z' => '134', 'item_id' => '3']);
+            //sticker_spaceduck
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '275',    'y' => '367',   'z' => '152', 'item_id' => '14']);
+            //paper_clip_1
             HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '183',    'y' => '373',   'z' => '171', 'item_id' => '15']);
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '0',      'y' => '0',     'z' => '0',   'item_id' => '17',  'data' => 'background']);
+            //bg_pattern_abstract2
+            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'item_id' => '17',  'data' => 'background']);
 
             $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']])->get();
         }
+
 
         return view('home')->with([
             'items'     => $items,
@@ -89,6 +98,16 @@ class HomeController extends Controller
             'group_id'      => $request->groupId,
             'expires_at'    => time() + 60 * 60 //1 hour
         ]);
+
+        //we need to create some items in case this user does not have them
+        //like some widgets
+        $widgets = StoreItem::where('type', 'w')->get();
+        foreach ($widgets as $widget) {
+            $item = HomeItem::where([['owner_id', user()->id], ['item_id', $widget->id]])->first();
+            if (!$item) {
+                HomeItem::insert(['owner_id' => user()->id, 'item_id' => $widget->id, 'skin' => 'defaultskin']);
+            }
+        }
 
         return redirect()->back();
     }

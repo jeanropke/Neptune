@@ -215,7 +215,7 @@ class User extends Authenticatable
      */
     public function getGroups()
     {
-        return GroupMember::where('guilds_members.user_id', $this->id)->join('guilds', 'guilds_members.guild_id', '=', 'guilds.id')->get();
+        return GroupMember::where('cms_groups_members.user_id', $this->id)->join('cms_groups', 'cms_groups_members.group_id', '=', 'cms_groups.id')->get();
     }
 
     /**

@@ -110,8 +110,9 @@
                                 </div>
                             @break
 
-                            @case('w')
+                            @case('gw')
                                 {{-- widget --}}
+                                {{ $itemStore->class }}
                                 @include('home.widgets.' . strtolower($itemStore->class))
                             @break
                         @endswitch

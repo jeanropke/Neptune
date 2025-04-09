@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\Guild;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
+use App\Models\Home\HomeSession;
 use App\Models\Home\HomeSong;
 use App\Models\Photo;
 use App\Models\PhotoLike;
@@ -18,7 +20,33 @@ use Illuminate\Support\Facades\DB;
 
 class WidgetController extends Controller
 {
-    public function avatarInfo(Req $request)
+    public function widgetAdd(Request $request)
+    {
+        $widgetId = $request->widgetId;
+        $widget = HomeItem::find($widgetId);
+        if (!$widget)
+            return 'ERROR';
+
+        if ($widget->owner_id != user()->id)
+            return 'ERROR';
+
+        $session = HomeSession::find(user()->id);
+        if (!$session)
+            return 'error: placeSticker > session expired';
+
+        $widget->update([
+            'home_id'   => $session->home_id,
+            'x'         => 20,
+            'y'         => 30,
+            'z'         => $request->zindex,
+        ]);
+
+        return response(view('home.widgets.' . $widget->getStoreItem()->class)->with(['item' => $widget, 'owner' => user(), 'isEdit' => true]), 200)
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode(array('id' => $widgetId)));
+    }
+
+    public function avatarInfo(Request $request)
     {
         return view('home.widgets.ajax.avatarinfo')->with([
             'friend'    => User::find($request->anAccountId),
@@ -92,7 +120,7 @@ class WidgetController extends Controller
     public function groupInfo(Request $request)
     {
         return view('home.widgets.ajax.groupinfo')->with([
-            'group' => Guild::find($request->groupId)
+            'group' => Group::find($request->groupId)
         ]);
     }
 
