@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalogue\CatalogueItem;
+use App\Models\Furni;
 use App\Models\User;
 use App\Models\UserBadge;
 use App\Models\UserIPLog;
@@ -137,7 +139,7 @@ class UserController extends Controller
             return redirect()->back()->with('message', 'User no found!');
 
         $rankBadge = DB::table('rank_badges')->where('badge', $badgeCode)->first();
-        if($rankBadge)
+        if ($rankBadge)
             return redirect()->back()->with('message', 'Cannot give a rank badge!');
 
         $result = $user->giveBadge($badgeCode);
@@ -185,5 +187,59 @@ class UserController extends Controller
             return view('housekeeping.ajax.accessdenied_dialog');
 
         return redirect()->back()->with('message', 'Not implemented yet! Kepler does not save on database which user is online.');
+    }
+
+    public function toolsFurniture(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users'))
+            return view('housekeeping.ajax.accessdenied');
+
+        $user = User::find($request->id);
+        if (!$user)
+            return redirect()->back()->with('message', 'User not found');
+
+        return view('housekeeping.moderation.users.furniture')->with(['user' => $user]);
+    }
+
+    public function toolsFurnitureGive(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users'))
+            return view('housekeeping.ajax.accessdenied');
+
+        $user = User::where('username', $request->username)->first();
+        if (!$user)
+            return redirect()->back()->with('message', 'User not found!');
+
+        if ($request->items) {
+            foreach (explode(';', $request->items) as $item) {
+                $cataItem = CatalogueItem::where('sale_code', $item)->first();
+                if ($cataItem)
+                    $user->giveItem($cataItem->definition_id, $cataItem->item_specialspriteid);
+            }
+            $user->refreshHand();
+        }
+
+        create_staff_log('users.furniture.give', $request);
+
+        return redirect()->back()->with('message', 'Items delivered!');
+    }
+
+    public function toolsFurnitureRemove(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $furni = Furni::find($request->id);
+
+        if (!$furni)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This furni does not exist!']);
+
+        create_staff_log('users.furniture.remove', $request);
+
+        $furni->delete();
+
+        $furni->getOwner()->refreshHand();
+
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Furni removed!']);
     }
 }

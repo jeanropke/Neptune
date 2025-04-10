@@ -107,6 +107,15 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="10%" valign="middle">
+                                        <b>Furnis</b>
+                                        <div class="graytext"><a href="{{ route('housekeeping.users.furniture', $user->id) }}">See user furnis</a></div>
+                                    </td>
+                                    <td class="tablerow2" width="40%" valign="middle">
+                                        {{ $user->getInventory()->count() }} furnis
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="10%" valign="middle">
                                         <b>Badges</b>
                                         <div class="graytext"><a href="{{ route('housekeeping.users.badges', $user->id) }}">See user badges</a></div>
                                     </td>

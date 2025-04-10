@@ -156,6 +156,11 @@ class User extends Authenticatable
             rcon("refresh_hand", ['userId' => $this->id]);
     }
 
+    public function getInventory()
+    {
+        return Furni::where('user_id', $this->id)->get();
+    }
+
     public function getLatestIP()
     {
         $ip = UserIPLog::where('user_id', $this->id)->orderBy('created_at', 'DESC')->first();
@@ -163,6 +168,12 @@ class User extends Authenticatable
             return $ip->ip_address;
 
         return '0.0.0.0';
+    }
+
+    public function refreshHand()
+    {
+        if (is_hotel_online())
+            rcon("refresh_hand", ['userId' => $this->id]);
     }
 
     /**
@@ -200,7 +211,6 @@ class User extends Authenticatable
 
         return true;
     }
-
 
     /**
      * Get user rooms

@@ -500,6 +500,10 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/mass', [UserController::class, 'toolsMass'])->name('housekeeping.users.tools.mass');
             Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass');
+
+            Route::get('/furniture/{id}', [UserController::class, 'toolsFurniture'])->name('housekeeping.users.furniture');
+            Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture');
+            Route::post('/furniture/remove', [UserController::class, 'toolsFurnitureRemove'])->name('housekeeping.users.furniture.remove');
         });
 
         Route::prefix('editors')->group(function() {
