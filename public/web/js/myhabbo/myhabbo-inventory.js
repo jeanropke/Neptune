@@ -17,8 +17,9 @@ var WebInventory = {
     open: function (e, type) {
         Event.stop(e);
         showOverlay();
-        WebInventory._createInventoryDialog("dialog.title." + type);
-        WebInventory._loadInventory(type);
+        WebInventory.selectedCategory = type;
+        WebInventory._createInventoryDialog("dialog.title." + WebInventory.selectedCategory);
+        WebInventory._loadInventory();
     },
     _createInventoryDialog: function (title) {
         WebInventory.dialog = createDialog("stickers_dialog", title, "9003", -1500, 0, WebInventory.close);
@@ -26,10 +27,9 @@ var WebInventory = {
         setAsWaitDialog(WebInventory.dialog);
         moveDialogToCenter(WebInventory.dialog);
     },
-    _loadInventory: function (type) {
-        WebInventory.selectedCategory = type;
-        new Ajax.Request(habboReqPath + "/myhabbo/inventory/" + type, {
-            method: "post", parameters: WebInventory.noteParams, onComplete: function (req, json) {
+    _loadInventory: function () {
+        new Ajax.Request(habboReqPath + "/myhabbo/inventory/" + WebInventory.selectedCategory, {
+            method: "post", onComplete: function (req, json) {
                 setDialogBody(WebInventory.dialog, req.responseText);
                 req.responseText.evalScripts();
 
@@ -174,10 +174,27 @@ var WebInventory = {
 var WebStore = {
     open: function (e) {
         e.preventDefault();
-        var dialog = showInfoDialog("open-web-store", "Web Store not implemented yet", "Ok", WebStore.close);
-        makeDialogDraggable(dialog);
-        moveOverlay(9004);
-        dialog.style.zIndex = 9005;
+        WebStore._loadInventory();
+    },
+    _loadInventory: function () {
+        new Ajax.Request(habboReqPath + "/myhabbo/store/" + WebInventory.selectedCategory, {
+            method: "post", onComplete: function (req, json) {
+                setDialogBody(WebInventory.dialog, req.responseText);
+                req.responseText.evalScripts();
+
+                if ($("inventory-close")) { Event.observe($("inventory-close"), "click", WebInventory.close); }
+                if ($("load-inventory")) { Event.observe($("load-inventory"), "click", WebStore._loadInventory()) }
+
+                var el = $A($("inventory-item-list").getElementsByTagName("li")).first();
+                if (el) {
+                    WebInventory._selectItem(el);
+                    var temp = el.id.split("-");
+                    WebInventory._loadPreview(temp.last(), WebInventory.selectedCategory, temp[2] == "p");
+                }
+
+                WebInventory._setEventHandlers();
+            }
+        });
     },
     close: function (e) {
         Event.stop(e);

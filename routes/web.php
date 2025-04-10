@@ -15,6 +15,7 @@ use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\NoteEditorController;
 use App\Http\Controllers\Home\WebInventoryController;
+use App\Http\Controllers\Home\WebStoreController;
 use App\Http\Controllers\Home\WidgetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
@@ -229,6 +230,8 @@ Route::middleware('user')->group(function () {
 
         Route::post('/sticker/place_sticker', [WebInventoryController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
         Route::post('/sticker/remove_sticker', [WebInventoryController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
+
+        Route::post('/store/{type}', [WebStoreController::class, 'loadStore'])->name('myhabbo.store.load');
 
         //Old stuff
         Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
