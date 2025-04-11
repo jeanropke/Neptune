@@ -36,63 +36,62 @@
                     <br />
                     <div class="tableborder">
                         <div class="tableheaderalt">Publicrooms editor</div>
-                    </div>
-                    <table cellpadding="4" cellspacing="0" width="100%">
-                        <tr>
-                            <td class="tablesubheader" width="6%" align="center">Room ID</td>
-                            <td class="tablesubheader" width="20%" align="center">Roomname</td>
-                            <td class="tablesubheader" width="10%" align="center">Category</td>
-                            <td class="tablesubheader" width="20%" align="center">CCTs</td>
-                            <td class="tablesubheader" width="34%" align="center">Description</td>
-                            <td class="tablesubheader" width="5%" align="center">Edit</td>
-                            <td class="tablesubheader" width="5%" align="center">Delete</td>
-                        </tr>
-                        @forelse ($rooms as $room)
+                        <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
-                                <td class="tablerow1" align="center">
-                                    {{ $room->id }}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {!! $room->name ?? '<b><i>No room name</i></b>' !!}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {{ $room->category }}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {{ $room->ccts }}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    {!! $room->description ? $room->description : '<b><i>No room description</i></b>' !!}
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    <a href="{{ route('housekeeping.editor.publicroom.edit', $room->id) }}">
-                                        <img src=" {{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit publicroom">
-                                    </a>
-                                </td>
-                                <td class="tablerow2" align="center">
-                                    <a href="#" class="delete-publicroom" data-id="{{ $room->id }}">
-                                        <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
-                                    </a>
-                                </td>
+                                <td class="tablesubheader" width="6%" align="center">Room ID</td>
+                                <td class="tablesubheader" width="20%" align="center">Roomname</td>
+                                <td class="tablesubheader" width="10%" align="center">Category</td>
+                                <td class="tablesubheader" width="20%" align="center">CCTs</td>
+                                <td class="tablesubheader" width="34%" align="center">Description</td>
+                                <td class="tablesubheader" width="5%" align="center">Edit</td>
+                                <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td class="tablerow1" align="center" colspan="6">
-                                    No publicrooms found
-                                </td>
-                            </tr>
-                        @endforelse
-                    </table>
-                    <div class="tablefooter" align="center">
-                        <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.editor.publicroom.add') }}">Add New Publicroom</a></span>
+                            @forelse ($rooms as $room)
+                                <tr>
+                                    <td class="tablerow1" align="center">
+                                        {{ $room->id }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {!! $room->name ?? '<b><i>No room name</i></b>' !!}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $room->category }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $room->ccts }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {!! $room->description ? $room->description : '<b><i>No room description</i></b>' !!}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        <a href="{{ route('housekeeping.editor.publicroom.edit', $room->id) }}">
+                                            <img src=" {{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit publicroom">
+                                        </a>
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        <a href="#" class="delete-publicroom" data-id="{{ $room->id }}">
+                                            <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="tablerow1" align="center" colspan="6">
+                                        No publicrooms found
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </table>
+                        <div class="tablefooter" align="center">
+                            <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.editor.publicroom.add') }}">Add New Publicroom</a></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <script>
-                    GenericManager.initialise('.delete-publicroom', '<p>Are you sure you want to delete this publicroom? This cannot be undone!</p>',
-                        '{{ route('housekeeping.editor.publicroom.delete') }}');
-                </script>
-                <div style="text-align: center; vertical-align: middle;">{!! $rooms->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <script>
+                        GenericManager.initialise('.delete-publicroom', '<p>Are you sure you want to delete this publicroom? This cannot be undone!</p>',
+                            '{{ route('housekeeping.editor.publicroom.delete') }}');
+                    </script>
+                    <div style="text-align: center; vertical-align: middle;">{!! $rooms->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>
