@@ -502,7 +502,7 @@ Route::middleware('admin')->group(function () {
             Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass');
 
             Route::get('/furniture/{id}', [UserController::class, 'toolsFurniture'])->name('housekeeping.users.furniture');
-            Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture');
+            Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture.give');
             Route::post('/furniture/remove', [UserController::class, 'toolsFurnitureRemove'])->name('housekeeping.users.furniture.remove');
         });
 

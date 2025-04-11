@@ -18,7 +18,7 @@
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
-                    <form action="{{ route('housekeeping.users.furniture') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                    <form action="{{ route('housekeeping.users.furniture.give') }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="tableborder">
                             <div class="tableheaderalt">Furniture Manager</div>
