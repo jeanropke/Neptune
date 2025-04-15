@@ -903,7 +903,7 @@ function showGroupPurchaseResult(productCode, name, description, dialog_title) {
     new Ajax.Request(
         habboReqPath + "/grouppurchase/purchase_ajax", {
             method: "post",
-            parameters: "product=" + encodeURIComponent(productCode) + "&name=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(description) + "&webwork.token.name=webwork.token&webwork.token" + "=" + document.getElementsByName("webwork.token").item(0).value,
+            parameters: "product=" + encodeURIComponent(productCode) + "&name=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(description),
             onComplete: function(req, json) {
                 if ($("group_purchase_form")) { Element.remove("group_purchase_form"); }
                 if ($("group_purchase_confirmation")) Element.remove("group_purchase_confirmation");

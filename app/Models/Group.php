@@ -9,20 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    use HasFactory;
-
-    protected $table = 'cms_groups';
+    protected $table = 'groups_details';
 
     protected $fillable = [
-        'user_id', 'name', 'description', 'badge', 'url', 'date_created'
+        'owner_id', 'name', 'description', 'badge', 'group_type', 'forum_type', 'forum_premission', 'alias', 'date_created', 'updated_at'
     ];
-
-    public $timestamps = false;
 
     public function getUrl()
     {
-        if($this->url)
-            return $this->url;
+        if($this->alias)
+            return $this->alias;
 
         return "{$this->id}/id";
     }
@@ -39,12 +35,12 @@ class Group extends Model
 
     public function getOwner()
     {
-        return User::find($this->user_id);
+        return User::find($this->owner_id);
     }
 
     public function getAdmins()
     {
-        return GroupMember::where([['level_id', '<=', 2]])->get();
+        return GroupMember::where([['level_id', '=', 2]])->get();
     }
 
     public function getMembers()

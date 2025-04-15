@@ -39,14 +39,14 @@ class HotelController extends Controller
 
     public function groups()
     {
-        $guilds = [];
+        $groups = [];
         foreach(GroupMember::groupBy('group_id')->select('group_id', DB::raw('COUNT(group_id) AS total'))->take(10)->orderBy('total', 'DESC')->get() as $guild) {
-            array_push($guilds, Group::find($guild->group_id));
+            array_push($groups, Group::find($guild->group_id));
         }
 
         return view('hotel.groups')->with([
-            'guilds'      => $guilds,
-            'latest'      => Group::take(10)->orderBy('date_created', 'desc')->get()
+            'groups'      => $groups,
+            'latest'      => Group::take(10)->orderBy('created_at', 'desc')->get()
 
         ]);
     }

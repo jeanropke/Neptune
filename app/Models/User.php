@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'email', 'password', 'motto', 'console_motto', 'credits', 'last_online', 'sso_ticket', 'created_at', 'birthday',
         'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active', 'battleball_points', 'snowstorm_points',
-        'club_subscribed', 'club_expiration', 'club_gift_due'
+        'club_subscribed', 'club_expiration', 'club_gift_due', 'favourite_group'
     ];
 
     protected $hidden = [
@@ -63,10 +63,19 @@ class User extends Authenticatable
 
     public function setMotto($motto)
     {
-        $this->motto   = $motto;
+        $this->motto = $motto;
         $this->save();
         if (is_hotel_online())
             rcon("refresh_looks", ['userId' => $this->id]);
+    }
+
+    public function setFavouriteGroup($id)
+    {
+        $this->favourite_group = $id;
+        $this->save();
+
+        if (is_hotel_online())
+            rcon("refresh_group_perms", ['userId' => $this->id]);
     }
 
     /**

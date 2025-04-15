@@ -10,6 +10,7 @@ class IndexController extends Controller
 
     public function home()
     {
+        user()->setFavouriteGroup(1);
         return view('index');
     }
 

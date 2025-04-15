@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class GroupMember extends Model
 {
-    protected $table = 'cms_groups_members';
+    protected $table = 'groups_memberships';
 
     protected $fillable = [
-        'group_id', 'user_id', 'level_id', 'member_since'
+        'group_id', 'user_id', 'member_rank', 'is_pending', 'created_at', 'updated_at'
     ];
 
     public $timestamps = false;

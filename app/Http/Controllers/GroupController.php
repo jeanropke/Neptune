@@ -115,22 +115,13 @@ class GroupController extends Controller
             return view('habblet.ajax.grouppurchase.purchase_result')->with('message', 'The Group name is too long');
 
         $group = Group::create([
-            'user_id'       => user()->id,
+            'owner_id'      => user()->id,
             'name'          => $request->name,
-            'description'   => $request->description,
-            'badge'         => 'b0503Xs09114s05013s05015',
-            'date_created'  => time()
-        ]);
-
-        GroupMember::insert([
-            'guild_id'      => $group->id,
-            'user_id'       => user()->id,
-            'level_id'      => 1,
-            'member_since'  => time()
+            'description'   => $request->description
         ]);
 
         return view('habblet.ajax.grouppurchase.purchase_ajax')->with([
-            'group' => Group::find(1)
+            'group' => $group
         ]);
     }
     #endregion

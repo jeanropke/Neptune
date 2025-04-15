@@ -70,7 +70,7 @@
                         <div class="v3box-body">
 
                             <ul class="groups-toplist toplist">
-                                @foreach($guilds as $key => $group)
+                                @foreach($groups as $key => $group)
                                     <li class="{!! round(($key+1)/2) % 2 ? 'even' : 'odd' !!}" style="background-image: url({{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.gif)">
                                         <div class="toplist-item">
                                             <div class="group-index">{{ $key+1 }}.</div>
@@ -79,7 +79,7 @@
                                                     {{ $group->name }}
                                                 </a>
                                             </div>
-                                            <p>Group created: <strong>{{ \Carbon\Carbon::createFromTimeStamp($group->date_created)->format('M d, Y') }}</strong></p>
+                                            <p>Group created: <strong>{{ $group->created_at->format('M d, Y') }}</strong></p>
                                         </div>
                                     </li>
                                 @endforeach
@@ -104,7 +104,7 @@
                                                     {{ $group->name }}
                                                 </a>
                                             </div>
-                                            <p>Group created: <strong>{{ \Carbon\Carbon::createFromTimeStamp($group->date_created)->format('M d, Y') }}</strong></p>
+                                            <p>Group created: <strong>{{ $group->created_at->format('M d, Y') }}</strong></p>
                                         </div>
                                     </li>
                                 @endforeach
