@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Group\GroupTopic;
 use App\Models\Home\HomeItem;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
@@ -12,12 +11,12 @@ class Group extends Model
     protected $table = 'groups_details';
 
     protected $fillable = [
-        'owner_id', 'name', 'description', 'badge', 'group_type', 'forum_type', 'forum_premission', 'alias', 'date_created', 'updated_at'
+        'owner_id', 'name', 'description', 'badge', 'group_type', 'forum_type', 'forum_premission', 'alias'
     ];
 
     public function getUrl()
     {
-        if($this->alias)
+        if ($this->alias)
             return $this->alias;
 
         return "{$this->id}/id";
@@ -47,5 +46,4 @@ class Group extends Model
     {
         return GroupMember::where([['user_id', '=', $this->id]])->get();
     }
-
 }
