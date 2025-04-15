@@ -12,16 +12,7 @@ class Report extends Model
     protected $table = 'cms_reports';
 
     protected $fillable = [
-        'id',
-        'reported_by',
-        'object_id',
-        'type',
-        'message',
-        'author_id',
-        'picked_by',
-        'closed',
-        'created_at',
-        'updated_at'
+        'reported_by', 'object_id', 'type', 'message', 'author_id', 'picked_by', 'closed', 'created_at', 'updated_at'
     ];
 
     public function getUsername()

@@ -9,7 +9,7 @@ class StaffLog extends Model
     protected $table = 'cms_stafflogs';
 
     protected $fillable = [
-        'id', 'user_id', 'page', 'message', 'ip_address'
+       'user_id', 'page', 'message', 'ip_address'
     ];
 
     public function getUsername()

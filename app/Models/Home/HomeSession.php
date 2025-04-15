@@ -15,6 +15,4 @@ class HomeSession extends Model
     public $timestamps = false;
 
     protected $primaryKey = 'user_id';
-
-
 }

@@ -14,7 +14,7 @@ class Group extends Model
     protected $table = 'cms_groups';
 
     protected $fillable = [
-        'id', 'user_id', 'name', 'description', 'badge', 'url', 'date_created'
+        'user_id', 'name', 'description', 'badge', 'url', 'date_created'
     ];
 
     public $timestamps = false;

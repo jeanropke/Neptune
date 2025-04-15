@@ -20,28 +20,9 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username',
-        'email',
-        'password',
-        'motto',
-        'console_motto',
-        'credits',
-        'last_online',
-        'sso_ticket',
-        'created_at',
-        'birthday',
-        'sex',
-        'figure',
-        'rank',
-        'allow_stalking',
-        'allow_friend_requests',
-        'badge',
-        'badge_active',
-        'battleball_points',
-        'snowstorm_points',
-        'club_subscribed',
-        'club_expiration',
-        'club_gift_due'
+        'username', 'email', 'password', 'motto', 'console_motto', 'credits', 'last_online', 'sso_ticket', 'created_at', 'birthday',
+        'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active', 'battleball_points', 'snowstorm_points',
+        'club_subscribed', 'club_expiration', 'club_gift_due'
     ];
 
     protected $hidden = [

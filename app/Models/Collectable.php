@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Catalogue\CatalogueItem;
-use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 

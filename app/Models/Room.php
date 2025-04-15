@@ -9,7 +9,7 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'id', 'owner_id', 'category', 'name', 'description', 'model', 'ccts', 'wallpaper', 'floor', 'showname', 'superusers', 'accesstype', 'password', 'visitors_now', 'visitors_max', 'rating', 'is_hidden'
+        'owner_id', 'category', 'name', 'description', 'model', 'ccts', 'wallpaper', 'floor', 'showname', 'superusers', 'accesstype', 'password', 'visitors_now', 'visitors_max', 'rating', 'is_hidden'
     ];
 
     public $timestamps = false;

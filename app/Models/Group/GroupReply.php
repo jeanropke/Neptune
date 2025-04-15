@@ -10,7 +10,7 @@ class GroupReply extends Model
     protected $table = 'cms_groups_replies';
 
     protected $fillable = [
-        'id', 'topic_id', 'user_id', 'message', 'is_edited', 'is_deleted', 'hidden_by_staff', 'created_at', 'updated_at'
+        'topic_id', 'user_id', 'message', 'is_edited', 'is_deleted', 'hidden_by_staff', 'created_at', 'updated_at'
     ];
 
     protected $casts = [

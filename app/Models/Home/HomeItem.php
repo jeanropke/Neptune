@@ -6,20 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class HomeItem extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'cms_homes';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'skin', 'home_id', 'group_id', 'is_deleted'
+        'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'skin', 'home_id', 'group_id', 'is_deleted'
     ];
 
     public $timestamps = false;

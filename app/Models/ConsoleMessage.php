@@ -9,7 +9,7 @@ class ConsoleMessage extends Model
     protected $table = 'messenger_messages';
 
     protected $fillable = [
-        'id', 'receiver_id', 'sender_id', 'unread', 'body', 'date'
+        'receiver_id', 'sender_id', 'unread', 'body', 'date'
     ];
 
     public $timestamps = false;

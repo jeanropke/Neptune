@@ -6,20 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoxPage extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'cms_boxes_pages';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'box_id', 'page', 'column', 'color'
+        'box_id', 'page', 'column', 'color'
     ];
 
     public $timestamps = false;

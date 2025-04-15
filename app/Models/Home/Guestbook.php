@@ -9,7 +9,7 @@ class Guestbook extends Model
     protected $table = 'cms_homes_guestbook';
 
     protected $fillable = [
-        'id', 'user_id', 'message', 'widget_id', 'is_deleted', 'created_at', 'updated_at'
+        'user_id', 'message', 'widget_id', 'is_deleted', 'created_at', 'updated_at'
     ];
 
     protected $casts = [

@@ -9,7 +9,7 @@ class CatalogueItem extends Model
     protected $table = 'catalogue_items';
 
     protected $fillable = [
-        'id', 'page_id', 'sale_code', 'order_id', 'price', 'is_hidden', 'amount', 'definition_id',
+        'page_id', 'sale_code', 'order_id', 'price', 'is_hidden', 'amount', 'definition_id',
         'item_specialspriteid', 'name', 'description', 'is_package', 'package_name', 'package_description'
     ];
 

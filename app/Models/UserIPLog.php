@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserIPLog extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users_ip_logs';
 
     protected $fillable = [

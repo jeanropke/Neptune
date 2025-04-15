@@ -9,11 +9,7 @@ class RoomChatLog extends Model
     protected $table = 'room_chatlogs';
 
     protected $fillable = [
-        'user_id',
-        'room_id',
-        'timestamp',
-        'chat_type',
-        'message'
+        'user_id', 'room_id', 'timestamp', 'chat_type', 'message'
     ];
 
     public function getUsername()

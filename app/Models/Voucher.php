@@ -9,7 +9,9 @@ class Voucher extends Model
 {
     protected $table = 'vouchers';
 
-    protected $fillable = ['voucher_code', 'credits', 'expiry_date', 'is_single_use'];
+    protected $fillable = [
+        'voucher_code', 'credits', 'expiry_date', 'is_single_use'
+    ];
 
     public $primaryKey = false;
 

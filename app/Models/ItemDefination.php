@@ -9,7 +9,7 @@ class ItemDefination extends Model
     protected $table = 'items_definitions';
 
     protected $fillable = [
-        'id ', 'sprite', 'sprite_id', 'name', 'description', 'colour', 'length', 'width', 'top_height', 'max_status', 'behaviour', 'interactor', 'is_tradable', 'is_recyclable', 'drink_ids'
+        'sprite', 'sprite_id', 'name', 'description', 'colour', 'length', 'width', 'top_height', 'max_status', 'behaviour', 'interactor', 'is_tradable', 'is_recyclable', 'drink_ids'
     ];
 
     public $timestamps = false;

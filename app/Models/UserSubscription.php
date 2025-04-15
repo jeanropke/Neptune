@@ -6,20 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSubscription extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'id', 'club_subscribed', 'club_expiration'
+        'club_subscribed', 'club_expiration'
     ];
 
     public $timestamps = false;

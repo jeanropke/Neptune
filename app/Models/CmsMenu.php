@@ -9,7 +9,7 @@ class CmsMenu extends Model
     protected $table = 'cms_menu';
 
     protected $fillable = [
-        'id', 'url', 'caption', 'icon', 'parent_id', 'order_num', 'min_rank'
+        'url', 'caption', 'icon', 'parent_id', 'order_num', 'min_rank'
     ];
 
     public $timestamps = false;

@@ -11,7 +11,7 @@ class GroupTopic extends Model
     protected $table = 'cms_groups_topics';
 
     protected $fillable = [
-        'id', 'group_id', 'user_id', 'subject', 'views', 'replies', 'latest_comment', 'created_at', 'updated_at'
+        'group_id', 'user_id', 'subject', 'views', 'replies', 'latest_comment', 'created_at', 'updated_at'
     ];
 
     protected $casts = [

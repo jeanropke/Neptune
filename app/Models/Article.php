@@ -11,7 +11,7 @@ class Article extends Model
     protected $table = 'cms_articles';
 
     protected $fillable = [
-        'id', 'url', 'image', 'title', 'short_text', 'long_text', 'author_id', 'author_override', 'publish_date', 'is_deleted', 'created_at', 'updated_at'
+        'url', 'image', 'title', 'short_text', 'long_text', 'author_id', 'author_override', 'publish_date', 'is_deleted', 'created_at', 'updated_at'
     ];
 
     protected $casts = [

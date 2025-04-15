@@ -9,7 +9,9 @@ class ItemOffer extends Model
 {
     protected $table = 'cms_items_offers';
 
-    protected $fillable = ['id', 'salecode', 'name', 'items', 'price', 'enabled'];
+    protected $fillable = [
+        'salecode', 'name', 'items', 'price', 'enabled'
+    ];
 
     public $timestamps = false;
 
