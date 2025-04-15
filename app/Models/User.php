@@ -144,16 +144,13 @@ class User extends Authenticatable
             rcon("refresh_hand", ['userId' => $this->id]);
     }
 
-    public function giveItem($id, $custom, $refreshHand = true)
+    public function giveItem($id, $custom)
     {
         Furni::create([
             'user_id'       => $this->id,
             'definition_id' => $id,
             'custom_data'   => $custom
         ]);
-
-        if (is_hotel_online() && $refreshHand)
-            rcon("refresh_hand", ['userId' => $this->id]);
     }
 
     public function getInventory()

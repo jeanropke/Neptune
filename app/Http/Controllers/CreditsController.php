@@ -107,7 +107,8 @@ class CreditsController extends Controller
             user()->updateCredits(-$collectable->getPrice());
 
             $cataItem = $collectable->getCatalogueItem();
-            user()->giveItem($cataItem->definition_id, $cataItem->item_specialspriteid, true);
+            user()->giveItem($cataItem->definition_id, $cataItem->item_specialspriteid);
+            user()->refreshHand();
 
             return view('habblet.ajax.collectibles_success')->with([
                 'collectable'   => $collectable
@@ -145,6 +146,8 @@ class CreditsController extends Controller
                 $itemsRedeemed[$item->catalogue_sale_code] = 1;
             }
         }
+
+        user()->refreshHand();
 
         $itemsRedeemedString = "";
         foreach ($itemsRedeemed as $key => $value) {
@@ -203,11 +206,11 @@ class CreditsController extends Controller
             return view('credits.ajax.purchase_result')->with(['message' => "Unable to purchase this pack.", 'status' => 'error']);
 
         $items = $pack->getItems();
-        $lastItem = $items->last();
         foreach ($items as $item) {
-            user()->giveItem($item->definition_id, $item->item_specialspriteid, $item === $lastItem);
+            user()->giveItem($item->definition_id, $item->item_specialspriteid);
         }
         user()->updateCredits(-$pack->price);
+        user()->refreshHand();
 
         return view('credits.ajax.purchase_result')->with(['message' => 'Purchase successful! Your items are on their way!']);
     }
