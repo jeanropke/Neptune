@@ -57,11 +57,11 @@
                                         alt="" class="tabmenu-image myimage" id="myimage"></td>
                                 <td class="post-list-creator-badge">
                                     <div class="group-badges-container">
-                                        @if(user()->getFavoriteGroup())
-                                        <img src="{{ cms_config('site.groupbadge.url') }}{{ user()->getFavoriteGroup()->badge }}.gif"><br>
+                                        @if($author->getFavoriteGroup())
+                                        <img src="{{ cms_config('site.groupbadge.url') }}{{ $author->getFavoriteGroup()->badge }}.gif"><br>
                                         @endif
-                                        @if(user()->badge)
-                                        <img src="{{ cms_config('site.badges.url') }}/{{ user()->badge }}.gif">
+                                        @if($author->badge)
+                                        <img src="{{ cms_config('site.badges.url') }}/{{ $author->badge }}.gif">
                                         @endif
                                     </div>
                                 </td>
@@ -93,11 +93,13 @@
                                 <td valign="top">
                                     <div class="post-list-report-element">
                                         @if(!$reply->hidden_by_staff)
+                                            @auth
                                             @if ($author->id == user()->id)
                                             <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
                                             @else
                                             <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
                                             @endif
+                                            @endauth
                                         @endif
                                     </div>
                                     @if($reply->hidden_by_staff)
