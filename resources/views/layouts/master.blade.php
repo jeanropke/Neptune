@@ -58,13 +58,6 @@
         <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet" />
 
-        {{-- <script type="text/javascript" src="{{ url('/') }}/web/js/visual.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/libs.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/common.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/homeview.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/homeauth.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo.js"></script> --}}
-
         <script type="text/javascript" src="{{ url('/') }}/web/js/inheritance.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/effects.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/dragdrop.js"></script>
