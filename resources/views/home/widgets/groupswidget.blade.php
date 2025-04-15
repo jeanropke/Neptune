@@ -33,15 +33,15 @@
                                 </h4>
                                 <p>
                                     Group created: <br>
-                                    @if ($owner->getFavoriteGroup()->id == $group->id)
+                                    @if ($owner->getFavoriteGroup() && $owner->getFavoriteGroup()->id == $group->id)
                                         <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon"
                                             alt="Favorite" title="Favorite">
                                     @endif
-                                    @if ($owner->id == $group->user_id)
+                                    @if ($owner->id == $group->owner_id)
                                         <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner"
                                             title="Owner">
                                     @endif
-                                    <b>{{ \Carbon\Carbon::createFromTimeStamp($group->date_created)->format('M d, Y') }}</b>
+                                    <b>{{ \Carbon\Carbon::parse($group->created_at)->format('M d, Y') }}</b>
                                 </p>
                                 <div class="clear"></div>
                             </li>
