@@ -256,36 +256,6 @@ class User extends Authenticatable
         return $this->last_online > time();
     }
 
-    public function getCurrencies()
-    {
-        return UserCurrency::where('user_id', $this->id);
-    }
-
-    public function getCurrency($type)
-    {
-        $currency = $this->getCurrencies()->where('type', $type)->first();
-
-        if (!empty(json_decode($currency))) {
-            return json_decode($currency)[0]->amount;
-        }
-        return 0;
-    }
-
-    public function setPoints($amount, $type)
-    {
-
-        $currency = UserCurrency::where([['user_id', $this->id], ['type', $type]])->first();
-        if ($currency == null) {
-            UserCurrency::create([
-                'user_id'   => $this->id,
-                'amount'    => $amount,
-                'type'      => $type
-            ]);
-        } else {
-            $currency->update(['amount' => $currency->amount + $amount]);
-        }
-    }
-
     /**
      * Check if user has permission
      *
