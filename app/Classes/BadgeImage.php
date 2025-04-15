@@ -57,7 +57,7 @@ class BadgeImage
         $badgeImage = imageCreateTrueColor($this->rectWidth, $this->rectHeight);
         imageAlphaBlending($badgeImage, false);
         imageSaveAlpha($badgeImage, true);
-        $rectMask = imageColorAllocateAlpha($badgeImage, 255, 0, 255, 127);
+        $rectMask = imageColorAllocateAlpha($badgeImage, 255, 255, 255, 127);
         imageFill($badgeImage, 0, 0, $rectMask);
 
         imageAlphaBlending($badgeImage, true);
@@ -88,7 +88,7 @@ class BadgeImage
         ob_start();
         if ($format == "gif") {
             $this->format = "gif";
-            $rectMask = imageColorAllocateAlpha($badgeImage, 255, 0, 255, 127);
+            $rectMask = imageColorAllocateAlpha($badgeImage, 255, 255, 255, 127);
             imageColorTransparent($badgeImage, $rectMask);
             imageGIF($badgeImage);
         } elseif ($format == "png") {
