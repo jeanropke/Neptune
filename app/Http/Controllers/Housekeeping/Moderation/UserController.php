@@ -242,4 +242,22 @@ class UserController extends Controller
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Furni removed!']);
     }
+
+    public function toolsEmptyHand(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_users'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $user = User::find($request->id);
+
+        if (!$user)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This user does not exist!']);
+
+        create_staff_log('users.empty.hand', $request);
+
+        Furni::where([['user_id', $request->id], ['room_id', '0']])->delete();
+        $user->refreshHand();
+
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Hand has been cleared!']);
+    }
 }

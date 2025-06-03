@@ -56,16 +56,25 @@
                             <div id="furni-picker-listing">
                                 @foreach ($user->getInventory() as $furni)
                                     <div class="slot remove-furni" data-id="{{ $furni->id }}" style="height: 56px; line-height: 9;">
-                                        <div title="{{ $furni->getSprite() }}" class="image" style="background: url({{ cms_config('furni.small.url') }}/{{ $furni->getSprite() }}_icon.png) center no-repeat">
+                                        <div title="{{ $furni->getSprite() }}" class="image"
+                                            style="background: url({{ cms_config('furni.small.url') }}/{{ $furni->getSprite() }}_icon.png) center no-repeat">
                                         </div>
                                     </div>
                                 @endforeach
                                 <div class="clear"></div>
                             </div>
+                            <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
+                                <tr>
+                                    <td align="center" class="tablesubheader" colspan="2">
+                                        <input type="submit" name="submit" value="Empty hand" class="realbutton empty-hand" accesskey="s" data-id="{{ $user->id }}">
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <script>
                             FurniPicker.initialise();
                             GenericManager.initialise('.remove-furni', '<p>Are you sure you want to remove this furni? This cannot be undone!</p>', '{{ route('housekeeping.users.furniture.remove') }}');
+                            GenericManager.initialise('.empty-hand', '<p>Are you sure you want to empty {{ $user->username }} hand? This cannot be undone!</p>', '{{ route('housekeeping.users.empty.hand') }}');
                         </script>
                     @endif
                 </div>
