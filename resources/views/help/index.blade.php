@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '5', 'submenuId' => '21', 'headline' => true])
+@extends('layouts.master', ['menuId' => '5'])
 
 @section('title', 'Help & Safety Home')
 

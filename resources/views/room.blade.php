@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => 'article', 'submenuId' => 'article', 'headline' => true])
+@extends('layouts.master', ['menuId' => 'article'])
 
 @section('title', $room->name)
 

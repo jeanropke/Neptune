@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '2', 'submenuId' => 'pets_taking_care', 'headline' => true])
+@extends('layouts.master', ['menuId' => '2'])
 
 @section('title', 'Taking Care of Your Pet')
 

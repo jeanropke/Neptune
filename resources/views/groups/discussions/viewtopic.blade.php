@@ -1,4 +1,4 @@
-@extends('layouts.master', ['body' => 'viewmode', 'menuId' => 'home_group', 'submenuId' => 'groups', 'headline' => false])
+@extends('layouts.master', ['body' => 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
 
 @section('title', "Group Discussions: {$group->name} ~ {$topic->subject}")
 

@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '4', 'submenuId' => 'credits_furniture', 'headline' => true])
+@extends('layouts.master', ['menuId' => '4'])
 
 @section('title', 'Furni Catalog')
 

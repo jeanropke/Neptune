@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '2', 'submenuId' => 'hotel_welcome_started', 'headline' => true])
+@extends('layouts.master', ['menuId' => '2'])
 
 @section('title', 'How To Get Started')
 

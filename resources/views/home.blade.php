@@ -1,4 +1,4 @@
-@extends('layouts.master', ['body' => $isEdit ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'submenuId' => 'home', 'headline' => false])
+@extends('layouts.master', ['body' => $isEdit ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
 
 @section('title', 'Habbo Home: ' . $owner->username)
 

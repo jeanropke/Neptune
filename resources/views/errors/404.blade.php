@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '404', 'submenuId' => '404', 'headline' => true])
+@extends('layouts.master', ['menuId' => '404'])
 
 @section('title', 'Page not found')
 

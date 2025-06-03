@@ -2,6 +2,7 @@
 
 use App\Models\BoxPage;
 use App\Models\Catalogue\CatalogueItem;
+use App\Models\CmsMenu;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
 use App\Models\StaffLog;
@@ -146,6 +147,11 @@ function create_staff_log($page, $request)
         'message'       => $message,
         'ip_address'    => request()->ip()
     ]);
+}
+
+function cms_menu($parent = -1)
+{
+    return CmsMenu::where([['parent_id', $parent], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get();
 }
 
 function rcon($key, $data = [])

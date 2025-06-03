@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => '2', 'submenuId' => '6', 'headline' => true])
+@extends('layouts.master', ['menuId' => '2'])
 
 @section('title', 'Welcome to ' . cms_config('hotel.name.full'))
 

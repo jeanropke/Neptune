@@ -72,7 +72,7 @@
         <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-noteeditor.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-inventory.js"></script>
 
-        @if ($submenuId == 'groups')
+        @if ($menuId == 'home_group')
             <link href="{{ url('/') }}/web/styles/grouptabs.css" type="text/css" rel="stylesheet" />
         @endif
         <style type="text/css">
@@ -89,14 +89,14 @@
         @endif
     @endif
 
-    @if ($submenuId == 23)
+    @if (request()->path() == 'collectibles')
         <link href="{{ url('/') }}/web/styles/collectibles.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="{{ url('/') }}/web/js/collectibles.js"></script>
     @endif
 
     <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
 </head>
-
+{{ request()->path() }}
 <style>
     body {
         background-image: url({{ cms_config('site.style.background') }});
@@ -216,8 +216,8 @@
                 <div id="mainmenu">
                     <ul>
                         <li id="leftspacer">&nbsp;</li>
-                        @foreach (\App\Models\CmsMenu::where([['parent_id', -1], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get() as $item)
-                            <li {{ $item->id == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
+                        @foreach (cms_menu() as $item)
+                            <li {{ $item->url == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
                                 <span class="left"></span>
                                 <a href="{{ url('/') }}/{{ $item->url }}"><img src="{{ url('/') }}/web/images/navi_icons/{{ $item->icon }}.gif"
                                         alt="" />
@@ -229,8 +229,8 @@
                 </div>
                 <div id="submenu">
                     <div class="subnav">
-                        @foreach (\App\Models\CmsMenu::where([['parent_id', $menuId], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get() as $subitem)
-                            @if ($subitem->id == $submenuId)
+                        @foreach (cms_menu($menuId) as $subitem)
+                            @if ($subitem->url == request()->path())
                                 {{ $subitem->caption }}
                             @else
                                 <a href="{{ url('/') }}/{{ $subitem->url }}">{{ $subitem->caption }}</a>
@@ -245,10 +245,17 @@
         </div>
 
         <div id="main-content">
-            @if ($headline ?? false)
+            @if ((isset($skipHeadline) && !$skipHeadline) || !isset($skipHeadline))
                 <div id="page-headline">
                     <div id="page-headline-breadcrums">
-                    </div>
+                        {{--<a href="/web/20071012021140/http://www.habbo.com/hotel">New?</a>
+                            »
+                        <a href="/web/20071012021140/http://www.habbo.com/hotel/trax">Trax</a>
+                            »
+                        <a href="/web/20071012021140/http://www.habbo.com/hotel/trax/masterclass">Trax Masterclasses</a>
+                            »
+                    Rock &amp; Heavy--}}
+                        </div>
                     <div id="page-headline-text">@yield('title')</div>
                 </div>
             @endif

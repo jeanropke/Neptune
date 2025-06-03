@@ -1,4 +1,4 @@
-@extends('layouts.master', ['menuId' => 'home_private', 'submenuId' => 'home', 'headline' => false])
+@extends('layouts.master', ['menuId' => 'home_private', 'skipHeadline' => true])
 
 @section('title', 'Home not found')
 
