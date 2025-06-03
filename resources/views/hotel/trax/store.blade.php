@@ -44,10 +44,6 @@
                                                 advantage of our introductory offer of <span style="font-weight: bold;">only 10 Habbo Coins</span>, with a free Traxpack.<span
                                                     style="font-weight: bold;"></span><br>
                                                 <div id="purchase_5" class="purchase-component">
-
-
-
-
                                                     TraxMachine Starter Pack costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                         pages</a><br>
                                                     <span id="purchase_5_purchase"></span>
@@ -59,33 +55,23 @@
                                                         $("purchase_5_purchase").appendChild(purchaseButton);
                                                         Event.observe(purchaseButton, "click", function(e) {
                                                             Event.stop(e);
-                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                            Dialog.appendDialogBody(dialog,
+                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                            appendDialogBody(dialog,
                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                 true);
-                                                            Dialog.moveDialogToCenter(dialog);
-                                                            Overlay.show();
+                                                            moveDialogToCenter(dialog);
+                                                            showOverlay();
                                                             new Ajax.Request(
                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                     method: "post",
                                                                     parameters: "product=" + encodeURIComponent("sound_machine_deal"),
                                                                     onComplete: function(req, json) {
-                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                        setDialogBody(dialog, req.responseText);
                                                                     }
                                                                 }
                                                             );
                                                         }, false);
                                                     </script>
-                                                    <noscript>
-                                                        <form action="{{ url('/') }}/hotel/trax/store#purchase_5" method="post">
-                                                            <input type="hidden" name="purchase_5_task" value="purchase" />
-                                                            <input type="hidden" name="purchase_5_product" value="sound_machine_deal" />
-                                                            <input type="hidden" name="__app_key" value="ayECQXVTtikhEfdDsw" />
-                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                        </form>
-                                                    </noscript>
-
-
                                                 </div>
                                                 <div class="clear"></div>
                                             </div>
@@ -96,7 +82,7 @@
                                     </div>
                                     <div class="v3box blue">
                                         <div class="v3box-top">
-                                            <h3>Traxpacks - Just 5 Coins Each!</h3>
+                                            <h3>Traxpacks - Just 3 Coins Each!</h3>
                                         </div>
                                         <div class="v3box-content">
                                             <div class="v3box-body">
@@ -114,9 +100,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 A collection of rocking party sounds<br><br>
-                                                                <b>Price: </b><span style="font-weight: bold;">5 Credits</span><b>&nbsp;</b><br>
+                                                                <b>Price: </b><span style="font-weight: bold;">3 Credits</span><b>&nbsp;</b><br>
                                                                 <div id="purchase_6" class="purchase-component">
-                                                                    DJ Fuse's Habbo Theme costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    DJ Fuse's Habbo Theme costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_6_purchase"></span>
                                                                     <script language="JavaScript">
@@ -127,18 +113,18 @@
                                                                         $("purchase_6_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_2"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -155,9 +141,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
-                                                                Brazilian rhythms<br><br><b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                Brazilian rhythms<br><br><b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_7" class="purchase-component">
-                                                                    Little Tanga Beach costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Little Tanga Beach costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_7_purchase"></span>
                                                                     <script language="JavaScript">
@@ -168,18 +154,18 @@
                                                                         $("purchase_7_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_18"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -205,9 +191,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 8bit music madness<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_8" class="purchase-component">
-                                                                    Snow Storm Theme costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Snow Storm Theme costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_8_purchase"></span>
                                                                     <script language="JavaScript">
@@ -218,18 +204,18 @@
                                                                         $("purchase_8_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_3"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -246,9 +232,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a><br>
                                                                 For chilling moments<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_9" class="purchase-component">
-                                                                    Sunset Adventure costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Sunset Adventure costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_9_purchase"></span>
                                                                     <script language="JavaScript">
@@ -259,18 +245,18 @@
                                                                         $("purchase_9_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_4"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -296,9 +282,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 The dark side of Habbo<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_10" class="purchase-component">
-                                                                    Dark Skies costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Dark Skies costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_10_purchase"></span>
                                                                     <script language="JavaScript">
@@ -309,18 +295,18 @@
                                                                         $("purchase_10_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_5"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -337,9 +323,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a><br>
                                                                 Background ambient loops<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_11" class="purchase-component">
-                                                                    Ambiences costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Ambiences costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_11_purchase"></span>
                                                                     <script language="JavaScript">
@@ -350,18 +336,18 @@
                                                                         $("purchase_11_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_6"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -387,9 +373,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Sound effects for Furni<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_12" class="purchase-component">
-                                                                    Furni Sounds 1 costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Furni Sounds 1 costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_12_purchase"></span>
                                                                     <script language="JavaScript">
@@ -400,18 +386,18 @@
                                                                         $("purchase_12_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_7"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -429,9 +415,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Mellow electric grooves<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_13" class="purchase-component">
-                                                                    Electronica costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Electronica costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_13_purchase"></span>
                                                                     <script language="JavaScript">
@@ -442,18 +428,18 @@
                                                                         $("purchase_13_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_8"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -479,9 +465,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Mystical ambient soundscapes<br><br>
-                                                                <b>Price: 5 Credits <br></b>
+                                                                <b>Price: 3 Credits <br></b>
                                                                 <div id="purchase_14" class="purchase-component">
-                                                                    Mysto Magica costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Mysto Magica costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_14_purchase"></span>
                                                                     <script language="JavaScript">
@@ -492,18 +478,18 @@
                                                                         $("purchase_14_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_9"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -521,9 +507,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Fan and Funky<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_15" class="purchase-component">
-                                                                    MnM costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin pages</a><br>
+                                                                    MnM costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin pages</a><br>
                                                                     <span id="purchase_15_purchase"></span>
                                                                     <script language="JavaScript">
                                                                         var purchaseButton = Builder.node("a", {
@@ -533,18 +519,18 @@
                                                                         $("purchase_15_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_19"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -570,9 +556,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 D.I.S.C.O. grooves<br><br>
-                                                                <b>Price: 5 Credits <br></b>
+                                                                <b>Price: 3 Credits <br></b>
                                                                 <div id="purchase_16" class="purchase-component">
-                                                                    Spicey Donna costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Spicey Donna costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_16_purchase"></span>
                                                                     <script language="JavaScript">
@@ -583,18 +569,18 @@
                                                                         $("purchase_16_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_11"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -612,9 +598,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Weirdness for the open minded<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_17" class="purchase-component">
-                                                                    Abe Normal costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Abe Normal costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_17_purchase"></span>
                                                                     <script language="JavaScript">
@@ -625,18 +611,18 @@
                                                                         $("purchase_17_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_12"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -662,9 +648,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 For that special elevator<br><br>
-                                                                <b>Price: 5 Credits <br></b>
+                                                                <b>Price: 3 Credits <br></b>
                                                                 <div id="purchase_18" class="purchase-component">
-                                                                    Cafe Muzzakh costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Cafe Muzzakh costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_18_purchase"></span>
                                                                     <script language="JavaScript">
@@ -675,18 +661,18 @@
                                                                         $("purchase_18_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_13"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -704,9 +690,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Just in grooves<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_19" class="purchase-component">
-                                                                    Cameron's Ex costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Cameron's Ex costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_19_purchase"></span>
                                                                     <script language="JavaScript">
@@ -717,18 +703,18 @@
                                                                         $("purchase_19_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_14"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -754,9 +740,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 R'n'B massivo<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_20" class="purchase-component">
-                                                                    El Generico costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    El Generico costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_20_purchase"></span>
                                                                     <script language="JavaScript">
@@ -767,18 +753,18 @@
                                                                         $("purchase_20_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_15"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -795,9 +781,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a><br>
                                                                 Chic melodies<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span>
                                                                 <div id="purchase_21" class="purchase-component">
-                                                                    Ferry Nultado costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Ferry Nultado costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_21_purchase"></span>
                                                                     <script language="JavaScript">
@@ -808,18 +794,18 @@
                                                                         $("purchase_21_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_16"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -845,9 +831,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Funky disco loops<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_22" class="purchase-component">
-                                                                    Jive Sideburns costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Jive Sideburns costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_22_purchase"></span>
                                                                     <script language="JavaScript">
@@ -858,61 +844,18 @@
                                                                         $("purchase_22_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_17"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                </div>
-                                                            </td>
-                                                            <td valign="top" bgcolor="#c0c0c0" align="justify">
-                                                                <img vspace="0" hspace="8" border="0" align="left"
-                                                                    src="{{ url('/') }}/c_images/album1394/sound_set_18_small.png" alt="">
-                                                            </td>
-                                                            <td width="672" bgcolor="#c0c0c0"><b><u>Little Tanga Beach</u></b><a
-                                                                    href="https://web.archive.org/web/20071012043842/http://images.habbohotel.fi/c_images/album2348/Little_Tanga_Beach.mp3"><img
-                                                                        vspace="0" hspace="9" border="0" align="right"
-                                                                        src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
-                                                                <br>
-                                                                The
-                                                                Brazilian rhythms as above<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span>
-                                                                <div id="purchase_23" class="purchase-component">
-                                                                    Little Tanga Beach costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
-                                                                        pages</a><br>
-                                                                    <span id="purchase_23_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_23_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("A0 sound_set_18"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -932,7 +875,7 @@
                                     </div>
                                     <div class="v3box blue">
                                         <div class="v3box-top">
-                                            <h3>More Traxpacks - Just 5 Coins Each!</h3>
+                                            <h3>More Traxpacks - Just 3 Coins Each!</h3>
                                         </div>
                                         <div class="v3box-content">
                                             <div class="v3box-body">
@@ -949,9 +892,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Sounds of the deepest jungle<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_24" class="purchase-component">
-                                                                    Monkey Paradise costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Monkey Paradise costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_24_purchase"></span>
                                                                     <script language="JavaScript">
@@ -962,18 +905,18 @@
                                                                         $("purchase_24_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_20"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -991,9 +934,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Headbanging riffs<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits </span><br>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits </span><br>
                                                                 <div id="purchase_25" class="purchase-component">
-                                                                    Snotty Day costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Snotty Day costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_25_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1004,18 +947,18 @@
                                                                         $("purchase_25_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_21"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1041,9 +984,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Nature sound effects<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_26" class="purchase-component">
-                                                                    A Day in the Park costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    A Day in the Park costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_26_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1054,18 +997,18 @@
                                                                         $("purchase_26_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_22"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1082,9 +1025,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""><br></a>
                                                                 Can you cricket? Owling good sound effects<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span> <br>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span> <br>
                                                                 <div id="purchase_27" class="purchase-component">
-                                                                    Nature Nightlife costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Nature Nightlife costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_27_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1095,18 +1038,18 @@
                                                                         $("purchase_27_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_23"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1126,9 +1069,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Sci-Fi sound effects<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_28" class="purchase-component">
-                                                                    Compu FX costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Compu FX costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_28_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1139,18 +1082,18 @@
                                                                         $("purchase_28_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_24"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1167,9 +1110,9 @@
                                                                         vspace="0" hspace="9" border="0" align="right"
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""><br></a>
                                                                 Happy and jolly party sounds<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits</span> <br>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits</span> <br>
                                                                 <div id="purchase_29" class="purchase-component">
-                                                                    Party Pack costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Party Pack costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_29_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1180,18 +1123,18 @@
                                                                         $("purchase_29_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_25"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1217,9 +1160,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Indian rhythms<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_30" class="purchase-component">
-                                                                    Bhangra Mangra costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Bhangra Mangra costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_30_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1230,18 +1173,18 @@
                                                                         $("purchase_30_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_26"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1259,9 +1202,9 @@
                                                                         src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 <br>
                                                                 Reggae flavors<br><br>
-                                                                <b>Price:</b> <span style="font-weight: bold;">5 Credits </span><br>
+                                                                <b>Price:</b> <span style="font-weight: bold;">3 Credits </span><br>
                                                                 <div id="purchase_31" class="purchase-component">
-                                                                    Rasta.Claus's Pack costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Rasta.Claus's Pack costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_31_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1272,18 +1215,18 @@
                                                                         $("purchase_31_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_27"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
@@ -1300,9 +1243,9 @@
                                                             <td bgcolor="#c0c0c0"><b><u>Moshy Metal</u></b>
                                                                 <br>
                                                                 Mosh pit time<br><br>
-                                                                <b>Price: 5 Credits </b><br>
+                                                                <b>Price: 3 Credits </b><br>
                                                                 <div id="purchase_32" class="purchase-component">
-                                                                    Moshy Metal costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                    Moshy Metal costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_32_purchase"></span>
                                                                     <script language="JavaScript">
@@ -1313,18 +1256,18 @@
                                                                         $("purchase_32_purchase").appendChild(purchaseButton);
                                                                         Event.observe(purchaseButton, "click", function(e) {
                                                                             Event.stop(e);
-                                                                            var dialog = Dialog.createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            Dialog.appendDialogBody(dialog,
+                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
+                                                                            appendDialogBody(dialog,
                                                                                 "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
-                                                                            Dialog.moveDialogToCenter(dialog);
-                                                                            Overlay.show();
+                                                                            moveDialogToCenter(dialog);
+                                                                            showOverlay();
                                                                             new Ajax.Request(
                                                                                 habboReqPath + "/furnipurchase/purchase_confirmation", {
                                                                                     method: "post",
                                                                                     parameters: "product=" + encodeURIComponent("A0 sound_set_28"),
                                                                                     onComplete: function(req, json) {
-                                                                                        Dialog.setDialogBody(dialog, req.responseText);
+                                                                                        setDialogBody(dialog, req.responseText);
                                                                                     }
                                                                                 }
                                                                             );
