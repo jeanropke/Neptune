@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Housekeeping\Furniture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalogue\CatalogueItem;
 use App\Models\ItemOffer;
 use Illuminate\Http\Request;
 
@@ -32,15 +33,22 @@ class WebOfferController extends Controller
         $request->validate([
             'salecode'  => 'required',
             'name'      => 'required',
-            'items'     => 'required',
+            'item_ids'  => 'required',
             'price'     => 'required|numeric',
             'enabled'   => 'required|in:0,1'
         ]);
 
+        foreach(explode(';', $request->item_ids) as $id)
+        {
+            $cata = CatalogueItem::find($id);
+            if(!$cata)
+                return redirect()->back()->with('message', 'Catalogue Item id not found!');
+        }
+
         $offer->update([
             'salecode'  => $request->salecode,
             'name'      => $request->name,
-            'items'     => $request->items,
+            'item_ids'  => $request->item_ids,
             'price'     => $request->price,
             'enabled'   => $request->enabled
         ]);
@@ -60,15 +68,22 @@ class WebOfferController extends Controller
         $request->validate([
             'salecode'  => 'required',
             'name'      => 'required',
-            'items'     => 'required',
+            'item_ids'  => 'required',
             'price'     => 'required|numeric',
             'enabled'   => 'required|in:0,1'
         ]);
 
+        foreach(explode(';', $request->item_ids) as $id)
+        {
+            $cata = CatalogueItem::find($id);
+            if(!$cata)
+                return redirect()->back()->with('message', 'Catalogue Item id not found!');
+        }
+
         $offer = ItemOffer::create([
             'salecode'  => $request->salecode,
             'name'      => $request->name,
-            'items'     => $request->items,
+            'item_ids'  => $request->item_ids,
             'price'     => $request->price,
             'enabled'   => $request->enabled
         ]);

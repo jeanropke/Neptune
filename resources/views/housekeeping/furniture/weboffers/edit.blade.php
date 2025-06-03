@@ -51,12 +51,12 @@
                                         <a href="{{ route('furnipicker.listing') }}" id="furni-picker">Pick</a>
                                         <div id="furni-picked">
                                             @foreach ($offer->getItems() as $item)
-                                                <div class="slot" data-furni="{{ $item->sale_code }}">
+                                                <div class="slot" data-item-id="{{ $item->id }}">
                                                     <div class="image" style="background-image: url({{ cms_config('furni.small.url') }}/{{ $item->getNormalizedName() }}_icon.png)"></div>
                                                 </div>
                                             @endforeach
                                         </div>
-                                        <input name="items" value="{{ $offer->items }}" type="text" hidden>
+                                        <input name="item_ids" value="{{ $offer->item_ids }}" type="text" hidden>
                                     </td>
                                 </tr>
                                 <tr>

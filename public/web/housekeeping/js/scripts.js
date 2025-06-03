@@ -55,7 +55,7 @@ var FurniPicker = {
 
         $('#furni-picked .slot').each((i, e) => {
             $(e).click(this.removeFurni);
-            this.picked.push($(e).data('furni'));
+            this.picked.push($(e).data('item-id'));
         });
     },
 
@@ -90,13 +90,12 @@ var FurniPicker = {
 
                     $('#furni-picker-listing .slot').click((e) => {
                         var slot = $(e.target).closest('.slot');
-                        var furni = slot.data('furni');
+                        var furni = slot.data('item-id');
                         this.picked.push(furni);
                         var clone = slot.clone();
                         clone.click(this.removeFurni);
                         $('#furni-picked').append(clone);
-                        $('input[name=items]').val(FurniPicker.picked.join(';'));
-                        console.log('????');
+                        $('input[name=item_ids]').val(FurniPicker.picked.join(';'));
                     });
                 });
         });
@@ -105,10 +104,10 @@ var FurniPicker = {
     },
     removeFurni: function (e) {
         var $el = $(e.target).closest('.slot');
-        var furni = $el.data('furni');
-        FurniPicker.picked.splice(FurniPicker.picked.indexOf(furni), 1);
+        var id = $el.data('item-id');
+        FurniPicker.picked.splice(FurniPicker.picked.indexOf(id), 1);
         $el.remove();
-        $('input[name=items]').val(FurniPicker.picked.join(';'));
+        $('input[name=item_ids]').val(FurniPicker.picked.join(';'));
     }
 }
 

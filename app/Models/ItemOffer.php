@@ -10,16 +10,15 @@ class ItemOffer extends Model
     protected $table = 'cms_items_offers';
 
     protected $fillable = [
-        'salecode', 'name', 'items', 'price', 'enabled'
+        'salecode', 'name', 'item_ids', 'price', 'enabled'
     ];
 
     public $timestamps = false;
 
     public function isValid()
     {
-        $itemsSprites = explode(';', $this->items);
-        foreach ($itemsSprites as $sprite) {
-            $item = CatalogueItem::where('sale_code', $sprite)->first();
+        foreach (explode(';', $this->item_ids) as $item_id) {
+            $item = CatalogueItem::find($item_id);
             if (!$item)
                 return false;
         }
@@ -29,9 +28,8 @@ class ItemOffer extends Model
     public function getItems()
     {
         $items = array();
-        $itemsSprites = explode(';', $this->items);
-        foreach ($itemsSprites as $sprite) {
-            $item = CatalogueItem::where('sale_code', $sprite)->first();
+        foreach (explode(';', $this->item_ids) as $item_id) {
+            $item = CatalogueItem::find($item_id);
             if($item)
                 array_push($items, $item);
         }
