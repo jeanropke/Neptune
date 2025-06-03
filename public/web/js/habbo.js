@@ -1337,3 +1337,17 @@ function setPreview(selectedoption, template, targetDiv) {
     new Ajax.Updater(targetDiv,
         habboReqPath + "/components/roomlink_export_update", { method: "post", parameters: "roomId=" + selectedoption + "&template=" + template });
 }
+
+
+function purchaseFurnitureResult(code) {
+    setDialogBody($("purchase_dialog"),
+        "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
+        true);
+    new Ajax.Request(habboReqPath + "/furnipurchase/purchase", {
+        method: "post",
+        parameters: "product=" + code,
+        onComplete: function(req, json) {
+            setDialogBody($("purchase_dialog"), req.responseText);
+        }
+    });
+}
