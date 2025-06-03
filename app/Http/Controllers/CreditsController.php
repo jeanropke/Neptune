@@ -209,6 +209,11 @@ class CreditsController extends Controller
         foreach ($items as $item) {
             user()->giveItem($item->definition_id, $item->item_specialspriteid);
         }
+
+        $homeItems = $pack->getHomeItems();
+        foreach($homeItems as $homeItem) {
+            user()->giveHomeItem($homeItem->id);
+        }
         user()->updateCredits(-$pack->price);
         user()->refreshHand();
 

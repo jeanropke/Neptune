@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\Hotel;
 use App\Models\Guild;
 use App\Models\GuildMember;
+use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSong;
 use App\Models\Permission;
 use App\Models\Room;
@@ -161,6 +162,14 @@ class User extends Authenticatable
     {
         if (is_hotel_online())
             rcon("refresh_hand", ['userId' => $this->id]);
+    }
+
+    public function giveHomeItem($itemId)
+    {
+        HomeItem::create([
+            'owner_id'  => $this->id,
+            'item_id'   => $itemId
+        ]);
     }
 
     /**
