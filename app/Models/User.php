@@ -145,7 +145,7 @@ class User extends Authenticatable
 
     public function getInventory()
     {
-        return Furni::where('user_id', $this->id)->get();
+        return Furni::where([['user_id', $this->id], ['room_id', '0']])->get();
     }
 
     public function getLatestIP()

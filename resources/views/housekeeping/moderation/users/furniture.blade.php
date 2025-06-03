@@ -52,7 +52,7 @@
                     <br />
                     @if (isset($user))
                         <div class="tableborder">
-                            <div class="tableheaderalt">User Furnitures <i>(Click to remove)</i></div>
+                            <div class="tableheaderalt">User Furniture On Hand <i>(Click to remove)</i></div>
                             <div id="furni-picker-listing">
                                 @foreach ($user->getInventory() as $furni)
                                     <div class="slot remove-furni" data-id="{{ $furni->id }}" style="height: 56px; line-height: 9;">
