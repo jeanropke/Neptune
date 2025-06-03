@@ -83,8 +83,8 @@ class UserController extends Controller
         ]);
 
         if (is_hotel_online()) {
-            mus("refresh_looks", ['userId' => $user->id]);
-            mus("refresh_credits", ['userId' => $user->id]);
+            rcon("refresh_looks", ['userId' => $user->id]);
+            rcon("refresh_credits", ['userId' => $user->id]);
         }
 
         create_staff_log('users.edit.save', $request);
