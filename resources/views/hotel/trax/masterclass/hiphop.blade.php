@@ -121,7 +121,7 @@
                                                             <td bgcolor="#c0c0c0"><img vspace="0" hspace="8" border="0" align="left"
                                                                     src="{{ url('/') }}/c_images/album1394/sound_set_19_small.png" alt=""> <b>MnM</b><br>
                                                                 <div id="purchase_3" class="purchase-component">
-                                                                    MnM costs 5 coins. To get more coins, please visit the <a href="/web/20071012043837/http://habbo.com/credits">Coin
+                                                                    MnM costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
                                                                     <span id="purchase_3_purchase"></span>
                                                                     <script language="JavaScript">
@@ -134,7 +134,7 @@
                                                                             Event.stop(e);
                                                                             var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
                                                                             appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"http://images.habbohotel.com/habboweb/16/11/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
+                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
                                                                             moveDialogToCenter(dialog);
                                                                             showOverlay();
@@ -156,7 +156,7 @@
                                                                     src="{{ url('/') }}/c_images/album1394/sound_set_14_small.png" alt=""> <b>Cameron's Ex</b><br>
                                                                 <div id="purchase_4" class="purchase-component">
                                                                     Cameron's Ex costs 5 coins. To get more coins, please visit the <a
-                                                                        href="/web/20071012043837/http://habbo.com/credits">Coin pages</a><br>
+                                                                        href="{{ url('/') }}/credits">Coin pages</a><br>
                                                                     <span id="purchase_4_purchase"></span>
                                                                     <script language="JavaScript">
                                                                         var purchaseButton = Builder.node("a", {
@@ -168,7 +168,7 @@
                                                                             Event.stop(e);
                                                                             var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
                                                                             appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"http://images.habbohotel.com/habboweb/16/11/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
+                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                 true);
                                                                             moveDialogToCenter(dialog);
                                                                             showOverlay();
@@ -196,7 +196,7 @@
 
 
                                                                         Ferry Nultado costs 5 coins. To get more coins, please visit the <a
-                                                                            href="/web/20071012043837/http://habbo.com/credits">Coin pages</a><br>
+                                                                            href="{{ url('/') }}/credits">Coin pages</a><br>
                                                                         <span id="purchase_5_purchase"></span>
                                                                         <script language="JavaScript">
                                                                             var purchaseButton = Builder.node("a", {
@@ -208,7 +208,7 @@
                                                                                 Event.stop(e);
                                                                                 var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
                                                                                 appendDialogBody(dialog,
-                                                                                    "<p style=\"text-align:center\"><img src=\"http://images.habbohotel.com/habboweb/16/11/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
+                                                                                    "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
                                                                                     true);
                                                                                 moveDialogToCenter(dialog);
                                                                                 showOverlay();
