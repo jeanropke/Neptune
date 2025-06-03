@@ -6,6 +6,7 @@
         <li class="inactive">
             <a href="{{ url('/') }}/hotel/trax">Trax Homepage</a>
         </li>
+
         @if ($page == 'index')
         <li class="active">
             The Basics
@@ -16,9 +17,15 @@
             </li>
         @endif
 
-        <li class="inactive">
-            <a href="{{ url('/') }}/hotel/trax/masterclass/hiphop">Hip-Hop</a>
+        @if ($page == 'hiphop')
+        <li class="active">
+            Hip-Hop
         </li>
+        @else
+            <li class="inactive">
+                <a href="{{ url('/') }}/hotel/trax/masterclass/hiphop">Hip-Hop</a>
+            </li>
+        @endif
 
         <li class="inactive">
             <a href="{{ url('/') }}/hotel/trax/masterclass/rock">Rock &amp; Heavy</a>

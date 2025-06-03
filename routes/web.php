@@ -94,6 +94,7 @@ Route::middleware('user')->group(function () {
 
             Route::prefix('masterclass')->group(function () {
                 Route::get('/', function() { return view('hotel.trax.masterclass.index'); })->name('hotel.trax.masterclass.index');
+                Route::get('/hiphop', function() { return view('hotel.trax.masterclass.hiphop'); })->name('hotel.trax.masterclass.hiphop');
             });
         });
     });
