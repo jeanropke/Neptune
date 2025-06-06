@@ -98,7 +98,7 @@ class MenuController extends Controller
     public function menuCategoriesDelete(Request $request)
     {
         if (!user()->hasPermission('can_edit_website_menu'))
-            return view('housekeeping.accessdenied');
+            return view('housekeeping.ajax.accessdenied_dialog');
 
         $category = CmsMenu::find($request->id);
 
@@ -208,7 +208,7 @@ class MenuController extends Controller
     public function menuSubcategoriesDelete(Request $request)
     {
         if (!user()->hasPermission('can_edit_website_menu'))
-            return view('housekeeping.accessdenied');
+            return view('housekeeping.ajax.accessdenied_dialog');
 
         $category = CmsMenu::find($request->id);
 
