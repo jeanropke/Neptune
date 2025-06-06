@@ -73,9 +73,9 @@
                     <div>
                         <h3><span>myhabbo.discussion.delete.title</span></h3>
                     </div>
-                    <a href="#" class="dialog-grey-exit" id="postentry-delete-dialog-exit"><img
-                            src="https://web.archive.org/web/20071011205728im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/dialogs/grey-exit.gif" alt=""
-                            height="12" width="12"></a>
+                    <a href="#" class="dialog-grey-exit" id="postentry-delete-dialog-exit">
+                        <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
+                    </a>
                 </div>
                 <div class="dialog-grey-content clearfix">
                     <div id="postentry-delete-dialog-body" class="dialog-grey-body">
@@ -99,9 +99,9 @@
                     <div>
                         <h3><span>Please activate your email address</span></h3>
                     </div>
-                    <a href="#" class="dialog-grey-exit" id="postentry-verifyemail-dialog-exit"><img
-                            src="https://web.archive.org/web/20071011205728im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/dialogs/grey-exit.gif" alt=""
-                            height="12" width="12"></a>
+                    <a href="#" class="dialog-grey-exit" id="postentry-verifyemail-dialog-exit">
+                        <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
+                    </a>
                 </div>
                 <div class="dialog-grey-content clearfix">
                     <div id="postentry-verifyemail-dialog-body" class="dialog-grey-body">
