@@ -96,7 +96,6 @@
 
     <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
 </head>
-{{ request()->path() }}
 <style>
     body {
         background-image: url({{ cms_config('site.style.background') }});
@@ -212,12 +211,11 @@
                 <script language="JavaScript" type="text/javascript">
                     $("tabmenu").style.left = (Position.cumulativeOffset($("myhabbo"))[0] - Position.cumulativeOffset($("top"))[0]) + "px";
                 </script>
-
                 <div id="mainmenu">
                     <ul>
                         <li id="leftspacer">&nbsp;</li>
                         @foreach (cms_menu() as $item)
-                            <li {{ $item->url == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
+                            <li {{ $item->url == trim(request()->path(), '/') ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
                                 <span class="left"></span>
                                 <a href="{{ url('/') }}/{{ $item->url }}"><img src="{{ url('/') }}/web/images/navi_icons/{{ $item->icon }}.gif"
                                         alt="" />
@@ -230,7 +228,7 @@
                 <div id="submenu">
                     <div class="subnav">
                         @foreach (cms_menu($menuId) as $subitem)
-                            @if ($subitem->url == request()->path())
+                            @if ($subitem->url == trim(request()->path(), '/'))
                                 {{ $subitem->caption }}
                             @else
                                 <a href="{{ url('/') }}/{{ $subitem->url }}">{{ $subitem->caption }}</a>
