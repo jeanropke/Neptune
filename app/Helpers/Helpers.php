@@ -5,6 +5,7 @@ use App\Models\Catalogue\CatalogueItem;
 use App\Models\CmsMenu;
 use App\Models\CmsSetting;
 use App\Models\EmuSetting;
+use App\Models\Partner;
 use App\Models\StaffLog;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,11 @@ function set_emu_config($key, $value)
     $setting = EmuSetting::where('setting', $key)->first();
     if (!$setting) return;
     $setting->update(['value' => $value]);
+}
+
+function get_partners()
+{
+    return Partner::where('enabled', '1')->orderBy('order_num')->get();
 }
 
 function get_cata_item($sale)

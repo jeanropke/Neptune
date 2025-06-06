@@ -36,6 +36,7 @@ use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
 use App\Http\Controllers\Housekeeping\Site\MenuController;
+use App\Http\Controllers\Housekeeping\Site\PartnerController;
 use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -425,6 +426,11 @@ Route::middleware('admin')->group(function () {
             Route::post('/maintenance', [SiteController::class, 'maintenanceSave'])->name('housekeeping.site.maintenance.save');
             Route::get('/loader', [SiteController::class, 'loader'])->name('housekeeping.site.loader');
             Route::post('/loader', [SiteController::class, 'loaderSave'])->name('housekeeping.site.loader.save');
+
+            Route::get('/partners', [PartnerController::class, 'partners'])->name('housekeeping.site.partners');
+            Route::get('/partners/{id}/id', [PartnerController::class, 'partners'])->name('housekeeping.site.partners.edit');
+            Route::post('/partners', [PartnerController::class, 'partnersSave'])->name('housekeeping.site.partners.save');
+            Route::post('/partners/delete', [PartnerController::class, 'partnersDelete'])->name('housekeeping.site.partners.delete');
 
             //Maybe in future :v
             //Route::get('/site/collectables', 'welcomemsg')->name('admin.site.collectables');

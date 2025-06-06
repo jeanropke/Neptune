@@ -16,6 +16,10 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.site.ads') }}" style="text-decoration:none;{{ $submenu == 'ads' ? 'font-weight: bold;' : '' }}">Advertisements & Tracking Configuration</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.partners') }}" style="text-decoration:none;{{ $submenu == 'partners' ? 'font-weight: bold;' : '' }}">Partners Configuration</a>
+    </div>
 </div>
 <br />
 {{--
