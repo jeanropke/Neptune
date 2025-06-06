@@ -8,6 +8,9 @@ Discussions.prototype = {
         if ($("group-topiclist-list")) {
             Event.observe($('group-topiclist-list'), 'click', this.handleActions.bindAsEventListener(this));
         }
+
+        Event.observe($('create-post-message-lower-button'), 'click', createNewPost);
+        Event.observe($('create-post-message-button'), 'click', createNewPost);
     },
 
     handleActions: function (e) {
@@ -351,14 +354,23 @@ var delete_function = function (postId) {
     });
 }
 
-var createNewPost = function () {
-
+var createNewPost = function (e) {
+    Event.stop(e);
     document.getElementById('post-message').value = "";
     document.getElementById('post-id').value = null;
     Element.show("new-post-entry-message");
     Element.show("new-post-entry-label");
     $("post-message").focus();
     Element.scrollTo('post-message');
+    Element.hide("create-post-message-button");
+    Element.hide("create-post-message-lower-button");
+    Event.observe("post-form-cancel", "click", cancel_new_post, false);
+}
+
+var cancel_new_post = function(e) {
+    Event.stop(e);
+    Element.show("create-post-message-button");
+    Element.show("create-post-message-lower-button");
 }
 
 var closeTopicSettings = function (e) {

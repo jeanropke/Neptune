@@ -9,11 +9,15 @@
                 <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions" class="colorlink noarrow">
                     <span class="to-topics">To Threads</span>
                 </a>
-                <a href="#" class="colorlink dialogbutton" id="create-post-message-button">
-                    <span>create-post-message-button</span>
+                <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
+                    <span>Post Reply</span>
+                </a>
+                <a href="#" class="colorlink noarrow" id="topic-settings">
+                    <span>Settings</span>
                 </a>
                 <br clear="all">
                 <input type="hidden" id="spam-message" value="Spam detected!">
+                <input type="hidden" id="settings_dialog_header" value="Topic settings">
             </td>
         </tr>
         <tr>
@@ -123,13 +127,7 @@
                 </td>
             </tr>
         @endforeach
-        <tr>
-            <td>
-                @auth
-                <a href="#" class="verify-email create-post-link" id="create-post">Post Reply</a>
-                @endauth
-            </td>
-        </tr>
+
         <tr class="new-post-preview" id="new-post-preview">
             <td colspan="3">
                 <div id="new-post-preview-container"></div>
@@ -190,10 +188,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <a href="#" class="colorlink dialogbutton" id="create-post-message-lower-button"><span>create-post-message-lower-button</span></a>
+            <td>
+                @auth
+                <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button"><span>Post Reply</span></a>
+                @endauth
             </td>
-            <td align="right">
+            <td align="right" colspan="2">
                 View page:
                 @for ($i = 1; $i <= $replies->lastPage(); $i++)
                     @if($i == $replies->currentPage())
@@ -223,6 +223,6 @@
     if ($("topic-settings")) {
         Event.observe("topic-settings", "click", topic_settings_function);
     }
-    // document.getElementsByClassName("quote-post").each(quote_function);
-    // document.getElementsByClassName("edit-post").each(edit_function);
+    document.getElementsByClassName("quote-post").each(quote_function);
+    document.getElementsByClassName("edit-post").each(edit_function);
 </script>
