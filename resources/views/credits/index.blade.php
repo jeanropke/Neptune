@@ -175,7 +175,7 @@
                                                 stuff you can spend your coins on:<br>
                                                 <ul>
                                                     <li>decorate your room
-                                                        with <a href="{{ url('/') }}/hotel/furniture" target="_self">{{ cms_config('hotel.name.short') }}
+                                                        with <a href="{{ url('/') }}/credits/furniture" target="_self">{{ cms_config('hotel.name.short') }}
                                                             Furni</a></li>
                                                     <li><a href="{{ url('/') }}/hotel/pets">{{ cms_config('hotel.name.short') }}
                                                             Pets</a> (how about a crocodile?)<br></li>
