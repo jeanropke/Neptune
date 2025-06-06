@@ -44,11 +44,11 @@
 
     @if ($menuId == 'home_group')
 
-         <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
-    {{--<!--link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet"/-->
+        <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
+        {{-- <!--link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet"/-->
     <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" /> --}}
-    <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
-    <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
+        <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
+        <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
 
         <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/myhabbo/skins.css" type="text/css" rel="stylesheet" />
@@ -94,7 +94,8 @@
         <script type="text/javascript" src="{{ url('/') }}/web/js/collectibles.js"></script>
     @endif
 
-    <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
+    <meta name="build"
+        content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
 </head>
 <style>
     body {
@@ -215,11 +216,10 @@
                     <ul>
                         <li id="leftspacer">&nbsp;</li>
                         @foreach (cms_menu() as $item)
-                            <li {{ $item->url == trim(request()->path(), '/') ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
+                            <li {{ $item->id == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
                                 <span class="left"></span>
-                                <a href="{{ url('/') }}/{{ $item->url }}"><img src="{{ url('/') }}/web/images/navi_icons/{{ $item->icon }}.gif"
-                                        alt="" />
-                                    {{ $item->caption }}</a>
+                                <a href="{{ url('/') }}/{{ $item->url }}">
+                                    <img src="{{ url('/') }}/web/images/navi_icons/{{ $item->icon }}.gif" alt="" />{{ $item->caption }}</a>
                                 <span class="right"></span>
                             </li>
                         @endforeach
@@ -246,14 +246,13 @@
             @if ((isset($skipHeadline) && !$skipHeadline) || !isset($skipHeadline))
                 <div id="page-headline">
                     <div id="page-headline-breadcrums">
-                        {{--<a href="/web/20071012021140/http://www.habbo.com/hotel">New?</a>
-                            »
-                        <a href="/web/20071012021140/http://www.habbo.com/hotel/trax">Trax</a>
-                            »
-                        <a href="/web/20071012021140/http://www.habbo.com/hotel/trax/masterclass">Trax Masterclasses</a>
-                            »
-                    Rock &amp; Heavy--}}
-                        </div>
+                        @isset($breadcrums)
+                            @foreach ($breadcrums as $breadcrum)
+                                <a href="{{ $breadcrum['url'] }}">{{ $breadcrum['title'] }}</a> »
+                            @endforeach
+                            @yield('title')
+                        @endisset
+                    </div>
                     <div id="page-headline-text">@yield('title')</div>
                 </div>
             @endif

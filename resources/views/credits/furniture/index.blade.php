@@ -1,4 +1,7 @@
-@extends('layouts.master', ['menuId' => '4'])
+@extends('layouts.master', [
+    'menuId' => '4',
+    'breadcrums' => [['url' => url('/credits'), 'title' => 'Credits']]
+])
 
 @section('title', cms_config('hotel.name.short') . ' Furni')
 

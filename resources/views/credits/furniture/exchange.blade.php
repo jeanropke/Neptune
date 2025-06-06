@@ -1,4 +1,7 @@
-@extends('layouts.master', ['menuId' => '4'])
+@extends('layouts.master', [
+    'menuId' => '4',
+    'breadcrums' => [['url' => url('/credits'), 'title' => 'Credits'], ['url' => url('/credits/furniture'), 'title' => 'Furniture']]
+])
 
 @section('title', 'Habbo Exchange')
 
