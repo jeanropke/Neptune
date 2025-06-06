@@ -7,7 +7,7 @@
         <h4><a href="{{ url('/') }}/groups/{{ $group->id }}/id">{{ $group->name }}</a></h4>
         <p>
             Group created:<br />
-            <b>{{ \Carbon\Carbon::createFromTimeStamp($group->date_created)->format('M d, Y') }}</b>
+            <b>{{ $group->created_at->format('M d, Y') }}</b>
         </p>
         <div class="groups-info-description">
             {{ $group->description }}
