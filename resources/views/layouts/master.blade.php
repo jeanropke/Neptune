@@ -89,10 +89,12 @@
         @endif
     @endif
 
-    @if (request()->path() == 'collectibles')
-        <link href="{{ url('/') }}/web/styles/collectibles.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="{{ url('/') }}/web/js/collectibles.js"></script>
-    @endif
+    @isset($submenuType)
+        @if ($submenuType == 'collectibles')
+            <link href="{{ url('/') }}/web/styles/collectibles.css" type="text/css" rel="stylesheet" />
+            <script type="text/javascript" src="{{ url('/') }}/web/js/collectibles.js"></script>
+        @endif
+    @endisset
 
     <meta name="build"
         content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
