@@ -7,6 +7,7 @@ use App\Models\CmsSetting;
 use App\Models\EmuSetting;
 use App\Models\Partner;
 use App\Models\StaffLog;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 function user()
@@ -47,6 +48,11 @@ function set_emu_config($key, $value)
 function get_partners()
 {
     return Partner::where('enabled', '1')->orderBy('order_num')->get();
+}
+
+function carbon_format($date, $format = 'd/m/Y')
+{
+    return Carbon::parse($date)->format($format);
 }
 
 function get_cata_item($sale)

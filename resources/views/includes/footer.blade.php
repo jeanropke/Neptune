@@ -6,17 +6,25 @@
                     <p>
                         @foreach (cms_menu() as $item)
                             <a href="/{{ $item->url }}">{{ $item->caption }}</a>
-                            @if(!$loop->last) | @endif
+                            @if (!$loop->last) | @endif
                         @endforeach
                     </p>
                     <p>
                         <a href="/footer_pages/privacy_policy">Privacy Policy</a> | <a href="/footer_pages/terms_and_conditions">Terms &amp; Conditions of Use</a> |
                         <a href="/footer_pages/terms_of_sale">Terms &amp; Conditions of Sale</a> | <a href="/help/lawenforcementcontact">Law Enforcement</a> |
-                        <a href="/footer_pages/atlas">Other {{ cms_config('hotel.name.short') }} sites</a> | <a href="/footer_pages/advertise">Advertise in {{ cms_config('hotel.name.short') }}</a> |
+                        <a href="/footer_pages/atlas">Other {{ cms_config('hotel.name.short') }} sites</a> | <a href="/footer_pages/advertise">Advertise in
+                            {{ cms_config('hotel.name.short') }}</a> |
                         <a href="https://www.sulake.com/">Sulake</a>
                     </p>
-                    <p class="footer-legal">© {{ date('Y') }} Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and {{ cms_config('hotel.name.short') }} is
-                        not affiliated with Sulake.</p>
+                    <p class="footer-legal">
+                        @php
+                            $year = carbon_format(cms_config('hotel.created.at'), 'Y');
+                            if ($year != date('Y')) {
+                                $year = $year . ' - ' . date('Y');
+                            }
+                        @endphp
+                        © {{ $year }} Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and
+                        {{ cms_config('hotel.name.short') }} is not affiliated with Sulake.</p>
                 </div>
             </div>
             <div id="footer-bottom">
