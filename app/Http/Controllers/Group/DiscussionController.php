@@ -158,13 +158,16 @@ class DiscussionController extends Controller
             return;
 
         $group = Group::find($request->groupId);
-        if (!$group) return;
+        if (!$group)
+            return;
 
         $topic = GroupTopic::find($request->topicId);
-        if (!$topic) return;
+        if (!$topic)
+            return;
 
         $reply = GroupReply::find($request->postId);
-        if (!$reply) return;
+        if (!$reply)
+            return;
 
         if ($topic->group_id != $group->id)
             return;
@@ -172,13 +175,13 @@ class DiscussionController extends Controller
         if ($reply->topic_id != $topic->id)
             return;
 
-        if (!$group->getAdmins()->where('user_id', user()->id)->first())
+
+        if ($group->getOwner()->id != user()->id || $group->getAdmins()->where('user_id', user()->id)->first())
             return;
 
         $topic->decrement('replies');
         $topic->update(['latest_comment' => $topic->getLatestPost()->created_at]);
-        $reply->getAuthor()->getCmsSettings()->decrement('discussions_posts');
-        $reply->update(['is_deleted' => '1']);
+        $reply->markAsDeleted();
 
         return $request->all();
     }

@@ -39,11 +39,11 @@ class Group extends Model
 
     public function getAdmins()
     {
-        return GroupMember::where([['level_id', '=', 2]])->get();
+        return GroupMember::where([['member_rank', '>=', 2]])->get();
     }
 
     public function getMembers()
     {
-        return GroupMember::where([['user_id', '=', $this->id]])->get();
+        return GroupMember::where([['group_id', '=', $this->id]])->get();
     }
 }
