@@ -181,6 +181,10 @@ Route::middleware('user')->group(function () {
             Route::post('/previewpost', [DiscussionController::class, 'previewPost'])->name('discussions.actions.previewpost');
             Route::post('/savepost', [DiscussionController::class, 'savePost'])->name('discussions.actions.savepost');
             Route::post('/deletepost', [DiscussionController::class, 'deletePost'])->name('discussions.actions.deletepost');
+
+            Route::post('/opentopicsettings', [DiscussionController::class, 'openTopicSettings'])->name('discussions.actions.opentopicsettings');
+            Route::post('/confirm_delete_topic', [DiscussionController::class, 'confirmDeleteTopic'])->name('discussions.actions.confirm_delete_topic');
+            Route::post('/deletetopic', [DiscussionController::class, 'deleteTopic'])->name('discussions.actions.deletetopic');
         });
     });
 

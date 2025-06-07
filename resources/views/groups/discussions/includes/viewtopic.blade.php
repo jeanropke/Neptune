@@ -98,11 +98,13 @@
                                     <div class="post-list-report-element">
                                         @if(!$reply->hidden_by_staff)
                                             @auth
-                                            @if ($author->id == user()->id)
-                                            <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
-                                            @else
-                                            <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
-                                            @endif
+                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/quote_button.gif" width="19" height="18" class="quote-post verify-email" id="quote-post-{{ $reply->id }}" />
+                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
+                                                @if ($author->id != user()->id)
+                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
+                                                @else
+                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/icon_edit.gif" width="19" height="18" class="edit-post verify-email" id="edit-post-{{ $reply->id }}" />
+                                                @endif
                                             @endauth
                                         @endif
                                     </div>
@@ -223,6 +225,6 @@
     if ($("topic-settings")) {
         Event.observe("topic-settings", "click", topic_settings_function);
     }
-    document.getElementsByClassName("quote-post").each(quote_function);
-    document.getElementsByClassName("edit-post").each(edit_function);
+    //document.getElementsByClassName("quote-post").each(quote_function);
+    //document.getElementsByClassName("edit-post").each(edit_function);
 </script>

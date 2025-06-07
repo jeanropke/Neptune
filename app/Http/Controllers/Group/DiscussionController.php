@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Group;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ class DiscussionController extends Controller
 {
     public function newTopic()
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         return view('groups.discussions.newtopic');
@@ -22,7 +23,7 @@ class DiscussionController extends Controller
 
     public function previewTopic(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $topic = (object)[
@@ -35,16 +36,16 @@ class DiscussionController extends Controller
 
     public function saveTopic(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
-        if(!$request->topicName)
+        if (!$request->topicName)
             return;
-        if(!$request->message)
+        if (!$request->message)
             return;
 
         $group = Group::find($request->groupId);
-        if(!$group) return;
+        if (!$group) return;
 
         $now = Carbon::now();
 
@@ -68,7 +69,6 @@ class DiscussionController extends Controller
         user()->getCmsSettings()->increment('discussions_posts');
 
         echo "/groups/{$group->id}/id/discussions/{$topic->id}/id";
-
     }
 
     public function viewTopic(Request $request)
@@ -76,10 +76,10 @@ class DiscussionController extends Controller
         $topic = GroupTopic::find($request->topicId);
         $group = Group::find($request->groupId);
 
-        if(!$topic || !$group)
+        if (!$topic || !$group)
             return abort(404);
 
-        if($topic->group_id != $group->id)
+        if ($topic->group_id != $group->id)
             return abort(404);
 
         return view('groups.discussions.viewtopic')->with([
@@ -91,16 +91,16 @@ class DiscussionController extends Controller
 
     public function previewPost(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $topic = GroupTopic::find($request->topicId);
         $group = Group::find($request->groupId);
 
-        if(!$topic || !$group)
+        if (!$topic || !$group)
             return abort(404);
 
-        if($topic->group_id != $group->id)
+        if ($topic->group_id != $group->id)
             return abort(404);
 
         $post = (object)[
@@ -115,16 +115,16 @@ class DiscussionController extends Controller
 
     public function savePost(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $topic = GroupTopic::find($request->topicId);
         $group = Group::find($request->groupId);
 
-        if(!$topic || !$group)
+        if (!$topic || !$group)
             return abort(404);
 
-        if($topic->group_id != $group->id)
+        if ($topic->group_id != $group->id)
             return abort(404);
 
         $now = Carbon::now();
@@ -154,25 +154,25 @@ class DiscussionController extends Controller
 
     public function deletePost(Request $request)
     {
-        if(!Auth::check())
+        if (!Auth::check())
             return;
 
         $group = Group::find($request->groupId);
-        if(!$group) return;
+        if (!$group) return;
 
         $topic = GroupTopic::find($request->topicId);
-        if(!$topic) return;
+        if (!$topic) return;
 
         $reply = GroupReply::find($request->postId);
-        if(!$reply) return;
+        if (!$reply) return;
 
-        if($topic->group_id != $group->id)
+        if ($topic->group_id != $group->id)
             return;
 
-        if($reply->topic_id != $topic->id)
+        if ($reply->topic_id != $topic->id)
             return;
 
-        if(!$group->getAdmins()->where('user_id', user()->id)->first())
+        if (!$group->getAdmins()->where('user_id', user()->id)->first())
             return;
 
         $topic->decrement('replies');
@@ -181,5 +181,37 @@ class DiscussionController extends Controller
         $reply->update(['is_deleted' => '1']);
 
         return $request->all();
+    }
+
+    public function openTopicSettings(Request $request)
+    {
+        return view('groups.discussions.ajax.topicsettings');
+    }
+
+    public function confirmDeleteTopic(Request $request)
+    {
+        return view('groups.discussions.ajax.confirmdeletetopic');
+    }
+
+    public function deleteTopic(Request $request)
+    {
+        if (!Auth::check())
+            return;
+
+        $group = Group::find($request->groupId);
+        if (!$group) return;
+
+        $topic = GroupTopic::find($request->topicId);
+        if (!$topic) return;
+
+        if ($topic->group_id != $group->id)
+            return;
+
+        if ($topic->user_id != user()->id)
+            if (!$group->getAdmins()->where('user_id', user()->id)->first()) return;
+
+        $topic->markAsDeleted();
+
+        return 'SUCCESS';
     }
 }

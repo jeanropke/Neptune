@@ -47,11 +47,11 @@ Discussions.prototype = {
 
             } else {
                 if (clickedEl.id.search('quote-post') > -1) {
-                    var postId = clickedEl.id.substring('quote-post-'.length, clickedEl.id.length - '-message'.length);
-                    quotePost(postId);
+                    var postId = clickedEl.id.substring('quote-post-'.length, clickedEl.id.length);
+                    quote_function(postId);
                 } else if (clickedEl.id.search('edit-post') > -1) {
-                    var postId = clickedEl.id.substring('edit-post-'.length, clickedEl.id.length - '-message'.length);
-                    editPost(postId);
+                    var postId = clickedEl.id.substring('edit-post-'.length, clickedEl.id.length);
+                    edit_function(postId);
                 } else if (clickedEl.id.search('create-post') > -1) {
                     createNewPost();
                 } else if (clickedEl.id == 'newtopic-upper' || clickedEl.id == 'newtopic-lower') {
@@ -91,8 +91,7 @@ Discussions.prototype = {
     }
 };
 
-var editPost = function (postId) {
-
+var edit_function = function(postId) {
     Element.show("new-post-entry-message");
     Element.show("new-post-entry-label");
     var editText = document.getElementById(postId + '-message');
@@ -102,10 +101,11 @@ var editPost = function (postId) {
     messageText.value = editText.value;
     $("post-message").focus();
     Element.scrollTo('post-message');
+
 }
 
-var quotePost = function (postId) {
-
+var quote_function = function(postId) {
+    console.log(postId);
     Element.show("new-post-entry-message");
     Element.show("new-post-entry-label");
     var quoteText = document.getElementById(postId + '-message');
@@ -114,6 +114,7 @@ var quotePost = function (postId) {
     document.getElementById('edit-type').value = "new";
     $("post-message").focus();
     Element.scrollTo('post-message');
+
 }
 
 var cancel_edit_function = function (e) {

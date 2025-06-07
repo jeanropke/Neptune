@@ -11,12 +11,7 @@ class GroupTopic extends Model
     protected $table = 'cms_groups_topics';
 
     protected $fillable = [
-        'group_id', 'user_id', 'subject', 'views', 'replies', 'latest_comment', 'created_at', 'updated_at'
-    ];
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'group_id', 'user_id', 'subject', 'views', 'replies', 'latest_comment', 'is_deleted'
     ];
 
     public function getAuthor()
@@ -34,10 +29,25 @@ class GroupTopic extends Model
         return GroupReply::where([['topic_id', '=', $this->id], ['is_deleted', '=', '0']])->orderBy('created_at', 'ASC')->paginate(10);
     }
 
+    public function getAllReplies()
+    {
+        return GroupReply::where([['topic_id', '=', $this->id], ['is_deleted', '=', '0']])->get();
+    }
+
     public function getGroup()
     {
         $group = Group::find($this->group_id);
         if ($group)
             return $group;
+    }
+
+    public function markAsDeleted()
+    {
+        if ($this->is_deleted) return;
+        $this->update(['is_deleted' => '1']);
+
+        foreach ($this->getAllReplies() as $reply) {
+            $reply->markAsDeleted();
+        }
     }
 }
