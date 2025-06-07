@@ -62,6 +62,7 @@ Route::middleware('user')->group(function () {
     Route::get('/footer_pages/privacy_policy', [IndexController::class, 'privacyPolicy'])->name('footer_pages.privacy_policy');
     Route::get('/footer_pages/terms_and_conditions', [IndexController::class, 'termsConditions'])->name('footer_pages.terms_and_conditions');
     Route::get('/footer_pages/terms_of_sale', [IndexController::class, 'termsSale'])->name('footer_pages.terms_of_sale');
+    Route::get('/footer_pages/atlas', [IndexController::class, 'atlas'])->name('footer_pages.atlas');
 
     Route::get('/article/{url}', [ArticleController::class, 'show'])->name('article.show');
     Route::get('/articles', [ArticleController::class, 'articles'])->name('article.articles');

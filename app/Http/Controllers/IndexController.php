@@ -42,4 +42,9 @@ class IndexController extends Controller
     {
         return view('footer_pages.terms_of_sale');
     }
+
+    public function atlas()
+    {
+        return view('footer_pages.atlas');
+    }
 }
