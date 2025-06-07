@@ -241,7 +241,7 @@
                             <li {{ $item->id == $menuId ? 'id=active' : '' }} {{ $loop->last ? 'class=last' : '' }}>
                                 <span class="left"></span>
                                 <a href="{{ url('/') }}/{{ $item->url }}">
-                                    <img src="{{ url('/') }}/web/images/navi_icons/{{ $item->icon }}.gif" alt="" />{{ $item->caption }}</a>
+                                    <img src="{{ url('/') }}/c_images/navi_icons/{{ $item->icon }}.gif" alt="" />{{ $item->caption }}</a>
                                 <span class="right"></span>
                             </li>
                         @endforeach
