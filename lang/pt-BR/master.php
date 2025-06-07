@@ -17,4 +17,13 @@ return [
     'welcome_signin'    => 'Olá! Por favor, entre ou registre-se',
     'register_now'      => 'Registre-se, é gratuito',
     'signin'            => 'Entre',
+    'auth_credits'      => '{0,1}Você tem :credits Moeda|{2,*}Você têm :credits Moedas',
+    'guest_credits'     => 'Por favor, <a href=":url">entre</a> para ver seu saldo',
+    'buy_more_credits'  => 'Comprar Moedas',
+    'redeem_code'       => 'Inserir Código de Moedas ou Mobis',
+    'auth_hc_days'      => '{0,1}Você tem :days de :short_club|{2,*}Você têm :days dias :short_club',
+    'auth_not_member'   => 'Você não é membro do :short_name Club',
+    'guest_hc_days'     => 'Por favor, <a href=":url">entre</a> para ver suas informações do :short Club',
+    'hc_days_benefits'  => ':short_name Club te dá os melhores benefícios.',
+    'hc_days_about'     => 'Mais sobre :short_name Club'
 ];
