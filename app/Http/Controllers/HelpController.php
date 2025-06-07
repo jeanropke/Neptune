@@ -27,4 +27,9 @@ class HelpController extends Controller
     {
         return view('help.iot.go');
     }
+
+    public function lawEnforcementContact()
+    {
+        return view('help.lawenforcementcontact');
+    }
 }
