@@ -128,33 +128,33 @@
                         <tr>
                             <td id="topbar-count">
                                 @if (is_hotel_online())
-                                    {{ emu_config('players.online') }} members online
+                                    {{ trans_choice('master.hotel_online', emu_config('players.online'), ['count' => emu_config('players.online'), 'short_name' => cms_config('hotel.name.short')]) }}
                                 @else
-                                    Hotel is offline
+                                    {{ trans('master.hotel_offline') }}
                                 @endif
                             </td>
                             <td id="topbar-menu" align="center">
                                 <ul>
                                     <li id="myhabbo" class="selected" onmouseover="switchTab('myhabbo')">
-                                        <div><a href="/" class="topbar-menu-link" onclick="return false;">My Habbo</a>
+                                        <div><a href="/" class="topbar-menu-link" onclick="return false;">{{ trans('master.my_habbo', ['short_name' => cms_config('hotel.name.short')]) }}</a>
                                         </div>
                                     </li>
                                     <li id="mycredits" onmouseover="if (switchTab('mycredits') && document.habboLoggedIn) updateCredits()" onmouseout="fadeTab('myhabbo')">
-                                        <div><a href="/credits" class="topbar-menu-link" onclick="return false;">My Credits</a></div>
+                                        <div><a href="/credits" class="topbar-menu-link" onclick="return false;">{{ trans('master.my_credits') }}</a></div>
                                     </li>
                                     <li id="habboclub" onmouseover="if (switchTab('habboclub') && document.habboLoggedIn) updateHabboClub()" onmouseout="fadeTab('myhabbo')">
                                         <div><a href="/club" class="topbar-menu-link" onclick="return false;">
-                                                Habbo Club</a></div>
+                                                {{ trans('master.habbo_club', ['short_name' => cms_config('hotel.name.short')]) }}</a></div>
                                     </li>
                                 </ul>
                             </td>
                             @if (Auth::check())
                                 <td id="topbar-status" class="loggedin">
-                                    Welcome {{ user()->username }}
+                                    {{ trans('master.welcome', ['name' => user()->username]) }}
                                 </td>
                             @else
                                 <td id="topbar-status" class="notloggedin">
-                                    Not logged in
+                                    {{ trans('master.not_logged_in', ['short_name' => cms_config('hotel.name.short')]) }}
                                 </td>
                             @endif
                         </tr>
@@ -169,29 +169,46 @@
                                 @if (Auth::check())
                                     <img src="{{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=wav&direction=3&head_direction=3" alt=""
                                         width="64" height="110" class="tabmenu-image">
-                                    <h3>Hello {{ user()->username }}! Enter and have fun!</h3>
+                                    <h3>{{ trans('master.hello', ['name' => user()->username]) }}</h3>
                                     <div class="tabmenu-inner-content">
                                         @if (user()->hasPermission('can_access_housekeeping'))
-                                            <p> <a href="/housekeeping" class="arrow"><span>Housekeeping</span></a> </p>
+                                            <p>
+                                                <a href="/housekeeping" class="arrow">
+                                                    <span>{{ trans('master.housekeeping') }}</span>
+                                                </a>
+                                            </p>
                                         @else
-                                            <p> <a href="/client" class="arrow" target="client" onclick="openOrFocusHabbo(this); return false;"><span>Enter Hotel</span></a>
+                                            <p>
+                                                <a href="/client" class="arrow" target="client" onclick="openOrFocusHabbo(this); return false;">
+                                                    <span>{{ trans('master.enter_hotel') }}</span>
+                                                </a>
                                             </p>
                                         @endif
-                                        <p> <a href="/home/{{ user()->username }}" class="arrow"><span>My
-                                                    {{ cms_config('hotel.name.short') }} Home</span></a> </p>
-                                        <p> <a href="/profile" class="arrow"><span>Update Profile</span></a> </p>
-                                        <p> <a href="/account/logout" class="colorlink orange last"><span>Logout</span></a>
+                                        <p>
+                                            <a href="/home/{{ user()->username }}" class="arrow">
+                                                <span>{{ trans('master.my_home', ['short_name' => cms_config('hotel.name.short')]) }}</span>
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <a href="/profile" class="arrow">
+                                                <span>{{ trans('master.update_profile') }}</span>
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <a href="/account/logout" class="colorlink orange last">
+                                                <span>{{ trans('master.logout') }}</span>
+                                            </a>
                                         </p>
                                     </div>
                                 @else
                                     <img src="/web/images/top_bar/myhabbo_frank.gif" alt="" width="60" height="85" class="tabmenu-image" />
-                                    <h3>Welcome! Please sign in or register</h3>
+                                    <h3>{{ trans('master.welcome_signin') }}</h3>
                                     <div class="tabmenu-inner-content">
                                         <p>
-                                            <a href="{{ route('auth.login') }}" class="colorlink orange"><span>Register Now, it's free!</span></a>
+                                            <a href="{{ route('auth.login') }}" class="colorlink orange"><span>{{ trans('master.register_now') }}</span></a>
                                         </p>
                                         <p>
-                                            <a href="{{ route('auth.login') }}" class="colorlink orange last"><span>Sign In</span></a>
+                                            <a href="{{ route('auth.login') }}" class="colorlink orange last"><span>{{ trans('master.signin') }}</span></a>
                                         </p>
                                     </div>
                                 @endif
