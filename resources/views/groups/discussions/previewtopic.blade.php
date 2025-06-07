@@ -6,7 +6,11 @@
                 <tr>
                     <td colspan="2" class="online">
                         <a href="{{ url('/') }}/home/{{ user()->username }}">{{ user()->username }}</a>
+                        @if(user()->isOnline())
                         <img alt="online" src="{{ url('/') }}/web/images/myhabbo/habbo_online_anim.gif">
+                        @else
+                        <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/habbo_offline.gif">
+                        @endif
                     </td>
                 </tr>
                 <tr>

@@ -257,12 +257,12 @@ class User extends Authenticatable
 
     /**
      * Get if user is online
-     *
+     * Kepler does not support it right now :/
      * @return bool
      */
     public function isOnline()
     {
-        return $this->last_online > time();
+        return false;
     }
 
     /**
