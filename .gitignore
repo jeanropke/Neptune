@@ -21,7 +21,13 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-/public/c_images
+/public/c_images/ads_rooms
+/public/c_images/article_images_hq
+/public/c_images/background_images
+/public/c_images/Badges
+/public/c_images/catalogue
+/public/c_images/DEV_Tests
+/public/c_images/directVipBuy
 /public/dcr
 /public/imager/cache
 /public/furni_large
