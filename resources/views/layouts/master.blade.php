@@ -136,7 +136,8 @@
                             <td id="topbar-menu" align="center">
                                 <ul>
                                     <li id="myhabbo" class="selected" onmouseover="switchTab('myhabbo')">
-                                        <div><a href="/" class="topbar-menu-link" onclick="return false;">{{ trans('master.my_habbo', ['short_name' => cms_config('hotel.name.short')]) }}</a>
+                                        <div><a href="/" class="topbar-menu-link"
+                                                onclick="return false;">{{ trans('master.my_habbo', ['short_name' => cms_config('hotel.name.short')]) }}</a>
                                         </div>
                                     </li>
                                     <li id="mycredits" onmouseover="if (switchTab('mycredits') && document.habboLoggedIn) updateCredits()" onmouseout="fadeTab('myhabbo')">
@@ -148,15 +149,16 @@
                                     </li>
                                 </ul>
                             </td>
-                            @if (Auth::check())
+                            @auth
                                 <td id="topbar-status" class="loggedin">
                                     {{ trans('master.welcome', ['name' => user()->username]) }}
                                 </td>
-                            @else
+                            @endauth
+                            @guest
                                 <td id="topbar-status" class="notloggedin">
                                     {{ trans('master.not_logged_in', ['short_name' => cms_config('hotel.name.short')]) }}
                                 </td>
-                            @endif
+                            @endguest
                         </tr>
                     </table>
                     <div id="habbologo"><a href="/"></a></div>
@@ -166,7 +168,7 @@
                     <div id="tabmenu" onmouseover="lockCurrentTab();" onmouseout="fadeTab('myhabbo')">
                         <div id="tabmenu-content">
                             <div id="myhabbo-content" class="tabmenu-inner selected">
-                                @if (Auth::check())
+                                @auth
                                     <img src="{{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=wav&direction=3&head_direction=3" alt=""
                                         width="64" height="110" class="tabmenu-image">
                                     <h3>{{ trans('master.hello', ['name' => user()->username]) }}</h3>
@@ -200,7 +202,8 @@
                                             </a>
                                         </p>
                                     </div>
-                                @else
+                                @endauth
+                                @guest
                                     <img src="/web/images/top_bar/myhabbo_frank.gif" alt="" width="60" height="85" class="tabmenu-image" />
                                     <h3>{{ trans('master.welcome_signin') }}</h3>
                                     <div class="tabmenu-inner-content">
@@ -211,7 +214,7 @@
                                             <a href="{{ route('auth.login') }}" class="colorlink orange last"><span>{{ trans('master.signin') }}</span></a>
                                         </p>
                                     </div>
-                                @endif
+                                @endguest
                             </div>
                             <div id="mycredits-content" class="tabmenu-inner">
                                 <div id="credits-status">
