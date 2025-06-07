@@ -47,4 +47,9 @@ class IndexController extends Controller
     {
         return view('footer_pages.atlas');
     }
+
+    public function advertise()
+    {
+        return view('footer_pages.advertise');
+    }
 }

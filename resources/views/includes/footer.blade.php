@@ -12,10 +12,10 @@
                     <p>
                         <a href="/footer_pages/privacy_policy">Privacy Policy</a> | <a href="/footer_pages/terms_and_conditions">Terms &amp; Conditions of Use</a> |
                         <a href="/footer_pages/terms_of_sale">Terms &amp; Conditions of Sale</a> | <a href="/help/lawenforcementcontact">Law Enforcement</a> |
-                        <a href="/footer_pages/atlas">Other {{ cms_config('hotel.name.short') }} sites</a> |<a href="/footer_pages/advertise_in_habbo">Advertise in Habbo</a> |
+                        <a href="/footer_pages/atlas">Other {{ cms_config('hotel.name.short') }} sites</a> | <a href="/footer_pages/advertise">Advertise in {{ cms_config('hotel.name.short') }}</a> |
                         <a href="https://www.sulake.com/">Sulake</a>
                     </p>
-                    <p class="footer-legal">© {{ date('Y') }} Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and :hotel is
+                    <p class="footer-legal">© {{ date('Y') }} Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy. This is not HABBO and {{ cms_config('hotel.name.short') }} is
                         not affiliated with Sulake.</p>
                 </div>
             </div>
