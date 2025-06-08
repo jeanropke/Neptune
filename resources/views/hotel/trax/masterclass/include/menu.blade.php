@@ -77,10 +77,15 @@
             </li>
         @endif
 
-        <li class="inactive">
-            <a href="{{ url('/') }}/hotel/trax/masterclass/sfx">Sound Design &amp; SFX</a>
+        @if ($page == 'sfx')
+        <li class="active">
+            Sound Design &amp; SFX
         </li>
-
+        @else
+            <li class="inactive">
+                <a href="{{ url('/') }}/hotel/trax/masterclass/sfx">Sound Design &amp; SFX</a>
+            </li>
+        @endif
 
         <li class="inactive">
             <a href="{{ url('/') }}/hotel/trax/masterclass/ambient">Ambient</a>
