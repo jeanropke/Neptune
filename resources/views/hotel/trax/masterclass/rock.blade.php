@@ -45,14 +45,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td align="center" colspan="2"><img vspace="15" hspace="4" border="0"
-                                                                    src="{{ url('/') }}/c_images/album1895/tm_room_metal.gif"
-                                                                    alt=""><br></td>
+                                                                    src="{{ url('/') }}/c_images/album1895/tm_room_metal.gif" alt=""><br></td>
 
                                                         </tr>
                                                         <tr>
                                                             <td valign="top" rowspan="2"><br><img vspace="5" hspace="5" border="0" align="left"
-                                                                    src="{{ url('/') }}/c_images/album1395/sirkkelihevi.gif"
-                                                                    alt="">
+                                                                    src="{{ url('/') }}/c_images/album1395/sirkkelihevi.gif" alt="">
                                                                 Rock and Roll has its roots in 1950s rockabilly when artists like
                                                                 Chuck Berry and Little Richard developed the style influenced by
                                                                 original Rhythm and Blues. In the late 60s, rock music was blended
@@ -70,15 +68,12 @@
                                                                 Nirvana, Metallica, U2 and Green Day.<p></p>
                                                             </td>
                                                             <td bgcolor="#c0c0c0">
-                                                                <p align="center"><a
-                                                                        href="{{ url('/') }}/c_images/album949/Heavy_and_rock_trax.gif">
+                                                                <p align="center"><a href="{{ url('/') }}/c_images/album949/Heavy_and_rock_trax.gif">
                                                                         <img"><img vspace="5" hspace="5" border="0"
-                                                                                src="{{ url('/') }}/c_images/album1390/heavy_rock_200x131.gif"
-                                                                                alt=""></img">
+                                                                                src="{{ url('/') }}/c_images/album1390/heavy_rock_200x131.gif" alt=""></img">
                                                                     </a></p>
-                                                                <p align="center"><a
-                                                                        href="{{ url('/') }}/c_images/album949/Heavy_and_rock_trax.gif"
-                                                                        target="_self">Click here to see the full track and recreate it yourself</a><br></p>
+                                                                <p align="center"><a href="{{ url('/') }}/c_images/album949/Heavy_and_rock_trax.gif" target="_self">Click here to
+                                                                        see the full track and recreate it yourself</a><br></p>
                                                                 <p>&nbsp;</p>
                                                             </td>
                                                         </tr>
@@ -86,17 +81,13 @@
                                                             <td bgcolor="#c0c0c0">
                                                                 <p style="margin-left: 10px;"><span style="font-weight: bold;">Trax used in this composition:</span><br>
                                                                     <br> <img vspace="0" hspace="0" border="0" align="bottom"
-                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_orange.gif"
-                                                                        alt="">
+                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_orange.gif" alt="">
                                                                     Snotty Day<br> <img vspace="0" hspace="0" border="0" align="bottom"
-                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_magenta.gif"
-                                                                        alt="">
+                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_magenta.gif" alt="">
                                                                     Moshy Meyal<br>
-                                                                    <br><br> Listen here <a
-                                                                        href="{{ url('/') }}/c_images/album2354/traxexample12_heavyrock.mp3"><img
+                                                                    <br><br> Listen here <a href="{{ url('/') }}/c_images/album2354/traxexample12_heavyrock.mp3"><img
                                                                             vspace="0" hspace="0" border="0" align="absmiddle"
-                                                                            src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif"
-                                                                            alt=""></a>
+                                                                            src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -123,12 +114,11 @@
                                                             <td>
                                                                 <b>
                                                                     <img vspace="0" hspace="8" border="0" align="left"
-                                                                        src="{{ url('/') }}/c_images/album1394/sound_set_21_small.png"
-                                                                        alt="">Snotty
+                                                                        src="{{ url('/') }}/c_images/album1394/sound_set_21_small.png" alt="">Snotty
                                                                     Day</b><br>
                                                                 <div id="purchase_3" class="purchase-component">
-                                                                    Snotty Day costs 3 coins. To get more coins, please visit the <a
-                                                                        href="{{ url('/') }}/credits">Coin pages</a><br>
+                                                                    Snotty Day costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                        pages</a><br>
                                                                     <span id="purchase_3_purchase"></span>
                                                                     <script language="JavaScript">
                                                                         var purchaseButton = Builder.node("a", {
@@ -159,16 +149,11 @@
                                                             </td>
                                                             <td>
                                                                 <img vspace="0" hspace="8" border="0" align="left"
-                                                                    src="{{ url('/') }}/c_images/album1394/sound_set_28_small.png"
-                                                                    alt=""><b>Moshy
+                                                                    src="{{ url('/') }}/c_images/album1394/sound_set_28_small.png" alt=""><b>Moshy
                                                                     Metal</b><br>
                                                                 <div id="purchase_4" class="purchase-component">
-
-
-
-
-                                                                    Moshy Metal costs 3 coins. To get more coins, please visit the <a
-                                                                        href="{{ url('/') }}/credits">Coin pages</a><br>
+                                                                    Moshy Metal costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                        pages</a><br>
                                                                     <span id="purchase_4_purchase"></span>
                                                                     <script language="JavaScript">
                                                                         var purchaseButton = Builder.node("a", {
