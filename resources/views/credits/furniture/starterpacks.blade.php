@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '4',
-    'breadcrums' => [['url' => url('/credits'), 'title' => 'Credits'], ['url' => url('/credits/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/credits'), 'title' => 'Credits'], ['url' => url('/credits/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Starter Packs')
@@ -64,90 +64,16 @@
                                                                 <div id="purchase_1" class="purchase-component">
                                                                     A La Mode costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_1_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_1_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_mode"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_1" method="post">
-                                                                            <input type="hidden" name="purchase_1_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_1_product" value="starter_mode" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_1" product="starter_mode" />
                                                                 </div>
                                                             </td>
                                                             <td width="50%" align="center" style="background-color: rgb(230, 239, 239);">
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album109/combo_4.gif" alt=""></div><br>
                                                                 <div id="purchase_2" class="purchase-component">
-
-
-
-
                                                                     Tube Pack costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_2_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_2_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_tv"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_2" method="post">
-                                                                            <input type="hidden" name="purchase_2_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_2_product" value="starter_tv" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_2" product="starter_tv" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -161,96 +87,18 @@
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album2643/deal03.gif" alt=""></div><br><br>
                                                                 <div id="purchase_3" class="purchase-component">
-
-
-
-
                                                                     Living Green costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_3_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_3_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_green"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_3" method="post">
-                                                                            <input type="hidden" name="purchase_3_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_3_product" value="starter_green" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_3" product="starter_green" />
                                                                 </div>
                                                             </td>
                                                             <td width="50%" align="center" style="background-color: rgb(230, 239, 239);">
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album2643/livingroomdeal2.gif" alt=""></div><br>
                                                                 <div id="purchase_4" class="purchase-component">
-
-
-
-
                                                                     Home, Sweet, Home costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_4_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_4_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_home"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_4" method="post">
-                                                                            <input type="hidden" name="purchase_4_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_4_product" value="starter_home" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_4" product="starter_home" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -264,96 +112,18 @@
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album2643/candydeal.gif" alt=""></div><br>
                                                                 <div id="purchase_5" class="purchase-component">
-
-
-
-
                                                                     Girl Talk costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_5_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_5_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_candy"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_5" method="post">
-                                                                            <input type="hidden" name="purchase_5_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_5_product" value="starter_candy" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_5" product="starter_candy" />
                                                                 </div>
                                                             </td>
                                                             <td width="50%" align="center" style="background-color: rgb(230, 239, 239);">
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album2643/plasticdeal1.gif" alt=""></div><br>
                                                                 <div id="purchase_6" class="purchase-component">
-
-
-
-
                                                                     Plastic Fantastic costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_6_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_6_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_plastic1"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_6" method="post">
-                                                                            <input type="hidden" name="purchase_6_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_6_product" value="starter_plastic1" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_6" product="starter_plastic1" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -368,96 +138,18 @@
                                                                             src="{{ url('/') }}/c_images/album2643/bedroomdeal.gif" alt=""></div>
                                                                 </div><br><br>
                                                                 <div id="purchase_7" class="purchase-component">
-
-
-
-
                                                                     Sleep In Style costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_7_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_7_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_bedroom"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_7" method="post">
-                                                                            <input type="hidden" name="purchase_7_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_7_product" value="starter_bedroom" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_7" product="starter_bedroom" />
                                                                 </div>
                                                             </td>
                                                             <td width="50%" align="center" style="background-color: rgb(230, 239, 239);">
                                                                 <div height="215"><img vspace="0" hspace="0" border="0"
                                                                         src="{{ url('/') }}/c_images/album2643/kitchendeal.gif" alt=""></div><br>
                                                                 <div id="purchase_8" class="purchase-component">
-
-
-
-
                                                                     Bachelor Pad costs 10 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_8_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_8_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web-gallery/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("starter_kitchen"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
-                                                                    <noscript>
-                                                                        <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_8" method="post">
-                                                                            <input type="hidden" name="purchase_8_task" value="purchase" />
-                                                                            <input type="hidden" name="purchase_8_product" value="starter_kitchen" />
-                                                                            <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
-                                                                            <input type="submit" value="Purchase" class="process-button" />
-                                                                        </form>
-                                                                    </noscript>
-
-
+                                                                    <x-purchase_button id="purchase_8" product="starter_kitchen" />
                                                                 </div>
                                                             </td>
                                                         </tr>
