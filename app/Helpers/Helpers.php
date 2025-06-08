@@ -9,6 +9,7 @@ use App\Models\Partner;
 use App\Models\StaffLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 
 function user()
 {
@@ -86,7 +87,7 @@ function boxes($page, $column)
     );
 
     foreach ($boxes as $box) {
-        $box->content = preg_replace($search, $replace, $box->content);
+        $box->content = Blade::render(preg_replace($search, $replace, $box->content));
     }
 
     return $boxes;
