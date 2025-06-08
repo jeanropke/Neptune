@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']],
 ])
 
 @section('title', 'Rock & Heavy')
@@ -23,7 +23,7 @@
                                             </div>
                                             <div class="v3box-content">
                                                 <div class="v3box-body">
-                                                    {!! $box->content !!}
+                                                    {!! Blade::render($box->content) !!}
                                                     <div class="clear"></div>
                                                 </div>
                                             </div>
@@ -122,32 +122,7 @@
                                                                 <div id="purchase_3" class="purchase-component">
                                                                     Snotty Day costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_3_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_3_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("A0 sound_set_21"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
+                                                                    <x-purchase_button id="purchase_3" product="A0 sound_set_21" />
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -157,32 +132,7 @@
                                                                 <div id="purchase_4" class="purchase-component">
                                                                     Moshy Metal costs 3 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_4_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_4_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("A0 sound_set_28"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
+                                                                    <x-purchase_button id="purchase_4" product="A0 sound_set_28" />
                                                                 </div>
                                                             </td>
                                                         </tr>

@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']],
 ])
 
 @section('title', 'Hip-Hop')
@@ -23,7 +23,7 @@
                                             </div>
                                             <div class="v3box-content">
                                                 <div class="v3box-body">
-                                                    {!! $box->content !!}
+                                                    {!! Blade::render($box->content) !!}
                                                     <div class="clear"></div>
                                                 </div>
                                             </div>
@@ -45,13 +45,15 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <p align="center">
-                                                                    <img vspace="15" hspace="0" border="0" align="middle" src="{{ url('/') }}/c_images/album1895/tm_room_hiphop_001.gif" alt=""><br>
+                                                                    <img vspace="15" hspace="0" border="0" align="middle"
+                                                                        src="{{ url('/') }}/c_images/album1895/tm_room_hiphop_001.gif" alt=""><br>
                                                                 </p>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top" rowspan="2"><br>
-                                                                <img vspace="5" hspace="5" border="0" align="left" src="{{ url('/') }}/c_images/album1395/bling.gif" alt="">
+                                                                <img vspace="5" hspace="5" border="0" align="left" src="{{ url('/') }}/c_images/album1395/bling.gif"
+                                                                    alt="">
                                                                 Hip-hop was born in late 1970s and early 1980s
                                                                 mainly in the New York Bronx. Artists like Africa
                                                                 Bambaata, Grandmaster Flash and The Sugar
@@ -73,13 +75,10 @@
                                                                     and beatboxing. Today some of the most succesful Hip-Hop artists are
                                                                     Eminem, 50 Cent, Dr. Dre, Busta Rhymes, Jay Z and P. Diddy.</p>
                                                             </td>
-                                                            <td bgcolor="#c0c0c0"><a
-                                                                    href="{{ url('/') }}/c_images/album949/clubrnb_trax.gif"><img
-                                                                        vspace="10" hspace="10" border="0" src="{{ url('/') }}/c_images/album1390/club_rnb_200x131.gif"
-                                                                        alt=""></a>
-                                                                <p align="center"><a
-                                                                        href="{{ url('/') }}/c_images/album949/clubrnb_trax.gif"
-                                                                        target="_self">Click here to see the full track and recreate it yourself</a><br></p>
+                                                            <td bgcolor="#c0c0c0"><a href="{{ url('/') }}/c_images/album949/clubrnb_trax.gif"><img vspace="10" hspace="10"
+                                                                        border="0" src="{{ url('/') }}/c_images/album1390/club_rnb_200x131.gif" alt=""></a>
+                                                                <p align="center"><a href="{{ url('/') }}/c_images/album949/clubrnb_trax.gif" target="_self">Click here to see the
+                                                                        full track and recreate it yourself</a><br></p>
                                                                 <p>&nbsp;</p>
                                                             </td>
                                                         </tr>
@@ -95,8 +94,7 @@
                                                                         src="{{ url('/') }}/c_images/album2063/trax_bullet_green.gif" alt="">
                                                                     Boy Band Sensation<br> <img vspace="0" hspace="0" border="0" align="bottom"
                                                                         src="{{ url('/') }}/c_images/album2063/trax_bullet_blue.gif" alt="">
-                                                                    Cameron's Ex<br><br> Listen here <a
-                                                                        href="{{ url('/') }}/c_images/album2354/traxexample9_moodyrnb.mp3"><img
+                                                                    Cameron's Ex<br><br> Listen here <a href="{{ url('/') }}/c_images/album2354/traxexample9_moodyrnb.mp3"><img
                                                                             vspace="0" hspace="0" border="0" align="absmiddle"
                                                                             src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 </p>
@@ -126,66 +124,16 @@
                                                                 <div id="purchase_3" class="purchase-component">
                                                                     MnM costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
                                                                         pages</a><br>
-                                                                    <span id="purchase_3_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_3_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("A0 sound_set_19"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
+                                                                    <x-purchase_button id="purchase_3" product="A0 sound_set_19" />
                                                                 </div>
                                                             </td>
                                                             <td><br></td>
                                                             <td height="68" bgcolor="#c0c0c0"><img vspace="0" hspace="5" border="0" align="left"
                                                                     src="{{ url('/') }}/c_images/album1394/sound_set_14_small.png" alt=""> <b>Cameron's Ex</b><br>
                                                                 <div id="purchase_4" class="purchase-component">
-                                                                    Cameron's Ex costs 5 coins. To get more coins, please visit the <a
-                                                                        href="{{ url('/') }}/credits">Coin pages</a><br>
-                                                                    <span id="purchase_4_purchase"></span>
-                                                                    <script language="JavaScript">
-                                                                        var purchaseButton = Builder.node("a", {
-                                                                            href: "#",
-                                                                            className: "colorlink orange"
-                                                                        }, [Builder.node("span", "Purchase")]);
-                                                                        $("purchase_4_purchase").appendChild(purchaseButton);
-                                                                        Event.observe(purchaseButton, "click", function(e) {
-                                                                            Event.stop(e);
-                                                                            var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                            appendDialogBody(dialog,
-                                                                                "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                true);
-                                                                            moveDialogToCenter(dialog);
-                                                                            showOverlay();
-                                                                            new Ajax.Request(
-                                                                                habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                    method: "post",
-                                                                                    parameters: "product=" + encodeURIComponent("A0 sound_set_14"),
-                                                                                    onComplete: function(req, json) {
-                                                                                        setDialogBody(dialog, req.responseText);
-                                                                                    }
-                                                                                }
-                                                                            );
-                                                                        }, false);
-                                                                    </script>
+                                                                    Cameron's Ex costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                        pages</a><br>
+                                                                    <x-purchase_button id="purchase_4" product="A0 sound_set_14" />
                                                                 </div> <br>
                                                             </td>
                                                         </tr>
@@ -194,38 +142,9 @@
                                                                     src="{{ url('/') }}/c_images/album1394/sound_set_16_small.png" alt=""><b> Ferry Nultado</b><br><span
                                                                     style="font-weight: 400;">
                                                                     <div id="purchase_5" class="purchase-component">
-
-
-
-
-                                                                        Ferry Nultado costs 5 coins. To get more coins, please visit the <a
-                                                                            href="{{ url('/') }}/credits">Coin pages</a><br>
-                                                                        <span id="purchase_5_purchase"></span>
-                                                                        <script language="JavaScript">
-                                                                            var purchaseButton = Builder.node("a", {
-                                                                                href: "#",
-                                                                                className: "colorlink orange"
-                                                                            }, [Builder.node("span", "Purchase")]);
-                                                                            $("purchase_5_purchase").appendChild(purchaseButton);
-                                                                            Event.observe(purchaseButton, "click", function(e) {
-                                                                                Event.stop(e);
-                                                                                var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
-                                                                                appendDialogBody(dialog,
-                                                                                    "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
-                                                                                    true);
-                                                                                moveDialogToCenter(dialog);
-                                                                                showOverlay();
-                                                                                new Ajax.Request(
-                                                                                    habboReqPath + "/furnipurchase/purchase_confirmation", {
-                                                                                        method: "post",
-                                                                                        parameters: "product=" + encodeURIComponent("A0 sound_set_16"),
-                                                                                        onComplete: function(req, json) {
-                                                                                            setDialogBody(dialog, req.responseText);
-                                                                                        }
-                                                                                    }
-                                                                                );
-                                                                            }, false);
-                                                                        </script>
+                                                                        Ferry Nultado costs 5 coins. To get more coins, please visit the <a href="{{ url('/') }}/credits">Coin
+                                                                            pages</a><br>
+                                                                            <x-purchase_button id="purchase_5" product="A0 sound_set_16" />
                                                                     </div>
                                                                 </span></td>
                                                         </tr>

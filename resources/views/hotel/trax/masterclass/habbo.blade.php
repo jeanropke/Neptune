@@ -23,7 +23,7 @@
                                             </div>
                                             <div class="v3box-content">
                                                 <div class="v3box-body">
-                                                    {!! $box->content !!}
+                                                    {!! Blade::render($box->content) !!}
                                                     <div class="clear"></div>
                                                 </div>
                                             </div>
