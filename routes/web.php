@@ -107,6 +107,7 @@ Route::middleware('user')->group(function () {
                 Route::get('/habbo', function() { return view('hotel.trax.masterclass.habbo'); })->name('hotel.trax.masterclass.habbo');
                 Route::get('/groove', function() { return view('hotel.trax.masterclass.groove'); })->name('hotel.trax.masterclass.groove');
                 Route::get('/sfx', function() { return view('hotel.trax.masterclass.sfx'); })->name('hotel.trax.masterclass.sfx');
+                Route::get('/ambient', function() { return view('hotel.trax.masterclass.ambient'); })->name('hotel.trax.masterclass.ambient');
             });
         });
     });

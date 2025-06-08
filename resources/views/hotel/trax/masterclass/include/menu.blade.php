@@ -87,10 +87,15 @@
             </li>
         @endif
 
-        <li class="inactive">
-            <a href="{{ url('/') }}/hotel/trax/masterclass/ambient">Ambient</a>
+        @if ($page == 'ambient')
+        <li class="active">
+            Ambient
         </li>
-
+        @else
+            <li class="inactive">
+                <a href="{{ url('/') }}/hotel/trax/masterclass/ambient">Ambient</a>
+            </li>
+        @endif
     </ul>
     <div class="clear"></div>
 </div>
