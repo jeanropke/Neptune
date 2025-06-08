@@ -1,4 +1,7 @@
-@extends('layouts.master', ['menuId' => '2'])
+@extends('layouts.master', [
+    'menuId' => '2',
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']]
+])
 
 @section('title', 'Disco')
 
