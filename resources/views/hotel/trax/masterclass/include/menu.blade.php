@@ -47,10 +47,15 @@
             </li>
         @endif
 
-        <li class="inactive">
-            <a href="{{ url('/') }}/hotel/trax/masterclass/disco">Disco</a>
+        @if ($page == 'disco')
+        <li class="active">
+            Disco
         </li>
-
+        @else
+            <li class="inactive">
+                <a href="{{ url('/') }}/hotel/trax/masterclass/disco">Disco</a>
+            </li>
+        @endif
 
         <li class="inactive">
             <a href="{{ url('/') }}/hotel/trax/masterclass/habbo">8-bit / Habbo</a>
