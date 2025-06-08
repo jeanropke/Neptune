@@ -102,6 +102,7 @@ Route::middleware('user')->group(function () {
                 Route::get('/', function() { return view('hotel.trax.masterclass.index'); })->name('hotel.trax.masterclass.index');
                 Route::get('/hiphop', function() { return view('hotel.trax.masterclass.hiphop'); })->name('hotel.trax.masterclass.hiphop');
                 Route::get('/rock', function() { return view('hotel.trax.masterclass.rock'); })->name('hotel.trax.masterclass.rock');
+                Route::get('/electronic', function() { return view('hotel.trax.masterclass.electronic'); })->name('hotel.trax.masterclass.electronic');
             });
         });
     });
