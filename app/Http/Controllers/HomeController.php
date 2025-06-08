@@ -5,20 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Home\HomeInventory;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
+use App\Models\Home\HomeUpdate;
 use App\Models\Home\StoreCategory;
 use App\Models\Home\StoreItem;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function home($username = null)
-    {
-        if (!$username)
-            $username = user()->username;
 
+    public function homeTutorial()
+    {
+        return view('home.tutorial')->with('latests', HomeUpdate::orderBy('updated_at', 'DESC')->limit(10)->get());
+    }
+
+    public function homeUsername($username)
+    {
         $user = User::where('username', $username)->first();
         if (!$user)
             return 'home 404';
@@ -66,13 +71,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function homeId($userId)
+    public function homeId(Request $request)
     {
-        $userinfo = User::find($userId);
+        $userinfo = User::find($request->id);
         if (!$userinfo)
             return 'home 404';
 
-        return $this->home($userinfo->username);
+        return $this->homeUsername($userinfo->username);
     }
 
     public function startSession(Request $request)
@@ -227,6 +232,10 @@ class HomeController extends Controller
             ]);
         }
 
+        HomeUpdate::updateOrCreate(
+            ['user_id' =>  user()->id],
+            ['updated_at' => Carbon::now()]
+        );
 
         $session->delete();
 

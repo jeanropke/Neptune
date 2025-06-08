@@ -206,7 +206,8 @@ Route::middleware('user')->group(function () {
         Route::get('/go', [HelpController::class, 'iotGo'])->name('iot.go');
     });
 
-    Route::get('/home/{username?}', [HomeController::class, 'home'])->name('home.user.username');
+    Route::get('/home', [HomeController::class, 'homeTutorial'])->name('home.user.tutorial');
+    Route::get('/home/{username}', [HomeController::class, 'homeUsername'])->name('home.user.username');
     Route::get('/home/{id}/id', [HomeController::class, 'homeId'])->name('home.user.id');
 
     Route::prefix('myhabbo')->group(function () {
