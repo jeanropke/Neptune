@@ -25,3 +25,14 @@
         );
     }, false);
 </script>
+
+{{--
+<noscript>
+    <form action="{{ url('/') }}/hotel/furniture/starterpacks#purchase_2" method="post">
+        <input type="hidden" name="purchase_2_task" value="purchase" />
+        <input type="hidden" name="purchase_2_product" value="starter_tv" />
+        <input type="hidden" name="__app_key" value="dcazA2DGf22H8dDCEkJyr" />
+        <input type="submit" value="Purchase" class="process-button" />
+    </form>
+</noscript>
+--}}
