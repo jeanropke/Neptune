@@ -171,6 +171,34 @@ var SelectorPreview = {
     }
 }
 
+var VersionChecker = {
+    initialise: function () {
+        $('#version-checker').click((e) => {
+            e.preventDefault();
+            $('#version-checker').attr('disabled', 'disabled');
+            $('#log').text('Checking... please wait...\n');
+            $.ajax(habboReqPath + "help/version", {
+                method: "post"
+            }).done((json) => {
+                if (json.error) {
+                    $('#log').append(json.error);
+                }
+                else {
+                    if (json.version > json.cms_version) {
+                        $('#log').append(`A new version was found.\n`);
+                        $('#log').append(`v${json.version} - Published at ${json.published_at}\n`);
+                        $('#log').append('Please download it on https://github.com/jeanropke/Neptune/releases');
+                    }
+                    else {
+                        $('#log').append(`You are using the latest release!`);
+                    }
+                }
+
+            });
+        });
+    }
+}
+
 var Dialog = {
     createDialog: function (dialogId, header, dialogZIndex, dialogLeft, dialogTop, exitCallback, tabs) {
         if (!dialogId) return;

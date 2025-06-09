@@ -15,8 +15,9 @@
         var habboImagerUrl = "/habbo-imaging/";
 
         $.ajaxSetup({
-            headers:
-            { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
         });
     </script>
     <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
@@ -31,8 +32,7 @@
     <div id="loading-layer" style="display:none">
         <div id="loading-layer-shadow">
             <div id="loading-layer-inner">
-                <img src="{{ url('/') }}/web/housekeeping/images/loading_anim.gif" style="vertical-align:middle" border="0"
-                    alt="Loading..." />
+                <img src="{{ url('/') }}/web/housekeeping/images/loading_anim.gif" style="vertical-align:middle" border="0" alt="Loading..." />
                 <br />
                 <span style="font-weight:bold" id="loading-layer-text">Loading Data. Please Wait...</span>
             </div>
@@ -48,7 +48,8 @@
             </div>
             <div class="tab{{ $menu == 'server' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/system.png" style="vertical-align:middle" />
-                <a href="/housekeeping/server">Server</a></div>
+                <a href="/housekeeping/server">Server</a>
+            </div>
             <div class="tab{{ $menu == 'site' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/tools.png" style="vertical-align:middle" />
                 <a href="/housekeeping/site">Site & Content</a>
@@ -59,39 +60,40 @@
             </div>
             <div class="tab{{ $menu == 'neptunecms' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/components.png" style="vertical-align:middle" />
-                <a href="/housekeeping/neptunecms">NeptuneCMS</a></div>
+                <a href="/housekeeping/neptunecms">NeptuneCMS</a>
+            </div>
             <div class="tab{{ $menu == 'users' ? 'on' : 'off' }}-main">
                 <img src="{{ url('/') }}/web/housekeeping/images/admin.png" style="vertical-align:middle" />
-                <a href="/housekeeping/users/listing">Users & Moderation</a></div>
+                <a href="/housekeeping/users/listing">Users & Moderation</a>
+            </div>
+            <div class="tab{{ $menu == 'help' ? 'on' : 'off' }}-main">
+                <img src="{{ url('/') }}/web/housekeeping/images/help.png" style="vertical-align:middle" />
+                <a href="/housekeeping/help">Help</a>
+            </div>
+            <div class="logoright">
 
-            {{--<div class="tab{{ $menu == 'help' ? 'on' : 'off' }}-main">
-            <img src="{{ url('/') }}/web/housekeeping/images/help.png" style="vertical-align:middle" />
-            <a href="/housekeeping/help">Help</a>
-        </div>--}}
-        <div class="logoright">
-
+            </div>
         </div>
-    </div>
-    <!-- / TOP TABS -->
-    <div class="sub-tab-strip">
-        <div class="global-memberbar">
-            Welcome <strong>{{ user()->username }}</strong>
-            [<a href="{{ url('/') }}" target="_blank">Site Home</a>]
+        <!-- / TOP TABS -->
+        <div class="sub-tab-strip">
+            <div class="global-memberbar">
+                Welcome <strong>{{ user()->username }}</strong>
+                [<a href="{{ url('/') }}" target="_blank">Site Home</a>]
+            </div>
+            <div class="navwrap">
+                <a href="/housekeeping/dashboard"> {{ env('APP_NAME') }} Housekeeping</a>
+            </div>
         </div>
-        <div class="navwrap">
-            <a href="/housekeeping/dashboard"> {{ env('APP_NAME') }} Housekeeping</a>
+        <div class="outerdiv" id="global-outerdiv">
+            @yield('content')
+            <!-- / OUTERDIV -->
+            <div align="center">
+                Time: {{ round(microtime(true) - LARAVEL_START, 5) }}
+            </div>
+            <div class="copy" align="center">{{ config('cms.name') }} v{{ config('cms.version') }} [{{ config('cms.title') }}] {{ config('cms.stable') }}<br />
+                <font size="1">Build {{ config('cms.build') }} {{ config('cms.gmt') }}</font>
+            </div>
         </div>
-    </div>
-    <div class="outerdiv" id="global-outerdiv">
-        @yield('content')
-        <!-- / OUTERDIV -->
-        <div align="center">
-            Time: {{ round(microtime(true) - LARAVEL_START, 5) }}
-        </div>
-        <div class="copy" align="center">{{ config('cms.name') }} v{{ config('cms.version') }} [{{ config('cms.title') }}] {{ config('cms.stable') }}<br />
-            <font size="1">Build {{ config('cms.build') }} {{ config('cms.gmt') }}</font>
-        </div>
-    </div>
     </div>
 </body>
 

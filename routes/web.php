@@ -22,6 +22,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\Housekeeping\AuthController as HousekeepingAuthController;
 use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\FurniPickerController;
+use App\Http\Controllers\Housekeeping\HelpController as HouseekeepingHelpController;
 use App\Http\Controllers\Housekeeping\Furniture\CatalogueController;
 use App\Http\Controllers\Housekeeping\Furniture\FurnitureController;
 use App\Http\Controllers\Housekeeping\Furniture\WebOfferController;
@@ -581,7 +582,10 @@ Route::middleware('admin')->group(function () {
         });
 
         Route::prefix('help')->group(function () {
-            Route::get('/', [HelpController::class, 'index'])->name('housekeeping.help.index');
+            Route::get('/', [HouseekeepingHelpController::class, 'index'])->name('housekeeping.help.index');
+            Route::get('/bugs', [HouseekeepingHelpController::class, 'bugs'])->name('housekeeping.help.bugs');
+            Route::get('/version', [HouseekeepingHelpController::class, 'version'])->name('housekeeping.help.version');
+            Route::post('/version', [HouseekeepingHelpController::class, 'versionChecker'])->name('housekeeping.help.version.checker');
         });
 
         Route::post('furnipicker', [FurniPickerController::class, 'listing'])->name('furnipicker.listing');
