@@ -219,10 +219,10 @@
                                 </div>
                                 <div id="acp-update-wrapper">
                                     <div class="homepage_pane_border" id="acp-update-normal">
-                                        <div class="homepage_section">Support HoloCMS</div>
+                                        <div class="homepage_section">Support {{ config('cms.name') }}</div>
                                         <div style="font-size:12px;padding:4px; text-align:center">
                                             <p>
-                                                HoloCMS is, always has been, and always will be, free software. To help keep
+                                                {{ config('cms.name') }} is, always has been, and always will be, free software. To help keep
                                                 the developer happy and allow him to buy a pizza <sup>every now and
                                                     then</sup>, you can make a donation. This is completely optional, and if
                                                 you decide not to donate, you won't miss out on any advantages, besides the
@@ -230,33 +230,19 @@
                                                 current developer to encourage development and get faster releases (results
                                                 may vary).
                                                 <br />
-                                                <br /> Donate to Miguel González Aravena (the current HoloCMS developer):
+                                                <br /> Donate to Jean Röpke (the current {{ config('cms.name') }} developer):
                                                 <br />
                                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                                <input type="hidden" name="cmd" value="_s-xclick">
-                                                <input type="hidden" name="hosted_button_id" value="SMY3KKLWK73QY">
+                                                <input type="hidden" name="cmd" value="_donations">
+                                                <input type="hidden" name="business" value="X3A9DHBPW3B2A">
+                                                <input type="hidden" name="lc" value="en_US">
+                                                <input type="hidden" name="currency_code" value="USD">
                                                 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit"
                                                     alt="PayPal - The safer, easier way to pay online!">
                                                 <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
                                             </form>
                                             <br />
-                                            <br /> Donate to Meth0d (the orginal HoloCMS developer):
-                                            <br />
-                                            <br />
-                                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                                                <input type="hidden" name="cmd" value="_donations">
-                                                <input type="hidden" name="business" value="meth0d@meth0d.org">
-                                                <input type="hidden" name="item_name" value="HoloCMS Donation">
-                                                <input type="hidden" name="no_shipping" value="0">
-                                                <input type="hidden" name="no_note" value="1">
-                                                <input type="hidden" name="currency_code" value="USD">
-                                                <input type="hidden" name="tax" value="0">
-                                                <input type="hidden" name="lc" value="GB">
-                                                <input type="hidden" name="bn" value="PP-DonationsBF">
-                                                <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" border="0" name="submit"
-                                                    alt="Donate to HoloCMS using PayPal - The safer, easier way to pay online.">
-                                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                                            </form>
+
                                             <br />
                                             </p>
                                         </div>
@@ -268,10 +254,9 @@
                                         <div class="homepage_section">Need assistance?</div>
                                         <div style="font-size:12px;padding:4px; text-align:center">
                                             <p>
-                                                If you need Help with your copy of HoloCMS, your first stop should be the
+                                                If you need Help with your copy of {{ config('cms.name') }}, your first stop should be the
                                                 'Help' tab in Housekeeping. If you still have problems, feel free to ask for
-                                                support on <a href="http://forum.ragezone.com/f282" target="_BLANK">RaGEZONE</a> or <a href="http://www.meth0d.org"
-                                                    target="_BLANK">Meth0d dot org</a>.
+                                                support on <a href="https://github.com/jeanropke/Neptune" target="_BLANK">Neptune GitHub page</a>.
                                             </p>
                                         </div>
                                     </div>
