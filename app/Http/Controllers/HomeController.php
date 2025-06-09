@@ -221,10 +221,12 @@ class HomeController extends Controller
                 return;
 
             $bgInUse = HomeItem::where([['data', 'background'], ['home_id', $session->user_id]])->first();
-            $bgInUse->update([
-                'home_id'   => null,
-                'group_id'  => null
-            ]);
+            if($bgInUse) {
+                $bgInUse->update([
+                    'home_id'   => null,
+                    'group_id'  => null
+                ]);
+            }
             $home = HomeItem::where([['data', 'background'], ['owner_id', $session->user_id], ['item_id', $storeItem->id]])->first();
             $home->update([
                 'home_id'   => $session->home_id,
