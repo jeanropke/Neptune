@@ -82,7 +82,7 @@ Route::middleware('user')->group(function () {
     Route::prefix('hotel')->group(function () {
         Route::get('/', [HotelController::class, 'index'])->name('hotel.index');
         Route::get('/pets', [HotelController::class, 'pets'])->name('hotel.pets');
-        Route::get('/pets/taking_care_of_your_pet', [HotelController::class, 'takingCareOfYourPet'])->name('hotel.pets');
+        Route::get('/pets/taking_care_of_your_pet', [HotelController::class, 'takingCareOfYourPet'])->name('hotel.pets.taking_care_of_your_pet');
         Route::get('/room', [HotelController::class, 'room'])->name('hotel.room');
         Route::get('/staff', [HotelController::class, 'staff'])->name('hotel.staff');
         Route::get('/groups', [HotelController::class, 'groups'])->name('hotel.groups');
@@ -127,7 +127,7 @@ Route::middleware('user')->group(function () {
     Route::prefix('habboclub')->group(function () {
         Route::post('/habboclub_subscribe', [ClubController::class, 'clubSubscribe'])->name('club.subscribe');
         Route::post('/habboclub_subscribe_submit', [ClubController::class, 'clubSubscribeSubmit'])->name('club.subscribe.submit');
-        Route::post('/habboclub_meter_update', [ClubController::class, 'clubMeterUpdate'])->name('club.subscribe.submit');
+        Route::post('/habboclub_meter_update', [ClubController::class, 'clubMeterUpdate'])->name('club.meter.update');
     });
 
     Route::prefix('community')->group(function () {
@@ -255,15 +255,15 @@ Route::middleware('user')->group(function () {
         Route::post('/store/{type}', [WebStoreController::class, 'loadStore'])->name('myhabbo.store.load');
 
         //Old stuff
-        Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
-        Route::post('/store/main', [HomeController::class, 'storeMain'])->name('myhabbo.store.main');
-        Route::post('/store/inventory', [HomeController::class, 'inventoryMain'])->name('myhabbo.inventory.main');
-        Route::post('/store/inventory_items', [HomeController::class, 'inventoryItems'])->name('myhabbo.inventory.items');
-        Route::post('/store/inventory_preview', [HomeController::class, 'inventoryPreview'])->name('myhabbo.inventory.preview');
-        Route::post('/store/items', [HomeController::class, 'getStoreItems'])->name('myhabbo.store.main');
-        Route::post('/store/preview', [HomeController::class, 'previewItem'])->name('myhabbo.item.preview');
-        Route::post('/store/purchase_confirm', [HomeController::class, 'purchaseConfirm'])->name('myhabbo.item.purchase_confirm');
-        Route::post('/store/purchase_stickers', [HomeController::class, 'purchaseDone'])->name('myhabbo.item.purchase_done');
+        //Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
+        //Route::post('/store/main', [HomeController::class, 'storeMain'])->name('myhabbo.store.main');
+        //Route::post('/store/inventory', [HomeController::class, 'inventoryMain'])->name('myhabbo.inventory.main');
+        //Route::post('/store/inventory_items', [HomeController::class, 'inventoryItems'])->name('myhabbo.inventory.items');
+        //Route::post('/store/inventory_preview', [HomeController::class, 'inventoryPreview'])->name('myhabbo.inventory.preview');
+        //Route::post('/store/items', [HomeController::class, 'getStoreItems'])->name('myhabbo.store.main');
+        //Route::post('/store/preview', [HomeController::class, 'previewItem'])->name('myhabbo.item.preview');
+        //Route::post('/store/purchase_confirm', [HomeController::class, 'purchaseConfirm'])->name('myhabbo.item.purchase_confirm');
+        //Route::post('/store/purchase_stickers', [HomeController::class, 'purchaseDone'])->name('myhabbo.item.purchase_done');
 
         Route::get('/trax_song/{id}', [WidgetController::class, 'getTraxSong'])->name('myhabbo.trax_song.get');
         Route::post('/traxplayer/select_song', [WidgetController::class, 'saveTraxSong'])->name('myhabbo.trax_song.select_song');
@@ -328,18 +328,18 @@ Route::middleware('guest')->group(function () {
     Route::prefix('register')->group(function () {
         Route::get('/username', [AuthController::class, 'checkUsername']);
         Route::post('/start', [AuthController::class, 'registerStart'])->name('auth.register.start');
-        Route::post('/step/2', [AuthController::class, 'registerStepTwoVerify'])->name('auth.register.step_2');
+        Route::post('/step/2', [AuthController::class, 'registerStepTwoVerify'])->name('auth.register.step_2.verify');
 
         Route::get('/step/2', [AuthController::class, 'registerStepTwo'])->name('auth.register.step_2');
-        Route::post('/step/3', [AuthController::class, 'registerStepThreeVerify'])->name('auth.register.step_3');
+        Route::post('/step/3', [AuthController::class, 'registerStepThreeVerify'])->name('auth.register.step_3.verify');
 
         Route::get('/step/3', [AuthController::class, 'registerStepThree'])->name('auth.register.step_3');
-        Route::post('/step/4', [AuthController::class, 'registerStepFourVerify'])->name('auth.register.step_4');
+        Route::post('/step/4', [AuthController::class, 'registerStepFourVerify'])->name('auth.register.step_4.verify');
 
         Route::get('/step/4', [AuthController::class, 'registerStepFour'])->name('auth.register.step_4');
         Route::post('/done', [AuthController::class, 'registerDone'])->name('auth.register.done');
 
-        Route::get('/done', [AuthController::class, 'registerDoneRedirect'])->name('auth.register.done');
+        Route::get('/done', [AuthController::class, 'registerDoneRedirect'])->name('auth.register.done.redirect');
     });
     Route::prefix('account')->group(function () {
         Route::get('/password/forgot', [AuthController::class, 'forgotPassword'])->name('auth.password.forgot');
@@ -347,7 +347,7 @@ Route::middleware('guest')->group(function () {
         Route::get('/password/reset/{token}', [AuthController::class, 'forgotPasswordReset'])->name('auth.password.reset');
         Route::post('/password/reset', [AuthController::class, 'forgotPasswordCheck'])->name('auth.password.check');
 
-        Route::post('/forgot', [AuthController::class, 'forgotPasswordMyAccounts'])->name('auth.password.forgot');
+        Route::post('/forgot', [AuthController::class, 'forgotPasswordMyAccounts'])->name('auth.account.forgot');
         Route::get('/forgot', [AuthController::class, 'emailForgotPassword'])->name('auth.forgot');
         Route::post('submit', [AuthController::class, 'doLogin'])->name('account.submit');
 
@@ -366,7 +366,7 @@ Route::middleware('admin')->group(function () {
 
     Route::prefix('housekeeping')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.index');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.dashboard');
         Route::post('/dashboard', [DashboardController::class, 'saveNote'])->name('housekeeping.save_note');
 
         Route::prefix('settings')->group(function() {
@@ -400,35 +400,35 @@ Route::middleware('admin')->group(function () {
             Route::get('/catalogue/edit/{id}', [CatalogueController::class, 'catalogueEdit'])->name('housekeeping.furniture.catalogue.pages.edit');
             Route::post('/catalogue/save', [CatalogueController::class, 'catalogueSave'])->name('housekeeping.furniture.catalogue.pages.save');
             Route::get('/catalogue/add', [CatalogueController::class, 'catalogueAdd'])->name('housekeeping.furniture.catalogue.pages.add');
-            Route::post('/catalogue/add', [CatalogueController::class, 'catalogueAddSave'])->name('housekeeping.furniture.catalogue.pages.add');
+            Route::post('/catalogue/add', [CatalogueController::class, 'catalogueAddSave'])->name('housekeeping.furniture.catalogue.pages.add.save');
             Route::post('/catalogue/delete', [CatalogueController::class, 'catalogueDelete'])->name('housekeeping.furniture.catalogue.pages.delete');
 
             Route::get('/catalogue/items', [CatalogueController::class, 'catalogueItems'])->name('housekeeping.furniture.catalogue.items');
             Route::get('/catalogue/items/edit/{id}', [CatalogueController::class, 'catalogueItemsEdit'])->name('housekeeping.furniture.catalogue.items.edit');
             Route::post('/catalogue/items/save', [CatalogueController::class, 'catalogueItemsSave'])->name('housekeeping.furniture.catalogue.items.save');
             Route::get('/catalogue/items/add', [CatalogueController::class, 'catalogueItemsAdd'])->name('housekeeping.furniture.catalogue.items.add');
-            Route::post('/catalogue/items/add', [CatalogueController::class, 'catalogueItemsAddSave'])->name('housekeeping.furniture.catalogue.items.add');
+            Route::post('/catalogue/items/add', [CatalogueController::class, 'catalogueItemsAddSave'])->name('housekeeping.furniture.catalogue.items.add.save');
             Route::post('/catalogue/items/delete', [CatalogueController::class, 'catalogueItemsDelete'])->name('housekeeping.furniture.catalogue.items.delete');
 
             Route::get('/catalogue/packages', [CatalogueController::class, 'cataloguePackages'])->name('housekeeping.furniture.catalogue.packages');
             Route::get('/catalogue/packages/edit/{id}', [CatalogueController::class, 'cataloguePackagesEdit'])->name('housekeeping.furniture.catalogue.packages.edit');
             Route::post('/catalogue/packages/save', [CatalogueController::class, 'cataloguePackagesSave'])->name('housekeeping.furniture.catalogue.packages.save');
             Route::get('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAdd'])->name('housekeeping.furniture.catalogue.packages.add');
-            Route::post('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAddSave'])->name('housekeeping.furniture.catalogue.packages.add');
+            Route::post('/catalogue/packages/add', [CatalogueController::class, 'cataloguePackagesAddSave'])->name('housekeeping.furniture.catalogue.packages.add.save');
             Route::post('/catalogue/packages/delete', [CatalogueController::class, 'cataloguePackagesDelete'])->name('housekeeping.furniture.catalogue.packages.delete');
 
             Route::get('/items', [FurnitureController::class, 'items'])->name('housekeeping.furniture.items');
             Route::get('/items/edit/{id}', [FurnitureController::class, 'furnitureEdit'])->name('housekeeping.furniture.items.edit');
             Route::post('/items/save', [FurnitureController::class, 'furnitureSave'])->name('housekeeping.furniture.items.save');
             Route::get('/items/add', [FurnitureController::class, 'furnitureAdd'])->name('housekeeping.furniture.items.add');
-            Route::post('/items/add', [FurnitureController::class, 'furnitureAddSave'])->name('housekeeping.furniture.items.add');
+            Route::post('/items/add', [FurnitureController::class, 'furnitureAddSave'])->name('housekeeping.furniture.items.add.save');
             Route::post('/items/delete', [FurnitureController::class, 'furnitureDelete'])->name('housekeeping.furniture.items.delete');
 
             Route::get('/weboffers', [WebOfferController::class, 'webOffers'])->name('housekeeping.furniture.weboffers');
             Route::get('/weboffers/edit/{id}', [WebOfferController::class, 'webOffersEdit'])->name('housekeeping.furniture.weboffers.edit');
             Route::post('/weboffers/save', [WebOfferController::class, 'webOffersSave'])->name('housekeeping.furniture.weboffers.save');
             Route::get('/weboffers/add', [WebOfferController::class, 'webOffersAdd'])->name('housekeeping.furniture.weboffers.add');
-            Route::post('/weboffers/add', [WebOfferController::class, 'webOffersAddSave'])->name('housekeeping.furniture.weboffers.add');
+            Route::post('/weboffers/add', [WebOfferController::class, 'webOffersAddSave'])->name('housekeeping.furniture.weboffers.add.save');
             Route::post('/weboffers/delete', [WebOfferController::class, 'webOffersDelete'])->name('housekeeping.furniture.weboffers.delete');
 
         });
@@ -471,7 +471,7 @@ Route::middleware('admin')->group(function () {
             Route::post('/articles/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.articles.create.save');
             Route::get('/articles', [HousekeepingArticleController::class, 'articles'])->name('housekeeping.site.articles');
             Route::get('/articles/restore', [HousekeepingArticleController::class, 'articlesRestore'])->name('housekeeping.site.articles.restore');
-            Route::post('/articles/restore', [HousekeepingArticleController::class, 'articleRestore'])->name('housekeeping.site.articles.restore');
+            Route::post('/articles/restore', [HousekeepingArticleController::class, 'articleRestore'])->name('housekeeping.site.articles.restore.post');
             Route::get('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEdit'])->name('housekeeping.site.articles.edit');
             Route::post('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEditSave'])->name('housekeeping.site.articles.edit.save');
             Route::post('/articles/delete', [HousekeepingArticleController::class, 'articleDelete'])->name('housekeeping.site.articles.delete');
@@ -492,7 +492,7 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/menu/categories', [MenuController::class, 'menuCategoriesListing'])->name('housekeeping.site.menu.categories.listing');
             Route::get('/menu/categories/create', [MenuController::class, 'menuCategoriesCreate'])->name('housekeeping.site.menu.categories.create');
-            Route::post('/menu/categories/create', [MenuController::class, 'menuCategoriesCreateSave'])->name('housekeeping.site.menu.categories.create');
+            Route::post('/menu/categories/create', [MenuController::class, 'menuCategoriesCreateSave'])->name('housekeeping.site.menu.categories.create.save');
             Route::get('/menu/categories/edit/{id}', [MenuController::class, 'menuCategoriesEdit'])->name('housekeeping.site.menu.categories.edit');
             Route::post('/menu/categories/save', [MenuController::class, 'menuCategoriesSave'])->name('housekeeping.site.menu.categories.save');
             Route::post('/menu/categories/delete', [MenuController::class, 'menuCategoriesDelete'])->name('housekeeping.site.menu.categories.delete');
@@ -500,7 +500,7 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/menu/subcategories', [MenuController::class, 'menuSubcategoriesListing'])->name('housekeeping.site.menu.subcategories.listing');
             Route::get('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreate'])->name('housekeeping.site.menu.subcategories.create');
-            Route::post('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreateSave'])->name('housekeeping.site.menu.subcategories.create');
+            Route::post('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreateSave'])->name('housekeeping.site.menu.subcategories.create,save');
             Route::get('/menu/subcategories/edit/{id}', [MenuController::class, 'menuSubcategoriesEdit'])->name('housekeeping.site.menu.subcategories.edit');
             Route::post('/menu/subcategories/save', [MenuController::class, 'menuSubcategoriesSave'])->name('housekeeping.site.menu.subcategories.save');
             Route::post('/menu/subcategories/delete', [MenuController::class, 'menuSubcategoriesDelete'])->name('housekeeping.site.menu.subcategories.delete');
@@ -525,7 +525,7 @@ Route::middleware('admin')->group(function () {
             Route::post('/badges/remove', [UserController::class, 'toolsBadgeRemove'])->name('housekeeping.users.badges.remove');
 
             Route::get('/mass', [UserController::class, 'toolsMass'])->name('housekeeping.users.tools.mass');
-            Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass');
+            Route::post('/mass', [UserController::class, 'toolsMassPost'])->name('housekeeping.users.tools.mass.post');
 
             Route::get('/furniture/{id}', [UserController::class, 'toolsFurniture'])->name('housekeeping.users.furniture');
             Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture.give');
@@ -564,9 +564,9 @@ Route::middleware('admin')->group(function () {
             Route::post('/reports/website/hide', [HouseekeepingReportController::class, 'websiteHide'])->name('housekeeping.moderation.reports.website.hide');
 
             Route::get('/remote/ban', [RemoteController::class, 'ban'])->name('housekeeping.moderation.remote.ban');
-            Route::post('/remote/ban', [RemoteController::class, 'banPost'])->name('housekeeping.moderation.remote.ban');
+            Route::post('/remote/ban', [RemoteController::class, 'banPost'])->name('housekeeping.moderation.remote.ban.post');
             Route::get('/unban', [RemoteController::class, 'unban'])->name('housekeeping.moderation.unban');
-            Route::post('/unban', [RemoteController::class, 'unbanPost'])->name('housekeeping.moderation.unban');
+            Route::post('/unban', [RemoteController::class, 'unbanPost'])->name('housekeeping.moderation.unban.post');
         });
 
         Route::prefix('logs')->group(function() {
