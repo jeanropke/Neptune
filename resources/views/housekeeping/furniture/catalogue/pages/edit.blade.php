@@ -113,6 +113,15 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="10%" valign="middle">
+                                        <b>Teasers</b>
+                                        <div class="graytext"></div>
+                                    </td>
+                                    <td class="tablerow2" width="40%" valign="middle">
+                                        <textarea name="image_teasers" cols="80" rows="8">{{ old('image_teasers') ?? $page->image_teasers }}</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="10%" valign="middle">
                                         <b>Body</b>
                                         <div class="graytext"></div>
                                     </td>
