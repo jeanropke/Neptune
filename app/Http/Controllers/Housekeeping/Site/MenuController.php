@@ -29,7 +29,7 @@ class MenuController extends Controller
 
         return view('housekeeping.site.menu.categories.edit')->with([
             'category'  => $category,
-            'icons'     => array_map(fn($file) => basename($file, '.gif'), File::files('web/images/navi_icons'))
+            'icons'     => array_map(fn($file) => basename($file, '.gif'), File::files('c_images/navi_icons'))
         ]);
     }
 
@@ -67,7 +67,7 @@ class MenuController extends Controller
         if (!user()->hasPermission('can_edit_website_menu'))
             return view('housekeeping.accessdenied');
 
-        return view('housekeeping.site.menu.categories.create')->with('icons', array_map(fn($file) => basename($file, '.gif'), File::files('web/images/navi_icons')));
+        return view('housekeeping.site.menu.categories.create')->with('icons', array_map(fn($file) => basename($file, '.gif'), File::files('c_images/navi_icons')));
     }
 
     public function menuCategoriesCreateSave(Request $request)
@@ -139,7 +139,7 @@ class MenuController extends Controller
         return view('housekeeping.site.menu.subcategories.edit')->with([
             'categories'    => CmsMenu::where('parent_id', -1)->get(),
             'subcategory'   => $subcategory,
-            'icons'         => array_map(fn($file) => basename($file, '.gif'), File::files('web/images/navi_icons'))
+            'icons'         => array_map(fn($file) => basename($file, '.gif'), File::files('c_images/navi_icons'))
         ]);
     }
 
