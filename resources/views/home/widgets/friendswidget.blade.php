@@ -13,13 +13,14 @@
         <div class="widget-body">
             <div class="widget-content">
                 <div id="friends">
-                    @php($friendsPerPage = 2)
+                    @php($friendsPerPage = 10)
                     @php($friends = $owner->getFriends()->take($friendsPerPage))
                     @php($friendsCount = $owner->getFriends()->count())
                     @include('home.widgets.ajax.friendswidget')
                 </div>
 
                 <div class="clear"></div>
+                @if(ceil($friendsCount / $friendsPerPage) > 1)
 
                 <div id="number">1/{{ ceil($friendsCount / $friendsPerPage) }}</div>
 
@@ -29,6 +30,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
                 {{-- Habbo uses account name instead id --}}
                 <script language="JavaScript" type="text/javascript">

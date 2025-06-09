@@ -1,24 +1,27 @@
 var FriendsWidget = {
     init: function (pages, theRange, accountIdentity) {
         var currentIndex = 1;
-        this.slider = new Control.Slider('slider-handle', 'slider-bar', {
-            range: $R(1, pages), axis: 'horizontal', alignX: -10,
-            values: theRange
-        });
-        this.slider.options.onChange = function (value) {
-            if(currentIndex == value) return;
-            currentIndex = value;
-
-            $("number").innerHTML = value + "/" + pages;
-            Element.wait($("friends"));
-
-            new Ajax.Updater($("friends"), habboReqPath + "/myhabbo/friends_ajax", {
-                method: "post",
-                parameters: "name=" + encodeURIComponent(accountIdentity) + "&index=" + encodeURIComponent(value - 1),
-                evalScripts: true
+        if (pages > 1) {
+            this.slider = new Control.Slider('slider-handle', 'slider-bar', {
+                range: $R(1, pages), axis: 'horizontal', alignX: -10,
+                values: theRange
             });
+            console.log(pages);
+            this.slider.options.onChange = function (value) {
+                if (currentIndex == value) return;
+                currentIndex = value;
 
-        };
+                $("number").innerHTML = value + "/" + pages;
+                //Element.wait($("friends"));
+
+                new Ajax.Updater($("friends"), habboReqPath + "/myhabbo/friends_ajax", {
+                    method: "post",
+                    parameters: "name=" + encodeURIComponent(accountIdentity) + "&index=" + encodeURIComponent(value - 1),
+                    evalScripts: true
+                });
+
+            };
+        }
         this.timer = false;
     },
 
@@ -757,23 +760,23 @@ BadgesWidget.prototype = {
 var WidgetRegistry = {
     _widgetsById: [],
     _widgetsByType: [],
-    add: function(A, D, C) {
+    add: function (A, D, C) {
         WidgetRegistry._widgetsById[A + ""] = C;
         if (!WidgetRegistry._widgetsByType[D]) {
             WidgetRegistry._widgetsByType[D] = []
         }
         WidgetRegistry._widgetsByType[D].push(C)
     },
-    getWidgetById: function(A) {
+    getWidgetById: function (A) {
         return WidgetRegistry._widgetsById[A + ""]
     },
-    getWidgetsByType: function(A) {
+    getWidgetsByType: function (A) {
         return WidgetRegistry._widgetsByType[A]
     }
 };
 var HighscoreListWidget = Class.create();
 Object.extend(HighscoreListWidget, {
-    handleEditMenu: function(C) {
+    handleEditMenu: function (C) {
         if (chosenElement && chosenElement.id) {
             var A = WidgetRegistry.getWidgetById(chosenElement.id);
             if (A) {
@@ -784,7 +787,7 @@ Object.extend(HighscoreListWidget, {
     }
 });
 HighscoreListWidget.prototype = {
-    initialize: function(D, A, C) {
+    initialize: function (D, A, C) {
         this.widgetId = D;
         this.gameId = A;
         this.type = C;
@@ -794,15 +797,15 @@ HighscoreListWidget.prototype = {
             this.scoresEl.onclick = this.handleScoresClick.bindAsEventListener(this)
         }
     },
-    selectGameId: function() {
+    selectGameId: function () {
         var A = $("highscorelist-game");
-        $A(A.options).each(function(C) {
+        $A(A.options).each(function (C) {
             if (C.value == this.gameId) {
                 A.selectedIndex = C.index
             }
         }.bind(this))
     },
-    handleScoresClick: function(E) {
+    handleScoresClick: function (E) {
         var C = Event.element(E);
         if (C.nodeName.toLowerCase() == "li" && C.id) {
             var A = this.type;
@@ -825,7 +828,7 @@ HighscoreListWidget.prototype = {
             this._loadScores(A, F, D)
         }
     },
-    setGameId: function(A) {
+    setGameId: function (A) {
         if (A != "" && A != this.gameId) {
             closeEditMenu();
             Element.wait(this.scoresEl);
@@ -834,16 +837,16 @@ HighscoreListWidget.prototype = {
                 parameters: {
                     widgetId: this.widgetId,
                     gameId: A,
-					_token: _token
+                    _token: _token
                 },
-                onComplete: function(C) {
+                onComplete: function (C) {
                     this.scoresEl.innerHTML = C.responseText;
                     this.gameId = A
                 }.bind(this)
             })
         }
     },
-    _loadScores: function(C, E, D) {
+    _loadScores: function (C, E, D) {
         var A = habboReqPath + "/myhabbo/highscorelist/scores";
         if (D != -1) {
             A = habboReqPath + "/myhabbo/highscorelist/page"
@@ -858,9 +861,9 @@ HighscoreListWidget.prototype = {
                 type: C,
                 period: E,
                 page: ((D != -1) ? D : 0),
-				_token: _token
+                _token: _token
             },
-            onComplete: function(F) {
+            onComplete: function (F) {
                 if (D != -1) {
                     $("highscorelist-page-" + this.widgetId).innerHTML = F.responseText
                 } else {
