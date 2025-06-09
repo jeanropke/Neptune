@@ -54,7 +54,7 @@
                 <div class="groups-list-loading">
                     <div><a href="#" class="groups-loading-close"></a></div>
                     <div class="clear"></div>
-                    <p style="text-align:center"><img src="{{ url('/') }}/web/images/progress_habbos.gif" alt="" width="29" height="6"></p>
+                    <p style="text-align:center"><img src="{{ url('/') }}/web/images/progress_habbos.gif" alt=""></p>
                 </div>
                 <div class="groups-list-info"></div>
 
