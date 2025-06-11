@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
+use App\Models\Home\StoreCategory;
 use App\Models\Home\StoreItem;
 use Illuminate\Http\Request;
 
@@ -15,20 +16,25 @@ class WebStoreController extends Controller
         switch ($request->type) {
 
             case 'backgrounds':
-                $items = StoreItem::where([['owner_id', user()->id], ['type', 'b']])->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')->select('cms_homes.*', 'cms_homes_store_items.class')->get();
-                break;
-            case 'widgets':
-                $widgets = HomeItem::where([['owner_id', user()->id], ['type', 'w'], ['class', '!=', 'profilewidget']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', 'cms_homes_store_items.caption', 'cms_homes_store_items.description')->get();
-                return view('home.inventory.widgets')->with('widgets', $widgets);
+                $items = StoreItem::where('type', 'b')->get();
                 break;
             default:
             case 'stickers':
                 $items = StoreItem::where('type', 's')->get();
                 break;
         }
-        return view('home.store.items')->with('items', $items);
+        return view('home.store.main')->with([
+            'items'         =>  $items,
+            'categories'    => StoreCategory::where('type', 's')->get(),
+        ]);
+    }
+
+    public function loadItems(Request $request)
+    {
+        $items = StoreItem::where('category', $request->subCategoryId)->get();
+        return view('home.store.items')->with([
+            'items' =>  $items
+        ]);
     }
 
     public function preview(Request $request)

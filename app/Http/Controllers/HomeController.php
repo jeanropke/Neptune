@@ -271,7 +271,7 @@ class HomeController extends Controller
     public function getStoreItems(Request $request)
     {
         return view('home.store.items')->with([
-            'items' => StoreItem::where('category', $request->subCategoryId)->get()
+            'items'         => StoreItem::where('category', $request->subCategoryId)->get()
         ]);
     }
 
