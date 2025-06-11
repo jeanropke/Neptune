@@ -836,7 +836,7 @@ function closeSubscription(e) {
 
 function showSubscriptionResult(optionNumber, res_dialog_header) {
     new Ajax.Request(
-        habboReqPath + "/myhabbo/habboclub_subscribe", {
+        habboReqPath + "/habboclub/habboclub_subscribe_submit", {
             method: "post",
             parameters: "optionNumber=" + encodeURIComponent(optionNumber),
             onComplete: function(req, json) {
