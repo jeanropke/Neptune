@@ -1,7 +1,7 @@
 <div id="webstore-categories">
     <ul class="purchase-subcategory-list">
         @foreach ($categories as $category)
-            <li id="subcategory-{{ $category->id }}-stickers">
+            <li id="category-{{ $category->id }}-stickers">
                 <div>{{ $category->caption }}</div>
             </li>
         @endforeach
@@ -35,27 +35,29 @@
         <div id="webstore-preview">
             @isset($items)
                 @php($firstItem = $items->first())
-
-                <div id="webstore-preview-box">
-                </div>
+                <div id="webstore-preview-box"></div>
                 <div style="width: 110px; float: right;">
-                    <h4 title="">{{ $firstItem->caption }}</h4>
-                    <div id="webstore-preview-price">
-                        Price:<br><b>
-                            {{ $firstItem->price }} credit
-                        </b>
-                    </div>
+                    @isset($firstItem)
+                        <h4 title="">{{ $firstItem->caption }}</h4>
 
-                    <div id="webstore-preview-purse">
-                        You have:<br><b>{{ user()->credits }} credits</b><br>
-                        <a href="{{ url('/') }}/credits" target="_blank">Get Credits</a>
-                    </div>
+                        <div id="webstore-preview-price">
 
-                    <div id="webstore-preview-purchase">
-                        <a href="#" class="colorlink orange last" id="webstore-purchase"><span>Purchase</span></a>
-                    </div>
+                            Price:<br><b>
+                                {{ $firstItem->price }} credit
+                            </b>
+                        </div>
 
-                    <span id="webstore-preview-bg-text" style="display: none">Preview</span>
+                        <div id="webstore-preview-purse">
+                            You have:<br><b>{{ user()->credits }} credits</b><br>
+                            <a href="{{ url('/') }}/credits" target="_blank">Get Credits</a>
+                        </div>
+
+                        <div id="webstore-preview-purchase">
+                            <a href="#" class="colorlink orange last" id="webstore-purchase"><span>Purchase</span></a>
+                        </div>
+
+                        <span id="webstore-preview-bg-text" style="display: none">Preview</span>
+                    @endisset
                 </div>
             @endisset
         </div>
@@ -64,5 +66,7 @@
 <div class="clear"></div>
 <div>
     <a href="#" id="webstore-close" class="toolbutton"><span>Close</span></a>
-    <a href="#" id="load-inventory" class="colorlink" style="margin: 0; margin-top: 4px"><span>Open Inventory</span></a>
+    <a href="#" id="load-inventory" class="colorlink" style="margin: 0; margin-top: 4px"><span>Open Inventory <span id="webstore-inventory-new"></span></span></a>
 </div>
+<div id="inventory-content"></div>
+

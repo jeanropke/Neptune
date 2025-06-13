@@ -247,13 +247,18 @@ Route::middleware('user')->group(function () {
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');
 
         Route::post('/inventory/preview', [WebInventoryController::class, 'preview'])->name('myhabbo.inventory.preview');
-        Route::post('/inventory/{type}', [WebInventoryController::class, 'loadInventory'])->name('myhabbo.inventory.load');
-
+        Route::post('/inventory', [WebInventoryController::class, 'loadInventory'])->name('myhabbo.inventory.load');
+        Route::post('/inventory/items', [WebInventoryController::class, 'inventoryItems'])->name('myhabbo.inventory.items');
         Route::post('/sticker/place_sticker', [WebInventoryController::class, 'placeSticker'])->name('myhabbo.sticker.place_sticker');
         Route::post('/sticker/remove_sticker', [WebInventoryController::class, 'removeSticker'])->name('myhabbo.sticker.remove_sticker');
 
-        Route::post('/store/main/{type}', [WebStoreController::class, 'loadStore'])->name('myhabbo.store.load');
-        Route::post('/store/items/', [WebStoreController::class, 'loadItems'])->name('myhabbo.store.items');
+        Route::post('/store/main', [WebStoreController::class, 'storeMain'])->name('myhabbo.store.main');
+        Route::post('/store/preview', [WebStoreController::class, 'preview'])->name('myhabbo.store.preview');
+        Route::post('/store/purchase_confirm', [WebStoreController::class, 'purchaseConfirm'])->name('myhabbo.item.purchase_confirm');
+        Route::post('/store/purchase_stickers', [WebStoreController::class, 'purchaseDone'])->name('myhabbo.item.purchase_done');
+        Route::post('/store/items', [WebStoreController::class, 'loadItems'])->name('myhabbo.item.load_items');
+
+
 
         //Old stuff
         //Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');

@@ -70,7 +70,7 @@
         <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.bbcode.js"></script>
         <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-noteeditor.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-inventory.js"></script>
+        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-store.js"></script>
 
         @if ($menuId == 'home_group')
             <link href="{{ url('/') }}/web/styles/grouptabs.css" type="text/css" rel="stylesheet" />

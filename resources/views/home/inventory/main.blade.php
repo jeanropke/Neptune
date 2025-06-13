@@ -1,4 +1,5 @@
-<div id="inventory-items-container">
+<div id="inventory-content">
+    <div id="inventory-items-container">
         <div id="inventory-items">
             <ul id="inventory-item-list">
                 @foreach ($items as $item)
@@ -20,3 +21,25 @@
             </ul>
         </div>
     </div>
+    <div id="inventory-preview-container" style="display: block;">
+        <div id="inventory-preview-default"></div>
+        <div id="inventory-preview">
+
+            <div id="inventory-preview-box">
+
+            </div>
+
+            <div id="inventory-preview-place" class="clearfix">
+                <a href="#" class="toolbutton" id="inventory-place"><span>Place</span></a>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div>
+        <a href="#" id="inventory-close" class="toolbutton"><span>Close</span></a>
+        <a href="#" id="purchase-stickers" class="colorlink" style="margin: 0; margin-top: 4px"><span>Purchase Stickers</span></a>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="webstore-content"></div>

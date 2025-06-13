@@ -14,7 +14,7 @@
                     </div>
                 </li>
             @endforeach
-            @for ($i = 0; $i < ($items->count() <= 12 ? 12 - $items->count() : $items->count() % 4); $i++)
+            @for ($i = 0; $i < ($items->count() <= 12 ? 12 - $items->count() : 4 - $items->count() % 4); $i++)
                 <li class="webstore-item-empty"></li>
             @endfor
         </ul>

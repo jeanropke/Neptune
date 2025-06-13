@@ -1339,6 +1339,28 @@ div.webstore-widget-description {
 
 /* custom */
 
+#webstore-content {
+    height: 331px;
+    display: none;
+}
+#webstore-content a span #webstore-inventory-new.new {
+    padding: 0px 14px 0 4px;
+    background: url(../../images/myhabbo/store/animated_arrow.gif) no-repeat 100% 0% !important;
+}
+#webstore-content a span #webstore-inventory-new {
+    font-weight: bold;
+    text-decoration: none;
+    background-image: none !important;
+    float: right;
+    display: none;
+}
+#webstore-tabs li a span {
+    background: none;
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
 #webstore-items-container {
     float: right;
     top: 128px;
@@ -1632,70 +1654,72 @@ span.webstore-preview-error {
     font-weight: bold;
     color: red;
 }
+
 ul.purchase-subcategory-list li {
-        border-bottom: 1px dotted black;
-        padding: 3px;
-    }
+    border-bottom: 1px dotted black;
+    padding: 3px;
+    cursor: pointer;
+}
 
-    li.subcategory {
-        background-image: none;
-        background-color: #e2e2e2;
-        display: none;
-    }
+li.subcategory {
+    background-image: none;
+    background-color: #e2e2e2;
+    display: none;
+}
 
-    li.subcategory:hover,
-    li.subcategory-selected {
-        background-image: none;
-        background-color: #f5f5f5;
-        display: block;
-    }
+li.subcategory:hover,
+li.subcategory-selected {
+    background-image: none;
+    background-color: #f5f5f5;
+    display: block;
+}
 
-    li.selected-main-category li.subcategory,
-    li.selected-main-category li.subcategory-selected {
-        display: block;
-    }
+li.selected-main-category li.subcategory,
+li.selected-main-category li.subcategory-selected {
+    display: block;
+}
 
-    li.subcategory div {
-        font-weight: normal;
-        background: transparent;
-    }
+li.subcategory div {
+    font-weight: normal;
+    background: transparent;
+}
 
-    li.subcategory-selected div {
-        font-weight: bold;
-        background-image: none;
-    }
+li.subcategory-selected div {
+    font-weight: bold;
+    background-image: none;
+}
 
-    div.webstore-frank {
-        position: absolute;
-        top: 35px;
-        left: 15px;
-        width: 240px;
-    }
+div.webstore-frank {
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    width: 240px;
+}
 
-    div.webstore-frank div.blackbubble-bottom-body,
-    div.webstore-frank-image {
-        text-align: right;
-    }
+div.webstore-frank div.blackbubble-bottom-body,
+div.webstore-frank-image {
+    text-align: right;
+}
 
-    div.webstore-frank div.blackbubble-bottom-body img.invitation-tail {
-        margin-right: 60px;
-    }
+div.webstore-frank div.blackbubble-bottom-body img.invitation-tail {
+    margin-right: 60px;
+}
 
-    div.webstore-item-count {
-        padding: 5px 5px 0 0;
-        font-size: 10px;
-        font-weight: bold;
-        color: white;
-    }
+div.webstore-item-count {
+    padding: 5px 5px 0 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+}
 
-    div.webstore-item-count div {
-        text-align: center;
-        float: right;
-        width: 32px;
-        height: 17px;
-        padding-top: 2px;
-        background: url(../../images/myhabbo/dialogs/item_count_label.gif) no-repeat;
-    }
+div.webstore-item-count div {
+    text-align: center;
+    float: right;
+    width: 32px;
+    height: 17px;
+    padding-top: 2px;
+    background: url(../../images/myhabbo/dialogs/item_count_label.gif) no-repeat;
+}
 
 /*
 #webstore-items-container {

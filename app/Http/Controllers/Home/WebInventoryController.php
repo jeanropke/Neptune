@@ -30,7 +30,16 @@ class WebInventoryController extends Controller
                     ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
                 break;
         }
-        return view('home.inventory.items')->with('items', $items);
+
+        $item = $items->first();
+        $store = $item->getStoreItem();
+        $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
+
+        return response(view('home.inventory.main', [
+            'items' => $items
+        ]), 200)
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode($data));
     }
 
     public function preview(Request $request)
@@ -104,5 +113,17 @@ class WebInventoryController extends Controller
         return response('SUCCESS', 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($sticker->id));
+    }
+
+
+    public function inventoryItems(Request $request)
+    {
+        $inventory = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
+            ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
+            ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
+
+        return view('home.inventory.items')->with([
+            'items' => $inventory
+        ]);
     }
 }

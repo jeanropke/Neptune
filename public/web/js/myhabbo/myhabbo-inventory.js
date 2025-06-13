@@ -1,8 +1,14 @@
 var WebInventory = {
+    created: false,
     selectedItem: null,
     previewItem: null,
     selectedCategory: null,
-    loaded: false,
+
+    loadingCategory: false,
+    selectedSubcategory: null,
+    previewItems: null,
+    previewItemPointer: 0,
+
     initialise: function () {
         Event.observe('stickers-button', 'click', function (e) { WebInventory.open(e, 'stickers') }, false);
         Event.observe('widgets-button', 'click', function (e) { WebInventory.open(e, 'widgets') }, false);
@@ -19,14 +25,19 @@ var WebInventory = {
         Event.stop(e);
         showOverlay();
         WebInventory.selectedCategory = type;
-        WebInventory._createInventoryDialog("dialog.title." + WebInventory.selectedCategory);
-        WebInventory._loadInventory();
+        if (!WebInventory.created) {
+            WebInventory._createInventoryDialog("dialog.title." + WebInventory.selectedCategory);
+            WebInventory._loadInventory();
+        } else {
+
+        }
     },
     _createInventoryDialog: function (title) {
         WebInventory.dialog = createDialog("stickers_dialog", title, "9003", -1500, 0, WebInventory.close);
         makeDialogDraggable(WebInventory.dialog);
         setAsWaitDialog(WebInventory.dialog);
         moveDialogToCenter(WebInventory.dialog);
+        WebInventory.created = true;
     },
     _loadInventory: function () {
         new Ajax.Request(habboReqPath + "/myhabbo/inventory/" + WebInventory.selectedCategory, {
@@ -35,7 +46,7 @@ var WebInventory = {
                 req.responseText.evalScripts();
 
                 if ($("inventory-close")) { Event.observe($("inventory-close"), "click", WebInventory.close); }
-                if ($("purchase-stickers")) { Event.observe($("purchase-stickers"), "click", WebStore.open) }
+                if ($("purchase-stickers")) { Event.observe($("purchase-stickers"), "click", WebInventory.openStore) }
 
                 var el = $A($("inventory-item-list").getElementsByTagName("li")).first();
                 if (el) {
@@ -45,7 +56,6 @@ var WebInventory = {
                 }
 
                 WebInventory._setEventHandlers();
-                WebInventory.loaded = true;
             }
         });
     },
@@ -169,20 +179,12 @@ var WebInventory = {
             return false;
         }
         return true;
-    }
-}
+    },
 
-var WebStore = {
-    loadingCategory: false,
-    selectedSubcategory: null,
-    selectedItem: null,
-    previewItems: null,
-    previewItemPointer: 0,
-    loaded: false,
-    open: function (e) {
+    openStore: function (e) {
         //$('stickers_dialog').style.width = '507px';
         e.preventDefault();
-        WebStore._loadPage();
+        WebInventory._loadPage();
     },
     _loadPage: function () {
         new Ajax.Request(habboReqPath + "/myhabbo/store/main/" + WebInventory.selectedCategory, {
@@ -190,7 +192,7 @@ var WebStore = {
                 setDialogBody(WebInventory.dialog, req.responseText);
                 req.responseText.evalScripts();
 
-                if ($("inventory-close")) { Event.observe($("webstore-close"), "click", WebStore.close); }
+                if ($("inventory-close")) { Event.observe($("webstore-close"), "click", WebInventory.close); }
                 if ($("load-inventory")) { Event.observe($("load-inventory"), "click", WebInventory._loadInventory) }
 
                 //var el = $A($("inventory-item-list").getElementsByTagName("li")).first();
@@ -200,8 +202,7 @@ var WebStore = {
                 //    WebInventory._loadPreview(temp.last(), WebInventory.selectedCategory, temp[2] == "p");
                 //}
 
-                WebStore._setEventHandler();
-                WebStore.loaded = true;
+                WebInventory._setEventHandler();
             }
         });
     },
@@ -218,52 +219,52 @@ var WebStore = {
     _handleCategoryClick: function (e) {
         Event.stop(e);
         console.log(e);
-        if (!WebStore.loadingCategory) {
+        if (!WebInventory.loadingCategory) {
             var el = Event.findElement(e, "li");
             if (el && el.id) {
                 if (el.id.indexOf("subcategory-") == 0) {
                     var temp = el.id.split("-");
-                    WebStore.changeSubcategory(temp[1], el);
-                    WebStore._setContentClassName(temp[2]);
+                    WebInventory.changeSubcategory(temp[1], el);
+                    WebInventory._setContentClassName(temp[2]);
                 }
             }
         }
     },
     changeSubcategory: function (subcategoryId, subcategoryEl) {
-        WebStore._unselectSelectedSubcategory();
-        WebStore.selectedSubcategory = subcategoryEl;
+        WebInventory._unselectSelectedSubcategory();
+        WebInventory.selectedSubcategory = subcategoryEl;
         subcategoryEl.className = "subcategory-selected";
 
-        WebStore.openSubCategory(subcategoryId);
+        WebInventory.openSubCategory(subcategoryId);
     },
     _unselectSelectedSubcategory: function () {
-        if (WebStore.selectedSubcategory) {
-            WebStore.selectedSubcategory.className = "";
+        if (WebInventory.selectedSubcategory) {
+            WebInventory.selectedSubcategory.className = "";
         }
     },
     openSubCategory: function (subCategoryId, force, productId) {
-        if ((!WebStore.loadingCategory && subCategoryId != WebStore.selectedSubCategory) || force) {
-            WebStore.loadingCategory = true;
-            WebStore._resetState();
+        if ((!WebInventory.loadingCategory && subCategoryId != WebStore.selectedSubCategory) || force) {
+            WebInventory.loadingCategory = true;
+            WebInventory._resetState();
             $("webstore-items").innerHTML = getProgressNode();
-            WebStore._loadSubCategory(subCategoryId, productId);
+            WebInventory._loadSubCategory(subCategoryId, productId);
         }
     },
     _resetState: function () {
-        WebStore.selectedItem = null;
-        WebStore.selectedSubCategory = null;
-        WebStore._showDefaultPreview();
+        WebInventory.selectedItem = null;
+        WebInventory.selectedSubCategory = null;
+        WebInventory._showDefaultPreview();
     },
     _showDefaultPreview: function () {
-        WebStore._clearPreview();
+        WebInventory._clearPreview();
         var previewDiv = $("webstore-preview");
         previewDiv.hide();
         $("webstore-preview-default").show();
         previewDiv.innerHTML = "";
     },
     _clearPreview: function () {
-        WebStore.previewItems = null;
-        WebStore.previewItemPointer = 0;
+        WebInventory.previewItems = null;
+        WebInventory.previewItemPointer = 0;
         var previewBox = $("webstore-preview-box");
         if (previewBox) {
             previewBox.innerHTML = "";
@@ -278,10 +279,10 @@ var WebStore = {
             habboReqPath + "/myhabbo/store/items", {
             method: "post", parameters: query,
             onComplete: function (req, json) {
-                if (WebStore._checkResponse(req.responseText)) {
+                if (WebInventory._checkResponse(req.responseText)) {
                     $("webstore-content-container").innerHTML = req.responseText;
-                    WebStore.selectedSubCategory = subCategoryId;
-                    WebStore.loadingCategory = false;
+                    WebInventory.selectedSubCategory = subCategoryId;
+                    WebInventory.loadingCategory = false;
 
                     var itemSelected = false;
                     var productEls = $A($("webstore-item-list").getElementsByTagName("li"));
@@ -290,8 +291,8 @@ var WebStore = {
                             if (el.id) {
                                 var id = el.id.substring(el.id.lastIndexOf("-") + 1);
                                 if (id == productId) {
-                                    WebStore._selectItem(el);
-                                    WebStore._loadPreview(id);
+                                    WebInventory._selectItem(el);
+                                    WebInventory._loadPreview(id);
                                     itemSelected = true;
                                     throw $break;
                                 }
@@ -302,8 +303,8 @@ var WebStore = {
                     if (!itemSelected) {
                         var el = productEls.first();
                         if (el && el.id) {
-                            WebStore._selectItem(el);
-                            WebStore._loadPreview(el.id.substring(el.id.lastIndexOf("-") + 1));
+                            WebInventory._selectItem(el);
+                            WebInventory._loadPreview(el.id.substring(el.id.lastIndexOf("-") + 1));
                         }
                     }
                 }
@@ -313,12 +314,5 @@ var WebStore = {
     },
     _setContentClassName: function (className) {
         $("webstore-content-container").className = className;
-    },
-    _checkResponse: function (responseText) {
-        if (responseText.strip() == "REFRESH") {
-            window.location.replace(window.location.href);
-            return false;
-        }
-        return true;
     }
 }

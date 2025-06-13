@@ -404,7 +404,9 @@
             }
         </style>
         <script>
-            WebInventory.initialise();
+            Event.observe('stickers-button', 'click', function (e) { WebStore.open('stickers') }, false);
+            Event.observe('widgets-button', 'click', function (e) { WebStore.open('widgets') }, false);
+            Event.observe('backgrounds-button', 'click', function (e) { WebStore.open('backgrounds') }, false);
         </script>
     @endif
 @stop
