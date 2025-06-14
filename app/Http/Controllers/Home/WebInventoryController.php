@@ -13,7 +13,6 @@ class WebInventoryController extends Controller
     public function loadInventory(Request $request)
     {
         switch ($request->type) {
-
             case 'backgrounds':
                 $items = HomeItem::where([['owner_id', user()->id], ['type', 'b']])->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')->select('cms_homes.*', 'cms_homes_store_items.class')->get();
                 break;
@@ -23,11 +22,13 @@ class WebInventoryController extends Controller
                     ->select('cms_homes.*', 'cms_homes_store_items.class', 'cms_homes_store_items.caption', 'cms_homes_store_items.description')->get();
                 return view('home.inventory.widgets')->with('widgets', $widgets);
                 break;
-            default:
             case 'stickers':
                 $items = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
                     ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
                     ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
+                break;
+            default:
+                return $request->type;
                 break;
         }
 
@@ -118,12 +119,21 @@ class WebInventoryController extends Controller
 
     public function inventoryItems(Request $request)
     {
-        $inventory = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
-            ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-            ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
-
+        switch ($request->type) {
+            case 'backgrounds':
+                $items = HomeItem::where([['owner_id', user()->id], ['type', 'b']])->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')->select('cms_homes.*', 'cms_homes_store_items.class')->get();
+                break;
+            case 'stickers':
+                $items = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
+                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
+                    ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
+                break;
+            default:
+                return $request->type;
+                break;
+        }
         return view('home.inventory.items')->with([
-            'items' => $inventory
+            'items' => $items
         ]);
     }
 }

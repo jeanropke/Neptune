@@ -2968,16 +2968,6 @@ div.s_hw cny_kunfu_dude_pre {
     background: url(../../../c_images/stickers/cny_kungfu_dude.gif) no-repeat 50% 50%;
 }
 
-div.s_hw cny_kunfu_girl {
-    width: 57px;
-    height: 84px;
-    background-image: url(../../../c_images/stickers/cny_kungfu_girl.gif);
-}
-
-div.s_hw cny_kunfu_girl_pre {
-    background: url(../../../c_images/stickers/cny_kungfu_girl.gif) no-repeat 50% 50%;
-}
-
 div.s_hw val_cupido_anim {
     width: 55px;
     height: 99px;
@@ -9908,30 +9898,6 @@ div.b_goth_pattern_pre {
     background-image: url(../../../c_images/backgrounds2/goth_pattern.gif);
 }
 
-div.b_easter_eggs_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
-}
-
-div.b_easter_eggs_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
-}
-
-div.b_spm_background {
-    background-image: url(../../../c_images/backgrounds2/spm_bg_version_041207.gif);
-}
-
-div.b_spm_background_pre {
-    background-image: url(../../../c_images/backgrounds2/spmbgthumb.gif);
-}
-
-div.b_spm_bg_version_041207.gif {
-    background-image: url(../../../c_images/backgrounds2/bg_spmX);
-}
-
-div.b_spm_bg_version_041207.gif_pre {
-    background-image: url(../../../c_images/backgrounds2/spm_bg_version_041207.gif);
-}
-
 div.b_hc_bg_machine {
     background-image: url(../../../c_images/backgrounds2/HC_machine.png);
 }
@@ -9954,30 +9920,6 @@ div.b_hc_bg_royal {
 
 div.b_hc_bg_royal_pre {
     background-image: url(../../../c_images/backgrounds2/HC_royal.gif);
-}
-
-div.b_bg_xmas_gift {
-    background-image: url(../../../c_images/backgrounds2/xmas_gifts_bg);
-}
-
-div.b_bg_xmas_gift_pre {
-    background-image: url(../../../c_images/backgrounds2/xmas_gifts_bg);
-}
-
-div.b_newyear_bg_fireworks {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks.gif);
-}
-
-div.b_newyear_bg_fireworks_pre {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks.gif);
-}
-
-div.b_newyear_bg_fireworks2 {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks2.gif);
-}
-
-div.b_newyear_bg_fireworks2_pre {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks2.gif);
 }
 
 div.b_nl_green_bg {
@@ -10108,14 +10050,6 @@ div.b_kir_stamp4_pre {
     background-image: url(../../../c_images/backgrounds2/kir_stamp4.gif);
 }
 
-div.b_poptarts_cv_002.jpg {
-    background-image: url(../../../c_images/backgrounds2/poptarts_cv.jpg);
-}
-
-div.b_poptarts_cv_002.jpg_pre {
-    background-image: url(../../../c_images/backgrounds2/poptarts_cv.jpg);
-}
-
 div.b_poptarts_cv {
     background-image: url(../../../c_images/backgrounds2/poptarts_cv.jpg);
 }
@@ -10148,36 +10082,12 @@ div.b_globalw_background_pre {
     background-image: url(../../../c_images/backgrounds2/);
 }
 
-div.b_voiceofteens {
-    background-image: url(../../../c_images/backgrounds2/voiceofteens.gif);
-}
-
-div.b_voiceofteens_pre {
-    background-image: url(../../../c_images/backgrounds2/);
-}
-
 div.b_makeover {
     background-image: url(../../../c_images/backgrounds2/makeover.gif);
 }
 
 div.b_makeover_pre {
     background-image: url(../../../c_images/backgrounds2/makeover.gif);
-}
-
-div.b_christmas2007bg_001 {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg_001.gif);
-}
-
-div.b_christmas2007bg_001_pre {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg_001.gif);
-}
-
-div.b_bg_battle_ball2 {
-    background-image: url(../../../c_images/backgrounds2/BB_Group2.png);
-}
-
-div.b_bg_battle_ball2_pre {
-    background-image: url(../../../c_images/backgrounds2/BB_Group2.png);
 }
 
 div.b_bg_infobus_blue {
@@ -10396,20 +10306,12 @@ div.b_straypixelsbg_pre {
     background-image: url(../../../c_images/backgrounds2/StrayPixelsBG.gif);
 }
 
-div.b_hw bgus-staff {
+div.b_hw_bgus-staff {
     background-image: url(../../../c_images/backgrounds2/US_StaffBG.gif);
 }
 
-div.b_hw bgus-staff_pre {
+div.b_hw_bgus-staff_pre {
     background-image: url(../../../c_images/backgrounds2/US_StaffBG.gif);
-}
-
-div.b_usastaff-wall {
-    background-image: url(../../../c_images/backgrounds2/US_staffers.png);
-}
-
-div.b_usastaff-wall_pre {
-    background-image: url(../../../c_images/backgrounds2/US_staffers.png);
 }
 
 div.b_wwe_wrestlemania_main {
@@ -10570,14 +10472,6 @@ div.b_summer_bg {
 
 div.b_summer_bg_pre {
     background-image: url(../../../c_images/backgrounds2/summer_bg_optimal.png);
-}
-
-div.b_tiki_firehead_bg {
-    background-image: url(../../../c_images/backgrounds2/tiki_firehead_bg.png);
-}
-
-div.b_tiki_firehead_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/tiki_firehead_bg.png);
 }
 
 div.b_wallpaper_rotw {
@@ -11020,12 +10914,6 @@ div.s_cny_kunfu_dude {
 
 div.s_cny_kunfu_dude_pre {
     background: url(../../../c_images/stickers/cny_kungfu_dude.gif) no-repeat 50% 50%;
-}
-
-div.s_cny_kungfu_girl {
-    width: 57px;
-    height: 84px;
-    background-image: url(../../../c_images/stickers/cny_kungfu_girl.gif);
 }
 
 div.s_val_sticker_barbwire_horis_p {
@@ -12406,28 +12294,12 @@ div.b_xmas2009_bg_snowing_pre {
     background-image: url(../../../c_images/backgrounds2/xmas2009_bg_snowing.gif);
 }
 
-div.b_xmas_bgpattern_starsky {
-    background-image: url(../../../c_images/backgrounds2/xmas_bgpattern_starsky.gif);
-}
-
-div.b_xmas_bgpattern_starsky_pre {
-    background-image: url(../../../c_images/backgrounds2/xmas_bgpattern_starsky.gif);
-}
-
 div.b_bg_newyear_bg_fireworks {
     background-image: url(../../../c_images/backgrounds2/NewYear_bg_fireworks.gif);
 }
 
 div.b_bg_newyear_bg_fireworks_pre {
     background-image: url(../../../c_images/backgrounds2/NewYear_bg_fireworks.gif);
-}
-
-div.b_cny_kunfu_girl {
-    background-image: url(../../../c_images/backgrounds2/CNY_KUNFU_GIRL.GIF);
-}
-
-div.b_cny_kunfu_girl_pre {
-    background-image: url(../../../c_images/backgrounds2/CNY_KUNFU_GIRL.GIF);
 }
 
 div.b_sticker_heartbeat_2 {
@@ -12474,24 +12346,12 @@ div.b_bg_bobbaheart_pre {
     background-image: url(../../../c_images/backgrounds2/bg_bobbaheart.gif);
 }
 
-div.b_habboween_bg {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
-}
-
-div.b_habboween_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
-}
-
 div.b_bg_habbolido {
     background-image: url(../../../c_images/backgrounds2/bg_habbolido.png);
 }
 
 div.b_bg_habbolido_pre {
     background-image: url(../../../c_images/backgrounds2/bg_habbolido.png);
-}
-
-div.b_voiceofteens_pre {
-    background-image: url(../../../c_images/backgrounds2/voiceofteens.gif);
 }
 
 div.b_amango_bg {
@@ -12524,14 +12384,6 @@ div.b_eb_928x1360 {
 
 div.b_eb_928x1360_pre {
     background-image: url(../../../c_images/backgrounds2/EB_928x1360.jpg);
-}
-
-div.b_exec_bg_viilu {
-    background-image: url(../../../c_images/backgrounds2/Exec_bg_viilu.gif);
-}
-
-div.b_exec_bg_viilu_pre {
-    background-image: url(../../../c_images/backgrounds2/Exec_bg_viilu.gif);
 }
 
 div.b_shabboline {
@@ -12606,14 +12458,6 @@ div.b_diadeinternet2008_pre {
     background-image: url(../../../c_images/backgrounds2/diadeinternet2008.png);
 }
 
-div.b_alhambragroup {
-    background-image: url(../../../c_images/backgrounds2/alhambragroup.png);
-}
-
-div.b_alhambragroup_pre {
-    background-image: url(../../../c_images/backgrounds2/alhambragroup.png);
-}
-
 div.b_928x1360_productboard {
     background-image: url(../../../c_images/backgrounds2/928x1360_productboard.jpg);
 }
@@ -12646,14 +12490,6 @@ div.b_madball_2008_bg_001_pre {
     background-image: url(../../../c_images/backgrounds2/madball_2008_bg_001.png);
 }
 
-div.b_toolbar_bg2 {
-    background-image: url(../../../c_images/backgrounds2/toolbar_bg2.png);
-}
-
-div.b_toolbar_bg2_pre {
-    background-image: url(../../../c_images/backgrounds2/toolbar_bg2.png);
-}
-
 div.b_hmf_928x1360_principale_b {
     background-image: url(../../../c_images/backgrounds2/HMF_928x1360_principale_B.gif);
 }
@@ -12668,14 +12504,6 @@ div.b_hmf_928x1360_dediee {
 
 div.b_hmf_928x1360_dediee_pre {
     background-image: url(../../../c_images/backgrounds2/HMF_928x1360_dediee.gif);
-}
-
-div.b_bg games top gamers {
-    background-image: url(../../../c_images/backgrounds2/top_gamers_bg_64.png);
-}
-
-div.b_bg games top gamers_pre {
-    background-image: url(../../../c_images/backgrounds2/top_gamers_bg_64.png);
 }
 
 div.b_bg_guidegroup {
@@ -12710,70 +12538,12 @@ div.b_bmx_tailwhip_pre {
     background-image: url(../../../c_images/backgrounds2/Habbo_BMX_foot_jam_tailwhip_BG.jpg);
 }
 
-div.b_skateb_ollie_bg {
-    background-image: url(../../../c_images/backgrounds2/skateb_ollie_BG2.jpg);
-}
-
-div.b_skateb_ollie_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/skateb_ollie_BG2.jpg);
-}
-
-div.b_diner_draft {
-    background-image: url(../../../c_images/backgrounds2/wallpaper_dinerUS.png);
-}
-
-div.b_diner_draft_pre {
-    background-image: url(../../../c_images/backgrounds2/wallpaper_dinerUS.png);
-}
-
 div.b_diner_global {
     background-image: url(../../../c_images/backgrounds2/diner_global.png);
 }
 
 div.b_diner_global_pre {
     background-image: url(../../../c_images/backgrounds2/diner_global.png);
-}
-
-div.b_geeks_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/geeks_wallpaper.gif);
-}
-
-div.b_geeks_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/geeks_wallpaper.gif);
-}
-
-div.b_greasers_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/greasers_wallpaper.gif);
-}
-
-div.b_greasers_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/greasers_wallpaper.gif);
-}
-
-div.b_jocks_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/jocks_wallpaper.gif);
-}
-
-div.b_jocks_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/jocks_wallpaper.gif);
-}
-
-div.b_skulls_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/skulls_wallpaper.gif);
-}
-
-div.b_skulls_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/skulls_wallpaper.gif);
-}
-
-div.s_ {
-    width: 0px;
-    height: 0px;
-    background-image: url(../../../c_images/stickers/);
-}
-
-div.s__pre {
-    background: url(../../../c_images/stickers/) no-repeat 50% 50%;
 }
 
 div.s_cat_animated {
@@ -13468,60 +13238,12 @@ div.b_xmas_gifts_bg_pre {
     background-image: url(../../../c_images/backgrounds2/xmas_gifts_bg);
 }
 
-div.b_bgpattern_starsky {
-    background-image: url(../../../c_images/backgrounds2/starsky.gif);
-}
-
-div.b_bgpattern_starsky_pre {
-    background-image: url(../../../c_images/backgrounds2/xmas_bgpattern_starsky);
-}
-
-div.b_xmas bgpattern starsky {
-    background-image: url(../../../c_images/backgrounds2/xmas bgpattern starsky.gif);
-}
-
-div.b_xmas bgpattern starsky_pre {
-    background-image: url(../../../c_images/backgrounds2/xmas bgpattern starsky.gif);
-}
-
-div.b_bg_xmas bgpattern starsky {
-    background-image: url(../../../c_images/backgrounds2/xmas bgpattern starsky.gif);
-}
-
-div.b_bg_xmas bgpattern starsky_pre {
-    background-image: url(../../../c_images/backgrounds2/xmas bgpattern starsky.gif);
-}
-
-div.b_newyear_bg_fireworks {
-    background-image: url(../../../c_images/backgrounds2/NewYear_bg_fireworks.gif);
-}
-
-div.b_newyear_bg_fireworks_pre {
-    background-image: url(../../../c_images/backgrounds2/NewYear_bg_fireworks.gif);
-}
-
 div.b_sticker_masque_04 {
     background-image: url(../../../c_images/backgrounds2/sticker_masque_04.gif);
 }
 
 div.b_sticker_masque_04_pre {
     background-image: url(../../../c_images/backgrounds2/sticker_masque_04.gif);
-}
-
-div.b_solid_bg_white {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_white.gif);
-}
-
-div.b_solid_bg_white_pre {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_white.gif);
-}
-
-div.b_solid_bg_black {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_Black.gif);
-}
-
-div.b_solid_bg_black_pre {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_Black.gif);
 }
 
 div.b_christmas2007bg {
@@ -13572,28 +13294,12 @@ div.b_bubblejuice_bg_pre {
     background-image: url(../../../c_images/backgrounds2/bubblejuice_bg3.jpg);
 }
 
-div.b_bg_guidegroup {
-    background-image: url(../../../c_images/backgrounds2/bg_guidegroup.png);
-}
-
-div.b_bg_guidegroup_pre {
-    background-image: url(../../../c_images/backgrounds2/bg_guidegroup.png);
-}
-
 div.b_snowbattle_bg {
     background-image: url(../../../c_images/backgrounds2/grouppage_snowbattle.png);
 }
 
 div.b_snowbattle_bg_pre {
     background-image: url(../../../c_images/backgrounds2/grouppage_snowbattle.png);
-}
-
-div.b_diner_draft {
-    background-image: url(../../../c_images/backgrounds2/diner_draft.png);
-}
-
-div.b_diner_draft_pre {
-    background-image: url(../../../c_images/backgrounds2/diner_draft.png);
 }
 
 div.s_xmas_dograindeer_sticker {
@@ -13936,14 +13642,6 @@ div.b_xmas_gifts_bg_pre {
     background-image: url(../../../c_images/backgrounds2/xmas_gifts_bg,gif);
 }
 
-div.b_bg_goth_pattern {
-    background-image: url(../../../c_images/backgrounds2/goth_pattern.gif);
-}
-
-div.b_bg_goth_pattern_pre {
-    background-image: url(../../../c_images/backgrounds2/goth_pattern.gif);
-}
-
 div.b_bg_easter_eggs_wallpaper {
     background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
 }
@@ -13973,7 +13671,7 @@ div.b_bg_konkurrence {
 }
 
 div.b_bg_konkurrence_pre {
-    background-image: url(../../../c_images/backgrounds2/konkurrence);
+    background-image: url(../../../c_images/backgrounds2/konkurrence.gif);
 }
 
 div.b_bg_bg_infobus_white {
@@ -14001,19 +13699,11 @@ div.b_27835_getitcard_bg_pre {
 }
 
 div.b_bg_us_staffers {
-    background-image: url(../../../c_images/backgrounds2/US_staffers.gif);
+    background-image: url(../../../c_images/backgrounds2/US_staffers.png);
 }
 
 div.b_bg_us_staffers_pre {
-    background-image: url(../../../c_images/backgrounds2/US_staffers.gif);
-}
-
-div.b_bg_solid_bg_white {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_white.gif);
-}
-
-div.b_bg_solid_bg_white_pre {
-    background-image: url(../../../c_images/backgrounds2/Solid_BG_white.gif);
+    background-image: url(../../../c_images/backgrounds2/US_staffers.png);
 }
 
 div.b_wallpaper_dinerus {
@@ -14046,14 +13736,6 @@ div.b_rexona_bg {
 
 div.b_rexona_bg_pre {
     background-image: url(../../../c_images/backgrounds2/rexona_bg.jpg);
-}
-
-div.b_anim_elvis {
-    background-image: url(../../../c_images/backgrounds2/anim_elvis.jpg);
-}
-
-div.b_anim_elvis_pre {
-    background-image: url(../../../c_images/backgrounds2/anim_elvis.jpg);
 }
 
 div.b_nicolajrasted_vip {
@@ -14276,22 +13958,6 @@ div.s_25_146x146_habbo_sticker_fi_pre {
     background: url(../../../c_images/stickers/25_146x146_habbo_sticker_fi.gif) no-repeat 50% 50%;
 }
 
-div.b_hw xmas_gifts_bg {
-    background-image: url(../../../c_images/backgrounds2/TEST);
-}
-
-div.b_hw xmas_gifts_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/TEST);
-}
-
-div.b_bg_rasta_99x99. {
-    background-image: url(../../../c_images/backgrounds2/Rasta_99x99.gif);
-}
-
-div.b_bg_rasta_99x99._pre {
-    background-image: url(../../../c_images/backgrounds2/Rasta_99x99.gif);
-}
-
 div.b_xmas2009_bg_xmasfun {
     background-image: url(../../../c_images/backgrounds2/xmas2009_bg_xmasfun.png);
 }
@@ -14306,22 +13972,6 @@ div.b_xmas_box_darkred {
 
 div.b_xmas_box_darkred_pre {
     background-image: url(../../../c_images/backgrounds2/TEST4);
-}
-
-div.b_bg_christmas2007bg {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_bg_christmas2007bg_pre {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_vip_group {
-    background-image: url(../../../c_images/backgrounds2/Vip_Group.png);
-}
-
-div.b_vip_group_pre {
-    background-image: url(../../../c_images/backgrounds2/Vip_Group.png);
 }
 
 div.b_bionicle2 {
@@ -14494,14 +14144,6 @@ div.b_bg_serpentine_darkred_pre {
     background-image: url(../../../c_images/backgrounds2/bg_serpentine_darkred.gif);
 }
 
-div.b_habbo_group_tutorial {
-    background-image: url(../../../c_images/backgrounds2/habbo_group_tutorial_bg.png);
-}
-
-div.b_habbo_group_tutorial_pre {
-    background-image: url(../../../c_images/backgrounds2/habbo_group_tutorial_bg.png);
-}
-
 div.b_habbos_group {
     background-image: url(../../../c_images/backgrounds2/habbos_group.png);
 }
@@ -14510,48 +14152,12 @@ div.b_habbos_group_pre {
     background-image: url(../../../c_images/backgrounds2/habbos_group.png);
 }
 
-div.b_bg_christmas2007bg.gif {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_bg_christmas2007bg.gif_pre {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_christmas2007bg {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_christmas2007bg_pre {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg.gif);
-}
-
-div.b_bg_kingcorp_928x1360 {
-    background-image: url(../../../c_images/backgrounds2/kingcorp_929x1360.gif);
-}
-
-div.b_bg_kingcorp {
-    background-image: url(../../../c_images/backgrounds2/bg_kingcorp.gif);
-}
-
-div.b_bg_kingcorp_pre {
-    background-image: url(../../../c_images/backgrounds2/bg_kingcorp);
-}
-
-div.b_kingcorp 928x1360 {
-    background-image: url(../../../c_images/backgrounds2/kingcorp 928x1360.gif);
-}
-
-div.b_kingcorp 928x1360_pre {
-    background-image: url(../../../c_images/backgrounds2/kingcorp 928x1360.gif);
-}
-
 div.b_bg_konkurrenceno {
     background-image: url(../../../c_images/backgrounds2/konkurrenceno.gif);
 }
 
 div.b_bg_konkurrenceno_pre {
-    background-image: url(../../../c_images/backgrounds2/konkurrenceno);
+    background-image: url(../../../c_images/backgrounds2/konkurrenceno.gif);
 }
 
 div.b_hannamontanawp {
@@ -15690,14 +15296,6 @@ div.s_sticker_toadstools_r_pre {
     background: url(../../../c_images/stickers/sticker_toadStools_R.gif) no-repeat 50% 50%;
 }
 
-div.b_trax_bling. {
-    background-image: url(../../../c_images/backgrounds2/trax_bling.gif);
-}
-
-div.b_trax_bling._pre {
-    background-image: url(../../../c_images/backgrounds2/trax_bling.gif);
-}
-
 div.b_xmas_box_darkred {
     background-image: url(../../../c_images/backgrounds2/TEST4);
 }
@@ -15712,30 +15310,6 @@ div.b_cheesewedge_wallpaper {
 
 div.b_cheesewedge_wallpaper_pre {
     background-image: url(../../../c_images/backgrounds2/CheeseWedge_wallpaper.gif);
-}
-
-div.b_cheese_suit {
-    background-image: url(../../../c_images/backgrounds2/cheeseSuit.gif);
-}
-
-div.b_cheese_suit_pre {
-    background-image: url(../../../c_images/backgrounds2/cheeseSuit.gif);
-}
-
-div.b_camo_cheese_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/CamoCheese_wallpaper.gif);
-}
-
-div.b_camo_cheese_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/CamoCheese_wallpaper.gif);
-}
-
-div.b_bg_habboween {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
-}
-
-div.b_bg_habboween_pre {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
 }
 
 div.b_bg_voiceofteens {
@@ -15754,14 +15328,6 @@ div.b_allhabbos_group_pre {
     background-image: url(../../../c_images/backgrounds2/allhabbos_group.png);
 }
 
-div.b_vip_group.png {
-    background-image: url(../../../c_images/backgrounds2/Vip_Group);
-}
-
-div.b_vip_group.png_pre {
-    background-image: url(../../../c_images/backgrounds2/Vip_Group.png);
-}
-
 div.b_grungewall {
     background-image: url(../../../c_images/backgrounds2/grungewall.gif);
 }
@@ -15776,22 +15342,6 @@ div.b_habborellabg {
 
 div.b_habborellabg_pre {
     background-image: url(../../../c_images/backgrounds2/habborellabg.gif);
-}
-
-div.b_safetyweek2008 {
-    background-image: url(../../../c_images/backgrounds2/SafetyWeek2008.gif);
-}
-
-div.b_safetyweek2008_pre {
-    background-image: url(../../../c_images/backgrounds2/SafetyWeek2008.gif);
-}
-
-div.b_safetyweek2008_b {
-    background-image: url(../../../c_images/backgrounds2/SafetyWeek2008_b.gif);
-}
-
-div.b_safetyweek2008_b_pre {
-    background-image: url(../../../c_images/backgrounds2/SafetyWeek2008_b.gif);
 }
 
 div.b_simpleplan_bg.gif {
@@ -15880,14 +15430,6 @@ div.b_kfp_grouppage_bg {
 
 div.b_kfp_grouppage_bg_pre {
     background-image: url(../../../c_images/backgrounds2/KFP_GroupPage_bg.jpg);
-}
-
-div.b_summer_bg_optimal {
-    background-image: url(../../../c_images/backgrounds2/summer_bg_optimal.png);
-}
-
-div.b_summer_bg_optimal_pre {
-    background-image: url(../../../c_images/backgrounds2/summer_bg_optimal.png);
 }
 
 div.b_gyroscope_grouppage_bg_v1 {
@@ -16614,38 +16156,6 @@ div.b_comic_style_pre {
     background-image: url(../../../c_images/backgrounds2/Comic_style.gif);
 }
 
-div.b_28182_hmf_917x1360_principale {
-    background-image: url(../../../c_images/backgrounds2/28182_HMF_917x1360_principale.gif);
-}
-
-div.b_28182_hmf_917x1360_principale_pre {
-    background-image: url(../../../c_images/backgrounds2/28182_HMF_917x1360_principale.gif);
-}
-
-div.b_28184_hmf_917x1360_principale_b {
-    background-image: url(../../../c_images/backgrounds2/28184_HMF_917x1360_principale_B.gif);
-}
-
-div.b_28184_hmf_917x1360_principale_b_pre {
-    background-image: url(../../../c_images/backgrounds2/28184_HMF_917x1360_principale_B.gif);
-}
-
-div.b_28183_hmf_917x1360_dediee {
-    background-image: url(../../../c_images/backgrounds2/28183_HMF_917x1360_dediee.gif);
-}
-
-div.b_28183_hmf_917x1360_dediee_pre {
-    background-image: url(../../../c_images/backgrounds2/28183_HMF_917x1360_dediee.gif);
-}
-
-div.b_28221_comic_style_orange {
-    background-image: url(../../../c_images/backgrounds2/28221_Comic_style_orange.gif);
-}
-
-div.b_28221_comic_style_orange_pre {
-    background-image: url(../../../c_images/backgrounds2/28221_Comic_style_orange.gif);
-}
-
 div.b_hmf_928x1360_principale {
     background-image: url(../../../c_images/backgrounds2/HMF_928x1360_principale.gif);
 }
@@ -17134,10 +16644,6 @@ div.b_hw_bassplayer_girl_pre {
     background-image: url(../../../c_images/backgrounds2/);
 }
 
-div.b_christmas2007bg_pre {
-    background-image: url(../../../c_images/backgrounds2/christmas2007bg);
-}
-
 div.b_wallpaper2 {
     background-image: url(../../../c_images/backgrounds2/wallpaper2.gif);
 }
@@ -17146,44 +16652,12 @@ div.b_wallpaper2_pre {
     background-image: url(../../../c_images/backgrounds2/wallpaper2.gif);
 }
 
-div.b_hw around_the_world_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/wallpaper2_001.gif);
-}
-
-div.b_hw around_the_world_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/);
-}
-
 div.b_aroundtheworld_bg {
     background-image: url(../../../c_images/backgrounds2/aroundtheworld_bg.gif);
 }
 
 div.b_aroundtheworld_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/aroundtheworld_bg);
-}
-
-div.b_wallpaper1 {
-    background-image: url(../../../c_images/backgrounds2/wallpaper1.jpg);
-}
-
-div.b_wallpaper1_pre {
-    background-image: url(../../../c_images/backgrounds2/wallpaper1.jpg);
-}
-
-div.b_wallpaper2_001 {
-    background-image: url(../../../c_images/backgrounds2/wallpaper2_001.jpg);
-}
-
-div.b_wallpaper2_001_pre {
-    background-image: url(../../../c_images/backgrounds2/wallpaper2_001.jpg);
-}
-
-div.b_wallpaper3 {
-    background-image: url(../../../c_images/backgrounds2/wallpaper3.jpg);
-}
-
-div.b_wallpaper3_pre {
-    background-image: url(../../../c_images/backgrounds2/wallpaper3.jpg);
+    background-image: url(../../../c_images/backgrounds2/aroundtheworld_bg.gif);
 }
 
 div.b_sasquatch_hhbg3 {
@@ -17694,18 +17168,6 @@ div.b_bg_newyear_pre {
     background-image: url(../../../c_images/backgrounds2/bg_newyear.gif);
 }
 
-div.b_newyear_bg_fireworks.gif {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks.gif);
-}
-
-div.b_newyear_bg_fireworks.gif_pre {
-    background-image: url(../../../c_images/backgrounds2/newyear_bg_fireworks.gif);
-}
-
-div.b_newyear_bg_fireworks_pre {
-    background-image: url(../../../c_images/backgrounds2/NewYear_bg_);
-}
-
 div.b_ss_bootsitjalapaset_red {
     background-image: url(../../../c_images/backgrounds2/ss_bootsitjalapaset_red.gif);
 }
@@ -17720,14 +17182,6 @@ div.b_easter_eggs_horizontal {
 
 div.b_easter_eggs_horizontal_pre {
     background-image: url(../../../c_images/backgrounds2/easter_eggs_horizontal.gif);
-}
-
-div.b_easter_egg_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
-}
-
-div.b_easter_egg_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
 }
 
 div.b_samsungclouds {
@@ -17811,15 +17265,7 @@ div.b_sg_animax_keroro_pre {
 }
 
 div.b_tiki_firehead_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/tik_firehead_bg.png);
-}
-
-div.b_toolbar_bg {
-    background-image: url(../../../c_images/backgrounds2/toolbar_bg2.png);
-}
-
-div.b_toolbar_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/toolbar_bg2.png);
+    background-image: url(../../../c_images/backgrounds2/tiki_firehead_bg.png);
 }
 
 div.s_spotlight_sticker_2 {
@@ -18120,22 +17566,6 @@ div.b_myspy_group {
 
 div.b_myspy_group_pre {
     background-image: url(../../../c_images/backgrounds2/myspy_group.gif);
-}
-
-div.b_cw_group_1.jpg {
-    background-image: url(../../../c_images/backgrounds2/CW_group_1.jpg);
-}
-
-div.b_cw_group_1.jpg_pre {
-    background-image: url(../../../c_images/backgrounds2/CW_group_1.jpg);
-}
-
-div.b_cw_group_2.jpg {
-    background-image: url(../../../c_images/backgrounds2/CW_group_2.jpg);
-}
-
-div.b_cw_group_2.jpg_pre {
-    background-image: url(../../../c_images/backgrounds2/CW_group_2.jpg);
 }
 
 div.b_cw_group_1 {
@@ -18670,16 +18100,6 @@ div.s_anim_hockey_pre {
     background: url(../../../c_images/stickers/anim_hockey.gif) no-repeat 50% 50%;
 }
 
-div.s_habboween_bg {
-    width: 917px;
-    height: 1360px;
-    background-image: url(../../../c_images/stickers/);
-}
-
-div.s_habboween_bg_pre {
-    background: url(../../../c_images/stickers/) no-repeat 50% 50%;
-}
-
 div.s_gorilla_hand {
     width: 0px;
     height: 0px;
@@ -18774,14 +18194,6 @@ div.b_bg_colour_17_pre {
     background-image: url(../../../c_images/backgrounds2/bg_colour_17.gif);
 }
 
-div.b_goth_patternn {
-    background-image: url(../../../c_images/backgrounds2/goth_pattern.gif);
-}
-
-div.b_goth_patternn_pre {
-    background-image: url(../../../c_images/backgrounds2/goth_pattern.gif);
-}
-
 div.b_bg_hw_val_bgpattern_love.gif {
     background-image: url(../../../c_images/backgrounds2/hw_val_bgpattern_love.gif);
 }
@@ -18796,26 +18208,6 @@ div.b_hw_val_bgpattern_love {
 
 div.b_hw_val_bgpattern_love_pre {
     background-image: url(../../../c_images/backgrounds2/vale_rose_bg.gif);
-}
-
-div.b_habboween_bg_bg {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
-}
-
-div.b_habboween_bg_bg_pre {
-    background-image: url(../../../c_images/backgrounds2/habboween_bg.gif);
-}
-
-div.b_habbox_pre {
-    background-image: url(../../../c_images/backgrounds2/HW HABBOX);
-}
-
-div.b_abrinq_infobus {
-    background-image: url(../../../c_images/backgrounds2/abrinq_infobus.png);
-}
-
-div.b_abrinq_infobus_pre {
-    background-image: url(../../../c_images/backgrounds2/abrinq_infobus.png);
 }
 
 div.b_abrinq_infobusg {
@@ -19516,22 +18908,6 @@ div.s_easteregg_costume0_pre {
     background: url(../../../c_images/stickers/easteregg_costume.gif) no-repeat 50% 50%;
 }
 
-div.b_hw easter_egg_wallpaper {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
-}
-
-div.b_hw easter_egg_wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper.gif);
-}
-
-div.b_easter_eggs_wallpaper2 {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper2.gif);
-}
-
-div.b_easter_eggs_wallpaper2_pre {
-    background-image: url(../../../c_images/backgrounds2/easter_eggs_wallpaper2.gif);
-}
-
 div.b_habboguide {
     background-image: url(../../../c_images/backgrounds2/habboguide.gif);
 }
@@ -19546,14 +18922,6 @@ div.b_jp_valentine {
 
 div.b_jp_valentine_pre {
     background-image: url(../../../c_images/backgrounds2/JP_Valentine.gif);
-}
-
-div.b_jp valentine {
-    background-image: url(../../../c_images/backgrounds2/JP Valentine.gif);
-}
-
-div.b_jp valentine_pre {
-    background-image: url(../../../c_images/backgrounds2/JP Valentine.gif);
 }
 
 div.s_hw_bgpattern_skull {
@@ -20046,14 +19414,6 @@ div.b_bb_group {
 
 div.b_bb_group_pre {
     background-image: url(../../../c_images/backgrounds2/BB_Group.png);
-}
-
-div.b_felix03 {
-    background-image: url(../../../c_images/backgrounds2/felix_ryhmasivutausta.gif);
-}
-
-div.b_felix03_pre {
-    background-image: url(../../../c_images/backgrounds2/felix_ryhmasivutausta.gif);
 }
 
 div.b_bg_dark_floors {

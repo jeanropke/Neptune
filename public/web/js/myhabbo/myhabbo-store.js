@@ -807,7 +807,21 @@ WebStore.Inventory = {
         WebStore.Inventory._clearPreview();
         $("inventory-items").innerHTML = getProgressNode();
         WebStore.Inventory.waitingForReload = true;
-    }
+    },
+    selectCategory: function (type, categoryEl) {
+        if (!categoryEl) {
+            categoryEl = $("inv-cat-" + type);
+        }
+        if (WebStore.Inventory.selectedCategory != type && categoryEl) {
+            categoryEl.className = "selected-main-category-no-subcategories";
+            if (WebStore.Inventory.selectedCategory != null) {
+                $("inv-cat-" + WebStore.Inventory.selectedCategory).className = "main-category-no-subcategories";
+            }
+            WebStore.Inventory.selectedCategory = type;
+            WebStore.Inventory.loadCategory(type);
+            WebStore.Inventory._setContentClassName(type);
+        }
+    },
 
 }
 

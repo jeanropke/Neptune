@@ -15,7 +15,7 @@ class WebStoreController extends Controller
     {
         switch ($request->type) {
             case 'backgrounds':
-                $categories = StoreCategory::where('type', 'b')->get();
+                $categories = StoreCategory::where('type', 'b')->orderBy('order_num')->get();
                 $items = $categories->first()->getItems();
                 break;
             default:
@@ -28,7 +28,7 @@ class WebStoreController extends Controller
         $firstItem = $items->first();
 
         $data = [];
-        if($firstItem)
+        if ($firstItem)
             $data = ['itemCount' => 1, 'previewCssClass' => "{$firstItem->type}_{$firstItem->class}_pre", 'titleKey' => ''];
 
 
@@ -77,9 +77,8 @@ class WebStoreController extends Controller
         return view('home.store.purchase_confirm')->with('item', StoreItem::find($request->productId));
     }
 
-    public function purchaseDone(Request $request)
+    public function purchaseStickers(Request $request)
     {
-        //"task":"purchase","selectedId":"3"
         $store = StoreItem::find($request->selectedId);
         if (!$store)
             return 'ERROR';
@@ -92,5 +91,31 @@ class WebStoreController extends Controller
         ]);
         user()->updateCredits(-$store->price);
         return 'OK';
+    }
+
+    public function purchaseBackgrounds(Request $request)
+    {
+        $owned = HomeItem::where([['owner_id', user()->id], ['item_id', $request->selectedId]])->first();
+        if ($owned)
+            return 'ERROR';
+
+        $store = StoreItem::find($request->selectedId);
+        if (!$store)
+            return 'ERROR';
+
+        HomeItem::create([
+            'owner_id'  => user()->id,
+            'type'      => $store->getFullType(),
+            'amount'    => 1,
+            'item_id'   => $store->id,
+            'data'      => 'background'
+        ]);
+        user()->updateCredits(-$store->price);
+        return 'OK';
+    }
+
+    public function backgroundWarning()
+    {
+        return view('home.store.background_warning');
     }
 }

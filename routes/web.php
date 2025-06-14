@@ -255,9 +255,10 @@ Route::middleware('user')->group(function () {
         Route::post('/store/main', [WebStoreController::class, 'storeMain'])->name('myhabbo.store.main');
         Route::post('/store/preview', [WebStoreController::class, 'preview'])->name('myhabbo.store.preview');
         Route::post('/store/purchase_confirm', [WebStoreController::class, 'purchaseConfirm'])->name('myhabbo.item.purchase_confirm');
-        Route::post('/store/purchase_stickers', [WebStoreController::class, 'purchaseDone'])->name('myhabbo.item.purchase_done');
+        Route::post('/store/purchase_stickers', [WebStoreController::class, 'purchaseStickers'])->name('myhabbo.item.purchase_stickers');
+        Route::post('/store/purchase_backgrounds', [WebStoreController::class, 'purchaseBackgrounds'])->name('myhabbo.item.purchase_background');
         Route::post('/store/items', [WebStoreController::class, 'loadItems'])->name('myhabbo.item.load_items');
-
+        Route::post('/store/background_warning', [WebStoreController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
 
 
         //Old stuff
