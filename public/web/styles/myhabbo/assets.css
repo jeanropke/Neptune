@@ -10210,14 +10210,6 @@ div.b_habboclassifieds_pre {
     background-image: url(../../../c_images/backgrounds2/wallpaper2.gif);
 }
 
-div.b_donnas wallpaper {
-    background-image: url(../../../c_images/backgrounds2/donnasWallpaper.jpg);
-}
-
-div.b_donnas wallpaper_pre {
-    background-image: url(../../../c_images/backgrounds2/donnasWallpaper.jpg);
-}
-
 div.b_donnas_wallpaper {
     background-image: url(../../../c_images/backgrounds2/donnasWallpaper.jpg);
 }
@@ -10755,85 +10747,85 @@ div.b_backtoschool_wallpaper_pre {
 }
 
 div.w_highscoreswidget_pre {
-    background-image: url(../../../web/images/widgets/hiscores_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/hiscores_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_profilewidget_pre {
-    background-image: url(../../../web/images/widgets/profilewidget.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/profilewidget.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_friendswidget_pre {
-    background-image: url(../../../web/images/widgets/friends_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/friends_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_roomswidget_pre {
-    background-image: url(../../../web/images/widgets/rooms_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/rooms_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_guestbookwidget_pre {
-    background-image: url(../../../web/images/widgets/guestbook_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/guestbook_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_groupinfowidget_pre {
-    background-image: url(../../../web/images/widgets/groupinfowidget.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/groupinfowidget.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_groupswidget_pre {
-    background-image: url(../../../web/images/widgets/groupswidget.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/groupswidget.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_memberwidget_pre {
-    background-image: url(../../../c_images/widgets/member_preview.gif);
+    background-image: url(../../../c_images/myhabbo/widgets/member_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_ratingwidget_pre {
-    background-image: url(../../../web/images/widgets/rating_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/rating_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_traxplayerwidget_pre {
-    background-image: url(../../../web/images/widgets/trax_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/trax_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_highscorelistwidget_pre {
-    background-image: url(../../../web/images/widgets/highscorelistwidget.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/highscorelistwidget.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_userexpswidget_pre {
-    background-image: url(../../../web/images/widgets/hiscores_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/hiscores_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_badgeswidget_pre {
-    background-image: url(../../../web/images/widgets/badges_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/badges_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
 div.w_habbomovieswidget_pre {
-    background-image: url(../../../web/images/widgets/movies_preview.gif);
+    background-image: url(../../../web/images/myhabbo/widgets/movies_preview.gif);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
@@ -12506,14 +12498,6 @@ div.b_hmf_928x1360_dediee_pre {
     background-image: url(../../../c_images/backgrounds2/HMF_928x1360_dediee.gif);
 }
 
-div.b_bg_guidegroup {
-    background-image: url(../../../c_images/backgrounds2/guidesgroup_bg.png);
-}
-
-div.b_bg_guidegroup_pre {
-    background-image: url(../../../c_images/backgrounds2/guidesgroup_bg.png);
-}
-
 div.b_snowbattle_bg {
     background-image: url(../../../c_images/backgrounds2/grouppage_snowbattle2.png);
 }
@@ -13658,14 +13642,6 @@ div.b_easter_broomstick_002_pre {
     background-image: url(../../../c_images/backgrounds2/easter_broomstick_002.gif);
 }
 
-div.b_bg_kingcorp_928x1360 {
-    background-image: url(../../../c_images/backgrounds2/bg_kingcorp_928x1360.gif);
-}
-
-div.b_bg_kingcorp_928x1360_pre {
-    background-image: url(../../../c_images/backgrounds2/backgrounds2/kingcorp_928x1360.gif);
-}
-
 div.b_bg_konkurrence {
     background-image: url(../../../c_images/backgrounds2/konkurrence.gif);
 }
@@ -14008,16 +13984,6 @@ div.s_xmas_angelwings_anim {
 
 div.s_xmas_angelwings_anim_pre {
     background: url(../../../c_images/stickers/angelwings_anim.gif) no-repeat 50% 50%;
-}
-
-div.s_newyear 2007 anim2 {
-    width: 146px;
-    height: 58px;
-    background-image: url(../../../c_images/stickers/TEST);
-}
-
-div.s_newyear 2007 anim2_pre {
-    background: url(../../../c_images/stickers/TEST) no-repeat 50% 50%;
 }
 
 div.s_newyear_2007_anim2 {
@@ -16061,11 +16027,11 @@ div.b_bg_kingcorp_928x1360_pre {
 }
 
 div.b_bg_shabbolin {
-    background-image: url(../../../c_images/backgrounds2/bg_shabbolin.gif);
+    background-image: url(../../../c_images/backgrounds/bg_shabbolin.gif);
 }
 
 div.b_bg_shabbolin_pre {
-    background-image: url(../../../c_images/backgrounds2/bg_shabbolin.gif);
+    background-image: url(../../../c_images/backgrounds/bg_shabbolin.gif);
 }
 
 div.b_background_tour {
@@ -16602,14 +16568,6 @@ div.s_sticker_caballoons {
 
 div.s_sticker_caballoons_pre {
     background: url(../../../c_images/stickers/sticker_caBalloons.gif) no-repeat 50% 50%;
-}
-
-div.b_bg_pattern_floral_test {
-    background-image: url(../../../c_images/backgrounds2/bg_pattern_floral_01.gif);
-}
-
-div.b_bg_pattern_floral_test_pre {
-    background-image: url(../../../c_images/backgrounds2/bg_pattern_floral_01.gif);
 }
 
 div.b_bg_starburst_raspberry {
@@ -17158,14 +17116,6 @@ div.s_sg_mtv_sticker_03 {
 
 div.s_sg_mtv_sticker_03_pre {
     background: url(../../../c_images/stickers/SG_MTV_Sticker_03.gif) no-repeat 50% 50%;
-}
-
-div.b_bg_newyear {
-    background-image: url(../../../c_images/backgrounds2/bg_newyear.gif);
-}
-
-div.b_bg_newyear_pre {
-    background-image: url(../../../c_images/backgrounds2/bg_newyear.gif);
 }
 
 div.b_ss_bootsitjalapaset_red {
@@ -18194,14 +18144,6 @@ div.b_bg_colour_17_pre {
     background-image: url(../../../c_images/backgrounds2/bg_colour_17.gif);
 }
 
-div.b_bg_hw_val_bgpattern_love.gif {
-    background-image: url(../../../c_images/backgrounds2/hw_val_bgpattern_love.gif);
-}
-
-div.b_bg_hw_val_bgpattern_love.gif_pre {
-    background-image: url(../../../c_images/backgrounds2/hw_val_bgpattern_love.gif);
-}
-
 div.b_hw_val_bgpattern_love {
     background-image: url(../../../c_images/backgrounds2/vale_rose_bg.gif);
 }
@@ -18224,14 +18166,6 @@ div.b_infobus_abrinq_sem_logo {
 
 div.b_infobus_abrinq_sem_logo_pre {
     background-image: url(../../../c_images/backgrounds2/infobus_abrinq_sem_logo.gif);
-}
-
-div.b_festa de boas vindas {
-    background-image: url(../../../c_images/backgrounds2/welcoming_party.gif);
-}
-
-div.b_festa de boas vindas_pre {
-    background-image: url(../../../c_images/backgrounds2/welcoming_party.gif);
 }
 
 div.b_gruposedateens.jpg {
