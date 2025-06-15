@@ -16,22 +16,3 @@
         </ul>
     </div>
 </div>
-<div id="inventory-preview-container" style="display: block;">
-    <div id="inventory-preview-default"></div>
-    <div id="inventory-preview">
-
-        <div id="inventory-preview-box">
-            <div id="inventory-preview-pre" class="" title=""></div>
-        </div>
-
-        <div id="inventory-preview-place" class="clearfix">
-            <a href="#" class="toolbutton" id="inventory-place"><span>Place</span></a>
-        </div>
-
-    </div>
-    <div class="clear"></div>
-</div>
-<div>
-    <a href="#" id="inventory-close" class="toolbutton"><span>Close</span></a>
-</div>
-<div class="clear"></div>

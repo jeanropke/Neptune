@@ -404,9 +404,9 @@
             }
         </style>
         <script>
-            Event.observe('stickers-button', 'click', function (e) { WebStore.open('stickers') }, false);
-            Event.observe('widgets-button', 'click', function (e) { WebStore.open('widgets') }, false);
-            Event.observe('backgrounds-button', 'click', function (e) { WebStore.open('backgrounds') }, false);
+            Event.observe('stickers-button', 'click', function (e) { Event.stop(e); WebStore.open('stickers'); }, false);
+            Event.observe('widgets-button', 'click', function (e) { Event.stop(e); WebStore.open('widgets'); }, false);
+            Event.observe('backgrounds-button', 'click', function (e) { Event.stop(e); WebStore.open('backgrounds'); }, false);
         </script>
     @endif
 @stop

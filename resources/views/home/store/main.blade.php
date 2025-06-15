@@ -24,7 +24,11 @@
                         </div>
                     </li>
                 @endforeach
-                @for ($i = 0; $i < ($items->count() <= 20 ? 20 - $items->count() : 4 - ($items->count() % 4)); $i++)
+                @php
+                    $count = $items->count();
+                    $fill = $count < 12 ? 12 - $count : (4 - ($count % 4)) % 4;
+                @endphp
+                @for ($i = 0; $i < $fill; $i++)
                     <li class="webstore-item-empty"></li>
                 @endfor
             </ul>
@@ -69,4 +73,3 @@
     <a href="#" id="load-inventory" class="colorlink" style="margin: 0; margin-top: 4px"><span>Open Inventory <span id="webstore-inventory-new"></span></span></a>
 </div>
 <div id="inventory-content"></div>
-
