@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CreditsController;
+use App\Http\Controllers\EntertainmentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Group\DiscussionController;
 use App\Http\Controllers\GroupController;
@@ -113,6 +114,11 @@ Route::middleware('user')->group(function () {
                 Route::get('/ambient', function() { return view('hotel.trax.masterclass.ambient'); })->name('hotel.trax.masterclass.ambient');
             });
         });
+    });
+
+    //EntertainmentController
+    Route::prefix('entertainment')->group(function() {
+        Route::get('/habbowood', [EntertainmentController::class, 'habbowood'])->name('entertainment.habbowood');
     });
 
     //ClubController
