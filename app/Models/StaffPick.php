@@ -17,4 +17,9 @@ class StaffPick extends Model
     {
         return User::find($this->picker_id);
     }
+
+    public function getMovie()
+    {
+        return HabbowoodMovie::find($this->pick_id);
+    }
 }

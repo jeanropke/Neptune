@@ -73,7 +73,7 @@
                                     Welcome to the <span style="font-weight: bold;">Habbowood Digital Movie Awards</span>, the internet's coolest moviemaking competition!<br>
                                     <a target="_blank" href="https://web.archive.org/web/20071003010249/http://www.habbo.com/habbomovies/private/openeditor"><br>
                                         <img width="45" vspace="0" hspace="5" height="45" border="0" align="left"
-                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.co.uk/c_images/album1644/unknown_4.gif"
+                                            src="{{ cms_config('site.c_images.url') }}/album1644/unknown_4.gif"
                                             alt=""></a><br><a href="https://web.archive.org/web/20071003010249/http://www.habbo.com/habbomovies/private/openeditor">Shoot a
                                         movie
                                         and WIN!</a><br>
@@ -102,6 +102,7 @@
                             </div>
                         </div>
 
+                        {{--
                         <div class="portlet-goldenfilm goldenfilm">
                             <div class="portlet-goldenfilm-header">
                                 <h3>Target Top Ten</h3>
@@ -110,10 +111,10 @@
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
 
-                                    <p align="center"><a href="https://web.archive.org/web/20071003010249/http://www.habbo.com/entertainment/target/hdma_top10.html"><img
-                                                width="130" height="100" border="0"
-                                                src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/c_images/album2544/top10button.gif"
-                                                alt=""></a></p>
+                                    <p align="center"><a href="https://web.archive.org/web/20071003010249/http://www.habbo.com/entertainment/target/hdma_top10.html"><img width="130"
+                                                height="100" border="0"
+                                                src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/c_images/album2544/top10button.gif" alt=""></a>
+                                    </p>
                                     <p align="center"><a href="https://web.archive.org/web/20071003010249/http://www.habbo.com/entertainment/target/hdma_top10.html">Check out</a> the
                                         daily <span style="font-weight: bold;">Top Ten</span> Habbowood Movies brought to you by <span style="font-weight: bold;">Target</span>. </p>
                                     <div class="clear"></div>
@@ -123,6 +124,7 @@
                                 <div class="portlet-goldenfilm-bottom-body"></div>
                             </div>
                         </div>
+                        --}}
                     </td>
 
                     <td style="width:5px;" rowspan="2">&nbsp;</td>
@@ -148,6 +150,47 @@
 
                                     <div class="habbomovie-scrollable-component">
                                         <table border="0" cellpadding="2" cellspacing="0" width="90%">
+                                            <tbody>
+                                                @foreach ($top as $movie)
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item">
+                                                            <img class="genre-image" src="{{ url('/') }}/web/images/habbomovies/genres/action.gif" border="0">
+                                                        </td>
+                                                        <td valign="top" class="list-movie-name">
+                                                            <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->title }}</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>By:</span></td>
+                                                        <td valign="middle" class="list-movie-creatorname"><a
+                                                                href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>Rating:</span></td>
+                                                        <td valign="middle">
+                                                            <ul class="rater-list">
+                                                                @for ($i = 0; $i < 5; $i++)
+                                                                    <li class="rater-list-item">
+                                                                        @if($movie->rating > $i)
+                                                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
+                                                                        @else
+                                                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
+                                                                        @endif
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>Views:</span></td>
+                                                        <td valign="middle">{{ $movie->views }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
 
@@ -170,357 +213,52 @@
                                 <div class="portlet-film-content">
 
                                     <img vspace="5" hspace="5" border="0" align="left"
-                                        src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.co.uk/c_images/album2627/unknown.gif" alt="">
+                                        src="{{ cms_config('site.c_images.url') }}/album2627/unknown.gif" alt="">
                                     Everyday, a movie will be added to this list by Habbo Staff from the daily Top 10 Rated movies (on the left). The movies in this list will then
                                     become our finalists!<br><br><br>
                                     <div class="habbomovie-scrollable-component">
                                         <table border="0" cellpadding="2" cellspacing="0" width="90%">
                                             <tbody>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/action.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/2549">Stop That Hacker!</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/:Poptart">:Poptart</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">49795</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/action.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/24619">Objective Impossible</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/riley66">riley66</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">18030</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/adventure.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/38119">Abnormal</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/Tidning">Tidning</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">8980</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/action.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/1303">Mission: Habbowood</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/Mathew">Mathew</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">9488</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/romantic.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/46237">I Love You.</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/Warmness">Warmness</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">10379</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/scifi.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/29010">Aliens of Terror</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a href="/web/20071003010249/http://www.habbo.com/home/Mutata">Mutata</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">5224</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/scifi.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/31273">Inactive Galaxy</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/home/skamanjab">skamanjab</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">5934</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/romantic.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/3051">Chicken Sandwich</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/home/Funkipenguin">Funkipenguin</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">20415</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><img class="genre-image"
-                                                            src="https://web.archive.org/web/20071003010249im_/http://images.habbohotel.com/habboweb/16/11/web-gallery/images/habbomovies/genres/scifi.gif"
-                                                            border="0"></td>
-                                                    <td valign="top" class="list-movie-name"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/entertainment/habbowood/movies/46317">The Other Hotel</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>By:</span></td>
-                                                    <td valign="middle" class="list-movie-creatorname"><a
-                                                            href="/web/20071003010249/http://www.habbo.com/home/gamerguy821">gamerguy821</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Rating:</span></td>
-                                                    <td valign="middle">
-                                                        <ul class="rater-list">
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                                            </li>
-                                                            <li class="rater-list-item"><img
-                                                                    src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" class="list-movie-item"><span>Views:</span></td>
-                                                    <td valign="middle">7736</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
-                                                </tr>
+                                                @foreach ($staff as $pick)
+                                                @php($movie = $pick->getMovie())
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item">
+                                                            <img class="genre-image" src="{{ url('/') }}/web/images/habbomovies/genres/action.gif" border="0">
+                                                        </td>
+                                                        <td valign="top" class="list-movie-name">
+                                                            <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->title }}</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>By:</span></td>
+                                                        <td valign="middle" class="list-movie-creatorname"><a
+                                                                href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>Rating:</span></td>
+                                                        <td valign="middle">
+                                                            <ul class="rater-list">
+                                                                @for ($i = 0; $i < 5; $i++)
+                                                                    <li class="rater-list-item">
+                                                                        @if($movie->rating > $i)
+                                                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
+                                                                        @else
+                                                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
+                                                                        @endif
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" class="list-movie-item"><span>Views:</span></td>
+                                                        <td valign="middle">{{ $movie->views }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="height:15px;" colspan="2" class="habbomovies-component-divider"></td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
