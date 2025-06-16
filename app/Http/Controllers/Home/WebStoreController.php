@@ -95,10 +95,6 @@ class WebStoreController extends Controller
 
     public function purchaseBackgrounds(Request $request)
     {
-        $owned = HomeItem::where([['owner_id', user()->id], ['item_id', $request->selectedId]])->first();
-        if ($owned)
-            return 'ERROR';
-
         $store = StoreItem::find($request->selectedId);
         if (!$store)
             return 'ERROR';
