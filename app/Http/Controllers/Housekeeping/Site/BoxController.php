@@ -10,22 +10,14 @@ use Illuminate\Http\Request;
 class BoxController extends Controller
 {
     private $availablePages = [
-        'club.shop',
-        'index',
-        'include.furniture',
-        'home.about',
-        'hotel',
-        'hotel.groups',
-        'hotel.homes',
-        'hotel.pets',
-        'hotel.room',
-        'hotel.staff',
-        'hotel.welcome',
-        'hotel.navigator',
-        'help.index',
-        'community.index',
-        'community.fansites',
-        'games.index'
+        'club.shop', 'community.fansites', 'community.index', 'credits.furniture.camera', 'credits.furniture.catalogue', 'credits.furniture.catalogue_1', 'credits.furniture.catalogue_2',
+        'credits.furniture.catalogue_4', 'credits.furniture.decoration_examples', 'credits.furniture.ecotronfaq', 'credits.furniture.exchange', 'credits.furniture', 'credits.furniture.starterpacks',
+        'credits.furniture.trading', 'footer_pages.advertise', 'footer_pages.atlas', 'footer_pages.privacy_policy', 'footer_pages.terms_and_conditions', 'footer_pages.terms_of_sale',
+        'games.battleball.challenge', 'games.battleball.high_scores', 'games.battleball.how_to_play', 'games.battleball.index', 'games.dive', 'games.index', 'games.snowstorm.high_scores',
+        'games.snowstorm.index', 'games.snowstorm.rules', 'games.wobblesquabble.high_scores', 'games.wobblesquabble.index', 'help.contact_us', 'help.hotel_way', 'help.index', 'hotel.groups.group_instructions',
+        'hotel.groups', 'hotel.homes', 'hotel', 'hotel.navigator', 'hotel.pets', 'hotel.staff', 'hotel.trax.index', 'hotel.trax.masterclass.ambient', 'hotel.trax.masterclass.disco',
+        'hotel.trax.masterclass.electronic', 'hotel.trax.masterclass.groove', 'hotel.trax.masterclass.habbo', 'hotel.trax.masterclass.hiphop', 'hotel.trax.masterclass', 'hotel.trax.masterclass.rock',
+        'hotel.trax.masterclass.sfx', 'hotel.trax.store', 'hotel.welcome', 'index'
     ];
 
     public function boxCreate()
@@ -141,6 +133,8 @@ class BoxController extends Controller
         if (!user()->hasPermission('can_manage_site_box'))
             return view('housekeeping.accessdenied');
 
+        sort($this->availablePages);
+
         return view('housekeeping.site.boxes.pages.create')->with([
             'boxes'     => Box::all(),
             'pages'     => $this->availablePages
@@ -173,6 +167,8 @@ class BoxController extends Controller
 
         if (!$box)
             return redirect()->route('housekeeping.site.boxes.pages')->with('message',  'Box Page not found!');
+
+        sort($this->availablePages);
 
         return view('housekeeping.site.boxes.pages.edit')->with([
             'boxes'     => Box::all(),
