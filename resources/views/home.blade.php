@@ -143,8 +143,7 @@
             @endif
             <div id="mypage-top-spacer"></div>
 
-
-            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
+            <div id="mypage-bg" class="b_{{ $background ? $background->getStoreItem()->class : '' }}">
                 <div id="playground">
                     @foreach ($items as $item)
                         @php($itemStore = $item->getStoreItem())
