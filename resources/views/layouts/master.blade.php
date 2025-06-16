@@ -55,7 +55,9 @@
         <link href="{{ url('/') }}/web/styles/myhabbo/dialogs.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/myhabbo/buttons.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/myhabbo/boxes.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" />
+        <link href="{{ url('/') }}/web/styles/myhabbo/backgrounds.css" type="text/css" rel="stylesheet" />
+        <link href="{{ url('/') }}/web/styles/myhabbo/stickers.css" type="text/css" rel="stylesheet" />
+        <link href="{{ url('/') }}/web/styles/myhabbo/other.css" type="text/css" rel="stylesheet" />
         <link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet" />
 
         <script type="text/javascript" src="{{ url('/') }}/web/js/inheritance.js"></script>
