@@ -14,17 +14,7 @@ class HHAssetController extends Controller
         if (!user()->hasPermission('can_manage_hh_assets'))
             return view('housekeeping.accessdenied');
 
-        switch ($request->type) {
-            case 'b':
-            case 's':
-                $assets = HomeAsset::where('type', $request->type)->paginate(20);
-                break;
-
-            default:
-                $assets = HomeAsset::paginate(20);
-                break;
-        }
-
+        $assets = HomeAsset::where('class', 'LIKE', "%{$request->q}%")->orWhere('path', 'LIKE', "%{$request->q}%")->paginate(20);
         return view('housekeeping.site.hhassets.listing')->with('assets', $assets);
     }
 
@@ -122,4 +112,46 @@ class HHAssetController extends Controller
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Asset deleted!']);
     }
 
+    public function generate()
+    {
+        if (!user()->hasPermission('can_manage_hh_assets'))
+            return view('housekeeping.accessdenied');
+
+        return view('housekeeping.site.hhassets.generate');
+    }
+
+    public function generatePost(Request $request)
+    {
+        if (!user()->hasPermission('can_manage_hh_assets'))
+            return view('housekeeping.accessdenied');
+
+        $cimages = cms_config('site.c_images.url');
+        $isFormatted = $request->formatted == 1;
+        if ($request->type == 'b') {
+            $content = null;
+            $assets = HomeAsset::where('type', 'b')->get();
+            foreach ($assets as $asset) {
+                if ($isFormatted) {
+                    $content .= "div.b_{$asset->class},div.b_{$asset->class}_pre {\n    background-image: url({$cimages}/backgrounds2/{$asset->path})\n}\n";
+                } else {
+                    $content .= "div.b_{$asset->class},div.b_{$asset->class}_pre{background-image:url({$cimages}/backgrounds2/{$asset->path})}";
+                }
+            }
+            Storage::disk('public_root')->put('web/styles/myhabbo/backgrounds.css', $content);
+        } else {
+            $content = null;
+            $assets = HomeAsset::where('type', 's')->get();
+            foreach ($assets as $asset) {
+                if ($isFormatted) {
+                    $content .= "div.s_{$asset->class} {\n    width: {$asset->width}px;\n    height: {$asset->height}px;\n    background-image: url({$cimages}/stickers/{$asset->path})\n}\n";
+                    $content .= "div.s_{$asset->class}_pre {\n    background: url({$cimages}/stickers/{$asset->path}) no-repeat 50% 50%\n}\n";
+                } else {
+                    $content .= "div.s_{$asset->class}{width:{$asset->width}px;height:{$asset->height}px;background-image: url({$cimages}/stickers/{$asset->path})}";
+                    $content .= "div.s_{$asset->class}_pre{background:url({$cimages}/stickers/{$asset->path}) no-repeat 50% 50%}";
+                }
+            }
+            Storage::disk('public_root')->put('web/styles/myhabbo/stickers.css', $content);
+        }
+        return $request->all();
+    }
 }

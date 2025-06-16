@@ -18,6 +18,25 @@
                     @if (session('message'))
                         <p><strong>{{ session('message') }}</strong></p>
                     @endif
+                    <form action="{{ route('housekeeping.site.hh_assets.listing') }}" method="get" name="theAdminForm" id="theAdminForm" autocomplete="off">
+                        <div class="tableborder">
+                            <div class="tableheaderalt">Create New Habbo Home Asset</div>
+                            <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Class or Path</b></td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="q" value="{{ request()->q }}" size="30" class="textinput">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="tablesubheader" colspan="2">
+                                        <input type="submit" value="Search" class="realbutton" accesskey="s">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                    <br />
                     <div class="tableborder">
                         <div class="tableheaderalt">Habbo Home Assets</div>
                         <table cellpadding="4" cellspacing="0" width="100%" class="listing">
@@ -39,10 +58,10 @@
                                     <td class="tablerow2">
                                         <strong class="tooltip">
                                             {{ $asset->class }}
-                                            @if($asset->type == 's')
-                                            <img src="{{ cms_config('site.c_images.url') }}/stickers/{{ $asset->path }}" class="tooltip-image">
+                                            @if ($asset->type == 's')
+                                                <img src="{{ cms_config('site.c_images.url') }}/stickers/{{ $asset->path }}" class="tooltip-image">
                                             @else
-                                            <img src="{{ cms_config('site.c_images.url') }}/backgrounds2/{{ $asset->path }}" class="tooltip-image background">
+                                                <img src="{{ cms_config('site.c_images.url') }}/backgrounds2/{{ $asset->path }}" class="tooltip-image background">
                                             @endif
                                         </strong>
                                     </td>

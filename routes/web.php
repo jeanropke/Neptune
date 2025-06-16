@@ -518,6 +518,8 @@ Route::middleware('admin')->group(function () {
             Route::get('/hh_assets/edit/{id}', [HHAssetController::class, 'edit'])->name('housekeeping.site.hh_assets.edit');
             Route::post('/hh_assets/edit/save', [HHAssetController::class, 'editSave'])->name('housekeeping.site.hh_assets.edit.save');
             Route::post('/hh_assets/delete', [HHAssetController::class, 'delete'])->name('housekeeping.site.hh_assets.delete');
+            Route::get('/hh_assets/generate', [HHAssetController::class, 'generate'])->name('housekeeping.site.hh_assets.generate');
+            Route::post('/hh_assets/generate', [HHAssetController::class, 'generatePost'])->name('housekeeping.site.hh_assets.generate.post');
         });
 
         Route::prefix('neptunecms')->group(function () {

@@ -116,6 +116,10 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.site.hh_assets.create') }}" style="text-decoration:none;{{ $submenu == 'hh_assets.create' ? 'font-weight: bold;' : '' }}">Create Asset</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.hh_assets.generate') }}" style="text-decoration:none;{{ $submenu == 'hh_assets.generate' ? 'font-weight: bold;' : '' }}">Generate CSS</a>
+    </div>
 </div>
 <br />
 {{--<div class="menuouterwrap">
