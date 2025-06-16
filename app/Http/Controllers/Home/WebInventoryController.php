@@ -32,9 +32,12 @@ class WebInventoryController extends Controller
                 break;
         }
 
+        $data = null;
         $item = $items->first();
-        $store = $item->getStoreItem();
-        $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
+        if ($item) {
+            $store = $item->getStoreItem();
+            $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
+        }
 
         return response(view('home.inventory.main', [
             'items' => $items
