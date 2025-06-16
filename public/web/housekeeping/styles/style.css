@@ -665,6 +665,7 @@ img.calendar {
     text-decoration: none;
     color: #FFF;
 }
+
 .tableheaderalt-right {
     font-size: 11px;
     padding-right: 10px;
@@ -807,6 +808,18 @@ img.calendar {
     border-right: 1px solid #C1BEBE;
     border-top: 1px solid #FFF;
     border-left: 1px solid #FFF;
+}
+
+.even .tablerow1 {
+    background-color: #e1e3e5;
+}
+
+.even .tablerow2 {
+    background-color: #e5e5e5;
+}
+
+.tableborder tbody tr:hover td:not(.tablesubheader) {
+    background-color: rgba(52, 144, 220, .25);
 }
 
 /* ======================================== */
@@ -1626,7 +1639,9 @@ div.dialog-defaulttab-body {
     background-repeat: repeat-y;
     text-align: left;
 }
-#confirm-dialogcontent, #furni-picker-dialog-body {
+
+#confirm-dialogcontent,
+#furni-picker-dialog-body {
     padding: 7px;
 }
 
@@ -1654,22 +1669,25 @@ div.dialog-defaulttab-body {
     width: 50px;
     height: 50px;
 }
+
 #badge-manager .slot .code {
     text-align: center;
 }
-.ui-draggable-handle h3 {
-    cursor:move;
-}
-#furni-picker-form {
 
+.ui-draggable-handle h3 {
+    cursor: move;
 }
+
+#furni-picker-form {}
+
 #furni-picker-form #furni-name {
     float: right;
 }
-#furni-picker-listing {
 
-}
-#furni-picker-listing .slot, #furni-picked .slot {
+#furni-picker-listing {}
+
+#furni-picker-listing .slot,
+#furni-picked .slot {
     background: #F1F1F1;
     margin: 2px;
     border-bottom: 1px solid #C1BEBE;
@@ -1679,10 +1697,36 @@ div.dialog-defaulttab-body {
     float: left;
     cursor: pointer;
 }
-#furni-picker-listing .slot .image, #furni-picked .slot .image {
+
+#furni-picker-listing .slot .image,
+#furni-picked .slot .image {
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-image {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    padding: 5px;
+    border: 1px solid #5D789C;
+    background-color: #EFF3F7;
+}
+
+.tooltip:hover .tooltip-image {
+    visibility: visible;
+}
+
+.tooltip img.background {
+    width: 100%;
+    max-width: 300px;
+}

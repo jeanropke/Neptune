@@ -36,6 +36,7 @@ use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
+use App\Http\Controllers\Housekeeping\Site\HHAssetController;
 use App\Http\Controllers\Housekeeping\Site\MenuController;
 use App\Http\Controllers\Housekeeping\Site\PartnerController;
 use App\Http\Controllers\Housekeeping\Site\SiteController;
@@ -504,13 +505,19 @@ Route::middleware('admin')->group(function () {
             Route::post('/menu/categories/save', [MenuController::class, 'menuCategoriesSave'])->name('housekeeping.site.menu.categories.save');
             Route::post('/menu/categories/delete', [MenuController::class, 'menuCategoriesDelete'])->name('housekeeping.site.menu.categories.delete');
 
-
             Route::get('/menu/subcategories', [MenuController::class, 'menuSubcategoriesListing'])->name('housekeeping.site.menu.subcategories.listing');
             Route::get('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreate'])->name('housekeeping.site.menu.subcategories.create');
             Route::post('/menu/subcategories/create', [MenuController::class, 'menuSubcategoriesCreateSave'])->name('housekeeping.site.menu.subcategories.create,save');
             Route::get('/menu/subcategories/edit/{id}', [MenuController::class, 'menuSubcategoriesEdit'])->name('housekeeping.site.menu.subcategories.edit');
             Route::post('/menu/subcategories/save', [MenuController::class, 'menuSubcategoriesSave'])->name('housekeeping.site.menu.subcategories.save');
             Route::post('/menu/subcategories/delete', [MenuController::class, 'menuSubcategoriesDelete'])->name('housekeeping.site.menu.subcategories.delete');
+
+            Route::get('/hh_assets/listing', [HHAssetController::class, 'listing'])->name('housekeeping.site.hh_assets.listing');
+            Route::get('/hh_assets/create', [HHAssetController::class, 'create'])->name('housekeeping.site.hh_assets.create');
+            Route::post('/hh_assets/create', [HHAssetController::class, 'createSave'])->name('housekeeping.site.hh_assets.create.save');
+            Route::get('/hh_assets/edit/{id}', [HHAssetController::class, 'edit'])->name('housekeeping.site.hh_assets.edit');
+            Route::post('/hh_assets/edit/save', [HHAssetController::class, 'editSave'])->name('housekeeping.site.hh_assets.edit.save');
+            Route::post('/hh_assets/delete', [HHAssetController::class, 'delete'])->name('housekeeping.site.hh_assets.delete');
         });
 
         Route::prefix('neptunecms')->group(function () {

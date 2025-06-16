@@ -106,6 +106,18 @@
     </div>
 </div>
 <br />
+<div class="menuouterwrap">
+    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Habbo Home Assets</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.hh_assets.listing') }}" style="text-decoration:none;{{ $submenu == 'hh_assets.listing' ? 'font-weight: bold;' : '' }}">Listing</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.hh_assets.create') }}" style="text-decoration:none;{{ $submenu == 'hh_assets.create' ? 'font-weight: bold;' : '' }}">Create Asset</a>
+    </div>
+</div>
+<br />
 {{--<div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Database Tools</div>
     <div class="menulinkwrap">&nbsp;
