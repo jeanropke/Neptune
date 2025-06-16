@@ -818,7 +818,7 @@ img.calendar {
     background-color: #e5e5e5;
 }
 
-.tableborder tbody tr:hover td:not(.tablesubheader) {
+.tableborder .listing tbody tr:hover td:not(.tablesubheader) {
     background-color: rgba(52, 144, 220, .25);
 }
 

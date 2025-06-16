@@ -20,7 +20,7 @@
                     @endif
                     <div class="tableborder">
                         <div class="tableheaderalt">Habbo Home Assets</div>
-                        <table cellpadding="4" cellspacing="0" width="100%">
+                        <table cellpadding="4" cellspacing="0" width="100%" class="listing">
                             <tr>
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
                                 <td class="tablesubheader" width="15%">Class</td>
