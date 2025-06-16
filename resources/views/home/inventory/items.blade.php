@@ -16,7 +16,7 @@
             @endforeach
             @php
                 $count = $items->count();
-                $fill = $count < 12 ? 12 - $count : (4 - ($count % 4)) % 4;
+                $fill = $count < 20 ? 20 - $count : (4 - ($count % 4)) % 4;
             @endphp
             @for ($i = 0; $i < $fill; $i++)
                 <li class="webstore-item-empty"></li>
