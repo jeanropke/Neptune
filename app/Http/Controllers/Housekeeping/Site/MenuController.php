@@ -87,7 +87,8 @@ class MenuController extends Controller
             'url'       => $request->url ?? '',
             'icon'      => $request->icon,
             'order_num' => $request->order_num,
-            'min_rank'  => $request->min_rank
+            'min_rank'  => $request->min_rank,
+            'parent_id' => '-1'
         ]);
 
         create_staff_log('site.menus.categories.save', $request);

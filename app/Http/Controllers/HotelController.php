@@ -20,7 +20,8 @@ class HotelController extends Controller
         return view('hotel.pets');
     }
 
-    public function takingCareOfYourPet() {
+    public function takingCareOfYourPet()
+    {
         return view('hotel.pets.taking_care_of_your_pet');
     }
 
@@ -40,14 +41,20 @@ class HotelController extends Controller
     public function groups()
     {
         $groups = [];
-        foreach(GroupMember::groupBy('group_id')->select('group_id', DB::raw('COUNT(group_id) AS total'))->take(10)->orderBy('total', 'DESC')->get() as $guild) {
+        foreach (GroupMember::groupBy('group_id')->select('group_id', DB::raw('COUNT(group_id) AS total'))->take(10)->orderBy('total', 'DESC')->get() as $guild) {
             array_push($groups, Group::find($guild->group_id));
         }
 
         return view('hotel.groups')->with([
             'groups'      => $groups,
             'latest'      => Group::take(10)->orderBy('created_at', 'desc')->get()
+        ]);
+    }
 
+    public function groupsInstructions()
+    {
+        return view('hotel.groups.group_instructions')->with([
+            'latest' => Group::take(5)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
