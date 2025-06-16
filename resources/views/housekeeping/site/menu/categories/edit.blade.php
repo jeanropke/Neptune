@@ -45,7 +45,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ url('/') }}/web/images/navi_icons/{{ $category->icon }}.gif" id="icon_preview" data-url="{{ url('/') }}/web/images/navi_icons/%icon%.gif">
+                                        <img src="{{ cms_config('site.c_images.url') }}/navi_icons/{{ $category->icon }}.gif" id="icon_preview" data-url="{{ cms_config('site.c_images.url') }}/navi_icons/%icon%.gif">
                                         <br>
                                         <select name="icon" id="icon_selector" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($icons as $icon)
