@@ -745,6 +745,7 @@ WebStore.Inventory = {
             }
 
             WebStore.Inventory._setPreviewItem();
+            $("inventory-preview-container").show();
         }
 
         previewDiv.show();

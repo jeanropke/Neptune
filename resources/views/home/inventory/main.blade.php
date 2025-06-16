@@ -5,7 +5,7 @@
     @isset($widgets)
         @include('home.inventory.widgets', ['widgets' => $widgets])
     @endisset
-    <div id="inventory-preview-container" style="display: block;">
+    <div id="inventory-preview-container" style="display: none;">
         <div id="inventory-preview-default"></div>
         <div id="inventory-preview">
             <div id="inventory-preview-box">
@@ -14,9 +14,8 @@
                 <a href="#" class="toolbutton" id="inventory-place"><span>Place</span></a>
             </div>
         </div>
-        <div class="clear"></div>
     </div>
-    <div>
+    <div class="clear">
         <a href="#" id="inventory-close" class="toolbutton"><span>Close</span></a>
         @isset($items)
         <a href="#" id="purchase-stickers" class="colorlink" style="margin: 0; margin-top: 4px"><span>Purchase Stickers</span></a>
