@@ -1,5 +1,5 @@
 <div class="habbomovies-rating-floatcol1">
-    @if (!auth() || (auth() && $movie->alreadyRated()))
+    @if (!user() || $movie->alreadyRated())
         <ul class="rater-list hwood-rating-unit-rating">
             @for ($i = 0; $i < 5; $i++)
                 <li class="rater-list-item">
@@ -39,3 +39,4 @@
     <b>{{ $movie->views }}</b> views<br>
     <b>{{ $movie->getRatings()->count() }}</b> ratings
 </div>
+
