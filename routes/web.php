@@ -78,7 +78,7 @@ Route::middleware('user')->group(function () {
 
     Route::get('room/{id}', function ($id) {
         $room = Room::find($id);
-        if(!$room) return redirect('404');
+        if (!$room) return redirect('404');
         return view('room')->with('room', $room);
     });
     //HotelController
@@ -167,8 +167,12 @@ Route::middleware('user')->group(function () {
     });
 
     Route::prefix('community')->group(function () {
-        Route::get('/', [CommunityController::class, 'index'])->name('community.index');
-        Route::get('/fansites', [CommunityController::class, 'fansites'])->name('community.fansites');
+        Route::get('/', function() { return view('community.index'); })->name('community.index');
+        Route::get('/avatar', function() { return view('community.avatar'); })->name('community.avatar');
+        Route::get('/fansites', function() { return view('community.fansites'); })->name('community.fansites');
+        Route::get('/mgm_sendlink_invite', function() { return view('community.mgm_sendlink_invite'); })->name('community.mgm_sendlink_invite');
+        Route::get('/mgm_sendlink', function() { return view('community.mgm_sendlink'); })->name('community.mgm_sendlink');
+        Route::post('/mgm_sendlink', [CommunityController::class, 'sendlinkPreview'])->name('community.mgm_sendlink.preview');
     });
 
     Route::prefix('games')->group(function () {
