@@ -28,9 +28,9 @@
             habbowood.addVariable("avatar_name", "{{ user()->username }}");
             habbowood.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_locale.xml");
             habbowood.addVariable("movie_id", "");
-            habbowood.addVariable("cancel_url", "http://www.google.com");
+            habbowood.addVariable("cancel_url", "{{ url('/') }}/entertainment/habbowood");
             habbowood.addVariable("post_url", "{{ url('/') }}/habbomovies/savemovie?_token={{ csrf_token() }}");
-            habbowood.addVariable("end_page_url", "{{ url('/') }}/habbomovies/movie");
+            habbowood.addVariable("end_page_url", "{{ url('/') }}/entertainment/habbowood/end");
             habbowood.addVariable("is_habbo_club_member", "true");
             habbowood.addVariable("usersearch_url", "{{ url('/') }}/habbomovies/private/ajax/getfiguredata");
 
