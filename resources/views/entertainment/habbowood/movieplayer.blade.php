@@ -25,10 +25,10 @@
                                         swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
                                         swfobj.addVariable("movie_data_url", "{{ url('/') }}/habbomovies/ajax/getpublicmovie/{{ $movie->id }}");
                                         swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_player.xml");
-                                        swfobj.addVariable("shoot_movie_url", "{{ url('/') }}//habbomovies/private/openeditor");
-                                        swfobj.addVariable("share_this_movie", "{{ url('/') }}//entertainment/habbowood/sharemovie/{{ $movie->id }}");
-                                        swfobj.addVariable("competition_url", "{{ url('/') }}//entertainment/habbowood/awards");
-                                        swfobj.addVariable("meet_filmmakers_url", "{{ url('/') }}//entertainment/habbowood/filmakers");
+                                        swfobj.addVariable("shoot_movie_url", "{{ url('/') }}/habbomovies/private/openeditor");
+                                        swfobj.addVariable("share_this_movie", "{{ url('/') }}/entertainment/habbowood/sharemovie/{{ $movie->id }}");
+                                        swfobj.addVariable("competition_url", "{{ url('/') }}/entertainment/habbowood/awards");
+                                        swfobj.addVariable("meet_filmmakers_url", "{{ url('/') }}/entertainment/habbowood/filmakers");
                                         swfobj.addVariable("end_page_url", "{{ url('/') }}/entertainment/habbowood/end");
                                         swfobj.addParam("allowScriptAccess", "always");
                                         swfobj.addParam("menu", "false");
