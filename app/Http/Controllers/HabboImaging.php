@@ -11,7 +11,8 @@ class HabboImaging extends Controller
 {
     public function avatarimage(Request $request)
     {
-        //habbo old figure data converter - 1650718001878252701630005 114400
+        //                                      1550518001240022850630005 01 22 00
+        //habbo old figure data converter -     1650718001878252701630005 11 44 00
         if(strlen($request->figure) >= 31) {
             $tempFigure = substr($request->figure, 0, 31);
             $request->figure = substr($tempFigure, 0, 25);
@@ -19,6 +20,7 @@ class HabboImaging extends Controller
             $request->action = substr($tempFigure, 26, 1) == 1 ? 'std' : 'wav';
             $request->direction = substr($tempFigure, 27, 1);
             $request->head_direction = substr($tempFigure, 28, 1);
+            //$request->gesture = $gestures[substr($tempFigure, 29, 1)] ?? 'std';
         }
         $inputFigure        = strtolower($request->figure);
         $inputAction        = isset($request->action) ? strtolower($request->action) : 'std';
