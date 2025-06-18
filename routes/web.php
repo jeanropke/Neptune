@@ -129,6 +129,7 @@ Route::middleware('user')->group(function () {
         Route::get('/habbowood/movieshc', function() { return view('entertainment.habbowood.movieshc'); })->name('entertainment.habbowood.movieshc');
         Route::get('/habbowood/filmakers', function() { return view('entertainment.habbowood.filmakers'); })->name('entertainment.habbowood.filmakers');
         Route::get('/habbowood/help', function() { return view('entertainment.habbowood.help'); })->name('entertainment.habbowood.help');
+        Route::get('/habbowood/end', function() { return view('entertainment.habbowood.end'); })->name('entertainment.habbowood.end');
     });
 
     //HabboMovies
