@@ -1,0 +1,23 @@
+<keys>
+<!--
+   TUTORIAL KEYS
+-->
+<key name="tutorial_text_1">Hi and welcome to the Habbowood MovieMaker's crash course!</key>
+<key name="tutorial_text_2">First, choose your movie's Set, Props and Soundtrack</key>
+<key name="tutorial_text_3">Now you can add some FX, for example a Zoom!</key>
+<key name="tutorial_text_4">Just drag &amp; drop the Zoom icon into the timeline</key>
+<key name="tutorial_text_5">Select where you wanna zoom by moving the crosshair with your mouse</key>
+<key name="tutorial_text_6">Now let's add a surprise element!</key>
+<key name="tutorial_text_7">Tip: some of the surprises last longer than a single frame, and need to be dragged twice in a row to be seen fully</key>
+<key name="tutorial_text_8">Now let's try the Double Zoom, for even CLOSER close-ups!</key>
+<key name="tutorial_text_9">Oops, careful there!</key>
+<key name="tutorial_text_10">A little bit of Sound FX...</key>
+<key name="tutorial_text_11">...and then let's add Dialogue, the heart of every good movie!</key>
+<key name="tutorial_text_12">Drag, drop &amp; type... it's easy!</key>
+<key name="tutorial_text_13">Let's mix in some extra surprises...</key>
+<key name="tutorial_text_14">And now to proper editing!</key>
+<key name="tutorial_text_15">Let's cut our scene to the perfect length!</key>
+<key name="tutorial_text_16">Et voila, your movie is ready :)</key>
+<key name="tutorial_text_17">Play again</key>
+<key name="tutorial_text_18">Play</key>
+</keys>

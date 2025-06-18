@@ -17,7 +17,7 @@ class BoxController extends Controller
         'games.snowstorm.index', 'games.snowstorm.rules', 'games.wobblesquabble.high_scores', 'games.wobblesquabble.index', 'help.contact_us', 'help.hotel_way', 'help.index', 'hotel.groups.group_instructions',
         'hotel.groups', 'hotel.homes', 'hotel', 'hotel.navigator', 'hotel.pets', 'hotel.staff', 'hotel.trax.index', 'hotel.trax.masterclass.ambient', 'hotel.trax.masterclass.disco',
         'hotel.trax.masterclass.electronic', 'hotel.trax.masterclass.groove', 'hotel.trax.masterclass.habbo', 'hotel.trax.masterclass.hiphop', 'hotel.trax.masterclass', 'hotel.trax.masterclass.rock',
-        'hotel.trax.masterclass.sfx', 'hotel.trax.store', 'hotel.welcome', 'index', 'entertainment.habbowood'
+        'hotel.trax.masterclass.sfx', 'hotel.trax.store', 'hotel.welcome', 'index'
     ];
 
     public function boxCreate()

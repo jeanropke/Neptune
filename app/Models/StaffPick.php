@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Habbowood\Movie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 
@@ -20,6 +21,6 @@ class StaffPick extends Model
 
     public function getMovie()
     {
-        return HabbowoodMovie::find($this->pick_id);
+        return Movie::find($this->pick_id);
     }
 }

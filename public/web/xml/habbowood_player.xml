@@ -1,0 +1,15 @@
+<keys>
+<key name="play">play</key>
+
+<key name="end_shoot_movie">[b]Shoot a movie and win![/b]</key>
+<key name="end_replay_movie">[b]Replay this movie[/b]</key>
+<key name="end_share_movie">[b]Share this movie![/b]</key>
+<key name="end_meet_filmmakers">[b]Meet other filmmaking Habbos[/b]</key>
+<key name="embed_end_text">Shoot your own movies at http://www.habbo.com</key>
+
+<!-- TITLE MOVIE TEXTS -->
+
+<key name="titlemovie_as">In the role of:</key>
+<key name="titlemovie_directed_by">Director:</key>
+
+</keys>

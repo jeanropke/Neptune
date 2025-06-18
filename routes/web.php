@@ -13,6 +13,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\Group\DiscussionController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HabboImaging;
+use App\Http\Controllers\HabboMovieController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\Home\NoteEditorController;
 use App\Http\Controllers\Home\WebInventoryController;
@@ -117,8 +118,34 @@ Route::middleware('user')->group(function () {
     });
 
     //EntertainmentController
-    Route::prefix('entertainment')->group(function() {
+    Route::prefix('entertainment')->group(function () {
         Route::get('/habbowood', [EntertainmentController::class, 'habbowood'])->name('entertainment.habbowood');
+        Route::get('/habbowood/competition', [EntertainmentController::class, 'habbowoodCompetition'])->name('entertainment.habbowood.competition');
+        Route::get('/habbowood/movies', [EntertainmentController::class, 'habbowoodMovies'])->name('entertainment.habbowood.movies');
+        Route::get('/habbowood/movies/{id}', [EntertainmentController::class, 'habbowoodMoviePlayer'])->name('entertainment.habbowood.movieplayer');
+        Route::get('/habbowood/sharemovie/{id}', [EntertainmentController::class, 'habbowoodShareMovie'])->name('entertainment.habbowood.sharemovie');
+        Route::get('/habbowood/mymovies', [EntertainmentController::class, 'habbowoodMyMovies'])->name('entertainment.habbowood.mymovies');
+        Route::get('/habbowood/embed', function() { return view('entertainment.habbowood.embed'); })->name('entertainment.habbowood.embed');
+        Route::get('/habbowood/movieshc', function() { return view('entertainment.habbowood.movieshc'); })->name('entertainment.habbowood.movieshc');
+        Route::get('/habbowood/filmakers', function() { return view('entertainment.habbowood.filmakers'); })->name('entertainment.habbowood.filmakers');
+        Route::get('/habbowood/help', function() { return view('entertainment.habbowood.help'); })->name('entertainment.habbowood.help');
+    });
+
+    //HabboMovies
+    Route::prefix('habbomovies')->group(function () {
+        Route::prefix('private')->group(function () {
+            Route::get('/openeditor', [HabboMovieController::class, 'openEditor'])->name('habbomovies.private.openeditor');
+
+            Route::get('/ajax/getfiguredata', [HabboMovieController::class, 'getFigureData'])->name('habbomovies.private.ajax.getfiguredata');
+            Route::post('/ajax/showmovieadmin', [HabboMovieController::class, 'showMovieAdmin'])->name('habbomovies.private.ajax.showmovieadmin');
+            Route::post('/ajax/showunpublished', [HabboMovieController::class, 'showUnpublished'])->name('habbomovies.private.ajax.showunpublished');
+        });
+
+        Route::post('/ajax/ratemovie', [HabboMovieController::class, 'rateMovie'])->name('habbomovies.ajax.ratemovie');
+
+        Route::post('/savemovie', [HabboMovieController::class, 'save'])->name('habbomovies.save');
+        Route::get('/movie', [HabboMovieController::class, 'movie'])->name('habbomovies.movie');
+        Route::get('/ajax/getpublicmovie/{id}', [HabboMovieController::class, 'movieXmlData'])->name('habbomovies.movie_xml_data');
     });
 
     //ClubController

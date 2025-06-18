@@ -24,6 +24,7 @@
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/scriptaculous.js?load=effects"></script>
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/builder.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/habbo.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/habbowood.js"></script>
 
     <script>
         Ajax.Responders.register({
