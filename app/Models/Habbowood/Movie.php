@@ -16,7 +16,8 @@ class Movie extends Model
         'data',
         'author_id',
         'genre',
-        'views'
+        'views',
+        'rating'
     ];
 
     public function getAuthor()
@@ -29,7 +30,7 @@ class Movie extends Model
         return MovieRating::where('movie_id', $this->id);
     }
 
-    public function getAverageRate()
+    private function getAverageRate()
     {
         $ratings = $this->getRatings();
         return round($ratings->select(DB::raw("SUM(rating) AS rating"))->get()[0]->rating / ($ratings->count() > 0 ? $ratings->count() : 1));

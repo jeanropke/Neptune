@@ -22,7 +22,7 @@
                         <ul class="rater-list">
                             @for ($i = 0; $i < 5; $i++)
                                 <li class="rater-list-item">
-                                    @if ($movie->getAverageRate() > $i)
+                                    @if ($movie->rating > $i)
                                         <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
                                     @else
                                         <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
