@@ -56,12 +56,12 @@ class AuthController extends Controller
             'user' => $user
         ];
 
-        try {
-            Mail::to($email)->send(new ResetPasswordMail($data));
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
+        //try {
+        //    Mail::to($email)->send(new ResetPasswordMail($data));
+        //    return true;
+        //} catch (\Exception $e) {
+        //    return false;
+        //}
     }
 
     public function forgotPasswordReset($token)
@@ -70,7 +70,7 @@ class AuthController extends Controller
         if (!$reset)
             return redirect()->route('auth.login');
 
-        $secondsPassed = Carbon::parse()->diffInSeconds(Carbon::parse($reset->created_at));
+        $secondsPassed = Carbon::now()->diffInSeconds(Carbon::parse($reset->created_at));
         if ($secondsPassed >= 43200) //12 hours check
             return redirect()->route('auth.login');
 
