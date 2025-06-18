@@ -210,11 +210,17 @@
                                     <img src="/web/images/top_bar/myhabbo_frank.gif" alt="" width="60" height="85" class="tabmenu-image" />
                                     <h3>{{ trans('master.welcome_signin') }}</h3>
                                     <div class="tabmenu-inner-content">
+                                        @php
+                                            $page = ltrim(request()->getRequestUri(), '/');
+                                            if (strlen($page) > 0) {
+                                                $page = "?page=/$page";
+                                            }
+                                        @endphp
                                         <p>
-                                            <a href="{{ route('auth.login') }}" class="colorlink orange"><span>{{ trans('master.register_now') }}</span></a>
+                                            <a href="{{ route('auth.login') . $page }}" class="colorlink orange"><span>{{ trans('master.register_now') }}</span></a>
                                         </p>
                                         <p>
-                                            <a href="{{ route('auth.login') }}" class="colorlink orange last"><span>{{ trans('master.signin') }}</span></a>
+                                            <a href="{{ route('auth.login') . $page }}" class="colorlink orange last"><span>{{ trans('master.signin') }}</span></a>
                                         </p>
                                     </div>
                                 @endguest

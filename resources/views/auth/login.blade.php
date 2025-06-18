@@ -171,6 +171,7 @@
                                     <div class="content-white-content">
                                         <form action="{{ route('account.submit') }}" method="post" id="login-form">
                                             {{ csrf_field() }}
+                                            <input type="hidden" name="page" value="{{ request()->page }}">
                                             <p id="login-username-area">
                                                 <label for="login-username" class="registration-text">My {{ cms_config('hotel.name.short') }} name</label>
                                                 <br />

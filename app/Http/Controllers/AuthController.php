@@ -121,13 +121,16 @@ class AuthController extends Controller
 
     public function doLogin(Request $request)
     {
-
         $validator = $request->validate([
             'username'  => 'required',
             'password'  => 'required'
         ]);
 
+
         if (Auth::attempt($validator)) {
+            if ($request->page) {
+                return redirect($request->page);
+            }
             return redirect()->route('index.home');
         } else {
             return redirect()->back()->withErrors(['error' => trans('Username or password wrong')]);
