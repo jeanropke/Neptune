@@ -103,7 +103,8 @@ class AvatarImage
             foreach ($parts as $key => $value) {
                 if (($key % 2) == 1) continue;
                 $data = $this->getSpriteData($value, $parts[$key + 1]);
-                array_push($this->figure, array("type" => $data['type'], "id" => $value, "color" => $data['color'], "data" => $data));
+                if($data)
+                    array_push($this->figure, array("type" => $data['type'], "id" => $value, "color" => $data['color'], "data" => $data));
             }
 
             $frame = is_array($frame) ? $frame : array($frame);
@@ -629,7 +630,7 @@ class AvatarImage
                     foreach ($partDefinition as $definitionsArray) {
                         foreach ($definitionsArray as $sprites) {
                             if ($sprites['s'] == $sprite) {
-                                $ret['color'] = $sprites['c'][$color - 1];
+                                $ret['color'] = $sprites['c'][$color - 1] ?? $sprites['c'][0];
                                 $ret['type']  = $_part;
                                 $ret['part']  = $sprites['p'];
                                 return $ret;
