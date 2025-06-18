@@ -85,45 +85,55 @@ p.search-result-navigation {
     text-align: center;
 }
 --}}
+    <div id="habbomovies-administration-links">
+        <a href="#" id="habbomovies-administration-link-unpublished" class="selected" onclick="switchToUnpublished(); return false;">Não Publicados</a> |
+        <a href="#" id="habbomovies-administration-link-published" onclick="switchToPublished(); return false;">Publicados</a>
+    </div>
 
-<div class="component">
-    <form class="search-box">
-        <table class="search-box">
-            <input class="search-box-query" />
-            <input class="search-box-sidebar-query" />
-        </table>
-    </form>
-</div>
+    <div id="habbomovies-administration-unpublished">
+        <p>Carregando filmes não publicados...</p>
+    </div>
 
-<p class="search-result-count">count</p>
-<p class="search-result-divider">divider</p>
+    <div id="habbomovies-administration-published" style="display:none;">
+        <p>Carregando filmes publicados...</p>
+    </div>
 
+
+{{--
 <table class="search-result">
     <tr class="odd">
-        <td class="image">image</td>
-        <td class="text">text</td>
+        <td class="image"><img src="genre_icon.png" alt="Gênero"></td>
+        <td class="text">
+            <strong>Título do Filme</strong><br>
+            Criado por: Fulano<br>
+            <div id="hwood-rating-stars-1">
+                <!-- Estrelas de rating aqui -->
+                ★★★☆☆
+            </div>
+        </td>
     </tr>
     <tr class="even">
-        <td class="image">image</td>
-        <td class="text">text</td>
+        <td class="image"><img src="genre_icon.png" alt="Gênero"></td>
+        <td class="text">
+            <strong>Outro Filme</strong><br>
+            Criado por: Ciclano<br>
+            <div id="hwood-rating-stars-2">
+                ★★☆☆☆
+            </div>
+        </td>
     </tr>
 </table>
-
-<p class="search-result-navigation">search-result-navigation</p>
-
-<table>
-    <tr>
-        <td class="list-movie-item">
-            <span>item</span>
-        </td>
-        <td class="list-movie-name">
-            <a href="{{ url('/') }}">name</a>
-        </td>
-        <td class="list-movie-creatorname"><a href="{{ url('/') }}/home/">creatorname</a></td>
-        <td class="list-movie-item">
-            <div class="genre-image"></div>
-        </td>
-
-    </tr>
-</table>
-<div id="habbomovies-administration-unpublished">test</div>
+--}}
+<!-- Barra de busca -->
+<div class="component">
+    <form class="search-box" onsubmit="return false;">
+        <table class="search-box">
+            <tr>
+                <td class="search-box-label">Buscar:</td>
+                <td><input type="text" class="search-box-query" placeholder="Digite o nome do filme..."></td>
+                <td><input type="submit" value="Procurar"></td>
+            </tr>
+        </table>
+    </form>
+    <p class="search-result-count">Resultados encontrados: X</p>
+</div>
