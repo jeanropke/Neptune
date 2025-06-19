@@ -43,8 +43,9 @@ class EntertainmentController extends Controller
 
     public function habbowoodMoviePlayer(Request $request)
     {
-        $top = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
-        $staff = StaffPick::where('pick_type', 'movie')->limit(10)->get();
+        $top        = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
+        $staff      = StaffPick::where('pick_type', 'movie')->limit(10)->get();
+        $related    = Movie::where('published', '1')->limit(10)->inRandomOrder()->get();
         $movie = Movie::find($request->id);
         if (!$movie)
             return abort(404);
@@ -52,9 +53,10 @@ class EntertainmentController extends Controller
         $movie->addView();
 
         return view('entertainment.habbowood.movieplayer')->with([
-            'top'   => $top,
-            'staff' => $staff,
-            'movie' => $movie
+            'top'       => $top,
+            'staff'     => $staff,
+            'related'   => $related,
+            'movie'     => $movie
         ]);
     }
 
