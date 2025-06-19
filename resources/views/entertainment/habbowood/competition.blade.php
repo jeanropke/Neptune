@@ -83,7 +83,7 @@
                                     <script>
                                         var swfobj = new SWFObject("{{ cms_config('site.c_images.url') }}/trailer/habbowood_trailer3.swf", "demo", "512", "318", "8");
                                         swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_trailer.xml");
-                                        swfobj.addVariable("trailer_end_url", "/entertainment/habbowood/index.html");
+                                        swfobj.addVariable("trailer_end_url", "/entertainment/habbowood");
                                         swfobj.addParam("allowScriptAccess", "always");
                                         swfobj.addParam("menu", "false");
                                         swfobj.write("flashcontent");
@@ -104,29 +104,35 @@
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
 
-                                    <p>Join the fray of wannabe movie stars with the <span style="font-weight: bold;">Habbowood Digital Movie Awards,</span> the largest moviemaking
-                                        competition over the internet! Everyone can create a <span style="font-weight: bold;">free digital movie</span> and participate to the
-                                        competition. That's how you do it:</p>
-                                    <p><img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt=""> <span
-                                            style="font-weight: bold;">Log in</span> with your Habbo (if you don't have a Habbo yet, <a
-                                            href="https://web.archive.org/web/20071004231432/https://www.habbo.com/account/login" target="_blank">create it here!</a><br>
-                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt=""> <span
-                                            style="font-weight: bold;">Shoot a movie</span> with the awesome <a href="{{ url('/') }}/entertainment/habbowood/index.html"
-                                            target="_blank">Moviemaker</a><br>
-                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt=""> Get
-                                        your friends to <span style="font-weight: bold;">rate</span> your movie and push it to the Top Ten list!
+                                    <p>
+                                        Join the fray of wannabe movie stars with the <span style="font-weight: bold;">Habbowood Digital Movie Awards,</span>the largest moviemaking
+                                        competition over the internet!
+                                        Everyone can create a <span style="font-weight: bold;">free digital movie</span> and participate to the competition.
+                                        That's how you do it:
                                     </p>
-                                    <p>Every day at <span style="font-weight: bold;">3PM PDT</span> the Habbo Staff will select <span style="font-weight: bold;">one</span> movie from
-                                        the Top Ten list. The movie will then be a Nominee for the final victory of the <span style="font-weight: bold;">Habbowood Award!</span></p>
-                                    <p><span style="font-weight: bold;">How to promote your movie and win!</span><br>
-                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt=""> Use
-                                        the MovieMaker’s sharing tools to promote the movie online and get friends to log in (only logged in users can rate a movie) and push it to the
-                                        top!<br>
+                                    <p>
                                         <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt="">
-                                        Promote it with your Habbo Hotel friends! Every day until September 14 there’s a <span style="font-weight: bold;">new chance </span>to make it
-                                        to the Top Ten Nominees, so it’s never too late!
+                                        <span style="font-weight: bold;">Log in</span> with your {{ cms_config('hotel.name.short') }} (if you don't have a {{ cms_config('hotel.name.short') }} yet, <a href="{{ url('/') }}/account/login" target="_blank">create it here!</a>
+                                        <br>
+                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt="">
+                                        <span style="font-weight: bold;">Shoot a movie</span> with the awesome <a href="{{ url('/') }}/entertainment/habbowood" target="_blank">Moviemaker</a>
+                                        <br>
+                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt="">
+                                        Get your friends to <span style="font-weight: bold;">rate</span> your movie and push it to the Top Ten list!
                                     </p>
-                                    <p>Are you ready to be a star? <a href="{{ url('/') }}/entertainment/habbowood/index.html" target="_blank">Then shoot a movie and win!</a>
+                                    <p>Every day at <span style="font-weight: bold;">3PM PDT</span> the {{ cms_config('hotel.name.short') }} Staff will select <span style="font-weight: bold;">one</span> movie from the Top Ten list.
+                                        The movie will then be a Nominee for the final victory of the <span style="font-weight: bold;">Habbowood Award!</span>
+                                    </p>
+                                    <p>
+                                        <span style="font-weight: bold;">How to promote your movie and win!</span>
+                                        <br>
+                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt="">
+                                        Use the MovieMaker’s sharing tools to promote the movie online and get friends to log in (only logged in users can rate a movie) and push it to the top!
+                                        <br>
+                                        <img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt="">
+                                        Promote it with your {{ cms_config('hotel.name.short') }} Hotel friends! Every day until September 14 there’s a <span style="font-weight: bold;">new chance </span>to make it to the Top Ten Nominees, so it’s never too late!
+                                    </p>
+                                    <p>Are you ready to be a star? <a href="{{ url('/') }}/entertainment/habbowood" target="_blank">Then shoot a movie and win!</a>
                                     </p>
                                     <div class="clear"></div>
                                 </div>
@@ -148,16 +154,16 @@
                                             <font color="red">THE HABBOWOOD AWARD PRIZE</font>
                                         </span><br>
                                         With 10 Nominees selected, it’ll be time to choose the <span style="font-weight: bold;">winner of the Habbowood Award,</span> and who’s gonna
-                                        do it but YOU? From Monday, September 14 until Friday, Sept 21 every Habbo will have a chance to vote the winner. Stay posted for the Staff’s
-                                        instructions! The prize is astonishing: <span style="font-weight: bold;">1,000 Habbo Credits</span> in gold bars and celebrity status to be
+                                        do it but YOU? From Monday, September 14 until Friday, Sept 21 every {{ cms_config('hotel.name.short') }} will have a chance to vote the winner. Stay posted for the Staff’s
+                                        instructions! The prize is astonishing: <span style="font-weight: bold;">1,000 {{ cms_config('hotel.name.short') }} Credits</span> in gold bars and celebrity status to be
                                         gained at the <span style="font-weight: bold;">Habbowood Gala,</span> the most glamorous online party ever!</p>
                                     <p><img width="15" height="15" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif" alt=""> <span
                                             style="font-weight: bold;">
                                             <font color="red">THE WORLD'S BEST DIRECTOR... GOES TO HOLLYWOOD!</font>
                                         </span><br>
-                                        All over the world, the Habbo sites are selecting their top directors. Who’s the world’s best, then? A panel of expert professionals in the
-                                        world of animation and moviemaking, as well as the creator of Habbo himself (the legendary Apparatus), will select the winner of the <span
-                                            style="font-weight: bold;">World's Best Habbowood Movie.</span> The Habbo who directed the movie will win a <span
+                                        All over the world, the {{ cms_config('hotel.name.short') }} sites are selecting their top directors. Who’s the world’s best, then? A panel of expert professionals in the
+                                        world of animation and moviemaking, as well as the creator of {{ cms_config('hotel.name.short') }} himself (the legendary Apparatus), will select the winner of the <span
+                                            style="font-weight: bold;">World's Best Habbowood Movie.</span> The {{ cms_config('hotel.name.short') }} who directed the movie will win a <span
                                             style="font-weight: bold;">free trip</span> for 2 to the <span style="font-weight: bold;">real life</span> <span
                                             style="font-weight: bold;">Hollywood, California,</span> the birthplace of moviemaking!</p>
                                     <p>Read the Competitions' <a href="{{ url('/') }}/entertainment/habbowood/rules" target="_blank">Terms and Conditions</a></p>
