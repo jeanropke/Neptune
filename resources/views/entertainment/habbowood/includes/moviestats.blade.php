@@ -37,6 +37,6 @@
 </div>
 <div class="habbomovies-rating-floatcol2">
     <b>{{ $movie->views }}</b> views<br>
-    <b>{{ $movie->getRatings()->count() }}</b> ratings
+    <b>{{ $movie->votes }}</b> ratings
 </div>
 
