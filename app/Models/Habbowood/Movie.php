@@ -13,7 +13,6 @@ class Movie extends Model
     protected $table = 'cms_habbowood_movies';
 
     protected $fillable = [
-        'title',
         'data',
         'author_id',
         'genre',
