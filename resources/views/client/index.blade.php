@@ -57,8 +57,13 @@
         <div class="logo"><img src="{{ url('/') }}/web/images/popup/popup_topbar_habbologo.gif" alt="" align="middle" /></div>
         <div class="habbocount">
             <div id="habboCountUpdateParent">
-                <span id="habboCountUpdateTarget">{{ emu_config('players.online') }}</span>
-                {{ cms_config('hotel.name.short') }}s online
+                @if (is_hotel_online())
+                    <span id="habboCountUpdateTarget">{{ emu_config('players.online') }}</span>
+                    {{ trans_choice('master.hotel_online', emu_config('players.online'), ['count' => '', 'short_name' => cms_config('hotel.name.short')]) }}
+                @else
+                    {{ trans('master.hotel_offline') }}
+                @endif
+
             </div>
             <script language="JavaScript" type="text/javascript">
                 HabboCounter.init(600);

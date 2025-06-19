@@ -349,7 +349,7 @@ Route::middleware('user')->group(function () {
         Route::get('/disconnected', [ClientController::class, 'disconnected'])->name('client.disconnected');
     });
 
-    Route::post('/habblet/ajax/updateHabboCount', [ClientController::class, 'updateHabboCount'])->name('client.updateHabboCount');
+    Route::post('/components/updateHabboCount', [ClientController::class, 'updateHabboCount'])->name('client.updateHabboCount');
 });
 
 Route::middleware('auth')->group(function () {
