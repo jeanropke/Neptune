@@ -10,7 +10,7 @@ class EntertainmentController extends Controller
 {
     public function habbowood()
     {
-        $top = Movie::orderBy('rating', 'DESC')->limit(10)->get();
+        $top = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
         $staff = StaffPick::where('pick_type', 'movie')->limit(10)->get();
 
         return view('entertainment.habbowood')->with([
@@ -21,7 +21,7 @@ class EntertainmentController extends Controller
 
     public function habbowoodCompetition()
     {
-        $top = Movie::orderBy('rating', 'DESC')->limit(10)->get();
+        $top = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
         $staff = StaffPick::where('pick_type', 'movie')->limit(10)->get();
 
         return view('entertainment.habbowood.competition')->with([
@@ -32,7 +32,7 @@ class EntertainmentController extends Controller
 
     public function habbowoodMovies()
     {
-        $top = Movie::orderBy('rating', 'DESC')->limit(10)->get();
+        $top = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
         $staff = StaffPick::where('pick_type', 'movie')->limit(10)->get();
 
         return view('entertainment.habbowood.movies')->with([
@@ -43,7 +43,7 @@ class EntertainmentController extends Controller
 
     public function habbowoodMoviePlayer(Request $request)
     {
-        $top = Movie::orderBy('rating', 'DESC')->limit(10)->get();
+        $top = Movie::where('published', '1')->orderBy('rating', 'DESC')->limit(10)->get();
         $staff = StaffPick::where('pick_type', 'movie')->limit(10)->get();
         $movie = Movie::find($request->id);
         if (!$movie)
