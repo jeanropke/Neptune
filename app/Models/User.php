@@ -2,15 +2,11 @@
 
 namespace App\Models;
 
-use App\Helpers\Hotel;
-use App\Models\Guild;
-use App\Models\GuildMember;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSong;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\UserBadge;
-use App\Models\UserCurrency;
 use App\Models\UserFriend;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
