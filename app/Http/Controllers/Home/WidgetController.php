@@ -313,4 +313,19 @@ class WidgetController extends Controller
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($widgetId));
     }
+
+    public function photoPaging(Request $request)
+    {
+        $user = User::find($request->_mypage_requested_account);
+        if (!$user) return;
+        $page = $request->pageNumber;
+        $photos = $user->getPhotos();
+        $totalPages = $photos->count();
+
+        return view('home.widgets.ajax.photoswidget')->with([
+            'photos'        => $photos,
+            'totalPages'    => $totalPages,
+            'page'          => $page
+        ]);
+    }
 }

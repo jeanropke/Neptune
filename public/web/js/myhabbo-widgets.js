@@ -875,3 +875,56 @@ HighscoreListWidget.prototype = {
         })
     }
 };
+
+/* custom */
+
+var PhotosWidget = Class.create();
+PhotosWidget.prototype = {
+    initialize: function (a, b) {
+        this.options = Object.extend({
+            searchUrl: "/myhabbo/photolist/photopaging",
+            ownerParameter: "&_mypage_requested_account="
+        });
+        this.ownerId = a;
+        this.widgetId = b;
+        this.containerElement = $("photolist-content");
+        this.listHeight = null;
+        if (this.containerElement) {
+            this.listHeight = $(this.containerElement).down("ul").getHeight();
+            Event.observe(this.containerElement, "click", function (c) {
+                Event.stop(c);
+                this._processSearch(c)
+            }.bind(this))
+        }
+    },
+    _processSearch: function (f) {
+        var b = Event.element(f);
+        var a = parseInt($F("photoListPageNumber"));
+        var d = parseInt($F("photoListTotalPages"));
+        var c = null;
+        if (b.id == "photo-list-search-first") {
+            c = 1
+        } else {
+            if (b.id == "photo-list-search-previous") {
+                c = a - 1
+            } else {
+                if (b.id == "photo-list-search-next") {
+                    c = a + 1
+                } else {
+                    if (b.id == "photo-list-search-last") {
+                        c = d
+                    }
+                }
+            }
+
+        }
+        if (null == c) {
+            return
+        }
+
+        new Ajax.Updater(this.containerElement, habboReqPath + this.options.searchUrl, {
+            method: "post",
+            parameters: "pageNumber=" + encodeURIComponent(c) + "&widgetId=" + this.widgetId + this.options.ownerParameter + this.ownerId
+        })
+    }
+}

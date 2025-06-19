@@ -276,6 +276,7 @@ Route::middleware('user')->group(function () {
         Route::post('/widget/delete', [WidgetController::class, 'widgetDelete'])->name('myhabbo.widget.delete');
         Route::post('/widget/add', [WidgetController::class, 'widgetAdd'])->name('myhabbo.widget.add');
         Route::post('/rating/reset_ratings', [WidgetController::class, 'ratingsReset'])->name('myhabbo.rating.reset');
+        Route::post('/photolist/photopaging', [WidgetController::class, 'photoPaging'])->name('myhabbo.badgelist.photopaging');
 
         Route::post('/noteeditor/editor', [NoteEditorController::class, 'editor'])->name('myhabbo.noteeditor.editor');
         Route::post('/noteeditor/preview', [NoteEditorController::class, 'preview'])->name('myhabbo.noteeditor.preview');

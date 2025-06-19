@@ -1128,3 +1128,20 @@ div.stickie.n_skin_nakedskin-c,
 .n_skin_nakedskin div.stickie-footer {
     padding: 0;
 }
+
+
+/* custom stuff */
+.PhotosWidget .widget-content {
+    width: 162px;
+}
+div#photo-list-paging {
+    text-align: center;
+}
+.PhotosWidget .photo {
+    width: 161px;
+    height: 117px;
+}
+.PhotosWidget .photo-text {
+    overflow: auto;
+    height: 39px;
+}

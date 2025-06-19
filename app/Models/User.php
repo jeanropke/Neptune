@@ -208,6 +208,11 @@ class User extends Authenticatable
         return true;
     }
 
+    public function getPhotos()
+    {
+        return Photo::where('photo_user_id', $this->id)->orderBy('timestamp', 'DESC')->get();
+    }
+
     /**
      * Get user rooms
      */
