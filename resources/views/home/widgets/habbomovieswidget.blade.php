@@ -21,36 +21,43 @@
                 <div id="movies_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
-                            <tr>
-                                <td valign="top">
-                                    <div class="movie_genre_image">
-                                        <img src="https://web.archive.org/web/20071114062110im_/http://images.habbohotel.jp/habboweb/17/16/web-gallery/images/habbomovies/genres/fantasy.gif"
-                                            title="Fantasy" align="middle">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="movie_info">
-                                        <div class="movie_name"><a href="/web/20071114062110/http://www.habbo.jp/entertainment/habbowood/movies/370">movie name</a>
+                            @foreach ($owner->getMovies(true) as $movie)
+                                <tr>
+                                    <td valign="top">
+                                        <div class="movie_genre_image">
+                                            {{-- If you have any images of movie genres, please post in this issue on the repository page. --}}
+                                            {{-- https://github.com/jeanropke/Neptune/issues/1 --}}
+                                            <img src="{{ url('/') }}/web/images/habbomovies/genres/fantasy.gif" title="Fantasy" align="middle">
                                         </div>
-                                        <div class="movie_created metadata">Created at: 2007/09/03
+                                    </td>
+                                    <td>
+                                        <div class="movie_info">
+                                            <div class="movie_name"><a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->getTitle() }}</a>
+                                            </div>
+                                            <div class="movie_created metadata">Created at: {{ $movie->updated_at->format('Y/m/d') }}
+                                            </div>
+                                            <div>Views: {{ $movie->views }}
+                                            </div>
+                                            <div>
+                                                <hr>
+                                                <ul class="rater-list">
+                                                    @for ($i = 0; $i < 5; $i++)
+                                                        <li class="rater-list-item">
+                                                            @if ($movie->rating > $i)
+                                                                <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
+                                                            @else
+                                                                <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
+                                                            @endif
+                                                        </li>
+                                                    @endfor
+                                                </ul> <br class="clear">
+                                                <div>Rate: {{ $movie->rating }} Votes: {{ $movie->votes }}</div>
+                                            </div>
                                         </div>
-                                        <div>Views: 1,993
-                                        </div>
-                                        <div>
-                                            <hr>
-                                            <ul class="rater-list">
-                                                <li class="rater-list-item"><img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                <li class="rater-list-item"><img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                <li class="rater-list-item"><img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                <li class="rater-list-item"><img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                                <li class="rater-list-item"><img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt=""></li>
-                                            </ul> <br class="clear">
-                                            <div>Rate: 0 Votes: 0</div>
-                                        </div>
-                                    </div>
-                                    <br class="clear">
-                                </td>
-                            </tr>
+                                        <br class="clear">
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

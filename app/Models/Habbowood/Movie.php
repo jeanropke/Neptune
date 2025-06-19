@@ -3,6 +3,7 @@
 namespace App\Models\Habbowood;
 
 use Carbon\Carbon;
+use DOMDocument;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,9 @@ class Movie extends Model
         'author_id',
         'genre',
         'views',
-        'rating'
+        'rating',
+        'votes',
+        'published'
     ];
 
     public function getAuthor()
@@ -25,7 +28,22 @@ class Movie extends Model
         return User::find($this->author_id);
     }
 
-    public function getRatings()
+    public function getTitle()
+    {
+        $dom = new DOMDocument();
+
+        if (!$this->data) return 'No Title';
+
+        $dom->loadXML($this->data);
+
+        $movie = $dom->getElementsByTagName('movie')->item(0);
+
+        if (!$movie) return 'No Title';
+
+        return $movie->getAttribute('name');
+    }
+
+    private function getRatings()
     {
         return MovieRating::where('movie_id', $this->id);
     }
@@ -33,7 +51,7 @@ class Movie extends Model
     private function getAverageRate()
     {
         $ratings = $this->getRatings();
-        return round($ratings->select(DB::raw("SUM(rating) AS rating"))->get()[0]->rating / ($ratings->count() > 0 ? $ratings->count() : 1));
+        return round($ratings->select(DB::raw("SUM(rating) AS rating"))->get()[0]->rating / ($this->votes > 0 ? $ratings->votes : 1));
     }
 
     public function alreadyRated()
@@ -53,8 +71,10 @@ class Movie extends Model
         ]);
 
         $this->update([
-            'rating'    => $this->getAverageRate()
+            'rating'    => $this->getAverageRate(),
         ]);
+
+        $this->increment('votes');
     }
 
     public function alreadyWatched()

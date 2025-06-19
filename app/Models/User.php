@@ -209,6 +209,13 @@ class User extends Authenticatable
         return Photo::where('photo_user_id', $this->id)->orderBy('timestamp', 'DESC')->get();
     }
 
+    public function getMovies($published)
+    {
+        if ($published)
+            return Movie::where([['author_id', $this->id], ['published', '1']])->orderBy('rating', 'DESC')->get();
+        return Movie::where('author_id', $this->id)->orderBy('rating', 'DESC')->get();
+    }
+
     /**
      * Get user rooms
      */
