@@ -3,7 +3,6 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
@@ -38,6 +37,7 @@ use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
+use App\Http\Controllers\Housekeeping\Site\FansiteController;
 use App\Http\Controllers\Housekeeping\Site\HHAssetController;
 use App\Http\Controllers\Housekeeping\Site\MenuController;
 use App\Http\Controllers\Housekeeping\Site\PartnerController;
@@ -169,10 +169,10 @@ Route::middleware('user')->group(function () {
     Route::prefix('community')->group(function () {
         Route::get('/', function() { return view('community.index'); })->name('community.index');
         Route::get('/avatar', function() { return view('community.avatar'); })->name('community.avatar');
-        Route::get('/fansites', function() { return view('community.fansites'); })->name('community.fansites');
         Route::get('/mgm_sendlink_invite', function() { return view('community.mgm_sendlink_invite'); })->name('community.mgm_sendlink_invite');
         Route::get('/mgm_sendlink', function() { return view('community.mgm_sendlink'); })->name('community.mgm_sendlink');
         Route::post('/mgm_sendlink', [CommunityController::class, 'sendlinkPreview'])->name('community.mgm_sendlink.preview');
+        Route::get('/fansites', [CommunityController::class, 'fansites'])->name('community.fansites');
 
         Route::get('/photos', [CommunityController::class, 'photos'])->name('community.photos');
     });
@@ -419,13 +419,6 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.dashboard');
         Route::post('/dashboard', [DashboardController::class, 'saveNote'])->name('housekeeping.save_note');
 
-        Route::prefix('settings')->group(function() {
-            Route::get('/hotel', [SettingsController::class, 'hotel'])->name('housekeeping.settings.hotel');
-            Route::post('/hotel', [SettingsController::class, 'hotelSave'])->name('housekeeping.settings.hotel.save');
-            Route::get('/site', [SettingsController::class, 'site'])->name('housekeeping.settings.site');
-            Route::post('/site', [SettingsController::class, 'siteSave'])->name('housekeeping.settings.site.save');
-        });
-
         Route::prefix('server')->group(function () {
             Route::get('/', [ServerGeneralController::class, 'index'])->name('housekeeping.server');
             Route::post('/', [ServerGeneralController::class, 'serverSave'])->name('housekeeping.server.save');
@@ -500,6 +493,11 @@ Route::middleware('admin')->group(function () {
             Route::get('/partners/{id}/id', [PartnerController::class, 'partners'])->name('housekeeping.site.partners.edit');
             Route::post('/partners', [PartnerController::class, 'partnersSave'])->name('housekeeping.site.partners.save');
             Route::post('/partners/delete', [PartnerController::class, 'partnersDelete'])->name('housekeeping.site.partners.delete');
+
+            Route::get('/fansites', [FansiteController::class, 'fansites'])->name('housekeeping.site.fansites');
+            Route::get('/fansites/{id}/id', [FansiteController::class, 'fansites'])->name('housekeeping.site.fansites.edit');
+            Route::post('/fansites', [FansiteController::class, 'fansitesSave'])->name('housekeeping.site.fansites.save');
+            Route::post('/fansites/delete', [FansiteController::class, 'fansitesDelete'])->name('housekeeping.site.fansites.delete');
 
             //Maybe in future :v
             //Route::get('/site/collectables', 'welcomemsg')->name('admin.site.collectables');

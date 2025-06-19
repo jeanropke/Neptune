@@ -20,6 +20,10 @@
         <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.site.partners') }}" style="text-decoration:none;{{ $submenu == 'partners' ? 'font-weight: bold;' : '' }}">Partners Configuration</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.fansites') }}" style="text-decoration:none;{{ $submenu == 'fansites' ? 'font-weight: bold;' : '' }}">Fansites</a>
+    </div>
 </div>
 <br />
 {{--

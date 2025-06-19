@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fansite;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,13 @@ class CommunityController extends Controller
     {
         return view('community.photos')->with([
             'photos' => Photo::orderBy('timestamp', 'DESC')->limit(20)->get()
+        ]);
+    }
+
+    public function fansites()
+    {
+        return view('community.fansites')->with([
+            'fansites' => Fansite::get()
         ]);
     }
 
