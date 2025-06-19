@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Habbowood\Movie;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSong;
 use App\Models\Permission;
