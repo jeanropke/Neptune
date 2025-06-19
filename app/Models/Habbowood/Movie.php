@@ -42,6 +42,11 @@ class Movie extends Model
         return $movie->getAttribute('name');
     }
 
+    public function getGenre()
+    {
+        return trans("habbowood.genre.$this->genre");
+    }
+
     private function getRatings()
     {
         return MovieRating::where('movie_id', $this->id);
