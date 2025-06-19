@@ -33,7 +33,7 @@
                             <ol type="1">
                                 <li>Type Your Birthday</li>
                                 <li>Create Your {{ cms_config('hotel.name.short') }}</li>
-                                <li>Enter {{ cms_config('hotel.name.full') }}</li>
+                                <li>Enter {{ cms_config('hotel.name.short') }} Hotel</li>
                                 <li>Make Your {{ cms_config('hotel.name.short') }} Home</li>
                                 <li>Have Fun!</li>
                             </ol>

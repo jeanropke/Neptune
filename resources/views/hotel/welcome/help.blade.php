@@ -78,7 +78,7 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
                             <img align="right" src="{{ url('/') }}/c_images/album108/image_5.gif" alt="">We do
-                            everything we can to make sure that {{ cms_config('hotel.name.full') }} is a safe place to
+                            everything we can to make sure that {{ cms_config('hotel.name.short') }} Hotel is a safe place to
                             hang out, but you have to watch out for {{ cms_config('hotel.name.short') }}s who are out to trick you. These bad {{ cms_config('hotel.name.short') }}s
                             will try to steal your Furni, account or Credits, either by tricking you
                             into handing them or your password over.<p>
@@ -101,7 +101,7 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
                             <p align="left">You can use the <a target="_blank" href="{{ url('/') }}/iot/go">{{ cms_config('hotel.name.short') }}
-                                    Help Tool</a> to send an email to {{ cms_config('hotel.name.full') }},
+                                    Help Tool</a> to send an email to {{ cms_config('hotel.name.short') }} Hotel,
                                 but before you use the tool, please take a look at the <a target="_self"
                                     href="{{ url('/') }}/help/faqs">FAQs</a> to see
                                 if your question is answered there.</p>

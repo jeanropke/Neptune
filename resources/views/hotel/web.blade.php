@@ -102,7 +102,7 @@
                                             </td>
                                             <td valign="top"><b>Direct Room Links<br></b>
                                                 <p>With the new website you can
-                                                    load {{ cms_config('hotel.name.full') }} rooms directly! Just click on a Hotel room link
+                                                    load {{ cms_config('hotel.name.short') }} Hotel rooms directly! Just click on a Hotel room link
                                                     (usually the room name, or saying something like 'Go to room' / 'go to
                                                     this room') and the room will load in the Hotel pop up.</p>
                                                 <p>If you are not logged into the site the log in page will appear
@@ -111,7 +111,7 @@
                                                 <p>If you are logged in, but you don't have the Hotel window open then
                                                     the window will open for you automatically.</p>
                                                 <p><a href="{{ url('/') }}/hotel/welcome_to_habbo_hotel/how_to_get_started" target="_self">More about
-                                                        {{ cms_config('hotel.name.full') }}</a></p>
+                                                        {{ cms_config('hotel.name.short') }} Hotel</a></p>
                                             </td>
                                         </tr>
                                     </tbody>

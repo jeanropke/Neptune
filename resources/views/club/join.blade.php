@@ -130,7 +130,7 @@
 
                                     <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
                                     <img src="{{ url('/') }}/web/images/credits/hc_badge.gif" alt="" align="right">
-                                    <p>{{ cms_config('hotel.name.short') }} Club is {{ cms_config('hotel.name.full') }}'s exclusive club, and as a member
+                                    <p>{{ cms_config('hotel.name.short') }} Club is {{ cms_config('hotel.name.short') }} Hotel's exclusive club, and as a member
                                         of this club you get
                                         privileges that are not available to non-{{ cms_config('hotel.name.short') }} Club Habbos. As a
                                         member you get

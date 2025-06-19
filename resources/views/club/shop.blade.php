@@ -51,7 +51,7 @@
 
                                 <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
                                 <img src="{{ url('/') }}/web/images/club/hcclick_trnsprnt.gif" alt="" align="right">
-                                <p>{{ cms_config('hotel.name.short') }} Club is {{ cms_config('hotel.name.full') }}'s exclusive club, and as a member of this club you get privileges that are not available to non-{{ cms_config('hotel.name.short') }} Club {{ cms_config('hotel.name.short') }}s. As a member you get priority access to the Hotel and Public Rooms, rare furni gifts, extra cool dances and so much more.</p>
+                                <p>{{ cms_config('hotel.name.short') }} Club is {{ cms_config('hotel.name.short') }} Hotel's exclusive club, and as a member of this club you get privileges that are not available to non-{{ cms_config('hotel.name.short') }} Club {{ cms_config('hotel.name.short') }}s. As a member you get priority access to the Hotel and Public Rooms, rare furni gifts, extra cool dances and so much more.</p>
 
                                 <div id="subscription-divider">
                                     <div>

@@ -70,7 +70,7 @@
                                                     or to act in an emergency to protect someone’s safety or legal rights.</p>
                                                 <p>
                                                     We encourage you to use caution and common sense in giving out Personal Information when using <a
-                                                        href="https://web.archive.org/web/20071012035049/http://www.habbo.com/habbo/en/help/safety/habboway/">
+                                                        href="{{ url('/') }}/help/safety/habboway/">
                                                         Community Services</a> or otherwise. We have no control over third parties to whom you may give Personal Information through the
                                                     use of our Services.
                                                 </p>
@@ -92,7 +92,7 @@
                                                     governed by those acts), or if you would like to exercise your right under the CAN SPAM Act to not receive future e-mail
                                                     correspondence from us, except with respect to your prior financial transaction or communications, or as otherwise required by law,
                                                     please print, complete, sign and return the opt-out letter available at <a
-                                                        href="https://web.archive.org/web/20071012035049/http://images.habbohotel.com/c_images/album43/Opt_Out_Notice.pdf">
+                                                        href="{{ cms_config('site.c_images.url') }}/album43/Opt_Out_Notice.pdf">
                                                         Opt-Out Notice</a>. Further, if you would like to terminate our use of your Personal Information on a going forward basis
                                                     (except as it relates to prior financial transaction and communications, there is also a place on that form to select that option.
                                                     However, this will result in the termination of your Habbo user account(s).
@@ -179,7 +179,7 @@
                                                     Unless you opt-out we and our affiliates may e-mail you with information from Sulake, including information about selected third
                                                     parties. If you have opted in to our sharing of your Personal Information with third parties, you may receive e-mails directly from
                                                     third parties. If you do not want to receive information from Sulake or third parties that we have selected, you may <a
-                                                        href="https://web.archive.org/web/20071012035049/http://images.habbohotel.com/c_images/album43/Opt_Out_Notice.pdf">
+                                                        href="{{ cms_config('site.c_images.url') }}/album43/Opt_Out_Notice.pdf">
                                                         Opt-Out Notice</a>. You may also contact Sulake by postal mail at the address below.
                                                 </p>
                                                 <p>
@@ -232,11 +232,8 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </td>
-
                 <td rowspan="2" style="width: 4px;"></td>
-
                 <td rowspan="2" valign="top" style="width: 176px;">
                     <div id="ad_sidebar">
                         @include('includes.partners')

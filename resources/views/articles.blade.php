@@ -12,7 +12,7 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
 
-                            <p>Did you miss reading about something happening in {{ cms_config('hotel.name.full') }}? You can find all of the news articles here!<br></p>
+                            <p>Did you miss reading about something happening in {{ cms_config('hotel.name.short') }} Hotel? You can find all of the news articles here!<br></p>
                             <div class="clear"></div>
                         </div>
                     </div>

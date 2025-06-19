@@ -30,7 +30,7 @@
                     @foreach ($ranks as $rank)
                         <div class="v3box yellow">
                             <div class="v3box-top">
-                                <h3>{{ cms_config('hotel.name.full') }} ~ {{ $rank->name }}</h3>
+                                <h3>{{ cms_config('hotel.name.short') }} Hotel ~ {{ $rank->name }}</h3>
                             </div>
                             <div class="v3box-content">
                                 <div class="v3box-body">

@@ -30,7 +30,7 @@
                                 If you want to make your own {{ cms_config('hotel.name.short') }} room, click HERE to find out how.<br><br><strong>How
                                     to visit a room</strong><br>To visit a room click on its name in the Navigator and
                                 then click 'Go'.<br><br><strong>The Welcome Lounge</strong><br>If this is your first
-                                visit to {{ cms_config('hotel.name.full') }}, why not check out the Welcome Lounge? It's a great place to meet
+                                visit to {{ cms_config('hotel.name.short') }} Hotel, why not check out the Welcome Lounge? It's a great place to meet
                                 new friends. You might even spot one of the Hotels eXperts. <br><br><br><strong>Moving
                                     around a room</strong><br><img width="194" vspace="0" hspace="0" height="118"
                                     border="0" align="right" alt="tour walk" id="galleryImage"

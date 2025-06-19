@@ -10,7 +10,7 @@
 @endguest
 <div class="tabmenu-inner-content">
     <p>
-        {{ trans('master.hc_days_benefits', ['short_name' => cms_config('hotel.name.short'), 'full_name' => cms_config('hotel.name.full')]) }}
+        {{ trans('master.hc_days_benefits', ['short_name' => cms_config('hotel.name.short'), 'full_name' => cms_config('hotel.name.short')]) }}
     </p>
     <p>
         <a href="/club" class="arrow">

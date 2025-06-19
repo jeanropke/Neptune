@@ -18,7 +18,7 @@
                         <div class="v3box-body">
 
                             <p>Before you can explore the Hotel, you'll need to 'check in'. The first time
-                                you check in to {{ cms_config('hotel.name.full') }}, you have to register an account and create your
+                                you check in to {{ cms_config('hotel.name.short') }} Hotel, you have to register an account and create your
                                 {{ cms_config('hotel.name.short') }}.<br>
                                 <br>
                                 Creating a {{ cms_config('hotel.name.short') }} account is simple and it will only take a few minutes - just
@@ -26,7 +26,7 @@
                                 <br>
                                 <img border="0" align="left" src="{{ url('/') }}/c_images/payment/1_hi.gif"
                                     alt=""><span style="font-weight: bold;">Installing Shockwave</span><br>
-                                Before you can check in to {{ cms_config('hotel.name.full') }} for the first time, you need to download
+                                Before you can check in to {{ cms_config('hotel.name.short') }} Hotel for the first time, you need to download
                                 and install Shockwave- it should only take a couple of minutes. If a 'security
                                 warning' box appears when you are installing, just click 'yes'.</p>
                             <p><br><br>
@@ -36,15 +36,15 @@
                                         width="105" height="106" border="0" align="right" id="galleryImage"
                                         src="{{ url('/') }}/c_images/album209/enterHH.png"
                                         alt=""></span><br style="font-weight: bold;">
-                                Once Shockwave is installed you're ready to check in to {{ cms_config('hotel.name.full') }}. Click
-                                <span style="font-weight: bold;">enter {{ cms_config('hotel.name.full') }} </span>and a new window will open.
+                                Once Shockwave is installed you're ready to check in to {{ cms_config('hotel.name.short') }} Hotel. Click
+                                <span style="font-weight: bold;">enter {{ cms_config('hotel.name.short') }} Hotel </span>and a new window will open.
                                 When the Hotel loading bar reaches 100%,
                                 you'll see the Hotel View page.<br>
                                 <br>
                                 <br><img border="0" align="left" src="{{ url('/') }}/c_images/payment/3_hi.gif"
                                     alt=""><span style="font-weight: bold;">
                                     Creating your {{ cms_config('hotel.name.short') }}</span><br>
-                                The first time you check in to {{ cms_config('hotel.name.full') }}, you have to register an account and
+                                The first time you check in to {{ cms_config('hotel.name.short') }} Hotel, you have to register an account and
                                 create your {{ cms_config('hotel.name.short') }}. A log in window will appear as soon as the page has loaded.
                                 Click on 'You can create one here' to open the registration window.<br>
                                 <br>

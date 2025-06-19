@@ -140,7 +140,7 @@
                                         <div class="bubble-body">
                                             <!--Oh, calm down Frank. We're just working on something quick and had we took the website down to work on. Just check back again in a little while to see if we're back up. -->
                                             Oh, calm down Frank. The Flash Player needs be allowed in order to play
-                                            {{ cms_config('hotel.name.full') }}.
+                                            {{ cms_config('hotel.name.short') }} Hotel.
                                             <a href="https://get.adobe.com/flashplayer" target="_blank">Enable
                                                 Flash</a>.
 

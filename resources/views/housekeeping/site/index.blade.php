@@ -24,15 +24,6 @@
                             <div class="tableheaderalt">General Configuration</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <tr>
-                                    <td class="tablerow1" width="40%" valign="middle"><b>Sitename</b>
-                                        <div class="graytext">This is the full name of your site, eg. 'Habbo Hotel'.
-                                        </div>
-                                    </td>
-                                    <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="hotel.name.full" value="{{ cms_config('hotel.name.full') }}" size="30" class="textinput">
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Shortname</b>
                                         <div class="graytext">This is the 'shortname' of your site, eg. 'Habbo'.</div>
                                     </td>

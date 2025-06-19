@@ -32,7 +32,6 @@ class SiteController extends Controller
             'register_default_tickets'  => 'required|numeric'
         ]);
 
-        set_cms_config('hotel.name.full', $request->hotel_name_full);
         set_cms_config('hotel.name.short', $request->hotel_name_short);
         set_cms_config('register.default.console_motto', $request->register_default_console_motto);
         set_cms_config('register.default.credits', $request->register_default_credits);

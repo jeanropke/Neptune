@@ -30,7 +30,6 @@
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
-
                                     <div class="v3box yellow">
                                         <div class="v3box-top">
                                             <h3>Habbo Atlas</h3>
@@ -38,7 +37,7 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
                                                 <p align="center">
-                                                    <img style="width: 620px; height: 429px;" src="{{ url('/') }}/c_images/album209/habboatlas2.gif" alt="">
+                                                    <img style="width: 620px; height: 429px;" src="{{ cms_config('site.c_images.url') }}/album209/habboatlas2.gif" alt="">
                                                     <br><br><br>
                                                 </p>
                                                 <p align="center">
@@ -47,7 +46,7 @@
                                                 <p align="center">
                                                     <b>Americas</b>
                                                     <br>
-                                                    <img vspace="0" hspace="0" border="0" align="bottom" src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif"
+                                                    <img vspace="0" hspace="0" border="0" align="bottom" src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif"
                                                         alt="">
                                                     <a href="https://www.habbo.com.br/" target="_blank">Brasil</a> |
                                                     <a href="https://www.habbo.ca/" target="_blank">Canada</a> |
@@ -56,14 +55,14 @@
                                                     <a href="https://www.habbo.com.co/">República de Colombia</a> |
                                                     <a href="https://www.habbo.com.ve/">Venezuela</a> |
                                                     <a href="https://www.habbo.com/" target="_blank">United States of America</a>
-                                                    <img src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif" alt="">
+                                                    <img src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif" alt="">
                                                     <br>
                                                 </p>
                                                 <p align="center">
                                                     <br>
                                                     <b>Europe</b>
                                                     <br>
-                                                    <img vspace="0" hspace="0" border="0" align="bottom" src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif"
+                                                    <img vspace="0" hspace="0" border="0" align="bottom" src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif"
                                                         alt="">
                                                     <a href="https://www.habbo.be/">Koninkrijk België</a> |
                                                     <a href="https://www.habbo.dk/" target="_blank">Danmark</a> |
@@ -79,13 +78,13 @@
                                                     <a href="https://www.habbo.ch/" target="_blank">Schweiz</a> |
                                                     <a href="https://www.habbohotel.co.uk/" target="_blank">United Kingdom</a> |
                                                     <a href="https://www.habbo.at/" target="_blank">Österreich</a>
-                                                    <img src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif" alt="">
+                                                    <img src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif" alt="">
                                                     <br><br><br>
                                                     <b>Asia Pacific</b>
                                                     <br>
                                                     <align>
                                                         <img vspace="0" hspace="0" border="0" align="bottom"
-                                                            src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif" alt="">
+                                                            src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif" alt="">
                                                         <a href="https://www.habbo.com.au/" target="_blank">Australia</a> |
                                                         <a href="https://www.habbo.cn/">China</a> |
                                                     </align>
@@ -94,12 +93,10 @@
                                                     </span>
                                                     <align>
                                                         <a href="https://www.habbo.com.sg/" target="_blank">Singapore</a>
-                                                        <img src="{{ url('/') }}/c_images/navi_icons/tab_icon_02_hotel.gif" alt="">
+                                                        <img src="{{ cms_config('site.c_images.url') }}/navi_icons/tab_icon_02_hotel.gif" alt="">
                                                         <br>
                                                     </align>
                                                 </p>
-
-
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
@@ -111,9 +108,7 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </td>
-
                 <td rowspan="2" style="width: 8px;"></td>
             </tr>
         </tbody>

@@ -25,7 +25,7 @@
                                                     <p>
                                                         You can use {{ cms_config('hotel.name.short') }} Coins for buying furniture and playing
                                                         games in
-                                                        {{ cms_config('hotel.name.full') }} or enhancing your {{ cms_config('hotel.name.short') }} Home page
+                                                        {{ cms_config('hotel.name.short') }} Hotel or enhancing your {{ cms_config('hotel.name.short') }} Home page
                                                         content. <a href="{{ url('/') }}/credits">Learn more!</a>
                                                     </p>
 

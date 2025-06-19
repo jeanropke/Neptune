@@ -78,9 +78,9 @@
                                                 that bad people can use chat functions and that chat rooms can be dangerous places if you do not use caution and good sense. You agree
                                                 not to give out any personal information including your password, your first and last name, your phone number, e-mail address, instant
                                                 messenger screen name or other contact information and not to ask for personal information from other Habbos. Use common sense and
-                                                follow the <a href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a>!<br><br>6. If you
+                                                follow the <a href="{{ url('/') }}/help/habbo_way">Habbo Way</a>!<br><br>6. If you
                                                 steal furniture or Coins from other Habbos, cheat on any of our games, use any hacking scripting or editing programs in the Hotel,
-                                                violate the <a href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a> or break the
+                                                violate the <a href="{{ url('/') }}/help/habbo_way">Habbo Way</a> or break the
                                                 law, we can freeze or terminate your account, or if appropriate, report you to the Police!<br><br>7. You understand that all purchases
                                                 of Habbo Coins are final and non-refundable, except, in our sole and absolute discretion. Once you buy Coins you can’t get your money
                                                 back. You understand that Habbo Coins will expire after one year, so use them while you can. Further, in Sulake’s sole discretion, Habbo
@@ -99,7 +99,7 @@
                                                 harassing; is defamatory; is invasive of privacy or publicity rights; is obscene; is lewd, lascivious, filthy, violent or otherwise
                                                 objectionable; or which encourages conduct that would violate any law or give rise to civil or criminal liability under any law. You
                                                 agree to abide by the terms and conditions of this Agreement, the <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a> and any additional terms,
+                                                    href="{{ url('/') }}/help/habbo_way">Habbo Way</a> and any additional terms,
                                                 conditions, rules or procedures imposed by Sulake or by third-party content providers in connection with third-party content, software
                                                 or services available on or through the Services.<br><br>Rights:<br><br>The content of the Services includes copyrighted materials,
                                                 trademarks and other proprietary information, which may include, without limitation, text, software, photos, video, audio visual
@@ -129,7 +129,7 @@
                                                 subsidiaries, successors, assigns and licensees, for any purpose whatsoever, including, without limitation, developing, manufacturing
                                                 and marketing products using such information, and you hereby waive the right to receive any financial or other consideration in
                                                 connection with such information, including, without limitation, credit. (See <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/footer_pages/submissions_agreement.html">Submission
+                                                    href="{{ url('/') }}/footer_pages/submissions_agreement">Submission
                                                     Agreement</a>, which is incorporated herein by reference)<br><br>You agree that all purchases of Habbo Coins are final. No refunds
                                                 will be given, except in our sole and absolute discretion. You agree that all Habbo Coins will be forfeited if your account is
                                                 terminated for any reason. All Habbo Coins will expire after one year(1) year. Further, in Sulake’s sole discretion, Habbo accounts that
@@ -148,7 +148,7 @@
                                                 disseminate or upload any inappropriate, infringing, defamatory, profane, indecent, obscene or illegal/unlawful matters, including,
                                                 without limitation, information, topics, names or other material.<br><br>Without limiting the generality of the forgoing, you agree to
                                                 read and strictly follow our User Code of Conduct Guidelines known as the <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a>, which are incorporated
+                                                    href="{{ url('/') }}/help/habbo_way">Habbo Way</a>, which are incorporated
                                                 herein by reference.<br><br>Always use caution and common sense when using the Internet, especially when giving out any personally
                                                 identifying information about yourself or with respect to financial information or transactions. Sulake does not control or endorse the
                                                 content, messages or information found in user submitted portions of the Services or external sites that may be linked to or from the
@@ -193,22 +193,22 @@
                                                 without limitation, by keystroke capture) to determine compliance with this Agreement and for any other purpose deemed appropriate by
                                                 Sulake and further that Sulake may use the information gathered during such monitoring for any purpose deemed appropriate by Sulake to
                                                 the extent permitted by law and our <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/footer_pages/privacy_policy.html">Privacy Policy</a>, which is
+                                                    href="{{ url('/') }}/footer_pages/privacy_policy">Privacy Policy</a>, which is
                                                 incorporated herein by reference. You further agree that, subject only to Sulake’s <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/footer_pages/privacy_policy.html">Privacy Policy</a>, as it
+                                                    href="{{ url('/') }}/footer_pages/privacy_policy">Privacy Policy</a>, as it
                                                 may change from time to time, personal data provided by you to Sulake may be used, to the extent permitted by law, for any purpose
                                                 Sulake deems appropriate and may, within Sulake's sole discretion, be given or sold to our affiliates or third parties. You acknowledge
                                                 that you understand that when you disclose personal information (e.g., user name, e-mail address) on the Services, that information can
                                                 be monitored, collected and used by others and may result in unsolicited messages from other users or other third parties and that
                                                 Sulake cannot control such monitoring, collection and use. If you object to our sharing of your personal information, you may opt out as
                                                 more fully explained in our <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/footer_pages/privacy_policy.html">Privacy Policy</a> and <a
-                                                    href="https://web.archive.org/web/20071011205658/http://images.habbohotel.com/c_images/album43/Opt_Out_Notice.pdf">Opt-Out
+                                                    href="{{ url('/') }}/footer_pages/privacy_policy">Privacy Policy</a> and <a
+                                                    href="{{ cms_config('site.c_images.url') }}/album43/Opt_Out_Notice.pdf">Opt-Out
                                                     Notice</a>.<br><br>Editing/Blocking:<br><br>You agree that Sulake, in its sole discretion, shall have the right, but not the
                                                 obligation, to edit, refuse to post or remove any material submitted to or posted on the Services, for any reason whatsoever, including,
                                                 without limitation, if Sulake considers that the material constitutes or promotes gambling or any illegal activity, or if Sulake
                                                 considers the material to be pornographic, sexually explicit, lewd, lascivious, filthy, violent, harassing, in violation of the <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a> or otherwise objectionable.
+                                                    href="{{ url('/') }}/help/habbo_way">Habbo Way</a> or otherwise objectionable.
                                                 Notwithstanding the foregoing, you shall remain solely responsible for the content of material you upload, post or otherwise make
                                                 available on the Services. Furthermore, you acknowledge that the Services may not be monitored and that you do not rely on Sulake to
                                                 monitor or edit the Services and that the Services may contain content which you find offensive, and you hereby waive any objections you
@@ -273,8 +273,8 @@
                                                 defamation and violation of rights of privacy or publicity very seriously and complies with the complaint procedures of the Digital
                                                 Millennium Copyright Act. If you believe that any of the material that is or was on our Services infringes or has infringed any rights,
                                                 including copyrights or trademarks, owned by you, or by an owner for which you are authorized to act, please refer to our <a
-                                                    href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Complaint Policy</a> included as part of
-                                                the <a href="https://web.archive.org/web/20071011205658/http://www.habbo.com/help/habbo_way.html">Habbo Way</a>.<br><br>For all other
+                                                    href="{{ url('/') }}/help/habbo_way">Complaint Policy</a> included as part of
+                                                the <a href="{{ url('/') }}/help/habbo_way">Habbo Way</a>.<br><br>For all other
                                                 correspondence and complaints of a non-legal nature, please e-mail:<br><br>contact.us@sulake.com.<br><br>Last updated: September 30,
                                                 2005.
                                                 <div class="clear"></div>

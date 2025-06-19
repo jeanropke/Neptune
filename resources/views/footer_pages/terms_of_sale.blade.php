@@ -57,12 +57,12 @@
                                                 content or services offered by the carrier. Similarly a Premium Subscription is non-refundable, has no monetary value and is limited by
                                                 the terms of the subscription. <span style="font-weight: bold;">BOTH COINS AND PREMIUM SUBSCRIPTIONS ARE SUBJECT TO EXPIRATION AND
                                                     REVOCATION AS SET FORTH IN THE <a
-                                                        href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/terms_and_conditions.html">TERMS OF
+                                                        href="{{ url('/') }}/footer_pages/terms_and_conditions">TERMS OF
                                                         USE</a></span>.
                                                 <br><br>
                                                 You have no property interest in Coins, any subscription, your avatar, or virtual items (e.g., Furni or Rares), which remain the
                                                 exclusive property of Sulake subject only to your limited, non-transferable revocable license to use such for in-game play subject to
-                                                the <a href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/terms_and_conditions.html">Terms of Use</a>.
+                                                the <a href="{{ url('/') }}/footer_pages/terms_and_conditions">Terms of Use</a>.
                                                 Any attempt to sell or transfer same will result in an automatic termination of such license. Further, as these are merely licensed game
                                                 play activities, they are deemed consumed upon purchase like putting a quarter in an arcade game.
                                                 <br><br style="font-weight: bold;"><span style="font-weight: bold;">
@@ -78,13 +78,13 @@
                                                 <br><br>
                                                 All Coins, Premium Subscriptions and all virtual products (including “Furni” and all other items or services within the Hotel) are
                                                 non-refundable, except, in our sole and absolute discretion and are subject to revocation and the <a
-                                                    href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/terms_and_conditions.html">Terms of Use</a>.
+                                                    href="{{ url('/') }}/footer_pages/terms_and_conditions">Terms of Use</a>.
                                                 Virtual products purchased will be available for use as soon as reasonably practicable.
                                                 <br><br><span style="font-weight: bold;">
                                                     CREDIT CARD SECURITY
                                                 </span><br><br>
                                                 Shopping should be fun, and we want you to feel safe and secure when you shop with us at Habbo Hotel. Please see our <a
-                                                    href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/privacy_policy.html">Privacy Policy</a> to
+                                                    href="{{ url('/') }}/footer_pages/privacy_policy">Privacy Policy</a> to
                                                 understand how we take care of your personal information. Of course, as you’re shopping with us online, you may give us your credit card
                                                 information, and we take the responsibility of caring for that information very seriously. While no security system is absolute, we
                                                 employ industry standard security systems. Our servers protect your information using encryption and firewall technology throughout the
@@ -106,7 +106,7 @@
                                                 <br><br>
                                                 All Habbo Coins, subscription services and virtual products (including “Furni” and all other game play activities items or services
                                                 within the Hotel) are non-refundable, and non-returnable except, in our sole and absolute discretion and are subject to revocation and
-                                                the <a href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/terms_and_conditions.html">Terms of Use</a>.
+                                                the <a href="{{ url('/') }}/footer_pages/terms_and_conditions">Terms of Use</a>.
                                                 You understand that Coins will expire after one year, so use them while you can. Subscriptions expire according to their term. Further,
                                                 in Sulake’s sole discretion, Habbo accounts that are either unused or have been used only once for a period greater than six (6) months
                                                 may be terminated. If we cannot fill your order in 30 days, we will give you notice and an opportunity to cancel and obtain a refund.
@@ -127,7 +127,7 @@
                                                 Conditions of Sale or pertaining to the subject matter hereof. <span style="font-weight: bold;">YOU IRREVOCABLY WAIVE ALL RIGHTS TO
                                                     BRING OR PARTICIPATE IN ANY CLASS ACTION SUITS OR CLAIMS REGARDING THE MATTERS RELATED HERETO AND CONSENT TO THE MANDATORY
                                                     ARBITRATION PROVISIONS IN THE</span><a
-                                                    href="https://web.archive.org/web/20071012044431/http://www.habbo.com/footer_pages/terms_and_conditions.html"
+                                                    href="{{ url('/') }}/footer_pages/terms_and_conditions"
                                                     style="font-weight: bold;"> TERMS OF USE</a><span style="font-weight: bold;">.</span> If any part of these Terms and Conditions of
                                                 Sale is unlawful, void or unenforceable, that part will be deemed severable and will not affect the validity and enforceability of any
                                                 remaining provisions. These Terms and Conditions of Sale constitute the entire agreement among the parties relating to this subject
