@@ -71,6 +71,7 @@
                                     <ul>
                                         <ul>
                                             <ul>
+                                                @auth
                                                 <!-- habbo export begins -->
                                                 <table width="200" cellspacing="0" cellpadding="0" border="0">
                                                     <tbody>
@@ -109,6 +110,7 @@
                                                     </tbody>
                                                 </table>
                                                 <!-- habbo export ends -->
+                                                @endauth
                                             </ul>
                                         </ul>
                                     </ul>
