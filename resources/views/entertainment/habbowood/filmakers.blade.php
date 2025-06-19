@@ -18,41 +18,36 @@
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
 
-                                    <img vspace="5" hspace="0" border="0" align="right"
-                                        src="{{ cms_config('site.c_images.url') }}/album897/maverick_1.gif" alt=""><br>...in a
-                                    bunch of <b>links!</b>
+                                    <img vspace="5" hspace="0" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album897/maverick_1.gif" alt="">
+                                    <br>
+                                    ...in a bunch of <b>links!</b>
 
                                     <p>Check out what makes life in Habbo so cool!<br><br>
                                         As a Habbo you can:</p>
                                     <br><br>
                                     <p>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/hotel" target="_self">Meet friends</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/entertainment/habbowood/" target="_self">Shoot movies</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/credits/furniture/" target="_self">Decorate your room</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/hotel/pets/" target="_self">Play with pets</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/club/" target="_self">Be exclusive</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/home/" target="_self">Express yourself</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/hotel/trax/" target="_self">Make &amp; play music</a><br>
-                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif"><a
-                                            href="{{ url('/') }}/games/" target="_self">Play games</a>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/hotel" target="_self">Meet friends</a>
+                                        <br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/entertainment/habbowood/" target="_self">Shoot movies</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/credits/furniture/" target="_self">Decorate your room</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/hotel/pets/" target="_self">Play with pets</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/club/" target="_self">Be exclusive</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/home/" target="_self">Express yourself</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/hotel/trax/" target="_self">Make &amp; play music</a><br>
+                                        <img width="15" hspace="4" height="15" alt="golden star" order="0" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2201/golden_star.gif">
+                                        <a href="{{ url('/') }}/games/" target="_self">Play games</a>
                                     </p>
-                                    <p><br>What R U waiting 4?<br><a target="_new" href="{{ url('/') }}/hotel/">Create your Habbo
-                                            now!</a></p>
+                                    <p>
+                                        <br>What R U waiting 4?<br>
+                                        <a target="_new" href="{{ url('/') }}/hotel/">Create your {{ cms_config('hotel.name.short') }} now!</a>
+                                    </p>
                                     <p><a href="{{ url('/') }}/entertainment/habbowood" target="_self">Back to Habbowood</a>
                                     </p>
                                     <div class="clear"></div>
@@ -72,29 +67,41 @@
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-
-                                    <p>Hi, movie fanatic! At this point you probably already shot a few Habbowood movies. Now it's time for the next step: entering <b>Habbo Hotel!</b>
+                                    <p>
+                                        Hi, movie fanatic! At this point you probably already shot a few Habbowood movies. Now it's time for the next step: entering <b>{{ cms_config('hotel.name.short') }} Hotel!</b>
                                     </p>
-
                                     <p></p>
-                                    <p>Habbo Hotel is a unique and amazingly funny <b>online hangout.</b> The place is packed with <b>thousands of people,</b> all in the guise of Habbo
-                                        characters. Making <b>friends,</b> building and decorating your own <b>virtual room,</b> partying hard with your buddies, creating your own
-                                        <b>music</b> and <b>movies,</b> playing cool <b>multiplayer games,</b> and keeping track of your Habbo experiences through your Habbo's personal
-                                        <b>homepage.</b> This - and much more - is life in Habbo.</p>
-
+                                    <p>
+                                        {{ cms_config('hotel.name.short') }} Hotel is a unique and amazingly funny <b>online hangout.</b> The place is packed with <b>thousands of people,</b> all in the guise of {{ cms_config('hotel.name.short') }} characters.
+                                        Making <b>friends,</b> building and decorating your own <b>virtual room,</b> partying hard with your buddies, creating your own <b>music</b> and <b>movies,</b> playing cool <b>multiplayer games,</b>
+                                        and keeping track of your {{ cms_config('hotel.name.short') }} experiences through your {{ cms_config('hotel.name.short') }}'s personal <b>homepage.</b>
+                                        This - and much more - is life in {{ cms_config('hotel.name.short') }}.
+                                    </p>
                                     <p>What's left to say, then, except...</p>
-
                                     <p></p>
-                                    <center><a target="_new" href="{{ url('/') }}/hotel">Dive into Habbo Hotel right NOW
-                                            &gt;&gt;</a></center>
+                                    <center>
+                                        <a target="_new" href="{{ url('/') }}/hotel">
+                                            Dive into {{ cms_config('hotel.name.short') }} Hotel right NOW &gt;&gt;
+                                        </a>
+                                    </center>
                                     <p>&nbsp;</p>
-                                    <center><a target="_new" href="{{ url('/') }}/hotel"><img width="318" height="169" border="0"
-                                                src="{{ cms_config('site.c_images.url') }}/common/group_of_habbos_318.gif"
-                                                id="galleryImage" alt="Group of habbos (318)"></a></center>
+                                    <center>
+                                        <a target="_new" href="{{ url('/') }}/hotel">
+                                            <img width="318" height="169" border="0" src="{{ cms_config('site.c_images.url') }}/common/group_of_habbos_318.gif" id="galleryImage" alt="Group of habbos (318)">
+                                        </a>
+                                    </center>
                                     <p><br></p>
-                                    <p><a target="_self" href="{{ url('/') }}/entertainment/habbowood">Back to
-                                            Habbowood</a><br></p>
-                                    <p><a target="_new" href="{{ url('/') }}/hotel/">Read more &gt;&gt;</a></p>
+                                    <p>
+                                        <a target="_self" href="{{ url('/') }}/entertainment/habbowood">
+                                            Back to Habbowood
+                                        </a>
+                                        <br>
+                                    </p>
+                                    <p>
+                                        <a target="_new" href="{{ url('/') }}/hotel/">
+                                            Read more &gt;&gt;
+                                        </a>
+                                    </p>
                                     <div class="clear"></div>
                                 </div>
                             </div>

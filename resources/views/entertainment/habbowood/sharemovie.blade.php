@@ -28,8 +28,7 @@
                                                 <div class="habbomovies-movie-info">
                                                     <span class="habbomovies-movie-name">{{ $movie->getTitle() }}</span>
                                                     <span class="habbomovies-movie-created">Created: {{ $movie->created_at->format('M j, Y h:i:s A') }}</span>
-                                                    <span class="habbomovies-movie-by">By: <b><a
-                                                                href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a></b></span>
+                                                    <span class="habbomovies-movie-by">By: <b><a href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a></b></span>
                                                     <span class="habbomovies-movie-category">Category: Romantic</span>
                                                     <span class="habbomovies-movie-url">URL:</span>
                                                 </div>
@@ -61,9 +60,7 @@
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-
                                     Copy the <span style="font-weight: bold;">Movie URL</span> above and share it via your own email or IM!
-
                                     <div class="clear"></div>
                                 </div>
                             </div>
@@ -80,12 +77,12 @@
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-
                                     <p>Share this movie with all your friends!<br></p>
                                     <p><br></p>
-                                    <p><a class="colorlink orange"
-                                            href="{{ url('/') }}/entertainment/habbowood/sharemovie_tell.html?page=/entertainment/habbowood/movies/{{ $movie->id }}"><span>Tell
-                                                my friend about this movie</span></a>
+                                    <p>
+                                        <a class="colorlink orange" href="{{ url('/') }}/entertainment/habbowood/sharemovie_tell.html?page=/entertainment/habbowood/movies/{{ $movie->id }}">
+                                            <span>Tell my friend about this movie</span>
+                                        </a>
                                         <span style="font-weight: bold;">&nbsp;</span>
                                     </p>
                                     <div class="clear"></div>
@@ -97,17 +94,17 @@
                         </div>
                         <div class="portlet-goldenfilm goldenfilm">
                             <div class="portlet-goldenfilm-header">
-                                <h3>...or log in and use Habbo's Sharing Tool</h3>
+                                <h3>...or log in and use {{ cms_config('hotel.name.short') }}'s Sharing Tool</h3>
                             </div>
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-
-                                    <p>By logging in with your Habbo account <span style="font-weight: bold;">before</span> sharing this movie, you'll have much cooler sharing options,
-                                        such as:</p>
+                                    <p>
+                                        By logging in with your {{ cms_config('hotel.name.short') }} account <span style="font-weight: bold;">before</span> sharing this movie, you'll have much cooler sharing options, such as:
+                                    </p>
                                     <ul>
                                         <li>Adding the recipient to your <b>Friends List</b> as soon as she/he registers</li>
-                                        <li>Including your own <b>Habbo</b> in the email</li>
+                                        <li>Including your own <b>{{ cms_config('hotel.name.short') }}</b> in the email</li>
                                         <li>Writing a <b>personalized message</b></li>
                                     </ul>Log in and boost your sharing power!<br>
                                     <br><a class="colorlink orange"

@@ -21,17 +21,15 @@
                                         <li>Keep it <span style="font-weight: bold;">short</span> and <span style="font-weight: bold;">funny!</span></li>
                                         <li>Use plenty of <span style="font-weight: bold;">zoom</span> and <span style="font-weight: bold;">double zoom</span></li>
                                         <li>Come up with some snappy and witty <span style="font-weight: bold;">dialogue</span></li>
-                                        <li>Let the <span style="font-weight: bold;">visual</span> and <span style="font-weight: bold;">sound FX</span> serve your story and not vice
-                                            versa</li>
-                                        <li>Go crazy. It's <span style="font-weight: bold;">Habbo,</span> after all :)</li>
+                                        <li>Let the <span style="font-weight: bold;">visual</span> and <span style="font-weight: bold;">sound FX</span> serve your story and not vice versa</li>
+                                        <li>Go crazy. It's <span style="font-weight: bold;">{{ cms_config('hotel.name.short') }},</span> after all :)</li>
                                     </ol>
-
                                     <p>Enjoy your Habbowood experience!</p>
-                                    <p>Back to <a target="_self" href="{{ url('/') }}/entertainment/habbowood">Habbowood
-                                            main</a><br></p>
+                                    <p>Back to <a target="_self" href="{{ url('/') }}/entertainment/habbowood">Habbowood main</a><br></p>
 
-                                    <center><img width="38" height="51" border="0" alt="Clapperboard HWIII" id="galleryImage"
-                                            src="{{ cms_config('site.c_images.url') }}/album2051/Clapperboard_HWIII.gif"></center>
+                                    <center>
+                                        <img width="38" height="51" border="0" alt="Clapperboard HWIII" id="galleryImage" src="{{ cms_config('site.c_images.url') }}/album2051/Clapperboard_HWIII.gif">
+                                    </center>
                                     <div class="clear"></div>
                                 </div>
                             </div>
@@ -76,25 +74,23 @@
                                     Wanna direct a blockbuster in a few minutes time? Then follow this drill!<br>
 
                                     <ol>
-                                        <li>Click any of the <a href="{{ url('/') }}/habbomovies/private/openeditor"
-                                                target="_self">shoot a movie</a> links<br></li>
-                                        <li>Log in with your Habbo account (or create one first, if you don't have one already)<br></li>
-                                        <li><span style="font-weight: bold;">Cast</span> your and your friends' Habbos, or choose a fictional actor; then click <span
-                                                style="font-weight: bold;">"Edit Movie"</span><br></li>
+                                        <li>
+                                            Click any of the <a href="{{ url('/') }}/habbomovies/private/openeditor" target="_self">shoot a movie</a> links<br>
+                                        </li>
+                                        <li>Log in with your {{ cms_config('hotel.name.short') }} account (or create one first, if you don't have one already)<br></li>
+                                        <li>
+                                            <span style="font-weight: bold;">Cast</span> your and your friends' {{ cms_config('hotel.name.short') }}s, or choose a fictional actor; then click
+                                            <span style="font-weight: bold;">"Edit Movie"</span><br>
+                                        </li>
                                         <li>The mighty <b>MovieMaker</b> will open up in all its glory! Watch the <b>Demo</b> on the left and you'll learn the ropes in a sec!<br></li>
 
                                         <li>Add and edit <span style="font-weight: bold;">new scenes</span> to your movie (there's a nice button for that)<br></li>
-                                        <li>Proceed to <span style="font-weight: bold;">Saving,</span> <span style="font-weight: bold;">Publishing</span> and <b>Sharing</b> if by
-                                            following the onsite instructions<br></li>
+                                        <li>Proceed to <span style="font-weight: bold;">Saving,</span> <span style="font-weight: bold;">Publishing</span> and <b>Sharing</b> if by following the onsite instructions<br></li>
                                     </ol>
-
                                     <p>Et voila, a new <span style="font-weight: bold;">Habbowood Director</span> is born!</p>
-                                    <p>Now go <a href="{{ url('/') }}/habbomovies/private/openeditor" target="_self">shoot a movie</a>
-                                        and good luck with your creative career!</p>
+                                    <p>Now go <a href="{{ url('/') }}/habbomovies/private/openeditor" target="_self">shoot a movie</a> and good luck with your creative career!</p>
 
-                                    <p>Back to <a href="{{ url('/') }}/entertainment/habbowood" target="_self">Habbowood
-                                            Main
-                                        </a></p>
+                                    <p>Back to <a href="{{ url('/') }}/entertainment/habbowood" target="_self">Habbowood Main </a></p>
                                     <div class="clear"></div>
                                 </div>
                             </div>

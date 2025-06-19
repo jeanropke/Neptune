@@ -38,7 +38,7 @@
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-                                    <p>So that other Habbos can see your movie, you first need to <span style="font-weight: bold;">publish it</span>.<br></p>
+                                    <p>So that other {{ cms_config('hotel.name.short') }}s can see your movie, you first need to <span style="font-weight: bold;">publish it</span>.<br></p>
                                     <br><b><br></b>Tell your friends about your movie by sharing it.<br><br> <br>
                                     <div class="clear"></div>
                                 </div>

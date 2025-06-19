@@ -44,7 +44,6 @@
                     <td style="width:4px;" rowspan="2">&nbsp;</td>
                     <td valign="top" style="width:179px;" rowspan="2">
                         @include('entertainment.habbowood.includes.habbowoodmenu')
-
                         {{--
                         <div class="portlet-goldenfilm goldenfilm">
                             <div class="portlet-goldenfilm-header">
@@ -79,7 +78,6 @@
                     </td>
                     <td style="width:4px;" rowspan="2">&nbsp;</td>
                 </tr>
-
                 <tr>
                     <td style="width:4px;">&nbsp;</td>
                     <td valign="top" style="width:274px;">
@@ -100,8 +98,6 @@
                     </td>
                     <td style="width:4px;">&nbsp;</td>
                     <td valign="top" style="width:275px;">
-
-
                         <div class="portlet-film film">
                             <div class="portlet-film-header">
                                 <h3>Staff Picks</h3>
