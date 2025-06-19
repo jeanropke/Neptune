@@ -173,6 +173,8 @@ Route::middleware('user')->group(function () {
         Route::get('/mgm_sendlink_invite', function() { return view('community.mgm_sendlink_invite'); })->name('community.mgm_sendlink_invite');
         Route::get('/mgm_sendlink', function() { return view('community.mgm_sendlink'); })->name('community.mgm_sendlink');
         Route::post('/mgm_sendlink', [CommunityController::class, 'sendlinkPreview'])->name('community.mgm_sendlink.preview');
+
+        Route::get('/photos', [CommunityController::class, 'photos'])->name('community.photos');
     });
 
     Route::prefix('games')->group(function () {
@@ -652,6 +654,7 @@ Route::middleware('admin')->group(function () {
 Route::prefix('habbo-imaging')->group(function() {
     Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
     Route::get('/badge/{badge}', [HabboImaging::class, 'badge'])->name('habboimaging.badge');
+    Route::get('/photo/{photo}', [HabboImaging::class, 'photo'])->name('habboimaging.photo');
 });
 
 Route::fallback(function(){

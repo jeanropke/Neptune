@@ -10,7 +10,7 @@ class CommunityController extends Controller
     public function photos()
     {
         return view('community.photos')->with([
-            'photos'    => Photo::orderBy('timestamp', 'DESC')->limit(20)->get()
+            'photos' => Photo::orderBy('timestamp', 'DESC')->limit(20)->get()
         ]);
     }
 

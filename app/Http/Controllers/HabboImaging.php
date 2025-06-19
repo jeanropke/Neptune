@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Classes\AvatarImage;
 use App\Classes\BadgeImage;
+use App\Classes\PhotoPallets\GreyscalePalette;
+use App\Classes\PhotoRenderer;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -13,7 +16,7 @@ class HabboImaging extends Controller
     {
         //                                      1550518001240022850630005 01 22 00
         //habbo old figure data converter -     1650718001878252701630005 11 44 00
-        if(strlen($request->figure) >= 31) {
+        if (strlen($request->figure) >= 31) {
             $tempFigure = substr($request->figure, 0, 31);
             $request->figure = substr($tempFigure, 0, 25);
             $request->size = substr($tempFigure, 25, 1) == 1 ? 's' : 'n';
@@ -40,7 +43,7 @@ class HabboImaging extends Controller
         $hash = md5($expandedstyle);
         $path = storage_path('habboimaging/figure');
 
-        if(!File::exists($path))
+        if (!File::exists($path))
             File::makeDirectory($path, 0755, true);
 
 
@@ -49,7 +52,7 @@ class HabboImaging extends Controller
 
         if ($resourceCache && file_exists($cacheName)) {
             return response(file_get_contents($cacheName), 200)
-                ->header('Content-Type', 'image/'.$inputFormat)
+                ->header('Content-Type', 'image/' . $inputFormat)
                 ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
                 ->header('Cache-Control', 'no-cache, must-revalidate\n\n')
                 ->header('Etag', md5_file($cacheName));
@@ -66,11 +69,11 @@ class HabboImaging extends Controller
                 }
 
                 return response($image, 200)
-                ->header('Process-Time', $avatarImage->processTime)
-                ->header('Error-Message', $avatarImage->error)
-                ->header('Debug-Message', $avatarImage->debug)
-                ->header('Generator-Version', $avatarImage->version)
-                ->header('Content-Type', 'image/'.$inputFormat);
+                    ->header('Process-Time', $avatarImage->processTime)
+                    ->header('Error-Message', $avatarImage->error)
+                    ->header('Debug-Message', $avatarImage->debug)
+                    ->header('Generator-Version', $avatarImage->version)
+                    ->header('Content-Type', 'image/' . $inputFormat);
             }
             exit;
         }
@@ -82,11 +85,48 @@ class HabboImaging extends Controller
         $image = $badge->Generate();
 
         return response($image, 200)
-                ->header('Process-Time', $badge->processTime)
-                //->header('Error-Message', $avatarImage->error)
-                //->header('Debug-Message', $avatarImage->debug)
-                //->header('Generator-Version', $avatarImage->version)
-                ->header('Content-Type', 'image/gif');
+            ->header('Process-Time', $badge->processTime)
+            ->header('Error-Message', $badge->error)
+            ->header('Debug-Message', $badge->debug)
+            ->header('Generator-Version', $badge->version)
+            ->header('Content-Type', 'image/gif');
+    }
 
+    public function photo(Request $request)
+    {
+        $photo = Photo::find($request->photo);
+        if (!$photo) return;
+
+        $path = storage_path('habboimaging/photos');
+        $cacheName =  "$path/photo_$request->photo.png";
+        $resourceCache = true;
+
+        if ($resourceCache && file_exists($cacheName)) {
+            return response(file_get_contents($cacheName), 200)
+                ->header('Content-Type', 'image/png')
+                ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
+                ->header('Cache-Control', 'no-cache, must-revalidate\n\n')
+                ->header('Etag', md5_file($cacheName));
+            exit;
+        } else {
+
+            $pallete = new GreyscalePalette();
+            $renderer = new PhotoRenderer($pallete->getPalette(), 'SEPIA');
+            $image = $renderer->createImage($photo->photo_data);
+
+            if ($resourceCache) {
+                $fp = fopen($cacheName, "w");
+                fwrite($fp, $image);
+                fclose($fp);
+            }
+
+            return response($image, 200)
+                ->header('Process-Time', $renderer->processTime)
+                ->header('Error-Message', $renderer->error)
+                ->header('Debug-Message', $renderer->debug)
+                ->header('Generator-Version', $renderer->version)
+                ->header('Content-Type', 'image/png');
+            exit;
+        }
     }
 }
