@@ -26,7 +26,7 @@
                                     <td valign="top">
                                         <div class="movie_genre_image">
                                             {{-- If you have any images of movie genres, please post in this issue on the repository page. --}}
-                                            {{-- https://github.com/jeanropke/Neptune/issues/1 --}}
+                                            {{-- https://github.com/jeanropke/Neptune/issues/2 --}}
                                             <img src="{{ url('/') }}/web/images/habbomovies/genres/fantasy.gif" title="Fantasy" align="middle">
                                         </div>
                                     </td>
