@@ -27,7 +27,6 @@
                         </div>
                     </td>
                     <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
-
                         <div class="portlet-goldenfilm goldenfilm">
                             <div class="portlet-goldenfilm-header">
                                 <h3>Daily Staff Picks</h3>

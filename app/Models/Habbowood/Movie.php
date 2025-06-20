@@ -14,6 +14,8 @@ class Movie extends Model
 
     protected $fillable = [
         'data',
+        'title',
+        'subtitle',
         'author_id',
         'genre',
         'views',
@@ -25,21 +27,6 @@ class Movie extends Model
     public function getAuthor()
     {
         return User::find($this->author_id);
-    }
-
-    public function getTitle()
-    {
-        $dom = new DOMDocument();
-
-        if (!$this->data) return 'No Title';
-
-        $dom->loadXML($this->data);
-
-        $movie = $dom->getElementsByTagName('movie')->item(0);
-
-        if (!$movie) return 'No Title';
-
-        return $movie->getAttribute('name');
     }
 
     public function getGenre()

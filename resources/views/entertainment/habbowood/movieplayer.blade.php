@@ -71,7 +71,7 @@
                                     <div class="portlet-director-body">
                                         <div class="portlet-director-content">
                                             <div class="habbomovies-movie-info">
-                                                <span class="habbomovies-movie-name">{{ $movie->getTitle() }}</span>
+                                                <span class="habbomovies-movie-name">{{ $movie->title }}</span>
                                                 <span class="habbomovies-movie-created">Created: {{ $movie->created_at->format('M j, Y h:i:s A') }}</span>
                                                 <span class="habbomovies-movie-by">By: <b><a
                                                             href="{{ url('/') }}//home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a></b></span>

@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Habbowood\Movie;
+use DOMDocument;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,25 @@ class HabboMovieController extends Controller
     public function save(Request $request)
     {
         $movie = Movie::find($request->movie_id);
-        if($movie) {
+        $xmlData = $request->data;
+
+        $dom = new DOMDocument();
+        $dom->loadXML($xmlData);
+
+        $movieTag = $dom->getElementsByTagName('movie')->item(0);
+
+        if ($movie) {
             $movie->update([
-                'data' => $request->data
+                'data'      => $xmlData,
+                'title'     => $movieTag->getAttribute('name'),
+                'subtitle'  => $movieTag->getAttribute('subtitle')
             ]);
-        }
-        else {
+        } else {
             $movie = Movie::create([
-                'data'      => $request->data,
-                'author_id' => user()->id
+                'data'      => $xmlData,
+                'author_id' => user()->id,
+                'title'     => $movieTag->getAttribute('name'),
+                'subtitle'  => $movieTag->getAttribute('subtitle')
             ]);
         }
         return $movie->id;
@@ -44,7 +55,7 @@ class HabboMovieController extends Controller
     public function movie(Request $request)
     {
         $movie = Movie::find($request->movieId);
-        if(!$movie) return abort(404);
+        if (!$movie) return abort(404);
 
         return view('entertainment.habbomovies.movie')->with('movie', $movie);
     }
@@ -52,7 +63,7 @@ class HabboMovieController extends Controller
     public function movieXmlData(Request $request)
     {
         $movie = Movie::find($request->id);
-        if(!$movie) return abort(404);
+        if (!$movie) return abort(404);
 
         return $movie->data;
     }
@@ -69,10 +80,10 @@ class HabboMovieController extends Controller
 
     public function rateMovie(Request $request)
     {
-        if(!auth()) return;
+        if (!auth()) return;
 
         $movie = Movie::find($request->movieId);
-        if(!$movie) return;
+        if (!$movie) return;
 
         $movie->addRating($request->newRating);
         return view('entertainment.habbowood.includes.moviestats')->with('movie', $movie);

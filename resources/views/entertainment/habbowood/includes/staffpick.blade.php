@@ -4,13 +4,16 @@ become our finalists!<br><br><br>
     <table border="0" cellpadding="2" cellspacing="0" width="90%">
         <tbody>
             @foreach ($staff as $pick)
-                @php($movie = $pick->getMovie())
+                @php
+                $movie = $pick->getMovie();
+                if(!$movie) continue;
+                @endphp
                 <tr>
                     <td valign="top" class="list-movie-item">
                         <img class="genre-image" src="{{ url('/') }}/web/images/habbomovies/genres/action.gif" border="0">
                     </td>
                     <td valign="top" class="list-movie-name">
-                        <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->getTitle() }}</a>
+                        <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->title }}</a>
                     </td>
                 </tr>
                 <tr>

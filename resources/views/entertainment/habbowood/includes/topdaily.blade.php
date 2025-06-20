@@ -7,7 +7,7 @@
                         <img class="genre-image" src="{{ url('/') }}/web/images/habbomovies/genres/action.gif" border="0">
                     </td>
                     <td valign="top" class="list-movie-name">
-                        <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->getTitle() }}</a>
+                        <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->title }}</a>
                     </td>
                 </tr>
                 <tr>

@@ -32,7 +32,7 @@
                                     </td>
                                     <td>
                                         <div class="movie_info">
-                                            <div class="movie_name"><a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->getTitle() }}</a>
+                                            <div class="movie_name"><a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">{{ $movie->title }}</a>
                                             </div>
                                             <div class="movie_created metadata">Created at: {{ $movie->updated_at->format('Y/m/d') }}
                                             </div>
