@@ -44,6 +44,3 @@ ALTER TABLE `groups_memberships`
   ADD KEY `groupid` (`group_id`),
   ADD KEY `group_id` (`group_id`),
   ADD KEY `user_id` (`user_id`);
-
-DROP TABLE cms_groups;
-DROP TABLE cms_groups_members;
