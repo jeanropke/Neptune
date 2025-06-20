@@ -7,6 +7,9 @@ Habbo Homes
 
 ![image](https://github.com/user-attachments/assets/68126bd4-c784-422c-8431-7b0f4c375323)
 
+Photos Page (PhotoRenderer by Quackster - Rewritten in PHP)
+![image](https://github.com/user-attachments/assets/82afbac9-a2cd-4f6d-8fc9-c98428286fd5)
+
 Groups Discussions
 ![image](https://github.com/user-attachments/assets/52add6f3-05c1-4d05-bc75-d9c53fc9a3a6)
 
