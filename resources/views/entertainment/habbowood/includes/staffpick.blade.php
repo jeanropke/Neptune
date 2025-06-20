@@ -5,8 +5,10 @@ become our finalists!<br><br><br>
         <tbody>
             @foreach ($staff as $pick)
                 @php
-                $movie = $pick->getMovie();
-                if(!$movie) continue;
+                    $movie = $pick->getMovie();
+                    if (!$movie) {
+                        continue;
+                    }
                 @endphp
                 <tr>
                     <td valign="top" class="list-movie-item">
@@ -18,8 +20,8 @@ become our finalists!<br><br><br>
                 </tr>
                 <tr>
                     <td valign="top" class="list-movie-item"><span>By:</span></td>
-                    <td valign="middle" class="list-movie-creatorname"><a
-                            href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a>
+                    <td valign="middle" class="list-movie-creatorname">
+                        <a href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a>
                     </td>
                 </tr>
                 <tr>
