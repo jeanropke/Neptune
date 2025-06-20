@@ -1,4 +1,4 @@
-@php($guestbook = \App\Models\Home\Guestbook::where([['widget_id', '=', $item->id], ['is_deleted', '=', '0']])->orderBy('created_at', 'desc')->get())
+@php($guestbook = \App\Models\Home\Guestbook::where([['widget_id', '=', $item->id], ['deleted_by', '=', null]])->orderBy('created_at', 'desc')->get())
 <div class="movable widget GuestbookWidget" id="widget-{{ $item->id }}"
     style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
     <div class="w_skin_{{ $item->skin }}">

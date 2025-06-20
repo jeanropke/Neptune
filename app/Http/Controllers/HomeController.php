@@ -38,7 +38,7 @@ class HomeController extends Controller
             $isEdit = $session && ((user()->rank > 5 && $session->home_id) || (user()->id == $user->id && $session->home_id));
         }
 
-        $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']]);
+        $items = HomeItem::where([['home_id', '=', $user->id], ['deleted_by', '=', null]]);
 
         if ($items->count() == 0) {
             //Stickie notes
@@ -66,7 +66,7 @@ class HomeController extends Controller
             //needle_2
             HomeItem::insert(['owner_id' => $user->id, 'item_id' => '17']);
 
-            $items = HomeItem::where([['home_id', '=', $user->id], ['is_deleted', '=', '0']]);
+            $items = HomeItem::where([['home_id', '=', $user->id], ['deleted_by', '=', null]]);
         }
         return view('home')->with([
             'items'         => $items->get(),
@@ -431,7 +431,7 @@ class HomeController extends Controller
             return 'ERROR';
 
         $stickie->update([
-            'is_deleted' => '1'
+            'deleted_by' => user()->id
         ]);
 
         return response('SUCCESS', 200)

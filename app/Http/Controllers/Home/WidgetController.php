@@ -172,7 +172,7 @@ class WidgetController extends Controller
                 return;
 
             //just hide the message
-            $message->update(['is_deleted' => '1']);
+            $message->update(['deleted_by' => user()->id]);
         }
     }
 
@@ -182,7 +182,7 @@ class WidgetController extends Controller
         $widgetId       = $request->widgetId;
         $lastEntryId    = $request->lastEntryId;
 
-        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['is_deleted', '=', '0'], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
+        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['deleted_by', '=', null], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
 
         return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')

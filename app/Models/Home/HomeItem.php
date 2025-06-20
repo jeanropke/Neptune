@@ -2,6 +2,7 @@
 
 namespace App\Models\Home;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class HomeItem extends Model
@@ -9,10 +10,20 @@ class HomeItem extends Model
     protected $table = 'cms_homes';
 
     protected $fillable = [
-        'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'skin', 'home_id', 'group_id', 'is_deleted'
+        'owner_id', 'x', 'y', 'z', 'item_id', 'data', 'skin', 'home_id', 'group_id', 'deleted_by'
     ];
 
     public $timestamps = false;
+
+    public function getOwner()
+    {
+        return User::find($this->owner_id);
+    }
+
+    public function getDeletedBy()
+    {
+        return User::find($this->deleted_by);
+    }
 
     public function getStoreItem()
     {
