@@ -78,7 +78,11 @@
                                         <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ \Carbon\Carbon::createFromTimeStamp($user->last_online)->diffForHumans() }}
+                                        @if ($user->last_online)
+                                            {{ \Carbon\Carbon::createFromTimeStamp($user->last_online)->diffForHumans() }}
+                                        @else
+                                            Never online
+                                        @endif
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $user->created_at }}
