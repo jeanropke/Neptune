@@ -21,7 +21,7 @@ class HabboMovieController extends Controller
 
     public function getFigureData(Request $request)
     {
-        $user = User::where('username', 'LIKE', "%{$request->user}%")->select('figure', 'sex')->first();
+        $user = User::where('username', $request->user)->select('figure', 'sex')->first();
         return "{$user->sex};{$user->figure}";
     }
 
