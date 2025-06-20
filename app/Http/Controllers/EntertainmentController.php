@@ -71,7 +71,9 @@ class EntertainmentController extends Controller
 
     public function habbowoodMyMovies()
     {
-        //TODO: add auth
+        if (!user())
+            return redirect()->route('entertainment.habbowood');
+
         $movies = Movie::where('author_id', user()->id);
         if (!$movies)
             return abort(404);
