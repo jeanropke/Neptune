@@ -94,6 +94,18 @@
 </div>
 <br />
 <div class="menuouterwrap">
+    <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Habbo Home Moderation</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.moderation.homes.guestbook') }}" style="text-decoration:none;{{ $submenu == 'hh_moderation.guestbook' ? 'font-weight: bold;' : '' }}">Guestbook Messages</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ url('/') }}/web/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.moderation.homes.stickies') }}" style="text-decoration:none;{{ $submenu == 'hh_moderation.stickies' ? 'font-weight: bold;' : '' }}">Stickies</a>
+    </div>
+</div>
+<br />
+<div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ url('/') }}/web/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Customer Support</div>
     {{--
     <div class="menulinkwrap">&nbsp;

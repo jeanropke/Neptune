@@ -29,6 +29,7 @@ use App\Http\Controllers\Housekeeping\Furniture\FurnitureController;
 use App\Http\Controllers\Housekeeping\Furniture\WebOfferController;
 use App\Http\Controllers\Housekeeping\Moderation\EditorController as HousekeepingEditorController;
 use App\Http\Controllers\Housekeeping\Moderation\CreditsController as HousekeepingCreditsController;
+use App\Http\Controllers\Housekeeping\Moderation\HomeController as HouseekeepingHomeController;
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
 use App\Http\Controllers\Housekeeping\Moderation\RemoteController;
 use App\Http\Controllers\Housekeeping\Moderation\ReportController as HouseekeepingReportController;
@@ -623,6 +624,13 @@ Route::middleware('admin')->group(function () {
             Route::post('/remote/ban', [RemoteController::class, 'banPost'])->name('housekeeping.moderation.remote.ban.post');
             Route::get('/unban', [RemoteController::class, 'unban'])->name('housekeeping.moderation.unban');
             Route::post('/unban', [RemoteController::class, 'unbanPost'])->name('housekeeping.moderation.unban.post');
+
+            Route::get('/homes/guestbook', [HouseekeepingHomeController::class, 'guestbook'])->name('housekeeping.moderation.homes.guestbook');
+            Route::post('/homes/guestbook/delete', [HouseekeepingHomeController::class, 'guestbookDelete'])->name('housekeeping.moderation.homes.guestbook.delete');
+            Route::post('/homes/guestbook/restore', [HouseekeepingHomeController::class, 'guestbookRestore'])->name('housekeeping.moderation.homes.guestbook.restore');
+            Route::get('/homes/stickies', [HouseekeepingHomeController::class, 'stickies'])->name('housekeeping.moderation.homes.stickies');
+            Route::post('/homes/stickies/delete', [HouseekeepingHomeController::class, 'stickiesDelete'])->name('housekeeping.moderation.homes.stickies.delete');
+            Route::post('/homes/stickies/restore', [HouseekeepingHomeController::class, 'stickiesRestore'])->name('housekeeping.moderation.homes.stickies.restore');
         });
 
         Route::prefix('logs')->group(function() {
