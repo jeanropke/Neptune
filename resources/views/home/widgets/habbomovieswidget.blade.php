@@ -21,7 +21,7 @@
                 <div id="movies_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
-                            @foreach ($owner->getMovies(true) as $movie)
+                            @forelse ($owner->getMovies(true) as $movie)
                                 <tr>
                                     <td valign="top">
                                         <div class="movie_genre_image">
@@ -57,7 +57,9 @@
                                         <br class="clear">
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                            <center>No movie</center>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
