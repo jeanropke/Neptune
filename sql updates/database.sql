@@ -4148,7 +4148,7 @@ INSERT INTO `cms_settings` (`key`, `value`) VALUES
 ('site.avatarimage.url', 'http://127.0.0.1/habbo-imaging/avatarimage?figure='),
 ('connection.rcon.host', '127.0.0.1'),
 ('connection.rcon.port', '12309'),
-('site.admin.notes', 'Hello there!\r\nThis is the Housekeeping.\r\nBe careful! 🙂\r\neu nao queria estar escrevendo\r\no gordo é tongo e mija na cama\r\no enzo é legal\r\nessa parte é brincadeira\r\no gordo \r\no gordo anti social e ta bem gosta do seu amigo enzo.o gordo vive no seu quarto egosta de jogar com seu sobrinho querido enzo.'),
+('site.admin.notes', 'Hello there!\r\nThis is the Housekeeping.\r\nBe careful! 🙂'),
 ('register.default.console_motto', NULL),
 ('hotel.gift.wraps', '415,416,417,418,419,420'),
 ('site.badges.url', 'http://127.0.0.1/c_images/Badges'),
