@@ -24,8 +24,11 @@ class BadgeImage
 
         $badge = explode('.', $badge)[0];
 
-        if (strlen($badge) % 6 != 0)
+        $strlen = strlen($badge);
+        if ($strlen  % 6 != 0) {
+            $this->error .= "strlen % 6 != 0 ($strlen)";
             return;
+        }
 
         foreach (str_split($badge, 6) as $part) {
             if (str_starts_with($part, 'b')) {
