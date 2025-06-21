@@ -81,15 +81,36 @@ class HabboImaging extends Controller
 
     public function badge(Request $request)
     {
-        $badge = new BadgeImage($request->badge);
-        $image = $badge->Generate();
+        $path = storage_path('habboimaging/badges');
+        $badge = substr($request->badge, 0, 24);
+        $cacheName =  "$path/$badge.gif";
+        $resourceCache = true;
 
-        return response($image, 200)
-            ->header('Process-Time', $badge->processTime)
-            ->header('Error-Message', $badge->error)
-            ->header('Debug-Message', $badge->debug)
-            ->header('Generator-Version', $badge->version)
-            ->header('Content-Type', 'image/gif');
+        if ($resourceCache && file_exists($cacheName)) {
+            return response(file_get_contents($cacheName), 200)
+                ->header('Content-Type', 'image/gif')
+                ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
+                ->header('Cache-Control', 'no-cache, must-revalidate\n\n')
+                ->header('Etag', md5_file($cacheName));
+            exit;
+        } else {
+            $badge = new BadgeImage($badge);
+            $image = $badge->Generate();
+
+            if ($resourceCache) {
+                $fp = fopen($cacheName, "w");
+                fwrite($fp, $image);
+                fclose($fp);
+            }
+
+            return response($image, 200)
+                ->header('Process-Time', $badge->processTime)
+                ->header('Error-Message', $badge->error)
+                ->header('Debug-Message', $badge->debug)
+                ->header('Generator-Version', $badge->version)
+                ->header('Content-Type', 'image/gif');
+            exit;
+        }
     }
 
     public function photo(Request $request)
