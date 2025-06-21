@@ -37,7 +37,7 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
                                                 <p align="center">
-                                                    <img style="width: 620px; height: 429px;" src="{{ cms_config('site.c_images.url') }}/album209/habboatlas2.gif" alt="">
+                                                    <img src="{{ cms_config('site.c_images.url') }}/album209/habboatlas2.gif" alt="">
                                                     <br><br><br>
                                                 </p>
                                                 <p align="center">
