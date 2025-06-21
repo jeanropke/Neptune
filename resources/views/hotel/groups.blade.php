@@ -32,32 +32,7 @@
                         <div class="v3box-body">
                             <p align="center"><img src="{{ url('/') }}/c_images/album2276/groups_header_image.gif" alt=""></p><p>Join a collective, form a gang, create a fan club, make new friends or just hang out with your old mates - {{ cms_config('hotel.name.short') }} Groups is what you make it! Joining a group is free and it's only 10 {{ cms_config('hotel.name.short') }} Credits to start your own.<br></p><p>
                             </p>
-                            <div id="group_purchase_2">
-                                <span id="group_purchase_2_group_purchase">
-                                </span>
-                                <script type="text/javascript">
-
-                                    var groupPurchaseButton = Builder.node("a", {href:"#", className:"colorlink orange"}, [ Builder.node("span", "Create a Group") ]);
-                                    $("group_purchase_2_group_purchase").appendChild(groupPurchaseButton);
-                                    var dialog;
-                                    Event.observe(groupPurchaseButton, "click", function(e) {
-                                        Event.stop(e);
-                                        dialog = createDialog("group_purchase_form", "Create a Group", 9001, 0, -1000, cancelGroupPurchase);
-                                        appendDialogBody(dialog, "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>", true);
-                                        moveDialogToCenter(dialog);
-                                        makeDialogDraggable(dialog);
-                                        showOverlay();
-                                        new Ajax.Request(
-                                                habboReqPath + "/grouppurchase/group_create_form",
-                                                { method: "post", parameters: "product="+encodeURIComponent("g0 group_product"), onComplete: function(req, json) {
-                                                    setDialogBody(dialog, req.responseText);
-                                                } }
-                                        );
-                                    }, false);
-
-                                </script>
-                            </div>
-
+                            <x-purchase_group id="group_purchase_2" product="g0 group_product" />
                             <p></p>
                             <div class="clear"></div>
                         </div>
