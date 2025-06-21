@@ -20,6 +20,17 @@
         window.name = "habboMain";
     </script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            "autoplay": "on",
+            "unmuteOverlay": "hidden",
+            "splashScreen": false,
+            "allowScriptAccess": true,
+            "playerVersion": 11,
+            "quality": "low"
+        };
+    </script>
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/prototype.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/scriptaculous.js?load=effects"></script>
     <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/builder.js"></script>
