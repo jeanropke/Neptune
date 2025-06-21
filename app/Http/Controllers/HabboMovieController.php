@@ -16,6 +16,9 @@ class HabboMovieController extends Controller
 {
     public function openEditor()
     {
+        if(!user())
+            return redirect()->route('auth.login', ['page' => 'habbomovies/private/openeditor']);
+
         return view('entertainment.habbomovies.editor');
     }
 
