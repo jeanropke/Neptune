@@ -122,7 +122,7 @@ class GroupController extends Controller
         $group = Group::create([
             'owner_id'      => user()->id,
             'name'          => $request->name,
-            'description'   => $request->description
+            'description'   => $request->description ?? ''
         ]);
 
         return view('habblet.ajax.grouppurchase.purchase_ajax')->with([
