@@ -41,7 +41,7 @@
                                         <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner"
                                             title="Owner">
                                     @endif
-                                    <b>{{ \Carbon\Carbon::parse($group->created_at)->format('M d, Y') }}</b>
+                                    <b>{{ $group->created_at->format('M d, Y') }}</b>
                                 </p>
                                 <div class="clear"></div>
                             </li>

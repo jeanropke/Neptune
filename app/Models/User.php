@@ -230,9 +230,13 @@ class User extends Authenticatable
      */
     public function getGroups()
     {
-        return GroupMember::where([['groups_memberships.user_id', $this->id], ['is_pending', '0']])
-            ->join('groups_details', 'groups_details.id', '=', 'groups_memberships.group_id')
-            ->orWhere('groups_details.owner_id', $this->id)
+        return Group::leftJoin('groups_memberships', 'groups_details.id', '=', 'groups_memberships.group_id')
+            ->where(function ($query) {
+                $query->where('groups_details.owner_id', $this->id)
+                    ->orWhere('groups_memberships.user_id', $this->id);
+            })
+            ->select('groups_details.*')
+            ->distinct()
             ->get();
     }
 

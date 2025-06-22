@@ -14,6 +14,11 @@ class Group extends Model
         'owner_id', 'name', 'description', 'badge', 'group_type', 'forum_type', 'forum_premission', 'alias'
     ];
 
+    public function memberships()
+    {
+        return $this->hasMany(GroupMember::class, 'group_id');
+    }
+
     public function getUrl()
     {
         if ($this->alias)
