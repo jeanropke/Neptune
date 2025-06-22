@@ -113,10 +113,10 @@
                                 @if ($owner->id == user()->id && !$isEdit)
                                     <a href="{{ url('/') }}/myhabbo/startSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                                 @endif
-                                <a href="#" class="toolbutton" id="reporting-button" style="float: right">
+                                <a href="#" class="toolbutton reporting-start" id="reporting-button" style="float: right">
                                     <span>Report</span>
                                 </a>
-                                <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
+                                <a href="#" class="toolbutton reporting-stop" id="stop-reporting-button" style="float: right; display: none">
                                     <span>Stop reporting</span>
                                 </a>
                             @endauth
