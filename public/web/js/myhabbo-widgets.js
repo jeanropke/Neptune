@@ -259,6 +259,7 @@ GuestbookWidget.prototype = {
         }
         if ($("guestbook-delete-dialog")) {
             var self = this;
+            makeDialogDraggable($("guestbook-delete-dialog"));
             Event.observe($("guestbook-delete"), "click", function (e) { Event.stop(e); self.doRemoveEntry($('guestbook-delete-id').value); self.hideRemoveConfirmation(); });
             var cancelDelete = function (e) { Event.stop(e); self.hideRemoveConfirmation(); };
             Event.observe($("guestbook-delete-dialog-exit"), "click", cancelDelete);
