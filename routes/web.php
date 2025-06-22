@@ -90,6 +90,10 @@ Route::middleware('user')->group(function () {
         Route::get('/room', [HotelController::class, 'room'])->name('hotel.room');
         Route::get('/staff', [HotelController::class, 'staff'])->name('hotel.staff');
         Route::get('/groups', [HotelController::class, 'groups'])->name('hotel.groups');
+        Route::get('/groups/directory', [HotelController::class, 'groupsDirectory'])->name('hotel.groups.directory');
+        Route::get('/groups/directory/active', [HotelController::class, 'groupsActive'])->name('hotel.groups.directory.active');
+        Route::get('/groups/directory/hotel', [HotelController::class, 'groupsHotel'])->name('hotel.groups.directory.hotel');
+        Route::get('/groups/directory/recent', [HotelController::class, 'groupsRecent'])->name('hotel.groups.directory.recent');
         Route::get('/groups/group_instructions', [HotelController::class, 'groupsInstructions'])->name('hotel.groups.group_instructions');
         Route::get('/homes', [HotelController::class, 'homes'])->name('hotel.homes');
         Route::get('/web', [HotelController::class, 'web'])->name('hotel.web');

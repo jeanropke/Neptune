@@ -47,14 +47,45 @@ class HotelController extends Controller
 
         return view('hotel.groups')->with([
             'groups'      => $groups,
-            'latest'      => Group::take(10)->orderBy('created_at', 'desc')->get()
+            'latest'      => Group::take(10)->orderBy('created_at', 'DESC')->get()
         ]);
     }
 
     public function groupsInstructions()
     {
         return view('hotel.groups.group_instructions')->with([
-            'latest' => Group::take(5)->orderBy('created_at', 'desc')->get()
+            'latest' => Group::take(5)->orderBy('created_at', 'DESC')->get()
+        ]);
+    }
+
+    public function groupsDirectory()
+    {
+        //TODO: most active members & most active habbo homes
+        return view('hotel.groups.directory')->with([
+            'active'    => Group::take(10)->orderBy('created_at', 'DESC')->get(),
+            'hotel'     => Group::take(20)->orderBy('created_at', 'DESC')->get(),
+            'recent'    => Group::take(10)->orderBy('created_at', 'DESC')->get(),
+        ]);
+    }
+
+    public function groupsActive()
+    {
+        return view('hotel.groups.directory.active')->with([
+            'active'    => Group::take(50)->orderBy('created_at', 'DESC')->get(),
+        ]);
+    }
+
+    public function groupsHotel()
+    {
+        return view('hotel.groups.directory.hotel')->with([
+            'hotel'     => Group::take(50)->orderBy('created_at', 'DESC')->get(),
+        ]);
+    }
+
+    public function groupsRecent()
+    {
+        return view('hotel.groups.directory.recent')->with([
+            'recent'    => Group::take(50)->orderBy('created_at', 'DESC')->get(),
         ]);
     }
 
