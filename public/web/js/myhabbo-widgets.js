@@ -175,6 +175,7 @@ GuestbookWidget.prototype = {
                 Event.stop(e);
                 offsets = Position.cumulativeOffset($('guestbook-open-dialog'));
                 var target = $('guestbook-form-dialog');
+                makeDialogDraggable(target);
                 Position.absolutize(target);
                 target.style.top = offsets[1] + 'px';
                 target.style.left = (offsets[0] - 80) + 'px';
