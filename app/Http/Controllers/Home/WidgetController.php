@@ -77,6 +77,7 @@ class WidgetController extends Controller
     {
         $user = User::find($request->_mypage_requested_account);
         if (!$user) return;
+
         $page = $request->pageNumber;
         $badges = $user->getBadges();
         $totalPages = ceil($badges->count() / 16);

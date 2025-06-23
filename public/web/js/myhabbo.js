@@ -49,6 +49,11 @@ function initView(id) {
     if (stopReportingButton) {
         Event.observe("stop-reporting-button", "click", stopReportingModeObserver, false)
     }
+
+    var groupToolsButtons = $("group-tools");
+    if (groupToolsButtons) {
+        new GroupEditTools(id, groupToolsButtons);
+    }
 }
 
 var startReportingModeObserver = function (e) {
@@ -677,6 +682,7 @@ MembersList.prototype = {
         showOverlay();
         Element.show(this.dialog);
         moveDialogToCenter(this.dialog);
+        makeDialogDraggable(this.dialog);
 
         if (this.selected == "pending") {
             this.switchToPending();
@@ -691,6 +697,7 @@ MembersList.prototype = {
         this.dialog.style.left = "-1500px";
         Element.hide(this.dialog);
         hideOverlay();
+        Event.stopObserving(this.membersDiv);
     },
 
     switchToMembers: function () {
@@ -1100,3 +1107,34 @@ function offsetToPlayground(element) {
     var elWidthHeight = Element.getDimensions(element);
     return pgTopLeft[0] + pgWidthHeight.width - elTopLeft[0] - elWidthHeight.width;
 }
+
+var GroupEditTools = Class.create();
+GroupEditTools.prototype = {
+    initialize: function (groupId, button) {
+        this.groupId = groupId;
+        this.buttonEl = button;
+        this.buttonEl.on('click', (e) => { this.handleToolsClick(e) });
+        this.membersList = new MembersList(this.groupId, 1);
+    },
+    handleToolsClick: function(d) {
+        var el = Event.findElement(d, 'a');
+        if (el && el.id) {
+            if (el.id != "group-tools-style") {
+                d.preventDefault();
+                switch (el.id) {
+                    case "group-tools-settings":
+                        openGroupSettings(this.groupId);
+                        break;
+                    case "group-tools-badge":
+                        openGroupBadgeEditor(this.groupId);
+                        break;
+                    case "group-tools-members":
+                        this.membersList.open();
+                        break
+                }
+            }
+        } else {
+            d.preventDefault();
+        }
+    }
+};

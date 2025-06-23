@@ -21,23 +21,30 @@
                             <span id="header-bar-text">
                                 Group Home: {{ $owner->name }}
                             </span>
-
-                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/groups/{{ $owner->getUrl() }}" id="tell-button" class="toolbutton tell"><span>Tell
-                                    a friend</span></a>
-
                             @auth
-                                <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button"><span>Create your own Group</span></a>
-
-                                <a href="#" class="toolbutton" id="reporting-button" style="float: right">
-                                    <span>Report</span>
-                                </a>
-                                <a href="#" class="toolbutton" id="stop-reporting-button" style="float: right; display: none">
-                                    <span>Stop reporting</span>
-                                </a>
+                                @if ($owner->owner_id == user()->id && !$isEdit)
+                                    <div id="group-tools">
+                                        <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
+                                        <a href="#" class="toolbutton group-badge"><span>Badge</span></a>
+                                        <a href="#" class="toolbutton group-settings"><span>Settings</span></a>
+                                        <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
+                                    </div>
+                                @else
+                                    <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
+                                        <span>Create your own Group</span>
+                                    </a>
+                                    <a href="#" class="toolbutton reporting-start" id="reporting-button" style="float: right">
+                                        <span>Report</span>
+                                    </a>
+                                    <a href="#" class="toolbutton reporting-stop" id="stop-reporting-button" style="float: right; display: none">
+                                        <span>Stop reporting</span>
+                                    </a>
+                                @endif
                             @endauth
                             @guest
-                                <a href="{{ url('/') }}/groups/actions/joinAfterLogin?groupId={{ $owner->id }}" class="toolbutton" id="join-button"><span>Log in to join this
-                                        Group</span></a>
+                                <a href="{{ url('/') }}/groups/actions/joinAfterLogin?groupId={{ $owner->id }}" class="toolbutton" id="join-button">
+                                    <span>Log in to join this Group</span>
+                                </a>
                             @endguest
                         </div>
                     </div>
@@ -112,7 +119,6 @@
 
                             @case('gw')
                                 {{-- widget --}}
-                                {{ $itemStore->class }}
                                 @include('home.widgets.' . strtolower($itemStore->class))
                             @break
                         @endswitch
@@ -124,13 +130,17 @@
         </div>
     </div>
 
-    <div class="topdialog dialog" id="guestbook-delete-dialog">
-        <div class="dialog-header dialog-handle">
-            <h3>Delete message</h3>
+    <div id="guestbook-delete-dialog" class="dialog-grey" style="display:none">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Delete message</span></h3>
+            </div>
+            <a href="#" class="dialog-grey-exit" id="guestbook-delete-dialog-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
         </div>
-        <a class="topdialog-exit" href="#" id="guestbook-delete-dialog-exit"></a>
-        <div class="dialog-body" id="guestbook-delete-dialog-body">
-            <div class="dialog-content">
+        <div class="dialog-grey-content">
+            <div id="confirm-dialog-body" class="dialog-grey-body">
                 <form method="post" id="guestbook-delete-form">
                     <input type="hidden" name="entryId" id="guestbook-delete-id" value="" />
                     <p>Tem certeza que quer apagar sua mensagem?</p>
@@ -140,48 +150,156 @@
                     </p>
                     <br style="clear: both">
                 </form>
+                <div class="clear"></div>
             </div>
         </div>
-    </div>
-    <div class="dialog topdialog" id="guestbook-form-dialog" style="width: auto">
-        <div class="dialog-header dialog-handle">
-            <h3>Create a message</h3>
+        <div class="dialog-grey-bottom">
+            <div></div>
         </div>
-        <a class="topdialog-exit" href="#" id="guestbook-form-dialog-exit"></a>
-        <div class="dialog-body" id="guestbook-form-dialog-body">
-            <div id="guestbook-form-tab" class="dialog-content">
-                <form method="post" id="guestbook-form">
-                    <p>
-                        Warning: max 200 characters
-                        <input type="hidden" name="ownerId" value="441794" />
-                    </p>
-                    <div>
-                        <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
-                        <script type="text/javascript">
-                            bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("guestbook-message");
-                            bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
-                            var colors = {
-                                "red": ["#d80000", "Vermelho"],
-                                "orange": ["#fe6301", "Laranja"],
-                                "yellow": ["#ffce00", "Amarelo"],
-                                "green": ["#6cc800", "Verde"],
-                                "cyan": ["#00c6c4", "Azul-claro"],
-                                "blue": ["#0070d7", "Azul-escuro"],
-                                "gray": ["#828282", "Cinza"],
-                                "black": ["#000000", "Preto"]
-                            };
-                            bbcodeToolbar.addColorSelect("Cores", colors, true);
-                        </script>
-                    </div>
+    </div>
 
-                    <div class="guestbook-toolbar clearfix">
-                        <a href="#" id="guestbook-form-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
-                        <a href="#" id="guestbook-form-preview" class="toolbutton notes" style="float: right"><span><b>Preview</b></span><i></i></a>
-                    </div>
-
-                </form>
+    <div id="guestbook-form-dialog" class="dialog-grey">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Create a message</span></h3>
             </div>
-            <div id="guestbook-preview-tab" class="dialog-content">&nbsp;</div>
+            <a href="#" class="dialog-grey-exit" id="guestbook-form-dialog-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
+        </div>
+        <div class="dialog-grey-content">
+            <div id="confirm-dialog-body" class="dialog-grey-body">
+                <div id="guestbook-form-tab" class="dialog-content">
+                    <form method="post" id="guestbook-form">
+                        <p>
+                            Warning: max 200 characters
+                            <input type="hidden" name="ownerId" value="441794" />
+                        </p>
+                        <div>
+                            <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
+                            <script type="text/javascript">
+                                bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("guestbook-message");
+                                bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
+                                var colors = {
+                                    "red": ["#d80000", "Red"],
+                                    "orange": ["#fe6301", "Orange"],
+                                    "yellow": ["#ffce00", "Yellow"],
+                                    "green": ["#6cc800", "Green"],
+                                    "cyan": ["#00c6c4", "Cyan"],
+                                    "blue": ["#0070d7", "Blue"],
+                                    "gray": ["#828282", "Gray"],
+                                    "black": ["#000000", "Black"]
+                                };
+                                bbcodeToolbar.addColorSelect("Colours", colors, true);
+                            </script>
+                        </div>
+                        <div class="guestbook-toolbar clearfix">
+                            <a href="#" id="guestbook-form-cancel" class="toolbutton"><span><b>Cancel</b></span><i></i></a>
+                            <a href="#" id="guestbook-form-preview" class="toolbutton notes" style="float: right"><span><b>Preview</b></span><i></i></a>
+                        </div>
+                    </form>
+                </div>
+                <div id="guestbook-preview-tab" class="dialog-content">&nbsp;</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="dialog-grey-bottom">
+            <div></div>
         </div>
     </div>
+
+    <div id="group-memberlist" class="dialog-grey dialog-greytab">
+        <div class="dialog-greytab-top dialog-grey-handle">
+            <div>
+                <h3><span>Members</span></h3>
+            </div>
+            <a href="#" class="dialog-grey-exit" id="group-memberlist-exit">
+                <img src="/web//images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
+        </div>
+        <div class="dialog-greytab-tabs">
+            <div class="dialog-greytab-tabs-content">
+                <ul>
+                    <li class="selected" id="group-memberlist-link-members"><a href="#">Members</a></li>
+                    <li id="group-memberlist-link-pending"><a href="#">Pending members</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="dialog-greytab-tabs-bottom">
+            <div></div>
+        </div>
+        <div class="dialog-greytab-content">
+            <div id="group-memberlist-body" class="dialog-greytab-body">
+                <div id="group-memberlist-members-search" class="clearfix">
+                    <input type="text" id="group-memberlist-members-search-string">
+                    <a id="group-memberlist-members-search-button" href="#" class="colorlink orange last"><span>Search</span></a>
+                </div>
+                <div id="group-memberlist-members" style="clear: both; display: none;"></div>
+
+                <div id="group-memberlist-members-buttons" class="clearfix" style="display: none;">
+                    <a href="#" class="toolbutton group-memberlist-button-disabled" id="group-memberlist-button-give-rights"><span>Give rights</span></a>
+                    <a href="#" class="toolbutton group-memberlist-button-disabled" id="group-memberlist-button-revoke-rights"><span>Revoke rights</span></a>
+                    <a href="#" class="toolbutton group-memberlist-button-disabled" id="group-memberlist-button-remove"><span>Remove</span></a>
+
+                    <a href="#" id="group-memberlist-button-close" class="toolbutton"><span>Close</span></a>
+                </div>
+                <div id="group-memberlist-pending" style="clear: both; display: none;"></div>
+                <div id="group-memberlist-pending-buttons" class="clearfix" style="display: none;">
+                    <a href="#" class="toolbutton group-memberlist-button-disabled" id="group-memberlist-button-accept"><span>Accept</span></a>
+                    <a href="#" class="toolbutton group-memberlist-button-disabled" id="group-memberlist-button-decline"><span>Reject</span></a>
+
+                    <a href="#" id="group-memberlist-button-close2" class="toolbutton"><span>Close</span></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="dialog-greytab-bottom">
+            <div></div>
+        </div>
+    </div>
+    {{--
+    <div class="dialog topdialog" id="group-memberlist">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Members</span></h3>
+            </div>
+            <a href="#" class="dialog-grey-exit" id="group-memberlist-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
+        </div>
+
+        <div class="dialog-grey-content">
+            <div class="box-tabs-container">
+                <ul class="box-tabs">
+                    <li class="selected" id="group-memberlist-link-members"><a href="#">Members</a><span class="tab-spacer"></span></li><li id="group-memberlist-link-pending"><a href="#">Pending members</a><span class="tab-spacer"></span></li>
+                </ul>
+            </div>
+            <div class="topdialog-body" id="group-memberlist-body">
+                <div id="group-memberlist-members-search" class="clearfix">
+                    <a id="group-memberlist-members-search-button" href="#" class="new-button"><b>Search</b><i></i></a>
+                    <input type="text" id="group-memberlist-members-search-string">
+                </div>
+                <div id="group-memberlist-members" style="clear: both; display: none;"></div>
+
+                <div id="group-memberlist-members-buttons" class="clearfix" style="display: none;">
+                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-give-rights"><b>Give rights</b><i></i></a>
+                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-revoke-rights"><b>Revoke rights</b><i></i></a> <a
+                        href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-remove"><b>Remove</b><i></i></a>
+                    <a href="#" class="new-button group-memberlist-button" id="group-memberlist-button-close"><b>Close</b><i></i></a>
+                </div>
+                <div id="group-memberlist-pending" style="clear: both; display: none;"></div>
+                <div id="group-memberlist-pending-buttons" class="clearfix" style="display: none;">
+                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-accept"><b>Accept</b><i></i></a>
+                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-decline"><b>Reject</b><i></i></a>
+                    <a href="#" class="new-button group-memberlist-button" id="group-memberlist-button-close2"><b>Close</b><i></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-grey-bottom">
+            <div></div>
+        </div>
+    </div>
+--}}
 @endsection

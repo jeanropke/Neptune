@@ -10,6 +10,7 @@ use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\EntertainmentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Group\DiscussionController;
+use App\Http\Controllers\Group\GroupMemberController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HabboImaging;
 use App\Http\Controllers\HabboMovieController;
@@ -307,6 +308,22 @@ Route::middleware('user')->group(function () {
         Route::post('/store/purchase_backgrounds', [WebStoreController::class, 'purchaseBackgrounds'])->name('myhabbo.item.purchase_background');
         Route::post('/store/items', [WebStoreController::class, 'loadItems'])->name('myhabbo.item.load_items');
         Route::post('/store/background_warning', [WebStoreController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
+
+        Route::prefix('groups')->group(function() {
+            Route::post('/memberlist', [GroupMemberController::class, 'listing'])->name('myhabbo.groups.memberlist');
+            Route::post('/memberlist_avatarinfo', [GroupMemberController::class, 'avatarinfo'])->name('myhabbo.groups.avatarinfo');
+
+            Route::post('/batch/confirm_give_rights', [GroupMemberController::class, 'confirmGiveRights'])->name('myhabbo.groups.batch.confirm_give_rights');
+            Route::post('/batch/give_rights', [GroupMemberController::class, 'giveRights'])->name('myhabbo.groups.batch.give_rights');
+            Route::post('/batch/confirm_revoke_rights', [GroupMemberController::class, 'confirmRevokeRights'])->name('myhabbo.groups.batch.confirm_revoke_rights');
+            Route::post('/batch/revoke_rights', [GroupMemberController::class, 'revokeRights'])->name('myhabbo.groups.batch.revoke_rights');
+            Route::post('/batch/confirm_remove', [GroupMemberController::class, 'confirmRemove'])->name('myhabbo.groups.batch.confirm_remove');
+            Route::post('/batch/remove', [GroupMemberController::class, 'remove'])->name('myhabbo.groups.batch.remove');
+            Route::post('/batch/confirm_accept', [GroupMemberController::class, 'confirmAccept'])->name('myhabbo.groups.batch.confirm_accept');
+            Route::post('/batch/accept', [GroupMemberController::class, 'accept'])->name('myhabbo.groups.batch.accept');
+            Route::post('/batch/confirm_decline', [GroupMemberController::class, 'confirmDecline'])->name('myhabbo.groups.batch.confirm_decline');
+            Route::post('/batch/decline', [GroupMemberController::class, 'decline'])->name('myhabbo.groups.batch.decline');
+        });
 
 
         //Old stuff

@@ -14,4 +14,8 @@ class GroupMember extends Model
 
     public $timestamps = false;
 
+    public function getUser()
+    {
+        return User::find($this->user_id);
+    }
 }

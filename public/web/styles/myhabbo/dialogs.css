@@ -171,15 +171,15 @@ body.dragging img.edit-button {
 member list
 */
 
+
 #group-memberlist {
-        top: 0;
-        left: -1500px;
-        width: 480px;
+	top: 0;
+	left: -1500px;
 }
 
 #group-memberlist-members, #group-memberlist-pending {
-        overflow: auto;
-        height: 200px;
+	overflow: auto;
+	height: 200px;
 }
 
 #group-memberlist-members-search {
@@ -187,73 +187,73 @@ member list
 }
 
 ul.group-memberlist-list {
-        padding-left: 0;
-        margin: 0;
-        list-style-type: none;
+	padding-left: 0;
+	margin: 0;
+	list-style-type: none;
 }
 
 ul.group-memberlist-list li {
-        clear: both;
+	clear: both;
 }
 
 ul.group-memberlist-list li div.group-memberlist-member {
-        width: 259px;
-        height: 20px;
-        display: block;
-        background-image: url(../../images/groups/memberlist-raster.gif);
-        background-repeat: no-repeat;
+	width: 259px;
+	height: 20px;
+	display: block;
+	background-image: url(../../images/groups/memberlist-raster.gif);
+	background-repeat: no-repeat;
 }
 
 ul.group-memberlist-list li div.group-memberlist-member img {
-        vertical-align: middle;
+	vertical-align: middle;
 }
 
 ul.group-memberlist-list li div.group-memberlist-cb {
-        display: block;
-        float: left;
-        width: 30px;
+	display: block;
+	float: left;
+	width: 30px;
 }
 
 ul.group-memberlist-list li div.group-memberlist-open {
-        float: right;
-        width: 16px;
-        height: 16px;
-        background-image: url(../../images/groups/plus.gif);
-        background-repeat: no-repeat;
-        background-position: 1px 1px;
-        visibility: hidden;
+	float: right;
+	width: 16px;
+	height: 16px;
+	background-image: url(../../images/groups/plus.gif);
+	background-repeat: no-repeat;
+	background-position: 1px 1px;
+	visibility: hidden;
 }
 
 ul.group-memberlist-list li.group-memberlist-opened div.group-memberlist-open {
-        background-image: url(../../images/groups/minus.gif);
+	background-image: url(../../images/groups/minus.gif);
 }
 
 ul.group-memberlist-list li:hover div.group-memberlist-open {
-        visibility: visible;
+	visibility: visible;
 }
 
 div.group-memberlist-avatarinfo {
-        font-size: 10px;
-        width: 259px;
-        display: none;
+	font-size: 10px;
+	width: 259px;
+	display: none;
 }
 
 div.group-memberlist-avatarinfo div.progressbar {
-        padding: 7px 0;
+	padding: 7px 0;
 }
 
 div.group-memberlist-avatarinfo-images {
-        float: right;
-        margin-left: 4px;
+	float: right;
+	margin-left: 4px;
 }
 
-div.group-memberlist-avatarinfo-birthday, 
+div.group-memberlist-avatarinfo-birthday,
 div.group-memberlist-avatarinfo-motto {
-        margin: 4px 3px 4px 30px;
+	margin: 4px 3px 4px 30px;
 }
 
 div.group-memberlist-avatarinfo-motto {
-        padding-top: 4px;
-        clear: both;
-        border-top: 1px dashed black;
+	padding-top: 4px;
+	clear: both;
+	border-top: 1px dashed black;
 }

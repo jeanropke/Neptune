@@ -5,13 +5,21 @@ namespace App\Models;
 use App\Models\Group\GroupTopic;
 use App\Models\Home\HomeItem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Model
 {
     protected $table = 'groups_details';
 
     protected $fillable = [
-        'owner_id', 'name', 'description', 'badge', 'group_type', 'forum_type', 'forum_premission', 'alias'
+        'owner_id',
+        'name',
+        'description',
+        'badge',
+        'group_type',
+        'forum_type',
+        'forum_premission',
+        'alias'
     ];
 
     public function memberships()
@@ -47,8 +55,44 @@ class Group extends Model
         return GroupMember::where([['member_rank', '>=', 2]])->get();
     }
 
-    public function getMembers()
+    public function getMembers($query = null)
     {
-        return GroupMember::where([['group_id', '=', $this->id]])->get();
+        $membersFromGroupMembers = DB::table('groups_memberships')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->where([['group_id', $this->id], ['is_pending', '0']])
+            ->select([
+                'users.id AS user_id',
+                'username',
+                'member_rank'
+            ]);
+
+        $owner = DB::table('groups_details')
+            ->join('users', 'owner_id', '=', 'users.id')
+            ->where('groups_details.id', $this->id)
+            ->select([
+                'users.id AS user_id',
+                'username',
+                DB::raw("'3' as member_rank")
+            ])->where('username', 'LIKE', "%$query%");
+
+        $results = $membersFromGroupMembers
+            ->union($owner)
+            ->orderBy('member_rank', 'DESC')
+            ->orderBy('username')
+            ->where('username', 'LIKE', "%$query%")
+            ->get();
+
+        return GroupMember::hydrate($results->toArray());
+    }
+
+    public function getMember($userId)
+    {
+        return $this->getMembers()->where('user_id', $userId)->first();
+    }
+
+    public function getPendingMembers()
+    {
+        $members = GroupMember::where([['group_id', $this->id], ['is_pending', '1']])->join('users', 'user_id', '=', 'users.id')->select(['id', 'username', 'groups_memberships.*'])->get();
+        return $members;
     }
 }
