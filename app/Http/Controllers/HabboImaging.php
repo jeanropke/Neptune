@@ -83,7 +83,12 @@ class HabboImaging extends Controller
     {
         $path = storage_path('habboimaging/badges');
         $badge = substr($request->badge, 0, 24);
-        $cacheName =  "$path/$badge.gif";
+
+
+        $badgeImage = new BadgeImage($badge);
+
+        $code = $badgeImage->getBadgeCode();
+        $cacheName =  "$path/$code.gif";
         $resourceCache = true;
 
         if ($resourceCache && file_exists($cacheName)) {
@@ -94,8 +99,8 @@ class HabboImaging extends Controller
                 ->header('Etag', md5_file($cacheName));
             exit;
         } else {
-            $badge = new BadgeImage($badge);
-            $image = $badge->Generate();
+            $badgeImage = new BadgeImage($badge);
+            $image = $badgeImage->Generate();
 
             if ($resourceCache) {
                 $fp = fopen($cacheName, "w");
@@ -104,10 +109,10 @@ class HabboImaging extends Controller
             }
 
             return response($image, 200)
-                ->header('Process-Time', $badge->processTime)
-                ->header('Error-Message', $badge->error)
-                ->header('Debug-Message', $badge->debug)
-                ->header('Generator-Version', $badge->version)
+                ->header('Process-Time', $badgeImage->processTime)
+                ->header('Error-Message', $badgeImage->error)
+                ->header('Debug-Message', $badgeImage->debug)
+                ->header('Generator-Version', $badgeImage->version)
                 ->header('Content-Type', 'image/gif');
             exit;
         }

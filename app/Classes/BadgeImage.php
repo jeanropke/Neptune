@@ -5,7 +5,7 @@ namespace App\Classes;
 define("PATH_RESOURCE",    resource_path() . "/habbo-imaging/badge/");
 class BadgeImage
 {
-    var $version        = "1.0.0 / March.19 2025";
+    var $version        = "1.1.0 / June.25 2025";
     var $error          = null;
     var $debug          = null;
     var $settings       = null;
@@ -38,19 +38,37 @@ class BadgeImage
                 // split image color X (base does not have a position)
                 $parts =  str_split($part, 2);
 
-                array_push($this->badge, ['type' => 'base', 'value' => $parts[0], 'color' => $parts[1], 'position' => 'X']);
+                array_push($this->badge, (object)['type' => 'base', 'value' => $parts[0], 'color' => $parts[1], 'position' => 'X']);
             } else if (str_starts_with($part, 's')) {
                 // remove first character 's'
                 $part = substr($part, 1);
 
                 // split image color position (base does not have a position)
                 $parts =  str_split($part, 2);
-                array_push($this->badge, ['type' => 'symbol', 'value' => $parts[0], 'color' => $parts[1], 'position' => $parts[2]]);
+                array_push($this->badge, (object)['type' => 'symbol', 'value' => $parts[0], 'color' => $parts[1], 'position' => $parts[2]]);
             }
         }
         $time_end = microtime(true);
         $this->processTime = $time_end - $time_start;
         return true;
+    }
+
+    function getBadgeCode()
+    {
+        $code = null;
+        foreach($this->badge as $item)
+        {
+            switch($item->type) {
+                case 'base':
+                    $code .= "b{$item->value}{$item->color}{$item->position}";
+                    break;
+                case 'symbol':
+                    $code .= "s{$item->value}{$item->color}{$item->position}";
+                    break;
+            }
+        }
+
+        return $code;
     }
 
     function Generate($format = 'gif')
@@ -67,14 +85,14 @@ class BadgeImage
 
         foreach ($this->badge as $part) {
             $drawPartRect = $this->getPartResource(
-                $part['type'],
-                $part['value'],
-                $part['position']
+                $part->type,
+                $part->value,
+                $part->position
             );
 
             if($drawPartRect)
             {
-                $this->setPartColor($drawPartRect['resource'], $part['color']);
+                $this->setPartColor($drawPartRect['resource'], $part->color);
 
                 imageCopy($badgeImage, $drawPartRect['resource'], $drawPartRect['offset']['x'], $drawPartRect['offset']['y'], 0, 0, $drawPartRect['width'], $drawPartRect['height']);
 
