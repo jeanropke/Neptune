@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class GroupMemberController extends Controller
 {
+
+    /**
+     * TODO: add member_rank permissions
+     */
+
     public function listing(Request $request)
     {
         $group = Group::find($request->groupId);
