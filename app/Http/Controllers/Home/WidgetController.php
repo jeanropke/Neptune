@@ -128,6 +128,11 @@ class WidgetController extends Controller
         ]);
     }
 
+    public function groupList(Request $request)
+    {
+        return view('home.widgets.ajax.grouplist')->with('owner', User::find($request->id));
+    }
+
     public function guestbookAdd(Request $request)
     {
         $ownerId    = $request->ownerId;

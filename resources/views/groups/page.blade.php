@@ -23,6 +23,13 @@
                                 Group Home: {{ $owner->name }}
                             </span>
                             @auth
+                                @if ($owner->getMember(user()->id))
+                                    @if (user()->getFavoriteGroup() && user()->getFavoriteGroup()->id == $owner->id)
+                                        <a href="#" class="toolbutton deselect-favorite-group" id="deselect-favorite-button" style="float: right"><span>Remove favorite</span></a>
+                                    @else
+                                        <a href="#" class="toolbutton select-favorite-group" id="select-favorite-button" style="float: right"><span>Make favorite</span></a>
+                                    @endif
+                                @endif
                                 @if ($owner->owner_id == user()->id && !$isEdit)
                                     <div id="group-tools">
                                         <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
@@ -31,13 +38,13 @@
                                         <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
                                     </div>
                                 @else
-                                    @if (!$owner->getMember(user()->id))
-                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
-                                            <span>Join group</span>
-                                        </a>
-                                    @else
+                                    @if ($owner->getMember(user()->id))
                                         <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
                                             <span>Leave group</span>
+                                        </a>
+                                    @else
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Join group</span>
                                         </a>
                                     @endif
                                     <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">

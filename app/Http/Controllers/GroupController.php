@@ -72,6 +72,8 @@ class GroupController extends Controller
 
         if (!$group) return;
 
+        if ($group->owner_id == user()->id) return;
+
         if ($group->addMember(user()->id)) {
             return view('groups.actions.join')->with([
                 'group'     => $group,
@@ -91,6 +93,8 @@ class GroupController extends Controller
 
         if (!$group) return;
 
+        if ($group->owner_id == user()->id) return;
+
         return view('groups.actions.confirm_leave')->with('group', $group);
     }
 
@@ -100,33 +104,75 @@ class GroupController extends Controller
 
         if (!$group) return;
 
+        if ($group->owner_id == user()->id) return;
+
         $group->removeMember();
 
         return view('groups.actions.leave')->with('group', $group);
     }
 
+    public function confirmSelectFavorite(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        return view('groups.actions.confirm_select_favorite')->with('group', $group);
+    }
+
+    public function selectFavorite(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        $group->makeFavorite();
+
+        return 'OK';
+    }
+
+    public function confirmDeselectFavorite(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        return view('groups.actions.confirm_deselect_favorite')->with('group', $group);
+    }
+
+    public function deselectFavorite(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        $group->removeFavorite();
+
+        return 'OK';
+    }
+
     public function showBadgeEditor(Request $request)
     {
-        if(!user()) return;
+        if (!user()) return;
 
         $group = Group::find($request->groupId);
 
         if (!$group) return;
 
-        if($group->owner_id != user()->id) return;
+        if ($group->owner_id != user()->id) return;
 
         return view('groups.actions.show_badge_editor')->with('group', $group);
     }
 
     public function updateGroupBadge(Request $request)
     {
-        if(!user()) return;
+        if (!user()) return;
 
         $group = Group::find($request->groupId);
 
         if (!$group) return;
 
-        if($group->owner_id != user()->id) return;
+        if ($group->owner_id != user()->id) return;
 
         $group->update(['badge' => $request->code]);
 

@@ -85,9 +85,9 @@ class Group extends Model
         return GroupMember::hydrate($results->toArray());
     }
 
-    public function getMember($userId)
+    public function getMember($userId = null)
     {
-        return $this->getMembers()->where('user_id', $userId)->first();
+        return $this->getMembers()->where('user_id', $userId ?? user()->id)->first();
     }
 
     public function addMember($userId = null)
@@ -107,7 +107,15 @@ class Group extends Model
     public function removeMember($userId = null)
     {
         if ($this->getMember($userId ?? user()->id)) {
-            GroupMember::where([['group_id', $this->id], ['user_id', $userId ?? user()->id]])->delete();
+            $user = User::find($userId ?? user()->id);
+            GroupMember::where([['group_id', $this->id], ['user_id', $user->id]])->delete();
+
+            $setting = $user->getCmsSettings();
+            if ($setting) {
+                if ($setting->favorite_group == $this->id) {
+                    $setting->update(['favorite_group' => null]);
+                }
+            }
             return true;
         }
 
@@ -118,5 +126,33 @@ class Group extends Model
     {
         $members = GroupMember::where([['group_id', $this->id], ['is_pending', '1']])->join('users', 'user_id', '=', 'users.id')->select(['id', 'username', 'groups_memberships.*'])->get();
         return $members;
+    }
+
+    public function makeFavorite($userId = null)
+    {
+        $member = $this->getMember($userId ?? user()->id);
+        if ($member) {
+            $setting = $member->getUser()->getCmsSettings();
+            if ($setting) {
+                $setting->update(['favorite_group' => $this->id]);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public function removeFavorite($userId = null)
+    {
+        $member = $this->getMember($userId ?? user()->id);
+        if ($member) {
+            $setting = $member->getUser()->getCmsSettings();
+            if ($setting) {
+                $setting->update(['favorite_group' => null]);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }

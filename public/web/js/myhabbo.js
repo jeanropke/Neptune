@@ -54,6 +54,23 @@ function initView(id) {
     if (groupToolsButtons) {
         new GroupEditTools(id, groupToolsButtons);
     }
+
+    /* custom */
+    var selectFavoriteButton = $("select-favorite-button");
+    if (selectFavoriteButton) {
+        Event.observe(selectFavoriteButton, "click", function (e) {
+            Event.stop(e);
+            openGroupActionDialog("/groups/actions/confirm_select_favorite", "/groups/actions/select_favorite", null, id, null);
+        });
+    }
+
+    var deselectFavoriteButton = $("deselect-favorite-button");
+    if (deselectFavoriteButton) {
+        Event.observe(deselectFavoriteButton, "click", function (e) {
+            Event.stop(e);
+            openGroupActionDialog("/groups/actions/confirm_deselect_favorite", "/groups/actions/deselect_favorite", null, id, null);
+        });
+    }
 }
 
 var startReportingModeObserver = function (e) {
@@ -440,6 +457,12 @@ function openGroupActionDialog(confirmActionName, actionName, accountId, groupId
                 new Ajax.Request(habboReqPath + actionName, {
                     method: "post", parameters: params,
                     onComplete: function (req, json) {
+                        /* custom */
+                        if (req.responseText == "OK") {
+                            document.location.reload()
+                            return;
+                        }
+                        /* end custom */
                         var cont = true;
                         if (onCompleteCallback) { cont = onCompleteCallback(req, json); }
                         if (cont) {
@@ -1116,7 +1139,7 @@ GroupEditTools.prototype = {
         this.buttonEl.on('click', (e) => { this.handleToolsClick(e) });
         this.membersList = new MembersList(this.groupId, 1);
     },
-    handleToolsClick: function(d) {
+    handleToolsClick: function (d) {
         var el = Event.findElement(d, 'a');
         if (el && el.id) {
             if (el.id != "group-tools-style") {

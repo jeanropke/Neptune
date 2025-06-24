@@ -270,6 +270,10 @@ Route::middleware('user')->group(function () {
         Route::post('/actions/leave', [GroupController::class, 'leave'])->name('groups.actions.confirm_leave');
         Route::post('/actions/show_badge_editor', [GroupController::class, 'showBadgeEditor'])->name('groups.actions.show_badge_editor');
         Route::post('/actions/update_group_badge', [GroupController::class, 'updateGroupBadge'])->name('groups.actions.update_group_badge');
+        Route::post('/actions/confirm_select_favorite', [GroupController::class, 'confirmSelectFavorite'])->name('groups.actions.confirm_select_favorite');
+        Route::post('/actions/select_favorite', [GroupController::class, 'selectFavorite'])->name('groups.actions.select_favorite');
+        Route::post('/actions/confirm_deselect_favorite', [GroupController::class, 'confirmDeselectFavorite'])->name('groups.actions.confirm_deselect_favorite');
+        Route::post('/actions/deselect_favorite', [GroupController::class, 'deselectFavorite'])->name('groups.actions.deselect_favorite');
 
         Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
     });
@@ -286,6 +290,7 @@ Route::middleware('user')->group(function () {
         Route::post('/guestbook/remove', [WidgetController::class, 'guestbookRemove'])->name('myhabbo.guestbook.remove');
         Route::post('/guestbook/list', [WidgetController::class, 'guestbookList'])->name('myhabbo.guestbook.list');
         Route::post('/groups/groupinfo', [WidgetController::class, 'groupInfo'])->name('myhabbo.groups.groupinfo');
+        Route::post('/groups/grouplist', [WidgetController::class, 'groupList'])->name('myhabbo.groups.grouplist');
         Route::post('/rating/rate', [WidgetController::class, 'ratingsRate'])->name('myhabbo.rating.rate');
         Route::post('/widget/delete', [WidgetController::class, 'widgetDelete'])->name('myhabbo.widget.delete');
         Route::post('/widget/add', [WidgetController::class, 'widgetAdd'])->name('myhabbo.widget.add');
