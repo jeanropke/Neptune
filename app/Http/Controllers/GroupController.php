@@ -63,7 +63,7 @@ class GroupController extends Controller
 
         $url = $group->getUrl();
 
-        return redirect()->route('auth.login', ['page' => "groups/$url?join"]);
+        return redirect()->route('auth.login', ['page' => "groups/$url?join=true"]);
     }
 
     public function join(Request $request)
