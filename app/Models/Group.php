@@ -90,6 +90,30 @@ class Group extends Model
         return $this->getMembers()->where('user_id', $userId)->first();
     }
 
+    public function addMember($userId = null)
+    {
+        if (!$this->getMember($userId ?? user()->id)) {
+            GroupMember::create([
+                'group_id'      => $this->id,
+                'user_id'       => $userId ?? user()->id,
+                'member_rank'   => '1'
+            ]);
+            return true;
+        }
+
+        return false;
+    }
+
+    public function removeMember($userId = null)
+    {
+        if ($this->getMember($userId ?? user()->id)) {
+            GroupMember::where([['group_id', $this->id], ['user_id', $userId ?? user()->id]])->delete();
+            return true;
+        }
+
+        return false;
+    }
+
     public function getPendingMembers()
     {
         $members = GroupMember::where([['group_id', $this->id], ['is_pending', '1']])->join('users', 'user_id', '=', 'users.id')->select(['id', 'username', 'groups_memberships.*'])->get();

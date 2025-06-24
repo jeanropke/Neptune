@@ -257,3 +257,8 @@ div.group-memberlist-avatarinfo-motto {
 	clear: both;
 	border-top: 1px dashed black;
 }
+
+#join-group-dialog {
+    width: 300px;
+    position: absolute!important;
+}

@@ -226,14 +226,6 @@ Route::middleware('user')->group(function () {
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
     });
 
-    //GroupController
-    Route::prefix('groups')->group(function () {
-        Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
-        Route::get('/{id}/id', [GroupController::class, 'groupId'])->name('groups.page.id');
-        Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
-        Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
-    });
-
     Route::prefix('discussions')->group(function() {
         Route::prefix('actions')->group(function() {
             Route::post('/newtopic', [DiscussionController::class, 'newTopic'])->name('discussions.actions.newtopic');
@@ -265,6 +257,20 @@ Route::middleware('user')->group(function () {
     Route::get('/home', [HomeController::class, 'homeTutorial'])->name('home.user.tutorial');
     Route::get('/home/{username}', [HomeController::class, 'homeUsername'])->name('home.user.username');
     Route::get('/home/{id}/id', [HomeController::class, 'homeId'])->name('home.user.id');
+
+    //GroupController
+    Route::prefix('groups')->group(function () {
+        Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
+        Route::get('/{id}/id', [GroupController::class, 'groupId'])->name('groups.page.id');
+        Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
+
+        Route::get('/actions/joinAfterLogin', [GroupController::class, 'joinAfterLogin'])->name('groups.actions.join_after_login');
+        Route::post('/actions/join', [GroupController::class, 'join'])->name('groups.actions.join');
+        Route::post('/actions/confirm_leave', [GroupController::class, 'confirmLeave'])->name('groups.actions.confirm_leave');
+        Route::post('/actions/leave', [GroupController::class, 'leave'])->name('groups.actions.confirm_leave');
+
+        Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
+    });
 
     Route::prefix('myhabbo')->group(function () {
         Route::post('/avatarlist/avatarinfo', [WidgetController::class, 'avatarInfo'])->name('myhabbo.avatarlist.avatarinfo');

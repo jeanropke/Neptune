@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalogue\CatalogueItem;
 use App\Models\Group;
+use App\Models\GroupMember;
 use App\Models\Home\HomeItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,7 @@ class GroupController extends Controller
         if (!$group)
             return abort(404);
 
-        if($group->getItems()->count() == 0)
-        {
+        if ($group->getItems()->count() == 0) {
             //guestbookwidget - gw
             HomeItem::insert(['owner_id' => $group->owner_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '12',   'skin' => 'defaultskin']);
             //groupinfowidget
@@ -40,8 +40,7 @@ class GroupController extends Controller
         if (!$group)
             return abort(404);
 
-        if($group->getItems()->count() == 0)
-        {
+        if ($group->getItems()->count() == 0) {
             //guestbookwidget - gw
             HomeItem::insert(['owner_id' => $group->owner_id, 'group_id' => $group->id, 'x' => '40',     'y' => '34',    'z' => '6', 'item_id' => '12',   'skin' => 'defaultskin']);
             //groupinfowidget
@@ -54,6 +53,56 @@ class GroupController extends Controller
             'isEdit'    => false,
             'owner'     => Group::find($id)
         ]);
+    }
+
+    public function joinAfterLogin(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return redirect()->route('auth.login');
+
+        $url = $group->getUrl();
+
+        return redirect()->route('auth.login', ['page' => "groups/$url?join"]);
+    }
+
+    public function join(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        if ($group->addMember(user()->id)) {
+            return view('groups.actions.join')->with([
+                'group'     => $group,
+                'message'   => 'You have now joined this group'
+            ]);
+        }
+
+        return view('groups.actions.join')->with([
+            'group'     => $group,
+            'message'   => 'You are already a member of this group'
+        ]);
+    }
+
+    public function confirmLeave(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        return view('groups.actions.confirm_leave')->with('group', $group);
+    }
+
+    public function leave(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        $group->removeMember();
+
+        return view('groups.actions.leave')->with('group', $group);
     }
 
     public function discussions($id)

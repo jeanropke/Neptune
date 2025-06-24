@@ -30,6 +30,15 @@
                                         <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
                                     </div>
                                 @else
+                                    @if (!$owner->getMember(user()->id))
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Join group</span>
+                                        </a>
+                                    @else
+                                        <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
+                                            <span>Leave group</span>
+                                        </a>
+                                    @endif
                                     <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
                                         <span>Create your own Group</span>
                                     </a>
@@ -259,47 +268,12 @@
             <div></div>
         </div>
     </div>
-    {{--
-    <div class="dialog topdialog" id="group-memberlist">
-        <div class="dialog-grey-top dialog-grey-handle">
-            <div>
-                <h3><span>Members</span></h3>
-            </div>
-            <a href="#" class="dialog-grey-exit" id="group-memberlist-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
-            </a>
-        </div>
 
-        <div class="dialog-grey-content">
-            <div class="box-tabs-container">
-                <ul class="box-tabs">
-                    <li class="selected" id="group-memberlist-link-members"><a href="#">Members</a><span class="tab-spacer"></span></li><li id="group-memberlist-link-pending"><a href="#">Pending members</a><span class="tab-spacer"></span></li>
-                </ul>
-            </div>
-            <div class="topdialog-body" id="group-memberlist-body">
-                <div id="group-memberlist-members-search" class="clearfix">
-                    <a id="group-memberlist-members-search-button" href="#" class="new-button"><b>Search</b><i></i></a>
-                    <input type="text" id="group-memberlist-members-search-string">
-                </div>
-                <div id="group-memberlist-members" style="clear: both; display: none;"></div>
+    <div id="join-group-dialog" class="dialog-grey"></div>
 
-                <div id="group-memberlist-members-buttons" class="clearfix" style="display: none;">
-                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-give-rights"><b>Give rights</b><i></i></a>
-                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-revoke-rights"><b>Revoke rights</b><i></i></a> <a
-                        href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-remove"><b>Remove</b><i></i></a>
-                    <a href="#" class="new-button group-memberlist-button" id="group-memberlist-button-close"><b>Close</b><i></i></a>
-                </div>
-                <div id="group-memberlist-pending" style="clear: both; display: none;"></div>
-                <div id="group-memberlist-pending-buttons" class="clearfix" style="display: none;">
-                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-accept"><b>Accept</b><i></i></a>
-                    <a href="#" class="new-button group-memberlist-button-disabled" id="group-memberlist-button-decline"><b>Reject</b><i></i></a>
-                    <a href="#" class="new-button group-memberlist-button" id="group-memberlist-button-close2"><b>Close</b><i></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="dialog-grey-bottom">
-            <div></div>
-        </div>
-    </div>
---}}
+    @if (request()->join && !$owner->getMember(user()->id))
+        <script language="JavaScript" type="text/javascript">
+            showGeneralAjaxDialog("join-group-dialog", "/groups/actions/join", "groupId=" + encodeURIComponent({{ $owner->id }}));
+        </script>
+    @endif
 @endsection

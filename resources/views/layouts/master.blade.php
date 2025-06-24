@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ url('/') }}/web/images/favicon.ico" type="image/x-icon">
 
     <script language="JavaScript" type="text/javascript">
-        var habboReqPath = "";
+        var habboReqPath = "{{ url('/') }}";
         var habboStaticFilePath = "/web/";
         var habboImagerUrl = "/habbo-imaging/";
         document.habboLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
