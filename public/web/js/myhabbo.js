@@ -1125,9 +1125,9 @@ GroupEditTools.prototype = {
                     case "group-tools-settings":
                         openGroupSettings(this.groupId);
                         break;
-                    case "group-tools-badge":
-                        openGroupBadgeEditor(this.groupId);
-                        break;
+                    //case "group-tools-badge":
+                    //    openGroupBadgeEditor(this.groupId);
+                    //    break;
                     case "group-tools-members":
                         this.membersList.open();
                         break

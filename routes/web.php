@@ -268,6 +268,8 @@ Route::middleware('user')->group(function () {
         Route::post('/actions/join', [GroupController::class, 'join'])->name('groups.actions.join');
         Route::post('/actions/confirm_leave', [GroupController::class, 'confirmLeave'])->name('groups.actions.confirm_leave');
         Route::post('/actions/leave', [GroupController::class, 'leave'])->name('groups.actions.confirm_leave');
+        Route::post('/actions/show_badge_editor', [GroupController::class, 'showBadgeEditor'])->name('groups.actions.show_badge_editor');
+        Route::post('/actions/update_group_badge', [GroupController::class, 'updateGroupBadge'])->name('groups.actions.update_group_badge');
 
         Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
     });

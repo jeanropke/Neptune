@@ -105,6 +105,34 @@ class GroupController extends Controller
         return view('groups.actions.leave')->with('group', $group);
     }
 
+    public function showBadgeEditor(Request $request)
+    {
+        if(!user()) return;
+
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        if($group->owner_id != user()->id) return;
+
+        return view('groups.actions.show_badge_editor')->with('group', $group);
+    }
+
+    public function updateGroupBadge(Request $request)
+    {
+        if(!user()) return;
+
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        if($group->owner_id != user()->id) return;
+
+        $group->update(['badge' => $request->code]);
+
+        return redirect()->back();
+    }
+
     public function discussions($id)
     {
         return view('groups.discussions')->with([

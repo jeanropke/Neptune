@@ -6,6 +6,7 @@
     <script language="JavaScript" type="text/javascript">
         Event.onDOMReady(function() {
             initView({{ $owner->id }});
+            attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
         });
     </script>
     <div id="mypage-wrapper">
@@ -25,7 +26,7 @@
                                 @if ($owner->owner_id == user()->id && !$isEdit)
                                     <div id="group-tools">
                                         <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
-                                        <a href="#" class="toolbutton group-badge"><span>Badge</span></a>
+                                        <a href="#" class="toolbutton group-badge" id="group-tools-badge"><span>Badge</span></a>
                                         <a href="#" class="toolbutton group-settings"><span>Settings</span></a>
                                         <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
                                     </div>
