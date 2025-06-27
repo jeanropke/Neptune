@@ -32,8 +32,9 @@
                     </div>
                     <div>
                         @if ($owner->getFavoriteGroup())
-                            <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="{{ $owner->getFavoriteGroup()->name }}"><img
-                                    src="{{ cms_config('site.groupbadge.url') }}{{ $owner->getFavoriteGroup()->badge }}.png"></a>
+                            <a href="{{ url('/') }}/groups/{{ $owner->getFavoriteGroup()->id }}/id" title="{{ $owner->getFavoriteGroup()->name }}">
+                                <img src="{{ cms_config('site.groupbadge.url') }}{{ $owner->getFavoriteGroup()->badge }}.png">
+                            </a>
                         @endif
                         @if ($owner->badge)
                             <img src="{{ cms_config('site.badges.url') }}/{{ $owner->badge }}.gif">

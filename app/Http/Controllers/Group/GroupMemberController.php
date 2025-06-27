@@ -27,7 +27,7 @@ class GroupMemberController extends Controller
         if (!$group)
             return;
 
-        $members = $group->getMembers($request->searchString);
+        $members = $group->filterByUsername($request->searchString);
         $page = $request->pageNumber;
 
         $pending = $group->getPendingMembers()->count();
@@ -74,8 +74,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        $targetIds = explode(',', $request->targetIds);
-        $targets = User::find($targetIds)->pluck('username')->implode(', ');
+        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds))->values()->pluck('username')->implode(', ');
 
         return view('groups.member.confirm_give_rights')->with('targets', $targets);
     }
@@ -85,9 +84,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        GroupMember::where('group_id', $group->id)
-            ->whereIn('user_id', explode(',', $request->targetIds))
-            ->update(['member_rank' => '2']);
+        $group->members()->whereIn('user_id', explode(',', $request->targetIds))->update(['member_rank' => '2']);
 
         return "OK";
     }
@@ -97,7 +94,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        $targets = $group->getMembers()->whereIn('user_id', explode(',', $request->targetIds))->pluck('username')->implode(', ');
+        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds))->values()->pluck('username')->implode(', ');
 
         return view('groups.member.confirm_remove_rights')->with('targets', $targets);
     }
@@ -107,9 +104,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        GroupMember::where('group_id', $group->id)
-            ->whereIn('user_id', explode(',', $request->targetIds))
-            ->update(['member_rank' => '1']);
+        $group->members()->whereIn('user_id', explode(',', $request->targetIds))->update(['member_rank' => '1']);
 
         return "OK";
     }
@@ -119,7 +114,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        $targets = $group->getMembers()->whereIn('user_id', explode(',', $request->targetIds))->pluck('username')->implode(', ');
+        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds))->values()->pluck('username')->implode(', ');
 
         return view('groups.member.confirm_remove')->with('targets', $targets);
     }
@@ -129,9 +124,7 @@ class GroupMemberController extends Controller
         $group = Group::find($request->groupId);
         if (!$group) return;
 
-        GroupMember::where('group_id', $group->id)
-            ->whereIn('user_id', explode(',', $request->targetIds))
-            ->delete();
+        $group->members()->whereIn('user_id', explode(',', $request->targetIds))->delete();
 
         CmsUserSettings::whereIn('user_id', explode(',', $request->targetIds))
             ->where('favorite_group', $group->id)

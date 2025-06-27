@@ -5,6 +5,7 @@
             <li id="group-memberlist-{{ $member->user_id }}">
                 <div class="group-memberlist-member">
                     <div class="group-memberlist-cb">
+
                         @if ($myself->member_rank <= $member->member_rank && $myself->member_rank >= 2)
                             <input type="checkbox" disabled="disabled" style="margin: 0; padding: 0; vertical-align: middle" />
                         @else
@@ -15,7 +16,7 @@
                             @endif
                         @endif
                     </div>
-                    <span>{{ $member->username }}</span>
+                    <span>{{ $member->user->username }}</span>
                     <div class="group-memberlist-open"></div>
                     <div style="float: right; height: 16px; margin-top: 1px">
                         @if ($member->member_rank == 3)
@@ -24,7 +25,7 @@
                         @if ($member->member_rank == 2)
                             <img src="{{ url('/') }}/web/images/groups/administrator_icon.gif" width="15" height="15" alt="Administrator" title="Administrator" />
                         @endif
-                        @if (!isset($pending) && ($member->getUser()->getFavoriteGroup() && $member->getUser()->getFavoriteGroup()->id == $group->id))
+                        @if (!isset($pending) && ($member->user->favorite_group == $group->id))
                             <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" alt="">
                         @endif
                     </div>

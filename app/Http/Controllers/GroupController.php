@@ -179,6 +179,19 @@ class GroupController extends Controller
         return redirect()->back();
     }
 
+    public function groupSettings(Request $request)
+    {
+        if (!user()) return;
+
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        if ($group->owner_id != user()->id) return;
+
+        return view('groups.actions.group_settings')->with('group', $group);
+    }
+
     public function discussions($id)
     {
         return view('groups.discussions')->with([
@@ -246,6 +259,12 @@ class GroupController extends Controller
             'owner_id'      => user()->id,
             'name'          => $request->name,
             'description'   => $request->description ?? ''
+        ]);
+
+        GroupMember::create([
+            'group_id'      => $group->id,
+            'user_id'       => user()->id,
+            'member_rank'   => 3
         ]);
 
         return view('habblet.ajax.grouppurchase.purchase_ajax')->with([

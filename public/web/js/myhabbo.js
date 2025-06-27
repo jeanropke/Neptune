@@ -644,6 +644,7 @@ function attachGroupSettingsObserver(id) {
         });
         showOverlay();
         moveDialogToCenter(dialog);
+        makeDialogDraggable(dialog);
     }, false);
 }
 

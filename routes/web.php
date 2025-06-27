@@ -274,6 +274,7 @@ Route::middleware('user')->group(function () {
         Route::post('/actions/select_favorite', [GroupController::class, 'selectFavorite'])->name('groups.actions.select_favorite');
         Route::post('/actions/confirm_deselect_favorite', [GroupController::class, 'confirmDeselectFavorite'])->name('groups.actions.confirm_deselect_favorite');
         Route::post('/actions/deselect_favorite', [GroupController::class, 'deselectFavorite'])->name('groups.actions.deselect_favorite');
+        Route::post('/actions/group_settings', [GroupController::class, 'groupSettings'])->name('groups.actions.group_settings');
 
         Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
     });

@@ -241,22 +241,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get user favorite group.
-     */
-    public function getFavoriteGroup()
-    {
-        if (!$this->getCmsSettings() || !$this->getCmsSettings()->favorite_group)
-            return;
-
-        $group = Group::find($this->getCmsSettings()->favorite_group);
-
-        if (!$group)
-            return;
-
-        return $group;
-    }
-
-    /**
      * Get user friends
      *
      * @return mixed

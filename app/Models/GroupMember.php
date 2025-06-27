@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GroupMember extends Model
 {
@@ -14,8 +15,7 @@ class GroupMember extends Model
 
     public $timestamps = false;
 
-    public function getUser()
-    {
-        return User::find($this->user_id);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }

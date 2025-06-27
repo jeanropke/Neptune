@@ -7,6 +7,7 @@
         Event.onDOMReady(function() {
             initView({{ $owner->id }});
             attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
+            attachGroupSettingsObserver({{ $owner->id }}, );
         });
     </script>
     <div id="mypage-wrapper">
@@ -24,7 +25,7 @@
                             </span>
                             @auth
                                 @if ($owner->getMember(user()->id))
-                                    @if (user()->getFavoriteGroup() && user()->getFavoriteGroup()->id == $owner->id)
+                                    @if (user()->favourite_group == $owner->id)
                                         <a href="#" class="toolbutton deselect-favorite-group" id="deselect-favorite-button" style="float: right"><span>Remove favorite</span></a>
                                     @else
                                         <a href="#" class="toolbutton select-favorite-group" id="select-favorite-button" style="float: right"><span>Make favorite</span></a>
@@ -34,7 +35,7 @@
                                     <div id="group-tools">
                                         <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                                         <a href="#" class="toolbutton group-badge" id="group-tools-badge"><span>Badge</span></a>
-                                        <a href="#" class="toolbutton group-settings"><span>Settings</span></a>
+                                        <a href="#" class="toolbutton group-settings" id="group-settings-button"><span>Settings</span></a>
                                         <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
                                     </div>
                                 @else
@@ -277,11 +278,33 @@
         </div>
     </div>
 
+    <div id="dialog-group-settings" class="dialog-grey">
+        <div class="dialog-grey-top dialog-grey-handle">
+            <div>
+                <h3><span>Group settings</span></h3>
+            </div>
+            <a href="#" class="dialog-grey-exit" id="dialog-group-settings-exit">
+                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+            </a>
+        </div>
+        <div class="dialog-grey-content">
+            <div id="dialog-group-settings-body" class="dialog-grey-body">
+            </div>
+        </div>
+        <div class="dialog-grey-bottom">
+            <div></div>
+        </div>
+    </div>
+
     <div id="join-group-dialog" class="dialog-grey"></div>
 
-    @if (request()->join && !$owner->getMember(user()->id))
-        <script language="JavaScript" type="text/javascript">
-            showGeneralAjaxDialog("join-group-dialog", "/groups/actions/join", "groupId=" + encodeURIComponent({{ $owner->id }}));
-        </script>
-    @endif
+    @auth
+        @if (request()->join && !$owner->getMember(user()->id))
+            <script language="JavaScript" type="text/javascript">
+                showGeneralAjaxDialog("join-group-dialog", "/groups/actions/join", "groupId=" + encodeURIComponent({{ $owner->id }}));
+            </script>
+        @endif
+    @endauth
+
+    {{ $owner->members }}
 @endsection
