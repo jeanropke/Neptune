@@ -60,7 +60,14 @@
                             <div></div>
                         </div>
                         <div class="body">
-                            <p class="search-result-count">{{ $result->firstItem() ?? 0 }} - {{ $result->lastItem() ?? $result->count() }} / {{ $result->total() }}</p>
+                            <p class="search-result-count">
+                                @if ($result->count() > 0)
+                                    {{ $result->firstItem() ?? 0 }} - {{ $result->lastItem() ?? $result->count() }} / {{ $result->total() }}
+                                @endif
+                            </p>
+                            @if ($result->count() == 0)
+                                <p>No results found. </p>
+                            @endif
                             <form name="tag_search_form" action="{{ url('/') }}/tag/search" class="search-box">
                                 <table class="search-box" border="0">
                                     <tbody>
@@ -80,7 +87,7 @@
                             <p class="search-result-divider"></p>
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="search-result">
                                 <tbody>
-                                    @forelse ($result as $entry)
+                                    @foreach ($result as $entry)
                                         <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="image" style="width:39px;">
                                                 @if ($entry->holder_type == 'user')
@@ -134,12 +141,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @empty
-
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
 
+                            @if ($result->count() > 0)
                             @php
                                 $currentPage = $result->currentPage();
                                 $lastPage = $result->lastPage();
@@ -186,6 +192,7 @@
 
 
                             </p>
+                            @endif
                             <div class="clear"></div>
                         </div>
                         <div class="bottom">
