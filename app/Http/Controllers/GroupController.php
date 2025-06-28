@@ -13,7 +13,7 @@ class GroupController extends Controller
 {
     public function groupUrl($url)
     {
-        $group = Group::where('url', $url)->first();
+        $group = Group::where('alias', $url)->first();
 
         if (!$group)
             return abort(404);
