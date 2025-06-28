@@ -19,7 +19,8 @@
                 <div class="profile-info">
                     <div class="name" style="float: left">
                         <span class="name-text">{{ $owner->username }}</span>
-                        <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-n" id="name-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
+                        <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-n"
+                            id="name-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     </div>
                     <br class="clear">
 
@@ -47,7 +48,8 @@
                 </div>
                 <div class="profile-motto">
                     {{ $owner->motto }}
-                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-m" id="motto-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
+                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-m"
+                        id="motto-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     <div class="clear"></div>
                 </div>
                 <div class="profile-friend-request">
@@ -56,16 +58,30 @@
                 <br clear="all" style="display: block; height: 1px">
                 <div id="profile-tags-panel">
                     <div id="profile-tag-list">
-                        {{-- <div id="profile-tags-container">
-                            <span class="tag-search-rowholder">
-                                <a href="https://web.archive.org/web/20110919070326/http://www.habbo.com/tag/randomness"
-                                    class="tag">randomness</a>
-                                <div class="tag-id" style="display:none">62</div><img border="0" class="tag-none-link"
-                                    src="https://web.archive.org/web/20110919070326im_/http://images.habbo.com/habboweb/63_1dc60c6d6ea6e089c6893ab4e0541ee0/536/web-gallery/images/buttons/tags/tag_button_dim.gif">
-                            </span>
-                        </div> --}}
-
+                        @include('home.widgets.ajax.profiletags')
+                        <div id="profile-tags-status-field" style="display: none">
+                            <div style="display: block;">
+                                <div class="content-red">
+                                    <div class="content-red-body">
+                                        <span id="tag-limit-message" style="display: none;">
+                                            <img src="{{ url('/') }}/web/images/register/icon_error.gif" > The limit is 8 tags!
+                                        </span>
+                                        <span id="tag-invalid-message" style="display: none;">
+                                            <img src="{{ url('/') }}/web/images/register/icon_error.gif"> Invalid tag.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="content-red-bottom">
+                                    <div class="content-red-bottom-body"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                        <div class="profile-add-tag">
+                            <input type="text" id="profile-add-tag-input" maxlength="30"><br clear="all">
+                            <a href="#" class="toolbutton" style="float:left;margin:5px 0 0 0;" id="profile-add-tag"><span>Add tag</span></a>
+                        </div>
                 </div>
                 <script type="text/javascript">
                     Event.onDOMReady(function() {

@@ -1343,10 +1343,12 @@ div.webstore-widget-description {
     height: 331px;
     display: none;
 }
+
 #webstore-content a span #webstore-inventory-new.new {
     padding: 0px 14px 0 4px;
     background: url(../../images/myhabbo/store/animated_arrow.gif) no-repeat 100% 0% !important;
 }
+
 #webstore-content a span #webstore-inventory-new {
     font-weight: bold;
     text-decoration: none;
@@ -1354,6 +1356,7 @@ div.webstore-widget-description {
     float: right;
     display: none;
 }
+
 #webstore-tabs li a span {
     background: none;
     display: inline;
@@ -1719,6 +1722,147 @@ div.webstore-item-count div {
     height: 17px;
     padding-top: 2px;
     background: url(../../images/myhabbo/dialogs/item_count_label.gif) no-repeat;
+}
+
+div.es_dynamic_animator_sticker_pre div.preview-image {
+    height: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+a#group-delete-button {
+    margin: 10px 0 0 40px;
+    float: left;
+}
+
+a#group-url-button {
+    margin-top: -26px;
+    margin-left: 40px;
+    float: right;
+}
+
+/* support for larger ... */
+div#member-list-paging,
+div#avatar-list-paging {
+    text-align: center;
+}
+
+a.avatar-list-paging-link {}
+
+input#group-memberlist-members-search-string {
+    float: left;
+}
+
+div#group-memberlist-members {
+    overflow: hidden;
+}
+
+div#group-memberlist-members-list {
+    height: 175px;
+    width: 100%;
+    overflow: auto;
+}
+
+div#member-list-pagenumbers {
+    text-align: center;
+}
+
+div#profile-tags-panel,
+div#profile-tags-list {
+    position: relative;
+}
+
+a.tag-search-link {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+img.tag-delete-link {
+    position: relative;
+    top: 1px;
+    cursor: hand;
+    margin: 0px 5px 0px 0px;
+}
+
+input#profile-add-tag-input {
+    width: 210px;
+    float: left;
+}
+
+div.profile-add-tag {
+    margin-top: 5px;
+    display: block;
+}
+
+div#profile-tag-list {}
+
+div#profile-tags-container {
+    margin: 5px 0 5px 0;
+    border: 1px solid #fff;
+    background-image: url(../../images/myhabbo/widgets/raster_selected.gif);
+    padding: 2px;
+}
+
+div#profile-tags-status-field {
+    margin-top: 5px;
+    display: none;
+}
+
+span#tag-limit-message,
+span#tag-invalid-message {
+    display: none;
+    font-weight: bold;
+}
+
+div#linktool {
+    margin-bottom: 12px;
+}
+
+div#linktool-scope {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+div#linktool-inline div#linktool-scope {
+    float: left;
+}
+
+div#linktool-inline {
+    margin-top: 3px;
+}
+
+div#linktool-scope label {
+    font-weight: normal;
+    margin: auto;
+}
+
+div#linktool-scope input {
+    vertical-align: middle;
+}
+
+input#linktool-query {
+    float: left;
+    width: 68%;
+}
+
+div#linktool-inline input#linktool-query {
+    float: none;
+    width: auto;
+}
+
+a#linktool-find {
+    float: right;
+}
+
+div#linktool-inline a#linktool-find {
+    margin-top: 3px;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+div#linktool-results {
+    display: none;
+    margin-top: 3px;
 }
 
 /*

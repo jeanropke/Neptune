@@ -9,6 +9,7 @@ use App\Models\Permission;
 use App\Models\Room;
 use App\Models\UserBadge;
 use App\Models\UserFriend;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -18,9 +19,29 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username', 'email', 'password', 'motto', 'console_motto', 'credits', 'last_online', 'sso_ticket', 'created_at', 'birthday',
-        'sex', 'figure', 'rank', 'allow_stalking', 'allow_friend_requests', 'badge', 'badge_active', 'battleball_points', 'snowstorm_points',
-        'club_subscribed', 'club_expiration', 'club_gift_due', 'favourite_group'
+        'username',
+        'email',
+        'password',
+        'motto',
+        'console_motto',
+        'credits',
+        'last_online',
+        'sso_ticket',
+        'created_at',
+        'birthday',
+        'sex',
+        'figure',
+        'rank',
+        'allow_stalking',
+        'allow_friend_requests',
+        'badge',
+        'badge_active',
+        'battleball_points',
+        'snowstorm_points',
+        'club_subscribed',
+        'club_expiration',
+        'club_gift_due',
+        'favourite_group'
     ];
 
     protected $hidden = [
@@ -121,7 +142,7 @@ class User extends Authenticatable
         $now = time();
         $message = str_replace('|', '', $message);
         $wraps = explode(',', cms_config('hotel.gift.wraps'));
-        $wrap = $wraps[rand(0, count($wraps)-1)];
+        $wrap = $wraps[rand(0, count($wraps) - 1)];
         Furni::create([
             'user_id'       => $this->id,
             'definition_id' => $wrap,
@@ -302,5 +323,29 @@ class User extends Authenticatable
     public function getTraxSongs()
     {
         return HomeSong::where('user_id', $this->id)->get();
+    }
+
+    public function addTag($tag)
+    {
+        $exists = $this->tags()->where('tag', $tag)->first();
+        if ($exists) return 'invalidtag';
+
+        Tag::insert([
+            'tag'           => $tag,
+            'holder_id'     => $this->id,
+            'holder_type'   => 'user'
+        ]);
+
+        return 'valid';
+    }
+
+    public function removeTag($tag)
+    {
+        $this->tags()->where('tag', $tag)->delete();
+    }
+
+    public function tags() : HasMany
+    {
+        return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'user');
     }
 }

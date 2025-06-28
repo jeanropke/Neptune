@@ -283,6 +283,9 @@ Route::middleware('user')->group(function () {
         Route::post('/avatarlist/avatarinfo', [WidgetController::class, 'avatarInfo'])->name('myhabbo.avatarlist.avatarinfo');
         Route::post('/avatarlist/friendsearchpaging', [WidgetController::class, 'friendsPaging'])->name('myhabbo.avatarlist.friend_search');
         Route::post('/badgelist/badgepaging', [WidgetController::class, 'badgePaging'])->name('myhabbo.badgelist.badgepaging');
+        Route::post('/tag/add', [WidgetController::class, 'tagAdd'])->name('myhabbo.tag.add');
+        Route::post('/tag/list', [WidgetController::class, 'tagList'])->name('myhabbo.tag.list');
+        Route::post('/tag/remove', [WidgetController::class, 'tagRemove'])->name('myhabbo.tag.remove');
         Route::post('/friends/add', [WidgetController::class, 'friendsAdd'])->name('myhabbo.friends.add');
         Route::post('/friends/request', [WidgetController::class, 'friendsRequest'])->name('myhabbo.friends.request');
         Route::post('/friends_ajax', [WidgetController::class, 'friendsAjax'])->name('myhabbo.friends.ajax');
