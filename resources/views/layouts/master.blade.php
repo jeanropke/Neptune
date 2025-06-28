@@ -225,6 +225,7 @@
                                         @php
                                             $page = ltrim(request()->getRequestUri(), '/');
                                             if (strlen($page) > 0) {
+                                                $page = urlencode($page);
                                                 $page = "?page=/$page";
                                             }
                                         @endphp
