@@ -8,6 +8,7 @@
     <link href="{{ url('/') }}/web/styles/style.css" type="text/css" rel="stylesheet" />
     <link href="{{ url('/') }}/web/styles/ads.css" type="text/css" rel="stylesheet" />
     <link href="{{ url('/') }}/web/styles/boxes.css" type="text/css" rel="stylesheet" />
+    <link href="{{ url('/') }}/web/styles/voltericons.css" type="text/css" rel="stylesheet" />
 
     <link rel="icon" href="{{ url('/') }}/web/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="{{ url('/') }}/web/images/favicon.ico" type="image/x-icon">

@@ -27,7 +27,9 @@
                                                     <div class="v3box-body">
                                                         <img src="{{ url('/') }}/habbo-imaging/photo/{{ $photo->photo_id }}">
                                                         <i>{{ $photo->getData()->date }}</i>
-                                                        <p>{{ $photo->getData()->text }}</p>
+                                                        <p>
+                                                            <span class="volter-icon alt_170"></span> {{ $photo->getData()->text }} <span class="volter-icon skull"></span>
+                                                        </p>
                                                         <div class="clear"></div>
                                                     </div>
                                                 </div>

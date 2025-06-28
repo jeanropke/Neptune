@@ -1,0 +1,19 @@
+.volter-icon {
+    background: url(../../web/images/voltericons.png) no-repeat;
+    /*display: inline-block;*/
+    display: none;
+    margin: 0px 0px -2px 0;
+
+}
+
+.volter-icon.alt_170 {
+    background-position: -140px -12px;
+    width: 20px;
+    height: 12px;
+}
+
+.volter-icon.skull {
+    background-position: -26px -24px;
+    width: 9px;
+    height: 10px;
+}
