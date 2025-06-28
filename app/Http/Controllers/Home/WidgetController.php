@@ -89,27 +89,6 @@ class WidgetController extends Controller
         ]);
     }
 
-    public function tagAdd(Request $request)
-    {
-        if (!user()) return;
-
-        return user()->addTag($request->tagName);
-    }
-
-    public function tagRemove(Request $request)
-    {
-        if (!user()) return;
-
-        user()->removeTag($request->tagName);
-
-        return view('home.widgets.ajax.profiletags')->with('owner', User::find($request->accountId));
-    }
-
-    public function tagList(Request $request)
-    {
-        return view('home.widgets.ajax.profiletags')->with('owner', User::find($request->accountId));
-    }
-
     public function friendsPaging(Request $request)
     {
         $page = $request->pageNumber;

@@ -20,9 +20,28 @@
                 <div class="group-info-description">{{ $owner->description }}<img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-gd" id="groupdesc-{{ $owner->id }}-report" style="display: none;margin-top: -1px;"></div>
                 <div id="profile-tags-panel">
                     <div id="profile-tag-list">
-                        <div id="profile-tags-container">
-                            No tags.
+                        @include('home.widgets.ajax.profiletags')
+                    </div>
+                    <div id="profile-tags-status-field" style="display: none">
+                        <div style="display: block;">
+                            <div class="content-red">
+                                <div class="content-red-body">
+                                    <span id="tag-limit-message" style="display: none;">
+                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> The limit is 8 tags!
+                                    </span>
+                                    <span id="tag-invalid-message" style="display: none;">
+                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> Invalid tag.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="content-red-bottom">
+                                <div class="content-red-bottom-body"></div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="profile-add-tag">
+                        <input type="text" id="profile-add-tag-input" maxlength="30"><br clear="all">
+                        <a href="#" class="toolbutton" style="float:left;margin:5px 0 0 0;" id="profile-add-tag"><span>Add tag</span></a>
                     </div>
                 </div>
                 <script type="text/javascript">

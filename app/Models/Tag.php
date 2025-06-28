@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tag extends Model
 {
@@ -15,4 +16,12 @@ class Tag extends Model
     public $primaryKey = false;
 
     public $timestamps = false;
+
+    public function holder(): BelongsTo
+    {
+        if ($this->holder_type == 'user')
+            return $this->belongsTo(User::class, 'holder_id');
+
+        return $this->belongsTo(Group::class, 'holder_id');
+    }
 }

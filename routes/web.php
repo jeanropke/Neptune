@@ -46,6 +46,7 @@ use App\Http\Controllers\Housekeeping\Site\PartnerController;
 use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TagController;
 use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,8 @@ Route::middleware('user')->group(function () {
 
     Route::get('account/logout', [AuthController::class, 'logout'])->name('account.logout');
     Route::get('/account/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
+
+    Route::get('/tag/search', [TagController::class, 'search'])->name('tag.search');
 
 
     Route::get('room/{id}', function ($id) {
@@ -283,9 +286,7 @@ Route::middleware('user')->group(function () {
         Route::post('/avatarlist/avatarinfo', [WidgetController::class, 'avatarInfo'])->name('myhabbo.avatarlist.avatarinfo');
         Route::post('/avatarlist/friendsearchpaging', [WidgetController::class, 'friendsPaging'])->name('myhabbo.avatarlist.friend_search');
         Route::post('/badgelist/badgepaging', [WidgetController::class, 'badgePaging'])->name('myhabbo.badgelist.badgepaging');
-        Route::post('/tag/add', [WidgetController::class, 'tagAdd'])->name('myhabbo.tag.add');
-        Route::post('/tag/list', [WidgetController::class, 'tagList'])->name('myhabbo.tag.list');
-        Route::post('/tag/remove', [WidgetController::class, 'tagRemove'])->name('myhabbo.tag.remove');
+
         Route::post('/friends/add', [WidgetController::class, 'friendsAdd'])->name('myhabbo.friends.add');
         Route::post('/friends/request', [WidgetController::class, 'friendsRequest'])->name('myhabbo.friends.request');
         Route::post('/friends_ajax', [WidgetController::class, 'friendsAjax'])->name('myhabbo.friends.ajax');
@@ -311,6 +312,17 @@ Route::middleware('user')->group(function () {
         Route::post('/cancel', [HomeController::class, 'cancelHome'])->name('myhabbo.cancel');
         Route::post('/save/{id}', [HomeController::class, 'saveHome'])->name('myhabbo.save');
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');
+
+        Route::prefix('tag')->group(function() {
+            Route::post('/add', [TagController::class, 'addTag'])->name('myhabbo.tag.add');
+            Route::post('/list', [TagController::class, 'listTag'])->name('myhabbo.tag.list');
+            Route::post('/remove', [TagController::class, 'removeTag'])->name('myhabbo.tag.remove');
+
+            Route::post('/addgrouptag', [TagController::class, 'addTagGroup'])->name('myhabbo.tag.group.add');
+            Route::post('/listgrouptags', [TagController::class, 'listTagGroup'])->name('myhabbo.tag.group.list');
+            Route::post('/removegrouptag', [TagController::class, 'removeTagGroup'])->name('myhabbo.tag.group.remove');
+        });
+
 
         Route::post('/inventory/preview', [WebInventoryController::class, 'preview'])->name('myhabbo.inventory.preview');
         Route::post('/inventory', [WebInventoryController::class, 'loadInventory'])->name('myhabbo.inventory.load');

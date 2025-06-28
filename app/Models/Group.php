@@ -132,4 +132,28 @@ class Group extends Model
         }
         return false;
     }
+
+    public function addTag($tag)
+    {
+        $exists = $this->tags()->where('tag', $tag)->first();
+        if ($exists) return 'invalidtag';
+
+        Tag::insert([
+            'tag'           => $tag,
+            'holder_id'     => $this->id,
+            'holder_type'   => 'group'
+        ]);
+
+        return 'valid';
+    }
+
+    public function removeTag($tag)
+    {
+        $this->tags()->where('tag', $tag)->delete();
+    }
+
+    public function tags() : HasMany
+    {
+        return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'group');
+    }
 }
