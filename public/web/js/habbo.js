@@ -1198,7 +1198,12 @@ TagHelper.setTexts = function (options) {
  */
 TagHelper.tagListClicked = function (e, loggedInAccountId) {
     var element = Event.element(e);
-    if (element.className.indexOf('tag-add-link') >= 0) {
+    if (element.className.indexOf('tag-delete-link') >= 0) {
+        var tagName = element.className.substring(element.className.lastIndexOf("-") + 1);
+        Event.stop(e);
+        TagHelper.removeThisTagFromMe(tagName, loggedInAccountId);
+    }
+    else if (element.className.indexOf('tag-add-link') >= 0) {
         var tagName = element.className.substring(element.className.lastIndexOf("-") + 1);
         Event.stop(e);
         TagHelper.addThisTagToMe(tagName, loggedInAccountId);
@@ -1222,6 +1227,21 @@ TagHelper.addThisTagToMe = function (tagName, loggedInAccountId) {
             } else if (tagMsgCode == "taglimit") {
                 showInfoDialog("tag-error-dialog", TagHelper.options.tagLimitText, TagHelper.options.buttonText, null);
             }
+        }
+    });
+}
+TagHelper.removeThisTagFromMe = function (tagName, loggedInAccountId) {
+    new Ajax.Request("/myhabbo/tag/remove", {
+        parameters: "accountId=" + encodeURIComponent(loggedInAccountId) + "&tagName=" + encodeURIComponent(tagName),
+        onSuccess: function (transport) {
+            $$('img.tag-delete-link-' + tagName).each(function (element) {
+                var sourceImg = $('tag-img-added').cloneNode(true);
+                element.src = sourceImg.src;
+                element.className = sourceImg.className;
+                element.onmouseover = null;
+                element.onmouseout = null;
+            });
+
         }
     });
 }
