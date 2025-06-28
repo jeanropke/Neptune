@@ -305,6 +305,4 @@
             </script>
         @endif
     @endauth
-
-    {{ $owner->members }}
 @endsection
