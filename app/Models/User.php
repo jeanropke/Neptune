@@ -241,6 +241,19 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user favorite group.
+     */
+    public function getFavoriteGroup()
+    {
+        $group = Group::find($this->favourite_group);
+
+        if (!$group)
+            return;
+
+        return $group;
+    }
+
+    /**
      * Get user friends
      *
      * @return mixed

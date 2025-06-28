@@ -12,7 +12,7 @@
             </h4>
             <p>
                 Group created: <br>
-                @if ($owner->getFavoriteGroup() && $owner->getFavoriteGroup()->id == $group->id)
+                @if ($owner->favourite_group == $group->id)
                     <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon" alt="Favorite" title="Favorite">
                 @endif
                 @if ($owner->id == $group->owner_id)

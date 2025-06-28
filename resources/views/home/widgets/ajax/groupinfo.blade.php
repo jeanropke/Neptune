@@ -22,7 +22,7 @@
         </p>
         @if (user() && request()->ownerId == user()->id)
             <p>
-                @if (user()->getFavoriteGroup() && user()->getFavoriteGroup()->id == $group->id)
+                @if (user()->favourite_group == $group->id)
                     <a href="#" class="groups-info-deselect-favorite toolbutton"><span>Remove favorite</span></a>
                 @else
                     <a href="#" class="groups-info-select-favorite toolbutton"><span>Make favorite</span></a>
