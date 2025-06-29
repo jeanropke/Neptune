@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Furni extends Model
 {
@@ -19,8 +20,7 @@ class Furni extends Model
             return $item->getNormalizedName();
     }
 
-    public function getOwner()
-    {
-        return User::find($this->user_id);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }

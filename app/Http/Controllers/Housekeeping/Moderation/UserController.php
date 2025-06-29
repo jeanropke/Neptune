@@ -238,7 +238,7 @@ class UserController extends Controller
 
         $furni->delete();
 
-        $furni->getOwner()->refreshHand();
+        $furni->user->refreshHand();
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Furni removed!']);
     }
