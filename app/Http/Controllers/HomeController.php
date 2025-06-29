@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (!$user)
             return 'home 404';
 
-        if ($user->getCmsSettings() && !$user->getCmsSettings()->home_public) //habbo home disabled
+        if (!$user->cmsSettings->home_public) //habbo home disabled
             return view('home.private')->with(['user' => $user]);
 
         $editing = false;

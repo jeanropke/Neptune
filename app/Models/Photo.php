@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Photo extends Model
 {
@@ -36,5 +37,9 @@ class Photo extends Model
             $data['text'] = substr($this->getFurni()->custom_data, 20);
 
         return (object)$data;
+    }
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'photo_user_id');
     }
 }

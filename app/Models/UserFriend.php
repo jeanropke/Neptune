@@ -12,6 +12,4 @@ class UserFriend extends Model
     protected $fillable = [
         'from_id', 'to_id'
     ];
-
-    public $timestamps = false;
 }

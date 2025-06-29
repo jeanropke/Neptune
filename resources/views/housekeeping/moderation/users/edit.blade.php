@@ -111,7 +111,7 @@
                                         <div class="graytext"><a href="{{ route('housekeeping.users.furniture', $user->id) }}">See user furnis</a></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $user->getInventory()->count() }} furnis
+                                        {{ $user->furnis->where('room_id', '0')->count() }} furnis
                                     </td>
                                 </tr>
                                 <tr>
@@ -120,7 +120,7 @@
                                         <div class="graytext"><a href="{{ route('housekeeping.users.badges', $user->id) }}">See user badges</a></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $user->getBadges(true)->count() }} badges
+                                        {{ $user->badges->count() }} badges
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,19 +129,20 @@
                                         <div class="graytext"><a href="{{ route('housekeeping.editor.guestroom.listing') }}?type=owner&value={{ $user->username }}">See user rooms</a></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $user->getRooms()->count() }} rooms
+                                        {{ $user->rooms->count() }} rooms
                                     </td>
                                 </tr>
                                 <tr>
+                                    @php($ip = $user->ipAddresses->last())
                                     <td class="tablerow1" width="10%" valign="middle">
                                         <b>Latest IP Address</b>
                                         <div class="graytext">
-                                            <a href="{{ route('housekeeping.users.listing') }}?value={{ $user->getLatestIP() }}&type=ip">Look up for this IP</a> -
+                                            <a href="{{ route('housekeeping.users.listing') }}?value={{ $ip?->ip_address }}&type=ip">Look up for this IP</a> -
                                             <a href="{{ route('housekeeping.users.ips', $user->id) }}">All user IPs address</a>
                                         </div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        <input type="text" size="30" value="{{ $user->getLatestIP() }}" disabled="disabled">
+                                        <input type="text" size="30" value="{{ $ip?->ip_address }}" disabled="disabled">
                                     </td>
                                 </tr>
                                 <tr>

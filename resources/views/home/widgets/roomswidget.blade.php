@@ -11,7 +11,7 @@
                 <div id="room_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
-                            @forelse($owner->getRooms() as $room)
+                            @forelse($owner->rooms as $room)
                             <tr>
                                 <td valign="top" class="dotted-line">
                                     <div class="room_image">
@@ -31,7 +31,7 @@
                                         <a href="{{ url('/') }}/client?forwardId=2&amp;roomId={{ $room->id }}"
                                             target="client" id="room-navigation-link_11"
                                             onclick="roomForward(this, '11', 'private', false); return false;">
-                                            Entrar
+                                            Enter
                                         </a>
                                         @endif
                                     </div>

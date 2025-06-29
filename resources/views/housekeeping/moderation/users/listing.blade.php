@@ -71,8 +71,10 @@
                                     </td>
                                     <td class="tablerow2"><strong>{{ $user->username }}</strong>
                                         <div class="desctext">
-                                            {{ $user->getLatestIP() }} {{ $user->ip_created_at ? "({$user->ip_created_at})" : '' }} [<a
-                                                href="http://who.is/whois-ip/ip-address/{{ $user->getLatestIP() }}/" target="_blank">WHOIS</a>]</div>
+                                            @php($ip = $user->ipAddresses->last())
+                                            {{ $ip?->created_at ? "({$ip?->created_at})" : '' }}
+                                            [<a href="http://who.is/whois-ip/ip-address/{{ $ip?->ip_address ?? 'N/A' }}/" target="_blank">WHOIS</a>]
+                                        </div>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>

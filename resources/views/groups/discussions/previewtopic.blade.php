@@ -14,7 +14,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="post-list-posts">Posts: {{ user()->getCmsSettings()->discussions_posts + 1 }}</td>
+                    <td colspan="2" class="post-list-posts">Posts: {{ user()->cmsSettings->discussions_posts + 1 }}</td>
                 </tr>
                 <tr>
                     <td class="post-list-creator-avatar"><img src="{{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&direction=2&head_direction=2" alt=""

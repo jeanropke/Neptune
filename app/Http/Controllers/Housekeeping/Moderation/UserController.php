@@ -21,13 +21,13 @@ class UserController extends Controller
         $users = [];
         switch ($request->type) {
             case 'ip':
-                $users = User::join('users_ip_logs', 'users.id', '=', 'users_ip_logs.user_id')->where('ip_address', $request->value)->select(['users_ip_logs.created_at AS ip_created_at', 'users.*']);
+                $users = User::with('ipAddresses')->join('users_ip_logs', 'users.id', '=', 'users_ip_logs.user_id')->where('ip_address', $request->value)->select(['users_ip_logs.created_at AS ip_created_at', 'users.*']);
                 break;
             case 'username':
-                $users = User::where('username', 'like', '%' . $request->value . '%');
+                $users = User::with('ipAddresses')->where('username', 'like', '%' . $request->value . '%');
                 break;
             default:
-                $users = User::orderby('id', 'DESC');
+                $users = User::with('ipAddresses')->orderBy('id', 'DESC');
                 break;
         }
 

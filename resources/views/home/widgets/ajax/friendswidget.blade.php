@@ -4,6 +4,7 @@
                 src="{{ cms_config('site.avatarimage.url') }}{{ $friend->figure }}&amp;size=s&amp;direction=2&amp;head_direction=2&amp;gesture=sml"
                 alt="{{ $friend->username }}"{{-- width="30" height="56" --}}></a>
     </div>
+
 @empty
     Sem amigos
 @endforelse
@@ -15,10 +16,8 @@
         Habbo Birthday: {{ \Carbon\Carbon::parse($friend->created_at)->format('M d, Y') }} <br>
         Motto: {{ $friend->motto }}<br>
     </div>
-@endforeach
 
-<script language="JavaScript" type="text/javascript">
-    @foreach ($friends as $friend)
+    <script language="JavaScript" type="text/javascript">
         Event.observe('f{{ $loop->index }}', "mouseover", function(e) {
             FriendsWidgetOld.showFriendData('{{ $loop->index }}', {{ $friends->count() }});
         });
@@ -31,5 +30,5 @@
         Event.observe('finf-{{ $loop->index }}', "mouseout", function(e) {
             FriendsWidgetOld.hideFriendData('{{ $loop->index }}', 1000);
         });
-    @endforeach
-</script>
+    </script>
+@endforeach

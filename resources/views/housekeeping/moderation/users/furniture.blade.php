@@ -54,7 +54,7 @@
                         <div class="tableborder">
                             <div class="tableheaderalt">User Furniture On Hand <i>(Click to remove)</i></div>
                             <div id="furni-picker-listing">
-                                @foreach ($user->getInventory() as $furni)
+                                @foreach ($user->furnis->where('room_id', '0') as $furni)
                                     <div class="slot remove-furni" data-id="{{ $furni->id }}" style="height: 56px; line-height: 9;">
                                         <div title="{{ $furni->getSprite() }}" class="image"
                                             style="background: url({{ cms_config('furni.small.url') }}/{{ $furni->getSprite() }}_icon.png) center no-repeat">

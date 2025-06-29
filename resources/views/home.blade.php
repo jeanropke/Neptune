@@ -76,7 +76,7 @@
         }
     </style>
     {{-- I dont like this, but otherwise will broke visual studio code colors --}}
-    @if ($owner->getSubscription()->isExpired())
+    @if ($owner->subscription->isExpired())
         <style type="text/css">
             #playground,
             #playground-outer {
@@ -303,7 +303,7 @@
                                 <option value="5" id="edit-menu-skins-select-notepadskin">Notepad</option>
                                 <option value="2" id="edit-menu-skins-select-speechbubbleskin">Speech Bubble</option>
                                 <option value="4" id="edit-menu-skins-select-noteitskin">Stickie Note</option>
-                                @if (!user()->getSubscription()->isExpired())
+                                @if (!user()->subscription->isExpired())
                                     <option value="8" id="edit-menu-skins-select-hc_pillowskin">HC Bling</option>
                                     <option value="7" id="edit-menu-skins-select-hc_machineskin">HC Scifi</option>
                                 @endif

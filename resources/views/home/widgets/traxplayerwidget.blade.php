@@ -1,4 +1,4 @@
-@php($songs = $owner->getTraxSongs())
+@php($songs = $owner->traxSongs)
 <div class="movable widget TraxPlayerWidget" id="widget-{{ $item->id }}"
     style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
     <div class="w_skin_{{ $item->skin }}">
@@ -10,7 +10,7 @@
         </div>
         <div class="widget-body">
             <div class="widget-content">
-                @if($isEdit)
+                @if($editing)
                 <div id="traxplayer-content" style="text-align: center;">
                     <img src="{{ url('/') }}/web/images/myhabbo/traxplayer/player.png" />
                 </div>

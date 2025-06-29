@@ -9,7 +9,7 @@
             <option value="5" id="webstore-notes-skins-select-notepadskin" {{ ($item->skin ?? 0) == 5 ? 'selected' : ''  }}>Notepad</option>
             <option value="2" id="webstore-notes-skins-select-speechbubbleskin" {{ ($item->skin ?? 0) == 2 ? 'selected' : ''  }}>Speech Bubble</option>
             <option value="4" id="webstore-notes-skins-select-noteitskin" {{ ($item->skin ?? 0) == 4 ? 'selected' : ''  }}>Stickie Note</option>
-            @if (!user()->getSubscription()->isExpired())
+            @if (!user()->subscription->isExpired())
                 <option value="8" id="edit-menu-skins-select-hc_pillowskin" {{ ($item->skin ?? 0) == 8 ? 'selected' : ''  }}>HC Bling</option>
                 <option value="7" id="edit-menu-skins-select-hc_machineskin" {{ ($item->skin ?? 0) == 7 ? 'selected' : ''  }}>HC Scifi</option>
             @endif

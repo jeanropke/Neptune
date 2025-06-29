@@ -66,7 +66,7 @@ class DiscussionController extends Controller
             'updated_at'    => $now
         ]);
 
-        user()->getCmsSettings()->increment('discussions_posts');
+        user()->cmsSettings->increment('discussions_posts');
 
         echo "/groups/{$group->id}/id/discussions/{$topic->id}/id";
     }
@@ -143,7 +143,7 @@ class DiscussionController extends Controller
             'updated_at'    => $now
         ]);
 
-        user()->getCmsSettings()->increment('discussions_posts');
+        user()->cmsSettings->increment('discussions_posts');
 
         return view('groups.discussions.includes.viewtopic')->with([
             'topic'     => $topic,

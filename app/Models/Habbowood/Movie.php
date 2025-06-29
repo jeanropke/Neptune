@@ -5,6 +5,7 @@ namespace App\Models\Habbowood;
 use Carbon\Carbon;
 use DOMDocument;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
 
@@ -24,9 +25,14 @@ class Movie extends Model
         'published'
     ];
 
+    //TODO: remove this and use user() instead
     public function getAuthor()
     {
         return User::find($this->author_id);
+    }
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 
     public function getGenre()

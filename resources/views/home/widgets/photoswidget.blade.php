@@ -10,7 +10,7 @@
         <div class="widget-body">
             <div class="widget-content">
                 <div id="photolist-content">
-                    @include('home.widgets.ajax.photoswidget', ['photos' => $owner->getPhotos(), 'page' => 1, 'totalPages' => $owner->getPhotos()->count()])
+                    @include('home.widgets.ajax.photoswidget', ['photos' => $owner->photos()->get(), 'page' => 1, 'totalPages' => $owner->photos->count()])
                     <script type="text/javascript">
                         Event.onDOMReady(function() {
                             window.photoWidget16 = new PhotosWidget('{{ $owner->id }}', '{{ $item->id }}');

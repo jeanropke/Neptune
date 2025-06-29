@@ -12,7 +12,7 @@
                 <div id="movies_wrapper">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tbody>
-                            @forelse ($owner->getMovies(true) as $movie)
+                            @forelse ($owner->movies()->where('published', '1')->get() as $movie)
                                 <tr>
                                     <td valign="top">
                                         <div class="movie_genre_image">

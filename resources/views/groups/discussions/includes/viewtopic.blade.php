@@ -57,7 +57,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="post-list-posts">Messages: {{ $author->getCmsSettings()->discussions_posts }}</td>
+                                <td colspan="2" class="post-list-posts">Messages: {{ $author->cmsSettings->discussions_posts }}</td>
                             </tr>
                             <tr>
                                 <td class="post-list-creator-avatar"><img

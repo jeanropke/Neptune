@@ -2,7 +2,7 @@
     <div class="w_skin_{{ $item->skin }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">My Groups (<span id="groups-list-size">{{ $owner->getGroups()->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
+                <h3><span class="header-left">&nbsp;</span><span class="header-middle">My Groups (<span id="groups-list-size">{{ $owner->groups()->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
             </div>
         </div>
         <div class="widget-body">

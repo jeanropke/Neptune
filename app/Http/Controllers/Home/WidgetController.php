@@ -40,7 +40,7 @@ class WidgetController extends Controller
             'z'         => $request->zindex,
         ]);
 
-        return response(view('home.widgets.' . $widget->getStoreItem()->class)->with(['item' => $widget, 'owner' => user(), 'isEdit' => true]), 200)
+        return response(view('home.widgets.' . $widget->getStoreItem()->class)->with(['item' => $widget, 'owner' => user(), 'editing' => true]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(array('id' => $widgetId)));
     }
@@ -78,7 +78,7 @@ class WidgetController extends Controller
         if (!$user) return;
 
         $page = $request->pageNumber;
-        $badges = $user->getBadges();
+        $badges = $user->allBadges();
         $totalPages = ceil($badges->count() / 16);
 
         return view('home.widgets.ajax.badgewidget')->with([
@@ -113,7 +113,7 @@ class WidgetController extends Controller
         $accountId = $request->name;
         $index = $request->index;
 
-        $friends = User::find($accountId)->getFriends();
+        $friends = User::find($accountId)->friends();
 
         return view('home.widgets.ajax.friendswidget')->with([
             'friends'   => $friends->skip(($index) * 2)->take(2)
@@ -347,7 +347,10 @@ class WidgetController extends Controller
 
         $widget->update([
             'home_id'   => null,
-            'group_id'  => null
+            'group_id'  => null,
+            'x'         => null,
+            'y'         => null,
+            'z'         => null
         ]);
 
         return response('SUCCESS', 200)
@@ -360,7 +363,7 @@ class WidgetController extends Controller
         $user = User::find($request->_mypage_requested_account);
         if (!$user) return;
         $page = $request->pageNumber;
-        $photos = $user->getPhotos();
+        $photos = $user->photos;
         $totalPages = $photos->count();
 
         return view('home.widgets.ajax.photoswidget')->with([

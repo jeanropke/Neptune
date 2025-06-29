@@ -9,8 +9,7 @@ use App\Models\Home\HomeSong;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\UserBadge;
-use App\Models\UserFriend;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -53,22 +52,13 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['created_at'];
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Generate, save and return the SSO-Ticket
-     *
-     * @return string
-     */
     public function setAuthTicket()
     {
         $ticket = 'Habbo-' . md5(uniqid(rand(), true)) . '-Hotel-' . md5(uniqid(rand(), true)) . '-' . uniqid();
@@ -102,11 +92,6 @@ class User extends Authenticatable
             rcon("refresh_group_perms", ['userId' => $this->id]);
     }
 
-    /**
-     * Give users credits and update on client
-     *
-     * @return string
-     */
     public function updateCredits($amount)
     {
         $this->increment('credits', $amount);
@@ -114,16 +99,11 @@ class User extends Authenticatable
             rcon("refresh_credits", ['userId' => $this->id]);
     }
 
-    public function getSubscription()
+    public function subscription(): HasOne
     {
-        return UserSubscription::find($this->id);
+        return $this->hasOne(UserSubscription::class, 'id');
     }
 
-    /**
-     * Give users HC days
-     *
-     * @return int
-     */
     public function giveHCDays($days)
     {
         $now = time();
@@ -148,7 +128,7 @@ class User extends Authenticatable
         $message = str_replace('|', '', $message);
         $wraps = explode(',', cms_config('hotel.gift.wraps'));
         $wrap = $wraps[rand(0, count($wraps) - 1)];
-        Furni::create([
+        $this->furnis()->create([
             'user_id'       => $this->id,
             'definition_id' => $wrap,
             'custom_data'   => "{$cataItemId}|{$sender}|{$message}|{$unk}|{$now}"
@@ -160,25 +140,21 @@ class User extends Authenticatable
 
     public function giveItem($id, $custom)
     {
-        Furni::create([
+        $this->furnis()->create([
             'user_id'       => $this->id,
             'definition_id' => $id,
             'custom_data'   => $custom
         ]);
     }
 
-    public function getInventory()
+    public function furnis(): HasMany
     {
-        return Furni::where([['user_id', $this->id], ['room_id', '0']])->get();
+        return $this->hasMany(Furni::class, 'user_id');
     }
 
-    public function getLatestIP()
+    public function ipAddresses(): HasMany
     {
-        $ip = UserIPLog::where('user_id', $this->id)->orderBy('created_at', 'DESC')->first();
-        if ($ip)
-            return $ip->ip_address;
-
-        return '0.0.0.0';
+        return $this->hasMany(UserIPLog::class, 'user_id')->orderBy('created_at', 'ASC');
     }
 
     public function refreshHand()
@@ -195,80 +171,54 @@ class User extends Authenticatable
         ]);
     }
 
-    /**
-     * Get user badges
-     */
-    public function getBadges($skipRankBadge = false)
+    public function badges(): HasMany
     {
-        $badges = array();
+        return $this->hasMany(UserBadge::class, 'user_id');
+    }
 
-        foreach (UserBadge::select('users_badges.badge')->where('user_id', $this->id)->get() as $badge) {
-            array_push($badges, array('badge' => $badge->badge));
+    public function allBadges()
+    {
+        $temp = [];
+        foreach (DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
+            $temp[] = new UserBadge([
+                'badge' => $badge->badge
+            ]);
         }
-
-        if (!$skipRankBadge) {
-            foreach (DB::table('rank_badges')->where('rank', '<=', $this->rank)->get() as $badge) {
-                array_push($badges, array('badge' => $badge->badge));
-            }
-        }
-
-        sort($badges);
-
-        return collect($badges);
+        return $this->badges->concat(collect($temp))->sortBy('badge')->values();
     }
 
     public function giveBadge($code)
     {
-        $badge = UserBadge::where([['user_id', '=', $this->id], ['badge', '=', $code]])->get();
-        if ($badge->count() > 0)
-            return false;
-
-        UserBadge::insert([
-            'user_id'   => $this->id,
-            'badge'     => $code
-        ]);
-
-        return true;
+        if (!$this->badges()->where('badge', $code)->exists()) {
+            $this->badges()->insert([
+                'badge'           => $code,
+                'user_id'     => $this->id
+            ]);
+            return true;
+        }
+        return false;
     }
 
-    public function getPhotos()
+    public function photos(): HasMany
     {
-        return Photo::where('photo_user_id', $this->id)->orderBy('timestamp', 'DESC')->get();
+        return $this->hasMany(Photo::class, 'photo_user_id')->orderBy('timestamp', 'DESC');
     }
 
-    public function getMovies($published)
+    public function movies(): HasMany
     {
-        if ($published)
-            return Movie::where([['author_id', $this->id], ['published', '1']])->orderBy('rating', 'DESC')->get();
-        return Movie::where('author_id', $this->id)->orderBy('rating', 'DESC')->get();
+        return $this->hasMany(Movie::class, 'author_id')->orderBy('updated_at', 'DESC');
     }
 
-    /**
-     * Get user rooms
-     */
-    public function getRooms()
+    public function rooms(): HasMany
     {
-        return Room::where('owner_id', $this->id)->get();
+        return $this->hasMany(Room::class, 'owner_id')->orderBy('name', 'ASC');
     }
 
-    /**
-     * Get user groups
-     */
-    public function getGroups()
+    public function groups(): HasMany
     {
-        return Group::leftJoin('groups_memberships', 'groups_details.id', '=', 'groups_memberships.group_id')
-            ->where(function ($query) {
-                $query->where('groups_details.owner_id', $this->id)
-                    ->orWhere('groups_memberships.user_id', $this->id);
-            })
-            ->select('groups_details.*')
-            ->distinct()
-            ->get();
+        return $this->hasMany(GroupMember::class, 'user_id')->orderBy('created_at', 'DESC');
     }
 
-    /**
-     * Get user favorite group.
-     */
     public function getFavoriteGroup()
     {
         $group = Group::find($this->favourite_group);
@@ -279,16 +229,21 @@ class User extends Authenticatable
         return $group;
     }
 
-    /**
-     * Get user friends
-     *
-     * @return mixed
-     */
-    public function getFriends()
+    public function friendsOfMine(): BelongsToMany
     {
-        return UserFriend::where('from_id', $this->id)->join('users', 'users.id', '=', 'to_id')
-            ->select('users.id', 'username', 'figure', 'created_at', 'to_id')
-            ->orderBy('username', 'asc')->get();
+        return $this->belongsToMany(User::class, 'messenger_friends', 'from_id', 'to_id')->orderBy('username')
+            ->withPivot('from_id', 'to_id');
+    }
+
+    public function friendOf(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'messenger_friends', 'to_id', 'from_id')->orderBy('username')
+            ->withPivot('from_id', 'to_id');
+    }
+
+    public function friends()
+    {
+        return $this->friendsOfMine->merge($this->friendOf);
     }
 
     /**
@@ -320,38 +275,38 @@ class User extends Authenticatable
         return Permission::find($this->rank);
     }
 
-    public function getCmsSettings()
+    public function cmsSettings(): HasOne
     {
-        return CmsUserSettings::where('user_id', $this->id)->first();
+        return $this->hasOne(CmsUserSettings::class, 'user_id');
     }
 
-    public function getTraxSongs()
+    public function traxSongs(): HasMany
     {
-        return HomeSong::where('user_id', $this->id)->get();
-    }
-
-    public function addTag($tag)
-    {
-        $exists = $this->tags()->where('tag', $tag)->first();
-        if ($exists) return 'invalidtag';
-
-        Tag::insert([
-            'tag'           => $tag,
-            'holder_id'     => $this->id,
-            'holder_type'   => 'user'
-        ]);
-
-        return 'valid';
-    }
-
-    public function removeTag($tag)
-    {
-        $this->tags()->where('tag', $tag)->delete();
+        return $this->hasMany(HomeSong::class, 'user_id');
     }
 
     public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'user');
+    }
+
+    public function addTag($tag)
+    {
+        if (!$this->tags()->where('tag', $tag)->exists()) {
+            $this->tags()->insert([
+                'tag'           => $tag,
+                'holder_id'     => $this->id,
+                'holder_type'   => 'user'
+            ]);
+            return 'valid';
+        }
+
+        return 'invalidtag';
+    }
+
+    public function removeTag($tag)
+    {
+        $this->tags()->where('tag', $tag)->delete();
     }
 
     public function homeSession(): HasOne

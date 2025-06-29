@@ -9,8 +9,8 @@
             <div class="widget-content">
                 <div id="friends">
                     @php($friendsPerPage = 10)
-                    @php($friends = $owner->getFriends()->take($friendsPerPage))
-                    @php($friendsCount = $owner->getFriends()->count())
+                    @php($friends = $owner->friends()->take($friendsPerPage))
+                    @php($friendsCount = $owner->friends()->count())
                     @include('home.widgets.ajax.friendswidget')
                 </div>
 
