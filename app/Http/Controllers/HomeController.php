@@ -31,11 +31,11 @@ class HomeController extends Controller
         if ($user->getCmsSettings() && !$user->getCmsSettings()->home_public) //habbo home disabled
             return view('home.private')->with(['user' => $user]);
 
-        $isEdit = false;
+        $editing = false;
 
         if (Auth::check()) {
-            $session = HomeSession::find(user()->id);
-            $isEdit = $session && ((user()->rank > 5 && $session->home_id) || (user()->id == $user->id && $session->home_id));
+            $session = user()->homeSession;
+            $editing = $session && ((user()->rank > 5 && $session->home_id) || (user()->id == $user->id && $session->home_id));
         }
 
         $items = HomeItem::where([['home_id', '=', $user->id], ['deleted_by', '=', null]]);
@@ -71,7 +71,7 @@ class HomeController extends Controller
         return view('home')->with([
             'items'         => $items->get(),
             'owner'         => $user,
-            'isEdit'        => $isEdit,
+            'editing'       => $editing,
             'background'    => $items->where('data', 'background')->first()
         ]);
     }
@@ -95,7 +95,7 @@ class HomeController extends Controller
             return redirect("/");
         }
 
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if ($session) {
             if ($session->group_id)
                 return redirect("groups/{$session->group_id}/id");
@@ -124,7 +124,7 @@ class HomeController extends Controller
 
     public function saveHome($userId, Request $request)
     {
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session) return;
 
         $stickienotes = $request->stickienotes;
@@ -253,7 +253,7 @@ class HomeController extends Controller
 
     public function cancelHome(Request $request)
     {
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session) return;
 
         $session->delete();
@@ -379,7 +379,7 @@ class HomeController extends Controller
         if (!$item)
             return "Invalid item id: '{$request->itemId}'";
 
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session)
             return 'error: placeSticker > session expired';
 
@@ -391,10 +391,10 @@ class HomeController extends Controller
         ]);
 
         return response(view('home.sticker', [
-            'item'   => $item->getStoreItem(),
-            'id'     => $item->id,
-            'zindex' => $request->zindex,
-            'isEdit' => true
+            'item'      => $item->getStoreItem(),
+            'id'        => $item->id,
+            'zindex'    => $request->zindex,
+            'editing'   => true
         ]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($item->id));

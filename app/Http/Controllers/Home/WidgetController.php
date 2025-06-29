@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
-use App\Models\Guild;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
-use App\Models\Home\HomeSession;
 use App\Models\Home\HomeSong;
 use App\Models\Photo;
 use App\Models\PhotoLike;
@@ -30,12 +28,13 @@ class WidgetController extends Controller
         if ($widget->owner_id != user()->id)
             return 'ERROR';
 
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session)
             return 'error: placeSticker > session expired';
 
         $widget->update([
             'home_id'   => $session->home_id,
+            'group_id'  => $session->group_id,
             'x'         => 20,
             'y'         => 30,
             'z'         => $request->zindex,
@@ -49,8 +48,8 @@ class WidgetController extends Controller
     public function avatarInfo(Request $request)
     {
         return view('home.widgets.ajax.avatarinfo')->with([
-            'friend'    => User::find($request->anAccountId),
-            'badgeslot' => UserBadge::where([['user_id', $request->anAccountId], ['slot_id', '1']])->first()
+            'user'  => User::find($request->anAccountId),
+            'group' => Group::find($request->groupId)
         ]);
     }
 
@@ -118,6 +117,29 @@ class WidgetController extends Controller
 
         return view('home.widgets.ajax.friendswidget')->with([
             'friends'   => $friends->skip(($index) * 2)->take(2)
+        ]);
+    }
+
+    public function membersPaging(Request $request)
+    {
+        $group = Group::find($request->_groupspage_requested_group);
+        if(!$group) return;
+
+        $page = $request->pageNumber;
+        $search = $request->searchString;
+
+        $members = $group->members()->where('users.username', 'LIKE', '%' . $search . '%');
+        $totalPages = ceil($members->count() / 20);
+
+        return view('home.widgets.ajax.memberwidget')->with([
+            'members'           => $members,
+            'pageFriends'       => $members->skip(($page - 1) * 20)->take(20)->get(),
+            'totalPages'        => $totalPages,
+            'currentFriends'    => ($page - 1) * 20 + 1,
+            'toFriends'         => (($page - 1) * 20) + 1,
+            'page'              => $page,
+            'item'              => HomeItem::find($request->widgetId),
+            'owner'             => $group
         ]);
     }
 
@@ -193,6 +215,18 @@ class WidgetController extends Controller
         return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(['lastPage' => (20 > $messages->count()) ? 'true' : 'false']));
+    }
+
+    public function guestbookConfigure(Request $request)
+    {
+        $widget = HomeItem::find($request->widgetId);
+        if ($widget->owner_id != user()->id) return;
+
+        $widget->update([
+            'data' => $widget->data == 'public' ? 'private' : 'public'
+        ]);
+
+        return response(view('home.widgets.ajax.guestbook.configure'), 200)->header('Content-Type', 'text/javascript');
     }
 
     public function ratingsRate(Request $request)
@@ -312,7 +346,8 @@ class WidgetController extends Controller
             return 'ERROR';
 
         $widget->update([
-            'home_id' => null
+            'home_id'   => null,
+            'group_id'  => null
         ]);
 
         return response('SUCCESS', 200)

@@ -1,4 +1,4 @@
-var FriendsWidget = {
+var FriendsWidgetOld = {
     init: function (pages, theRange, accountIdentity) {
         var currentIndex = 1;
         if (pages > 1) {
@@ -49,6 +49,136 @@ var FriendsWidget = {
             window.clearTimeout(this.timer);
         }
     }
+};
+
+var FriendsWidget = Class.create();
+FriendsWidget.prototype = {
+
+    options: { searchUrl: "/myhabbo/avatarlist/friendsearchpaging", ownerParameter: "&_mypage.requested.account=" },
+
+    initialize: function (ownerId, widgetId) {
+        this.searchString = "";
+        this.pageNumber = 1;
+        this.ownerId = ownerId;
+        this.widgetId = widgetId;
+        this.widgetEl = $("widget-" + widgetId);
+        this.containerEl = $("avatarlist-content");
+        this.listElement = $("avatar-list-list");
+        this.pagingElement = $("avatar-list-paging");
+
+        if (this.listElement) {
+            this.containerEl.onclick = this._processClick.bindAsEventListener(this);
+            this.infoEl = document.getElementsByClassName("avatar-list-info", this.widgetEl)[0];
+            this.infoContentEl = document.getElementsByClassName("avatar-list-info-container", this.infoEl)[0];
+            this.closeLink = document.getElementsByClassName("avatar-list-info-close", this.infoEl)[0];
+            this.closeLink.onclick = this.hideAccountDetails.bindAsEventListener(this);
+            var self = this;
+            Event.observe("avatarlist-search-button", "click", function (e) { Event.stop(e); self._processSearch(e); });
+            Event.observe("avatarlist-search-string", "keypress", function (e) {
+                if (e.keyCode == Event.KEY_RETURN) {
+                    self._processSearch(e);
+                }
+            });
+        }
+    },
+
+    showAccountDetails: function (showId) {
+        this.infoEl = $("avatar-list-info");
+        this.listElement = $("avatar-list-list");
+        this.pagingElement = $("avatar-list-paging");
+        this.searchElement = $("avatar-list-search");
+        Element.show(this.infoEl);
+        Element.hide(this.listElement);
+        Element.hide(this.pagingElement);
+        Element.hide(this.searchElement);
+        this.infoEl.style.display = "block";
+        this.infoEl.innerHTML = getProgressNode();
+        this.showId = showId;
+        var self = this;
+        new Ajax.Request(habboReqPath + "/myhabbo/avatarlist/avatarinfo", {
+            method: "post", parameters: this._getInfoParameters(), onComplete: function (req, json) {
+                self.infoEl.innerHTML = req.responseText;
+
+                var infoCloseLink = document.getElementsByClassName("avatar-list-info-close", self.infoEl)[0];
+                infoCloseLink.onclick = self.hideAccountDetails.bindAsEventListener(self);
+
+                self._addLinkObservers();
+            }
+        });
+    },
+
+    hideAccountDetails: function (e) {
+        Event.stop(e);
+        this.infoContentEl.innerHTML = "";
+        Element.hide(this.infoEl);
+        Element.show(this.listElement);
+        Element.show(this.pagingElement);
+        Element.show(this.searchElement);
+    },
+
+    leaveFromGroup: function (e) { Event.stop(e); },
+    removeFromGroup: function (e) { Event.stop(e); },
+    revokeRights: function (e) { Event.stop(e); },
+
+    _parseAccountIdFromElementId: function (elementId) {
+        return elementId.substring(elementId.lastIndexOf("-") + 1);
+    },
+
+    _getInfoParameters: function () {
+        return "ownerAccountId=" + encodeURIComponent(this.ownerId) + "&anAccountId=" + encodeURIComponent(this.showId);
+    },
+
+    _processClick: function (e) {
+        var clickedElement = Event.element(e);
+        if (clickedElement.nodeName.toLowerCase() == "a" && clickedElement.className == "avatar-list-open-link") {
+            Event.stop(e);
+            this._processOpenClick(e);
+        } else if (clickedElement.nodeName.toLowerCase() == "a" && clickedElement.className == "avatar-list-paging-link") {
+            Event.stop(e);
+            this._processSearch(e);
+        }
+    },
+
+    _processOpenClick: function (e) {
+        var clickedEl = Event.element(e);
+        if (clickedEl.nodeName.toLowerCase() == "a" && clickedEl.className == "avatar-list-open-link") {
+            var id = this._parseAccountIdFromElementId(clickedEl.parentNode.parentNode.id);
+            this.showAccountDetails(id);
+        }
+    },
+
+    _addLinkObservers: function () { },
+
+    _processSearch: function (e) {
+        var clickedElement = Event.element(e);
+        var pageNumber = parseInt($F("pageNumber"));
+        var totalPages = parseInt($F("totalPages"));
+        var targetPageNumber = 1;
+        if (clickedElement.id == "avatarlist-search-first") {
+            targetPageNumber = 1;
+        } else if (clickedElement.id == "avatarlist-search-previous") {
+            targetPageNumber = pageNumber - 1;
+        } else if (clickedElement.id == "avatarlist-search-next") {
+            targetPageNumber = pageNumber + 1;
+        } else if (clickedElement.id == "avatarlist-search-last") {
+            targetPageNumber = totalPages;
+        } else if (clickedElement.parentNode.id == "avatarlist-search-button" || clickedElement.id == "avatarlist-search-string") {
+            this.searchString = $F("avatarlist-search-string");
+            targetPageNumber = 1;
+        }
+
+        var self = this; ''
+        new Ajax.Updater("avatarlist-content",
+            habboReqPath + this.options.searchUrl,
+            {
+                method: "post",
+                parameters: "pageNumber=" + encodeURIComponent(targetPageNumber) +
+                    "&searchString=" + encodeURIComponent(this.searchString) +
+                    "&widgetId=" + this.widgetId +
+                    this.options.ownerParameter + this.ownerId
+            });
+    }
+
 };
 
 var MemberWidget = Class.extend(FriendsWidget, {

@@ -138,6 +138,19 @@ var NoteEditor = {
                     if ($("webstore-confirm-submit")) {
                         Event.observe($("webstore-confirm-submit"), "click", function (e) {
                             Event.stop(e);
+                            new Ajax.Request(habboReqPath + "/myhabbo/noteeditor/purchase_done", {
+                                method: "post", parameters: { task: "purchase" }, onComplete: function (req, json) {
+                                    if (WebStore._checkResponse(req.responseText)) {
+                                        if (req.responseText.strip() != "OK") {
+                                            setDialogBody(dialog, req.responseText);
+                                            Event.observe($("webstore-confirm-cancel"), "click", NoteEditor.closePurchaseDialog);
+                                        } else {
+                                            moveOverlay("9000");
+                                            Element.remove(dialog);
+                                        }
+                                    }
+                                }
+                            });
                         });
                     }
                 }

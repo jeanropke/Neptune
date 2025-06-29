@@ -2,7 +2,7 @@
     <div class="w_skin_{{ $item->skin }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">Group info</span><span class="header-right">&nbsp;@if($isEdit)<img
+                <h3><span class="header-left">&nbsp;</span><span class="header-middle">Group info</span><span class="header-right">&nbsp;@if($editing)<img
                     src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18"
                     class="edit-button" id="widget-{{ $item->id }}-edit" />
                 <script language="JavaScript" type="text/javascript">

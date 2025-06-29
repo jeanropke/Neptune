@@ -1,4 +1,4 @@
-@extends('layouts.master', ['body' => $isEdit ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
+@extends('layouts.master', ['body' => $editing ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
 
 @section('title', 'Habbo Home: ' . $owner->username)
 
@@ -110,7 +110,7 @@
                                         <span>Get your own Habbo Home</span>
                                     </a>
                                 @endif
-                                @if ($owner->id == user()->id && !$isEdit)
+                                @if ($owner->id == user()->id && !$editing)
                                     <a href="{{ url('/') }}/myhabbo/startSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                                 @endif
                                 <a href="#" class="toolbutton reporting-start" id="reporting-button" style="float: right">
@@ -120,7 +120,7 @@
                                     <span>Stop reporting</span>
                                 </a>
                             @endauth
-                            @if (!$isEdit)
+                            @if (!$editing)
                                 <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $owner->username }}" id="tell-button"
                                     class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            @if ($isEdit)
+            @if ($editing)
                 <div id="top-toolbar">
                     <div>
                         <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
@@ -152,7 +152,7 @@
                                 {{-- sticker --}}
                                 <div class="movable sticker s_{{ $itemStore->class }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}"
                                     id="sticker-{{ $item->id }}">
-                                    @if ($isEdit)
+                                    @if ($editing)
                                         <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
                                             id="sticker-{{ $item->id }}-edit" />
                                         <script language="JavaScript" type="text/javascript">
@@ -277,7 +277,7 @@
 
     <script language="JavaScript" type="text/javascript">
         Event.observe(window, "load", observeAnim);
-        @if ($isEdit)
+        @if ($editing)
             initEditToolbar();
             initMovableItems();
         @endif
@@ -285,7 +285,7 @@
         //Utils.setAllEmbededObjectsVisibility('hidden');
         //Pinger.start();
     </script>
-    @if ($isEdit)
+    @if ($editing)
         <div id="edit-save" style="display:none;"></div>
         <div id="edit-menu" class="menu">
             <div class="menu-header">
@@ -379,7 +379,7 @@
     {{--
     There is no script in waybackmachine to handle home inventory and webstore :(
     --}}
-    @if ($isEdit)
+    @if ($editing)
         <script>
             NoteEditor.initialise();
         </script>

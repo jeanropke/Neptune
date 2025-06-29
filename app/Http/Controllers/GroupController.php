@@ -6,11 +6,14 @@ use App\Models\Catalogue\CatalogueItem;
 use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\Home\HomeItem;
+use App\Models\Home\HomeSession;
+use App\Models\Home\StoreItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
+    /*
     public function groupUrl($url)
     {
         $group = Group::where('alias', $url)->first();
@@ -32,10 +35,11 @@ class GroupController extends Controller
             'owner'     => $group
         ]);
     }
+    */
 
-    public function groupId($id)
+    public function group(Request $request)
     {
-        $group = Group::find($id);
+        $group = Group::find($request->id);
 
         if (!$group)
             return abort(404);
@@ -50,8 +54,8 @@ class GroupController extends Controller
         }
 
         return view('groups.page')->with([
-            'isEdit'    => false,
-            'owner'     => Group::find($id)
+            'editing'   => user() && user()->homeSession && user()->homeSession->group_id == $group->id,
+            'owner'     => $group
         ]);
     }
 
@@ -190,6 +194,161 @@ class GroupController extends Controller
         if ($group->owner_id != user()->id) return;
 
         return view('groups.actions.group_settings')->with('group', $group);
+    }
+
+    public function startEditing(Request $request)
+    {
+        if (!user()) return;
+
+        $group = Group::find($request->groupId);
+
+        if (!$group) return;
+
+        if ($group->owner_id != user()->id) return;
+
+        $session = user()->homeSession;
+
+        if ($session) {
+            if ($session->group_id)
+                return redirect("groups/{$session->group_id}/id");
+
+            return redirect("home/{$session->home_id}/id");
+        }
+
+        HomeSession::create([
+            'user_id'       => user()->id,
+            'home_id'       => $request->homeId,
+            'group_id'      => $request->groupId,
+            'expires_at'    => time() + 60 * 60 //1 hour
+        ]);
+
+        //we need to create some items in case this user does not have them
+        //like some widgets
+        $widgets = StoreItem::where('type', 'gw')->get();
+        foreach ($widgets as $widget) {
+            $item = HomeItem::where([['owner_id', user()->id], ['group_id', $group->id], ['item_id', $widget->id]])->first();
+            if (!$item) {
+                HomeItem::insert(['owner_id' => user()->id, 'item_id' => $widget->id, 'group_id' => $group->id, 'skin' => 'defaultskin']);
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function saveEditing(Request $request)
+    {
+        $session = user()->homeSession;
+        if (!$session) return;
+
+        $stickienotes = $request->stickienotes;
+        $widgets = $request->widgets;
+        $stickers = $request->stickers;
+        $background = $request->background;
+
+        $note = explode('/', $stickienotes);
+        $widget = explode('/', $widgets);
+        $sticker = explode('/', $stickers);
+        $background = explode(':', $background);
+
+        foreach ($note as $raw) {
+            if (strlen($raw) == 0)
+                continue;
+
+            $bits = explode(':', $raw);
+            $id = $bits[0];
+            $data = $bits[1];
+
+            if (!empty($data) && !empty($id) && is_numeric($id)) {
+                $coordinates = explode(',', $data);
+                $x = $coordinates[0];
+                $y = $coordinates[1];
+                $z = $coordinates[2];
+                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
+                    $home = HomeItem::find($id);
+                    if (!$home || $home->home_id)
+                        continue;
+
+                    $home->update([
+                        'x' => $x,
+                        'y' => $y,
+                        'z' => $z,
+                    ]);
+                }
+            }
+        }
+
+        foreach ($widget as $raw) {
+            if (strlen($raw) == 0)
+                continue;
+
+            $bits = explode(':', $raw);
+            $id = $bits[0];
+            $data = $bits[1];
+            if (!empty($data) && !empty($id) && is_numeric($id)) {
+                $coordinates = explode(',', $data);
+                $x = $coordinates[0];
+                $y = $coordinates[1];
+                $z = $coordinates[2];
+                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
+                    $home = HomeItem::find($id);
+                    if (!$home || $home->home_id)
+                        continue;
+
+                    $home->update([
+                        'x' => $x,
+                        'y' => $y,
+                        'z' => $z,
+                    ]);
+                }
+            }
+        }
+
+        foreach ($sticker as $raw) {
+            if (strlen($raw) == 0)
+                continue;
+
+            $bits = explode(':', $raw);
+            $id = $bits[0];
+            $data = $bits[1];
+            if (!empty($data) && !empty($id) && is_numeric($id)) {
+                $coordinates = explode(',', $data);
+                $x = $coordinates[0];
+                $y = $coordinates[1];
+                $z = $coordinates[2];
+                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
+                    $home = HomeItem::find($id);
+                    if (!$home || $home->home_id)
+                        continue;
+
+                    $home->update([
+                        'x' => $x,
+                        'y' => $y,
+                        'z' => $z,
+                    ]);
+                }
+            }
+        }
+
+        if (!empty($background[1])) {
+            $bg = str_replace('b_', '', $background[1]);
+            $storeItem = StoreItem::where([['type', 'b'], ['class', $bg] ])->first();
+            if (!$storeItem)
+                return;
+
+            $bgInUse = HomeItem::where([['data', 'background'], ['group_id', $session->group_id]])->first();
+            if ($bgInUse) {
+                $bgInUse->update([
+                    'group_id'  => null
+                ]);
+            }
+            $home = HomeItem::where([['data', 'background'], ['owner_id', $session->user_id], ['item_id', $storeItem->id]])->first();
+            if ($home) {
+                $home->update([
+                    'group_id'  => $session->group_id
+                ]);
+            }
+        }
+
+        $session->delete();
     }
 
     public function discussions($id)

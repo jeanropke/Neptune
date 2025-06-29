@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Home\HomeItem;
-use App\Models\Home\HomeSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +18,8 @@ class WebInventoryController extends Controller
                     ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
                 break;
             case 'widgets':
-                $widgets = HomeItem::where([['owner_id', user()->id], ['type', 'w'], ['class', '!=', 'profilewidget']])
+                $type = user()->homeSession->group_id ? 'gw' : 'w';
+                $widgets = HomeItem::where([['owner_id', user()->id], ['type', $type], ['group_id', user()->homeSession->group_id], ['class', '!=', 'profilewidget']])
                     ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
                     ->select('cms_homes.*', 'cms_homes_store_items.class', 'cms_homes_store_items.caption', 'cms_homes_store_items.description')->get();
                 return view('home.inventory.main')->with('widgets', $widgets);
@@ -70,7 +70,7 @@ class WebInventoryController extends Controller
         if (!$item)
             return "Invalid item id: '{$request->itemId}'";
 
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session)
             return 'error: placeSticker > session expired';
 
@@ -80,6 +80,7 @@ class WebInventoryController extends Controller
 
         $item->update([
             'home_id'   => $session->home_id,
+            'group_id'  => $session->group_id,
             'x'         => 20,
             'y'         => 30,
             'z'         => $request->zindex,

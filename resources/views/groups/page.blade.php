@@ -1,15 +1,98 @@
-@extends('layouts.master', ['body' => $isEdit ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
+@extends('layouts.master', ['body' => $editing ? 'editmode' : 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
 
 @section('title', 'Group Home: ' . $owner->name)
 
 @section('content')
-    <script language="JavaScript" type="text/javascript">
-        Event.onDOMReady(function() {
-            initView({{ $owner->id }});
-            attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
-            attachGroupSettingsObserver({{ $owner->id }}, );
-        });
-    </script>
+    @if (!$editing)
+        <script language="JavaScript" type="text/javascript">
+            Event.onDOMReady(function() {
+                initView({{ $owner->id }});
+                attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
+                attachGroupSettingsObserver({{ $owner->id }}, );
+            });
+        </script>
+    @else
+        <script language="JavaScript" type="text/javascript">
+            Event.onDOMReady(function() {
+                initView({{ $owner->id }});
+            });
+
+            function isElementLimitReached() {
+                if (getElementCount() >= 350) {
+                    showHabboHomeMessageBox("Error", "You have already reached the maximum number of elements on the page. Remove a sticker, note or widget to be able to place this item.",
+                        "Close");
+                    return true;
+                }
+                return false;
+            }
+
+            function cancelEditing(expired) {
+                location.replace("/groups/actions/cancelEditingSession" + (expired ? "?expired=true" : ""));
+            }
+
+            function getSaveEditingActionName() {
+                return '/groups/actions/saveEditingSession';
+            }
+
+            function showEditErrorDialog() {
+                var closeEditErrorDialog = function(e) {
+                    if (e) {
+                        Event.stop(e);
+                    }
+                    Element.remove($("myhabbo-error"));
+                    hideOverlay();
+                }
+                var dialog = createDialog("myhabbo-error", "", false, false, false, closeEditErrorDialog);
+                setDialogBody(dialog,
+                    '<p>Error occurred! Please try again in couple of minutes.</p><p><a href="#" class="new-button" id="myhabbo-error-close"><b>Close</b><i></i></a></p><div class="clear"></div>'
+                    );
+                Event.observe($("myhabbo-error-close"), "click", closeEditErrorDialog);
+                moveDialogToCenter(dialog);
+                makeDialogDraggable(dialog);
+            }
+
+            document.observe("dom:loaded", function() {
+                showInfoDialog("session-start-info-dialog",
+                    "Your editing session will time out in 30 minutes.",
+                    "Ok",
+                    function(e) {
+                        Event.stop(e);
+                        Element.hide($("session-start-info-dialog"));
+                        hideOverlay();
+                    });
+                var timeToTwoMinuteWarning = 1676000;
+                if (timeToTwoMinuteWarning > 0) {
+                    setTimeout(function() {
+                        showInfoDialog("session-ends-warning-dialog",
+                            "Your editing session will time out in 2 minutes.",
+                            "Ok",
+                            function(e) {
+                                Event.stop(e);
+                                Element.hide($("session-ends-warning-dialog"));
+                                hideOverlay();
+                            });
+                    }, timeToTwoMinuteWarning);
+                }
+            });
+
+            function showSaveOverlay() {
+                var invalidPos = getElementsInInvalidPositions();
+                if (invalidPos.length > 0) {
+                    $A(invalidPos).each(function(el) {
+                        Element.scrollTo(el);
+                        Effect.Pulsate(el);
+                    });
+                    showHabboHomeMessageBox("Whoops! You can\'t do that!",
+                        "Sorry, but you can\'t place your stickers, notes or widgets here. Close the window to continue editing your page.", "Close");
+                    return false;
+                } else {
+                    showOverlay(null, 'Saving');
+                    return true;
+                }
+            }
+        </script>
+    @endif
+
     <div id="mypage-wrapper">
         <div id="mypage-left-panel">
             <div id="mypage-top-nav"></div>
@@ -24,21 +107,21 @@
                                 Group Home: {{ $owner->name }}
                             </span>
                             @auth
-                                @if ($owner->getMember(user()->id))
+                                @if ($owner->getMember(user()->id) && !$editing)
                                     @if (user()->favourite_group == $owner->id)
                                         <a href="#" class="toolbutton deselect-favorite-group" id="deselect-favorite-button" style="float: right"><span>Remove favorite</span></a>
                                     @else
                                         <a href="#" class="toolbutton select-favorite-group" id="select-favorite-button" style="float: right"><span>Make favorite</span></a>
                                     @endif
                                 @endif
-                                @if ($owner->owner_id == user()->id && !$isEdit)
+                                @if ($owner->owner_id == user()->id && !$editing)
+                                    <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                                     <div id="group-tools">
-                                        <a href="{{ url('/') }}/groups/actions/startEditingSession/{{ $owner->id }}" class="toolbutton edit"><span>Edit</span></a>
                                         <a href="#" class="toolbutton group-badge" id="group-tools-badge"><span>Badge</span></a>
                                         <a href="#" class="toolbutton group-settings" id="group-settings-button"><span>Settings</span></a>
                                         <a href="#" class="toolbutton memberlist" id="group-tools-members"><span>Members</span></a>
                                     </div>
-                                @else
+                                @elseif(!$editing)
                                     @if ($owner->getMember(user()->id))
                                         <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
                                             <span>Leave group</span>
@@ -69,6 +152,19 @@
                 </div>
             </div>
 
+            @if ($editing)
+                <div id="top-toolbar">
+                    <div>
+                        <a href="#" id="notes-button" class="toolbutton notes"><span>Notes</span></a>
+                        <a href="#" id="stickers-button" class="toolbutton stickers"><span>Stickers</span></a>
+                        <a href="#" id="widgets-button" class="toolbutton widgets"><span>Widgets</span></a>
+                        <a href="#" id="backgrounds-button" class="toolbutton backgrounds"><span>Backgrounds</span></a>
+                        <a id="cancel-button" href="#" class="toolbutton cancel"><span>Cancel</span></a>
+                        <a id="save-button" href="#" class="toolbutton save"><span>Save</span></a>
+                    </div>
+                </div>
+            @endif
+
             <div id="grouptabs">
                 <ul>
                     <li id="selected"><a href="{{ url('/') }}/groups/{{ $owner->id }}/id">Front Page</a></li>
@@ -91,7 +187,7 @@
                                 {{-- sticker --}}
                                 <div class="movable sticker s_{{ $itemStore->class }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}"
                                     id="sticker-{{ $item->id }}">
-                                    @if ($isEdit)
+                                    @if ($editing)
                                         <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
                                             id="sticker-{{ $item->id }}-edit" />
                                         <script language="JavaScript" type="text/javascript">
@@ -110,7 +206,7 @@
                                     <div class="n_skin_{{ $item->skin }}">
                                         <div class="stickie-header">
                                             <h3>
-                                                @if ($isEdit)
+                                                @if ($editing)
                                                     <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
                                                         id="stickie-{{ $item->id }}-edit" />
                                                     <script language="JavaScript" type="text/javascript">
@@ -297,6 +393,140 @@
     </div>
 
     <div id="join-group-dialog" class="dialog-grey"></div>
+
+    @if ($editing)
+        <div id="edit-menu" class="menu" style="left: -1500px; top: 264px;">
+            <div class="menu-header">
+                <div class="menu-exit" id="edit-menu-exit"><img src="https://casper.fun/web-gallery/images/dialogs/menu-exit.gif" alt="" width="11" height="11">
+                </div>
+                <h3>Edit</h3>
+            </div>
+            <div class="menu-body">
+                <div class="menu-content">
+                    <form action="#" onsubmit="return false;">
+                        <div id="edit-menu-skins" style="display: none;">
+                            <select id="edit-menu-skins-select">
+                                <option value="1" id="edit-menu-skins-select-defaultskin">Default</option>
+                                <option value="6" id="edit-menu-skins-select-goldenskin">Golden</option>
+
+                                <option value="3" id="edit-menu-skins-select-metalskin">Metal</option>
+                                <option value="5" id="edit-menu-skins-select-notepadskin">Notepad</option>
+                                <option value="2" id="edit-menu-skins-select-speechbubbleskin">Speech Bubble</option>
+                                <option value="4" id="edit-menu-skins-select-noteitskin">Stickie Note</option>
+                                @if (!user()->getSubscription()->isExpired())
+                                    <option value="8" id="edit-menu-skins-select-hc_pillowskin">HC Bling</option>
+                                    <option value="7" id="edit-menu-skins-select-hc_machineskin">HC Scifi</option>
+                                @endif
+                                @if (user()->rank > 5)
+                                    <option value="9" id="edit-menu-skins-select-nakedskin">Staff - Naked Skin</option>
+                                @endif
+                            </select>
+                        </div>
+                        <div id="edit-menu-stickie" style="display: none;">
+
+                            <p>Warning! If you click 'Remove', the note will be permanently deleted.</p>
+                        </div>
+                        <div id="rating-edit-menu" style="display: none;">
+                            <input type="button" id="ratings-reset-link" value="Reset rating">
+                        </div>
+                        <div id="highscorelist-edit-menu" style="display:none">
+                            <select id="highscorelist-game">
+                                <option value="">Select game</option>
+                                <option value="1">Battle Ball: Rebound!</option>
+                                <option value="2">SnowStorm</option>
+                                <option value="0">Wobble Squabble</option>
+                            </select>
+                        </div>
+                        <div id="edit-menu-remove-group-warning" style="display: none;">
+                            <p>This item belongs to another user. If you remove it, it will return to their inventory.</p>
+
+                        </div>
+                        <div id="edit-menu-gb-availability" style="display: none;">
+                            <select id="guestbook-privacy-options">
+                                <option value="private">Members only</option>
+                                <option value="public" selected="">Public</option>
+                            </select>
+                        </div>
+                        <div id="edit-menu-trax-select" style="display: none;">
+
+                            <select id="trax-select-options"></select>
+                        </div>
+                        <div id="edit-menu-remove" style="display: block;">
+                            <input type="button" id="edit-menu-remove-button" value="Remove">
+                        </div>
+                    </form>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="menu-bottom"></div>
+        </div>
+        <script language="JavaScript" type="text/javascript">
+            Event.observe(window, "resize", function() {
+                if (editMenuOpen) closeEditMenu();
+            }, false);
+            Event.observe(document, "click", function() {
+                if (editMenuOpen) closeEditMenu();
+            }, false);
+            Event.observe("edit-menu", "click", Event.stop, false);
+            Event.observe("edit-menu-exit", "click", function() {
+                closeEditMenu();
+            }, false);
+            Event.observe("edit-menu-remove-button", "click", handleEditRemove, false);
+            Event.observe("edit-menu-skins-select", "click", Event.stop, false);
+            Event.observe("edit-menu-skins-select", "change", handleEditSkinChange, false);
+            Event.observe("guestbook-privacy-options", "click", Event.stop, false);
+            Event.observe("guestbook-privacy-options", "change", handleGuestbookPrivacySettings, false);
+            Event.observe("trax-select-options", "click", Event.stop, false);
+            Event.observe("trax-select-options", "change", handleTraxplayerTrackChange, false);
+        </script>
+
+        <script>
+            NoteEditor.initialise();
+        </script>
+        <style>
+            #note_editor_dialog {
+                width: 345px;
+            }
+
+            #note-editor-container {
+                position: relative;
+                margin: 0 0 1em 25px;
+            }
+
+            #note-editor-container div.stickie {
+                position: relative;
+                cursor: default;
+            }
+
+            #note-editor-container div.stickie h3 img {
+                display: none;
+            }
+        </style>
+        <script>
+            Event.observe('stickers-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('stickers');
+            }, false);
+            Event.observe('widgets-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('widgets');
+            }, false);
+            Event.observe('backgrounds-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('backgrounds');
+            }, false);
+        </script>
+    @endif
+
+    <script language="JavaScript" type="text/javascript">
+        Event.observe(window, "load", observeAnim);
+        @if ($editing)
+            initEditToolbar();
+            initMovableItems();
+        @endif
+        Event.onDOMReady(initDraggableDialogs);
+    </script>
 
     @auth
         @if (request()->join && !$owner->getMember(user()->id))

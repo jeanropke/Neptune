@@ -2,12 +2,7 @@
     <div class="w_skin_{{ $item->skin }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">MY FRIENDS</span><span class="header-right">&nbsp;@if($isEdit)<img
-                    src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18"
-                    class="edit-button" id="widget-{{ $item->id }}-edit" />
-                <script language="JavaScript" type="text/javascript">
-                    Event.observe('widget-{{ $item->id }}-edit', 'click', function(e) { openEditMenu(e, {{ $item->id }}, 'widget', 'widget-{{ $item->id }}-edit'); }, false);
-                </script>@endif</span></h3>
+                <h3><span class="header-left">&nbsp;</span><span class="header-middle">MY FRIENDS</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
             </div>
         </div>
         <div class="widget-body">
@@ -20,21 +15,21 @@
                 </div>
 
                 <div class="clear"></div>
-                @if(ceil($friendsCount / $friendsPerPage) > 1)
+                @if (ceil($friendsCount / $friendsPerPage) > 1)
+                    <div id="number">1/{{ ceil($friendsCount / $friendsPerPage) }}</div>
 
-                <div id="number">1/{{ ceil($friendsCount / $friendsPerPage) }}</div>
-
-                <div id="slider">
-                    <div id="slider-bar">
-                        <div style="left: 0px; position: relative;" class="selected" id="slider-handle"><img src="{{ url('/') }}/web/images/myhabbo/slider/slider_scaler.gif">
+                    <div id="slider">
+                        <div id="slider-bar">
+                            <div style="left: 0px; position: relative;" class="selected" id="slider-handle"><img
+                                    src="{{ url('/') }}/web/images/myhabbo/slider/slider_scaler.gif">
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
 
                 {{-- Habbo uses account name instead id --}}
                 <script language="JavaScript" type="text/javascript">
-                    FriendsWidget.init({{ ceil($friendsCount / $friendsPerPage) }}, {{ json_encode(range(1, ceil($friendsCount / $friendsPerPage))) }}, {{ $owner->id }});
+                    FriendsWidgetOld.init({{ ceil($friendsCount / $friendsPerPage) }}, {{ json_encode(range(1, ceil($friendsCount / $friendsPerPage))) }}, {{ $owner->id }});
                 </script>
 
                 <div class="clear"></div>

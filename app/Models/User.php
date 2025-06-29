@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Models\Habbowood\Movie;
 use App\Models\Home\HomeItem;
+use App\Models\Home\HomeSession;
 use App\Models\Home\HomeSong;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\UserBadge;
 use App\Models\UserFriend;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +60,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -344,8 +349,13 @@ class User extends Authenticatable
         $this->tags()->where('tag', $tag)->delete();
     }
 
-    public function tags() : HasMany
+    public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'user');
+    }
+
+    public function homeSession(): HasOne
+    {
+        return $this->hasOne(HomeSession::class, 'user_id');
     }
 }

@@ -40,7 +40,13 @@ class Group extends Model
 
     public function getItems()
     {
-        return HomeItem::where('group_id', $this->id)->get();
+        return HomeItem::where(function ($query) {
+            $query->where('group_id', $this->id)
+                ->whereNotNull('x');
+        })->orWhere(function ($query) {
+            $query->where('group_id', $this->id)
+                ->where('data', 'background');
+        })->get();
     }
 
     public function getTopics()
@@ -56,6 +62,11 @@ class Group extends Model
     public function getAdmins()
     {
         return GroupMember::where([['member_rank', '>=', 2]])->get();
+    }
+
+    public function getRank()
+    {
+        return $this->members;
     }
 
     public function members(): HasMany
@@ -152,7 +163,7 @@ class Group extends Model
         $this->tags()->where('tag', $tag)->delete();
     }
 
-    public function tags() : HasMany
+    public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'group');
     }

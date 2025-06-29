@@ -264,20 +264,31 @@ Route::middleware('user')->group(function () {
     //GroupController
     Route::prefix('groups')->group(function () {
         Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
-        Route::get('/{id}/id', [GroupController::class, 'groupId'])->name('groups.page.id');
+        Route::get('/{id}/id', [GroupController::class, 'group'])->name('groups.page.id');
         Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
 
-        Route::get('/actions/joinAfterLogin', [GroupController::class, 'joinAfterLogin'])->name('groups.actions.join_after_login');
-        Route::post('/actions/join', [GroupController::class, 'join'])->name('groups.actions.join');
-        Route::post('/actions/confirm_leave', [GroupController::class, 'confirmLeave'])->name('groups.actions.confirm_leave');
-        Route::post('/actions/leave', [GroupController::class, 'leave'])->name('groups.actions.confirm_leave');
-        Route::post('/actions/show_badge_editor', [GroupController::class, 'showBadgeEditor'])->name('groups.actions.show_badge_editor');
-        Route::post('/actions/update_group_badge', [GroupController::class, 'updateGroupBadge'])->name('groups.actions.update_group_badge');
-        Route::post('/actions/confirm_select_favorite', [GroupController::class, 'confirmSelectFavorite'])->name('groups.actions.confirm_select_favorite');
-        Route::post('/actions/select_favorite', [GroupController::class, 'selectFavorite'])->name('groups.actions.select_favorite');
-        Route::post('/actions/confirm_deselect_favorite', [GroupController::class, 'confirmDeselectFavorite'])->name('groups.actions.confirm_deselect_favorite');
-        Route::post('/actions/deselect_favorite', [GroupController::class, 'deselectFavorite'])->name('groups.actions.deselect_favorite');
-        Route::post('/actions/group_settings', [GroupController::class, 'groupSettings'])->name('groups.actions.group_settings');
+        Route::prefix('actions')->group(function () {
+            Route::get('/joinAfterLogin', [GroupController::class, 'joinAfterLogin'])->name('groups.actions.join_after_login');
+            Route::post('/join', [GroupController::class, 'join'])->name('groups.actions.join');
+            Route::post('/confirm_leave', [GroupController::class, 'confirmLeave'])->name('groups.actions.confirm_leave');
+            Route::post('/leave', [GroupController::class, 'leave'])->name('groups.actions.confirm_leave');
+            Route::post('/show_badge_editor', [GroupController::class, 'showBadgeEditor'])->name('groups.actions.show_badge_editor');
+            Route::post('/update_group_badge', [GroupController::class, 'updateGroupBadge'])->name('groups.actions.update_group_badge');
+            Route::post('/confirm_select_favorite', [GroupController::class, 'confirmSelectFavorite'])->name('groups.actions.confirm_select_favorite');
+            Route::post('/select_favorite', [GroupController::class, 'selectFavorite'])->name('groups.actions.select_favorite');
+            Route::post('/confirm_deselect_favorite', [GroupController::class, 'confirmDeselectFavorite'])->name('groups.actions.confirm_deselect_favorite');
+            Route::post('/deselect_favorite', [GroupController::class, 'deselectFavorite'])->name('groups.actions.deselect_favorite');
+            Route::post('/group_settings', [GroupController::class, 'groupSettings'])->name('groups.actions.group_settings');
+            Route::get('/startEditingSession/{groupId}', [GroupController::class, 'startEditing'])->name('groups.actions.start_editing');
+            Route::post('/saveEditingSession', [GroupController::class, 'saveEditing'])->name('groups.actions.save_editing');
+
+            Route::post('/confirm_give_rights', [GroupMemberController::class, 'confirmGiveRights'])->name('myhabbo.groups.confirm_give_rights');
+            Route::post('/give_rights', [GroupMemberController::class, 'giveRights'])->name('myhabbo.groups.give_rights');
+            Route::post('/confirm_revoke_rights', [GroupMemberController::class, 'confirmRevokeRights'])->name('myhabbo.groups.confirm_revoke_rights');
+            Route::post('/revoke_rights', [GroupMemberController::class, 'revokeRights'])->name('myhabbo.groups.revoke_rights');
+            Route::post('/confirm_remove', [GroupMemberController::class, 'confirmRemove'])->name('myhabbo.groups.confirm_remove');
+            Route::post('/remove', [GroupMemberController::class, 'remove'])->name('myhabbo.groups.remove');
+        });
 
         Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
     });
@@ -285,15 +296,21 @@ Route::middleware('user')->group(function () {
     Route::prefix('myhabbo')->group(function () {
         Route::post('/avatarlist/avatarinfo', [WidgetController::class, 'avatarInfo'])->name('myhabbo.avatarlist.avatarinfo');
         Route::post('/avatarlist/friendsearchpaging', [WidgetController::class, 'friendsPaging'])->name('myhabbo.avatarlist.friend_search');
+        Route::post('/avatarlist/membersearchpaging', [WidgetController::class, 'membersPaging'])->name('myhabbo.avatarlist.member_search');
         Route::post('/badgelist/badgepaging', [WidgetController::class, 'badgePaging'])->name('myhabbo.badgelist.badgepaging');
 
         Route::post('/friends/add', [WidgetController::class, 'friendsAdd'])->name('myhabbo.friends.add');
         Route::post('/friends/request', [WidgetController::class, 'friendsRequest'])->name('myhabbo.friends.request');
         Route::post('/friends_ajax', [WidgetController::class, 'friendsAjax'])->name('myhabbo.friends.ajax');
-        Route::post('/guestbook/add', [WidgetController::class, 'guestbookAdd'])->name('myhabbo.guestbook.add');
-        Route::post('/guestbook/preview', [WidgetController::class, 'guestbookPreview'])->name('myhabbo.guestbook.preview');
-        Route::post('/guestbook/remove', [WidgetController::class, 'guestbookRemove'])->name('myhabbo.guestbook.remove');
-        Route::post('/guestbook/list', [WidgetController::class, 'guestbookList'])->name('myhabbo.guestbook.list');
+
+        Route::prefix('guestbook')->group(function () {
+            Route::post('/add', [WidgetController::class, 'guestbookAdd'])->name('myhabbo.guestbook.add');
+            Route::post('/preview', [WidgetController::class, 'guestbookPreview'])->name('myhabbo.guestbook.preview');
+            Route::post('/remove', [WidgetController::class, 'guestbookRemove'])->name('myhabbo.guestbook.remove');
+            Route::post('/list', [WidgetController::class, 'guestbookList'])->name('myhabbo.guestbook.list');
+            Route::post('/configure', [WidgetController::class, 'guestbookConfigure'])->name('myhabbo.guestbook.configure');
+        });
+
         Route::post('/groups/groupinfo', [WidgetController::class, 'groupInfo'])->name('myhabbo.groups.groupinfo');
         Route::post('/groups/grouplist', [WidgetController::class, 'groupList'])->name('myhabbo.groups.grouplist');
         Route::post('/rating/rate', [WidgetController::class, 'ratingsRate'])->name('myhabbo.rating.rate');
@@ -306,6 +323,7 @@ Route::middleware('user')->group(function () {
         Route::post('/noteeditor/preview', [NoteEditorController::class, 'preview'])->name('myhabbo.noteeditor.preview');
         Route::post('/noteeditor/place', [NoteEditorController::class, 'place'])->name('myhabbo.noteeditor.place');
         Route::post('/noteeditor/purchase', [NoteEditorController::class, 'purchase'])->name('myhabbo.noteeditor.purchase');
+        Route::post('/noteeditor/purchase_done', [NoteEditorController::class, 'purchaseDone'])->name('myhabbo.noteeditor.purchase_done');
         Route::post('/stickie/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.stickie.edit');
         Route::post('/stickie/delete', [HomeController::class, 'deleteStickie'])->name('myhabbo.stickie.delete');
         Route::post('/widget/edit', [HomeController::class, 'skinEdit'])->name('myhabbo.widget.edit');

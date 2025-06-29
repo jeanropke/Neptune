@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Home\HomeItem;
-use App\Models\Home\HomeSession;
+use App\Models\Home\StoreItem;
 use Illuminate\Http\Request;
 
 class NoteEditorController extends Controller
@@ -68,12 +68,14 @@ class NoteEditorController extends Controller
 
     public function place(Request $request)
     {
-        $item = HomeItem::where([['owner_id', user()->id], ['item_id', 4], ['home_id', null], ['group_id', null]])->first();
-        //Does not have aa unused note
+        $store = StoreItem::where('type', 'commodity')->first();
+        $item = HomeItem::where([['owner_id', user()->id], ['item_id', $store->id], ['home_id', null], ['group_id', null]])->first();
+
+        //Does not have an unused note
         if (!$item)
             return 'BACK';
 
-        $session = HomeSession::find(user()->id);
+        $session = user()->homeSession;
         if (!$session)
             return 'BACK';
 
@@ -132,5 +134,23 @@ class NoteEditorController extends Controller
     public function purchase()
     {
         return view('home.noteeditor.purchase');
+    }
+
+    public function purchaseDone()
+    {
+        $store = StoreItem::where('type', 'commodity')->first();
+        if (!$store)
+            return 'ERROR';
+
+        for ($i = 0; $i <= $store->amount; $i++) {
+            HomeItem::create([
+                'owner_id'  => user()->id,
+                'item_id'   => $store->id
+            ]);
+        }
+
+        user()->updateCredits(-$store->price);
+
+        return 'OK';
     }
 }
