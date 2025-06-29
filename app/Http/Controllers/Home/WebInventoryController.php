@@ -91,7 +91,7 @@ class WebInventoryController extends Controller
             'item'      => $item,
             'id'        => $item->id,
             'zindex'    => $request->zindex,
-            'isEdit'    => true
+            'editing'    => true
         ]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(array($item->id)));
@@ -112,9 +112,9 @@ class WebInventoryController extends Controller
         $sticker->update([
             'home_id'   => null,
             'group_id'  => null,
-            'x'         => 0,
-            'y'         => 0,
-            'z'         => 0,
+            'x'         => null,
+            'y'         => null,
+            'z'         => null,
         ]);
 
         return response('SUCCESS', 200)

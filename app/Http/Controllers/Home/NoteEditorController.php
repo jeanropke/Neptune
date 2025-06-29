@@ -125,7 +125,7 @@ class NoteEditorController extends Controller
         return response(view('home.stickie', [
             'item'   => $item,
             'zindex' => $request->zindex,
-            'isEdit' => true
+            'editing' => true
         ]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($item->id));
