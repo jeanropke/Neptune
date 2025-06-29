@@ -20,16 +20,16 @@
 <script language="JavaScript" type="text/javascript">
     @foreach ($friends as $friend)
         Event.observe('f{{ $loop->index }}', "mouseover", function(e) {
-            FriendsWidget.showFriendData('{{ $loop->index }}', {{ $friends->count() }});
+            FriendsWidgetOld.showFriendData('{{ $loop->index }}', {{ $friends->count() }});
         });
         Event.observe('f{{ $loop->index }}', "mouseout", function(e) {
-            FriendsWidget.hideFriendData('{{ $loop->index }}', 1000);
+            FriendsWidgetOld.hideFriendData('{{ $loop->index }}', 1000);
         });
         Event.observe('finf-{{ $loop->index }}', "mouseover", function(e) {
-            FriendsWidget.stopHideTimer();
+            FriendsWidgetOld.stopHideTimer();
         });
         Event.observe('finf-{{ $loop->index }}', "mouseout", function(e) {
-            FriendsWidget.hideFriendData('{{ $loop->index }}', 1000);
+            FriendsWidgetOld.hideFriendData('{{ $loop->index }}', 1000);
         });
     @endforeach
 </script>
