@@ -1,6 +1,6 @@
 @extends('layouts.master', ['menuId' => 'article'])
 
-@section('title', $article->title)
+@section('title', $article->title_resolved)
 
 @section('content')
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -18,8 +18,8 @@
                                 <ul>
                                     @foreach($articles as $art)
                                     <li>
-                                        <span class="articledate">{{ $art->getPublishDate()->format('d/m/y') }}</span>
-                                        <a href="/article/{{ $art->url }}">{{ $art->getTitle() }}</a>
+                                        <span class="articledate">{{ $art->publish_date_resolved->format('d/m/y') }}</span>
+                                        <a href="/article/{{ $art->url }}">{{ $art->title_resolved }}</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -36,20 +36,20 @@
             <td valign="top" style="width: 539px; padding-top: 3px;" class="habboPage-col rightmost">
                 <div class="v3box yellow">
                     <div class="v3box-top">
-                        <h3>{{ $article->getTitle() }}</h3>
+                        <h3>{{ $article->title_resolved }}</h3>
                     </div>
                     <div class="v3box-content">
                         <div class="v3box-body">
                             <div class="article-full">
                                 <i class="article-author">Published at
-                                    {{ $article->getPublishDate()->format('F j, Y') }}</i><br><br>
+                                    {{ $article->publish_date_resolved->format('F j, Y') }}</i><br><br>
                                 <p class="teaser"><b>{{ $article->short_text }}</b></p><br>
                                 <div>
                                     {!! $article->long_text !!}
                                 </div>
 
                                 <br />
-                                <b style="float: right; margin-right: 25px;">{{ $article->getAuthor() }}</b>
+                                <b style="float: right; margin-right: 25px;">{{ $article->author_name }}</b>
                             </div>
                             <div class="clear"></div>
                         </div>

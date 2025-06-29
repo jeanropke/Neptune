@@ -66,7 +66,7 @@
         @foreach($articles as $article)
         <div class="newsitem">
             <h3><span class="articledate">[{{ $article->created_at->format('d/m/y') }}]</span>
-                <a href="/article/{{ $article->url }}">{{ $article->title }}</a></h3>
+                <a href="/article/{{ $article->url }}">{{ $article->title_resolved }}</a></h3>
 
             <p>
                 {{ $article->short_text }}

@@ -44,7 +44,7 @@
                                         {{ $article->created_at->format('m/d/y h:i') }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $article->author }}
+                                        {{ $article->author_name }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.articles.edit', $article->id) }}">

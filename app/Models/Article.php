@@ -2,49 +2,50 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
     protected $table = 'cms_articles';
 
     protected $fillable = [
-        'url', 'image', 'title', 'short_text', 'long_text', 'author_id', 'author_override', 'publish_date', 'is_deleted', 'created_at', 'updated_at'
+        'url',
+        'image',
+        'title',
+        'short_text',
+        'long_text',
+        'author_id',
+        'author_override',
+        'publish_date',
+        'is_deleted',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [
-        'created_at'    => 'datetime',
         'publish_date'  => 'datetime'
     ];
 
-    public function getAuthor()
+    public function author(): BelongsTo
     {
-        if ($this->author_override)
-            return $this->author_override;
-
-        $user = User::find($this->author_id);
-        if ($user)
-            return $user->username;
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function getPublishDate()
+    public function getAuthorNameAttribute(): ?string
     {
-        if ($this->publish_date)
-            return $this->publish_date;
-
-        return $this->created_at;
+        return $this->author_override ?: $this->author?->username;
     }
 
-    public function getTitle()
+    public function getPublishDateResolvedAttribute()
     {
-        if (Auth::check()) {
-            if (user()->hasPermission('can_create_site_news')) {
-                if ($this->getPublishDate() > Carbon::now()) {
-                    return "[NOT YET RELEASED] {$this->title}";
-                }
-            }
+        return $this->publish_date ?: $this->created_at;
+    }
+
+    public function getTitleResolvedAttribute()
+    {
+        if (user() && user()->hasPermission('can_create_site_news') && $this->publish_date_resolved > now()) {
+            return '[NOT YET RELEASED] ' . $this->title;
         }
 
         return $this->title;

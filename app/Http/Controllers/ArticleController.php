@@ -11,7 +11,7 @@ class ArticleController extends Controller
     public function show($url)
     {
         $article = Article::where('url', $url)->first();
-        if(!$article || $article->is_deleted == '1')
+        if(!$article || $article->is_deleted == '1' || !(user() && user()->hasPermission('can_create_site_news') && $article->publish_date_resolved > now()))
             return abort(404);
 
         $articles = Article::where([['is_deleted', '=', '0'], ['publish_date', '<', Carbon::now()]])->orderBy('created_at', 'desc')->take(10);
