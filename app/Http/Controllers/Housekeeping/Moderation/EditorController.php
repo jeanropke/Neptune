@@ -32,7 +32,7 @@ class EditorController extends Controller
         }
 
         return view('housekeeping.moderation.editor.guestroom.listing')->with([
-            'rooms' => $rooms->paginate(15)
+            'rooms' => $rooms->with('user')->paginate(15)
         ]);
     }
 

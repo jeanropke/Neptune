@@ -28,17 +28,7 @@ class Room extends Model
         }
     }
 
-    //TODO: remove this and use user() instead
-    public function getOwner()
-    {
-        $user = User::find($this->owner_id);
-        if ($user)
-            return $user->username;
-
-        return "Owner ID {$this->owner_id}";
-    }
-
     public function user(): BelongsTo {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
     }
 }

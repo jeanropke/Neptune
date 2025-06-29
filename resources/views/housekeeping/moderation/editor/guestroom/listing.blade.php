@@ -68,8 +68,8 @@
                                         {{ $room->id }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $room->getOwner() }} <br />
-                                        <i><a href="{{ route('housekeeping.editor.guestroom.listing') }}?type=owner&value={{ $room->getOwner() }}">See user rooms</a></i>
+                                        {{ $room->user->username }} <br />
+                                        <i><a href="{{ route('housekeeping.editor.guestroom.listing') }}?type=owner&value={{ $room->user->username }}">See user rooms</a></i>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {!! $room->name ?? '<b><i>No room name</i></b>' !!}
