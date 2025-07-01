@@ -366,6 +366,41 @@ function hideOverlayIfMacFirefox() {
     }
 }
 
+/* custom script */
+function lightboxOverlay(url, text) {
+    if (!url) return;
+
+    var img = Builder.node("img", {
+        src: url,
+        style: "display: none; position: absolute; z-index: 9001; top:0; left:0; border: 7px solid #fff"
+    });
+
+    var close = function (e) {
+        if (e) {
+            Event.stop(e)
+        }
+        Event.stopObserving(img);
+        if (img.parentNode) {
+            img.parentNode.removeChild(img);
+        }
+        hideOverlay();
+    };
+    Event.observe(img, "click", close);
+    var image = new Image();
+    showOverlay(close, text || "");
+    image.onload = function () {
+        if ($("overlay_progress")) {
+            Element.remove($("overlay_progress"))
+        }
+        $("overlay").parentNode.insertBefore(img, $("overlay"));
+        moveDialogToCenter(img);
+        $(img).show();
+        image.onload = function () { }
+    };
+    image.src = url;
+}
+/* end custom script  */
+
 // From Lightbox by Lokesh Dhakar - http://www.huddletogether.com
 // Core code from - quirksmode.org
 // Edit for Firefox by pHaez

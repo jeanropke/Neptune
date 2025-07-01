@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Decoration Examples')
@@ -55,8 +55,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" id="galleryImage" alt="thumb kick"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_kick.gif">
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_kick.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb kick"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_kick.gif" alt="">
+                                                                    </a>
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -72,8 +75,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" id="galleryImage" alt="thumb pacman"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_pacman.gif">
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_pacman.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb pacman"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_pacman.gif" alt="">
+                                                                    </a>
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -95,8 +101,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" id="galleryImage" alt="thumb fridge"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_fridge.gif">
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_fridge.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb fridge"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_fridge.gif" alt="">
+                                                                    </a>
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -114,8 +123,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" align="left" id="galleryImage7"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_maze.gif" alt=""></p>
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_maze.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb maze"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_maze.gif" alt="">
+                                                                    </a>
+                                                                </p>
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"></p>
@@ -141,8 +154,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" id="galleryImage" alt="thumb theatre"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_theatre.gif">
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_theatre.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb theatre"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_theatre.gif" alt="">
+                                                                    </a>
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -158,8 +174,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" align="left" id="galleryImage"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_discussionroom.gif" alt=""></p>
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_discussionroom.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb discussionroom"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_discussionroom.gif" alt="">
+                                                                    </a>
+                                                                </p>
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"><br><b>Discussion
@@ -176,8 +196,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" align="left" id="galleryImage8"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_restaurant2.gif" alt=""></p>
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_restaurant2.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb restaurant2"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_restaurant2.gif" alt="">
+                                                                    </a>
+                                                                </p>
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"><strong>Restaurants<br></strong>A
@@ -193,8 +217,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" align="left" id="galleryImage9"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_helpcentre.gif" alt=""></p>
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_helpcentre.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb helpcentre"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_helpcentre.gif" alt="">
+                                                                    </a>
+                                                                </p>
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"><b>Helpdesks</b>
@@ -211,8 +239,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="216">
-                                                                <p align="left"><img width="186" height="126" border="0" align="left" id="galleryImage10"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_greatwallofchina.gif" alt=""></p>
+                                                                <p align="left">
+                                                                    <a target="_new" href="{{ url('/') }}/c_images/album928/room_greatwallofchina.gif">
+                                                                        <img width="186" height="126" border="0" id="galleryImage" alt="thumb greatwallofchina"
+                                                                            src="{{ url('/') }}/c_images/album928/thumb_greatwallofchina.gif" alt="">
+                                                                    </a>
+                                                                </p>
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;">
@@ -235,6 +267,16 @@
                                             <div></div>
                                         </div>
                                     </div>
+                                    <script type="text/javascript" language="Javascript">
+                                        document.observe("dom:loaded", function() {
+                                            $$('#galleryImage').each(function(a) {
+                                                Event.observe(a, 'click', function(e) {
+                                                    Event.stop(e);
+                                                    lightboxOverlay(a.parentElement.href, "Image is loading");
+                                                });
+                                            });
+                                        });
+                                    </script>
                                 </td>
                             </tr>
                         </tbody>
