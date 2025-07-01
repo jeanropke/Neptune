@@ -3,7 +3,7 @@
         <ul id="inventory-item-list">
             @foreach ($widgets as $widget)
                 <li id="inventory-item-p-{{ $widget->id }}" title="{{ $widget->caption }}" class="webstore-widget-item {{ ($widget->home_id || $widget->x) ? 'webstore-widget-disabled' : '' }}">
-                    <div class="webstore-item-preview w_{{ $widget->getStoreItem()->class }}_pre">
+                    <div class="webstore-item-preview w_{{ $widget->store->class }}_pre">
                         <div class="webstore-item-mask">
                         </div>
                     </div>

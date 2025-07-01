@@ -12,105 +12,97 @@ class WebStoreController extends Controller
 {
     public function storeMain(Request $request)
     {
-        switch ($request->type) {
-            case 'backgrounds':
-                $categories = StoreCategory::where('type', 'b')->orderBy('order_num')->get();
-                $items = $categories->first()->getItems();
-                break;
-            default:
-            case 'stickers':
-                $categories = StoreCategory::where('type', 's')->get();
-                $items = $categories->first()->getItems();
-                break;
-        }
-
-        $firstItem = $items->first();
+        $type = $request->type === 'backgrounds' ? 'b' : 's';
+        $categories = StoreCategory::where('type', $type)->with('items')->orderBy('order_num')->get();
+        $items = $categories->first()?->items ?? collect();
 
         $data = [];
-        if ($firstItem)
-            $data = ['itemCount' => 1, 'previewCssClass' => "{$firstItem->type}_{$firstItem->class}_pre", 'titleKey' => ''];
+        if ($items->isNotEmpty()) {
+            $first = $items->first();
+            $data = [
+                'itemCount'       => 1,
+                'previewCssClass' => "{$first->type}_{$first->class}_pre",
+                'titleKey'        => ''
+            ];
+        }
 
-
-        return response(view('home.store.main', [
-            'categories'    => $categories,
-            'items'         => $items
-        ]), 200)
+        return response(
+            view('home.store.main', compact('categories', 'items')),
+            200
+        )
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode([$data]));
     }
 
     public function loadItems(Request $request)
     {
-        return view('home.store.items')->with([
-            'items' => StoreItem::where('category', $request->categoryId)->get()
-        ]);
+        $items = StoreItem::where('category', $request->categoryId)->get();
+        return view('home.store.items', compact('items'));
     }
 
     public function preview(Request $request)
     {
         $item = StoreItem::find($request->productId);
-        if (!$item)
+        if (!$item) {
             return "Invalid item id: '{$request->productId}'";
+        }
 
-        $data = [
-            [
-                'itemCount' => $item->amount,
-                'previewCssClass' => "{$item->type}_{$item->class}_pre",
-                'titleKey' => $item->caption
-            ]
-        ];
+        $data = [[
+            'itemCount'       => $item->amount,
+            'previewCssClass' => "{$item->type}_{$item->class}_pre",
+            'titleKey'        => $item->caption,
+        ]];
 
-        if ($item->type == 'b')
+        if ($item->type === 'b') {
             $data[0]['bgCssClass'] = "{$item->type}_{$item->class}";
+        }
 
-        return response(view('home.store.preview', [
-            'item' => $item
-        ]), 200)
+        return response(
+            view('home.store.preview', compact('item')),
+            200
+        )
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($data));
     }
 
-
     public function purchaseConfirm(Request $request)
     {
-        return view('home.store.purchase_confirm')->with('item', StoreItem::find($request->productId));
+        $item = StoreItem::find($request->productId);
+        return view('home.store.purchase_confirm', compact('item'));
     }
 
     public function purchaseStickers(Request $request)
     {
-        $store = StoreItem::find($request->selectedId);
-        if (!$store)
-            return 'ERROR';
-
-        HomeItem::create([
-            'owner_id'  => user()->id,
-            'type'      => $store->getFullType(),
-            'amount'    => $store->amount,
-            'item_id'   => $store->id
-        ]);
-        user()->updateCredits(-$store->price);
-        return 'OK';
+        return $this->handlePurchase($request->selectedId);
     }
 
     public function purchaseBackgrounds(Request $request)
     {
-        $store = StoreItem::find($request->selectedId);
-        if (!$store)
-            return 'ERROR';
-
-        HomeItem::create([
-            'owner_id'  => user()->id,
-            'type'      => $store->getFullType(),
-            'amount'    => 1,
-            'item_id'   => $store->id,
-            'data'      => 'background'
-        ]);
-        user()->updateCredits(-$store->price);
-        return 'OK';
+        return $this->handlePurchase($request->selectedId, true);
     }
 
     public function backgroundWarning()
     {
         return view('home.store.background_warning');
+    }
+
+    private function handlePurchase($itemId, bool $isBackground = false)
+    {
+        $store = StoreItem::find($itemId);
+        if (!$store) {
+            return response('ERROR');
+        }
+
+        HomeItem::create([
+            'owner_id' => user()->id,
+            'type'     => $store->getFullType(),
+            'amount'   => $isBackground ? 1 : $store->amount,
+            'item_id'  => $store->id,
+            'data'     => $isBackground ? 'background' : null,
+        ]);
+
+        user()->updateCredits(-$store->price);
+
+        return response('OK');
     }
 }

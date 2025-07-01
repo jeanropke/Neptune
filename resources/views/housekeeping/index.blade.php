@@ -43,16 +43,16 @@
                                                                             <strong>Members</strong>
                                                                         </td>
                                                                         <td class="homepage_sub_row">
-                                                                            {{ $users_total }} (<a href="">{{ emu_config('players.online') }} online</a>)
+                                                                            {{ $usersTotal }} (<a href="">{{ emu_config('players.online') }} online</a>)
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="homepage_sub_row"><strong>Rooms</strong>
                                                                         </td>
                                                                         <td class="homepage_sub_row">
-                                                                            {{ $rooms_users }}
+                                                                            {{ $roomsUsers }}
                                                                             (of which
-                                                                            {{ $rooms_public }} public rooms)
+                                                                            {{ $roomsPublic }} public rooms)
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -87,7 +87,7 @@
                                                                     <tr>
                                                                         <td class="homepage_sub_row"><strong>Website Reports</strong></td>
                                                                         <td class="homepage_sub_row">
-                                                                            {{ $reports_total }} ({{ $reports_closed }} closed)
+                                                                            {{ $reportsTotal }} ({{ $reportsClosed }} closed)
                                                                         </td>
                                                                     </tr>
                                                                 </table>

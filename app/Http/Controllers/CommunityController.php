@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fansite;
-use App\Models\Photo;
+use App\Models\Furni\Photo;
+use App\Models\Neptune\Fansite;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
 {
     public function photos()
     {
-        return view('community.photos')->with([
-            'photos' => Photo::orderBy('timestamp', 'DESC')->limit(20)->get()
-        ]);
+        $photos = Photo::with('furni')->latest('timestamp')->limit(20)->get();
+
+        return view('community.photos', compact('photos'));
     }
 
     public function fansites()
     {
-        return view('community.fansites')->with([
-            'fansites' => Fansite::get()
-        ]);
+        $fansites = Fansite::all();
+
+        return view('community.fansites', compact('fansites'));
     }
 
     public function linktoolSearch(Request $request)
@@ -39,5 +39,4 @@ class CommunityController extends Controller
 
         return view('community.mgm_sendlink_preview');
     }
-
 }

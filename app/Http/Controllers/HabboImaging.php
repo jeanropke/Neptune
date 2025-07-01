@@ -6,7 +6,7 @@ use App\Classes\AvatarImage;
 use App\Classes\BadgeImage;
 use App\Classes\PhotoPallets\GreyscalePalette;
 use App\Classes\PhotoRenderer;
-use App\Models\Photo;
+use App\Models\Furni\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 

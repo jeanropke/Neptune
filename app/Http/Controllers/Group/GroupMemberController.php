@@ -3,177 +3,133 @@
 namespace App\Http\Controllers\Group;
 
 use App\Http\Controllers\Controller;
-use App\Models\CmsUserSettings;
 use App\Models\Group;
-use App\Models\Group\GroupReply;
-use App\Models\Group\GroupTopic;
-use App\Models\GroupMember;
 use App\Models\User;
-use Carbon\Carbon;
+use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Str;
 
-class GroupMemberController extends Controller
+class GroupMemberController extends Controller implements HasMiddleware
 {
-
-    /**
-     * TODO: add member_rank permissions
-     */
+    public static function middleware(): array
+    {
+        return [
+            function (Request $request, Closure $next) {
+                $group = Group::findOrFail($request->groupId);
+                abort_unless($group->owner->id == user()->id, 403);
+                $request->merge(['group' => $group]);
+                return $next($request);
+            }
+        ];
+    }
 
     public function listing(Request $request)
     {
-        $group = Group::find($request->groupId);
+        $group = $request->group;
+        $page = $request->pageNumber ?? 1;
+        $perPage = 16;
+        $isPending = (bool) $request->pending;
 
-        if (!$group)
-            return;
-
-        $members = $group->filterByUsername($request->searchString);
-        $page = $request->pageNumber;
-
-        $pending = $group->getPendingMembers()->count();
-        $count = $members->count();
-
-        $data = array(
-            'pending'   => "Pending members ($pending)",
-            'members'   => "Members ($count)"
-        );
-
-        if ($request->pending) {
-            return response(view('groups.member.listing')->with([
-                'totalPages'    => ceil($pending / 16),
-                'page'          => $page,
-                'members'       => $group->getPendingMembers(),
-                'myself'        => $group->getMember(user()->id),
-                'group'         => $group,
-                'pending'       => true
-            ]), 200)
-                ->header('Content-Type', 'application/json')
-                ->header('X-JSON', json_encode($data));
+        $query = $isPending ? $group->pendingMembers() : $group->members()->with('user');
+        if (!$isPending && $request->filled('searchString')) {
+            $query->where('username', 'LIKE', '%' . Str::lower($request->searchString) . '%');
         }
 
-        return response(view('groups.member.listing')->with([
-            'totalPages'    => ceil($members->count() / 16),
-            'page'          => $page,
-            'members'       => $members,
-            'myself'        => $group->getMember(user()->id),
-            'group'         => $group
-        ]), 200)
+        $total = $query->count();
+        $members = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
+
+        $data = [
+            'pending' => 'Pending members (' . $group->pendingMembers()->count() . ')',
+            'members' => 'Members (' . $group->memberships()->count() . ')',
+        ];
+
+        return response(
+            view('groups.member.listing', compact('total', 'page', 'members', 'group', 'isPending') + [
+                'totalPages' => ceil($total / $perPage),
+                'myself' => $group->getMember(user()->id),
+            ]),
+            200
+        )
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($data));
     }
 
     public function avatarinfo(Request $request)
     {
-        return view('groups.member.memberlist_avatarinfo')->with([
-            'member'    => User::find($request->theAccountId)
+        return view('groups.member.memberlist_avatarinfo', [
+            'member' => User::findOrFail($request->theAccountId),
         ]);
+    }
+
+    protected function extractTargets(Request $request): array
+    {
+        $ids = $request->targetIds ?? $request->targetAccountId;
+        return is_string($ids) ? explode(',', $ids) : (array) $ids;
+    }
+
+    protected function renderConfirmation(Group $group, array $targetIds, string $view)
+    {
+        $targets = $group->members->whereIn('user_id', $targetIds)->pluck('username')->implode(', ');
+        return view("groups.member.$view", compact('targets'));
     }
 
     public function confirmGiveRights(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->values()->pluck('username')->implode(', ');
-
-        return view('groups.member.confirm_give_rights')->with('targets', $targets);
+        return $this->renderConfirmation($request->group, $this->extractTargets($request), 'confirm_give_rights');
     }
 
     public function giveRights(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $group->members()->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->update(['member_rank' => '2']);
-
-        return "OK";
+        $request->group->members()->whereIn('user_id', $this->extractTargets($request))->update(['member_rank' => '2']);
+        return response('OK');
     }
 
     public function confirmRevokeRights(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->values()->pluck('username')->implode(', ');
-
-        return view('groups.member.confirm_remove_rights')->with('targets', $targets);
+        return $this->renderConfirmation($request->group, $this->extractTargets($request), 'confirm_remove_rights');
     }
 
     public function revokeRights(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $group->members()->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->update(['member_rank' => '1']);
-
-        return "OK";
+        $request->group->members()->whereIn('user_id', $this->extractTargets($request))->update(['member_rank' => '1']);
+        return response('OK');
     }
 
     public function confirmRemove(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $targets = $group->members->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->values()->pluck('username')->implode(', ');
-
-        return view('groups.member.confirm_remove')->with('targets', $targets);
+        return $this->renderConfirmation($request->group, $this->extractTargets($request), 'confirm_remove');
     }
 
     public function remove(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $group->members()->whereIn('user_id', explode(',', $request->targetIds ?? $request->targetAccountId))->delete();
-
-        User::whereIn('id', explode(',', $request->targetIds ?? $request->targetAccountId))
-            ->where('favourite_group', $group->id)
-            ->update(['favourite_group' => 0]);
-
-        return "OK";
+        $ids = $this->extractTargets($request);
+        $request->group->members()->whereIn('user_id', $ids)->delete();
+        User::whereIn('id', $ids)->where('favourite_group', $request->group->id)->update(['favourite_group' => 0]);
+        return response('OK');
     }
 
     public function confirmAccept(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $targets = $group->getPendingMembers()->whereIn('user_id', explode(',', $request->targetIds))->pluck('username')->implode(', ');
-
-        return view('groups.member.confirm_accept')->with('targets', $targets);
+        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('username')->implode(', ');
+        return view('groups.member.confirm_accept', compact('targets'));
     }
 
     public function accept(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        GroupMember::where('group_id', $group->id)
-            ->whereIn('user_id', explode(',', $request->targetIds))
-            ->update(['is_pending' => 0]);
-
-        return "OK";
+        $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->update(['is_pending' => 0]);
+        return response('OK');
     }
 
     public function confirmDecline(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $targets = $group->getPendingMembers()->whereIn('user_id', explode(',', $request->targetIds))->pluck('username')->implode(', ');
-
-        return view('groups.member.confirm_decline')->with('targets', $targets);
+        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('username')->implode(', ');
+        return view('groups.member.confirm_decline', compact('targets'));
     }
 
     public function decline(Request $request)
     {
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        GroupMember::where('group_id', $group->id)
-            ->whereIn('user_id', explode(',', $request->targetIds))
-            ->delete();
-
-        return "OK";
+        $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->delete();
+        return response('OK');
     }
 }

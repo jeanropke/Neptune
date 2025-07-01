@@ -9,10 +9,11 @@ class EmuSetting extends Model
     protected $table = 'settings';
 
     protected $fillable = [
-        'setting', 'value'
+        'setting',
+        'value'
     ];
 
     public $timestamps = false;
+    protected $primaryKey = 'setting';
     public $incrementing = false;
-    public $primaryKey = 'setting';
 }

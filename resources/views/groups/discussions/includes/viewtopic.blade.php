@@ -2,7 +2,7 @@
     <tbody>
         <tr>
             <td class="post-header-link" valign="top" style="width: 148px;">Writer: <a
-                    href="{{ url('/') }}/home/{{ $topic->getAuthor()->username }}">{{ $topic->getAuthor()->username }}</a></td>
+                    href="{{ url('/') }}/home/{{ $topic->author->username }}">{{ $topic->author->username }}</a></td>
             <td class="post-header-name" valign="top">Subject: <span class="topic-name">{{ $topic->subject }} (Started:
                     {{ $topic->created_at->format('j.n.Y') }}) </span></td>
             <td align="right">
@@ -44,7 +44,7 @@
             <tr class="post-list-index-{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                 <td class="post-list-row-container">
                     <table border="0" cellpadding="4" cellspacing="0" width="100%">
-                        @php($author = $reply->getAuthor())
+                        @php($author = $reply->author)
                         <tbody>
                             <tr>
                                 <td colspan="2" class="online">

@@ -66,7 +66,7 @@
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <a href="{{ route('furnipicker.listing') }}" id="furni-picker">Pick</a>
                                         <div id="furni-picked"></div>
-                                        <input name="items" value="" type="text" hidden>
+                                        <input name="item_ids" value="" type="text">
                                     </td>
                                 </tr>
                                 <tr>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
 use App\Models\CmsUserSettings;
-use App\Models\Home\HomeData;
+use App\Models\Neptune\UserSettings;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -37,7 +37,7 @@ class AuthController extends Controller
         $token = Str::random(60);
         DB::table('cms_password_reset')->updateOrInsert(
             ['email' => $request->ownerEmailAddress],
-            ['token' => $token, 'created_at' => Carbon::now()]
+            ['token' => $token, 'created_at' => now()]
         );
 
         if ($this->sendResetEmail($request->ownerEmailAddress, $token)) {
@@ -290,8 +290,8 @@ class AuthController extends Controller
             'figure'        => $data['figure'],
             'sex'           => $data['gender'],
             'birthday'      => $data['birthday'],
-            'created_at'    => Carbon::now(),
-            'updated_at'    => Carbon::now(),
+            'created_at'    => now(),
+            'updated_at'    => now(),
             'credits'       => cms_config('register.default.credits'),
             'film'          => cms_config('register.default.film'),
             'tickets'       => cms_config('register.default.tickets'),
@@ -299,14 +299,14 @@ class AuthController extends Controller
             'console_motto' => cms_config('register.default.console_motto') ?? ''
         ]);
 
-        CmsUserSettings::create([
+        UserSettings::create([
             'user_id'   => $user->id
         ]);
 
         DB::table('users_ip_logs')->insert([
             'user_id'       => $user->id,
             'ip_address'    => $request->ip(),
-            'created_at'    => Carbon::now()
+            'created_at'    => now()
         ]);
 
         Auth::login($user);

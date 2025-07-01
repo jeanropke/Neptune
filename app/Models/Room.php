@@ -10,25 +10,38 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'owner_id', 'category', 'name', 'description', 'model', 'ccts', 'wallpaper', 'floor', 'showname', 'superusers', 'accesstype', 'password', 'visitors_now', 'visitors_max', 'rating', 'is_hidden'
+        'owner_id',
+        'category',
+        'name',
+        'description',
+        'model',
+        'ccts',
+        'wallpaper',
+        'floor',
+        'showname',
+        'superusers',
+        'accesstype',
+        'password',
+        'visitors_now',
+        'visitors_max',
+        'rating',
+        'is_hidden'
     ];
 
     public $timestamps = false;
 
-    public function getState()
+    public function getState(): string
     {
-        switch($this->accesstype)
-        {
-            case 0:
-                return 'open';
-            case 1:
-                return 'locked';
-            case 2:
-                return 'password';
-        }
+        return match ($this->accesstype) {
+            0 => 'open',
+            1 => 'locked',
+            2 => 'password',
+            default => 'unknown',
+        };
     }
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'owner_id');
     }
 }

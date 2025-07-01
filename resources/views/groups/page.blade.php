@@ -3,20 +3,23 @@
 @section('title', 'Group Home: ' . $owner->name)
 
 @section('content')
-    @if (!$editing)
+
+    <script language="JavaScript" type="text/javascript">
+        Event.onDOMReady(function() { initView({{ $owner->id }}); });
+    </script>
+
+    @if (user() && user()->id == $owner->owner_id)
         <script language="JavaScript" type="text/javascript">
             Event.onDOMReady(function() {
-                initView({{ $owner->id }});
                 attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
                 attachGroupSettingsObserver({{ $owner->id }}, );
             });
         </script>
+    @endif
+
+    @if (!$editing)
     @else
         <script language="JavaScript" type="text/javascript">
-            Event.onDOMReady(function() {
-                initView({{ $owner->id }});
-            });
-
             function isElementLimitReached() {
                 if (getElementCount() >= 350) {
                     showHabboHomeMessageBox("Error", "You have already reached the maximum number of elements on the page. Remove a sticker, note or widget to be able to place this item.",
@@ -45,7 +48,7 @@
                 var dialog = createDialog("myhabbo-error", "", false, false, false, closeEditErrorDialog);
                 setDialogBody(dialog,
                     '<p>Error occurred! Please try again in couple of minutes.</p><p><a href="#" class="new-button" id="myhabbo-error-close"><b>Close</b><i></i></a></p><div class="clear"></div>'
-                    );
+                );
                 Event.observe($("myhabbo-error-close"), "click", closeEditErrorDialog);
                 moveDialogToCenter(dialog);
                 makeDialogDraggable(dialog);
@@ -167,9 +170,9 @@
 
             <div id="grouptabs">
                 <ul>
-                    <li id="selected"><a href="{{ url('/') }}/groups/{{ $owner->id }}/id">Front Page</a></li>
+                    <li id="selected"><a href="{{ $owner->url }}">Front Page</a></li>
                     <li>
-                        <a href="{{ url('/') }}/groups/{{ $owner->id }}/id/discussions">Discussion Forum</a>
+                        <a href="{{ $owner->url }}/discussions">Discussion Forum</a>
                     </li>
                 </ul>
             </div>
@@ -177,11 +180,11 @@
             <br clear="all">
 
             <div id="mypage-top-spacer"></div>
-            @php($items = $owner->getItems())
-            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->getStoreItem()->class : '' }}">
+            @php($items = $owner->items)
+            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->store->class : '' }}">
                 <div id="playground">
-                    @foreach ($items as $item)
-                        @php($itemStore = $item->getStoreItem())
+                    @foreach ($items->whereNotNull(['x'], ['y'], ['z']) as $item)
+                        @php($itemStore = $item->store)
                         @switch($itemStore->type)
                             @case('s')
                                 {{-- sticker --}}

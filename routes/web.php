@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
@@ -47,6 +47,7 @@ use App\Http\Controllers\Housekeeping\Site\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TestController;
 use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
@@ -61,16 +62,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/maintenance', [IndexController::class, 'maintenance'])->name('index.maintenance');
+Route::get('/maintenance', [MaintenanceController::class, 'maintenance'])->name('index.maintenance');
+
+Route::get('/test', [TestController::class, 'index'])->name('index.maintenance');
 
 Route::middleware('user')->group(function () {
-    //IndexController means all pages in 'Home', including subpages.
-    Route::get('/', [IndexController::class, 'home'])->name('index.home');
-    Route::get('/footer_pages/privacy_policy', [IndexController::class, 'privacyPolicy'])->name('footer_pages.privacy_policy');
-    Route::get('/footer_pages/terms_and_conditions', [IndexController::class, 'termsConditions'])->name('footer_pages.terms_and_conditions');
-    Route::get('/footer_pages/terms_of_sale', [IndexController::class, 'termsSale'])->name('footer_pages.terms_of_sale');
-    Route::get('/footer_pages/atlas', [IndexController::class, 'atlas'])->name('footer_pages.atlas');
-    Route::get('/footer_pages/advertise', [IndexController::class, 'advertise'])->name('footer_pages.advertise');
+    Route::get('/', fn() => view('index'))->name('index.home');
+    Route::get('/footer_pages/privacy_policy', fn() => view('footer_pages.privacy_policy'))->name('footer_pages.privacy_policy');
+    Route::get('/footer_pages/terms_and_conditions', fn() => view('footer_pages.terms_and_conditions'))->name('footer_pages.terms_and_conditions');
+    Route::get('/footer_pages/terms_of_sale', fn() => view('footer_pages.terms_of_sale'))->name('footer_pages.terms_of_sale');
+    Route::get('/footer_pages/atlas', fn() => view('footer_pages.atlas'))->name('footer_pages.atlas');
+    Route::get('/footer_pages/advertise', fn() => view('footer_pages.advertise'))->name('footer_pages.advertise');
 
     Route::get('/article/{url}', [ArticleController::class, 'show'])->name('article.show');
     Route::get('/articles', [ArticleController::class, 'articles'])->name('article.articles');
@@ -88,10 +90,10 @@ Route::middleware('user')->group(function () {
     });
     //HotelController
     Route::prefix('hotel')->group(function () {
-        Route::get('/', [HotelController::class, 'index'])->name('hotel.index');
-        Route::get('/pets', [HotelController::class, 'pets'])->name('hotel.pets');
-        Route::get('/pets/taking_care_of_your_pet', [HotelController::class, 'takingCareOfYourPet'])->name('hotel.pets.taking_care_of_your_pet');
-        Route::get('/room', [HotelController::class, 'room'])->name('hotel.room');
+        Route::get('/', fn() => view('hotel.index'))->name('hotel.index');
+        Route::get('/pets', fn() => view('hotel.pets'))->name('hotel.pets');
+        Route::get('/pets/taking_care_of_your_pet', fn() => view('hotel.pets.taking_care_of_your_pet'))->name('hotel.pets.taking_care_of_your_pet');
+        Route::get('/room', fn() => view('hotel.room'))->name('hotel.room');
         Route::get('/staff', [HotelController::class, 'staff'])->name('hotel.staff');
         Route::get('/groups', [HotelController::class, 'groups'])->name('hotel.groups');
         Route::get('/groups/directory', [HotelController::class, 'groupsDirectory'])->name('hotel.groups.directory');
@@ -99,29 +101,29 @@ Route::middleware('user')->group(function () {
         Route::get('/groups/directory/hotel', [HotelController::class, 'groupsHotel'])->name('hotel.groups.directory.hotel');
         Route::get('/groups/directory/recent', [HotelController::class, 'groupsRecent'])->name('hotel.groups.directory.recent');
         Route::get('/groups/group_instructions', [HotelController::class, 'groupsInstructions'])->name('hotel.groups.group_instructions');
-        Route::get('/homes', [HotelController::class, 'homes'])->name('hotel.homes');
-        Route::get('/web', [HotelController::class, 'web'])->name('hotel.web');
-        Route::get('/navigator', [HotelController::class, 'navigator'])->name('hotel.navigator');
-        Route::get('/welcome_to_habbo_hotel/how_to_get_started', [HotelController::class, 'welcomeStarted'])->name('hotel.welcome.started');
-        Route::get('/welcome_to_habbo_hotel/chatting', [HotelController::class, 'welcomeChatting'])->name('hotel.welcome.chatting');
-        Route::get('/welcome_to_habbo_hotel/navigator', [HotelController::class, 'welcomeNavigator'])->name('hotel.welcome.navigator');
-        Route::get('/welcome_to_habbo_hotel/your_own_room', [HotelController::class, 'welcomeRoom'])->name('hotel.welcome.room');
-        Route::get('/welcome_to_habbo_hotel/help_safety', [HotelController::class, 'welcomeHelp'])->name('hotel.welcome.help');
+        Route::get('/homes', fn() => view('hotel.homes'))->name('hotel.homes');
+        Route::get('/web', fn() => view('hotel.web'))->name('hotel.web');
+        Route::get('/navigator', fn() => view('hotel.navigator'))->name('hotel.navigator');
+        Route::get('/welcome_to_habbo_hotel/how_to_get_started', fn() => view('hotel.welcome.started'))->name('hotel.welcome.started');
+        Route::get('/welcome_to_habbo_hotel/chatting', fn() => view('hotel.welcome.chatting'))->name('hotel.welcome.chatting');
+        Route::get('/welcome_to_habbo_hotel/navigator', fn() => view('hotel.welcome.navigator'))->name('hotel.welcome.navigator');
+        Route::get('/welcome_to_habbo_hotel/your_own_room', fn() => view('hotel.welcome.room'))->name('hotel.welcome.room');
+        Route::get('/welcome_to_habbo_hotel/help_safety', fn() => view('hotel.welcome.help'))->name('hotel.welcome.help');
 
         Route::prefix('trax')->group(function () {
-            Route::get('/', function() { return view('hotel.trax.index'); })->name('hotel.trax.index');
-            Route::get('/store', function() { return view('hotel.trax.store'); })->name('hotel.trax.store');
+            Route::get('/', fn() => view('hotel.trax.index'))->name('hotel.trax.index');
+            Route::get('/store', fn() => view('hotel.trax.store'))->name('hotel.trax.store');
 
             Route::prefix('masterclass')->group(function () {
-                Route::get('/', function() { return view('hotel.trax.masterclass.index'); })->name('hotel.trax.masterclass.index');
-                Route::get('/hiphop', function() { return view('hotel.trax.masterclass.hiphop'); })->name('hotel.trax.masterclass.hiphop');
-                Route::get('/rock', function() { return view('hotel.trax.masterclass.rock'); })->name('hotel.trax.masterclass.rock');
-                Route::get('/electronic', function() { return view('hotel.trax.masterclass.electronic'); })->name('hotel.trax.masterclass.electronic');
-                Route::get('/disco', function() { return view('hotel.trax.masterclass.disco'); })->name('hotel.trax.masterclass.disco');
-                Route::get('/habbo', function() { return view('hotel.trax.masterclass.habbo'); })->name('hotel.trax.masterclass.habbo');
-                Route::get('/groove', function() { return view('hotel.trax.masterclass.groove'); })->name('hotel.trax.masterclass.groove');
-                Route::get('/sfx', function() { return view('hotel.trax.masterclass.sfx'); })->name('hotel.trax.masterclass.sfx');
-                Route::get('/ambient', function() { return view('hotel.trax.masterclass.ambient'); })->name('hotel.trax.masterclass.ambient');
+                Route::get('/', fn() => view('hotel.trax.masterclass.index'))->name('hotel.trax.masterclass.index');
+                Route::get('/hiphop', fn() => view('hotel.trax.masterclass.hiphop'))->name('hotel.trax.masterclass.hiphop');
+                Route::get('/rock', fn() => view('hotel.trax.masterclass.rock'))->name('hotel.trax.masterclass.rock');
+                Route::get('/electronic', fn() => view('hotel.trax.masterclass.electronic'))->name('hotel.trax.masterclass.electronic');
+                Route::get('/disco', fn() => view('hotel.trax.masterclass.disco'))->name('hotel.trax.masterclass.disco');
+                Route::get('/habbo', fn() => view('hotel.trax.masterclass.habbo'))->name('hotel.trax.masterclass.habbo');
+                Route::get('/groove', fn() => view('hotel.trax.masterclass.groove'))->name('hotel.trax.masterclass.groove');
+                Route::get('/sfx', fn() => view('hotel.trax.masterclass.sfx'))->name('hotel.trax.masterclass.sfx');
+                Route::get('/ambient', fn() => view('hotel.trax.masterclass.ambient'))->name('hotel.trax.masterclass.ambient');
             });
         });
     });
@@ -132,13 +134,13 @@ Route::middleware('user')->group(function () {
         Route::get('/habbowood/competition', [EntertainmentController::class, 'habbowoodCompetition'])->name('entertainment.habbowood.competition');
         Route::get('/habbowood/movies', [EntertainmentController::class, 'habbowoodMovies'])->name('entertainment.habbowood.movies');
         Route::get('/habbowood/movies/{id}', [EntertainmentController::class, 'habbowoodMoviePlayer'])->name('entertainment.habbowood.movieplayer');
-        Route::get('/habbowood/sharemovie/{id}', [EntertainmentController::class, 'habbowoodShareMovie'])->name('entertainment.habbowood.sharemovie');
+        Route::get('/habbowood/sharemovie/{movie}', [EntertainmentController::class, 'habbowoodShareMovie'])->name('entertainment.habbowood.sharemovie');
         Route::get('/habbowood/mymovies', [EntertainmentController::class, 'habbowoodMyMovies'])->name('entertainment.habbowood.mymovies');
-        Route::get('/habbowood/embed', function() { return view('entertainment.habbowood.embed'); })->name('entertainment.habbowood.embed');
-        Route::get('/habbowood/movieshc', function() { return view('entertainment.habbowood.movieshc'); })->name('entertainment.habbowood.movieshc');
-        Route::get('/habbowood/filmakers', function() { return view('entertainment.habbowood.filmakers'); })->name('entertainment.habbowood.filmakers');
-        Route::get('/habbowood/help', function() { return view('entertainment.habbowood.help'); })->name('entertainment.habbowood.help');
-        Route::get('/habbowood/end', function() { return view('entertainment.habbowood.end'); })->name('entertainment.habbowood.end');
+        Route::get('/habbowood/embed', fn() => view('entertainment.habbowood.embed'))->name('entertainment.habbowood.embed');
+        Route::get('/habbowood/movieshc', fn() => view('entertainment.habbowood.movieshc'))->name('entertainment.habbowood.movieshc');
+        Route::get('/habbowood/filmakers', fn() => view('entertainment.habbowood.filmakers'))->name('entertainment.habbowood.filmakers');
+        Route::get('/habbowood/help', fn() => view('entertainment.habbowood.help'))->name('entertainment.habbowood.help');
+        Route::get('/habbowood/end', fn() => view('entertainment.habbowood.end'))->name('entertainment.habbowood.end');
     });
 
     //HabboMovies
@@ -160,19 +162,19 @@ Route::middleware('user')->group(function () {
 
     //ClubController
     Route::prefix('club')->group(function () {
-        Route::get('/', [ClubController::class, 'index'])->name('club.index');
-        Route::get('/join', [ClubController::class, 'join'])->name('club.join');
+        Route::get('/', fn() => view('club.index'))->name('club.index');
+        Route::get('/join', fn() => view('club.join'))->name('club.join');
+        Route::get('/benefits/habbo', fn() => view('club.benefitshabbo'))->name('club.benefits.habbo');
+        Route::get('/benefits/room', fn() => view('club.benefitsroom'))->name('club.benefits.room');
+        Route::get('/benefits/home', fn() => view('club.benefitshome'))->name('club.benefits.home');
+        Route::get('/benefits/extras', fn() => view('club.benefitsextras'))->name('club.benefits.extras');
         Route::get('/shop', [ClubController::class, 'shop'])->name('club.shop');
-        Route::get('/benefits/habbo', [ClubController::class, 'benefitsHabbo'])->name('club.benefits.habbo');
-        Route::get('/benefits/room', [ClubController::class, 'benefitsRoom'])->name('club.benefits.room');
-        Route::get('/benefits/home', [ClubController::class, 'benefitsHome'])->name('club.benefits.home');
-        Route::get('/benefits/extras', [ClubController::class, 'benefitsExtras'])->name('club.benefits.extras');
     });
 
     Route::prefix('habboclub')->group(function () {
         Route::post('/habboclub_subscribe', [ClubController::class, 'clubSubscribe'])->name('club.subscribe');
         Route::post('/habboclub_subscribe_submit', [ClubController::class, 'clubSubscribeSubmit'])->name('club.subscribe.submit');
-        Route::post('/habboclub_meter_update', [ClubController::class, 'clubMeterUpdate'])->name('club.meter.update');
+        Route::post('/habboclub_meter_update', fn() => view('club.ajax.habboclub_meter'))->name('club.meter.update');
     });
 
     Route::prefix('community')->group(function () {
@@ -211,20 +213,20 @@ Route::middleware('user')->group(function () {
 
     //CreditsController
     Route::prefix('credits')->group(function () {
-        Route::get('/', [CreditsController::class, 'index'])->name('credits.index');
+        Route::get('/', fn() => view('credits.index'))->name('credits.index');
         Route::get('/status', [CreditsController::class, 'getPaymentStatus'])->name('credits.status');
         Route::get('/buy/{offer?}', [CreditsController::class, 'buySetup'])->name('credits.buy.setup');
         Route::get('/transactions', [CreditsController::class, 'transactions'])->name('credits.transactions');
         Route::prefix('furniture')->group(function () {
-            Route::get('/', [CreditsController::class, 'furniture'])->name('credits.furniture');
-            Route::get('/catalogue', [CreditsController::class, 'catalogue'])->name('credits.furniture.catalogue');
+            Route::get('/', fn() => view('credits.furniture.index'))->name('credits.furniture');
+            Route::get('/catalogue', fn() => view('credits.furniture.catalogue'))->name('credits.furniture.catalogue');
             Route::get('/catalogue/{id}', [CreditsController::class, 'catalogue']);
-            Route::get('/decoration_examples', [CreditsController::class, 'decorationExamples']);
-            Route::get('/starterpacks', [CreditsController::class, 'starterPacks']);
-            Route::get('/trading', [CreditsController::class, 'trading']);
-            Route::get('/exchange', [CreditsController::class, 'exchange']);
-            Route::get('/cameras', [CreditsController::class, 'cameras']);
-            Route::get('/ecotronfaq', [CreditsController::class, 'ecotronfaq']);
+            Route::get('/decoration_examples', fn() => view('credits.furniture.decorationexamples'));
+            Route::get('/starterpacks', fn() => view('credits.furniture.starterpacks'));
+            Route::get('/trading', fn() => view('credits.furniture.trading'));
+            Route::get('/exchange', fn() => view('credits.furniture.exchange'));
+            Route::get('/cameras', fn() => view('credits.furniture.cameras'));
+            Route::get('/ecotronfaq', fn() => view('credits.furniture.ecotronfaq'));
         });
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
     });
@@ -263,9 +265,11 @@ Route::middleware('user')->group(function () {
 
     //GroupController
     Route::prefix('groups')->group(function () {
-        Route::get('/{url}', [GroupController::class, 'groupUrl'])->name('groups.page.url');
+        Route::get('/{alias}', [GroupController::class, 'group'])->name('groups.page.alias');
+        Route::get('/{alias}/discussions', [GroupController::class, 'discussions'])->name('groups.discussions.alias');
+
         Route::get('/{id}/id', [GroupController::class, 'group'])->name('groups.page.id');
-        Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions');
+        Route::get('/{id}/id/discussions', [GroupController::class, 'discussions'])->name('groups.discussions.id');
 
         Route::prefix('actions')->group(function () {
             Route::get('/joinAfterLogin', [GroupController::class, 'joinAfterLogin'])->name('groups.actions.join_after_login');
@@ -415,15 +419,15 @@ Route::middleware('user')->group(function () {
     Route::prefix('client')->group(function () {
         Route::get('/', [ClientController::class, 'index'])->name('client.index');
         Route::post('/', [ClientController::class, 'clientError'])->name('client.error');
-        Route::get('/disconnected', [ClientController::class, 'disconnected'])->name('client.disconnected');
+        Route::get('/disconnected', fn() => view('client.disconnected'))->name('client.disconnected');
     });
 
     Route::post('/components/updateHabboCount', [ClientController::class, 'updateHabboCount'])->name('client.updateHabboCount');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/topbar/credits', [ClientController::class, 'topbarCredits'])->name('topbar.credits');
-    Route::post('/topbar/habboclub', [ClientController::class, 'topbarHabboclub'])->name('topbar.habboclub');
+    Route::post('/topbar/credits', fn() => view('includes.topbar.credits'))->name('topbar.credits');
+    Route::post('/topbar/habboclub', fn() => view('includes.topbar.habboclub'))->name('topbar.habboclub');
 
     Route::prefix('profile')->group(function () {
         Route::get('/{page?}', [ProfileController::class, 'figure'])->name('profile.figure');
@@ -475,7 +479,7 @@ Route::middleware('guest')->group(function () {
 
     Route::prefix('housekeeping')->group(function () {
         Route::get('login', [HousekeepingAuthController::class, 'login'])->name('housekeeping.account.login');
-        Route::post('account/submit', [HousekeepingAuthController::class, 'doLogin'])->name('housekeeping.account.submit');
+        Route::post('account/submit', [HousekeepingAuthController::class, 'doLogin'])->middleware('guest', 'throttle:3,1')->name('housekeeping.account.submit');
     });
 
 });
@@ -714,9 +718,9 @@ Route::middleware('admin')->group(function () {
         });
 
         Route::prefix('help')->group(function () {
-            Route::get('/', [HouseekeepingHelpController::class, 'index'])->name('housekeeping.help.index');
-            Route::get('/bugs', [HouseekeepingHelpController::class, 'bugs'])->name('housekeeping.help.bugs');
-            Route::get('/version', [HouseekeepingHelpController::class, 'version'])->name('housekeeping.help.version');
+            Route::get('/', fn() => view('housekeeping.help.index'))->name('housekeeping.help.index');
+            Route::get('/bugs', fn() => view('housekeeping.help.bugs'))->name('housekeeping.help.bugs');
+            Route::get('/version', fn() => view('housekeeping.help.version'))->name('housekeeping.help.version');
             Route::post('/version', [HouseekeepingHelpController::class, 'versionChecker'])->name('housekeeping.help.version.checker');
         });
 

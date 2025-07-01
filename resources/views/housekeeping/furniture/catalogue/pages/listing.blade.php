@@ -75,7 +75,7 @@
                                         {{ $page->image_teasers }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $page->getCatalogueItems()->count() }} furnis - <a
+                                        {{ $page->items->count() }} furnis - <a
                                             href="{{ route('housekeeping.furniture.catalogue.items') }}?page_id={{ $page->id }}"><i>See them</i></a>
                                     </td>
                                     <td class="tablerow2" align="center">

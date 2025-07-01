@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Housekeeping;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catalogue\CatalogueItem;
+use App\Models\Catalogue\Item;
 use Illuminate\Http\Request;
 
 class FurniPickerController extends Controller
@@ -15,10 +15,17 @@ class FurniPickerController extends Controller
 
     public function search(Request $request)
     {
-        if(strlen($request->furni) < 3)
-            return '<p>The furni must be at least 3 characters.</p>';
+        $search = trim($request->input('furni'));
 
-        $items = CatalogueItem::where([['sale_code', 'LIKE', "%{$request->furni}%"]])->orWhere([['name', 'LIKE', "%{$request->furni}%"]])->get();
-        return view('housekeeping.ajax.furnipicker.search')->with('items', $items);
+        if (mb_strlen($search) < 3) {
+            return '<p>The furni must be at least 3 characters.</p>';
+        }
+
+        $items = Item::where('sale_code', 'LIKE', "%{$search}%")
+            ->orWhere('name', 'LIKE', "%{$search}%")
+            ->limit(50)
+            ->get();
+
+        return view('housekeeping.ajax.furnipicker.search', compact('items'));
     }
 }

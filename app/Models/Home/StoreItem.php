@@ -9,20 +9,25 @@ class StoreItem extends Model
     protected $table = 'cms_homes_store_items';
 
     protected $fillable = [
-        'caption', 'class', 'category', 'price', 'type'
+        'caption',
+        'class',
+        'category',
+        'price',
+        'type'
     ];
 
     public $timestamps = false;
 
-    public function getFullType() {
+    public function getFullType(): string
+    {
         switch ($this->type) {
-            case 'b';
+            case 'b':
                 return 'background';
-            case 's';
+            case 's':
                 return 'sticker';
-            case 'w';
+            case 'w':
                 return 'widget';
-            case 'commodity';
+            case 'commodity':
                 return 'note';
             default:
                 return $this->type . ' not found?';

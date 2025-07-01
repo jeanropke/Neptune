@@ -24,63 +24,24 @@ class HomeController extends Controller
 
     public function homeUsername($username)
     {
-        $user = User::where('username', $username)->first();
-        if (!$user)
-            return 'home 404';
+        $owner = User::where('username', $username)->with('homeItems')->firstOrFail();
 
-        if (!$user->cmsSettings->home_public) //habbo home disabled
-            return view('home.private')->with(['user' => $user]);
+        $owner->ensureHomeItems();
 
-        $editing = false;
+        if (!$owner->cmsSettings->home_public)
+            return view('home.private')->with(['user' => $owner]);
 
-        if (Auth::check()) {
-            $session = user()->homeSession;
-            $editing = $session && ((user()->rank > 5 && $session->home_id) || (user()->id == $user->id && $session->home_id));
-        }
+        $user = user();
 
-        $items = HomeItem::where([['home_id', '=', $user->id], ['deleted_by', '=', null]]);
-
-        if ($items->count() == 0) {
-            //Stickie notes
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '15',  'data' => 'Remember![br]Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.[br]Deleted notes will not be funded.[br][br]', 'skin' => 'noteitskin']);
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '15',  'data' => 'Welcome to a brand new Habbo Home page![br]This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo [br]trap off with colourful notes and showcase your Habbo rooms! To [br]start editing just click the edit button.[br][br]', 'skin' => 'speechbubbleskin']);
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '15',  'data' => 'Where are my friends?[br]To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin']);
-            //Profile Widget
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '455',    'y' => '27',    'z' => '129', 'item_id' => '1', 'skin' => 'defaultskin']);
-            //Rooms Widget
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '440',    'y' => '321',   'z' => '177', 'item_id' => '6', 'skin' => 'defaultskin']);
-            //High Scores Widget
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '383',    'y' => '491',   'z' => '179', 'item_id' => '7', 'skin' => 'goldenskin']);
-            //needle_3
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '109',    'y' => '19',    'z' => '134', 'item_id' => '18']);
-            //sticker_spaceduck
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '275',    'y' => '367',   'z' => '152', 'item_id' => '24']);
-            //paper_clip_1
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'x' => '183',    'y' => '373',   'z' => '171', 'item_id' => '21']);
-            //bg_pattern_abstract2
-            HomeItem::insert(['owner_id' => $user->id, 'home_id' => $user->id, 'item_id' => '28',  'data' => 'background']);
-
-            // Inventory items
-            //needle_1
-            HomeItem::insert(['owner_id' => $user->id, 'item_id' => '16']);
-            //needle_2
-            HomeItem::insert(['owner_id' => $user->id, 'item_id' => '17']);
-
-            $items = HomeItem::where([['home_id', '=', $user->id], ['deleted_by', '=', null]]);
-        }
         return view('home')->with([
-            'items'         => $items->get(),
-            'owner'         => $user,
-            'editing'       => $editing,
-            'background'    => $items->where('data', 'background')->first()
+            'editing' => $user && $user->homeSession && $user->homeSession->home_id == $owner->id,
+            'owner'   => $owner
         ]);
     }
 
     public function homeId(Request $request)
     {
-        $userinfo = User::find($request->id);
-        if (!$userinfo)
-            return 'home 404';
+        $userinfo = User::findOrFail($request->id);
 
         return $this->homeUsername($userinfo->username);
     }

@@ -69,10 +69,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="profile-add-tag">
-                        <input type="text" id="profile-add-tag-input" maxlength="30"><br clear="all">
-                        <a href="#" class="toolbutton" style="float:left;margin:5px 0 0 0;" id="profile-add-tag"><span>Add tag</span></a>
-                    </div>
+                    @if (user() && user()->id == $owner->id)
+                        <div class="profile-add-tag">
+                            <input type="text" id="profile-add-tag-input" maxlength="30"><br clear="all">
+                            <a href="#" class="toolbutton" style="float:left;margin:5px 0 0 0;" id="profile-add-tag"><span>Add tag</span></a>
+                        </div>
+                    @endif
                 </div>
                 <script type="text/javascript">
                     Event.onDOMReady(function() {

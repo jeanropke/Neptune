@@ -11,39 +11,30 @@ class WebInventoryController extends Controller
 {
     public function loadInventory(Request $request)
     {
-        switch ($request->type) {
-            case 'backgrounds':
-                $items = HomeItem::where([['owner_id', user()->id], ['type', 'b']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
-                break;
-            case 'widgets':
-                $type = user()->homeSession->group_id ? 'gw' : 'w';
-                $widgets = HomeItem::where([['owner_id', user()->id], ['type', $type], ['group_id', user()->homeSession->group_id], ['class', '!=', 'profilewidget']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', 'cms_homes_store_items.caption', 'cms_homes_store_items.description')->get();
-                return view('home.inventory.main')->with('widgets', $widgets);
-                break;
-            case 'stickers':
-                $items = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
-                break;
-            default:
-                return $request->type;
-                break;
+        $type = $request->type;
+
+        if ($type === 'widgets') {
+            $widgets = $this->getWidgets();
+            return view('home.inventory.main', compact('widgets'));
         }
+
+        $items = $this->loadItemsQuery($type);
+        $first = $items->first();
 
         $data = null;
-        $item = $items->first();
-        if ($item) {
-            $store = $item->getStoreItem();
-            $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
+        if ($first && $first->store) {
+            $store = $first->store;
+            $data = [
+                "{$store->type}_{$store->class}_pre",
+                "{$store->type}_{$store->class}",
+                $store->caption,
+                $first->getFullType(),
+                null,
+                $first->amount,
+            ];
         }
 
-        return response(view('home.inventory.main', [
-            'items' => $items
-        ]), 200)
+        return response(view('home.inventory.main', compact('items')), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($data));
     }
@@ -51,15 +42,21 @@ class WebInventoryController extends Controller
     public function preview(Request $request)
     {
         $item = HomeItem::find($request->itemId);
-        if (!$item)
+        if (!$item || !$item->store) {
             return "Invalid item id: '{$request->itemId}'";
+        }
 
-        $store = $item->getStoreItem();
-        $data = ["{$store->type}_{$store->class}_pre", "{$store->type}_{$store->class}", "{$store->caption}", "{$item->getFullType()}", null, $item->amount];
+        $store = $item->store;
+        $data = [
+            "{$store->type}_{$store->class}_pre",
+            "{$store->type}_{$store->class}",
+            $store->caption,
+            $item->getFullType(),
+            null,
+            $item->amount,
+        ];
 
-        return response(view('home.inventory.preview', [
-            'item' => $item
-        ]), 200)
+        return response(view('home.inventory.preview', compact('item')), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode($data));
     }
@@ -67,16 +64,11 @@ class WebInventoryController extends Controller
     public function placeSticker(Request $request)
     {
         $item = HomeItem::find($request->selectedStickerId);
-        if (!$item)
-            return "Invalid item id: '{$request->itemId}'";
-
         $session = user()->homeSession;
-        if (!$session)
-            return 'error: placeSticker > session expired';
 
-        // maybe auto report to staffs on housekeeping???
-        if ($item->owner_id != user()->id)
-            return;
+        if (!$item || !$session || $item->owner_id != user()->id) {
+            return response('ERROR');
+        }
 
         $item->update([
             'home_id'   => $session->home_id,
@@ -87,34 +79,29 @@ class WebInventoryController extends Controller
         ]);
 
         return response(view('home.sticker', [
-            'class'     => $item->getStoreItem()->class,
-            'item'      => $item,
-            'id'        => $item->id,
-            'zindex'    => $request->zindex,
-            'editing'    => true
+            'class'   => $item->store->class,
+            'item'    => $item,
+            'id'      => $item->id,
+            'zindex'  => $request->zindex,
+            'editing' => true,
         ]), 200)
             ->header('Content-Type', 'application/json')
-            ->header('X-JSON', json_encode(array($item->id)));
+            ->header('X-JSON', json_encode([$item->id]));
     }
 
     public function removeSticker(Request $request)
     {
-        // possible exloit here
-        // check for ownership
-        $stickerId = $request->stickerId;
-        $sticker = HomeItem::find($stickerId);
-        if (!$sticker)
-            return 'ERROR';
-
-        if ($sticker->owner_id != user()->id)
-            return 'ERROR';
+        $sticker = HomeItem::find($request->stickerId);
+        if (!$sticker || $sticker->owner_id != user()->id) {
+            return response('ERROR');
+        }
 
         $sticker->update([
-            'home_id'   => null,
-            'group_id'  => null,
-            'x'         => null,
-            'y'         => null,
-            'z'         => null,
+            'home_id'  => null,
+            'group_id' => null,
+            'x'        => null,
+            'y'        => null,
+            'z'        => null,
         ]);
 
         return response('SUCCESS', 200)
@@ -122,32 +109,64 @@ class WebInventoryController extends Controller
             ->header('X-JSON', json_encode($sticker->id));
     }
 
-
     public function inventoryItems(Request $request)
     {
-        switch ($request->type) {
-            case 'backgrounds':
-                $items = HomeItem::where([['owner_id', user()->id], ['type', 'b']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
-                break;
-            case 'stickers':
-                $items = HomeItem::where([['owner_id', user()->id], ['home_id', null], ['group_id', null], ['type', 's']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))->groupBy(['cms_homes.item_id'])->get();
-                break;
-            case 'widgets':
-                $widgets = HomeItem::where([['owner_id', user()->id], ['type', 'w'], ['class', '!=', 'profilewidget']])
-                    ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                    ->select('cms_homes.*', 'cms_homes_store_items.class', 'cms_homes_store_items.caption', 'cms_homes_store_items.description')->get();
-                return view('home.inventory.widgets')->with('widgets', $widgets);
-                break;
-            default:
-                return $request->type;
-                break;
+        $type = $request->type;
+
+        if ($type === 'widgets') {
+            $widgets = $this->getWidgets();
+            return view('home.inventory.widgets', compact('widgets'));
         }
-        return view('home.inventory.items')->with([
-            'items' => $items
-        ]);
+
+        $items = $this->loadItemsQuery($type);
+        return view('home.inventory.items', compact('items'));
+    }
+
+    private function loadItemsQuery(string $type)
+    {
+        $userId = user()->id;
+
+        return match ($type) {
+            'backgrounds' => HomeItem::where('owner_id', $userId)->where('type', 'b')->with('store')
+                ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
+                ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))
+                ->groupBy('cms_homes.item_id')->get(),
+
+            'stickers' => HomeItem::where([
+                ['owner_id', $userId],
+                ['home_id', null],
+                ['group_id', null],
+                ['type', 's']
+            ])
+                ->with('store')
+                ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
+                ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))
+                ->groupBy('cms_homes.item_id')->get(),
+
+            default => collect(),
+        };
+    }
+
+    private function getWidgets()
+    {
+        $session = user()->homeSession;
+        $groupId = $session?->group_id;
+        $type = $groupId ? 'gw' : 'w';
+
+        return HomeItem::where([
+            ['owner_id', user()->id],
+            ['type', $type],
+            ['group_id', $groupId],
+            ['class', '!=', 'profilewidget']
+        ])
+            ->with('store')
+            ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
+            ->select(
+                'cms_homes.*',
+                'cms_homes_store_items.class',
+                'cms_homes_store_items.caption',
+                'cms_homes_store_items.description'
+            )
+            ->get();
     }
 }

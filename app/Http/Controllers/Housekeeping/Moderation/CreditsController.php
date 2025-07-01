@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalogue\Item as CatalogueItem;
 use App\Models\User;
 use App\Models\Voucher;
+use App\Models\Voucher\Item;
 use App\Models\VoucherHistory;
 use App\Models\VoucherItem;
 use Illuminate\Http\Request;
@@ -13,12 +15,15 @@ class CreditsController extends Controller
 {
     public function vouchers()
     {
-        if (!user()->hasPermission('can_create_vouchers'))
-            return view('housekeeping.accessdenied');
+        $user = user();
 
-        return view('housekeeping.moderation.credits.vouchers')->with([
-            'vouchers' => Voucher::all()
-        ]);
+        if (!$user || !$user->hasPermission('can_create_vouchers')) {
+            return view('housekeeping.accessdenied');
+        }
+
+        $vouchers = Voucher::get();
+
+        return view('housekeeping.moderation.credits.vouchers', compact('vouchers'));
     }
 
     public function vouchersAdd(Request $request)
@@ -33,7 +38,7 @@ class CreditsController extends Controller
             'is_single_use' => 'required|boolean'
         ]);
 
-        if ($request->credits <= 0 && !$request->items)
+        if ($request->credits <= 0 && !$request->item_ids)
             return redirect()->route('housekeeping.credits.vouchers')->with('message', 'You can\'t create a voucher without rewards!');
 
         Voucher::insert([
@@ -43,11 +48,12 @@ class CreditsController extends Controller
             'is_single_use' => $request->is_single_use
         ]);
 
-        if ($request->items) {
-            foreach (explode(';', $request->items) as $item) {
-                VoucherItem::insert([
+        if ($request->item_ids) {
+            foreach (explode(';', $request->item_ids) as $item) {
+                $cataItem = CatalogueItem::find($item);
+                Item::insert([
                     'voucher_code'          => $request->voucher,
-                    'catalogue_sale_code'   => $item
+                    'catalogue_sale_code'   => $cataItem->sale_code
                 ]);
             }
         }

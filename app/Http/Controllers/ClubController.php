@@ -2,104 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ClubController extends Controller
 {
-    public function index()
+    protected array $plans = [
+        1 => ['credits' => 25,  'days' => 31],
+        2 => ['credits' => 60,  'days' => 93],
+        3 => ['credits' => 105, 'days' => 186],
+    ];
+
+    private function getPlan(int $option): array
     {
-        return view('club.index');
-    }
-
-    private function getCurrentChoice($choice)
-    {
-        $credits = -1;
-        $days = -1;
-
-        switch ($choice) {
-            default:
-            case 1:
-                $credits = 25;
-                $days = 31;
-                break;
-            case 2:
-                $credits = 60;
-                $days = 93;
-                break;
-            case 3:
-                $credits = 105;
-                $days = 186;
-                break;
-        }
-
-        return array(
-            'credits'   => $credits,
-            'days'      => $days,
-        );
+        return $this->plans[$option] ?? $this->plans[1];
     }
 
     public function clubSubscribe(Request $request)
     {
-        $choice = $this->getCurrentChoice($request->optionNumber);
-        return view('club.ajax.subscribe_form')->with([
-            'month' => $choice['days'] / 31,
-            'optionNumber' => $request->optionNumber,
-            'days'  => $choice['days'],
-            'price' => $choice['credits']
+        $optionNumber = (int) $request->optionNumber;
+        $plan = $this->getPlan($optionNumber);
+
+        return view('club.ajax.subscribe_form', [
+            'month'        => $plan['days'] / 31,
+            'optionNumber' => $optionNumber,
+            'days'         => $plan['days'],
+            'price'        => $plan['credits'],
         ]);
     }
 
     public function clubSubscribeSubmit(Request $request)
     {
-        if(!Auth::check())
+        $user = user();
+
+        if (!$user) {
             return redirect()->route('account.login');
-
-        $choice = $this->getCurrentChoice($request->optionNumber);
-
-        if(user()->credits >= $choice['credits'])
-        {
-            user()->giveHCDays($choice['days']);
-            user()->updateCredits(-$choice['credits']);
-
-            return view('club.ajax.subscribe_success');
         }
-    }
 
-    public function clubMeterUpdate()
-    {
-        return view('club.ajax.habboclub_meter');
-    }
+        $optionNumber = (int) $request->optionNumber;
+        $plan = $this->getPlan($optionNumber);
 
-    public function join()
-    {
-        return view('club.join');
+        if ($user->credits < $plan['credits']) {
+            return response()->json(['error' => 'Insufficient credits.'], 400);
+        }
+
+        $user->giveHCDays($plan['days']);
+        $user->updateCredits(-$plan['credits']);
+
+        return view('club.ajax.subscribe_success');
     }
 
     public function shop()
     {
         return view('club.shop');
-    }
-
-    public function benefitsHabbo()
-    {
-        return view('club.benefitshabbo');
-    }
-
-    public function benefitsRoom()
-    {
-        return view('club.benefitsroom');
-    }
-
-    public function benefitsHome()
-    {
-        return view('club.benefitshome');
-    }
-
-    public function benefitsExtras()
-    {
-        return view('club.benefitsextras');
     }
 }

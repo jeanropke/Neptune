@@ -4,217 +4,184 @@ namespace App\Http\Controllers\Group;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
-use App\Models\Group\GroupReply;
-use App\Models\Group\GroupTopic;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Models\Group\Reply;
+use App\Models\Group\Topic;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DiscussionController extends Controller
 {
+    protected function authorizeUser()
+    {
+        abort_unless(user(), 403, 'Unauthorized');
+    }
+
+    protected function validateGroupAndTopic(Request $request): array
+    {
+        $group = Group::findOrFail($request->groupId);
+        $topic = Topic::findOrFail($request->topicId);
+        abort_if($topic->group_id !== $group->id, 404);
+        return [$group, $topic];
+    }
+
     public function newTopic()
     {
-        if (!Auth::check())
-            return;
-
+        $this->authorizeUser();
         return view('groups.discussions.newtopic');
     }
 
     public function previewTopic(Request $request)
     {
-        if (!Auth::check())
-            return;
+        $this->authorizeUser();
+        $validated = $request->validate([
+            'topicName' => 'required|string|max:100',
+            'message'   => 'required|string|max:5000',
+        ]);
 
-        $topic = (object)[
-            'subject'       => $request->topicName,
-            'message'       => $request->message,
-            'created_at'    => Carbon::now(),
+        $topic = (object) [
+            'subject'       => $validated['topicName'],
+            'message'       => $validated['message'],
+            'created_at'    => now()
         ];
-        return view('groups.discussions.previewtopic')->with('topic', $topic);
+
+        return view('groups.discussions.previewtopic', compact('topic'));
     }
 
     public function saveTopic(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        if (!$request->topicName)
-            return;
-        if (!$request->message)
-            return;
-
-        $group = Group::find($request->groupId);
-        if (!$group) return;
-
-        $now = Carbon::now();
-
-        $topic = GroupTopic::create([
-            'user_id'           => user()->id,
-            'group_id'          => $group->id,
-            'subject'           => $request->topicName,
-            'latest_comment'    => $now,
-            'created_at'        => $now,
-            'updated_at'        => $now
+        $this->authorizeUser();
+        $validated = $request->validate([
+            'groupId'   => 'required|integer|exists:groups_details,id',
+            'topicName' => 'required|string|max:100',
+            'message'   => 'required|string|max:5000',
         ]);
 
-        GroupReply::create([
-            'topic_id'      => $topic->id,
-            'user_id'       => user()->id,
-            'message'       => $request->message,
-            'created_at'    => $now,
-            'updated_at'    => $now
+        $group = Group::find($validated['groupId']);
+        $now = now();
+
+        $topic = Topic::create([
+            'user_id'        => user()->id,
+            'group_id'       => $group->id,
+            'subject'        => $validated['topicName'],
+            'latest_comment' => $now
+        ]);
+
+        Reply::create([
+            'topic_id'   => $topic->id,
+            'user_id'    => user()->id,
+            'message'    => $validated['message'],
+            'created_at' => $now,
+            'updated_at' => $now
         ]);
 
         user()->cmsSettings->increment('discussions_posts');
 
-        echo "/groups/{$group->id}/id/discussions/{$topic->id}/id";
+        return response(route('groups.topic.view', [
+            'groupId' => $group->id,
+            'topicId' => $topic->id
+        ]));
     }
 
     public function viewTopic(Request $request)
     {
-        $topic = GroupTopic::find($request->topicId);
-        $group = Group::find($request->groupId);
+        [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        if (!$topic || !$group)
-            return abort(404);
-
-        if ($topic->group_id != $group->id)
-            return abort(404);
-
-        return view('groups.discussions.viewtopic')->with([
-            'topic'     => $topic,
-            'group'     => $group,
-            'replies'   => $topic->getReplies()
+        return view('groups.discussions.viewtopic', [
+            'topic'   => $topic,
+            'group'   => $group,
+            'replies' => $topic->replies()->paginate(10)
         ]);
     }
 
     public function previewPost(Request $request)
     {
-        if (!Auth::check())
-            return;
+        $this->authorizeUser();
+        [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        $topic = GroupTopic::find($request->topicId);
-        $group = Group::find($request->groupId);
-
-        if (!$topic || !$group)
-            return abort(404);
-
-        if ($topic->group_id != $group->id)
-            return abort(404);
-
-        $post = (object)[
-            'message'       => $request->message,
-            'created_at'    => Carbon::now(),
+        $post = (object) [
+            'message'    => $request->message,
+            'created_at' => now()
         ];
-        return view('groups.discussions.previewpost')->with([
-            'topic' => $topic,
-            'post'  => $post
-        ]);
+
+        return view('groups.discussions.previewpost', compact('topic', 'post'));
     }
 
     public function savePost(Request $request)
     {
-        if (!Auth::check())
-            return;
+        $this->authorizeUser();
 
-        $topic = GroupTopic::find($request->topicId);
-        $group = Group::find($request->groupId);
-
-        if (!$topic || !$group)
-            return abort(404);
-
-        if ($topic->group_id != $group->id)
-            return abort(404);
-
-        $now = Carbon::now();
-
-        $topic->update([
-            'latest_comment'    => $now,
+        $request->validate([
+            'topicId' => 'required|integer|exists:cms_groups_topics,id',
+            'groupId' => 'required|integer|exists:groups_details,id',
+            'message' => 'required|string|max:5000',
         ]);
 
+        [$group, $topic] = $this->validateGroupAndTopic($request);
+
+        $topic->update(['latest_comment' => now()]);
         $topic->increment('replies');
 
-        GroupReply::create([
-            'topic_id'      => $topic->id,
-            'user_id'       => user()->id,
-            'message'       => $request->message,
-            'created_at'    => $now,
-            'updated_at'    => $now
+        Reply::create([
+            'topic_id' => $topic->id,
+            'user_id'  => user()->id,
+            'message'  => $request->message
         ]);
 
         user()->cmsSettings->increment('discussions_posts');
 
-        return view('groups.discussions.includes.viewtopic')->with([
-            'topic'     => $topic,
-            'group'     => $group,
-            'replies'   => $topic->getReplies()
+        return view('groups.discussions.includes.viewtopic', [
+            'topic'   => $topic->refresh(),
+            'group'   => $group,
+            'replies' => $topic->replies()->paginate(10)
         ]);
     }
 
     public function deletePost(Request $request)
     {
-        if (!Auth::check())
-            return;
+        $this->authorizeUser();
 
-        $group = Group::find($request->groupId);
-        if (!$group)
-            return;
+        [$group, $topic] = $this->validateGroupAndTopic($request);
+        $reply = Reply::findOrFail($request->postId);
 
-        $topic = GroupTopic::find($request->topicId);
-        if (!$topic)
-            return;
+        abort_if($reply->topic_id !== $topic->id, 404);
 
-        $reply = GroupReply::find($request->postId);
-        if (!$reply)
-            return;
+        $isAdmin = $group->admins()->where('user_id', user()->id)->exists();
+        abort_unless($isAdmin, 403);
 
-        if ($topic->group_id != $group->id)
-            return;
-
-        if ($reply->topic_id != $topic->id)
-            return;
-
-
-        if ($group->getOwner()->id != user()->id || $group->getAdmins()->where('user_id', user()->id)->first())
-            return;
-
-        $topic->decrement('replies');
-        $topic->update(['latest_comment' => $topic->getLatestPost()->created_at]);
         $reply->markAsDeleted();
+        $topic->decrement('replies');
 
-        return $request->all();
+        $latest = $topic->latestReply();
+        $topic->update([
+            'latest_comment' => $latest?->created_at ?? $topic->created_at
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'postId'  => $reply->id,
+        ]);
     }
 
-    public function openTopicSettings(Request $request)
+    public function openTopicSettings()
     {
         return view('groups.discussions.ajax.topicsettings');
     }
 
-    public function confirmDeleteTopic(Request $request)
+    public function confirmDeleteTopic()
     {
         return view('groups.discussions.ajax.confirmdeletetopic');
     }
 
     public function deleteTopic(Request $request)
     {
-        if (!Auth::check())
-            return;
+        $this->authorizeUser();
 
-        $group = Group::find($request->groupId);
-        if (!$group) return;
+        [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        $topic = GroupTopic::find($request->topicId);
-        if (!$topic) return;
-
-        if ($topic->group_id != $group->id)
-            return;
-
-        if ($topic->user_id != user()->id)
-            if (!$group->getAdmins()->where('user_id', user()->id)->first()) return;
+        $isAdmin = $group->admins()->where('user_id', user()->id)->exists();
+        abort_unless($isAdmin, 403);
 
         $topic->markAsDeleted();
 
-        return 'SUCCESS';
+        return response('SUCCESS');
     }
 }

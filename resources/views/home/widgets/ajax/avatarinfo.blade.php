@@ -30,7 +30,7 @@
             </p>
         </div>
         <div>
-            @if ($group->owner_id == user()->id && $group->getMember($user->id)->member_rank <= 2)
+            @if (user() && $group->owner_id == user()->id && $group->getMember($user->id)->member_rank <= 2)
                 @if ($group->getMember($user->id)->member_rank == 2)
                     <a href="#" class="avatar-info-rights-revoke toolbutton"><span>Revoke rights</span></a>
                 @else
@@ -44,36 +44,6 @@
                 @endif
             @endif
         </div>
-
-        {{--
-        ?php if (!$OWNER && $rank >= 2) {
-        if ($ADMIN) { ?>
-        <div class="clear"><a href="#" class="avatar-info-rights-revoke new-button"><b>Remover direitos
-                    de Socio</b><i></i></a></div>
-        ?php } else { ?>
-        <div class="clear"><a href="#" class="avatar-info-rights-give new-button"><b>Dar direitos de
-                    Administrador</b><i></i></a></div>
-        ?php }
-        if ($data['id'] == USER_ID) { ?>
-        <div class="clear"><a href="#" class="avatar-info-rights-leave new-button"><b>myhabbo.memberwidget.leave_group</b><i></i></a>
-        </div>
-        ?php } else { ?>
-        <div class="clear"><a href="#" class="avatar-info-rights-remove new-button"><b>Remover
-                    Socio</b><i></i></a></div>
-        ?php }
-        } ?>
-         --}}
-        {{--
-        @if (user() && request()->ownerId == user()->id)
-            <p>
-                @if (user()->favourite_group == $group->id)
-                    <a href="#" class="groups-info-deselect-favorite toolbutton"><span>Remove favorite</span></a>
-                @else
-                    <a href="#" class="groups-info-select-favorite toolbutton"><span>Make favorite</span></a>
-                @endif
-            </p>
-        @endif
-        --}}
         <div class="clear"></div>
     </div>
 </div>

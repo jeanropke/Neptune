@@ -9,14 +9,15 @@ class HomeAsset extends Model
     protected $table = 'cms_home_assets';
 
     protected $fillable = [
-        'class', 'path', 'type', 'width', 'height'
+        'class',
+        'path',
+        'type',
+        'width',
+        'height'
     ];
 
-    public function getType()
+    public function getType(): string
     {
-        if($this->type == 's')
-            return 'sticker';
-
-        return 'background';
+        return $this->type === 's' ? 'sticker' : 'background';
     }
 }

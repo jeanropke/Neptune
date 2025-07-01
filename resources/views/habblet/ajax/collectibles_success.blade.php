@@ -1,5 +1,5 @@
 <div id="collectables_confirm_box">
-    @php($cata = $collectable->getCatalogueItem())
+    @php($cata = $collectable->item)
     <img src="{{ cms_config('furni.large.url') }}/{{ $cata->getNormalizedName() }}.png" alt="" align="left" style="margin:10px;">
     <p><b>{{ isset($error) ? 'Error' : 'Success' }}</b></p>
     <p>

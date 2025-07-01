@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Group\GroupTopic;
+use App\Models\Group\Member;
+use App\Models\Group\Topic;
 use App\Models\Home\HomeItem;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 
 class Group extends Model
 {
@@ -25,146 +26,169 @@ class Group extends Model
         'alias'
     ];
 
-    public function memberships()
+    public function ensureGroupHomeItems()
     {
-        return $this->hasMany(GroupMember::class, 'group_id');
+        if ($this->items->isEmpty()) {
+            $defaultItems = [
+                // guestbookwidget
+                ['x' => 40,  'y' => 34,  'z' => 6, 'item_id' => 12, 'skin' => 'defaultskin'],
+                // groupinfowidget
+                ['x' => 433, 'y' => 40,  'z' => 3, 'item_id' => 13, 'skin' => 'defaultskin'],
+                // bg_pattern_abstract2
+                ['x' => 0,   'y' => 0,   'z' => 0, 'item_id' => 28, 'data' => 'background']
+            ];
+
+            foreach ($defaultItems as $item) {
+                HomeItem::create(array_merge([
+                    'owner_id' => $this->owner_id,
+                    'group_id' => $this->id
+                ], $item));
+            }
+
+            $this->load('items');
+        }
     }
 
-    public function getUrl()
+    public function owner(): BelongsTo
     {
-        if ($this->alias)
-            return $this->alias;
-
-        return "{$this->id}/id";
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function getItems()
+    public function admins(): HasMany
     {
-        return HomeItem::where(function ($query) {
-            $query->where('group_id', $this->id)
-                ->whereNotNull('x');
-        })->orWhere(function ($query) {
-            $query->where('group_id', $this->id)
-                ->where('data', 'background');
-        })->get();
+        return $this->hasMany(Member::class, 'group_id')
+            ->where('member_rank', '>=', '2')
+            ->with('user');
     }
 
-    public function getTopics()
+    public function memberships(): HasMany
     {
-        return GroupTopic::where([['group_id', '=', $this->id], ['is_deleted', '=', '0']])->orderBy('latest_comment', 'DESC')->paginate(10);
-    }
-
-    public function getOwner()
-    {
-        return User::find($this->owner_id);
-    }
-
-    public function getAdmins()
-    {
-        return GroupMember::where([['member_rank', '>=', 2]])->get();
-    }
-
-    public function getRank()
-    {
-        return $this->members;
+        return $this->hasMany(Member::class, 'group_id');
     }
 
     public function members(): HasMany
     {
-        return $this->hasMany(GroupMember::class, 'group_id')
+        return $this->memberships()
+            ->with('user')
             ->join('users', 'groups_memberships.user_id', '=', 'users.id')
             ->orderBy('member_rank')
             ->orderBy('users.username')
             ->select('groups_memberships.*', 'users.username');
     }
 
-    public function filterByUsername($query = null)
+    public function pendingMembers()
     {
-        return $this->members()->where('users.username', 'LIKE', "%$query%")->get();
+        return $this->memberships()->where('is_pending', 1)->with('user');
+    }
+
+    public function getUrlAttribute(): string
+    {
+        if ($this->alias) {
+            return "/groups/{$this->alias}";
+        }
+
+        return "/groups/{$this->id}/id";
+    }
+
+    public function topics(): HasMany
+    {
+        return $this->hasMany(Topic::class)->where('is_deleted', false);
+    }
+
+    public function filterByUsername(?string $query)
+    {
+        return $this->members()->where('users.username', 'LIKE', '%' . Str::lower($query) . '%')->get();
     }
 
     public function getMember($userId = null)
     {
-        return $this->members()->where('user_id', $userId ?? user()->id)->first();
+        return $this->memberships()->where('user_id', $userId ?? user()->id)->first();
     }
 
-    public function addMember($userId = null)
+    public function addMember(?int $userId = null): bool
     {
-        if (!$this->getMember($userId ?? user()->id)) {
-            GroupMember::create([
-                'group_id'      => $this->id,
-                'user_id'       => $userId ?? user()->id,
-                'member_rank'   => '1'
-            ]);
-            return true;
-        }
+        $userId = $userId ?? auth()->id();
 
-        return false;
-    }
+        $member = $this->getMember($userId);
 
-    public function removeMember($userId = null)
-    {
-        $member = $this->getMember($userId ?? user()->id);
         if ($member) {
-            if ($member->user->favorite_group == $this->id) {
-                $this->removeFavorite($member->user_id);
-            }
-
-            GroupMember::where([['group_id', $this->id], ['user_id', $member->user_id]])->delete();
-
-            return true;
+            return false;
         }
 
-        return false;
-    }
-
-    public function getPendingMembers()
-    {
-        $members = GroupMember::where([['group_id', $this->id], ['is_pending', '1']])->join('users', 'user_id', '=', 'users.id')->select(['id', 'username', 'groups_memberships.*'])->get();
-        return $members;
-    }
-
-    public function makeFavorite($userId = null)
-    {
-        $member = $this->getMember($userId ?? user()->id);
-        if ($member) {
-            $member->user->setFavouriteGroup($this->id);
-            return true;
-        }
-        return false;
-    }
-
-    public function removeFavorite($userId = null)
-    {
-        $member = $this->getMember($userId ?? user()->id);
-        if ($member) {
-            $member->user->setFavouriteGroup(0);
-            return true;
-        }
-        return false;
-    }
-
-    public function addTag($tag)
-    {
-        $exists = $this->tags()->where('tag', $tag)->first();
-        if ($exists) return 'invalidtag';
-
-        Tag::insert([
-            'tag'           => $tag,
-            'holder_id'     => $this->id,
-            'holder_type'   => 'group'
+        $this->members()->create([
+            'user_id' => $userId,
+            'member_rank' => 1,
         ]);
 
-        return 'valid';
+        return true;
     }
 
-    public function removeTag($tag)
+    public function removeMember(?int $userId = null): bool
+    {
+        $userId = $userId ?? auth()->id();
+
+        $member = $this->getMember($userId);
+        if (!$member) {
+            return false;
+        }
+
+        if ($member->user->favorite_group == $this->id) {
+            $member->user->setFavouriteGroup(0);
+        }
+
+        $member->delete();
+
+        return true;
+    }
+
+    public function makeFavorite($userId = null): bool
+    {
+        return $this->updateFavoriteGroup($userId, $this->id);
+    }
+
+    public function removeFavorite($userId = null): bool
+    {
+        return $this->updateFavoriteGroup($userId, 0);
+    }
+
+    private function updateFavoriteGroup(?int $userId, int $groupId): bool
+    {
+        $member = $this->getMember($userId ?? user()->id);
+
+        if (! $member || ! $member->user) {
+            return false;
+        }
+
+        $member->user->setFavouriteGroup($groupId);
+        return true;
+    }
+
+    public function addTag($tag): string
+    {
+        $tag = Str::lower($tag);
+        if (!$this->tags()->where('tag', $tag)->exists()) {
+            $this->tags()->insert([
+                'tag'           => $tag,
+                'holder_id'     => $this->id,
+                'holder_type'   => 'group'
+            ]);
+            return 'valid';
+        }
+        return 'invalidtag';
+    }
+
+    public function removeTag(string $tag): void
     {
         $this->tags()->where('tag', $tag)->delete();
     }
 
-    public function tags(): HasMany
+    public function tags(): MorphMany
     {
-        return $this->hasMany(Tag::class, 'holder_id')->where('holder_type', 'group');
+        return $this->morphMany(Tag::class, 'holder');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(HomeItem::class, 'group_id')->with('store');
     }
 }

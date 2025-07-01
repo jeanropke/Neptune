@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\BoxPage;
-use App\Models\Catalogue\CatalogueItem;
-use App\Models\CmsMenu;
-use App\Models\CmsSetting;
+use App\Models\Catalogue\Item;
 use App\Models\EmuSetting;
-use App\Models\Partner;
-use App\Models\StaffLog;
+use App\Models\Neptune\BoxPage;
+use App\Models\Neptune\Menu;
+use App\Models\Neptune\Partner;
+use App\Models\Neptune\Setting;
+use App\Models\Staff\Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -18,7 +18,7 @@ function user()
 
 function cms_config($key)
 {
-    $setting = CmsSetting::where('key', $key)->first();
+    $setting = Setting::where('key', $key)->first();
     if ($setting)
         return $setting->value;
     return "Value {$key} not found";
@@ -26,7 +26,7 @@ function cms_config($key)
 
 function set_cms_config($key, $value)
 {
-    $setting = CmsSetting::where('key', $key)->first();
+    $setting = Setting::where('key', $key)->first();
     if (!$setting) return;
     $setting->update(['value' => $value]);
 }
@@ -58,7 +58,7 @@ function carbon_format($date, $format = 'd/m/Y')
 
 function get_cata_item($sale)
 {
-    $cata =  CatalogueItem::where('sale_code', $sale)->first();
+    $cata =  Item::where('sale_code', $sale)->first();
     if ($cata)
         return $cata->name;
 }
@@ -154,7 +154,7 @@ function create_staff_log($page, $request)
 {
     unset($request['_token']);
     $message = json_encode($request->post());
-    StaffLog::create([
+    Log::create([
         'user_id'       => user()->id,
         'page'          => $page,
         'message'       => $message,
@@ -164,7 +164,7 @@ function create_staff_log($page, $request)
 
 function cms_menu($parent = -1)
 {
-    return CmsMenu::where([['parent_id', $parent], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get();
+    return Menu::where([['parent_id', $parent], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get();
 }
 
 function rcon($key, $data = [])
@@ -177,38 +177,6 @@ function rcon($key, $data = [])
 }
 
 function build_rcon($header, $parameters)
-{
-    $message = "";
-    $message .= pack('N', strlen($header));
-    $message .= $header;
-    $message .= pack('N', count($parameters));
-
-    foreach ($parameters as $key => $value) {
-        $message .= pack('N', strlen($key));
-        $message .= $key;
-
-        $message .= pack('N', strlen($value));
-        $message .= $value;
-    }
-
-    $buffer = "";
-    $buffer .= pack('N', strlen($message));
-    $buffer .= $message;
-    return $buffer;
-}
-
-
-#[\Deprecated(message: "use rcon() instead")]
-function mus($key, $data = [])
-{
-    $command = build_mus($key, $data);
-    $socket = @socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
-    @socket_connect($socket, cms_config('connection.rcon.host'), cms_config('connection.rcon.port'));
-    @socket_send($socket, $command, strlen($command), MSG_DONTROUTE);
-    @socket_close($socket);
-}
-#[\Deprecated("use build_rcon() instead")]
-function build_mus($header, $parameters)
 {
     $message = "";
     $message .= pack('N', strlen($header));

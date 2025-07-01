@@ -16,8 +16,9 @@ class HabboMovieController extends Controller
 {
     public function openEditor()
     {
-        if(!user())
+        if (!user()) {
             return redirect()->route('auth.login', ['page' => 'habbomovies/private/openeditor']);
+        }
 
         return view('entertainment.habbomovies.editor');
     }
@@ -30,45 +31,60 @@ class HabboMovieController extends Controller
 
     public function save(Request $request)
     {
-        $movie = Movie::find($request->movie_id);
         $xmlData = $request->data;
 
-        $dom = new DOMDocument();
-        $dom->loadXML($xmlData);
+        // Verifica se o XML é válido
+        libxml_use_internal_errors(true);
+        $dom = new \DOMDocument();
+        if (!$dom->loadXML($xmlData)) {
+            return response('Invalid XML', 400);
+        }
 
         $movieTag = $dom->getElementsByTagName('movie')->item(0);
+        if (!$movieTag) {
+            return response('Missing <movie> tag in XML', 400);
+        }
+
+        $movieId = $request->movie_id;
+        $movie = $movieId ? Movie::find($movieId) : null;
+
+        $data = [
+            'data'      => $xmlData,
+            'title'     => $movieTag->getAttribute('name'),
+            'subtitle'  => $movieTag->getAttribute('subtitle')
+        ];
 
         if ($movie) {
-            $movie->update([
-                'data'      => $xmlData,
-                'title'     => $movieTag->getAttribute('name'),
-                'subtitle'  => $movieTag->getAttribute('subtitle')
-            ]);
+            $movie->update($data);
         } else {
-            $movie = Movie::create([
-                'data'      => $xmlData,
-                'author_id' => user()->id,
-                'title'     => $movieTag->getAttribute('name'),
-                'subtitle'  => $movieTag->getAttribute('subtitle')
-            ]);
+            $data['author_id'] = user()->id;
+            $movie = Movie::create($data);
         }
-        return $movie->id;
+
+        return response($movie->id);
     }
 
     public function movie(Request $request)
     {
         $movie = Movie::find($request->movieId);
-        if (!$movie) return abort(404);
 
-        return view('entertainment.habbomovies.movie')->with('movie', $movie);
+        if (!$movie) {
+            abort(404, 'Movie not found.');
+        }
+
+        return view('entertainment.habbomovies.movie', compact('movie'));
     }
 
     public function movieXmlData(Request $request)
     {
         $movie = Movie::find($request->id);
-        if (!$movie) return abort(404);
 
-        return $movie->data;
+        if (!$movie) {
+            abort(404, 'Movie not found.');
+        }
+
+        return response($movie->data, 200)
+            ->header('Content-Type', 'application/xml');
     }
 
     public function showMovieAdmin(Request $request)
@@ -78,17 +94,26 @@ class HabboMovieController extends Controller
 
     public function showUnpublished(Request $request)
     {
-        return 'showUnpublished';
+        return response('showUnpublished');
     }
 
     public function rateMovie(Request $request)
     {
-        if (!auth()) return;
+        if (!user()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
         $movie = Movie::find($request->movieId);
-        if (!$movie) return;
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        if (!is_numeric($request->newRating) || $request->newRating < 1 || $request->newRating > 5) {
+            return response()->json(['error' => 'Invalid rating'], 422);
+        }
 
         $movie->addRating($request->newRating);
-        return view('entertainment.habbowood.includes.moviestats')->with('movie', $movie);
+
+        return view('entertainment.habbowood.includes.moviestats', compact('movie'));
     }
 }

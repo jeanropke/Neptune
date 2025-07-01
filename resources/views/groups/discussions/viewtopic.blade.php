@@ -17,7 +17,7 @@
                                 Group Home: {{ $group->name }}
                             </span>
 
-                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id" id="tell-button"
+                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions/{{ $topic->id }}/id" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
                         </div>
                     </div>
@@ -25,9 +25,9 @@
             </div>
             <div id="grouptabs">
                 <ul>
-                    <li><a href="{{ url('/') }}/groups/{{ $group->id }}/id">Front Page</a></li>
+                    <li><a href="{{ $group->url }}">Front Page</a></li>
                     <li id="selected">
-                        <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions">Discussion Forum</a>
+                        <a href="{{ $group->url }}/discussions">Discussion Forum</a>
                     </li>
                 </ul>
             </div>

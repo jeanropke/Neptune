@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catalogue\CatalogueItem;
 use App\Models\Furni;
 use App\Models\User;
-use App\Models\UserBadge;
-use App\Models\UserIPLog;
+use App\Models\User\IPLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -102,7 +100,7 @@ class UserController extends Controller
             return redirect()->route('housekeeping.users.listing')->with('message', 'User not found');
 
         return view('housekeeping.moderation.users.listingip')->with([
-            'ips'   => UserIPLog::where('user_id', $user->id)->paginate(15),
+            'ips'   => IPLog::where('user_id', $user->id)->paginate(15),
             'user'  => $user
         ]);
     }

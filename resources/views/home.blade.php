@@ -143,25 +143,14 @@
             @endif
             <div id="mypage-top-spacer"></div>
 
-            <div id="mypage-bg" class="b_{{ $background ? $background->getStoreItem()->class : '' }}">
+            @php($items = $owner->homeItems)
+            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->store->class : '' }}">
                 <div id="playground">
-                    @foreach ($items as $item)
-                        @php($itemStore = $item->getStoreItem())
-                        @switch($itemStore->type)
+                    @foreach ($items->whereNotNull(['x'], ['y'], ['z']) as $item)
+                        @switch($item->store->type)
                             @case('s')
                                 {{-- sticker --}}
-                                <div class="movable sticker s_{{ $itemStore->class }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}"
-                                    id="sticker-{{ $item->id }}">
-                                    @if ($editing)
-                                        <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
-                                            id="sticker-{{ $item->id }}-edit" />
-                                        <script language="JavaScript" type="text/javascript">
-                                            Event.observe('sticker-{{ $item->id }}-edit', 'click', function(e) {
-                                                openEditMenu(e, {{ $item->id }}, 'sticker', 'sticker-{{ $item->id }}-edit');
-                                            }, false);
-                                        </script>
-                                    @endif
-                                </div>
+                                @include('home.sticker')
                             @break
 
                             @case('commodity')
@@ -171,11 +160,12 @@
 
                             @case('w')
                                 {{-- widget --}}
-                                @include('home.widgets.' . strtolower($itemStore->class))
+                                @include('home.widgets.' . strtolower($item->store->class))
                             @break
                         @endswitch
                     @endforeach
                 </div>
+
                 <div id="mypage-ad">
                     <div id="ad_sidebar">
 
@@ -184,18 +174,6 @@
             </div>
         </div>
     </div>
-    {{--
-    <div class="dialog">
-        <div class="dialog-header">
-            <h3>
-                header
-            </h3>
-        </div>
-        <div class="dialog-body">
-            <div class="dialog-content">hehehe</div>
-        </div>
-    </div>
-    --}}
 
     <div id="guestbook-delete-dialog" class="dialog-grey" style="display:none">
         <div class="dialog-grey-top dialog-grey-handle">

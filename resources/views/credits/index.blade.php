@@ -28,18 +28,14 @@
                                                         {{ cms_config('hotel.name.short') }} Hotel or enhancing your {{ cms_config('hotel.name.short') }} Home page
                                                         content. <a href="{{ url('/') }}/credits">Learn more!</a>
                                                     </p>
-
                                                     @if (Auth::check())
                                                         <div class="purse-balance">
                                                             You has <span class="purse-balance-amount">&nbsp;<span class="habbocredits">{{ Auth::user()->credits }}</span>&nbsp;</span>
                                                             {{ cms_config('hotel.name.short') }} Credits
                                                         </div>
                                                     @endif
-
-
                                                     <p>
-                                                        <a href="{{ url('/') }}/credits" class="colorlink"><span>Buy more
-                                                                coins</span></a>
+                                                        <a href="{{ url('/') }}/credits" class="colorlink"><span>Buy more coins</span></a>
                                                     </p>
 
                                                     <div id="purse-redeem">
@@ -50,7 +46,6 @@
                                                                     <input type="text" name="redeem-code" size="35" id="redeem-code" />
                                                                     <a href="#" class="colorlink orange last" align="top" id="redeem-button"><span>Redeem</span></a>
                                                                 </form>
-
                                                             </div>
 
                                                             <script>

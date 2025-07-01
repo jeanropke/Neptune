@@ -25,7 +25,7 @@
                         @if ($member->member_rank == 2)
                             <img src="{{ url('/') }}/web/images/groups/administrator_icon.gif" width="15" height="15" alt="Administrator" title="Administrator" />
                         @endif
-                        @if (!isset($pending) && ($member->user->favorite_group == $group->id))
+                        @if (!isset($pending) && ($member->user->favourite_group == $group->id))
                             <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" alt="">
                         @endif
                     </div>

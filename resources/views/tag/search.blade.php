@@ -60,6 +60,7 @@
                             <div></div>
                         </div>
                         <div class="body">
+                            {{--
                             <p class="search-result-count">
                                 @if ($result->count() > 0)
                                     {{ $result->firstItem() ?? 0 }} - {{ $result->lastItem() ?? $result->count() }} / {{ $result->total() }}
@@ -68,6 +69,7 @@
                             @if ($result->count() == 0)
                                 <p>No results found. </p>
                             @endif
+                            --}}
                             <form name="tag_search_form" action="{{ url('/') }}/tag/search" class="search-box">
                                 <table class="search-box" border="0">
                                     <tbody>
@@ -105,7 +107,6 @@
                                                     <a href="{{ url('/') }}/groups/{{ $entry->holder->getUrl() }}">{{ $entry->holder->name }}</a><br>
                                                     {{ $entry->holder->description }}
                                                 @endif
-
                                                 <br>
                                                 <div class="tag-list">
                                                     <ul class="tag-list">
@@ -113,7 +114,6 @@
                                                             <li class="tag-search-rowholder">
                                                                 <span class="tag-search-rowholder">
                                                                     <a href="{{ url('/') }}/tag/search?tag={{ $tag->tag }}" style="font-size:10px">{{ $tag->tag }}</a>
-
                                                                     @auth
                                                                         @if (user()->tags()->where('tag', $tag->tag)->exists())
                                                                             <img border="0" class="tag-delete-link tag-delete-link-{{ $tag->tag }}"

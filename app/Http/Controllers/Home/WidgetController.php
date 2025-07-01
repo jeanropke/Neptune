@@ -32,6 +32,10 @@ class WidgetController extends Controller
         if (!$session)
             return 'error: placeSticker > session expired';
 
+        $owner = user();
+        if($session->group_id)
+            $owner = Group::find($session->group_id);
+
         $widget->update([
             'home_id'   => $session->home_id,
             'group_id'  => $session->group_id,
@@ -40,7 +44,7 @@ class WidgetController extends Controller
             'z'         => $request->zindex,
         ]);
 
-        return response(view('home.widgets.' . $widget->getStoreItem()->class)->with(['item' => $widget, 'owner' => user(), 'editing' => true]), 200)
+        return response(view('home.widgets.' . $widget->store->class)->with(['item' => $widget, 'owner' => $owner, 'editing' => true]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(array('id' => $widgetId)));
     }
@@ -346,8 +350,6 @@ class WidgetController extends Controller
             return 'ERROR';
 
         $widget->update([
-            'home_id'   => null,
-            'group_id'  => null,
             'x'         => null,
             'y'         => null,
             'z'         => null

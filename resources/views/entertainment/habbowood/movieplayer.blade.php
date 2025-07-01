@@ -74,12 +74,12 @@
                                                 <span class="habbomovies-movie-name">{{ $movie->title }}</span>
                                                 <span class="habbomovies-movie-created">Created: {{ $movie->created_at->format('M j, Y h:i:s A') }}</span>
                                                 <span class="habbomovies-movie-by">By: <b><a
-                                                            href="{{ url('/') }}//home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a></b></span>
+                                                            href="{{ url('/') }}/home/{{ $movie->author->username }}">{{ $movie->author->username }}</a></b></span>
                                                 <span class="habbomovies-movie-category">Category: {{ $movie->getGenre() }}</span>
                                                 <span class="habbomovies-movie-url">URL:</span>
                                             </div>
                                             <div class="habbomovies-director-avatar">
-                                                <img alt="" src="{{ cms_config('site.avatarimage.url') }}{{ $movie->getAuthor()->figure }}1144001">
+                                                <img alt="" src="{{ cms_config('site.avatarimage.url') }}{{ $movie->author->figure }}114400">
                                             </div>
                                             <input type="text" value="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}" class="habbomovies-movie-url-field">
                                             <div class="clear"></div>

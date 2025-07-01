@@ -12,8 +12,8 @@
                 </tr>
                 <tr>
                     <td valign="top" class="list-movie-item"><span>By:</span></td>
-                    <td valign="middle" class="list-movie-creatorname"><a
-                            href="{{ url('/') }}/home/{{ $movie->getAuthor()->username }}">{{ $movie->getAuthor()->username }}</a>
+                    <td valign="middle" class="list-movie-creatorname">
+                        <a href="{{ url('/') }}/home/{{ $movie->author->username }}">{{ $movie->author->username }}</a>
                     </td>
                 </tr>
                 <tr>
@@ -22,11 +22,7 @@
                         <ul class="rater-list">
                             @for ($i = 0; $i < 5; $i++)
                                 <li class="rater-list-item">
-                                    @if ($movie->rating > $i)
-                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
-                                    @else
-                                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
-                                    @endif
+                                    <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_{{ $movie->rating > $i ? 'color' : 'grey' }}.gif" alt="">
                                 </li>
                             @endfor
                         </ul>

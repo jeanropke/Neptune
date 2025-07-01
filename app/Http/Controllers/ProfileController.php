@@ -2,71 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function figure($page = 'figure')
+    public function figure(string $page = 'figure')
     {
-        $possiblePages = ['figure', 'motto', 'password', 'email'];
-        if (!in_array($page, $possiblePages))
-            return view('errors.404');
+        $allowedPages = ['figure', 'motto', 'password', 'email'];
 
+        if (!in_array($page, $allowedPages)) {
+            abort(404);
+        }
 
-        return view("profile.{$page}")->with('page', $page);
+        return view("profile.{$page}", compact('page'));
     }
 
-    public function save($page = 'index', Request $request)
+    public function save(string $page = 'index', Request $request)
     {
-        $possiblePages = ['figure', 'motto', 'password', 'email'];
+        $allowedPages = ['figure', 'motto', 'password', 'email'];
 
-        if (!in_array($page, $possiblePages))
-            return view('errors.404');
+        if (!in_array($page, $allowedPages)) {
+            abort(404);
+        }
+
+        $user = user();
 
         switch ($page) {
             case 'figure':
-
-                $request->validate([
-                    'newGender'    => 'required|in:F,M',
-                    'newFigure'    => 'required|numeric'
+                $validated = $request->validate([
+                    'newGender' => 'required|in:F,M',
+                    'newFigure' => 'required|numeric',
                 ]);
 
-                user()->setLook($request->newFigure, $request->newGender);
-                return redirect()->back()->with('status', 'Figure updated!');
-                break;
+                $user->setLook($validated['newFigure'], $validated['newGender']);
+                return back()->with('status', 'Figure updated!');
 
             case 'motto':
-                user()->setMotto($request->motto ?? '');
-                return redirect()->back()->with('status', 'Motto updated!');
-                break;
+                $motto = $request->input('motto', '');
+                $user->setMotto($motto ?? '');
+                return back()->with('status', 'Motto updated!');
 
             case 'email':
-                $request->validate([
-                    'email' => 'required|unique:users,mail|regex:/(.+)@(.+)\.(.+)/i'
+                $validated = $request->validate([
+                    'email' => 'required|email|unique:users,email',
                 ]);
-                Auth::user()->update(['mail' => $request->email]);
-                return redirect()->back()->with('status', 'Email updated!');
-                break;
+
+                $user->update(['email' => $validated['email']]);
+                return back()->with('status', 'Email updated!');
 
             case 'password':
-                $request->validate([
+                $validated = $request->validate([
                     'currentpassword'    => 'required',
                     'newpassword'        => 'required|min:8|max:30',
-                    'newpasswordconfirm' => 'required|min:8|max:30|same:newpassword'
+                    'newpasswordconfirm' => 'required|same:newpassword',
                 ]);
-                if (!Hash::check(Auth::user()->password, $request->currentpassword)) {
-                    Auth::user()->update(['password' => Hash::make($request->currentpassword)]);
-                    return redirect()->back()->with('status', 'Password updated!');
-                }
-                return redirect()->back()->withErrors('Wrong password!');
-                break;
 
-            default:
-                return redirect()->back();
-                break;
+                if (!Hash::check($validated['currentpassword'], $user->password)) {
+                    return back()->withErrors(['currentpassword' => 'Wrong password!']);
+                }
+
+                $user->update(['password' => Hash::make($validated['newpassword'])]);
+                return back()->with('status', 'Password updated!');
         }
+
+        return back();
     }
 }

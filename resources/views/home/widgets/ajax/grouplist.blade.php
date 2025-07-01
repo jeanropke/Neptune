@@ -2,13 +2,13 @@
     @forelse($owner->groups()->with('group')->get() as $group)
         <li title="{{ $group->group->name }}" id="groups-list-1-{{ $group->group->id }}">
             <div class="groups-list-icon">
-                <a href="{{ url('/') }}/groups/{{ $group->group->id }}/id">
+                <a href="{{ $group->group->url }}">
                     <img src="{{ cms_config('site.groupbadge.url') }}{{ $group->group->badge }}.gif">
                 </a>
             </div>
             <div class="groups-list-open"></div>
             <h4>
-                <a href="{{ url('/') }}/groups/{{ $group->group->id }}/id">{{ $group->group->name }}</a>
+                <a href="{{ $group->group->url }}">{{ $group->group->name }}</a>
             </h4>
             <p>
                 Group created: <br>

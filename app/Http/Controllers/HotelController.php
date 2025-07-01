@@ -10,26 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
-    public function index()
-    {
-        return view('hotel.index');
-    }
-
-    public function pets()
-    {
-        return view('hotel.pets');
-    }
-
-    public function takingCareOfYourPet()
-    {
-        return view('hotel.pets.taking_care_of_your_pet');
-    }
-
-    public function room()
-    {
-        return view('hotel.room');
-    }
-
     public function staff()
     {
         return view('hotel.staff')->with([
@@ -87,45 +67,5 @@ class HotelController extends Controller
         return view('hotel.groups.directory.recent')->with([
             'recent'    => Group::take(50)->orderBy('created_at', 'DESC')->get(),
         ]);
-    }
-
-    public function homes()
-    {
-        return view('hotel.homes');
-    }
-
-    public function web()
-    {
-        return view('hotel.web');
-    }
-
-    public function navigator()
-    {
-        return view('hotel.navigator');
-    }
-
-    public function welcomeStarted()
-    {
-        return view('hotel.welcome.started');
-    }
-
-    public function welcomeChatting()
-    {
-        return view('hotel.welcome.chatting');
-    }
-
-    public function welcomeNavigator()
-    {
-        return view('hotel.welcome.navigator');
-    }
-
-    public function welcomeRoom()
-    {
-        return view('hotel.welcome.room');
-    }
-
-    public function welcomeHelp()
-    {
-        return view('hotel.welcome.help');
     }
 }

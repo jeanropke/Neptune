@@ -3,55 +3,46 @@
 namespace App\Http\Controllers\Housekeeping\Furniture;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catalogue\CatalogueItem;
-use App\Models\ItemOffer;
+use App\Http\Requests\Housekeeping\WebOfferRequest;
+use App\Models\Neptune\ItemOffer;
 use Illuminate\Http\Request;
 
 class WebOfferController extends Controller
 {
     public function webOffers(Request $request)
     {
-        $offers = ItemOffer::where('name', 'LIKE', "%{$request->value}%")->orWhere('salecode', 'LIKE', "%{$request->value}%")->paginate(25);
-        return view('housekeeping.furniture.weboffers.listing')->with('offers', $offers);
+        $search = $request->input('value');
+
+        $offers = ItemOffer::query()->when($search, function ($query, $search) {
+            $query->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('salecode', 'LIKE', "%{$search}%");
+        })->paginate(25);
+
+        return view('housekeeping.furniture.weboffers.listing', compact('offers'));
     }
 
     public function webOffersEdit(Request $request)
     {
         $offer = ItemOffer::find($request->id);
-        if (!$offer)
+
+        if (!$offer) {
             return redirect()->route('housekeeping.furniture.weboffers')->with('message', 'Web offer not found!');
-
-        return view('housekeeping.furniture.weboffers.edit')->with('offer', $offer);
-    }
-
-    public function webOffersSave(Request $request)
-    {
-        $offer = ItemOffer::find($request->id);
-        if (!$offer)
-            return redirect()->route('housekeeping.furniture.weboffers')->with('message', 'Web offer not found!');
-
-        $request->validate([
-            'salecode'  => 'required',
-            'name'      => 'required',
-            'item_ids'  => 'required',
-            'price'     => 'required|numeric',
-            'enabled'   => 'required|in:0,1'
-        ]);
-
-        foreach(explode(';', $request->item_ids) as $id)
-        {
-            $cata = CatalogueItem::find($id);
-            if(!$cata)
-                return redirect()->back()->with('message', 'Catalogue Item id not found!');
         }
 
-        $offer->update([
-            'salecode'  => $request->salecode,
-            'name'      => $request->name,
-            'item_ids'  => $request->item_ids,
-            'price'     => $request->price,
-            'enabled'   => $request->enabled
-        ]);
+        return view('housekeeping.furniture.weboffers.edit', compact('offer'));
+    }
+
+    public function webOffersSave(WebOfferRequest $request)
+    {
+        $offer = ItemOffer::find($request->id);
+
+        if (!$offer) {
+            return redirect()->route('housekeeping.furniture.weboffers')->with('message', 'Web offer not found!');
+        }
+
+        $validated = $request->validated();
+
+        $offer->update($validated);
 
         create_staff_log('furniture.weboffers.save', $request);
 
@@ -63,30 +54,11 @@ class WebOfferController extends Controller
         return view('housekeeping.furniture.weboffers.add');
     }
 
-    public function webOffersAddSave(Request $request)
+    public function webOffersAddSave(WebOfferRequest $request)
     {
-        $request->validate([
-            'salecode'  => 'required',
-            'name'      => 'required',
-            'item_ids'  => 'required',
-            'price'     => 'required|numeric',
-            'enabled'   => 'required|in:0,1'
-        ]);
+        $validated = $request->validated();
 
-        foreach(explode(';', $request->item_ids) as $id)
-        {
-            $cata = CatalogueItem::find($id);
-            if(!$cata)
-                return redirect()->back()->with('message', 'Catalogue Item id not found!');
-        }
-
-        $offer = ItemOffer::create([
-            'salecode'  => $request->salecode,
-            'name'      => $request->name,
-            'item_ids'  => $request->item_ids,
-            'price'     => $request->price,
-            'enabled'   => $request->enabled
-        ]);
+        $offer = ItemOffer::create($validated);
 
         create_staff_log('furniture.weboffers.add', $request);
 
@@ -97,13 +69,20 @@ class WebOfferController extends Controller
     {
         $offer = ItemOffer::find($request->id);
 
-        if (!$offer)
-            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This web offer does not exist!']);
+        if (!$offer) {
+            return view('housekeeping.ajax.dialog_result', [
+                'status' => 'error',
+                'message' => 'This web offer does not exist!',
+            ]);
+        }
 
         $offer->delete();
 
         create_staff_log('furniture.weboffers.delete', $request);
 
-        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Web offer deleted!']);
+        return view('housekeeping.ajax.dialog_result', [
+            'status' => 'success',
+            'message' => 'Web offer deleted!',
+        ]);
     }
 }

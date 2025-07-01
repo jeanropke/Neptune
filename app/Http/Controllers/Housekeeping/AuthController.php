@@ -10,27 +10,34 @@ class AuthController extends Controller
 {
     public function login()
     {
-        if (Auth::check())
-            return redirect('housekeeping/dashboard');
+        if (user()) {
+            return redirect()->route('housekeeping.dashboard');
+        }
 
         return view('housekeeping.login');
     }
+
     public function doLogin(Request $request)
     {
 
-        $validator = $request->validate([
-            'username'  => 'required',
-            'password'  => 'required'
+        $credentials = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($validator)) {
-            if (user()->hasPermission('can_access_housekeeping'))
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if (user()->hasPermission('can_access_housekeeping')) {
                 return redirect()->route('housekeeping.index');
+            }
 
             Auth::logout();
             return redirect()->route('index.home');
-        } else {
-            return redirect()->back()->withErrors(['error' => trans('Username or password wrong')]);
         }
+
+        return back()->withErrors([
+            'error' => trans('Username or password wrong'),
+        ])->withInput();
     }
 }

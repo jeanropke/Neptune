@@ -3,7 +3,7 @@
         <ul id="inventory-item-list">
             @foreach ($items as $item)
                 <li id="inventory-item-{{ $item->id }}" title="{{ $item->caption }}">
-                    <div class="webstore-item-preview {{ $item->getStoreItem()->type }}_{{ $item->getStoreItem()->class }}_pre">
+                    <div class="webstore-item-preview {{ $item->store->type }}_{{ $item->store->class }}_pre">
                         <div class="webstore-item-mask">
                             @if ($item->amount > 1)
                                 <div class="webstore-item-count">

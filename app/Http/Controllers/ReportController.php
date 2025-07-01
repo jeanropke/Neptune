@@ -9,146 +9,105 @@ use App\Models\Home\HomeItem;
 use App\Models\Report;
 use App\Models\Room;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
-    private function createReport($objectId, $type, $message, $author)
+    private function createReport($objectId, $type, $message, $authorId)
     {
-        $alreadyReported = Report::where([['reported_by', '=', user()->id], ['object_id', '=', $objectId], ['type', '=', $type]])->count() > 0;
+        $userId = user()->id;
 
-        if ($alreadyReported)
+        if (Report::where([
+            ['reported_by', '=', $userId],
+            ['object_id', '=', $objectId],
+            ['type', '=', $type]
+        ])->exists()) {
             return 'SPAM';
+        }
 
-        $reportsByUser = Report::where([['reported_by', '=', user()->id], ['created_at', '>', Carbon::now()->subMinutes(5)->toDateTimeString()]])->count();
+        $recentReports = Report::where('reported_by', $userId)
+            ->where('created_at', '>', now()->subMinutes(5))
+            ->count();
 
-        if ($reportsByUser > 3)
-            return "SPAM";
+        if ($recentReports > 3) {
+            return 'SPAM';
+        }
 
         Report::create([
-            'reported_by'   => user()->id,
-            'object_id'     => $objectId,
-            'type'          => $type,
-            'message'       => $message,
-            'author_id'     => $author,
-            'created_at'    => Carbon::now(),
-            'updated_at'    => Carbon::now()
+            'reported_by' => $userId,
+            'object_id'   => $objectId,
+            'type'        => $type,
+            'message'     => $message,
+            'author_id'   => $authorId
         ]);
 
-        return "SUCCESS";
+        return 'SUCCESS';
+    }
+
+    private function handleReport(Request $request, $type, $modelClass, $messageField, $authorField = 'user_id')
+    {
+        abort_unless(Auth::check(), 403);
+
+        $validator = Validator::make($request->all(), [
+            'objectId' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'Invalid request.'], 422);
+        }
+
+        $item = $modelClass::find($request->objectId);
+
+        if (!$item) {
+            return response()->json(['error' => 'Object not found.'], 404);
+        }
+
+        return $this->createReport(
+            $request->objectId,
+            $type,
+            data_get($item, $messageField, ''),
+            data_get($item, $authorField, 0)
+        );
     }
 
     public function addDiscussionpostReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $post = GroupReply::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'discussionpost', $post->message, $post->user_id);
+        return $this->handleReport($request, 'discussionpost', GroupReply::class, 'message');
     }
 
     public function addGroupdescReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $group = Group::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'groupdesc', $group->description, $group->user_id);
+        return $this->handleReport($request, 'groupdesc', Group::class, 'description');
     }
 
     public function addGroupnameReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $group = Group::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'groupname', $group->name, $group->user_id);
+        return $this->handleReport($request, 'groupname', Group::class, 'name');
     }
 
     public function addGuestbookReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $guestbook = Guestbook::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'guestbook', $guestbook->message, $guestbook->user_id);
+        return $this->handleReport($request, 'guestbook', Guestbook::class, 'message');
     }
 
     public function addMottoReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $user = User::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'motto', $user->motto, $user->id);
+        return $this->handleReport($request, 'motto', User::class, 'motto', 'id');
     }
 
     public function addNameReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $user = User::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'name', $user->username, $user->id);
+        return $this->handleReport($request, 'name', User::class, 'username', 'id');
     }
 
     public function addRoomReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $room = Room::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'room', "Name: {$room->name}\nDesc: {$room->description}", $room->owner_id);
+        return $this->handleReport($request, 'room', Room::class, fn($room) => "Name: {$room->name}\nDesc: {$room->description}", 'owner_id');
     }
 
     public function addStickieReport(Request $request)
     {
-        if (!Auth::check())
-            return;
-
-        $request->validate([
-            'objectId'  => 'required|numeric'
-        ]);
-
-        $stickie = HomeItem::find($request->objectId);
-
-        return $this->createReport($request->objectId, 'stickie', $stickie->data, $stickie->owner_id);
+        return $this->handleReport($request, 'stickie', HomeItem::class, 'data', 'owner_id');
     }
 }
