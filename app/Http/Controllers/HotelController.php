@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\Permission;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
@@ -67,5 +68,15 @@ class HotelController extends Controller
         return view('hotel.groups.directory.recent')->with([
             'recent'    => Group::take(50)->orderBy('created_at', 'DESC')->get(),
         ]);
+    }
+
+    public function catalogue(Request $request)
+    {
+        $allowedViews = ['1', '2', '4'];
+
+        if (!in_array($request->id, $allowedViews)) {
+            abort(404);
+        }
+        return view('hotel.furniture.catalogue' . ($request->id ? '_' . $request->id : ''));
     }
 }

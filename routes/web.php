@@ -110,6 +110,18 @@ Route::middleware('user')->group(function () {
         Route::get('/welcome_to_habbo_hotel/your_own_room', fn() => view('hotel.welcome.room'))->name('hotel.welcome.room');
         Route::get('/welcome_to_habbo_hotel/help_safety', fn() => view('hotel.welcome.help'))->name('hotel.welcome.help');
 
+        Route::prefix('furniture')->group(function () {
+            Route::get('/', fn() => view('hotel.furniture.index'))->name('hotel.furniture');
+            Route::get('/catalogue', fn() => view('hotel.furniture.catalogue'))->name('hotel.furniture.catalogue');
+            Route::get('/catalogue/{id}', [HotelController::class, 'catalogue']);
+            Route::get('/decoration_examples', fn() => view('hotel.furniture.decorationexamples'));
+            Route::get('/starterpacks', fn() => view('hotel.furniture.starterpacks'));
+            Route::get('/trading', fn() => view('hotel.furniture.trading'));
+            Route::get('/exchange', fn() => view('hotel.furniture.exchange'));
+            Route::get('/cameras', fn() => view('hotel.furniture.cameras'));
+            Route::get('/ecotronfaq', fn() => view('hotel.furniture.ecotronfaq'));
+        });
+
         Route::prefix('trax')->group(function () {
             Route::get('/', fn() => view('hotel.trax.index'))->name('hotel.trax.index');
             Route::get('/store', fn() => view('hotel.trax.store'))->name('hotel.trax.store');
@@ -217,17 +229,6 @@ Route::middleware('user')->group(function () {
         Route::get('/status', [CreditsController::class, 'getPaymentStatus'])->name('credits.status');
         Route::get('/buy/{offer?}', [CreditsController::class, 'buySetup'])->name('credits.buy.setup');
         Route::get('/transactions', [CreditsController::class, 'transactions'])->name('credits.transactions');
-        Route::prefix('furniture')->group(function () {
-            Route::get('/', fn() => view('credits.furniture.index'))->name('credits.furniture');
-            Route::get('/catalogue', fn() => view('credits.furniture.catalogue'))->name('credits.furniture.catalogue');
-            Route::get('/catalogue/{id}', [CreditsController::class, 'catalogue']);
-            Route::get('/decoration_examples', fn() => view('credits.furniture.decorationexamples'));
-            Route::get('/starterpacks', fn() => view('credits.furniture.starterpacks'));
-            Route::get('/trading', fn() => view('credits.furniture.trading'));
-            Route::get('/exchange', fn() => view('credits.furniture.exchange'));
-            Route::get('/cameras', fn() => view('credits.furniture.cameras'));
-            Route::get('/ecotronfaq', fn() => view('credits.furniture.ecotronfaq'));
-        });
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
     });
 

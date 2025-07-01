@@ -1,6 +1,6 @@
 @extends('layouts.master', [
-    'menuId' => '4',
-    'breadcrums' => [['url' => url('/credits'), 'title' => 'Credits']]
+    'menuId' => '2',
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
 ])
 
 @section('title', cms_config('hotel.name.short') . ' Furni')
@@ -15,8 +15,8 @@
                         <tbody>
                             <tr>
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
-                                    @include('credits.furniture.include.menu', ['page' => 'furniture'])
-                                    @foreach (boxes('credits.furniture', 1) as $box)
+                                    @include('hotel.furniture.include.menu', ['page' => 'furniture'])
+                                    @foreach (boxes('hotel.furniture', 1) as $box)
                                         <div class="v3box {{ $box->color }}">
                                             <div class="v3box-top">
                                                 <h3>{{ $box->title }}</h3>

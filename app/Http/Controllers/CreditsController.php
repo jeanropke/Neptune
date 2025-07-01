@@ -20,16 +20,6 @@ class CreditsController extends Controller
         return view('credits.transactions')->with(['transactions' => UserTransaction::where('user_id', Auth::user()->id)->orderBy('timestamp', 'DESC')->take(100)->get()]);
     }
 
-    public function catalogue(Request $request)
-    {
-        $allowedViews = ['1', '2', '4'];
-
-        if (!in_array($request->id, $allowedViews)) {
-            abort(404);
-        }
-        return view('credits.furniture.catalogue' . ($request->id ? '_' . $request->id : ''));
-    }
-
     public function collectibles()
     {
         $tick = emu_config('rare.cycle.tick.time');

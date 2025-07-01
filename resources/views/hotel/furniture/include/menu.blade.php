@@ -8,7 +8,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture">{{ cms_config('hotel.name.short') }} Furni</a>
+                <a href="{{ url('/') }}/hotel/furniture">{{ cms_config('hotel.name.short') }} Furni</a>
             </li>
         @endif
 
@@ -18,7 +18,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/catalogue">Furni Catalog</a>
+                <a href="{{ url('/') }}/hotel/furniture/catalogue">Furni Catalog</a>
             </li>
         @endif
 
@@ -28,7 +28,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/catalogue/1">Furni Styles</a>
+                <a href="{{ url('/') }}/hotel/furniture/catalogue/1">Furni Styles</a>
             </li>
         @endif
 
@@ -38,7 +38,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/catalogue/2">Functional Furni</a>
+                <a href="{{ url('/') }}/hotel/furniture/catalogue/2">Functional Furni</a>
             </li>
         @endif
 
@@ -48,7 +48,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/catalogue/4">Seasonal Furni</a>
+                <a href="{{ url('/') }}/hotel/furniture/catalogue/4">Seasonal Furni</a>
             </li>
         @endif
 
@@ -58,7 +58,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/decoration_examples">Decoration Examples</a>
+                <a href="{{ url('/') }}/hotel/furniture/decoration_examples">Decoration Examples</a>
             </li>
         @endif
 
@@ -68,7 +68,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/starterpacks">Starter Packs</a>
+                <a href="{{ url('/') }}/hotel/furniture/starterpacks">Starter Packs</a>
             </li>
         @endif
 
@@ -78,7 +78,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/trading">Trading</a>
+                <a href="{{ url('/') }}/hotel/furniture/trading">Trading</a>
             </li>
         @endif
 
@@ -88,7 +88,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/exchange">{{ cms_config('hotel.name.short') }} Exchange</a>
+                <a href="{{ url('/') }}/hotel/furniture/exchange">{{ cms_config('hotel.name.short') }} Exchange</a>
             </li>
         @endif
 
@@ -98,7 +98,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/cameras">Cameras</a>
+                <a href="{{ url('/') }}/hotel/furniture/cameras">Cameras</a>
             </li>
         @endif
 
@@ -108,7 +108,7 @@
             </li>
         @else
             <li class="inactive">
-                <a href="{{ url('/') }}/credits/furniture/ecotronfaq">Ecotron - Furni Recycling</a>
+                <a href="{{ url('/') }}/hotel/furniture/ecotronfaq">Ecotron - Furni Recycling</a>
             </li>
         @endif
 
