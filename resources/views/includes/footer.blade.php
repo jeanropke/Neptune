@@ -50,7 +50,7 @@
                     <td class="ad-content-ml"></td>
                     <td class="ad-content-m" align="center" valign="top">
                         @if (config('app.debug'))
-                            <img src="{{ url('/') }}/web/images/ads/728/{{ mt_rand(1, 5) }}.gif">
+                            <img src="{{ cms_config('site.web.url') }}/images/ads/728/{{ mt_rand(1, 5) }}.gif">
                         @else
                             {!! cms_config('site.ads_footer.content') !!}
                         @endif
@@ -65,7 +65,7 @@
             </table>
         </div>
     </div>
-    <div id="footer-message" style="width: 736px; margin: 8px auto;"><img src="{{ url('/') }}/web/images/warnings/message-footer.png"></div>
+    <div id="footer-message" style="width: 736px; margin: 8px auto;"><img src="{{ cms_config('site.web.url') }}/images/warnings/message-footer.png"></div>
     <script>
         if ($('ad-leader').offsetHeight == 0) $('footer-message').style.display = 'block';
     </script>

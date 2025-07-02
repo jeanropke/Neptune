@@ -16,15 +16,15 @@
                             </div>
                             <div class="portlet-darkgrey-body">
                                 <div class="portlet-darkgrey-content">
-                                    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/swfobject.js"></script>
+                                    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
                                     <div id="flashcontent"></div>
                                     <script type="text/javascript">
-                                        var swfobj = new SWFObject("{{ url('/') }}/web/flash/habbowood/movie_player_skin.swf",
+                                        var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/habbowood/movie_player_skin.swf",
                                             "MoviePlayer", "537", "360", "8");
-                                        swfobj.addParam("base", "{{ url('/') }}/web/flash/habbowood/");
-                                        swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
+                                        swfobj.addParam("base", "{{ cms_config('site.web.url') }}/flash/habbowood/");
+                                        swfobj.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml_hc.xml");
                                         swfobj.addVariable("movie_data_url", "{{ url('/') }}/habbomovies/ajax/getpublicmovie/{{ $movie->id }}");
-                                        swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_player.xml");
+                                        swfobj.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/habbowood_player.xml");
                                         swfobj.addVariable("shoot_movie_url", "{{ url('/') }}/habbomovies/private/openeditor");
                                         swfobj.addVariable("share_this_movie", "{{ url('/') }}/entertainment/habbowood/sharemovie/{{ $movie->id }}");
                                         swfobj.addVariable("competition_url", "{{ url('/') }}/entertainment/habbowood/awards");
@@ -65,7 +65,7 @@
                                 <div class="portlet-director director">
                                     <div class="portlet-director-header">
                                         {{-- Missing habbowood images: https://github.com/jeanropke/Neptune/issues/3 --}}
-                                        <img src="{{ url('/') }}/web/images/box-scale/habbomovies_klaffi-tl.gif">
+                                        <img src="{{ cms_config('site.web.url') }}/images/box-scale/habbomovies_klaffi-tl.gif">
                                     </div>
                                     <div class="portlet-director-header-b"></div>
                                     <div class="portlet-director-body">

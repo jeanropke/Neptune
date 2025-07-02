@@ -6,15 +6,15 @@
             <div id="process-header-content">
                 <div id="habbologo"><a href="{{ url('/') }}"></a></div>
                 <div id="steps">
-                    <img src="{{ url('/') }}/web/images/process/step1.gif" alt="1" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step2.gif" alt="2" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step3.gif" alt="3" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step4_on.gif" alt="4" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right_on.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step5.gif" alt="5" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step1.gif" alt="1" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step2.gif" alt="2" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step3.gif" alt="3" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step4_on.gif" alt="4" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right_on.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step5.gif" alt="5" width="30" height="26" />
                 </div>
             </div>
         </div>
@@ -39,10 +39,10 @@
                                 </div>
                             </div>
                             <div class="bubble-bottom">
-                                <div class="bubble-bottom-body"> <img src="{{ url('/') }}/web/images/register/bubble_tail_left.gif" alt="" width="22"
+                                <div class="bubble-bottom-body"> <img src="{{ cms_config('site.web.url') }}/images/register/bubble_tail_left.gif" alt="" width="22"
                                         height="31" /> </div>
                             </div>
-                            <div class="frank"><img src="{{ url('/') }}/web/images/register/register4.gif" alt="" width="245" height="180" /></div>
+                            <div class="frank"><img src="{{ cms_config('site.web.url') }}/images/register/register4.gif" alt="" width="245" height="180" /></div>
                         </div>
                         <div class="content-column2">
                             @if ($errors->any())

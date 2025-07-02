@@ -14,15 +14,15 @@
                 </p>
                 <p>
                     @if ($member->user->favourite_group == $owner->id)
-                        <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon" alt="Favorite"
+                        <img src="{{ cms_config('site.web.url') }}/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon" alt="Favorite"
                             title="Favorite">
                     @endif
                     @if ($member->user->id == $owner->owner_id)
-                        <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
+                        <img src="{{ cms_config('site.web.url') }}/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
                     @endif
 
                     @if ($member->member_rank == 2)
-                        <img src="{{ url('/') }}/web/images/groups/administrator_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
+                        <img src="{{ cms_config('site.web.url') }}/images/groups/administrator_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
                     @endif
                 </p>
             </li>

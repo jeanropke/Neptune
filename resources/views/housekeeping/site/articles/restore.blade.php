@@ -48,12 +48,12 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.articles.edit', $article->id) }}">
-                                            <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit">
                                         </a>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="#" class="restore-article" data-id="{{ $article->id }}">
-                                            <img src="{{ url('/') }}/web/housekeeping/images/restore.gif" alt="Delete">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/restore.gif" alt="Delete">
                                         </a>
                                     </td>
                                 </tr>

@@ -8,7 +8,7 @@
                 <h3>
                     <span class="header-left">&nbsp;</span><span class="header-middle">Guestbook(<span id="guestbook-size">{{ $guestbook->count() }}</span>)
                         <span id="guestbook-type" class="{{ $item->data }}">
-                            <img src="{{ url('/') }}/web/images/groups/status_exclusive.gif" title="Apenas Amigos" alt="Apenas Amigos" />
+                            <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive.gif" title="Apenas Amigos" alt="Apenas Amigos" />
 
                         </span></span>
                     <span class="header-right">&nbsp;
@@ -30,7 +30,7 @@
                 @if (!$editing && Auth::check())
                     <div class="guestbook-toolbar clearfix">
                         <a href="#" class="colorlink orange" id="guestbook-open-dialog">
-                            <span><img src="{{ url('/') }}/web/images/myhabbo/buttons/icon_envelope.gif" />Post
+                            <span><img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/icon_envelope.gif" />Post
                                 new message</span>
                         </a>
 

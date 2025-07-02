@@ -20,7 +20,7 @@
 
                                     <div class="portlet-director director">
                                         <div class="portlet-director-header"><img
-                                                src="{{ url('/') }}/web/images/box-scale/habbomovies_klaffi-tl.gif">
+                                                src="{{ cms_config('site.web.url') }}/images/box-scale/habbomovies_klaffi-tl.gif">
                                         </div>
                                         <div class="portlet-director-header-b"></div>
                                         <div class="portlet-director-body">

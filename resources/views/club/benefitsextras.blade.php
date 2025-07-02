@@ -12,7 +12,7 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra hair<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Club badge<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra dances<br><br><a target="_self" href="{{ url('/') }}/club/benefits/habbo">Find out more &gt;&gt;</a><br>
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra hair<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Club badge<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra dances<br><br><a target="_self" href="{{ url('/') }}/club/benefits/habbo">Find out more &gt;&gt;</a><br>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -23,13 +23,13 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Monthly free furni
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Monthly free furni
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Extra Guest Rooms
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra Guest Rooms
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> VIP Public Rooms
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> VIP Public Rooms
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> Priority access<br><br><a href="{{ url('/') }}/club/benefits/room" target="_self">Find out more &gt;&gt;</a><br>
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Priority access<br><br><a href="{{ url('/') }}/club/benefits/room" target="_self">Find out more &gt;&gt;</a><br>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -40,11 +40,11 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New widget skins
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> New widget skins
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> New Backgrounds
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> New Backgrounds
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt=""> No ads!<br><br>
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> No ads!<br><br>
                             <a href="{{ url('/') }}/club/benefits/home" target="_self">Find out more &gt;&gt;</a><br>
                             <div class="clear"></div>
                         </div>
@@ -56,11 +56,11 @@
                     <div class="v3box-content">
                         <div class="v3box-body">
 
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
                             <span style="font-weight: bold;">Huge Friends List</span>
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
                             <span style="font-weight: bold;">:chooser command</span>
-                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ url('/') }}/web/images/club/miniHCbadge.gif" alt="">
+                            <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
                             <span style="font-weight: bold;">:furni command</span>
                             <br><br>
                             <a href="{{ url('/') }}/club/benefits/extras" target="_self">Find out more &gt;&gt;</a><br>
@@ -77,7 +77,7 @@
                         <div class="content-white-body">
 
                             <div class="content-white-content">
-                                <img src="{{ url('/') }}/web/images/club/HC_subpage_actions.gif" alt=""><br><br><br><span style="font-weight: bold;">:chooser
+                                <img src="{{ cms_config('site.web.url') }}/images/club/HC_subpage_actions.gif" alt=""><br><br><br><span style="font-weight: bold;">:chooser
 </span><br>Type this in when in any room to see who else is there. Great for SnowStorm and seeing who else is in a Guest Room.<br><br><span style="font-weight: bold;">Huge Friends List</span><br>500 people!
 
 

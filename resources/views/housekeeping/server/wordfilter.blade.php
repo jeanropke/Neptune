@@ -156,10 +156,10 @@
                             </td>
                             <td class="tablerow2" align="center"><a
                                     href="{{ route('housekeeping.server.wordfilter.edit', $w->key) }}"><img
-                                        src="{{ url('/') }}/web/admin/images/edit.gif" alt="Edit"></a></td>
+                                        src="{{ cms_config('site.web.url') }}/admin/images/edit.gif" alt="Edit"></a></td>
                             <td class="tablerow2" align="center"><a
                                     href="{{ route('housekeeping.server.wordfilter.delete', $w->key) }}"><img
-                                        src="{{ url('/') }}/web/admin/images/delete.gif" alt="Delete"></a></td>
+                                        src="{{ cms_config('site.web.url') }}/admin/images/delete.gif" alt="Delete"></a></td>
                         </tr>
                         @empty
                         <tr align="center">

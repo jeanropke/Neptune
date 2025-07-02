@@ -13,10 +13,10 @@
             <p>
                 Group created: <br>
                 @if ($owner->favourite_group == $group->group->id)
-                    <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon" alt="Favorite" title="Favorite">
+                    <img src="{{ cms_config('site.web.url') }}/images/groups/favourite_group_icon.gif" width="15" height="15" class="groups-list-icon" alt="Favorite" title="Favorite">
                 @endif
                 @if ($owner->id == $group->group->owner_id)
-                    <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
+                    <img src="{{ cms_config('site.web.url') }}/images/groups/owner_icon.gif" width="15" height="15" class="groups-list-icon" alt="Owner" title="Owner">
                 @endif
                 <b>{{ $group->group->created_at->format('M d, Y') }}</b>
             </p>

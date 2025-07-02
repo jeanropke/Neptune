@@ -31,7 +31,7 @@
 
                                     <img width="113" vspace="0" hspace="0" height="100" border="0" align="right"
                                          alt="maintenance.gif" id="galleryImage"
-                                         src="{{ url('/') }}/web/images/maintenance/workman_habbo_error.gif">We're
+                                         src="{{ cms_config('site.web.url') }}/images/maintenance/workman_habbo_error.gif">We're
                                     sorry, but the page you have requested cannot be found.<br><br>Perhaps it's lost, or
                                     it might have run off... <span style="font-weight: bold;">OR</span>, Kedo might have
                                     thought it was a Twinkie and eaten it!<br><br>Please try typing the URL again, if

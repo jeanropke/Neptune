@@ -3,7 +3,7 @@
 @section('title', 'Create New Box')
 
 @section('content')
-<script src="{{ url('/') }}/web/housekeeping/js/tiny_mce.js"></script>
+<script src="{{ cms_config('site.web.url') }}/housekeeping/js/tiny_mce.js"></script>
 <script type="text/javascript">
     tinyMCE.init({
             // General options
@@ -21,7 +21,7 @@
             theme_advanced_resizing : true,
 
             // Example content CSS (should be your site CSS)
-            content_css : "{{ url('/') }}/web/housekeeping/js/themes/advanced/skins/default/content.css",
+            content_css : "{{ cms_config('site.web.url') }}/housekeeping/js/themes/advanced/skins/default/content.css",
 
             // Drop lists for link/image/media/template dialogs
             template_external_list_url : "lists/template_list.js",

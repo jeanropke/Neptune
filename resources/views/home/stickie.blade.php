@@ -2,9 +2,9 @@
     <div class="n_skin_{{ $item->skin }}">
         <div class="stickie-header">
             <h3>
-                <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-s" id="stickie-{{ $item->id }}-report" style="display: none" />
+                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-s" id="stickie-{{ $item->id }}-report" style="display: none" />
                 @if (isset($isEdit) && $isEdit)
-                    <img src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
+                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button"
                         id="stickie-{{ $item->id }}-edit" />
                     <script language="JavaScript" type="text/javascript">
                         Event.observe('stickie-{{ $item->id }}-edit', 'click', function(e) {

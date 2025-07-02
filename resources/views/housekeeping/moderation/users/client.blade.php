@@ -80,7 +80,7 @@
         }
     </style>
     <div id="client-topbar">
-        <div class="logo"><img src="{{ url('/') }}/web/images/popup/popup_topbar_habbologo.gif" alt="" align="middle" />
+        <div class="logo"><img src="{{ cms_config('site.web.url') }}/images/popup/popup_topbar_habbologo.gif" alt="" align="middle" />
         </div>
         <div class="habbocount">
             <div id="habboCountUpdateParent">
@@ -102,7 +102,7 @@
                 <div id="page-container">
                     <div id="header-container">
                         <div
-                            style="margin: 0 auto; padding-top: 44px; background: url({{ url('/') }}/web/images/logos/habbo_logo_nourl.gif) center no-repeat; width: 160px; height: 66px;">
+                            style="margin: 0 auto; padding-top: 44px; background: url({{ cms_config('site.web.url') }}/images/logos/habbo_logo_nourl.gif) center no-repeat; width: 160px; height: 66px;">
                         </div>
                     </div>
                     <div id="maintenance-container">
@@ -112,7 +112,7 @@
                                     <!-- bubble -->
                                     <div class="bubble">
                                         <div class="bubble-body">
-                                            <img src="{{ url('/') }}/web/images/maintenance/alert_triangle.gif"
+                                            <img src="{{ cms_config('site.web.url') }}/images/maintenance/alert_triangle.gif"
                                                 width="30" height="29" alt="" border="0" align="left"
                                                 class="triangle" />
                                             <b>I think you hit the wrong switch, Greggers! All of just vanished!</b>
@@ -122,13 +122,13 @@
                                     <div class="bubble-bottom">
 
                                         <div class="bubble-bottom-body">
-                                            <img src="{{ url('/') }}/web/images/maintenance/bubble_tail_left.gif" alt=""
+                                            <img src="{{ cms_config('site.web.url') }}/images/maintenance/bubble_tail_left.gif" alt=""
                                                 width="22" height="31" />
                                         </div>
                                     </div>
                                     <!-- \bubble -->
 
-                                    <img src="{{ url('/') }}/web/images/maintenance/frank_habbo_down.gif" width="57"
+                                    <img src="{{ cms_config('site.web.url') }}/images/maintenance/frank_habbo_down.gif" width="57"
                                         height="87" alt="" border="0" />
 
                                 </div>
@@ -150,13 +150,13 @@
                                     <div class="bubble-bottom">
 
                                         <div class="bubble-bottom-body">
-                                            <img src="{{ url('/') }}/web/images/maintenance/bubble_tail_left.gif" alt=""
+                                            <img src="{{ cms_config('site.web.url') }}/images/maintenance/bubble_tail_left.gif" alt=""
                                                 width="22" height="31" />
                                         </div>
                                     </div>
                                     <!-- \bubble -->
 
-                                    <img src="{{ url('/') }}/web/images/maintenance/workman_habbo_down.gif" width="125"
+                                    <img src="{{ cms_config('site.web.url') }}/images/maintenance/workman_habbo_down.gif" width="125"
                                         height="118" alt="" border="0" />
 
                                 </div>

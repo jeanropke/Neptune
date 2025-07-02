@@ -12,7 +12,7 @@
             <div class="widget-content">
                 @if($editing)
                 <div id="traxplayer-content" style="text-align: center;">
-                    <img src="{{ url('/') }}/web/images/myhabbo/traxplayer/player.png" />
+                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/traxplayer/player.png" />
                 </div>
                 <div id="edit-menu-trax-select-temp" style="display:none">
                     <select id="trax-select-options-temp">
@@ -27,8 +27,8 @@
                 You don't have a selected Trax song
                 @else
                 <div id="traxplayer-content" style="text-align:center;"></div>
-                <embed type="application/x-shockwave-flash" src="{{ url('/') }}/web/flash/traxplayer/traxplayer.swf"
-                    name="traxplayer" quality="high" base="{{ url('/') }}/web/flash/traxplayer/"
+                <embed type="application/x-shockwave-flash" src="{{ cms_config('site.web.url') }}/flash/traxplayer/traxplayer.swf"
+                    name="traxplayer" quality="high" base="{{ cms_config('site.web.url') }}/flash/traxplayer/"
                     allowscriptaccess="always" menu="false" wmode="transparent"
                     flashvars="songUrl={{ url('/') }}/myhabbo/trax_song/{{ $item->data }}&amp;sampleUrl={{ url('') }}/dcr/sound/mp3/"
                     height="66" width="210" />

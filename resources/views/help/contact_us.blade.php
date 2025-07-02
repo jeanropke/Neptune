@@ -39,7 +39,7 @@
                                             <p>Use the <a href="{{ url('/') }}/iot/go" target="_blank">Habbo Help Tool</a> to send us your questions and suggestions. Make sure you choose the correct category within the Help Tool - this makes it easier for us to assist you.</p>
                                             <p><br></p>
                                             <p>Please understand that we cannot return items that have been stolen from your account by another player. So, treat your password like you treat the keys to your house - don't give them to burglars!
-                                                <img vspace="0" hspace="0" border="0" align="right" src="{{ url('/') }}/web/images/iot/help_main.gif" alt=""></p><br>
+                                                <img vspace="0" hspace="0" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/iot/help_main.gif" alt=""></p><br>
                                                 <p>We aim to respond to emails within two working days (Monday to Friday). Emails are only answered within office hours (9.30am to 5.30pm PST).</p><br><br>
                                                 <b><p>Hi Habbos!  Due to technical difficulties and overwhelming response, our response time will be delayed. Thank you for your patience!</p>
                                                 <p>Habbo USA Player Support</p></b>

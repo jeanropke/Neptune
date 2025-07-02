@@ -11,14 +11,14 @@
                 <div class="profile-info">
                     <div class="name" style="float: left">
                         <span class="name-text">{{ $owner->username }}</span>
-                        <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-n"
+                        <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-n"
                             id="name-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     </div>
                     <br class="clear">
                     @if ($owner->isOnline())
-                        <img alt="online" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_online_anim_big.gif">
+                        <img alt="online" src="{{ cms_config('site.web.url') }}/images/myhabbo/profile/habbo_online_anim_big.gif">
                     @else
-                        <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_offline.gif">
+                        <img alt="offline" src="{{ cms_config('site.web.url') }}/images/myhabbo/profile/habbo_offline.gif">
                     @endif
                     <div class="birthday text">
                         Habbo Created On:
@@ -43,7 +43,7 @@
                 </div>
                 <div class="profile-motto">
                     {{ $owner->motto }}
-                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-m"
+                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-m"
                         id="motto-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     <div class="clear"></div>
                 </div>
@@ -60,10 +60,10 @@
                             <div class="content-red">
                                 <div class="content-red-body">
                                     <span id="tag-limit-message" style="display: none;">
-                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> The limit is 8 tags!
+                                        <img src="{{ cms_config('site.web.url') }}/images/register/icon_error.gif"> The limit is 8 tags!
                                     </span>
                                     <span id="tag-invalid-message" style="display: none;">
-                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> Invalid tag.
+                                        <img src="{{ cms_config('site.web.url') }}/images/register/icon_error.gif"> Invalid tag.
                                     </span>
                                 </div>
                             </div>

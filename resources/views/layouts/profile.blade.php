@@ -111,7 +111,7 @@
                         <div class="profile-info">
                             <div class="name">{{ Auth::user()->username }}</div>
 
-                            <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_offline.gif" />
+                            <img alt="offline" src="{{ cms_config('site.web.url') }}/images/myhabbo/profile/habbo_offline.gif" />
                             <div class="birthday text">
                                 {{ cms_config('hotel.name.short') }} Created On:
                             </div>

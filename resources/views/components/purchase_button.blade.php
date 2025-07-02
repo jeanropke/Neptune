@@ -10,7 +10,7 @@
         Event.stop(e);
         var dialog = createDialog("purchase_dialog", "Confirm purchase", 9001, 0, -1000, closePurchase);
         appendDialogBody(dialog,
-            "<p style=\"text-align:center\"><img src=\"{{ url('/') }}/web/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
+            "<p style=\"text-align:center\"><img src=\"{{ cms_config('site.web.url') }}/images/progress_bubbles.gif\" alt=\"\" width=\"29\" height=\"6\" /></p><div style=\"clear\"></div>",
             true);
         moveDialogToCenter(dialog);
         showOverlay();

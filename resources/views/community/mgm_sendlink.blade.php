@@ -46,13 +46,13 @@
                                                 </div>
                                                 <div class="blackbubble-bottom">
                                                     <div class="blackbubble-bottom-body">
-                                                        <img src="{{ url('/') }}/web/images/box-scale/bubble_tail_small.gif" alt="" width="12" height="21"
+                                                        <img src="{{ cms_config('site.web.url') }}/images/box-scale/bubble_tail_small.gif" alt="" width="12" height="21"
                                                             class="invitation-tail">
                                                     </div>
                                                 </div>
 
                                                 <p>
-                                                    <img alt="" src="{{ url('/') }}/web/images/frank/hello.gif" class="invitation-habbo">
+                                                    <img alt="" src="{{ cms_config('site.web.url') }}/images/frank/hello.gif" class="invitation-habbo">
                                                     <label for="invite_1_recipients_0">Friend's email address 1:</label><br>
                                                     <input type="text" name="invite_1_recipients[0]" id="invite_1_recipients_0" value="" size="40"
                                                         class="invitation-wide-input">

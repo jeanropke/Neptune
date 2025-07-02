@@ -50,9 +50,9 @@
                                 <td colspan="2" class="online">
                                     <a href="{{ url('/') }}/home/{{ $author->username }}">{{ $author->username }}</a>
                                     @if($author->isOnline())
-                                    <img alt="online" src="{{ url('/') }}/web/images/myhabbo/habbo_online_anim.gif">
+                                    <img alt="online" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_online_anim.gif">
                                     @else
-                                    <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/habbo_offline.gif">
+                                    <img alt="offline" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_offline.gif">
                                     @endif
                                 </td>
                             </tr>
@@ -102,12 +102,12 @@
                                     <div class="post-list-report-element">
                                         @if(!$reply->hidden_by_staff)
                                             @auth
-                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/quote_button.gif" width="19" height="18" class="quote-post verify-email" id="quote-post-{{ $reply->id }}" />
-                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
+                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/quote_button.gif" width="19" height="18" class="quote-post verify-email" id="quote-post-{{ $reply->id }}" />
+                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
                                                 @if ($author->id != user()->id)
-                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
+                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
                                                 @else
-                                                <img src="{{ url('/') }}/web/images/myhabbo/buttons/icon_edit.gif" width="19" height="18" class="edit-post verify-email" id="edit-post-{{ $reply->id }}" />
+                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/icon_edit.gif" width="19" height="18" class="edit-post verify-email" id="edit-post-{{ $reply->id }}" />
                                                 @endif
                                             @endauth
                                         @endif

@@ -47,11 +47,11 @@
                             <div class="portlet-goldenfilm-header-b"></div>
                             <div class="portlet-goldenfilm-body">
                                 <div class="portlet-goldenfilm-content">
-                                    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/swfobject.js"></script>
+                                    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
                                     <div id="flashcontent" style="text-align:center"></div>
                                     <script>
                                         var swfobj = new SWFObject("{{ cms_config('site.c_images.url') }}/album2426/tutorial_player.swf", "demo", "512", "288", "7");
-                                        swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_demo.xml");
+                                        swfobj.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/habbowood_demo.xml");
                                         swfobj.addParam("allowScriptAccess", "always");
                                         swfobj.addParam("menu", "false");
                                         swfobj.write("flashcontent");

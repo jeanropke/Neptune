@@ -3,7 +3,7 @@
 @section('title', 'Compose New Article')
 
 @section('content')
-    <script src="{{ url('/') }}/web/housekeeping/js/tiny_mce.js"></script>
+    <script src="{{ cms_config('site.web.url') }}/housekeeping/js/tiny_mce.js"></script>
     <script type="text/javascript">
         tinyMCE.init({
             // General options
@@ -21,7 +21,7 @@
             theme_advanced_resizing: true,
 
             // Example content CSS (should be your site CSS)
-            content_css: "{{ url('/') }}/web/housekeeping/js/themes/advanced/skins/default/content.css",
+            content_css: "{{ cms_config('site.web.url') }}/housekeeping/js/themes/advanced/skins/default/content.css",
 
             // Drop lists for link/image/media/template dialogs
             template_external_list_url: "lists/template_list.js",
@@ -89,7 +89,7 @@
                                         <div class="graytext">The URL to the topstory image.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ url('/') }}/web/images/top_story_images/{{ old('topstory') ?? $ts_images[0] }}" id="ts_preview" data-url="{{ url('/') }}/web/images/top_story_images/%icon%">
+                                        <img src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ old('topstory') ?? $ts_images[0] }}" id="ts_preview" data-url="{{ cms_config('site.web.url') }}/images/top_story_images/%icon%">
                                         <br>
                                         <select name="topstory" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($ts_images as $ts_img)

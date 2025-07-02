@@ -15,7 +15,7 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <img vspace="5" hspace="5" border="0" src="{{ url('/') }}/web/images/hotel/Web_navigate_001.gif" alt="">
+                                <img vspace="5" hspace="5" border="0" src="{{ cms_config('site.web.url') }}/images/hotel/Web_navigate_001.gif" alt="">
 
                                 <div class="clear"></div>
                             </div>
@@ -38,7 +38,7 @@
                                     <tbody>
                                         <tr>
                                             <td valign="top">
-                                                <img src="{{ url('/') }}/web/images/hotel/Habbo_Welcome_Instructions_Web_Registering.gif">
+                                                <img src="{{ cms_config('site.web.url') }}/images/hotel/Habbo_Welcome_Instructions_Web_Registering.gif">
                                             </td>
                                             <td valign="top"><b>Logging in<br></b>
                                                 <p>To log into {{ cms_config('hotel.name.short') }} click the Sign In button under the My {{ cms_config('hotel.name.short') }}
@@ -56,7 +56,7 @@
                                     <tbody>
                                         <tr>
                                             <td valign="top">
-                                                <img src="{{ url('/') }}/web/images/hotel/Habbo_Welcome_Instructions_Toolbar_Profile.gif">
+                                                <img src="{{ cms_config('site.web.url') }}/images/hotel/Habbo_Welcome_Instructions_Toolbar_Profile.gif">
                                             </td>
                                             <td valign="top"><b>{{ cms_config('hotel.name.short') }} Profiles<br></b>
                                                 <p>Once you have logged in you can edit your profile by clicking on
@@ -80,7 +80,7 @@
                                     <tbody>
                                         <tr>
                                             <td valign="top">
-                                                <img src="{{ url('/') }}/web/images/hotel/Habbo_Welcome_Instructions_Toolbar_Purse.gif">
+                                                <img src="{{ cms_config('site.web.url') }}/images/hotel/Habbo_Welcome_Instructions_Toolbar_Purse.gif">
                                             </td>
                                             <td valign="top"><b>{{ cms_config('hotel.name.short') }} Purse<br></b>
                                                 <p>Also on the {{ cms_config('hotel.name.short') }} Toolbar is the My Credits tab that allow you to see
@@ -98,7 +98,7 @@
                                 <table width="100%" border="0" id="table5">
                                     <tbody>
                                         <tr>
-                                            <td valign="top"><img src="{{ url('/') }}/web/images/hotel/Habbo_Welcome_Instructions_Navigator_Widget.gif" alt=""><br>
+                                            <td valign="top"><img src="{{ cms_config('site.web.url') }}/images/hotel/Habbo_Welcome_Instructions_Navigator_Widget.gif" alt=""><br>
                                             </td>
                                             <td valign="top"><b>Direct Room Links<br></b>
                                                 <p>With the new website you can
@@ -123,7 +123,7 @@
                                     <tbody>
                                         <tr>
                                             <td valign="top">
-                                                <img src="{{ url('/') }}/web/images/hotel/Habbo_Welcome_Instructions_Web_Buying.gif">
+                                                <img src="{{ cms_config('site.web.url') }}/images/hotel/Habbo_Welcome_Instructions_Web_Buying.gif">
                                             </td>
                                             <td valign="top"><span style="font-weight: 700;">Buying {{ cms_config('hotel.name.short') }} Furni from
                                                     website</span><span style="font-weight: bold;"><br></span>

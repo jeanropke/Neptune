@@ -53,7 +53,7 @@
                                                                 yuletide season with three different Christmas trees, gingerbread houses,
                                                                 stockings for your walls and plenty of holly! This furni is the <br>Also watch
                                                                 out for the post-Christmas furni!<br></td>
-                                                            <td><img width="32" height="51" border="0" src="{{ url('/') }}/web/images/credits/x_15.gif" alt="x-15"
+                                                            <td><img width="32" height="51" border="0" src="{{ cms_config('site.web.url') }}/images/credits/x_15.gif" alt="x-15"
                                                                     id="galleryImage"></td>
                                                         </tr>
                                                     </tbody>
@@ -66,7 +66,7 @@
                                                                 only released during Valentines.<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="66" height="70" border="0" align="right"
-                                                                            src="{{ url('/') }}/web/images/credits/giant_heart.gif" id="galleryImage12" alt=""></strong>
+                                                                            src="{{ cms_config('site.web.url') }}/images/credits/giant_heart.gif" id="galleryImage12" alt=""></strong>
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -80,7 +80,7 @@
                                                                 dead ducks and more! This furni is only released during {{ cms_config('hotel.name.short') }}ween.<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="37" height="65" border="0" align="right"
-                                                                            src="{{ url('/') }}/web/images/credits/flameSkull.gif" id="galleryImage13" alt=""></strong>
+                                                                            src="{{ cms_config('site.web.url') }}/images/credits/flameSkull.gif" id="galleryImage13" alt=""></strong>
                                                                 </p>
                                                             </td>
                                                         </tr>

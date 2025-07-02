@@ -42,7 +42,7 @@
                                             <div class="v3box-body">
 
                                                 <img width="99" height="118" border="0" align="right" id="galleryImage"
-                                                    src="{{ url('/') }}/web/images/credits/choice_newsie.gif" alt="">The possibilities are endless with
+                                                    src="{{ cms_config('site.web.url') }}/images/credits/choice_newsie.gif" alt="">The possibilities are endless with
                                                 {{ cms_config('hotel.name.short') }} Furni: You can make a rare room, a
                                                 theme park, a monument, hundreds of different games, restaurants and so much more...<br><br>To
                                                 start your creative juices a flowing below are some examples. For more examples of great

@@ -21,8 +21,8 @@
         });
     </script>
     <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
-    <link rel="icon" href="{{ url('/') }}/web/housekeeping/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ url('/') }}/web/housekeeping/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{{ cms_config('site.web.url') }}/housekeeping/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ cms_config('site.web.url') }}/housekeeping/images/favicon.png" type="image/x-icon">
 
 </head>
 
@@ -32,7 +32,7 @@
     <div id="loading-layer" style="display:none">
         <div id="loading-layer-shadow">
             <div id="loading-layer-inner">
-                <img src="{{ url('/') }}/web/housekeeping/images/loading_anim.gif" style="vertical-align:middle" border="0" alt="Loading..." />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/loading_anim.gif" style="vertical-align:middle" border="0" alt="Loading..." />
                 <br />
                 <span style="font-weight:bold" id="loading-layer-text">Loading Data. Please Wait...</span>
             </div>
@@ -43,31 +43,31 @@
         <!-- TOP TABS -->
         <div class="tabwrap-main">
             <div class="tab{{ $menu == 'dashboard' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/dashboard.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/dashboard.png" style="vertical-align:middle" />
                 <a href="/housekeeping/dashboard">Dashboard</a>
             </div>
             <div class="tab{{ $menu == 'server' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/system.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/system.png" style="vertical-align:middle" />
                 <a href="/housekeeping/server">Server</a>
             </div>
             <div class="tab{{ $menu == 'site' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/tools.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/tools.png" style="vertical-align:middle" />
                 <a href="/housekeeping/site">Site & Content</a>
             </div>
             <div class="tab{{ $menu == 'catalogue' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/catalogue.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/catalogue.png" style="vertical-align:middle" />
                 <a href="{{ route('housekeeping.furniture.catalogue.pages') }}">Furniture & Catalogue</a>
             </div>
             <div class="tab{{ $menu == 'neptunecms' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/components.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/components.png" style="vertical-align:middle" />
                 <a href="/housekeeping/neptunecms">NeptuneCMS</a>
             </div>
             <div class="tab{{ $menu == 'users' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/admin.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/admin.png" style="vertical-align:middle" />
                 <a href="/housekeeping/users/listing">Users & Moderation</a>
             </div>
             <div class="tab{{ $menu == 'help' ? 'on' : 'off' }}-main">
-                <img src="{{ url('/') }}/web/housekeeping/images/help.png" style="vertical-align:middle" />
+                <img src="{{ cms_config('site.web.url') }}/housekeeping/images/help.png" style="vertical-align:middle" />
                 <a href="/housekeeping/help">Help</a>
             </div>
             <div class="logoright">

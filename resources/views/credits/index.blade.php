@@ -162,7 +162,7 @@
                                             <div class="v3box-body">
 
                                                 <img width="110" height="103" border="0" align="right" style="font-weight: bold;" id="galleryImage"
-                                                    src="{{ url('/') }}/web/images/credits/coins_big.gif" alt=""><span
+                                                    src="{{ cms_config('site.web.url') }}/images/credits/coins_big.gif" alt=""><span
                                                     style="font-weight: bold;">{{ cms_config('hotel.name.short') }}
                                                     Coins are the Hotel's currency, they are kept in your {{ cms_config('hotel.name.short') }}
                                                     Purse and
@@ -201,7 +201,7 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                                <img vspace="0" hspace="0" border="0" align="right" src="{{ url('/') }}/web/images/credits/habbos_w_credits.gif"
+                                                <img vspace="0" hspace="0" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/credits/habbos_w_credits.gif"
                                                     alt="">
                                                 If you are having problems buying {{ cms_config('hotel.name.short') }} Coins then please use
                                                 the <a target="_blank" href="{{ url('/') }}/help/contact_us">{{ cms_config('hotel.name.short') }}

@@ -43,7 +43,7 @@
                                             <div class="v3box-body">
 
                                                 <img width="99" height="118" border="0" align="right" id="galleryImage"
-                                                    src="{{ url('/') }}/web/images/credits/choice_newsie.gif" alt="">{{ cms_config('hotel.name.short') }} Furni is
+                                                    src="{{ cms_config('site.web.url') }}/images/credits/choice_newsie.gif" alt="">{{ cms_config('hotel.name.short') }} Furni is
                                                 furniture that you put in your Guest Room to spruce it up a bit. There are loads of
                                                 different types and brands of {{ cms_config('hotel.name.short') }} Furni, from television sets and teleporters that you can zip about in
                                                 to fridges

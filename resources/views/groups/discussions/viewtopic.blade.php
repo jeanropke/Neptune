@@ -33,8 +33,8 @@
             </div>
             <br clear="all">
             <div id="mypage-top-spacer"></div>
-            <link href="{{ url('/') }}/web/styles/discussions.css" type="text/css" rel="stylesheet">
-            <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
+            <link href="{{ cms_config('site.web.url') }}/styles/discussions.css" type="text/css" rel="stylesheet">
+            <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
             <input type="hidden" id="email-verfication-ok" value="1"/>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-1col">
                 <tbody>
@@ -74,7 +74,7 @@
                         <h3><span>myhabbo.discussion.delete.title</span></h3>
                     </div>
                     <a href="#" class="dialog-grey-exit" id="postentry-delete-dialog-exit">
-                        <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
+                        <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
                     </a>
                 </div>
                 <div class="dialog-grey-content clearfix">
@@ -100,7 +100,7 @@
                         <h3><span>Please activate your email address</span></h3>
                     </div>
                     <a href="#" class="dialog-grey-exit" id="postentry-verifyemail-dialog-exit">
-                        <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
+                        <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" alt="" height="12" width="12">
                     </a>
                 </div>
                 <div class="dialog-grey-content clearfix">

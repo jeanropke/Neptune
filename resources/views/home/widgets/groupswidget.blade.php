@@ -14,7 +14,7 @@
                 <div class="groups-list-loading">
                     <div><a href="#" class="groups-loading-close"></a></div>
                     <div class="clear"></div>
-                    <p style="text-align:center"><img src="{{ url('/') }}/web/images/progress_habbos.gif" alt=""></p>
+                    <p style="text-align:center"><img src="{{ cms_config('site.web.url') }}/images/progress_habbos.gif" alt=""></p>
                 </div>
                 <div class="groups-list-info"></div>
 

@@ -12,21 +12,21 @@
     </script>
     @include('entertainment.habbowood.includes.menu')
     <div class="habbomovies-custom-bg">
-        <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/swfobject.js"></script>
+        <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
         <div id="flashcontent" style="height: 797px"></div>
         <script type="text/javascript">
-            var habbowood = new FlashObject("{{ url('/') }}/web/flash/habbowood/habbowood_movie_editor.swf", "habbowoodtester", "100%", "100%", "7", "#292929");
+            var habbowood = new FlashObject("{{ cms_config('site.web.url') }}/flash/habbowood/habbowood_movie_editor.swf", "habbowoodtester", "100%", "100%", "7", "#292929");
             habbowood.addParam("allowScriptAccess", "always");
             habbowood.addParam("scale", "noscale");
             habbowood.addParam("name", "editor");
             habbowood.addParam("quality", "high");
             habbowood.addVariable("language", "fi");
-            habbowood.addParam("base", "{{ url('/') }}/web/flash/habbowood/");
+            habbowood.addParam("base", "{{ cms_config('site.web.url') }}/flash/habbowood/");
 
-            habbowood.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
-            habbowood.addVariable("movie_data_url", "{{ url('/') }}/web/xml/habbowood_blank.xml");
+            habbowood.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml_hc.xml");
+            habbowood.addVariable("movie_data_url", "{{ cms_config('site.web.url') }}/xml/habbowood_blank.xml");
             habbowood.addVariable("avatar_name", "{{ user()->username }}");
-            habbowood.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_locale.xml");
+            habbowood.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/habbowood_locale.xml");
             habbowood.addVariable("movie_id", "");
             habbowood.addVariable("cancel_url", "{{ url('/') }}/entertainment/habbowood");
             habbowood.addVariable("post_url", "{{ url('/') }}/habbomovies/savemovie?_token={{ csrf_token() }}");
@@ -61,20 +61,20 @@
             <td></td>
         </tr>
     </table>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/swfobject.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
     <script type="text/javascript">
-        var habbowood = new FlashObject("{{ url('/') }}/web/flash/habbowood/habbowood_movie_editor.swf", "habbowoodtester", "100%", "100%", "7", "#292929");
+        var habbowood = new FlashObject("{{ cms_config('site.web.url') }}/flash/habbowood/habbowood_movie_editor.swf", "habbowoodtester", "100%", "100%", "7", "#292929");
         habbowood.addParam("allowScriptAccess", "always");
         habbowood.addParam("scale", "noscale");
         habbowood.addParam("name", "editor");
         habbowood.addParam("quality", "high");
         habbowood.addVariable("language", "fi");
-        habbowood.addParam("base", "{{ url('/') }}/web/flash/habbowood/");
+        habbowood.addParam("base", "{{ cms_config('site.web.url') }}/flash/habbowood/");
 
-        habbowood.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
-        habbowood.addVariable("movie_data_url", "{{ url('/') }}/web/xml/habbowood_blank.xml");
+        habbowood.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml_hc.xml");
+        habbowood.addVariable("movie_data_url", "{{ cms_config('site.web.url') }}/xml/habbowood_blank.xml");
         habbowood.addVariable("avatar_name", "{{ user()->username }}");
-        habbowood.addVariable("localization_url", "{{ url('/') }}/web/xml/habbowood_locale.xml");
+        habbowood.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/habbowood_locale.xml");
         habbowood.addVariable("movie_id", "");
         habbowood.addVariable("cancel_url", "http://www.google.com");
         habbowood.addVariable("post_url", "{{ url('/') }}/habbomovies/savemovie?_token={{ csrf_token() }}");

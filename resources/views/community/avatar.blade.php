@@ -44,9 +44,9 @@
                                     <textarea style="width: 99%; height:200px">
 <!-- habbo export begins -->
 <table width="200" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td height="80"><div style="position: relative; font-family: Verdana,Arial,Helvetica; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-size-adjust: none; color: white;">
-<div style="background: transparent url({{ url('/') }}/web/images/export/bg.png) no-repeat scroll 0% 50%; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<div style="background: transparent url({{ cms_config('site.web.url') }}/images/export/bg.png) no-repeat scroll 0% 50%; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
 <div style="background: transparent url({{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=std&direction=2&head_direction=2) no-repeat scroll 0pt -10px; float: left; width: 64px; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"></div></div>
-<div style="background: transparent url({{ url('/') }}/web/images/export/mask.png) no-repeat scroll 0% 50%; position: absolute; top: 0pt; left: 0pt; height: 80px; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"></div>
+<div style="background: transparent url({{ cms_config('site.web.url') }}/images/export/mask.png) no-repeat scroll 0% 50%; position: absolute; top: 0pt; left: 0pt; height: 80px; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"></div>
 <div style="position: absolute; width: 124px; top: 10px; left: 66px;"><span style="border-bottom: 1px dashed white; margin: 0pt 0pt 4px; padding: 0pt 0pt 4px; font-family: Verdana,Arial,Helvetica; font-style: normal; font-variant: normal; font-size: 12px; line-height: normal; font-size-adjust: none; font-weight: bold; float: left;">
 <a href="{{ url('/') }}/home/{{ user()->username }}?partner=export" style="color: white; text-decoration: none;" target="_self">{{ user()->username }}</a></span><p style="margin-top: 8px; margin-right: 0pt; margin-bottom: 0pt; text-align: left; clear: left;">{{ user()->motto }}<br></p>
 </div></div></td></tr><tr><td align="center" style="font-family: Verdana,Arial,Helvetica; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-size-adjust: none; color: black;">
@@ -80,13 +80,13 @@
                                                                 <div
                                                                     style="position: relative; font-family: Verdana,Arial,Helvetica; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-size-adjust: none; color: white;">
                                                                     <div
-                                                                        style="background: transparent url({{ url('/') }}/web/images/export/bg.png) no-repeat scroll 0% 50%; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+                                                                        style="background: transparent url({{ cms_config('site.web.url') }}/images/export/bg.png) no-repeat scroll 0% 50%; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
                                                                         <div
                                                                             style="background: transparent url({{ cms_config('site.avatarimage.url') }}{{ user()->figure }}&gesture=sml&action=std&direction=2&head_direction=2) no-repeat scroll 0pt -10px; float: left; width: 64px; height: 80px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
                                                                         </div>
                                                                     </div>
                                                                     <div
-                                                                        style="background: transparent url({{ url('/') }}/web/images/export/mask.png) no-repeat scroll 0% 50%; position: absolute; top: 0pt; left: 0pt; height: 80px; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+                                                                        style="background: transparent url({{ cms_config('site.web.url') }}/images/export/mask.png) no-repeat scroll 0% 50%; position: absolute; top: 0pt; left: 0pt; height: 80px; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
                                                                     </div>
                                                                     <div style="position: absolute; width: 124px; top: 10px; left: 66px;">
                                                                         <span

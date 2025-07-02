@@ -32,12 +32,12 @@
             <table width="10" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                 <tr>
-                    <td colspan="3"><img src="{{ url('/') }}/web/images/maintenance/maintenance_01.gif" alt="{{ cms_config('hotel.name.short') }}"
+                    <td colspan="3"><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_01.gif" alt="{{ cms_config('hotel.name.short') }}"
                                          width="768" height="91"></td>
                 </tr>
                 <tr>
-                    <td width="9" valign="top" background="{{ url('/') }}/web/images/maintenance/maintenance1_07.gif"
-                        bgcolor="#47839D"><img src="{{ url('/') }}/web/images/maintenance/maintenance1_07.gif" width="9"
+                    <td width="9" valign="top" background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_07.gif"
+                        bgcolor="#47839D"><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_07.gif" width="9"
                                                height="34"></td>
                     <td width="732" valign="top" bgcolor="#47839D">
                         <table width="100%" border="0" cellspacing="0" cellpadding="10">
@@ -59,35 +59,35 @@
                                         room. You can also take part in many activities such as meeting and hanging out
                                         with famous bands and celebs, or even creating and running your own events!
                                         There are a bunch of games to play and even more contests!</p></td>
-                                <td valign="middle"><img src="{{ url('/') }}/web/images/maintenance/maintenance.gif"
+                                <td valign="middle"><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance.gif"
                                                          alt="{{ cms_config('hotel.name.short') }} Maintenance" width="256" height="224"></td>
                             </tr>
                             </tbody>
                         </table>
                     </td>
-                    <td width="9" valign="top" background="{{ url('/') }}/web/images/maintenance/maintenance1_09.gif"
-                        bgcolor="#47839D"><img src="{{ url('/') }}/web/images/maintenance/maintenance1_09.gif" width="9"
+                    <td width="9" valign="top" background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_09.gif"
+                        bgcolor="#47839D"><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_09.gif" width="9"
                                                height="65"></td>
                 </tr>
 
                 <tr>
-                    <td background="{{ url('/') }}/web/images/maintenance/maintenance1_07.gif"><img
-                                src="{{ url('/') }}/web/images/maintenance/maintenance1_07.gif" width="9" height="34">
+                    <td background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_07.gif"><img
+                                src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_07.gif" width="9" height="34">
                     </td>
                     <td>
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
                             <tr>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_03.gif" width="20"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_03.gif" width="20"
                                          height="14"></td>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_04.gif" width="709"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_04.gif" width="709"
                                          height="14"></td>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_05.gif" width="21"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_05.gif" width="21"
                                          height="14"></td>
                             </tr>
                             <tr>
-                                <td background="{{ url('/') }}/web/images/maintenance/maintenance_06.gif"><img
-                                            src="{{ url('/') }}/web/images/maintenance/maintenance_06.gif" width="20"
+                                <td background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_06.gif"><img
+                                            src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_06.gif" width="20"
                                             height="31"></td>
                                 <td bgcolor="#0A4362">
                                     <div align="center">
@@ -103,31 +103,31 @@
                                         </table>
                                     </div>
                                 </td>
-                                <td background="{{ url('/') }}/web/images/maintenance/maintenance_08.gif"><img
-                                            src="{{ url('/') }}/web/images/maintenance/maintenance_08.gif" width="21"
+                                <td background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_08.gif"><img
+                                            src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_08.gif" width="21"
                                             height="31"></td>
                             </tr>
                             <tr>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_09.gif" width="20"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_09.gif" width="20"
                                          height="14"></td>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_10.gif" width="709"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_10.gif" width="709"
                                          height="14"></td>
-                                <td><img src="{{ url('/') }}/web/images/maintenance/maintenance_11.gif" width="21"
+                                <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance_11.gif" width="21"
                                          height="14"></td>
                             </tr>
                             </tbody>
                         </table>
                     </td>
-                    <td background="{{ url('/') }}/web/images/maintenance/maintenance1_09.gif">
+                    <td background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_09.gif">
                     </td>
                 </tr>
                 <tr>
-                    <td height="14"><img src="{{ url('/') }}/web/images/maintenance/maintenance1_12.gif" width="9"
+                    <td height="14"><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_12.gif" width="9"
                                          height="14"></td>
-                    <td valign="top" background="{{ url('/') }}/web/images/maintenance/maintenance1_13.gif"><img
-                                src="{{ url('/') }}/web/images/maintenance/maintenance1_13.gif" width="702" height="14">
+                    <td valign="top" background="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_13.gif"><img
+                                src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_13.gif" width="702" height="14">
                     </td>
-                    <td><img src="{{ url('/') }}/web/images/maintenance/maintenance1_14.gif" width="9" height="14"></td>
+                    <td><img src="{{ cms_config('site.web.url') }}/images/maintenance/maintenance1_14.gif" width="9" height="14"></td>
                 </tr>
                 </tbody>
             </table>

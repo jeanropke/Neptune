@@ -181,7 +181,7 @@
                 <h3><span>Are you sure?</span></h3>
             </div>
             <a href="#" class="dialog-grey-exit" id="guestbook-delete-dialog-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+                <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
         <div class="dialog-grey-content">
@@ -209,7 +209,7 @@
                 <h3><span>Create a message</span></h3>
             </div>
             <a href="#" class="dialog-grey-exit" id="guestbook-form-dialog-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+                <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
         <div class="dialog-grey-content">
@@ -267,7 +267,7 @@
         <div id="edit-save" style="display:none;"></div>
         <div id="edit-menu" class="menu">
             <div class="menu-header">
-                <div class="menu-exit" id="edit-menu-exit"><img src="{{ url('/') }}/web/images/dialogs/menu-exit.gif" alt="" width="11" height="11" /></div>
+                <div class="menu-exit" id="edit-menu-exit"><img src="{{ cms_config('site.web.url') }}/images/dialogs/menu-exit.gif" alt="" width="11" height="11" /></div>
                 <h3>Edit</h3>
             </div>
             <div class="menu-body">

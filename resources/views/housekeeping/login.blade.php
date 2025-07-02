@@ -46,7 +46,7 @@
                         <tr>
                           <td width="200" class="tablerow1" valign="top" style="border:0px;width:200px">
                             <div style="text-align:center;padding-top:20px">
-                              <img src="{{ url('/') }}/web/housekeeping/images/acp-login-lock.gif" alt="Housekeeping" border="0" />
+                              <img src="{{ cms_config('site.web.url') }}/housekeeping/images/acp-login-lock.gif" alt="Housekeeping" border="0" />
                             </div>
                             <br />
                             <div class="desctext">
@@ -61,7 +61,7 @@
                               <tr>
                                 <td colspan="2" align="center">
                                   <br />
-                                  <img src="{{ url('/') }}/web/housekeeping/images/cms-logo.png" alt="{{ config('cms.name') }}">
+                                  <img src="{{ cms_config('site.web.url') }}/housekeeping/images/cms-logo.png" alt="{{ config('cms.name') }}">
                                   @if ($errors->any())
                                   <div style="font-weight:bold;color:red">{{ $errors->first() }}</div>
                                   @endif

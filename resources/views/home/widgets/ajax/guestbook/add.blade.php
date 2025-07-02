@@ -8,10 +8,10 @@
     <div class="guestbook-actions">
         @if (Auth::check())
             @if ((user()->id == $message->user_id || user()->id == $ownerId) && (isset($isEdit) && $isEdit) || user()->hasPermission('cms_home_can_delete_message'))
-                <img src="{{ url('/') }}/web/images/myhabbo/buttons/delete_entry_button.gif" id="gbentry-delete-{{ $message->id }}" class="gbentry-delete" style="cursor:pointer; float: right" alt="" /><br />
+                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/delete_entry_button.gif" id="gbentry-delete-{{ $message->id }}" class="gbentry-delete" style="cursor:pointer; float: right" alt="" /><br />
             @endif
             <div class="report-button" style="display: none">
-                <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="gbentry-report" id="gbentry-report-{{ $message->id }}" />
+                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="gbentry-report" id="gbentry-report-{{ $message->id }}" />
             </div>
         @endif
     </div>

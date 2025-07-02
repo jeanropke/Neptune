@@ -60,7 +60,7 @@
                                                                 customarily released for a period of one - two weeks, after this they are rarely
                                                                 (hence the term) released again.<br></td>
                                                             <td><img width="63" height="91" border="0" align="right" id="galleryImage" alt="Throne (63)"
-                                                                    src="{{ url('/') }}/web/images/credits/hc_chair_2.gif">
+                                                                    src="{{ cms_config('site.web.url') }}/images/credits/hc_chair_2.gif">
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -77,7 +77,7 @@
                                                                 {{ cms_config('hotel.name.short') }} is and we'll wrap it up and deliver it right to their hand!<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><img width="130" height="96" border="0" align="right"
-                                                                        id="galleryImage" alt="WF-11" src="{{ url('/') }}/web/images/credits/WF_11.gif">
+                                                                        id="galleryImage" alt="WF-11" src="{{ cms_config('site.web.url') }}/images/credits/WF_11.gif">
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -96,7 +96,7 @@
                                                                 perfect!<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><img width="79" height="58" border="0" align="right"
-                                                                        id="galleryImage" alt="scam2" src="{{ url('/') }}/web/images/credits/scam2.gif">
+                                                                        id="galleryImage" alt="scam2" src="{{ cms_config('site.web.url') }}/images/credits/scam2.gif">
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -110,7 +110,7 @@
                                                                 Holodice and spinning bottles. Scroll down to the bottom to find out more about
                                                                 some of the cool accessories you can use to transform your room!<br></td>
                                                             <td><img width="51" height="65" border="0" align="right" id="galleryImage0"
-                                                                    src="{{ url('/') }}/web/images/credits/holodice.gif" alt=""></td>
+                                                                    src="{{ cms_config('site.web.url') }}/images/credits/holodice.gif" alt=""></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -124,7 +124,7 @@
                                                                 cityscapes to butterflies and ducks<br></td>
                                                             <td>
                                                                 <p align="center" style="margin-top: 0pt; margin-bottom: 0pt;"><img width="55" height="101" border="0"
-                                                                        align="right" id="galleryImage1" src="{{ url('/') }}/web/images/credits/habbo_pictureframe_small.gif"
+                                                                        align="right" id="galleryImage1" src="{{ cms_config('site.web.url') }}/images/credits/habbo_pictureframe_small.gif"
                                                                         alt=""></p>
                                                             </td>
                                                         </tr>
@@ -141,7 +141,7 @@
                                                                 positions in races and events.<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><img width="57" height="31" border="0" align="right"
-                                                                        id="galleryImage" alt="doormat love" src="{{ url('/') }}/web/images/credits/doormat_love.gif">
+                                                                        id="galleryImage" alt="doormat love" src="{{ cms_config('site.web.url') }}/images/credits/doormat_love.gif">
                                                                 </p>
                                                             </td>
                                                         </tr>

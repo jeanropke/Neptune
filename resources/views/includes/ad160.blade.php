@@ -11,7 +11,7 @@
                 <td class="ad-content-ml"></td>
                 <td class="ad-content-m" align="center" valign="top">
                     @if(config('app.debug'))
-                    <img src="{{ url('/') }}/web/images/ads/160/{{ mt_rand(1, 4) }}.gif">
+                    <img src="{{ cms_config('site.web.url') }}/images/ads/160/{{ mt_rand(1, 4) }}.gif">
                     @else
                     {!! cms_config('site.ads_160.content') !!}
                     @endif

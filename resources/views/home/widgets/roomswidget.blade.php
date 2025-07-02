@@ -15,7 +15,7 @@
                             <tr>
                                 <td valign="top" class="dotted-line">
                                     <div class="room_image">
-                                        <img src="{{ url('/') }}/web/images/myhabbo/rooms/room_icon_{{ $room->getState() }}.gif"
+                                        <img src="{{ cms_config('site.web.url') }}/images/myhabbo/rooms/room_icon_{{ $room->getState() }}.gif"
                                             alt="" align="middle">
                                     </div>
                                 </td>
@@ -35,7 +35,7 @@
                                         </a>
                                         @endif
                                     </div>
-                                    <img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-r" id="name-{{ $room->id }}-report" style="display: none;margin-top: -1px;">
+                                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-r" id="name-{{ $room->id }}-report" style="display: none;margin-top: -1px;">
                                     <br class="clear">
 
                                 </td>

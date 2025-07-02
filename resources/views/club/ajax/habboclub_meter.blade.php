@@ -38,7 +38,7 @@
                 <div id="clubdays"> <b>{{ $days }}</b> <span class="lang-hcjoin-remainingHeader">days
                         remaining</span> </div>
                 <div id="comingmonthsVal">{{ user()->subscription->monthsRemaining() }}</div>
-                <span><img src="{{ url('/') }}/web/images/club/club_subscription_arrow.png" style="margin-left: {{ 52 + (31 - $days) * 5 }}px;"></span>
+                <span><img src="{{ cms_config('site.web.url') }}/images/club/club_subscription_arrow.png" style="margin-left: {{ 52 + (31 - $days) * 5 }}px;"></span>
                 <div style=" margin-top: 35px;">
                     <div style="float: left; width: 60px">
                         <center>Months passed</center>
@@ -53,7 +53,7 @@
             @php($days = user()->subscription->daysRemaining() % 31)
             <div id="subscription-meter-box3" style="left: 20px;">
                 <div id="habboclub-buy-details">
-                    <span><img src="{{ url('/') }}/web/images/club/club_subscription_arrow.png" style="margin-left: {{ 55 + (31 - $days) * 5 }}px;"></span>
+                    <span><img src="{{ cms_config('site.web.url') }}/images/club/club_subscription_arrow.png" style="margin-left: {{ 55 + (31 - $days) * 5 }}px;"></span>
                     <div style=" margin-top: 35px;">
                         <div style="float: left; width: 56px">
                             <center><span class="lang-hcjoin-comingTitle">Periodos

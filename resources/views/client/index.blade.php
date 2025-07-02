@@ -5,17 +5,17 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>{{ cms_config('hotel.name.short') }} ~ Client</title>
-    <link href="{{ url('/') }}/web/styles/style.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/style.css" type="text/css" rel="stylesheet" />
 
     <script language="JavaScript" type="text/javascript">
         var habboClient = true;
         var habboReqPath = "{{ url('/') }}";
-        var habboStaticFilePath = "{{ url('/') }}/web";
+        var habboStaticFilePath = "{{ cms_config('site.web.url') }}";
         document.habboLoggedIn = {{ Auth::check() }};
     </script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/prototype.js"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/effects.js"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/habbo.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/prototype.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/effects.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbo.js"></script>
 
 
     <script>
@@ -43,18 +43,18 @@
     </script>
 
     <!--[if IE]>
-   <link href="{{ url('/') }}/web/styles/ie-all.css" type="text/css" rel="stylesheet" />
+   <link href="{{ cms_config('site.web.url') }}/styles/ie-all.css" type="text/css" rel="stylesheet" />
    <![endif]-->
     <!--[if lt IE 7]>
-   <link href="{{ url('/') }}/web/styles/ie6.css" type="text/css" rel="stylesheet" />
+   <link href="{{ cms_config('site.web.url') }}/styles/ie6.css" type="text/css" rel="stylesheet" />
    <![endif]-->
-    <link href="{{ url('/') }}/web/styles/styles/style_custom_default.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/styles/style_custom_default.css" type="text/css" rel="stylesheet" />
     <meta name="build" content="{{ config('app.version') }} - {{ config('app.build') }} - {{ config('app.locale') }}" />
 </head>
 
 <body id="client">
     <div id="client-topbar" style="display:none">
-        <div class="logo"><img src="{{ url('/') }}/web/images/popup/popup_topbar_habbologo.gif" alt="" align="middle" /></div>
+        <div class="logo"><img src="{{ cms_config('site.web.url') }}/images/popup/popup_topbar_habbologo.gif" alt="" align="middle" /></div>
         <div class="habbocount">
             <div id="habboCountUpdateParent">
                 @if (is_hotel_online())

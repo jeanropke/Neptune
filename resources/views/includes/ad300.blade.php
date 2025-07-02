@@ -11,7 +11,7 @@
                 <td class="ad-content-ml"></td>
                 <td class="ad-content-m" align="center" valign="top">
                     @if(config('app.debug'))
-                    <img src="{{ url('/') }}/web/images/ads/300/{{ mt_rand(1, 4) }}.gif">
+                    <img src="{{ cms_config('site.web.url') }}/images/ads/300/{{ mt_rand(1, 4) }}.gif">
                     @else
                     {!! cms_config('site.ads_300.content') !!}
                     @endif
@@ -26,7 +26,7 @@
         </tbody>
     </table>
 </div>
-<div id="message-300"><img src="{{ url('/') }}/web/images/warnings/message-300.png"></div>
+<div id="message-300"><img src="{{ cms_config('site.web.url') }}/images/warnings/message-300.png"></div>
 <script>
 if($('ad300').offsetHeight == 0) $('message-300').style.display = 'block';
 </script>

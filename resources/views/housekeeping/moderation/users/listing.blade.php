@@ -90,7 +90,7 @@
                                         {{ $user->created_at }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.users.edit', $user->id) }}"><img src="{{ url('/') }}/web/housekeeping/images/edit.gif"
+                                        <a href="{{ route('housekeeping.users.edit', $user->id) }}"><img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif"
                                                 alt="Edit User Data"></a>
                                     </td>
                                 </tr>

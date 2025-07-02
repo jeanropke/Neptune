@@ -83,7 +83,7 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <img vspace="5" hspace="5" border="0" align="right" src="{{ url('/') }}/web/images/common/habbo_purse_big_64.gif"
+                                <img vspace="5" hspace="5" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/common/habbo_purse_big_64.gif"
                                     alt="">Habbo
                                 Credits: they are great. <br><br>You can buy new stickers and backgrounds for your Habbo Home with them!<br><br><a target="_self"
                                     href="{{ url('/') }}/credits">More about Habbo Credits</a><br>

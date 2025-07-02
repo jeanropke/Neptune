@@ -65,12 +65,12 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.editor.publicroom.edit', $room->id) }}">
-                                            <img src=" {{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit publicroom">
+                                            <img src=" {{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit publicroom">
                                         </a>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="#" class="delete-publicroom" data-id="{{ $room->id }}">
-                                            <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/delete.gif" alt="Delete">
                                         </a>
                                     </td>
                                 </tr>

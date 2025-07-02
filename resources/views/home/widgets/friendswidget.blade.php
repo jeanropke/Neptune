@@ -21,7 +21,7 @@
                     <div id="slider">
                         <div id="slider-bar">
                             <div style="left: 0px; position: relative;" class="selected" id="slider-handle"><img
-                                    src="{{ url('/') }}/web/images/myhabbo/slider/slider_scaler.gif">
+                                    src="{{ cms_config('site.web.url') }}/images/myhabbo/slider/slider_scaler.gif">
                             </div>
                         </div>
                     </div>

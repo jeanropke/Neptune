@@ -1,5 +1,5 @@
 <div id="group-purchase-header">
-    <img src="{{ url('/') }}/web/images/groups/group_icon.gif" alt="" width="46" height="46" />
+    <img src="{{ cms_config('site.web.url') }}/images/groups/group_icon.gif" alt="" width="46" height="46" />
 </div>
 
 <p>

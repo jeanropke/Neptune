@@ -57,7 +57,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left"> <img width="186" height="126" border="0" id="galleryImage" alt="thumb pura"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_pura.gif"></p>
+                                                                        src="{{ cms_config('site.web.url') }}/images/credits/thumb_pura.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -75,7 +75,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb mode" src="{{ url('/') }}/web/images/credits/thumb_mode.gif"></p>
+                                                                        id="galleryImage" alt="thumb mode" src="{{ cms_config('site.web.url') }}/images/credits/thumb_mode.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -94,7 +94,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb lodge" src="{{ url('/') }}/web/images/credits/thumb_lodge.gif"></p>
+                                                                        id="galleryImage" alt="thumb lodge" src="{{ cms_config('site.web.url') }}/images/credits/thumb_lodge.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -112,7 +112,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left"><img width="186" height="126" border="0" id="galleryImage" alt="thumb plasto"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_plasto.gif"></p>
+                                                                        src="{{ cms_config('site.web.url') }}/images/credits/thumb_plasto.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -130,7 +130,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"><img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb area" src="{{ url('/') }}/web/images/credits/thumb_area.gif"></p>
+                                                                        id="galleryImage" alt="thumb area" src="{{ cms_config('site.web.url') }}/images/credits/thumb_area.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -149,7 +149,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb iced" src="{{ url('/') }}/web/images/credits/thumb_iced.gif"></p>
+                                                                        id="galleryImage" alt="thumb iced" src="{{ cms_config('site.web.url') }}/images/credits/thumb_iced.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -168,7 +168,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left"> <img width="186" height="126" border="0" id="galleryImage" alt="thumb candy"
-                                                                        src="{{ url('/') }}/web/images/credits/thumb_candy.gif"></p>
+                                                                        src="{{ cms_config('site.web.url') }}/images/credits/thumb_candy.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -185,7 +185,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb bathroom" src="{{ url('/') }}/web/images/credits/thumb_bathroom.gif"></p>
+                                                                        id="galleryImage" alt="thumb bathroom" src="{{ cms_config('site.web.url') }}/images/credits/thumb_bathroom.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -204,7 +204,7 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb plants" src="{{ url('/') }}/web/images/credits/thumb_plants.gif"></p>
+                                                                        id="galleryImage" alt="thumb plants" src="{{ cms_config('site.web.url') }}/images/credits/thumb_plants.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>

@@ -6,15 +6,15 @@
             <div id="process-header-content">
                 <div id="habbologo"><a href="{{ url('/') }}"></a></div>
                 <div id="steps">
-                    <img src="{{ url('/') }}/web/images/process/step1_on.gif" alt="1" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right_on.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step2.gif" alt="2" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step3.gif" alt="3" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step4.gif" alt="4" width="30" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step_right.gif" alt="" width="20" height="26" />
-                    <img src="{{ url('/') }}/web/images/process/step5.gif" alt="5" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step1_on.gif" alt="1" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right_on.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step2.gif" alt="2" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step3.gif" alt="3" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step4.gif" alt="4" width="30" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step_right.gif" alt="" width="20" height="26" />
+                    <img src="{{ cms_config('site.web.url') }}/images/process/step5.gif" alt="5" width="30" height="26" />
                 </div>
             </div>
         </div>
@@ -40,10 +40,10 @@
                                 </div>
                             </div>
                             <div class="bubble-bottom">
-                                <div class="bubble-bottom-body"> <img src="{{ url('/') }}/web/images/register/bubble_tail_left.gif" alt="" width="22"
+                                <div class="bubble-bottom-body"> <img src="{{ cms_config('site.web.url') }}/images/register/bubble_tail_left.gif" alt="" width="22"
                                         height="31" /> </div>
                             </div>
-                            <div class="frank"><img src="{{ url('/') }}/web/images/register/register7.gif" alt="" width="245" height="181" /></div>
+                            <div class="frank"><img src="{{ cms_config('site.web.url') }}/images/register/register7.gif" alt="" width="245" height="181" /></div>
                         </div>
                         <div class="content-column2">
                             <div id="process-errors">
@@ -65,16 +65,16 @@
                                                     <p>You can install and download Adobe Flash Player here: <a href="http://get.adobe.com/flashplayer/">Install flash player</a>. More
                                                         instructions for installation can be found here: <a
                                                             href="http://www.adobe.com/products/flashplayer/productinfo/instructions/">More information</a></p>
-                                                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="{{ url('/') }}/web/images/download/get_flash_player.gif"
+                                                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="{{ cms_config('site.web.url') }}/images/download/get_flash_player.gif"
                                                                 alt="Get Adobe Flash player" /></a></p>
                                                 </center>
                                             </div>
                                             <script type="text/javascript" language="JavaScript">
-                                                var swfobj = new SWFObject("{{ url('/') }}/web/flash/register/HabboRegistration.swf", "habboreg", "406", "327", "7");
+                                                var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/register/HabboRegistration.swf", "habboreg", "406", "327", "7");
                                                 swfobj.addVariable("post_url", "{{ url('/') }}/register/step/2?");
                                                 swfobj.addVariable("back_url", "{{ url('/') }}");
-                                                swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml.xml");
-                                                swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/figure_editor.xml");
+                                                swfobj.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml.xml");
+                                                swfobj.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/figure_editor.xml");
                                                 swfobj.addVariable("post_figure", "figure");
                                                 swfobj.addVariable("post_gender", "gender");
                                                 swfobj.addVariable("required-birth", "{{ session('birthday') }}");

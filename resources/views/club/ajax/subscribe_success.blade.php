@@ -1,6 +1,6 @@
 <div id="hc_confirm_box">
 
-    <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
+    <img src="{{ cms_config('site.web.url') }}/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
     <p><b>Subscribe</b></p>
     <p> Congratulations! You have successfully subscribed to {{ cms_config('hotel.name.short') }} Club.</p>
     <p>

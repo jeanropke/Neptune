@@ -55,12 +55,12 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.menu.categories.edit', $category->id) }}">
-                                            <img src="{{ url('/') }}/web/housekeeping/images/edit.gif" alt="Edit">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit">
                                         </a>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="#" class="delete-categories" data-id="{{ $category->id }}">
-                                            <img src="{{ url('/') }}/web/housekeeping/images/delete.gif" alt="Delete">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/delete.gif" alt="Delete">
                                         </a>
                                     </td>
                                 </tr>

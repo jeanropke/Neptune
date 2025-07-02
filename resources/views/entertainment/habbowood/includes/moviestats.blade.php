@@ -4,9 +4,9 @@
             @for ($i = 0; $i < 5; $i++)
                 <li class="rater-list-item">
                     @if ($movie->rating > $i)
-                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_color.gif" alt="">
+                        <img src="{{ cms_config('site.web.url') }}/images/habbomovies/stars/icon_star_color.gif" alt="">
                     @else
-                        <img src="{{ url('/') }}/web/images/habbomovies/stars/icon_star_grey.gif" alt="">
+                        <img src="{{ cms_config('site.web.url') }}/images/habbomovies/stars/icon_star_grey.gif" alt="">
                     @endif
                 </li>
             @endfor

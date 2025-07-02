@@ -8,16 +8,16 @@
 
 </div>
 <script type="text/javascript" language="JavaScript">
-    var swfobj = new SWFObject("{{ url('/') }}/web/flash/register/HabboRegistration.swf", "habboreg", "406", "327", "7");
+    var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/register/HabboRegistration.swf", "habboreg", "406", "327", "7");
     swfobj.addParam("base", "/profile/");
     swfobj.addVariable("post_url", "figure?");
     swfobj.addVariable("back_url", "");
     @if(!user()->subscription->isExpired())
-    swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml_hc.xml");
+    swfobj.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml_hc.xml");
     @else
-    swfobj.addVariable("figuredata_url", "{{ url('/') }}/web/xml/figure_data_xml.xml");
+    swfobj.addVariable("figuredata_url", "{{ cms_config('site.web.url') }}/xml/figure_data_xml.xml");
     @endif
-    swfobj.addVariable("localization_url", "{{ url('/') }}/web/xml/figure_editor.xml");
+    swfobj.addVariable("localization_url", "{{ cms_config('site.web.url') }}/xml/figure_editor.xml");
     swfobj.addVariable("post_figure", "newFigure");
     swfobj.addVariable("post_gender", "newGender");
     swfobj.addVariable("figure", "{{ user()->figure }}");

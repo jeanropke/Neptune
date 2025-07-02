@@ -1,6 +1,6 @@
 <div id="hc_confirm_box">
     @if(user()->credits >= $price)
-    <img src="{{ url('/') }}/web/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
+    <img src="{{ cms_config('site.web.url') }}/images/club/piccolo_happy.gif" alt="" align="left" style="margin:10px;">
     <p><b>Confirmation</b></p>
     <p> {{ cms_config('hotel.name.short') }} Club {{ $month }} month ({{ $days }} days) costs {{ $price }} Credits. You currently have: {{ Auth::user()->credits }} Credits.</p>
     <p>
@@ -14,7 +14,7 @@
     </table>
     </p>
     @else
-    <img src="{{ url('/') }}/web/images/club/piccolo_unhappy.gif" alt="" align="left" style="margin:10px;">
+    <img src="{{ cms_config('site.web.url') }}/images/club/piccolo_unhappy.gif" alt="" align="left" style="margin:10px;">
     <p><b>Oops!</b></p>
     <p> You cannot join {{ cms_config('hotel.name.short') }} Club because you don't have enought credits.</p>
     <table align="right">

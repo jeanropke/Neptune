@@ -10,8 +10,8 @@
     <link href="/web/styles/boxes.css" type="text/css" rel="stylesheet" />
     <link href="/web/styles/process.css" type="text/css" rel="stylesheet" />
 
-    <link rel="icon" href="{{ url('/') }}/web/images/favicon.gif" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ url('/') }}/web/images/favicon.gif" type="image/x-icon">
+    <link rel="icon" href="{{ cms_config('site.web.url') }}/images/favicon.gif" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ cms_config('site.web.url') }}/images/favicon.gif" type="image/x-icon">
 
     <script language="JavaScript" type="text/javascript">
         var habboReqPath = "{{ url('/') }}/";
@@ -21,7 +21,7 @@
         window.name = "habboMain";
     </script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-    <script type="text/javascript" src="{{ url('/') }}/web/js/profile/swfobject.js"></script>
+    <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/profile/swfobject.js"></script>
     <script language="JavaScript" type="text/javascript" src="/web/js/prototype.js"></script>
     <script language="JavaScript" type="text/javascript" src="/web/js/builder.js"></script>
     <script language="JavaScript" type="text/javascript" src="/web/js/habbo.js"></script>

@@ -1,7 +1,7 @@
 @extends('layouts.login')
 @section('title', cms_config('hotel.name.short') . ' Help Tool')
 @section('content')
-<link href="{{ url('/') }}/web/styles/style-iot.css" type="text/css" rel="stylesheet">
+<link href="{{ cms_config('site.web.url') }}/styles/style-iot.css" type="text/css" rel="stylesheet">
 <div id="main-content-process">
     <div style="height: 4px;"></div>
     <div style="height: 18px; padding: 0 0 0 12px;">&nbsp;</div>

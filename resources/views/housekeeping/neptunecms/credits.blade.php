@@ -14,7 +14,7 @@
                             <div style="font-size:12px;padding:4px; text-align:left">
                                 <p>
                                 <div align="center">
-                                    <img src="{{ url('/') }}/web/housekeeping/images/cms-logo.png" border="0" alt="{{ config('cms.name') }}"><br />
+                                    <img src="{{ cms_config('site.web.url') }}/housekeeping/images/cms-logo.png" border="0" alt="{{ config('cms.name') }}"><br />
                                     v{{ config('cms.version') }} {{ config('cms.stable') }} <br />
                                     Codename '{{ config('cms.title') }}'<br />
                                     <br />

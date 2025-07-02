@@ -35,7 +35,7 @@
                             if you join <a href="{{ url('/') }}/club/" target="_self">{{ cms_config('hotel.name.short') }}
                                 Club</a>).<br><br><strong>Sending a message</strong><br><img width="194" hspace="0"
                                 height="129" border="0" align="right" alt="tour_console.gif"
-                                src="{{ url('/') }}/web/images/tour/tour_console.gif">When
+                                src="{{ cms_config('site.web.url') }}/images/tour/tour_console.gif">When
                             you've added someone to your Friend List you can send them a Console Message even when they
                             are offline. To send a message; open your {{ cms_config('hotel.name.short') }} Console and click 'Friends', then click to
                             select the name of the {{ cms_config('hotel.name.short') }} you want to send the message to. (Remember: you can send the

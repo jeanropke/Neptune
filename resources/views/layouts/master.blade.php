@@ -5,13 +5,13 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
     <title>{{ cms_config('hotel.name.short') }} ~ @yield('title')</title>
-    <link href="{{ url('/') }}/web/styles/style.css" type="text/css" rel="stylesheet" />
-    <link href="{{ url('/') }}/web/styles/ads.css" type="text/css" rel="stylesheet" />
-    <link href="{{ url('/') }}/web/styles/boxes.css" type="text/css" rel="stylesheet" />
-    <link href="{{ url('/') }}/web/styles/voltericons.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/style.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/ads.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/boxes.css" type="text/css" rel="stylesheet" />
+    <link href="{{ cms_config('site.web.url') }}/styles/voltericons.css" type="text/css" rel="stylesheet" />
 
-    <link rel="icon" href="{{ url('/') }}/web/images/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ url('/') }}/web/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ cms_config('site.web.url') }}/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ cms_config('site.web.url') }}/images/favicon.ico" type="image/x-icon">
 
     <script language="JavaScript" type="text/javascript">
         var habboReqPath = "{{ url('/') }}";
@@ -32,11 +32,11 @@
             "quality": "low"
         };
     </script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/prototype.js"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/scriptaculous.js?load=effects"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/builder.js"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/habbo.js"></script>
-    <script language="JavaScript" type="text/javascript" src="{{ url('/') }}/web/js/habbowood.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/prototype.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/scriptaculous.js?load=effects"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/builder.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbo.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbowood.js"></script>
 
     <script>
         Ajax.Responders.register({
@@ -47,8 +47,8 @@
         });
     </script>
     @if ($menuId == 'profile')
-        <link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="{{ url('/') }}/web/js/profile/swfobject.js"></script>
+        <link href="{{ cms_config('site.web.url') }}/styles/profile.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/profile/swfobject.js"></script>
     @endif
 
     <meta name="keywords" content="">
@@ -57,38 +57,38 @@
 
     @if ($menuId == 'home_group')
 
-        <link href="{{ url('/') }}/web/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
-        {{-- <!--link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet"/-->
-    <link href="{{ url('/') }}/web/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" /> --}}
-        <link href="{{ url('/') }}/web/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
+        {{-- <!--link href="{{ cms_config('site.web.url') }}/styles/profile.css" type="text/css" rel="stylesheet"/-->
+    <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/assets.css" type="text/css" rel="stylesheet" /> --}}
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo-store.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
 
-        <link href="{{ url('/') }}/web/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/skins.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/dialogs.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/buttons.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/boxes.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/backgrounds.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/stickers.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/myhabbo/other.css" type="text/css" rel="stylesheet" />
-        <link href="{{ url('/') }}/web/styles/profile.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/myhabbo.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/skins.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/dialogs.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/buttons.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/boxes.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/backgrounds.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/stickers.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/other.css" type="text/css" rel="stylesheet" />
+        <link href="{{ cms_config('site.web.url') }}/styles/profile.css" type="text/css" rel="stylesheet" />
 
-        <script type="text/javascript" src="{{ url('/') }}/web/js/inheritance.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/effects.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/dragdrop.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/slider.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo-dialogs.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo-discussions.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo-widgets.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/swfobject.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/control.textarea.bbcode.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-noteeditor.js"></script>
-        <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo/myhabbo-store.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/inheritance.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/effects.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/dragdrop.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/slider.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-dialogs.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-discussions.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-widgets.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/control.textarea.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/control.textarea.bbcode.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo/myhabbo-noteeditor.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo/myhabbo-store.js"></script>
 
         @if ($menuId == 'home_group')
-            <link href="{{ url('/') }}/web/styles/grouptabs.css" type="text/css" rel="stylesheet" />
+            <link href="{{ cms_config('site.web.url') }}/styles/grouptabs.css" type="text/css" rel="stylesheet" />
         @endif
         <style type="text/css">
             #playground,
@@ -100,14 +100,14 @@
 
 
         @if ($body == 'editmode')
-            <script type="text/javascript" src="{{ url('/') }}/web/js/myhabbo-edit.js"></script>
+            <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-edit.js"></script>
         @endif
     @endif
 
     @isset($submenuType)
         @if ($submenuType == 'collectibles')
-            <link href="{{ url('/') }}/web/styles/collectibles.css" type="text/css" rel="stylesheet" />
-            <script type="text/javascript" src="{{ url('/') }}/web/js/collectibles.js"></script>
+            <link href="{{ cms_config('site.web.url') }}/styles/collectibles.css" type="text/css" rel="stylesheet" />
+            <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/collectibles.js"></script>
         @endif
     @endisset
 

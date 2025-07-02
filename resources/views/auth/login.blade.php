@@ -28,7 +28,7 @@
                             </h4>
                             <p>
                             </p>
-                            <p><img vspace="10" hspace="10" border="0" align="right" src="{{ url('/') }}/web/images/login/bandg.gif" alt="">
+                            <p><img vspace="10" hspace="10" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/login/bandg.gif" alt="">
                             </p>
                             <ol type="1">
                                 <li>Type Your Birthday</li>

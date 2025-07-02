@@ -215,7 +215,7 @@
                 <h3><span>Delete message</span></h3>
             </div>
             <a href="#" class="dialog-grey-exit" id="guestbook-delete-dialog-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+                <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
         <div class="dialog-grey-content">
@@ -243,7 +243,7 @@
                 <h3><span>Create a message</span></h3>
             </div>
             <a href="#" class="dialog-grey-exit" id="guestbook-form-dialog-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+                <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
         <div class="dialog-grey-content">
@@ -345,7 +345,7 @@
                 <h3><span>Group settings</span></h3>
             </div>
             <a href="#" class="dialog-grey-exit" id="dialog-group-settings-exit">
-                <img src="{{ url('/') }}/web/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
+                <img src="{{ cms_config('site.web.url') }}/images/dialogs/grey-exit.gif" width="12" height="12" alt="">
             </a>
         </div>
         <div class="dialog-grey-content">

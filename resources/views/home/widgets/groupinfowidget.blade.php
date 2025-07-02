@@ -3,7 +3,7 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3><span class="header-left">&nbsp;</span><span class="header-middle">Group info</span><span class="header-right">&nbsp;@if($editing)<img
-                    src="{{ url('/') }}/web/images/myhabbo/icon_edit.gif" width="19" height="18"
+                    src="{{ cms_config('site.web.url') }}/images/myhabbo/icon_edit.gif" width="19" height="18"
                     class="edit-button" id="widget-{{ $item->id }}-edit" />
                 <script language="JavaScript" type="text/javascript">
                     Event.observe('widget-{{ $item->id }}-edit', 'click', function(e) { openEditMenu(e, {{ $item->id }}, 'widget', 'widget-{{ $item->id }}-edit'); }, false);
@@ -15,9 +15,9 @@
             <div class="widget-content">
                 <div class="group-info-icon"><img src="{{ cms_config('site.groupbadge.url') }}{{ $owner->badge }}.gif">
                 </div>
-                <h4>{{ $owner->name }}<img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-gn" id="groupname-{{ $owner->id }}-report" style="display: none;margin-top: -1px;"></h4>
+                <h4>{{ $owner->name }}<img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-gn" id="groupname-{{ $owner->id }}-report" style="display: none;margin-top: -1px;"></h4>
                 <p>Group created: <b>{{ $owner->created_at->format('M d, Y') }}</b></p>
-                <div class="group-info-description">{{ $owner->description }}<img src="{{ url('/') }}/web/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-gd" id="groupdesc-{{ $owner->id }}-report" style="display: none;margin-top: -1px;"></div>
+                <div class="group-info-description">{{ $owner->description }}<img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-gd" id="groupdesc-{{ $owner->id }}-report" style="display: none;margin-top: -1px;"></div>
                 <div id="profile-tags-panel">
                     <div id="profile-tag-list">
                         @include('home.widgets.ajax.profiletags')
@@ -27,10 +27,10 @@
                             <div class="content-red">
                                 <div class="content-red-body">
                                     <span id="tag-limit-message" style="display: none;">
-                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> The limit is 8 tags!
+                                        <img src="{{ cms_config('site.web.url') }}/images/register/icon_error.gif"> The limit is 8 tags!
                                     </span>
                                     <span id="tag-invalid-message" style="display: none;">
-                                        <img src="{{ url('/') }}/web/images/register/icon_error.gif"> Invalid tag.
+                                        <img src="{{ cms_config('site.web.url') }}/images/register/icon_error.gif"> Invalid tag.
                                     </span>
                                 </div>
                             </div>

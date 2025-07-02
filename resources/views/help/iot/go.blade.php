@@ -5,8 +5,8 @@
     <title>Habbo Help Tool</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
-    <link href="{{ url('/') }}/web/iot/styles/style.css" type="text/css" rel="stylesheet">
-    <link href="{{ url('/') }}/web/iot/styles/style-iot.css" type="text/css" rel="stylesheet">
+    <link href="{{ cms_config('site.web.url') }}/iot/styles/style.css" type="text/css" rel="stylesheet">
+    <link href="{{ cms_config('site.web.url') }}/iot/styles/style-iot.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -14,21 +14,21 @@
         <table id="" border="0" cellpadding="0" cellspacing="0" width="720">
             <tbody>
                 <tr>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_left.gif) no-repeat; width: 8px; height: 77px;">
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_left.gif) no-repeat; width: 8px; height: 77px;">
                         &nbsp;</td>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_mid.gif) repeat-x;" valign="top">
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_mid.gif) repeat-x;" valign="top">
                         <div style="margin: 0; padding: 10px 0 0 27px; height: 67px;"><img src="{{ url('/') }}/c_images/WebLogos/habbo_logo_br.gif">
                         </div>
                     </td>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_header_left.gif) no-repeat; width: 3px; height: 77px;">
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_left.gif) no-repeat; width: 3px; height: 77px;">
                     </td>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_header_mid.gif) repeat-x; height: 77px;">
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_mid.gif) repeat-x; height: 77px;">
                         <div style="height: 43px; padding: 31px 0 0 4px; margin: 0; color: #fff; text-transform: uppercase; font-weight: bold; display: block;">
                             Habbo Help Tool</div>
                     </td>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_header_mid.gif) repeat-x; height: 54px; padding: 23px 0 0 0;" align="right"
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_mid.gif) repeat-x; height: 54px; padding: 23px 0 0 0;" align="right"
                         valign="top"></td>
-                    <td style="background: url({{ url('/') }}/web/iot/images/process/top_right.gif) no-repeat; width: 26px; height: 77px;">
+                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_right.gif) no-repeat; width: 26px; height: 77px;">
                         &nbsp;</td>
                 </tr>
             </tbody>
@@ -47,7 +47,7 @@
                         <table border="0" cellspacing="0" cellpadding="0" class="ihead">
                             <tbody>
                                 <tr>
-                                    <td class="icon"><img src="{{ url('/') }}/web/iot/header_images/Western2/1.gif" alt=" " width="47" height="37"></td>
+                                    <td class="icon"><img src="{{ cms_config('site.web.url') }}/iot/header_images/Western2/1.gif" alt=" " width="47" height="37"></td>
                                     <td class="text">
                                         <h2>DO YOU ALREADY HAVE A HABBO ACCOUNT?</h2>
                                     </td>

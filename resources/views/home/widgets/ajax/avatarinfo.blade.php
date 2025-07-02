@@ -8,7 +8,7 @@
         </div>
         <h4><a href="{{ url('/') }}/home/{{ $user->username }}">{{ $user->username }}</a></h4>
         <p>
-            <img src="{{ url('/') }}/web/images/myhabbo/profile/{{ $user->isOnline() ? 'habbo_online_anim_big.gif' : 'habbo_offline_big.gif' }}" />
+            <img src="{{ cms_config('site.web.url') }}/images/myhabbo/profile/{{ $user->isOnline() ? 'habbo_online_anim_big.gif' : 'habbo_offline_big.gif' }}" />
         </p>
         <p>
             {{ cms_config('hotel.name.short') }} created on:

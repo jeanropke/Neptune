@@ -24,25 +24,25 @@
                                                 @auth
                                                     @if (user()->tags()->where('tag', $tag->tag)->exists())
                                                         <img border="0" class="tag-delete-link tag-delete-link-{{ $tag->tag }}"
-                                                            onmouseover="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_delete_hi.gif'"
-                                                            onmouseout="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_delete.gif'"
-                                                            src="{{ url('/') }}/web/images/buttons/tags/tag_button_delete.gif"
+                                                            onmouseover="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete_hi.gif'"
+                                                            onmouseout="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete.gif'"
+                                                            src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete.gif"
                                                             onclick="TagHelper.removeThisTagFromMe('{{ $tag->tag }}', '{{ user()->id }}')">
                                                     @else
                                                         <img border="0" class="tag-add-link tag-add-link-{{ $tag->tag }}"
-                                                            onmouseover="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_add_hi.gif'"
-                                                            onmouseout="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_add.gif'"
-                                                            src="{{ url('/') }}/web/images/buttons/tags/tag_button_add.gif"
+                                                            onmouseover="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add_hi.gif'"
+                                                            onmouseout="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add.gif'"
+                                                            src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add.gif"
                                                             onclick="TagHelper.addThisTagToMe('{{ $tag->tag }}', '{{ user()->id }}')">
                                                     @endif
                                                 @endauth
                                                 @guest
-                                                    <img border="0" class="tag-none-link" src="{{ url('/') }}/web/images/buttons/tags/tag_button_dim.gif">
+                                                    <img border="0" class="tag-none-link" src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_dim.gif">
                                                 @endguest
                                         </li>
                                     @endforeach
                                 </ul>
-                                <img id="tag-img-added" border="0" src="{{ url('/') }}/web//images/buttons/tags/tag_button_added.gif" style="display:none">
+                                <img id="tag-img-added" border="0" src="{{ cms_config('site.web.url') }}//images/buttons/tags/tag_button_added.gif" style="display:none">
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -117,26 +117,26 @@
                                                                     @auth
                                                                         @if (user()->tags()->where('tag', $tag->tag)->exists())
                                                                             <img border="0" class="tag-delete-link tag-delete-link-{{ $tag->tag }}"
-                                                                                onmouseover="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_delete_hi.gif'"
-                                                                                onmouseout="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_delete.gif'"
-                                                                                src="{{ url('/') }}/web/images/buttons/tags/tag_button_delete.gif"
+                                                                                onmouseover="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete_hi.gif'"
+                                                                                onmouseout="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete.gif'"
+                                                                                src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_delete.gif"
                                                                                 onclick="TagHelper.removeThisTagFromMe('{{ $tag->tag }}', '{{ user()->id }}')">
                                                                         @else
                                                                             <img border="0" class="tag-add-link tag-add-link-{{ $tag->tag }}"
-                                                                                onmouseover="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_add_hi.gif'"
-                                                                                onmouseout="this.src='{{ url('/') }}/web/images/buttons/tags/tag_button_add.gif'"
-                                                                                src="{{ url('/') }}/web/images/buttons/tags/tag_button_add.gif"
+                                                                                onmouseover="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add_hi.gif'"
+                                                                                onmouseout="this.src='{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add.gif'"
+                                                                                src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_add.gif"
                                                                                 onclick="TagHelper.addThisTagToMe('{{ $tag->tag }}', '{{ user()->id }}')">
                                                                         @endif
                                                                     @endauth
                                                                     @guest
-                                                                        <img border="0" class="tag-none-link" src="{{ url('/') }}/web/images/buttons/tags/tag_button_dim.gif">
+                                                                        <img border="0" class="tag-none-link" src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_dim.gif">
                                                                     @endguest
                                                                 </span>
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                    <img id="tag-img-added" border="0" src="{{ url('/') }}/web//images/buttons/tags/tag_button_added.gif"
+                                                    <img id="tag-img-added" border="0" src="{{ cms_config('site.web.url') }}//images/buttons/tags/tag_button_added.gif"
                                                         style="display:none">
                                                 </div>
                                             </td>

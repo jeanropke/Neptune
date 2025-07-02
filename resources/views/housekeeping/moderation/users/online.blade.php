@@ -32,7 +32,7 @@
                             <td class="tablerow2" align="center"><a href="mailto:{{ $user->mail }}">{{ $user->mail }}</a></td>
                             <td class="tablerow2" align="center">{{ Carbon\Carbon::createFromTimestamp($user->account_created) }}</td>
                             <td class="tablerow2" align="center">{{ \Carbon\Carbon::createFromTimeStamp($user->last_online)->diffForHumans() }}</td>
-                        <td class="tablerow2" align="center"><a href="{{ route('admin.users.edituser', $user->id) }}"><img src="{{ url('/') }}/web/admin/images/edit.gif" alt="Edit User Data"></a></td>
+                        <td class="tablerow2" align="center"><a href="{{ route('admin.users.edituser', $user->id) }}"><img src="{{ cms_config('site.web.url') }}/admin/images/edit.gif" alt="Edit User Data"></a></td>
                             </tr>
                         @empty
                         <tr>

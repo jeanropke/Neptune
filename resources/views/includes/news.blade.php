@@ -17,7 +17,7 @@
         @foreach ($top_stories as $article)
             {
                 text: "{{ $article->short_text }}",
-                image: '<img width="425" height="178" border="0" src="{{ url('/') }}/web/images/top_story_images/{{ $article->image }}" />',
+                image: '<img width="425" height="178" border="0" src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ $article->image }}" />',
                 links: [
                     '<a href="/article/{{ $article->url }}">Read More!</a>',
                     '<a href="/client" target="client" onclick="openOrFocusHabbo(this); return false;">Enter Hotel</a>'
@@ -44,7 +44,7 @@
         <div id="promobody">
             @if ($top_stories->count() > 0)
                 <p id="promoimage">
-                    <img width="425" height="178" border="0" src="{{ url('/') }}/web/images/top_story_images/{{ $top_stories[0]->image }}"></a>
+                    <img width="425" height="178" border="0" src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ $top_stories[0]->image }}"></a>
                 </p>
 
                 <div class="promotext">

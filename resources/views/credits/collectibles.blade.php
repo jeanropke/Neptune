@@ -79,7 +79,7 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
                                                 <p class="collectibles-value-intro">
-                                                    <img src="{{ url('/') }}/web/images/collectibles/ukplane.png" alt="" width="79" height="47">
+                                                    <img src="{{ cms_config('site.web.url') }}/images/collectibles/ukplane.png" alt="" width="79" height="47">
                                                     Collect your way to the riches! Collectables not only make a great piece
                                                     of
                                                     Furni but also come with an amazing trade value. As collectables will
@@ -87,7 +87,7 @@
                                                     be sold again for quite a while (that's a promise), the value will keep
                                                     increasing in time.
                                                 </p>
-                                                <img src="{{ url('/') }}/web/images/collectibles/chart.png" alt="" width="272" height="117">
+                                                <img src="{{ cms_config('site.web.url') }}/images/collectibles/chart.png" alt="" width="272" height="117">
 
                                                 <div class="clear"></div>
                                             </div>

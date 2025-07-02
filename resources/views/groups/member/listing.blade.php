@@ -20,13 +20,13 @@
                     <div class="group-memberlist-open"></div>
                     <div style="float: right; height: 16px; margin-top: 1px">
                         @if ($member->member_rank == 3)
-                            <img src="{{ url('/') }}/web/images/groups/owner_icon.gif" width="15" height="15" alt="" title="" />
+                            <img src="{{ cms_config('site.web.url') }}/images/groups/owner_icon.gif" width="15" height="15" alt="" title="" />
                         @endif
                         @if ($member->member_rank == 2)
-                            <img src="{{ url('/') }}/web/images/groups/administrator_icon.gif" width="15" height="15" alt="Administrator" title="Administrator" />
+                            <img src="{{ cms_config('site.web.url') }}/images/groups/administrator_icon.gif" width="15" height="15" alt="Administrator" title="Administrator" />
                         @endif
                         @if (!isset($pending) && ($member->user->favourite_group == $group->id))
-                            <img src="{{ url('/') }}/web/images/groups/favourite_group_icon.gif" alt="">
+                            <img src="{{ cms_config('site.web.url') }}/images/groups/favourite_group_icon.gif" alt="">
                         @endif
                     </div>
                 </div>

@@ -44,7 +44,7 @@
                                                                     src="{{ cms_config('site.avatarimage.url') }}{{ $staff->figure }}&gesture=sml&direction=4&head_direction=4"
                                                                     alt="">{{ cms_config('hotel.name.short') }} name</b>: <a
                                                                 href="{{ url('/') }}/home/{{ $staff->username }}" target="_blank">{{ $staff->username }}</a> ~ <img
-                                                                src="{{ url('/') }}/web/images/myhabbo/{{ $staff->online ? 'habbo_online_anim' : 'habbo_offline' }}.gif"><br>
+                                                                src="{{ cms_config('site.web.url') }}/images/myhabbo/{{ $staff->online ? 'habbo_online_anim' : 'habbo_offline' }}.gif"><br>
                                                             <b>{{ cms_config('hotel.name.short') }} since</b>:
                                                             {{ $staff->created_at->format('F Y') }}<br>
                                                             <b>Motto</b>: {{ $staff->motto }}<br>
