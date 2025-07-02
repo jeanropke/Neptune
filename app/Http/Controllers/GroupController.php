@@ -195,6 +195,73 @@ class GroupController extends Controller
         return view('groups.actions.group_settings')->with('group', $group);
     }
 
+    public function checkGroupUrl(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group || !user() || $group->owner_id !== user()->id) {
+            return abort(403, 'Unauthorized');
+        }
+
+        if ($group->alias != null) {
+            return response("ERROR You already edited the group URL.");
+        }
+
+        if (Group::where('alias', $request->url)->exists()) {
+            return response("ERROR This URL is already in use.");
+        }
+
+        $url = url("/groups/$request->url");
+        return response("Your group alias will be $url. You can not alter it later on.");
+    }
+
+    public function updateGroupSettings(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group || !user() || $group->owner_id !== user()->id) {
+            return abort(403, 'Unauthorized');
+        }
+
+        if ($group->alias && $group->alias != $request->url) {
+            return response("You already edited the group URL.");
+        }
+
+        $group->update([
+            'name'              => $request->name,
+            'description'       => $request->description,
+            'group_type'        => $request->type,
+            'forum_type'        => $request->forumType,
+            'forum_premission'  => $request->newTopicPermission,
+            'alias'             => $request->url
+        ]);
+
+        return view('groups.actions.update_group_settings', compact('group'));
+    }
+
+    public function confirmDeleteGroup(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group || !user() || $group->owner_id !== user()->id) {
+            return abort(403, 'Unauthorized');
+        }
+
+        return view('groups.actions.confirm_delete_group', compact('group'));
+    }
+
+    public function deleteGroup(Request $request)
+    {
+        $group = Group::find($request->groupId);
+
+        if (!$group || !user() || $group->owner_id !== user()->id) {
+            return abort(403, 'Unauthorized');
+        }
+
+        $group->delete();
+        return response('deleteGroup');
+    }
+
     public function startEditing(Request $request)
     {
         $user = user();
@@ -305,9 +372,9 @@ class GroupController extends Controller
         }
     }
 
-    public function discussions($id)
+    public function discussions(Request $request)
     {
-        $group = Group::findOrFail($id);
+        $group = $request->id ? Group::with('items')->findOrFail($request->id) : Group::with('items')->where('alias', $request->alias)->firstOrFail();
 
         return view('groups.discussions', compact('group'));
     }

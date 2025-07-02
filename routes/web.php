@@ -284,6 +284,11 @@ Route::middleware('user')->group(function () {
             Route::post('/confirm_deselect_favorite', [GroupController::class, 'confirmDeselectFavorite'])->name('groups.actions.confirm_deselect_favorite');
             Route::post('/deselect_favorite', [GroupController::class, 'deselectFavorite'])->name('groups.actions.deselect_favorite');
             Route::post('/group_settings', [GroupController::class, 'groupSettings'])->name('groups.actions.group_settings');
+            Route::post('/check_group_url', [GroupController::class, 'checkGroupUrl'])->name('groups.actions.check_group_url');
+            Route::post('/update_group_settings', [GroupController::class, 'updateGroupSettings'])->name('groups.actions.update_group_settings');
+            Route::post('/confirm_delete_group', [GroupController::class, 'confirmDeleteGroup'])->name('groups.actions.confirm_delete_group');
+            Route::post('/delete_group', [GroupController::class, 'deleteGroup'])->name('groups.actions.confirm_delete_group');
+
             Route::get('/startEditingSession/{groupId}', [GroupController::class, 'startEditing'])->name('groups.actions.start_editing');
             Route::post('/saveEditingSession', [GroupController::class, 'saveEditing'])->name('groups.actions.save_editing');
 

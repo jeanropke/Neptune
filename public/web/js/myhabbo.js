@@ -55,7 +55,6 @@ function initView(id) {
         new GroupEditTools(id, groupToolsButtons);
     }
 
-    /* custom */
     var selectFavoriteButton = $("select-favorite-button");
     if (selectFavoriteButton) {
         Event.observe(selectFavoriteButton, "click", function (e) {
@@ -457,12 +456,10 @@ function openGroupActionDialog(confirmActionName, actionName, accountId, groupId
                 new Ajax.Request(habboReqPath + actionName, {
                     method: "post", parameters: params,
                     onComplete: function (req, json) {
-                        /* custom */
                         if (req.responseText == "OK") {
                             document.location.reload()
                             return;
                         }
-                        /* end custom */
                         var cont = true;
                         if (onCompleteCallback) { cont = onCompleteCallback(req, json); }
                         if (cont) {
@@ -497,34 +494,12 @@ function showGroupSettingsConfirmation(groupId, responseTitle, confirmationMessa
     var selectedForumType = $("forum_type").value;
     var selectedNewTopicPermission = $("new_topic_permission").value;
     var initialGroupType = $("initial_group_type").value;
-    var groupUrlEdited = $("group_url_edited").value;
     var groupUrlContent = $("group_url").value;
     var groupUrlEdited = $("group_url_edited").value;
     params = 'url=' + groupUrlContent + '&groupId=' + groupId;
 
     if (groupUrlContent == '' || groupUrlEdited == 0) {
-        // no need to check group url
-        if (initialGroupType == 1 && selectedGroupType != 1) {
-
-            var dialog = createDialog("group-settings-confirmation", responseTitle, "9003", 0, -1000, cancelGroupSettingsConfirmation);
-            var okButton = Builder.node("a", { href: "#", className: "colorlink orange dialogbutton" }, [Builder.node("span", confirmationButtonText)]);
-            var cancelButton = Builder.node("a", { href: "#", className: "colorlink noarrow dialogbutton" }, [Builder.node("span", cancelButtonText)]);
-
-            appendDialogBody(dialog, Builder.node("p", confirmationMessage));
-            appendDialogBody(dialog, cancelButton);
-            appendDialogBody(dialog, okButton);
-            Event.observe(cancelButton, "click", function (e) { Event.stop(e); cancelGroupSettingsConfirmation() }, false);
-            Event.observe(okButton, "click", function (e) {
-                Element.remove("group-settings-confirmation");
-                updateGroupSettings(groupId, responseTitle, confirmationMessage, confirmationButtonText, cancelButtonText);
-            });
-            moveOverlay("9002");
-            dialog.style.zIndex = '9003';
-            moveDialogToCenter(dialog);
-        }
-        else {
-            updateGroupSettings(groupId, responseTitle);
-        }
+        confirmAndUpdateGroupSettings(groupId);
     } else {
         new Ajax.Request(habboReqPath + '/groups/actions/check_group_url', {
             method: "post", parameters: params,
@@ -560,27 +535,7 @@ function showGroupSettingsConfirmation(groupId, responseTitle, confirmationMessa
 
                 Event.observe(urlOkButton, "click", function (e) {
                     Element.remove("group-url-confirmation");
-                    if (initialGroupType == 1 && selectedGroupType != 1) {
-
-                        var dialog = createDialog("group-settings-confirmation", responseTitle, "9003", 0, -1000, cancelGroupSettingsConfirmation);
-                        var okButton = Builder.node("a", { href: "#", className: "colorlink orange dialogbutton" }, [Builder.node("span", confirmationButtonText)]);
-                        var cancelButton = Builder.node("a", { href: "#", className: "colorlink noarrow dialogbutton" }, [Builder.node("span", cancelButtonText)]);
-
-                        appendDialogBody(dialog, Builder.node("p", confirmationMessage));
-                        appendDialogBody(dialog, cancelButton);
-                        appendDialogBody(dialog, okButton);
-                        Event.observe(cancelButton, "click", function (e) { Event.stop(e); cancelGroupSettingsConfirmation() }, false);
-                        Event.observe(okButton, "click", function (e) {
-                            Element.remove("group-settings-confirmation");
-                            updateGroupSettings(groupId, responseTitle, confirmationMessage, confirmationButtonText, cancelButtonText);
-                        });
-                        moveOverlay("9002");
-                        dialog.style.zIndex = '9003';
-                        moveDialogToCenter(dialog);
-                    }
-                    else {
-                        updateGroupSettings(groupId, responseTitle);
-                    }
+                    confirmAndUpdateGroupSettings(groupId);
                 });
 
                 moveOverlay("9002");
@@ -592,12 +547,35 @@ function showGroupSettingsConfirmation(groupId, responseTitle, confirmationMessa
 }
 
 function cancelGroupSettingsConfirmation() {
-    Element.remove("group-settings-confirmation");
     Element.show("group-settings-update-button");
     moveOverlay('9001');
 }
 
+function confirmAndUpdateGroupSettings(groupId) {
+    var D = $("group_type").value;
+    var A = $("initial_group_type").value;
+    if (D != A) {
+        var E = ["normal", "exclusive", "closed", "large"];
+        showConfirmDialog(L10N.get("group.settings.group_type_change_warning." + E[parseInt(D)]), {
+            okHandler: function () {
+                Element.remove($(this.dialogId));
+                hideOverlay();
+                updateGroupSettings(groupId)
+            },
+            cancelHandler: function () {
+                Element.show("group-settings-update-button");
+            },
+            headerText: L10N.get("group.settings.title.text"),
+            buttonText: L10N.get("myhabbo.groups.confirmation_ok"),
+            cancelButtonText: L10N.get("myhabbo.groups.confirmation_cancel")
+        })
+    } else {
+        updateGroupSettings(groupId)
+    }
+}
+
 function updateGroupSettings(groupId, responseTitle) {
+
     new Ajax.Request(habboReqPath + "/groups/actions/update_group_settings", {
         parameters: "name=" + encodeURIComponent($("group_name").value)
             + "&description=" + encodeURIComponent($("group_description").value)
@@ -629,6 +607,10 @@ function closeGroupSettings() {
     dialog.hide();
     $("dialog-group-settings-body").innerHTML = getProgressNode();
     hideOverlay();
+
+    if ($("group_settings_result")) {
+        Element.remove($("group_settings_result"));
+    }
 }
 
 function attachGroupSettingsObserver(id) {
@@ -1162,3 +1144,26 @@ GroupEditTools.prototype = {
         }
     }
 };
+
+var L10N = (function () {
+    var translations = [];
+    var formatString = function (template, values) {
+        var result = template;
+        for (var i = 0; i < values.length; ++i) {
+            result = result.replace("{" + i + "}", values[i]);
+        }
+        return result;
+    };
+    return {
+        put: function (key, value) {
+            translations[key] = value;
+            return this;
+        },
+        get: function (key) {
+            var args = $A(arguments);
+            args.shift();
+            var template = translations[key] || key;
+            return template === key ? template : formatString(template, args);
+        }
+    };
+})();
