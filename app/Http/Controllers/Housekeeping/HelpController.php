@@ -14,7 +14,7 @@ class HelpController extends Controller
         return response()->json($this->getLatestRelease());
     }
 
-    public function getLatestRelease()
+    private function getLatestRelease()
     {
         $owner = 'jeanropke';
         $repo = 'Neptune';
