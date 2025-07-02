@@ -15,8 +15,11 @@
                             id="name-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     </div>
                     <br class="clear">
-
-                    <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_offline.gif">
+                    @if ($owner->isOnline())
+                        <img alt="online" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_online_anim_big.gif">
+                    @else
+                        <img alt="offline" src="{{ url('/') }}/web/images/myhabbo/profile/habbo_offline.gif">
+                    @endif
                     <div class="birthday text">
                         Habbo Created On:
                     </div>

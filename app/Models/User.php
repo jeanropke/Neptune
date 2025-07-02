@@ -50,7 +50,8 @@ class User extends Authenticatable
         'club_subscribed',
         'club_expiration',
         'club_gift_due',
-        'favourite_group'
+        'favourite_group',
+        'online'
     ];
 
     protected $hidden = [
@@ -62,8 +63,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'online'            => 'boolean'
     ];
 
     public function setAuthTicket()
@@ -253,22 +253,11 @@ class User extends Authenticatable
         return $this->friendsOfMine->merge($this->friendOf);
     }
 
-    /**
-     * Get if user is online
-     * Kepler does not support it right now :/
-     * @return bool
-     */
     public function isOnline()
     {
-        return false;
+        return $this->online;
     }
 
-    /**
-     * Check if user has permission
-     *
-     * @param $permission
-     * @return bool
-     */
     public function hasPermission($permission)
     {
         $tempPermission = $this->getPermission();
