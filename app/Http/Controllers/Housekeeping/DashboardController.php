@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Housekeeping;
 
 use App\Http\Controllers\Controller;
+use App\Models\Furni;
 use App\Models\Group;
 use App\Models\Neptune\Report;
 use App\Models\Room;
@@ -10,7 +11,6 @@ use App\Models\Staff\Log;
 use App\Models\User;
 use App\Models\User\Ban;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $visitsToday    = User::where('last_online', '>', $today)->count();
         $roomsUsers     = Room::count();
         $roomsPublic    = Room::where('owner_id', 0)->count();
-        $furnis         = DB::table('items')->count();
+        $furnis         = Furni::count();
         $stafflogs      = Log::count();
         $bans           = Ban::count();
         $groups         = Group::count();
