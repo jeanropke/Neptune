@@ -31,27 +31,27 @@
                                     <td class="tablesubheader" width="10%" align="center">Edit</td>
                                     <td class="tablesubheader" width="12%" align="center">Delete</td>
                                 </tr>
-                                @foreach ($boxpages as $box)
+                                @foreach ($boxpages as $boxpage)
                                     <tr>
                                         <td class="tablerow1" align="center">
-                                            {{ $box->id }}
+                                            {{ $boxpage->id }}
                                         </td>
                                         <td class="tablerow2">
-                                            <strong> {{ \App\Models\Box::find($box->box_id)->title }}</strong>
+                                            <strong>{{ $boxpage->box?->title }}</strong>
                                         </td>
                                         <td class="tablerow2" align="center">
-                                            {{ $box->column }}
+                                            {{ $boxpage->column }}
                                         </td>
                                         <td class="tablerow2" align="center">
-                                            {{ $box->page }}
+                                            {{ $boxpage->page }}
                                         </td>
                                         <td class="tablerow2" align="center">
-                                            <a href="{{ route('housekeeping.site.boxes.pages.edit', $box->id) }}">
+                                            <a href="{{ route('housekeeping.site.boxes.pages.edit', $boxpage->id) }}">
                                                 <img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit">
                                             </a>
                                         </td>
                                         <td class="tablerow2" align="center">
-                                            <a href="#" class="delete-box-page" data-id="{{ $box->id }}">
+                                            <a href="#" class="delete-box-page" data-id="{{ $boxpage->id }}">
                                                 <img src="{{ cms_config('site.web.url') }}/housekeeping/images/delete.gif" alt="Delete">
                                             </a>
                                         </td>

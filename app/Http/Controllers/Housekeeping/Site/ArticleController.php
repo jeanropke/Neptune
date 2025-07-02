@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
+use App\Models\Neptune\Article;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -12,8 +12,7 @@ class ArticleController extends Controller
 {
     public function articleCreate()
     {
-        if (!user()->hasPermission('can_create_site_news'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_site_news');
 
         return view('housekeeping.site.articles.create')->with([
             'ts_images' => array_map('basename', File::files('web/images/top_story_images')),
@@ -22,8 +21,7 @@ class ArticleController extends Controller
 
     public function articleCreateSave(Request $request)
     {
-        if (!user()->hasPermission('can_create_site_news'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_site_news');
 
         $request->validate([
             'title'             => 'required|max:255',
@@ -57,18 +55,16 @@ class ArticleController extends Controller
 
     public function articles()
     {
-        if (!user()->hasPermission('can_create_site_news'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_site_news');
 
         return view('housekeeping.site.articles.listing')->with([
-            'articles'  => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->paginate(15)
+            'articles'  => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->with('author')->paginate(15)
         ]);
     }
 
     public function articleEdit(Request $request)
     {
-        if (!user()->hasPermission('can_create_site_news'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_site_news');
 
         $article = Article::find($request->id);
 
@@ -83,8 +79,7 @@ class ArticleController extends Controller
 
     public function articleEditSave(Request $request)
     {
-        if (!user()->hasPermission('can_create_site_news'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_site_news');
 
         $request->validate([
             'title'             => 'required|max:255',

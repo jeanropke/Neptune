@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Partner;
+use App\Models\Neptune\Partner;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
     public function partners(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_partners'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_partners');
 
         $parters = Partner::paginate(15);
 
@@ -23,8 +22,7 @@ class PartnerController extends Controller
 
     public function partnersSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_partners'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_partners');
 
         $request->validate([
             'title'     => 'required',
@@ -75,7 +73,7 @@ class PartnerController extends Controller
 
         $partner->delete();
 
-        create_staff_log('site.menus.subcategories.delete', $request);
+        create_staff_log('site.partners.delete', $request);
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Partner deleted!']);
     }

@@ -35,7 +35,7 @@
                                         <strong>{{ $box->title }}</strong>
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $box->getCreator() }}
+                                        {{ $box->creator?->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.boxes.edit', $box->id) }}">

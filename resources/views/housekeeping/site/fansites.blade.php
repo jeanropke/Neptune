@@ -105,7 +105,7 @@
                                         {{ $fansite->image }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $fansite->getUser()->username }}
+                                        {{ $fansite->creator->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.fansites.edit', $fansite->id) }}">

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Box;
-use App\Models\BoxPage;
+use App\Models\Neptune\Box;
+use App\Models\Neptune\BoxPage;
 use Illuminate\Http\Request;
 
 class BoxController extends Controller
@@ -22,16 +22,14 @@ class BoxController extends Controller
 
     public function boxCreate()
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         return view('housekeeping.site.boxes.create');
     }
 
     public function boxCreateSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         $request->validate([
             'title'         => 'required|max:125',
@@ -53,10 +51,9 @@ class BoxController extends Controller
 
     public function boxManage()
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
-        return view('housekeeping.site.boxes.listing')->with('boxes', Box::paginate(15));
+        return view('housekeeping.site.boxes.listing')->with('boxes', Box::with('creator')->paginate(15));
     }
 
     public function boxDelete(Request $request)
@@ -77,8 +74,7 @@ class BoxController extends Controller
 
     public function boxEdit(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         $box = Box::find($request->id);
 
@@ -92,8 +88,7 @@ class BoxController extends Controller
 
     public function boxEditSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         $request->validate([
             'id'            => 'required',
@@ -120,18 +115,16 @@ class BoxController extends Controller
 
     public function boxPagesManage()
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         return view('housekeeping.site.boxes.pages.listing')->with([
-            'boxpages'  => BoxPage::paginate(15)
+            'boxpages'  => BoxPage::with('box')->paginate(15)
         ]);
     }
 
     public function boxPagesCreate()
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         sort($this->availablePages);
 
@@ -143,8 +136,7 @@ class BoxController extends Controller
 
     public function boxPagesCreateSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         BoxPage::create([
             'box_id'   => $request->box_id,
@@ -160,8 +152,7 @@ class BoxController extends Controller
 
     public function boxPagesEdit(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         $box = BoxPage::find($request->id);
 
@@ -179,8 +170,7 @@ class BoxController extends Controller
 
     public function boxPagesSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_site_box'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_site_box');
 
         $box = BoxPage::find($request->id);
 

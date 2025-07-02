@@ -51,7 +51,7 @@
                                         {{ $category->min_rank }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $category->getSubmenus()->count() }} - <a href="{{ route('housekeeping.site.menu.subcategories.listing') }}?parent_id={{ $category->id }}">See them</a>
+                                        {{ $category->submenus->count() }} - <a href="{{ route('housekeeping.site.menu.subcategories.listing') }}?parent_id={{ $category->id }}">See them</a>
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.menu.categories.edit', $category->id) }}">

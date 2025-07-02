@@ -11,8 +11,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        if (!user()->hasPermission('can_edit_site_settings'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_settings');
 
         return view('housekeeping.site.index')->with([
             'backgrounds'   => File::allFiles('web/images/bg_patterns'),
@@ -23,8 +22,7 @@ class SiteController extends Controller
 
     public function siteSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_settings'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_settings');
 
         $request->validate([
             'register_default_credits'  => 'required|numeric',
@@ -54,16 +52,14 @@ class SiteController extends Controller
 
     public function maintenance()
     {
-        if (!user()->hasPermission('can_edit_site_maintenance'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_maintenance');
 
         return view('housekeeping.site.maintenance');
     }
 
     public function maintenanceSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_maintenance'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_maintenance');
 
         $request->validate([
             'site_maintenance_enabled' => 'required|boolean'
@@ -77,16 +73,14 @@ class SiteController extends Controller
 
     public function loader()
     {
-        if (!user()->hasPermission('can_edit_site_loader'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_loader');
 
         return view('housekeeping.site.loader');
     }
 
     public function loaderSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_loader'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_loader');
 
         $request->validate([
             'external_texts_txt'        => 'required',

@@ -11,8 +11,7 @@ class HHAssetController extends Controller
 {
     public function listing(Request $request)
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         $assets = HomeAsset::where('class', 'LIKE', "%{$request->q}%")->orWhere('path', 'LIKE', "%{$request->q}%")->paginate(20);
         return view('housekeeping.site.hhassets.listing')->with('assets', $assets);
@@ -20,16 +19,14 @@ class HHAssetController extends Controller
 
     public function create()
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         return view('housekeeping.site.hhassets.create');
     }
 
     public function createSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         $request->validate([
             'class' => 'required|unique:cms_home_assets,class',
@@ -54,8 +51,7 @@ class HHAssetController extends Controller
 
     public function edit(Request $request)
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         $asset = HomeAsset::find($request->id);
         if (!$asset)
@@ -66,8 +62,7 @@ class HHAssetController extends Controller
 
     public function editSave(Request $request)
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         $asset = HomeAsset::find($request->id);
         if (!$asset)
@@ -114,16 +109,14 @@ class HHAssetController extends Controller
 
     public function generate()
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         return view('housekeeping.site.hhassets.generate');
     }
 
     public function generatePost(Request $request)
     {
-        if (!user()->hasPermission('can_manage_hh_assets'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_hh_assets');
 
         $cimages = cms_config('site.c_images.url');
         $isFormatted = $request->formatted == 1;

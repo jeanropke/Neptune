@@ -23,7 +23,7 @@
                         {{ csrf_field() }}
                         <input type="number" value="{{ $box->id }}" name="id" hidden>
                         <div class="tableborder">
-                            <div class="tableheaderalt">Edit Box Page ({{ $box->getTitle() }})
+                            <div class="tableheaderalt">Edit Box Page ({{ $box->box?->title }})
                             </div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <tr>

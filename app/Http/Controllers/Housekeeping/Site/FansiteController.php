@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Housekeeping\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Fansite;
+use App\Models\Neptune\Fansite;
 use Illuminate\Http\Request;
 
 class FansiteController extends Controller
 {
     public function fansites(Request $request)
     {
-        if (!user()->hasPermission('can_edit_fansites'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_fansites');
 
-        $fansites = Fansite::paginate(20);
+        $fansites = Fansite::with('creator')->paginate(20);
 
         return view('housekeeping.site.fansites')->with([
             'fansites' => $fansites,
@@ -21,11 +20,9 @@ class FansiteController extends Controller
         ]);
     }
 
-
     public function fansitesSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_fansites'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_fansites');
 
         $request->validate([
             'name'          => 'required',
@@ -59,4 +56,20 @@ class FansiteController extends Controller
         return redirect()->back()->with('message', 'Fansite added!');
     }
 
+    public function fansitesDelete(Request $request)
+    {
+        if (!user()->hasPermission('can_edit_fansites'))
+            return view('housekeeping.ajax.accessdenied_dialog');
+
+        $fansite = Fansite::find($request->id);
+
+        if (!$fansite)
+            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This fansite does not exist!']);
+
+        $fansite->delete();
+
+        create_staff_log('site.fansites.delete', $request);
+
+        return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Fansite deleted!']);
+    }
 }

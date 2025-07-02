@@ -3,6 +3,7 @@
 namespace App\Models\Neptune;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Menu extends Model
 {
@@ -19,8 +20,8 @@ class Menu extends Model
 
     public $timestamps = false;
 
-    public function getSubmenus()
+    public function submenus(): HasMany
     {
-        return CmsMenu::where('parent_id', $this->id)->get();
+        return $this->hasMany(Menu::class, 'parent_id');
     }
 }

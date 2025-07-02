@@ -9,16 +9,14 @@ class AdvertisementController extends Controller
 {
     public function siteAds()
     {
-        if (!user()->hasPermission('can_edit_site_ads'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_ads');
 
         return view('housekeeping.site.ads');
     }
 
     public function siteAdsSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_ads'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_ads');
 
         set_cms_config('site.ads_160.enabled', $request->site_ads_160_enabled);
         set_cms_config('site.ads_160.content', $request->site_ads_160_content);
@@ -33,8 +31,7 @@ class AdvertisementController extends Controller
 
     public function siteTrackingSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_site_ads'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_site_ads');
 
         set_cms_config('site.tracking.enabled', $request->site_tracking_enabled);
         set_cms_config('site.tracking.content', $request->site_tracking_content);
