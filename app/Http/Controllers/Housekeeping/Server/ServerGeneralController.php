@@ -9,22 +9,20 @@ class ServerGeneralController extends Controller
 {
     public function index()
     {
-        if (!user()->hasPermission('can_edit_server_settings'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_server_settings');
 
         return view('housekeeping.server.index');
     }
 
     public function serverSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_server_settings'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_server_settings');
 
         $request->validate([
             'connection_info_host'  => 'required',
             'connection_info_port'  => 'required',
-            'connection_mus_host'  => 'required',
-            'connection_mus_port'  => 'required',
+            'connection_mus_host'   => 'required',
+            'connection_mus_port'   => 'required',
             'connection_rcon_host'  => 'required',
             'connection_rcon_port'  => 'required'
         ]);
@@ -36,11 +34,35 @@ class ServerGeneralController extends Controller
         set_cms_config('connection.rcon.host', $request->connection_rcon_host);
         set_cms_config('connection.rcon.port', $request->connection_rcon_port);
 
-        ucreate_staff_log('server.general.save', $request);
+        create_staff_log('server.general.save', $request);
 
-        return redirect()->route('housekeeping.server')->with('message',  'Server settings updated!');
+        return redirect()->route('housekeeping.server')->with('message', 'Server settings updated!');
     }
-/*
+
+    public function welcomemsg()
+    {
+        abort_unless_permission('can_edit_server_welcomemsg');
+
+        return view('housekeeping.server.welcomemsg');
+    }
+
+    public function welcomemsgSave(Request $request)
+    {
+        abort_unless_permission('can_edit_server_welcomemsg');
+
+        $request->validate([
+            'welcome_message_enabled' => 'required|boolean'
+        ]);
+
+        set_emu_config('welcome.message.enabled', $request->welcome_message_enabled ? 'true' : 'false');
+        set_emu_config('welcome.message.content', $request->welcome_message_content ?? '');
+
+        create_staff_log('server.welcomemsg.save', $request);
+
+        return redirect()->route('housekeeping.server.welcomemsg')->with('message', 'Welcome message settings updated!');
+    }
+
+    /*
     public function serverStartup()
     {
         return view('housekeeping.server.startup')->with('isOnline', Hotel::sendRconMessage('teststatus'));
@@ -158,28 +180,4 @@ class ServerGeneralController extends Controller
         return redirect()->route('housekeeping.server.wordfilter', false)->with('message',  'Word added!');
     }
 */
-    public function welcomemsg()
-    {
-        if (!user()->hasPermission('can_edit_server_welcomemsg'))
-            return view('housekeeping.accessdenied');
-
-        return view('housekeeping.server.welcomemsg');
-    }
-
-    public function welcomemsgSave(Request $request)
-    {
-        if (!user()->hasPermission('can_edit_server_welcomemsg'))
-            return view('housekeeping.accessdenied');
-
-        $request->validate([
-            'welcome_message_enabled' => 'required|boolean'
-        ]);
-
-        set_emu_config('welcome.message.enabled', $request->welcome_message_enabled ? 'true' : 'false');
-        set_emu_config('welcome.message.content', $request->welcome_message_content ?? '');
-
-        ucreate_staff_log('server.welcomemsg.save', $request);
-
-        return redirect()->route('housekeeping.server.welcomemsg')->with('message',  'Welcome message settings updated!');
-    }
 }
