@@ -41,7 +41,7 @@
                                                 <div class="toplist-item">
                                                     <div class="group-index">{{ $loop->index + 1 }}.</div>
                                                     <div class="group-link">
-                                                        <a href="{{ url('/') }}/groups/{{ $group->getUrl() }}"
+                                                        <a href="{{ url($group->url) }}"
                                                             @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif>
                                                             {{ $group->name }}
                                                         </a>

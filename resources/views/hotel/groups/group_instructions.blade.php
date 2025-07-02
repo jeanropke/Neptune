@@ -33,7 +33,7 @@
                             <div class="v3box-body">
                                 <div class="groups-toplist-sidebar">
                                     @foreach ($latest as $group)
-                                        <div class="group-link"><a href="{{ url('/') }}/groups/{{ $group->getUrl() }}">{{ $group->name }}</a></div>
+                                        <div class="group-link"><a href="{{ url($group->url) }}">{{ $group->name }}</a></div>
                                     @endforeach
                                 </div>
                                 <div class="clear"></div>

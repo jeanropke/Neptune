@@ -50,7 +50,7 @@
                                         <div class="toplist-item">
                                             <div class="group-index">{{ $key+1 }}.</div>
                                             <div class="group-link">
-                                                <a href="{{ url('/') }}/groups/{{ $group->getUrl() }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
+                                                <a href="{{ url($group->url) }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
                                                     {{ $group->name }}
                                                 </a>
                                             </div>
@@ -75,7 +75,7 @@
                                         <div class="toplist-item">
                                             <div class="group-index">{{ $loop->index+1 }}.</div>
                                             <div class="group-link">
-                                                <a href="{{ url('/') }}/groups/{{ $group->getUrl() }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
+                                                <a href="{{ url($group->url) }}" class="@if($group->state == 1) exclusive @elseif($group->state == 2) closed @endif" title="@if($group->state == 1) Exclusive @elseif($group->state == 2) Closed @endif">
                                                     {{ $group->name }}
                                                 </a>
                                             </div>
