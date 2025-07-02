@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use App\Models\GroupMember;
-use App\Models\Permission;
+use App\Models\Group\Member;
+use App\Models\Neptune\Permission;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +22,7 @@ class HotelController extends Controller
     public function groups()
     {
         $groups = [];
-        foreach (GroupMember::groupBy('group_id')->select('group_id', DB::raw('COUNT(group_id) AS total'))->take(10)->orderBy('total', 'DESC')->get() as $guild) {
+        foreach (Member::groupBy('group_id')->select('group_id', DB::raw('COUNT(group_id) AS total'))->take(10)->orderBy('total', 'DESC')->get() as $guild) {
             array_push($groups, Group::find($guild->group_id));
         }
 
