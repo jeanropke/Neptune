@@ -76,8 +76,8 @@
                                         {{ $item->price }}
                                     </td>
                                     <td class="tablerow2">
-                                        @if ($item->getPackage())
-                                             {{ $item->getPackage()->id }} - <a href="{{ route('housekeeping.furniture.catalogue.packages.edit', $item->getPackage()->id)}}"><i>See package</i></a>
+                                        @if ($item->package)
+                                             {{ $item->package->id }} - <a href="{{ route('housekeeping.furniture.catalogue.packages.edit', $item->package->id)}}"><i>See package</i></a>
                                         @else
                                             {{ $item->definition_id }} - <a href="{{ route('housekeeping.furniture.items.edit', $item->definition_id) }}"><i>See item</i></a>
                                         @endif

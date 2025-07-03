@@ -11,6 +11,8 @@ class WebOfferController extends Controller
 {
     public function webOffers(Request $request)
     {
+        abort_unless_permission('can_edit_web_offers');
+
         $search = $request->input('value');
 
         $offers = ItemOffer::query()->when($search, function ($query, $search) {
@@ -23,6 +25,8 @@ class WebOfferController extends Controller
 
     public function webOffersEdit(Request $request)
     {
+        abort_unless_permission('can_edit_web_offers');
+
         $offer = ItemOffer::find($request->id);
 
         if (!$offer) {
@@ -34,6 +38,8 @@ class WebOfferController extends Controller
 
     public function webOffersSave(WebOfferRequest $request)
     {
+        abort_unless_permission('can_edit_web_offers');
+
         $offer = ItemOffer::find($request->id);
 
         if (!$offer) {
@@ -51,11 +57,15 @@ class WebOfferController extends Controller
 
     public function webOffersAdd()
     {
+        abort_unless_permission('can_edit_web_offers');
+
         return view('housekeeping.furniture.weboffers.add');
     }
 
     public function webOffersAddSave(WebOfferRequest $request)
     {
+        abort_unless_permission('can_edit_web_offers');
+
         $validated = $request->validated();
 
         $offer = ItemOffer::create($validated);
@@ -67,6 +77,8 @@ class WebOfferController extends Controller
 
     public function webOffersDelete(Request $request)
     {
+        abort_unless_permission('can_delete_web_offers');
+
         $offer = ItemOffer::find($request->id);
 
         if (!$offer) {

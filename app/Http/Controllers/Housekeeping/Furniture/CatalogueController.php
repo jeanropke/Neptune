@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Housekeeping\Furniture;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue\Item;
+use App\Models\Catalogue\Package;
 use App\Models\Catalogue\Page;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,15 @@ class CatalogueController extends Controller
     //
     public function catalogue(Request $request)
     {
+        abort_unless_permission('can_edit_catalogue_pages');
+
         $pages = Page::with('items')->where([['name', 'LIKE', "%{$request->name}%"]])->paginate(25);
         return view('housekeeping.furniture.catalogue.pages.listing')->with('pages', $pages);
     }
 
     public function catalogueEdit(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_pages'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_catalogue_pages');
 
         $page = Page::find($request->id);
         if (!$page)
@@ -32,8 +34,7 @@ class CatalogueController extends Controller
 
     public function catalogueSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_pages'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_catalogue_pages');
 
         $page = Page::find($request->id);
         if (!$page)
@@ -73,16 +74,14 @@ class CatalogueController extends Controller
 
     public function catalogueAdd()
     {
-        if (!user()->hasPermission('can_add_catalogue_pages'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_catalogue_pages');
 
         return view('housekeeping.furniture.catalogue.pages.add');
     }
 
     public function catalogueAddSave(Request $request)
     {
-        if (!user()->hasPermission('can_add_catalogue_pages'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_catalogue_pages');
 
         $request->validate([
             'order_id'          => 'required|numeric',
@@ -141,19 +140,20 @@ class CatalogueController extends Controller
     //
     public function catalogueItems(Request $request)
     {
+        abort_unless_permission('can_edit_catalogue_items');
+
         if ($request->page_id) {
-            $items = Item::where('page_id', $request->page_id)->paginate(25);
+            $items = Item::where('page_id', $request->page_id)->with('package')->paginate(25);
             return view('housekeeping.furniture.catalogue.items.listing')->with('items', $items);
         }
 
-        $items = Item::where([['sale_code', 'LIKE', "%{$request->value}%"]])->orWhere([['package_name', 'LIKE', "%{$request->value}%"]])->orWhere([['name', 'LIKE', "%{$request->value}%"]])->paginate(25);
+        $items = Item::where([['sale_code', 'LIKE', "%{$request->value}%"]])->orWhere([['package_name', 'LIKE', "%{$request->value}%"]])->orWhere([['name', 'LIKE', "%{$request->value}%"]])->with('package')->paginate(25);
         return view('housekeeping.furniture.catalogue.items.listing')->with('items', $items);
     }
 
     public function catalogueItemsEdit(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
         $item = Item::find($request->id);
         if (!$item)
@@ -164,8 +164,7 @@ class CatalogueController extends Controller
 
     public function catalogueItemsSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
         $item = Item::find($request->id);
         if (!$item)
@@ -203,8 +202,7 @@ class CatalogueController extends Controller
 
     public function catalogueItemsAdd()
     {
-        if (!user()->hasPermission('can_add_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
         return view('housekeeping.furniture.catalogue.items.add');
     }
@@ -267,16 +265,17 @@ class CatalogueController extends Controller
     //
     public function cataloguePackages(Request $request)
     {
-        $packages = CataloguePackage::where([['salecode', 'LIKE', "%{$request->value}%"]])->paginate(25);
+        abort_unless_permission('can_edit_catalogue_items');
+
+        $packages = Package::where([['salecode', 'LIKE', "%{$request->value}%"]])->paginate(25);
         return view('housekeeping.furniture.catalogue.packages.listing')->with('packages', $packages);
     }
 
     public function cataloguePackagesEdit(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
-        $package = CataloguePackage::find($request->id);
+        $package = Package::find($request->id);
         if (!$package)
             return redirect()->route('housekeeping.furniture.catalogue.packages')->with('message', 'Catalogue package not found!');
 
@@ -285,10 +284,9 @@ class CatalogueController extends Controller
 
     public function cataloguePackagesSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
-        $package = CataloguePackage::find($request->id);
+        $package = Package::find($request->id);
         if (!$package)
             return redirect()->route('housekeeping.furniture.catalogue.packages')->with('message', 'Catalogue package not found!');
 
@@ -312,8 +310,7 @@ class CatalogueController extends Controller
 
     public function cataloguePackagesAdd()
     {
-        if (!user()->hasPermission('can_add_catalogue_items'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_catalogue_items');
 
         return view('housekeeping.furniture.catalogue.packages.add');
     }
@@ -329,7 +326,7 @@ class CatalogueController extends Controller
             'amount'        => 'required'
         ]);
 
-        $package = CataloguePackage::create([
+        $package = Package::create([
             'salecode'          => $request->salecode,
             'definition_id'     => $request->definition_id ?? 0,
             'special_sprite_id' => $request->special_sprite_id ?? 0,
@@ -346,7 +343,7 @@ class CatalogueController extends Controller
         if (!user()->hasPermission('can_delete_catalogue_items'))
             return view('housekeeping.ajax.accessdenied_dialog');
 
-        $package = CataloguePackage::find($request->id);
+        $package = Package::find($request->id);
 
         if (!$package)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This catalogue package does not exist!']);

@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Housekeeping\Furniture;
 
 use App\Http\Controllers\Controller;
-use App\Models\ItemDefination;
+use App\Models\Furni\Definition;
 use Illuminate\Http\Request;
 
 class FurnitureController extends Controller
 {
     public function items(Request $request)
     {
-        $items = ItemDefination::where('name', 'LIKE', "%{$request->value}%")->orWhere('sprite', 'LIKE', "%{$request->value}%")->paginate(25);
+        abort_unless_permission('can_edit_items_definitions');
+
+        $items = Definition::where('name', 'LIKE', "%{$request->value}%")->orWhere('sprite', 'LIKE', "%{$request->value}%")->paginate(25);
         return view('housekeeping.furniture.items.listing')->with('items', $items);
     }
 
     public function furnitureEdit(Request $request)
     {
-        $item = ItemDefination::find($request->id);
+        $item = Definition::find($request->id);
         if (!$item)
             return redirect()->route('housekeeping.furniture.items')->with('message', 'Item definition not found!');
 
@@ -25,7 +27,9 @@ class FurnitureController extends Controller
 
     public function furnitureSave(Request $request)
     {
-        $item = ItemDefination::find($request->id);
+        abort_unless_permission('can_edit_items_definitions');
+
+        $item = Definition::find($request->id);
         if (!$item)
             return redirect()->route('housekeeping.furniture.items')->with('message', 'Item definition not found!');
 
@@ -65,13 +69,14 @@ class FurnitureController extends Controller
 
     public function furnitureAdd()
     {
+        abort_unless_permission('can_edit_items_definitions');
+
         return view('housekeeping.furniture.items.add');
     }
 
     public function furnitureAddSave(Request $request)
     {
-        if (!user()->hasPermission('can_add_catalogue_pages'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_items_definitions');
 
         $request->validate([
             'sprite'        => 'required',
@@ -85,7 +90,7 @@ class FurnitureController extends Controller
             'is_recyclable' => 'required|in:0,1'
         ]);
 
-        $item = ItemDefination::create([
+        $item = Definition::create([
             'sprite'        => $request->sprite,
             'sprite_id'     => $request->sprite_id ?? 0,
             'name'          => $request->name ?? '',
@@ -109,7 +114,9 @@ class FurnitureController extends Controller
 
     public function furnitureDelete(Request $request)
     {
-        $item = ItemDefination::find($request->id);
+        abort_unless_permission('can_delete_items_definitions');
+
+        $item = Definition::find($request->id);
 
         if (!$item)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This item definition does not exist!']);

@@ -50,7 +50,7 @@
                                     <td class="tablerow2" width="40%" valign="middle" id="furni-picker-table">
                                         <a href="{{ route('furnipicker.listing') }}" id="furni-picker">Pick</a>
                                         <div id="furni-picked">
-                                            @foreach ($offer->getItems() as $item)
+                                            @foreach ($offer->items() as $item)
                                                 <div class="slot" data-item-id="{{ $item->id }}">
                                                     <div class="image" style="background-image: url({{ cms_config('furni.small.url') }}/{{ $item->getNormalizedName() }}_icon.png)"></div>
                                                 </div>

@@ -44,6 +44,6 @@ class Item extends Model
 
      public function package(): HasOne
     {
-        return $this->hasOne(CataloguePackage::class, 'salecode', 'sale_code');
+        return $this->hasOne(Package::class, 'salecode', 'sale_code');
     }
 }

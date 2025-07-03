@@ -20,31 +20,32 @@ class ItemOffer extends Model
 
     public $timestamps = false;
 
+    public function getItemIds(): array
+    {
+        return array_filter(explode(';', $this->item_ids));
+    }
+
+    public function getHomeIds(): array
+    {
+        return array_filter(explode(';', $this->home_ids));
+    }
+
+    public function items()
+    {
+        return Item::whereIn('id', $this->getItemIds())->get();
+    }
+
+    public function storeItems()
+    {
+        return StoreItem::whereIn('id', $this->getHomeIds())->get();
+    }
+
     public function isValid(): bool
     {
         if (empty($this->item_ids)) {
             return true;
         }
 
-        return collect(explode(';', $this->item_ids))
-            ->every(fn($id) => Item::find($id));
-    }
-
-    public function getItems()
-    {
-        return collect(explode(';', $this->item_ids))
-            ->map(fn($id) => Item::find($id))
-            ->filter();
-    }
-
-    public function getHomeItems()
-    {
-        if (empty($this->home_ids)) {
-            return collect();
-        }
-
-        return collect(explode(';', $this->home_ids))
-            ->map(fn($id) => StoreItem::find($id))
-            ->filter();
+        return Item::whereIn('id', $this->getItemIds())->count() === count($this->getItemIds());
     }
 }
