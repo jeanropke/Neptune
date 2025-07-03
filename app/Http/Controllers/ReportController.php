@@ -6,11 +6,12 @@ use App\Models\Group;
 use App\Models\Group\GroupReply;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeItem;
-use App\Models\Report;
+use App\Models\Neptune\Report;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
@@ -63,11 +64,19 @@ class ReportController extends Controller
             return response()->json(['error' => 'Object not found.'], 404);
         }
 
+        $message = is_callable($messageField)
+            ? call_user_func($messageField, $item)
+            : data_get($item, $messageField, 0);
+
+        $author = is_callable($authorField)
+            ? call_user_func($authorField, $item)
+            : data_get($item, $authorField, 0);
+
         return $this->createReport(
             $request->objectId,
             $type,
-            data_get($item, $messageField, ''),
-            data_get($item, $authorField, 0)
+            $message,
+            $author
         );
     }
 

@@ -6,20 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Catalogue\Item as CatalogueItem;
 use App\Models\User;
 use App\Models\Voucher;
+use App\Models\Voucher\History;
 use App\Models\Voucher\Item;
-use App\Models\VoucherHistory;
-use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 
 class CreditsController extends Controller
 {
     public function vouchers()
     {
-        $user = user();
-
-        if (!$user || !$user->hasPermission('can_create_vouchers')) {
-            return view('housekeeping.accessdenied');
-        }
+        abort_unless_permission('can_create_vouchers');
 
         $vouchers = Voucher::get();
 
@@ -28,8 +23,7 @@ class CreditsController extends Controller
 
     public function vouchersAdd(Request $request)
     {
-        if (!user()->hasPermission('can_create_vouchers'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_create_vouchers');
 
         $request->validate([
             'voucher'       => 'required|unique:vouchers,voucher_code|unique:vouchers_history,voucher_code',
@@ -85,13 +79,12 @@ class CreditsController extends Controller
 
     public function vouchersHistory(Request $request)
     {
-        if (!user()->hasPermission('can_create_vouchers'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_create_vouchers');
 
         $user = User::where('username', $request->username)->first();
         if ($user)
-            return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', VoucherHistory::where('user_id', $user->id)->paginate(15));
+            return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', History::where('user_id', $user->id)->paginate(15));
 
-        return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', VoucherHistory::paginate(15));
+        return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', History::with('user')->paginate(15));
     }
 }

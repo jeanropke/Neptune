@@ -30,7 +30,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $report->getUsername() }}
+                                        {{ $report->reporter?->username }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -48,7 +48,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        {{ $report->getAuthor() }} - <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $report->getAuthor() }}">Remote ban</a>
+                                        {{ $report->author?->username }} - <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $report->author?->username }}">Remote ban</a>
                                     </td>
                                 </tr>
                                 <tr>

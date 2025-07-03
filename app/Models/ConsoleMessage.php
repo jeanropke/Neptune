@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -29,13 +30,8 @@ class ConsoleMessage extends Model
         return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function getReceiverName(): ?string
+    public function getDateCarbonAttribute(): ?Carbon
     {
-        return $this->receiver?->username;
-    }
-
-    public function getSenderName(): ?string
-    {
-        return $this->sender?->username;
+        return $this->date ? Carbon::createFromTimestamp($this->date) : null;
     }
 }

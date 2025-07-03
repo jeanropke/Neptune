@@ -2,6 +2,9 @@
 
 namespace App\Models\Room;
 
+use App\Models\Room;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ChatLog extends Model
@@ -16,31 +19,32 @@ class ChatLog extends Model
         'message'
     ];
 
-    public function getUsername()
+    public function user()
     {
-        $user = User::find($this->user_id);
-        if ($user)
-            return $user->username;
+        return $this->belongsTo(User::class);
     }
 
-    public function getRoomName()
+    public function room()
     {
-        $room = Room::find($this->room_id);
-        if ($room)
-            return $room->name;
-        return '<i>Room deleted</i>';
+        return $this->belongsTo(Room::class);
     }
 
-    public function getChatType()
+    public function getRoomNameAttribute()
     {
-        switch ($this->chat_type) {
-            case 0:
-                return 'Chat';
-            case 1:
-                return 'Shout';
-            default:
-            case 2:
-                return 'Whisper';
-        }
+        return $this->room?->name ?? '<i>Room deleted</i>';
+    }
+
+    public function getChatTypeAttribute($value)
+    {
+        return match ((int)$value) {
+            0 => 'Chat',
+            1 => 'Shout',
+            default => 'Whisper'
+        };
+    }
+
+    public function getTimestampCarbonAttribute(): ?Carbon
+    {
+        return $this->timestamp ? Carbon::createFromTimestamp($this->timestamp) : null;
     }
 }

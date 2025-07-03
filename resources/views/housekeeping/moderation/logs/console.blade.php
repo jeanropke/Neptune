@@ -69,14 +69,14 @@
                                         {{ $message->id }}
                                     </td>
                                     <td class="tablerow1">
-                                        {{ $message->getReceiverName() }} (ID: {{ $message->receiver_id }})
+                                        {{ $message->receiver->username }} (ID: {{ $message->receiver_id }})
                                         <div class="desctext">
                                             <a href="{{ route('housekeeping.logs.console') }}?type=sender_id&value={{ $message->receiver_id }}">Sender</a> |
                                             <a href="{{ route('housekeeping.logs.console') }}?type=receiver_id&value={{ $message->receiver_id }}">Receiver</a>
                                         </div>
                                     </td>
                                     <td class="tablerow1">
-                                        {{ $message->getSenderName() }} (ID: {{ $message->sender_id }})
+                                        {{ $message->sender->username }} (ID: {{ $message->sender_id }})
                                         <div class="desctext">
                                             <a href="{{ route('housekeeping.logs.console') }}?type=sender_id&value={{ $message->sender_id }}">Sender</a> |
                                             <a href="{{ route('housekeeping.logs.console') }}?type=receiver_id&value={{ $message->sender_id }}">Receiver</a>
@@ -89,7 +89,7 @@
                                         {{ $message->body }}
                                     </td>
                                     <td class="tablerow1" align="center">
-                                        {{ \Carbon\Carbon::createFromTimestamp($message->date)->format('d/m/Y H:i:s') }}
+                                        {{ $message->date_carbon->format('d/m/Y H:i:s') }}
                                     </td>
                                     <td class="tablerow1" align="center">
                                         <a href="{{ route('housekeeping.logs.console') }}?user_one={{ $message->sender_id }}&user_two={{ $message->receiver_id }}">Full conversation</a>

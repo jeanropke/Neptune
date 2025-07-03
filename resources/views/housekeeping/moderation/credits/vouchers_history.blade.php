@@ -55,7 +55,7 @@
                                         {{ $voucher->voucher_code }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $voucher->getUser() }}
+                                        {{ $voucher->user->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $voucher->credits_redeemed }}
@@ -64,7 +64,7 @@
                                         {{ $voucher->used_at }}
                                     </td>
                                     <td class="tablerow2" align="center" id="furni-picker-listing">
-                                        @foreach ($voucher->getItems() as $item)
+                                        @foreach ($voucher->items as $item)
                                             <div class="slot" style="height: 56px; line-height: 9;">
                                                 <div class="image" style="background-image: url({{ cms_config('furni.small.url') }}/{{ $item->sale_code }}_icon.png)"><b>x{{ $item->amount }}</b></div>
                                             </div>

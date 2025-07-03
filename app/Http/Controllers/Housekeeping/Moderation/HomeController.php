@@ -11,10 +11,9 @@ class HomeController extends Controller
 {
     public function guestbook(Request $request)
     {
-        if (!user()->hasPermission('can_manage_guestbook'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_manage_guestbook');
 
-        $messages = Guestbook::where('message', 'LIKE', "%$request->q%")->orderBy('created_at', 'DESC');
+        $messages = Guestbook::where('message', 'LIKE', "%$request->q%")->with(['author', 'deletedBy', 'widget'])->orderBy('created_at', 'DESC');
         return view('housekeeping.moderation.home.guestbook')->with([
             'messages' => $messages->paginate(20)
         ]);
@@ -60,10 +59,9 @@ class HomeController extends Controller
 
     public function stickies(Request $request)
     {
-        if (!user()->hasPermission('can_manage_stickies'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_manage_stickies');
 
-        $stickies = HomeItem::where([['data', 'LIKE', "%$request->q%"], ['item_id', '15']]);
+        $stickies = HomeItem::where([['data', 'LIKE', "%$request->q%"], ['item_id', '15']])->with(['owner', 'deletedBy']);
 
         return view('housekeeping.moderation.home.stickies')->with([
             'stickies' => $stickies->paginate(20)
@@ -72,7 +70,7 @@ class HomeController extends Controller
 
     public function stickiesDelete(Request $request)
     {
-        if (!user()->hasPermission('can_manage_guestbook'))
+        if (!user()->hasPermission('can_manage_stickies'))
             return view('housekeeping.ajax.accessdenied_dialog');
 
         $stickie = HomeItem::find($request->id);

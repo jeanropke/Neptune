@@ -16,6 +16,9 @@ var BadgesManager = {
             data: { id: id, code: code },
             method: "post"
         }).done((html, status) => {
+            $(`div[data-code=${code}]`).fadeOut("slow", function () {
+                $(`div[data-code=${code}]`).remove();
+            });
             Dialog.setDialogBody($("#confirm-dialog"), html);
             $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
         });
@@ -144,6 +147,7 @@ var LogManager = {
 }
 
 var GenericManager = {
+    useFadeout: true,
     initialise: function (div, message, url) {
         $(div).click((e) => {
             e.preventDefault();
@@ -159,6 +163,12 @@ var GenericManager = {
         }).done((html, status) => {
             Dialog.setDialogBody($("#confirm-dialog"), html);
             $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
+
+            if (this.useFadeout) {
+                $(`[data-id=${id}]`).fadeOut("slow", function () {
+                    $(`[data-id=${id}]`).remove();
+                });
+            }
         });
     }
 }

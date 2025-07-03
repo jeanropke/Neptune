@@ -65,25 +65,25 @@
                             @forelse ($chats as $chat)
                                 <tr>
                                     <td class="tablerow1">
-                                        {{ $chat->getUsername() }} (ID: {{ $chat->user_id }})
+                                        {{ $chat->user->username }} (ID: {{ $chat->user_id }})
                                         <div class="desctext">
                                             <a href="{{ route('housekeeping.logs.chats') }}?type=user_id&value={{ $chat->user_id }}">More chat logs</a>
                                         </div>
                                     </td>
                                     <td class="tablerow1">
-                                        {{ $chat->getRoomName() }}
+                                        {{ $chat->room_name }}
                                         <div class="desctext">
                                             <a href="{{ route('housekeeping.logs.chats') }}?type=room_id&value={{ $chat->room_id }}">More chat logs</a>
                                         </div>
                                     </td>
                                     <td class="tablerow1" align="center">
-                                        {{ $chat->getChatType() }}
+                                        {{ $chat->chat_type }}
                                     </td>
                                     <td class="tablerow1">
                                         {{ $chat->message }}
                                     </td>
                                     <td class="tablerow1" align="center">
-                                        {{ \Carbon\Carbon::createFromTimestamp($chat->timestamp)->format('d/m/Y H:i:s') }}
+                                        {{ $chat->timestamp_carbon->format('d/m/Y H:i:s') }}
                                     </td>
                                 </tr>
                             @empty

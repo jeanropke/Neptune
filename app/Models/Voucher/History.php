@@ -2,7 +2,10 @@
 
 namespace App\Models\Voucher;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 class History extends Model
 {
@@ -18,26 +21,21 @@ class History extends Model
 
     public $timestamps = false;
 
-    public function getItems()
+    public function getItemsAttribute(): Collection
     {
-        $items = array();
-        if ($this->items_redeemed) {
-            foreach (explode('|', $this->items_redeemed) as $data) {
-                $explode = explode(',', $data);
-                array_push($items, (object)array(
-                    'amount'    => $explode[0],
-                    'sale_code' => str_replace('*', '_', $explode[1])
-                ));
-            }
-        }
-        return collect($items);
+        return collect(explode('|', $this->items_redeemed))
+            ->filter()
+            ->map(function ($data) {
+                [$amount, $saleCode] = explode(',', $data);
+                return (object)[
+                    'amount'    => (int) $amount,
+                    'sale_code' => str_replace('*', '_', $saleCode)
+                ];
+            });
     }
 
-    public function getUser()
+    public function user(): BelongsTo
     {
-        $user = User::find($this->user_id);
-        if ($user)
-            return $user->username;
-        return "Missing user id '{$this->user_id}'";
+        return $this->belongsTo(User::class);
     }
 }

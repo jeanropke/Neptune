@@ -3,32 +3,30 @@
 namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
-use App\Models\Report;
+use App\Models\Neptune\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
     public function website(Request $request)
     {
-        if (!user()->hasPermission('can_view_reports'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_view_reports');
 
-        if(isset($request->status) && $request->status > -1 && isset($request->type) && $request->type != 'all') {
-            $reports = Report::where([['closed', $request->status], ['type', $request->type]])->orderBy('created_at', 'DESC')->paginate(25);
-            return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
-        }
-        if(isset($request->status) && $request->status > -1) {
-            $reports = Report::where([['closed', $request->status]])->orderBy('created_at', 'DESC')->paginate(25);
-            return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
-        }
-        if(isset($request->type) && $request->type != 'all')
-        {
-            $reports = Report::where([['type', $request->type]])->orderBy('created_at', 'DESC')->paginate(25);
-            return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
+        $query = Report::query()->with(['reporter', 'author', 'picker']);
+
+        if ($request->filled('status') && $request->status > -1) {
+            $query->where('closed', $request->status);
         }
 
-        $reports = Report::orderBy('created_at', 'DESC')->paginate(25);
-        return view('housekeeping.moderation.reports.website.listing')->with('reports', $reports);
+        if ($request->filled('type') && $request->type !== 'all') {
+            $query->where('type', $request->type);
+        }
+
+        $reports = $query->orderByDesc('created_at')->paginate(25);
+
+        return view('housekeeping.moderation.reports.website.listing', [
+            'reports' => $reports
+        ]);
     }
 
     public function websiteView(Request $request)

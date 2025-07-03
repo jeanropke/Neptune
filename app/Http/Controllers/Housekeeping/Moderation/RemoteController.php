@@ -4,15 +4,14 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\UserBan;
+use App\Models\User\Ban;
 use Illuminate\Http\Request;
 
 class RemoteController extends Controller
 {
     public function ban(Request $request)
     {
-        if (!user()->hasPermission('can_user_ban'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_user_ban');
 
         $user = User::where('username', $request->username)->first();
 
@@ -21,8 +20,7 @@ class RemoteController extends Controller
 
     public function banPost(Request $request)
     {
-        if (!user()->hasPermission('can_user_ban'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_user_ban');
 
         $request->validate([
             'id'        => 'required|numeric',
@@ -30,7 +28,7 @@ class RemoteController extends Controller
             'length'    => 'required|numeric'
         ]);
 
-        $ban = UserBan::find($request->id);
+        $ban = Ban::find($request->id);
         if($ban)
             return redirect()->route('housekeeping.moderation.remote.ban')->with('message', 'User already banned!');
 
@@ -44,7 +42,7 @@ class RemoteController extends Controller
         if($user->rank >= user()->rank)
             return redirect()->route('housekeeping.moderation.remote.ban')->with('message', 'You can\'t ban a user with a rank equal to or higher than yours!');
 
-        UserBan::insert([
+        Ban::insert([
             'ban_type'      => 'USER_ID',
             'banned_value'  => $user->id,
             'message'       => $request->reason,
@@ -58,18 +56,16 @@ class RemoteController extends Controller
 
     public function unban()
     {
-        if (!user()->hasPermission('can_user_unban'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_user_unban');
 
         return view('housekeeping.moderation.remote.unban');
     }
 
     public function unbanPost(Request $request)
     {
-        if (!user()->hasPermission('can_user_unban'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_user_unban');
 
-        $ban = UserBan::find($request->input);
+        $ban = Ban::find($request->input);
         if(!$ban)
             return redirect()->route('housekeeping.moderation.unban')->with('message', 'User not found!');
 

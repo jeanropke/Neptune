@@ -56,14 +56,14 @@
                                         {{ $stickie->data }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $stickie->getOwner()->username }}
+                                        {{ $stickie->owner->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $stickie->getDeletedBy() ? $stickie->getDeletedBy()->username : '' }}
+                                        {{ $stickie->deletedBy?->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $stickie->getOwner()->username }}">Remote ban</a> -
-                                        @if ($stickie->getDeletedBy())
+                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $stickie->owner->username }}">Remote ban</a> -
+                                        @if ($stickie->deletedBy)
                                             <span class="restore-stickie" data-id="{{ $stickie->id }}">Restore</span>
                                         @else
                                             <span class="delete-stickie" data-id="{{ $stickie->id }}">Delete</span>
@@ -78,6 +78,7 @@
                         </table>
                     </div>
                     <script>
+                        GenericManager.useFadeout = false;
                         GenericManager.initialise('.delete-stickie', '<p>Are you sure you want to delete this stickie? The stickie will be hidden!</p>', '{{ route('housekeeping.moderation.homes.stickies.delete') }}');
                         GenericManager.initialise('.restore-stickie', '<p>Are you sure you want to restore this stickie?</p>', '{{ route('housekeeping.moderation.homes.stickies.restore') }}');
                     </script>

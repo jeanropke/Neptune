@@ -84,7 +84,7 @@
                                         {{ $report->id }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $report->getUsername() }}
+                                        {{ $report->reporter->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $report->type }}
@@ -93,10 +93,10 @@
                                         {!! bb_format($report->message) !!}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $report->getAuthor() }}
+                                        {{ $report->author?->username }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $report->getPickedBy() }}
+                                        {{ $report->picker?->username }}
                                     </td>
                                     <td class="tablerow2">
                                         {{ $report->closed ? 'Closed' : 'Open' }}

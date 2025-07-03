@@ -11,9 +11,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 
-function abort_unless_permission(string $permission)
+function abort_unless_permission(string $permission, $response = null)
 {
     if (!user()->hasPermission($permission)) {
+        if ($response) {
+            response()->view($response)->send();
+            exit;
+        }
         abort(response()->view('housekeeping.accessdenied', [], 403));
     }
 }

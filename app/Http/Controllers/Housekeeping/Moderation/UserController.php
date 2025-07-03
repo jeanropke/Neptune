@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 use App\Http\Controllers\Controller;
 use App\Models\Furni;
 use App\Models\User;
+use App\Models\User\Badge;
 use App\Models\User\IPLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -160,11 +161,11 @@ class UserController extends Controller
         if (!$user)
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This user does not exist!']);
 
-        $badge = UserBadge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->get();
+        $badge = Badge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->get();
         if ($badge->count() == '0')
             return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This user does not have this badge!']);
 
-        UserBadge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->delete();
+        Badge::where([['badge', '=', $request->code], ['user_id', '=', $user->id]])->delete();
 
         create_staff_log('users.badge.remove', $request);
 

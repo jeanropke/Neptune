@@ -5,7 +5,7 @@
                 <div class="graytext"></div>
             </td>
             <td class="tablerow2" width="80%" valign="middle">
-                {{ $log->getUsername() }}
+                {{ $log->user->username }}
             </td>
         </tr>
         <tr>

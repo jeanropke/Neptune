@@ -5,10 +5,10 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
     <title>{{ config('cms.name') }} ~ @yield('title')</title>
-    <link href="/web/housekeeping/styles/style.css" type="text/css" rel="stylesheet" />
-    <script src="/web/housekeeping/js/scripts.js"></script>
-    <script src="/web/housekeeping/js/jquery-3.5.1.min.js"></script>
-    <script src="/web/housekeeping/js/jquery-ui.js"></script>
+    <link href="{{ cms_config('site.web.url') }}/housekeeping/styles/style.css" type="text/css" rel="stylesheet" />
+    <script src="{{ cms_config('site.web.url') }}/housekeeping/js/scripts.js"></script>
+    <script src="{{ cms_config('site.web.url') }}/housekeeping/js/jquery-3.5.1.min.js"></script>
+    <script src="{{ cms_config('site.web.url') }}/housekeeping/js/jquery-ui.js"></script>
     <script>
         var habboReqPath = "{{ url('/') }}/housekeeping/";
         var habboStaticFilePath = "/web/";

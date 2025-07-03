@@ -52,7 +52,7 @@
                         <div class="tableborder">
                             <div class="tableheaderalt">User Badges <i>(Click to remove)</i></div>
                             <div id="badge-manager">
-                                @foreach ($user->getBadges(true) as $badge)
+                                @foreach ($user->badges as $badge)
                                     <div class="slot" data-code="{{ $badge['badge'] }}" data-user-id="{{ $user->id }}">
                                         <div class="badge" style="background: url({{ cms_config('site.badges.url') }}/{{ $badge['badge'] }}.gif) center no-repeat">
                                         </div>

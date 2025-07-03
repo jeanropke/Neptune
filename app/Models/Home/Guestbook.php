@@ -24,7 +24,7 @@ class Guestbook extends Model
 
     public function widget(): BelongsTo
     {
-        return $this->belongsTo(HomeItem::class, 'widget_id');
+        return $this->belongsTo(HomeItem::class, 'widget_id')->with('owner');
     }
 
     public function deletedBy(): BelongsTo

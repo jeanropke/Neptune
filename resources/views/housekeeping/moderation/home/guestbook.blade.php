@@ -50,7 +50,7 @@
                                 <td class="tablesubheader" width="15%" align="center">Action</td>
                             </tr>
                             @forelse($messages as $message)
-                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : '' }}">
+                                <tr data-id="{{ $message->id }}" class="{{ $loop->index % 2 == 0 ? 'even' : '' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $message->id }}
                                     </td>
@@ -58,7 +58,7 @@
                                         {{ $message->message }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $message->getAuthor()->username }}
+                                        {{ $message->author->username }}
                                     </td>
                                     <td class="tablerow2">
                                         {{ $message->getHomeOwner()->username }}
@@ -67,11 +67,11 @@
                                         {{ $message->created_at->format('M j, Y h:i:s A') }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        {{ $message->getDeletedBy() ? $message->getDeletedBy()->username : '' }}
+                                        {{ $message->deletedBy?->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $message->getAuthor()->username }}">Remote ban</a> -
-                                        @if ($message->getDeletedBy())
+                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={ $message->getAuthor()->username }}">Remote ban</a> -
+                                        @if ($message->deletedBy)
                                             <span class="restore-message" data-id="{{ $message->id }}">Restore</span>
                                         @else
                                             <span class="delete-message" data-id="{{ $message->id }}">Delete</span>
@@ -86,6 +86,7 @@
                         </table>
                     </div>
                     <script>
+                        GenericManager.useFadeout = false;
                         GenericManager.initialise('.delete-message', '<p>Are you sure you want to delete this message? The message will be hidden!</p>', '{{ route('housekeeping.moderation.homes.guestbook.delete') }}');
                         GenericManager.initialise('.restore-message', '<p>Are you sure you want to restore this message?</p>', '{{ route('housekeeping.moderation.homes.guestbook.restore') }}');
                     </script>

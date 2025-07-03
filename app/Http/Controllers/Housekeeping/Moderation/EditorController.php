@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Room;
-use App\Models\RoomCategory;
+use App\Models\Room\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,8 +12,7 @@ class EditorController extends Controller
 {
     public function guestroomListing(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $rooms = [];
         switch ($request->type) {
@@ -38,8 +37,7 @@ class EditorController extends Controller
 
     public function guestroomEdit(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $room = Room::find($request->id);
         if (!$room)
@@ -47,14 +45,13 @@ class EditorController extends Controller
 
         return view('housekeeping.moderation.editor.guestroom.edit')->with([
             'room'          => $room,
-            'categories'    => RoomCategory::where('public_spaces', '0')->get()
+            'categories'    => Category::where('public_spaces', '0')->get()
         ]);
     }
 
     public function guestroomSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $request->validate([
             'id'            => 'required|numeric',
@@ -94,8 +91,7 @@ class EditorController extends Controller
 
     public function publicroomListing(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $rooms = [];
         if ($request->value) {
@@ -111,8 +107,7 @@ class EditorController extends Controller
 
     public function publicroomEdit(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $room = Room::find($request->id);
         if (!$room)
@@ -120,14 +115,13 @@ class EditorController extends Controller
 
         return view('housekeeping.moderation.editor.publicroom.edit')->with([
             'room'          => $room,
-            'categories'    => RoomCategory::where('public_spaces', '1')->get()
+            'categories'    => Category::where('public_spaces', '1')->get()
         ]);
     }
 
     public function publicroomSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $request->validate([
             'id'            => 'required|numeric',
@@ -164,18 +158,16 @@ class EditorController extends Controller
 
     public function publicroomAdd()
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         return view('housekeeping.moderation.editor.publicroom.add')->with([
-            'categories'    => RoomCategory::where('public_spaces', '1')->get()
+            'categories'    => Category::where('public_spaces', '1')->get()
         ]);
     }
 
     public function publicroomAddSave(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.accessdenied');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $request->validate([
             'name'          => 'required|max:128',
@@ -207,8 +199,7 @@ class EditorController extends Controller
 
     public function publicroomDelete(Request $request)
     {
-        if (!user()->hasPermission('can_edit_users_guestroom'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_edit_users_guestroom');
 
         $room = Room::find($request->id);
 

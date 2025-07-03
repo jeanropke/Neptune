@@ -26,7 +26,7 @@
                             @forelse ($logs as $log)
                                 <tr>
                                     <td class="tablerow2" align="center">
-                                        {{ $log->getUsername() }} (ID: {{ $log->user_id }})
+                                        {{ $log->user->username }} (ID: {{ $log->user_id }})
                                     </td>
                                     <td class="tablerow1" align="center">
                                         {{ $log->page }}
