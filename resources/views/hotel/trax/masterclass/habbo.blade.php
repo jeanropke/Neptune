@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax'], ['url' => url('/hotel/trax/masterclass'), 'title' => 'Trax Masterclasses']],
 ])
 
 @section('title', '8-bit / Habbo')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.trax.masterclass.include.menu', ['page' => 'habbo'])
                                     @foreach (boxes('hotel.trax.masterclass.habbo', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -47,13 +34,12 @@
                                                     <tbody>
                                                         <tr>
                                                             <td align="center" colspan="2"><img vspace="15" hspace="4" border="0"
-                                                                    src="{{ url('/') }}/c_images/album1895/tm_room_habbo_8bit.gif"
-                                                                    alt=""><br></td>
+                                                                    src="{{ url('/') }}/c_images/album1895/tm_room_habbo_8bit.gif" alt=""><br></td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top" rowspan="2"><br><img vspace="10" hspace="10" border="0" align="left"
-                                                                    src="{{ url('/') }}/c_images/album1395/dj_habbo_8bit.gif"
-                                                                    alt="">Habbo Hotel's graphical style is reminiscent of old C64 and Atari
+                                                                    src="{{ url('/') }}/c_images/album1395/dj_habbo_8bit.gif" alt="">Habbo Hotel's graphical style is
+                                                                reminiscent of old C64 and Atari
                                                                 computer games. Habbo's pixel-style is very recognisable and so the Habbo sound and music has a similar retro
                                                                 approach. In music this means the use of limited polyphony, simple
                                                                 melodies, clearly synthetic instruments and 4bit or 8bit lo-fi sounds.
@@ -70,14 +56,10 @@
                                                                 noise or heavily shuffled old Roland drum machine hi-hat grooves.
                                                             </td>
                                                             <td bgcolor="#c0c0c0">
-                                                                <p align="center"><a
-                                                                        href="{{ url('/') }}/c_images/album949/sounddesign2_trax.gif">
-                                                                        <img"><img
-                                                                                src="{{ url('/') }}/c_images/album1390/sounddesign2_200x131.gif"
-                                                                                alt=""></img">
+                                                                <p align="center"><a href="{{ url('/') }}/c_images/album949/sounddesign2_trax.gif">
+                                                                        <img"><img src="{{ url('/') }}/c_images/album1390/sounddesign2_200x131.gif" alt=""></img">
                                                                     </a></p>
-                                                                <p align="center"><a
-                                                                        href="{{ url('/') }}/c_images/album949/sounddesign2_trax.gif">Click
+                                                                <p align="center"><a href="{{ url('/') }}/c_images/album949/sounddesign2_trax.gif">Click
                                                                         here to see the full track and recreate it yourself</a></p>
                                                                 <p>&nbsp;</p>
                                                             </td>
@@ -86,17 +68,13 @@
                                                             <td bgcolor="#c0c0c0">
                                                                 <p style="margin-left: 10px;"><span style="font-weight: bold;">Trax used in this composition:</span><br>
                                                                     <br> <img vspace="0" hspace="0" border="0" align="bottom"
-                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_orange.gif"
-                                                                        alt="">
+                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_orange.gif" alt="">
                                                                     Compu FX<br> <img vspace="0" hspace="0" border="0" align="bottom"
-                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_magenta.gif"
-                                                                        alt="">
+                                                                        src="{{ url('/') }}/c_images/album2063/trax_bullet_magenta.gif" alt="">
                                                                     Abe Normal<br>
-                                                                    <br><br> Listen now <a
-                                                                        href="{{ url('/') }}/c_images/album2354/traxexample14_sounddesign2.mp3"><img
+                                                                    <br><br> Listen now <a href="{{ url('/') }}/c_images/album2354/traxexample14_sounddesign2.mp3"><img
                                                                             vspace="0" hspace="0" border="0" align="absmiddle"
-                                                                            src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif"
-                                                                            alt=""></a>
+                                                                            src="{{ url('/') }}/c_images/album2304/musicsample_icon.gif" alt=""></a>
                                                                 </p>
                                                                 <p></p>
                                                             </td>

@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Furni Catalog')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'catalogue'])
                                     @foreach (boxes('hotel.furniture.catalogue', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -124,8 +111,8 @@
                                                                 cityscapes to butterflies and ducks<br></td>
                                                             <td>
                                                                 <p align="center" style="margin-top: 0pt; margin-bottom: 0pt;"><img width="55" height="101" border="0"
-                                                                        align="right" id="galleryImage1" src="{{ cms_config('site.web.url') }}/images/credits/habbo_pictureframe_small.gif"
-                                                                        alt=""></p>
+                                                                        align="right" id="galleryImage1"
+                                                                        src="{{ cms_config('site.web.url') }}/images/credits/habbo_pictureframe_small.gif" alt=""></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>

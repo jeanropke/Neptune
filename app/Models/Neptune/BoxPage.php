@@ -13,15 +13,11 @@ class BoxPage extends Model
         'box_id',
         'page',
         'column',
-        'color'
+        'color',
+        'type'
     ];
 
     public $timestamps = false;
-
-    public static function getBoxes($page)
-    {
-        return BoxPage::where('page', $page)->join('cms_boxes', 'cms_boxes_pages.box_id', '=', 'cms_boxes.id')->get();
-    }
 
     public function box(): BelongsTo {
         return $this->belongsTo(Box::class, 'box_id');

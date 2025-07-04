@@ -15,20 +15,7 @@
                                     @include('games.battleball.include.menu', ['page' => 'how_to_play'])
 
                                     @foreach (boxes('games.battleball.how_to_play', 1) as $box)
-                                        <div class="portlet-scale gold">
-                                            <div class="portlet-scale-header">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="portlet-scale-body">
-                                                <div class="portlet-scale-content">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="portlet-scale-bottom">
-                                                <div class="portlet-scale-bottom-body"></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -39,8 +26,7 @@
                                         <div class="portlet-scale-body">
                                             <div class="portlet-scale-content">
 
-                                                <b><img width="70" height="101" border="0" align="right"
-                                                        src="{{ url('/') }}/c_images/album372/player_red.gif"
+                                                <b><img width="70" height="101" border="0" align="right" src="{{ url('/') }}/c_images/album372/player_red.gif"
                                                         alt=""><a name="2">The Battle Ball Lobby</a></b>
                                                 <p></p>
                                                 <p>The Battle Ball Lobby is just like every other Public Room, the main purpose of the Lobby, is to find buddies to play with. Every
@@ -50,23 +36,19 @@
                                                 <p></p>
                                                 <p></p>
                                                 <p></p>
-                                                <p><b><img width="19" height="23" border="0" align="left"
-                                                            src="{{ url('/') }}/c_images/album372/ball_green.gif"
+                                                <p><b><img width="19" height="23" border="0" align="left" src="{{ url('/') }}/c_images/album372/ball_green.gif"
                                                             alt=""><a name="3"><img border="0" align="right"
-                                                                src="{{ url('/') }}/c_images/album372/player_green.gif"
-                                                                alt="">What Do I Need To Play?</a></b></p>
+                                                                src="{{ url('/') }}/c_images/album372/player_green.gif" alt="">What Do I Need To Play?</a></b></p>
                                                 <p>To play Battle Ball you'll need <b>2 Game Tickets</b> per game played, (won or lost). The tickets are the same ones that can also be
                                                     used to dive in the Lido or play Wobble Squabble. Tickets can be bought using the User Interface (see below) or by clicking the
                                                     vending machine in the Lobby, beside the serving maid. Tickets cost 2 Coins for 5, or 5 Coins for 17.</p>
-                                                <p>If you don't have any Coins, click <b><a
-                                                            href="{{ url('/') }}/credits/">HERE</a> </b>to find out how
+                                                <p>If you don't have any Coins, click <b><a href="{{ url('/') }}/credits/">HERE</a> </b>to find out how
                                                     to get some!</p>
                                                 <p></p>
-                                                <p><b><img width="19" height="23" border="0" align="left"
-                                                            src="{{ url('/') }}/c_images/album372/ball_yellow.gif"
+                                                <p><b><img width="19" height="23" border="0" align="left" src="{{ url('/') }}/c_images/album372/ball_yellow.gif"
                                                             alt=""></b><img width="205" height="471" border="0" align="right"
-                                                        src="{{ url('/') }}/c_images/faq-pages/battleball.gif"
-                                                        alt=""><b><a name="4">The Battle Ball User Interface</a></b></p>
+                                                        src="{{ url('/') }}/c_images/faq-pages/battleball.gif" alt=""><b><a name="4">The Battle Ball User
+                                                            Interface</a></b></p>
                                                 <p><br>The Battle Ball user interface (See Right) allows users to:</p>
                                                 <ul>
                                                     <li>Create A New Game</li>
@@ -89,11 +71,9 @@
                                                 <p></p>
                                                 <p></p>
                                                 <p></p>
-                                                <p><img width="19" height="23" border="0" align="left"
-                                                        src="{{ url('/') }}/c_images/album372/ball_blue.gif"
+                                                <p><img width="19" height="23" border="0" align="left" src="{{ url('/') }}/c_images/album372/ball_blue.gif"
                                                         alt=""><b><a name="5"><img width="70" height="101" border="0" align="right"
-                                                                src="{{ url('/') }}/c_images/album372/player_blue.gif"
-                                                                alt="">The Battle Ball Arena</a></b></p>
+                                                                src="{{ url('/') }}/c_images/album372/player_blue.gif" alt="">The Battle Ball Arena</a></b></p>
                                                 <p>The Battle Ball arena consists of a tiled floor, when a game is about to begin, players are moved automatically to the Battle Ball
                                                     Arena from the Battle Ball Lobby. Players will appear in fixed starting positions depending on their team colour. Different teams
                                                     begin the game from different sides of the Arena.</p>
@@ -101,15 +81,13 @@
                                                     game do not appear “physically” in the Arena. Their screen will become a "live television feed", broadcasted from the game arena.
                                                     They won’t be able to comment the game happenings.</p>
                                                 <p></p>
-                                                <p><b><img width="19" height="23" border="0" align="left"
-                                                            src="{{ url('/') }}/c_images/album372/ball_red.gif"
+                                                <p><b><img width="19" height="23" border="0" align="left" src="{{ url('/') }}/c_images/album372/ball_red.gif"
                                                             alt=""><b><a name="6">Game Play</a></b></b></p>
                                                 <p>When the Battle Ball Arena loads, a Start Counter will appear, counting down to the start of the game. You can leave the arena during
                                                     this count down and you will not be charged 2 tickets for that game. The tickets are only deducted from your Habbo account when the
                                                     game starts. </p>
-                                                <p><b><img align="right"
-                                                            src="{{ url('/') }}/c_images/album372/player_red.gif"
-                                                            alt=""></b>The Game is played by bouncing on "kangaroo balls" around the game arena. Bouncing is controlled in the
+                                                <p><b><img align="right" src="{{ url('/') }}/c_images/album372/player_red.gif" alt=""></b>The Game is played by bouncing
+                                                    on "kangaroo balls" around the game arena. Bouncing is controlled in the
                                                     same way as normal walking (i.e. click a floor tile and you’ll bounce there.) Players are able to bounce in all 8 directions, just
                                                     like normal walking.</p>
                                                 <p><b>Note: </b>Moving in Battle Ball is slightly different. If there's someone/something blocking your way, you don't bypass the
@@ -121,13 +99,11 @@
                                                     By doing this, you’ll earn some bonus points for your team.</p>
                                                 <p>You can also “steal” any opponents’ tile which has <b>NOT</b> been bounced over 4 times and permanently coloured. The stolen tile
                                                     will start the “colouring process” all over again, but with a different colour.</p>
-                                                <p><b><img width="19" height="23" border="0" align="left"
-                                                            src="{{ url('/') }}/c_images/album372/ball_green.gif"
+                                                <p><b><img width="19" height="23" border="0" align="left" src="{{ url('/') }}/c_images/album372/ball_green.gif"
                                                             alt=""></b><b><a name="7">Scoring System</a></b></p>
                                                 <p>A game ends after 2 minutes or when every tile in the game arena is permanently coloured. A game-over screen will appear, displaying
                                                     all players scores from the current game, as well as the overall team score.<a name="7"><img border="0" align="right"
-                                                            src="{{ url('/') }}/c_images/album372/player_green.gif"
-                                                            alt=""></a></p>
+                                                            src="{{ url('/') }}/c_images/album372/player_green.gif" alt=""></a></p>
                                                 <ul>
                                                     <li><b>1st Bounce:</b> 2 Points For You </li>
                                                     <li><b>1st Bounce Steal:</b> 4 Points For You </li>

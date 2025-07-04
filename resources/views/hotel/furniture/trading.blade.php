@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Trading')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'trading'])
                                     @foreach (boxes('hotel.furniture.trading', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">

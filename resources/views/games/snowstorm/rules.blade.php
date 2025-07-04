@@ -15,21 +15,7 @@
                                     @include('games.snowstorm.include.menu', ['page' => 'rules'])
 
                                     @foreach (boxes('games.snowstorm.rules', 1) as $box)
-                                        <div class="v2box blue light">
-                                            <div class="headline">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="border">
-                                                <div></div>
-                                            </div>
-                                            <div class="body">
-                                                {!! $box->content !!}
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div class="bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -44,33 +30,27 @@
                                         <div class="body">
 
 
-                                            <center><img src="{{ url('/') }}/c_images/album1424/Snow_Storm_logo.gif"
-                                                    alt=""></center>
+                                            <center><img src="{{ url('/') }}/c_images/album1424/Snow_Storm_logo.gif" alt=""></center>
                                             <br>
 
                                             <table width="100%" border="0" id="table1">
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <img vspace="0" hspace="10" border="0"
-                                                                src="{{ url('/') }}/c_images/album1424/tutorial_1_001.gif"
+                                                            <img vspace="0" hspace="10" border="0" src="{{ url('/') }}/c_images/album1424/tutorial_1_001.gif"
                                                                 alt=""><br><br>
 
-                                                            <img vspace="0" hspace="10" border="0"
-                                                                src="{{ url('/') }}/c_images/album1424/tutorial_3_001.gif"
+                                                            <img vspace="0" hspace="10" border="0" src="{{ url('/') }}/c_images/album1424/tutorial_3_001.gif"
                                                                 alt=""><br><br>
 
-                                                            <img vspace="0" hspace="10" border="0"
-                                                                src="{{ url('/') }}/c_images/album1424/tutorial_0.gif"
+                                                            <img vspace="0" hspace="10" border="0" src="{{ url('/') }}/c_images/album1424/tutorial_0.gif"
                                                                 alt="">
                                                             <p>
 
                                                                 <img vspace="0" hspace="10" border="0"
-                                                                    src="{{ url('/') }}/c_images/album1424/tutorial_5_animated_002.gif"
-                                                                    alt=""><br><br>
+                                                                    src="{{ url('/') }}/c_images/album1424/tutorial_5_animated_002.gif" alt=""><br><br>
 
-                                                                <img vspace="0" hspace="10" border="0"
-                                                                    src="{{ url('/') }}/c_images/album1424/tutorial_6_002.gif"
+                                                                <img vspace="0" hspace="10" border="0" src="{{ url('/') }}/c_images/album1424/tutorial_6_002.gif"
                                                                     alt="">
                                                             </p>
                                                         </td>
@@ -145,8 +125,7 @@
                                                             5 points if your ball is the one that sends an opponent to an ice cold
                                                             end.<br>
                                                             <br>
-                                                            Your score is recorded in the <a
-                                                                href="{{ url('/') }}/games/snowstorm/highscores">high score
+                                                            Your score is recorded in the <a href="{{ url('/') }}/games/snowstorm/highscores">high score
                                                                 board</a>; there
                                                             are several skills levels as well. Please bear in mind you can only play in lounges that are in your skill
                                                             level, or the 'free for all' games where players of all skills can

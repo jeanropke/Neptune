@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Seasonals')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'catalogue_4'])
                                     @foreach (boxes('hotel.furniture.catalogue_4', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -53,8 +40,8 @@
                                                                 yuletide season with three different Christmas trees, gingerbread houses,
                                                                 stockings for your walls and plenty of holly! This furni is the <br>Also watch
                                                                 out for the post-Christmas furni!<br></td>
-                                                            <td><img width="32" height="51" border="0" src="{{ cms_config('site.web.url') }}/images/credits/x_15.gif" alt="x-15"
-                                                                    id="galleryImage"></td>
+                                                            <td><img width="32" height="51" border="0" src="{{ cms_config('site.web.url') }}/images/credits/x_15.gif"
+                                                                    alt="x-15" id="galleryImage"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -66,7 +53,8 @@
                                                                 only released during Valentines.<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="66" height="70" border="0" align="right"
-                                                                            src="{{ cms_config('site.web.url') }}/images/credits/giant_heart.gif" id="galleryImage12" alt=""></strong>
+                                                                            src="{{ cms_config('site.web.url') }}/images/credits/giant_heart.gif" id="galleryImage12"
+                                                                            alt=""></strong>
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -80,7 +68,8 @@
                                                                 dead ducks and more! This furni is only released during {{ cms_config('hotel.name.short') }}ween.<br></td>
                                                             <td>
                                                                 <p style="margin-top: 0pt; margin-bottom: 0pt;"><strong><img width="37" height="65" border="0" align="right"
-                                                                            src="{{ cms_config('site.web.url') }}/images/credits/flameSkull.gif" id="galleryImage13" alt=""></strong>
+                                                                            src="{{ cms_config('site.web.url') }}/images/credits/flameSkull.gif" id="galleryImage13"
+                                                                            alt=""></strong>
                                                                 </p>
                                                             </td>
                                                         </tr>

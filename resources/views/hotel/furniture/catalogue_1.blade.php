@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Furni Styles')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'catalogue_1'])
                                     @foreach (boxes('hotel.furniture.catalogue_1', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -185,7 +172,8 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb bathroom" src="{{ cms_config('site.web.url') }}/images/credits/thumb_bathroom.gif"></p>
+                                                                        id="galleryImage" alt="thumb bathroom"
+                                                                        src="{{ cms_config('site.web.url') }}/images/credits/thumb_bathroom.gif"></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -204,7 +192,8 @@
                                                             </td>
                                                             <td>
                                                                 <p align="left" style="margin-top: 0pt; margin-bottom: 0pt;"> <img width="186" height="126" border="0"
-                                                                        id="galleryImage" alt="thumb plants" src="{{ cms_config('site.web.url') }}/images/credits/thumb_plants.gif"></p>
+                                                                        id="galleryImage" alt="thumb plants" src="{{ cms_config('site.web.url') }}/images/credits/thumb_plants.gif">
+                                                                </p>
                                                             </td>
                                                         </tr>
                                                     </tbody>

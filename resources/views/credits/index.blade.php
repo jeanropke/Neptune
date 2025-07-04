@@ -201,8 +201,8 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                                <img vspace="0" hspace="0" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/credits/habbos_w_credits.gif"
-                                                    alt="">
+                                                <img vspace="0" hspace="0" border="0" align="right"
+                                                    src="{{ cms_config('site.web.url') }}/images/credits/habbos_w_credits.gif" alt="">
                                                 If you are having problems buying {{ cms_config('hotel.name.short') }} Coins then please use
                                                 the <a target="_blank" href="{{ url('/') }}/help/contact_us">{{ cms_config('hotel.name.short') }}
                                                     Help Tool</a> to contact Player Support. <br><br>Make sure you select

@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Functional Furni')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'catalogue_2'])
                                     @foreach (boxes('hotel.furniture.catalogue_2', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -82,10 +69,12 @@
                                                     can use them to give new recruits instructions or hide it behind a piece of Furni as a
                                                     secret clue in a maze... The possibilities really are endless
                                                     (seriously).<br><br><strong>Teleports</strong><br><img width="19" height="32" border="0" align="right"
-                                                        src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall1.gif" id="galleryImage" alt=""><img width="19"
-                                                        height="32" border="0" align="right" src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall2.gif"
-                                                        id="galleryImage" alt=""><img width="19" height="32" border="0" align="right"
-                                                        src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall3.gif" id="galleryImage" alt="">Beam yourself from one
+                                                        src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall1.gif" id="galleryImage" alt=""><img
+                                                        width="19" height="32" border="0" align="right"
+                                                        src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall2.gif" id="galleryImage" alt=""><img
+                                                        width="19" height="32" border="0" align="right"
+                                                        src="{{ cms_config('site.web.url') }}/images/credits/explore_telesmall3.gif" id="galleryImage" alt="">Beam yourself
+                                                    from one
                                                     room to another with
                                                     our space age teleports. Buy a pair, put one in each room and you've got your own suite!
                                                     Teleports are sold in pairs (obviously!), so if you trade for them, check that you're

@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/trax'), 'title' => 'Trax']],
 ])
 
 @section('title', 'Trax Masterclasses')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.trax.masterclass.include.menu', ['page' => 'index'])
                                     @foreach (boxes('hotel.trax.masterclass', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 336px;" class="habboPage-col">
@@ -57,8 +44,7 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                                <img vspace="10" hspace="10" border="0" align="left"
-                                                    src="{{ url('/') }}/c_images/album2304/tm_beginners_traxgirl.gif"
+                                                <img vspace="10" hspace="10" border="0" align="left" src="{{ url('/') }}/c_images/album2304/tm_beginners_traxgirl.gif"
                                                     alt="">
                                                 Be creative with your sample use. Combining sounds from different packs will produce more interesting results. <br><br>Have ambient
                                                 intro in your party song or add some horror sound effects to your Habbo grooves. Use all four slots to maximize the impact and variety
@@ -106,40 +92,56 @@
                                 </td>
                                 <td valign="top" style="width: 202px;" class="habboPage-col rightmost">
                                     <div class="v3box green">
-                                        <div class="v3box-top"><h3>Tip 5: Length and structure</h3></div>
+                                        <div class="v3box-top">
+                                            <h3>Tip 5: Length and structure</h3>
+                                        </div>
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                    It's been said that perfect pop song is 3 minutes long. That's also the average length of music videos. <br><br>In a good pop song there are usually two or three different sections which last around 30 seconds each. Intro-verse-chorus-verse-chorus-outro is the typical form pop songs take. <br>
+                                                It's been said that perfect pop song is 3 minutes long. That's also the average length of music videos. <br><br>In a good pop song there
+                                                are usually two or three different sections which last around 30 seconds each. Intro-verse-chorus-verse-chorus-outro is the typical form
+                                                pop songs take. <br>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
-                                        <div class="v3box-bottom"><div></div></div>
+                                        <div class="v3box-bottom">
+                                            <div></div>
+                                        </div>
                                     </div>
                                     <div class="v3box green">
-                                        <div class="v3box-top"><h3>Tip 6: Is less more?</h3></div>
+                                        <div class="v3box-top">
+                                            <h3>Tip 6: Is less more?</h3>
+                                        </div>
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                    Sometimes in life less is more. Try having some dynamics in your tracks, featuring more minimalist sections than full-on extravaganzas. It's less tiring on your listeners' ears if there isn't too much happening all the time in your track.
+                                                Sometimes in life less is more. Try having some dynamics in your tracks, featuring more minimalist sections than full-on extravaganzas.
+                                                It's less tiring on your listeners' ears if there isn't too much happening all the time in your track.
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
-                                        <div class="v3box-bottom"><div></div></div>
+                                        <div class="v3box-bottom">
+                                            <div></div>
+                                        </div>
                                     </div>
                                     <div class="v3box green">
-                                        <div class="v3box-top"><h3>Tip 7: Music and sound effects</h3></div>
+                                        <div class="v3box-top">
+                                            <h3>Tip 7: Music and sound effects</h3>
+                                        </div>
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                    <img vspace="10" hspace="10" border="0" align="middle" src="{{ url('/') }}/c_images/album2304/tm_beginners_image1.gif" alt="">
-                                    <br>Try using music for the first three minutes of your track, with a minute of sound effects or even silence at the end.
+                                                <img vspace="10" hspace="10" border="0" align="middle" src="{{ url('/') }}/c_images/album2304/tm_beginners_image1.gif"
+                                                    alt="">
+                                                <br>Try using music for the first three minutes of your track, with a minute of sound effects or even silence at the end.
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
-                                        <div class="v3box-bottom"><div></div></div>
+                                        <div class="v3box-bottom">
+                                            <div></div>
+                                        </div>
                                     </div>
-                                            </td>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

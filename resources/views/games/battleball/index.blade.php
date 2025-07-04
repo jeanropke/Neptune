@@ -15,20 +15,7 @@
                                     @include('games.battleball.include.menu', ['page' => 'index'])
 
                                     @foreach (boxes('games.battleball.index', 1) as $box)
-                                    <div class="portlet-scale gold">
-                                        <div class="portlet-scale-header">
-                                            <h3>{{ $box->title }}</h3>
-                                        </div>
-                                        <div class="portlet-scale-body">
-                                            <div class="portlet-scale-content">
-                                                {!! $box->content !!}
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="portlet-scale-bottom">
-                                            <div class="portlet-scale-bottom-body"></div>
-                                        </div>
-                                    </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">

@@ -15,12 +15,16 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra
-                                clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> Extra
+                                clothes<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Extra
-                                hair<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                hair<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Club
-                                badge<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                badge<br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Extra
                                 dances<br><br><a target="_self" href="{{ url('/') }}/club/benefits/habbo">Find out more
                                     &gt;&gt;</a><br>
@@ -38,19 +42,23 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Monthly free
                                 furni
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> Extra
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> Extra
                                 Guest
                                 Rooms
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> VIP
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> VIP
                                 Public
                                 Rooms
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Priority
                                 access<br><br><a href="{{ url('/') }}/club/benefits/room" target="_self">Find out more
                                     &gt;&gt;</a><br>
@@ -68,14 +76,17 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> New
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> New
                                 widget
                                 skins
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> New
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> New
                                 Backgrounds
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt=""> No
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt=""> No
                                 ads!<br><br>
                                 <a href="{{ url('/') }}/club/benefits/home" target="_self">Find out more
                                     &gt;&gt;</a><br>
@@ -93,15 +104,18 @@
                         <div class="v3box-content">
                             <div class="v3box-body">
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 Huge
                                 Friends List
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 :chooser
                                 command
 
-                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif" alt="">
+                                <br><img vspace="0" hspace="0" border="0" align="absmiddle" src="{{ cms_config('site.web.url') }}/images/club/miniHCbadge.gif"
+                                    alt="">
                                 :furni
                                 command<br><br><a href="{{ url('/') }}/club/benefits/extras" target="_self">Find out
                                     more &gt;&gt;</a><br>

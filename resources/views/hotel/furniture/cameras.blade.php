@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?'], ['url' => url('/hotel/furniture'), 'title' => 'Furniture']],
 ])
 
 @section('title', 'Cameras')
@@ -17,20 +17,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.furniture.include.menu', ['page' => 'cameras'])
                                     @foreach (boxes('hotel.furniture.camera', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -42,9 +29,8 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
 
-                                                <div style="margin-left: 120px;"><img
-                                                        src="{{ url('/') }}/c_images/album209/Camera.png"
-                                                        alt=""><br></div><br><br>The Habbo Camera is perfect for capturing your Habbo friends and memories in an
+                                                <div style="margin-left: 120px;"><img src="{{ url('/') }}/c_images/album209/Camera.png" alt=""><br></div><br><br>The Habbo
+                                                Camera is perfect for capturing your Habbo friends and memories in an
                                                 instant.<br>Once you have taken your picture you can display your photos on the wall of your room for all to see!<br><br>A Camera costs
                                                 10 Habbo Coins with two photos included.<br><br>When you have used up all of your film you'll need to buy more. Each roll of film costs
                                                 6 Habbo Coins and contains 5 photos.<br><br><span style="font-weight: bold;">How to use the Camera (see below)</span><br><br>1. Click
@@ -53,11 +39,9 @@
                                                 box: Write a message that will show up beneath the picture<br>6. Save the photo and keep it forever. Once you have saved your photo it
                                                 will appear in your hand: you can trade your photos with your friends and stick them in your Guest Room.<br><br>
                                                 <div style="margin-left: 80px;"><img vspace="0" hspace="0" border="0" align="left"
-                                                        src="{{ url('/') }}/c_images/album209/Camera_Screen.png"
-                                                        alt=""> <img vspace="0" hspace="0" border="0" align="right"
-                                                        src="{{ url('/') }}/c_images/album209/film.png"
-                                                        alt=""><br></div><br><br><br><br><img vspace="0" hspace="0" border="0" align="right"
-                                                    src="{{ url('/') }}/c_images/album209/HW_photographer1.gif"
+                                                        src="{{ url('/') }}/c_images/album209/Camera_Screen.png" alt=""> <img vspace="0" hspace="0" border="0"
+                                                        align="right" src="{{ url('/') }}/c_images/album209/film.png" alt=""><br></div><br><br><br><br><img vspace="0"
+                                                    hspace="0" border="0" align="right" src="{{ url('/') }}/c_images/album209/HW_photographer1.gif"
                                                     alt=""><br><br><br><br><br>
                                                 <div class="clear"></div>
                                                 <div class="clear"></div>

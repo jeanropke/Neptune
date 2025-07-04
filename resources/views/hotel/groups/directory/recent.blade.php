@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '26',
-    'breadcrums' => [['url' => url('/hotel/groups'), 'title' => 'Groups'], ['url' => url('/hotel/groups/directory'), 'title' => 'Groups Directory']]
+    'breadcrums' => [['url' => url('/hotel/groups'), 'title' => 'Groups'], ['url' => url('/hotel/groups/directory'), 'title' => 'Groups Directory']],
 ])
 
 @section('title', 'Most Recent Groups')
@@ -12,20 +12,7 @@
                 <td style="width: 8px;"></td>
                 <td valign="top" style="width: 202px;" class="habboPage-col">
                     @foreach (boxes('hotel.groups.recent', 1) as $box)
-                        <div class="v3box {{ $box->color }}">
-                            <div class="v3box-top">
-                                <h3>{{ $box->title }}</h3>
-                            </div>
-                            <div class="v3box-content">
-                                <div class="v3box-body">
-                                    {!! $box->content !!}
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                            <div class="v3box-bottom">
-                                <div></div>
-                            </div>
-                        </div>
+                        @include('includes.boxes.' . $box->type, compact('box'))
                     @endforeach
                 </td>
                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -36,19 +23,20 @@
                                 <div class="content-white-content">
                                     <ul class="groups-toplist recentlist">
                                         @foreach ($recent as $group)
-                                        <li class="{{ round(($loop->index + 1) / 2) % 2 ? 'even' : 'odd' }}"
-                                            style="background-image: url({{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.gif)">
-                                            <div class="toplist-item">
-                                                <div class="group-index">{{ $loop->index + 1 }}.</div>
-                                                <div class="group-link">
-                                                    <a href="{{ url($group->url) }}" @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif >
-                                                        {{ $group->name }}
-                                                    </a>
+                                            <li class="{{ round(($loop->index + 1) / 2) % 2 ? 'even' : 'odd' }}"
+                                                style="background-image: url({{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.gif)">
+                                                <div class="toplist-item">
+                                                    <div class="group-index">{{ $loop->index + 1 }}.</div>
+                                                    <div class="group-link">
+                                                        <a href="{{ url($group->url) }}"
+                                                            @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif>
+                                                            {{ $group->name }}
+                                                        </a>
+                                                    </div>
+                                                    <p>Group created: <strong>{{ $group->created_at->format('M d, Y') }}</strong></p>
                                                 </div>
-                                                <p>Group created: <strong>{{ $group->created_at->format('M d, Y') }}</strong></p>
-                                            </div>
-                                        </li>
-                                    @endforeach
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="clear"></div>

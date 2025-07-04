@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '26',
-    'breadcrums' => [['url' => url('/hotel/groups'), 'title' => 'Groups']]
+    'breadcrums' => [['url' => url('/hotel/groups'), 'title' => 'Groups']],
 ])
 
 @section('title', 'Groups Directory')
@@ -12,20 +12,7 @@
                 <td style="width: 8px;"></td>
                 <td valign="top" style="width: 202px;" class="habboPage-col">
                     @foreach (boxes('hotel.groups.directory', 1) as $box)
-                        <div class="v3box {{ $box->color }}">
-                            <div class="v3box-top">
-                                <h3>{{ $box->title }}</h3>
-                            </div>
-                            <div class="v3box-content">
-                                <div class="v3box-body">
-                                    {!! $box->content !!}
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                            <div class="v3box-bottom">
-                                <div></div>
-                            </div>
-                        </div>
+                        @include('includes.boxes.' . $box->type, compact('box'))
                     @endforeach
                 </td>
                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -42,7 +29,8 @@
                                             <div class="toplist-item">
                                                 <div class="group-index">{{ $loop->index + 1 }}.</div>
                                                 <div class="group-link">
-                                                    <a href="{{ url($group->url) }}" @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif >
+                                                    <a href="{{ url($group->url) }}"
+                                                        @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif>
                                                         {{ $group->name }}
                                                     </a>
                                                 </div>
@@ -71,7 +59,8 @@
                                             <div class="toplist-item">
                                                 <div class="group-index">{{ $loop->index + 1 }}.</div>
                                                 <div class="group-link">
-                                                    <a href="{{ url($group->url) }}" @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif >
+                                                    <a href="{{ url($group->url) }}"
+                                                        @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif>
                                                         {{ $group->name }}
                                                     </a>
                                                 </div>
@@ -100,7 +89,8 @@
                                             <div class="toplist-item">
                                                 <div class="group-index">{{ $loop->index + 1 }}.</div>
                                                 <div class="group-link">
-                                                    <a href="{{ url($group->url) }}" @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif >
+                                                    <a href="{{ url($group->url) }}"
+                                                        @if ($group->state == 1) class="exclusive" title="Exclusive" @elseif($group->state == 2) class="closed" title="Private" @endif>
                                                         {{ $group->name }}
                                                     </a>
                                                 </div>

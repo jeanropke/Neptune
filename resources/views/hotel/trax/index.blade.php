@@ -1,6 +1,6 @@
 @extends('layouts.master', [
     'menuId' => '2',
-    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?']]
+    'breadcrums' => [['url' => url('/hotel'), 'title' => 'New?']],
 ])
 @section('title', 'Trax Machine')
 
@@ -16,20 +16,7 @@
                                 <td valign="top" style="width: 208px; height: 400px;" class="habboPage-col">
                                     @include('hotel.trax.include.menu', ['page' => 'index'])
                                     @foreach (boxes('hotel.trax.index', 1) as $box)
-                                        <div class="v3box {{ $box->color }}">
-                                            <div class="v3box-top">
-                                                <h3>{{ $box->title }}</h3>
-                                            </div>
-                                            <div class="v3box-content">
-                                                <div class="v3box-body">
-                                                    {!! $box->content !!}
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                            <div class="v3box-bottom">
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                        @include('includes.boxes.' . $box->type, compact('box'))
                                     @endforeach
                                 </td>
                                 <td valign="top" style="width: 539px;" class="habboPage-col rightmost">
@@ -69,7 +56,8 @@
                                                 <p align="center">All you have to do is <a href="https://web.archive.org/web/20071011200136/http://promo.habbohotel.com/trax/"
                                                         target="_blank"><strong>CLICK HERE</strong></a>, and enter your email address to take advantage of this <em>ROCKIN</em>'
                                                     <strong>limited time
-                                                        offer!</strong></p>
+                                                        offer!</strong>
+                                                </p>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
