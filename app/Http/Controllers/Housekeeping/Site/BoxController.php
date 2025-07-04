@@ -10,15 +10,97 @@ use Illuminate\Http\Request;
 class BoxController extends Controller
 {
     private $availablePages = [
-        'club.shop', 'community.fansites', 'community.index', 'credits.furniture.camera', 'credits.furniture.catalogue', 'credits.furniture.catalogue_1', 'credits.furniture.catalogue_2',
-        'credits.furniture.catalogue_4', 'credits.furniture.decoration_examples', 'credits.furniture.ecotronfaq', 'credits.furniture.exchange', 'credits.furniture', 'credits.furniture.starterpacks',
-        'credits.furniture.trading', 'footer_pages.advertise', 'footer_pages.atlas', 'footer_pages.privacy_policy', 'footer_pages.terms_and_conditions', 'footer_pages.terms_of_sale',
-        'games.battleball.challenge', 'games.battleball.high_scores', 'games.battleball.how_to_play', 'games.battleball.index', 'games.dive', 'games.index', 'games.snowstorm.high_scores',
-        'games.snowstorm.index', 'games.snowstorm.rules', 'games.wobblesquabble.high_scores', 'games.wobblesquabble.index', 'help.contact_us', 'help.hotel_way', 'help.index', 'hotel.groups.group_instructions',
-        'hotel.groups', 'hotel.homes', 'hotel', 'hotel.navigator', 'hotel.pets', 'hotel.staff', 'hotel.trax.index', 'hotel.trax.masterclass.ambient', 'hotel.trax.masterclass.disco',
-        'hotel.trax.masterclass.electronic', 'hotel.trax.masterclass.groove', 'hotel.trax.masterclass.habbo', 'hotel.trax.masterclass.hiphop', 'hotel.trax.masterclass', 'hotel.trax.masterclass.rock',
-        'hotel.trax.masterclass.sfx', 'hotel.trax.store', 'hotel.welcome', 'index'
+        'club.shop',
+        'community.fansites',
+        'community.index',
+        'credits.furniture.camera',
+        'credits.furniture.catalogue',
+        'credits.furniture.catalogue_1',
+        'credits.furniture.catalogue_2',
+        'credits.furniture.catalogue_4',
+        'credits.furniture.decoration_examples',
+        'credits.furniture.ecotronfaq',
+        'credits.furniture.exchange',
+        'credits.furniture',
+        'credits.furniture.starterpacks',
+        'credits.furniture.trading',
+        'footer_pages.advertise',
+        'footer_pages.atlas',
+        'footer_pages.privacy_policy',
+        'footer_pages.terms_and_conditions',
+        'footer_pages.terms_of_sale',
+        'games.battleball.challenge',
+        'games.battleball.high_scores',
+        'games.battleball.how_to_play',
+        'games.battleball.index',
+        'games.dive',
+        'games.index',
+        'games.snowstorm.high_scores',
+        'games.snowstorm.index',
+        'games.snowstorm.rules',
+        'games.wobblesquabble.high_scores',
+        'games.wobblesquabble.index',
+        'help.contact_us',
+        'help.hotel_way',
+        'help.index',
+        'hotel.groups.group_instructions',
+        'hotel.groups',
+        'hotel.homes',
+        'hotel',
+        'hotel.navigator',
+        'hotel.pets',
+        'hotel.staff',
+        'hotel.trax.index',
+        'hotel.trax.masterclass.ambient',
+        'hotel.trax.masterclass.disco',
+        'hotel.trax.masterclass.electronic',
+        'hotel.trax.masterclass.groove',
+        'hotel.trax.masterclass.habbo',
+        'hotel.trax.masterclass.hiphop',
+        'hotel.trax.masterclass',
+        'hotel.trax.masterclass.rock',
+        'hotel.trax.masterclass.sfx',
+        'hotel.trax.store',
+        'hotel.welcome',
+        'index'
     ];
+
+    private array $boxPageColors = [];
+
+    public function __construct()
+    {
+        $this->boxPageColors = [
+            'maskbox' => $this->generateShades('snow', 'xmas'),
+            'v2box' => $this->generateShades('red', 'blue', 'green', 'brown', 'alert'),
+            'v3box' => [
+                'darkgrey',
+                'black',
+                'blue',
+                'diamond',
+                'green',
+                'purple',
+                'red',
+                'yellow',
+                'orange',
+                'lightgrey'
+            ],
+            'portlet' => [
+                'gold'
+            ]
+        ];
+    }
+
+    private static function generateShades(...$prefixes): array
+    {
+        $shades = ['light', 'darker', 'darkest'];
+
+        return array_reduce($prefixes, function ($carry, $prefix) use ($shades) {
+            foreach ($shades as $shade) {
+                $carry[] = "$prefix $shade";
+            }
+            return $carry;
+        }, []);
+    }
 
     public function boxCreate()
     {
@@ -129,8 +211,9 @@ class BoxController extends Controller
         sort($this->availablePages);
 
         return view('housekeeping.site.boxes.pages.create')->with([
-            'boxes'     => Box::all(),
-            'pages'     => $this->availablePages
+            'boxes'         => Box::all(),
+            'pages'         => $this->availablePages,
+            'boxPageColors' => $this->boxPageColors
         ]);
     }
 
@@ -139,10 +222,11 @@ class BoxController extends Controller
         abort_unless_permission('can_manage_site_box');
 
         BoxPage::create([
-            'box_id'   => $request->box_id,
-            'page'     => $request->page,
-            'column'   => $request->column,
-            'color'    => $request->override_color
+            'box_id'    => $request->box_id,
+            'page'      => $request->page,
+            'column'    => $request->column,
+            'color'     => $request->override_color,
+            'type'      => $request->type
         ]);
 
         create_staff_log('site.boxes.pages.create.save', $request);
@@ -162,9 +246,10 @@ class BoxController extends Controller
         sort($this->availablePages);
 
         return view('housekeeping.site.boxes.pages.edit')->with([
-            'boxes'     => Box::all(),
-            'pages'     => $this->availablePages,
-            'box'       => $box
+            'boxes'         => Box::all(),
+            'pages'         => $this->availablePages,
+            'box'           => $box,
+            'boxPageColors' => $this->boxPageColors
         ]);
     }
 
@@ -181,7 +266,8 @@ class BoxController extends Controller
             'box_id'    => $request->box_id,
             'page'      => $request->page,
             'column'    => $request->column,
-            'color'     => $request->override_color
+            'color'     => $request->override_color,
+            'type'      => $request->type
         ]);
 
         create_staff_log('site.boxes.pages.save', $request);

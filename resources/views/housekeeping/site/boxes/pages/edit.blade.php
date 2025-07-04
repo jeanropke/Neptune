@@ -47,9 +47,22 @@
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <select name="column" class="textinput" style="margin-top: 5px;" size="1">
-                                            <option value="1" @if ($box->column == 1) selected="selected" @endif>1</option>
-                                            <option value="2" @if ($box->column == 2) selected="selected" @endif>2</option>
-                                            <option value="3" @if ($box->column == 3) selected="selected" @endif>3</option>
+                                            <option value="1" {{ $box->column == 1 ? 'selected' : '' }}>1</option>
+                                            <option value="2" {{ $box->column == 2 ? 'selected' : '' }}>2</option>
+                                            <option value="3" {{ $box->column == 3 ? 'selected' : '' }}>3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Box Type</b>
+                                        <div class="graytext">
+                                        </div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="type" class="textinput" style="margin-top: 5px;" size="1">
+                                            @foreach ($boxPageColors as $key => $type)
+                                                <option value="{{ $key }}" {{ $box->type == $key ? 'selected' : '' }}>{{ $key }}</option>
+                                            @endforeach
                                         </select>
                                     </td>
                                 </tr>
@@ -58,23 +71,7 @@
                                         <div class="graytext">Set the box color</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <select name="override_color">
-                                            <option value="black" @if ($box->color == 'black') selected @endif>Black</option>
-                                            <option value="blue" @if ($box->color == 'blue') selected @endif>Blue</option>
-                                            <option value="darkgrey" @if ($box->color == 'darkgrey') selected @endif>Dark
-                                                Grey</option>
-                                            <option value="diamond" @if ($box->color == 'diamond') selected @endif>Diamond
-                                            </option>
-                                            <option value="green" @if ($box->color == 'green') selected @endif>Green</option>
-                                            <option value="lightgrey" @if ($box->color == 'lightgrey') selected @endif>Light
-                                                Grey</option>
-                                            <option value="orange" @if ($box->color == 'orange') selected @endif>Orange
-                                            </option>
-                                            <option value="purple" @if ($box->color == 'purple') selected @endif>Purple
-                                            </option>
-                                            <option value="yellow" @if ($box->color == 'yellow') selected @endif>Yellow
-                                            </option>
-                                        </select>
+                                        <select name="override_color"></select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,7 +81,7 @@
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <select name="box_id" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($boxes as $b)
-                                                <option value="{{ $b->id }}" @if ($box->box_id == $b->id) selected="selected" @endif>{{ $b->title }}</option>
+                                                <option value="{{ $b->id }}" {{ $box->box_id == $b->id ? 'selected' : '' }}>{{ $b->title }}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -97,6 +94,29 @@
                             </table>
                         </div>
                     </form>
+                    <script>
+                        $(function() {
+                            var boxColors = @json($boxPageColors);
+                            var selectedColor = @json(old('override_color') ?? $box->color);
+                            $("select[name=type]").on('change', function() {
+                                var typeValue = $(this).val();
+                                var colors = boxColors[typeValue] || [];
+
+                                var colorSelect = $("select[name=override_color]");
+                                colorSelect.empty();
+
+                                colors.forEach(function(color) {
+                                    var option = new Option(color, color);
+                                    if (color === selectedColor) {
+                                        option.selected = true;
+                                    }
+                                    colorSelect.append(option);
+                                });
+                            });
+
+                            $("select[name=type]").trigger('change');
+                        });
+                    </script>
                     <br />
                 </div>
             </td>
