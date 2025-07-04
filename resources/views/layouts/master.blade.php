@@ -37,6 +37,7 @@
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/builder.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbo.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbowood.js"></script>
+        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
 
     <script>
         Ajax.Responders.register({
@@ -48,7 +49,6 @@
     </script>
     @if ($menuId == 'profile')
         <link href="{{ cms_config('site.web.url') }}/styles/profile.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/profile/swfobject.js"></script>
     @endif
 
     <meta name="keywords" content="">
@@ -81,7 +81,6 @@
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-dialogs.js"></script>
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-discussions.js"></script>
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo-widgets.js"></script>
-        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/control.textarea.js"></script>
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/control.textarea.bbcode.js"></script>
         <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/myhabbo/myhabbo-noteeditor.js"></script>
