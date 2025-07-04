@@ -1,4 +1,5 @@
 <div id="redeem_voucher">
+    <img src="{{ cms_config('site.web.url') }}/images/common/habbo_purse_big_64.gif" alt="" align="left" style="margin:10px;">
     <p><b>{{ $status }}</b></p>
     <p>
         {{ $message }}
@@ -16,7 +17,8 @@
         @endif
     @endif
     <p>
-    </p><table align="right">
+    </p>
+    <table align="right">
         <tbody>
             <tr>
                 <td></td>
