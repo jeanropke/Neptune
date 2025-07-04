@@ -385,18 +385,6 @@ Route::middleware('user')->group(function () {
             Route::post('/batch/decline', [GroupMemberController::class, 'decline'])->name('myhabbo.groups.batch.decline');
         });
 
-
-        //Old stuff
-        //Route::post('/store/background_warning', [HomeController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
-        //Route::post('/store/main', [HomeController::class, 'storeMain'])->name('myhabbo.store.main');
-        //Route::post('/store/inventory', [HomeController::class, 'inventoryMain'])->name('myhabbo.inventory.main');
-        //Route::post('/store/inventory_items', [HomeController::class, 'inventoryItems'])->name('myhabbo.inventory.items');
-        //Route::post('/store/inventory_preview', [HomeController::class, 'inventoryPreview'])->name('myhabbo.inventory.preview');
-        //Route::post('/store/items', [HomeController::class, 'getStoreItems'])->name('myhabbo.store.main');
-        //Route::post('/store/preview', [HomeController::class, 'previewItem'])->name('myhabbo.item.preview');
-        //Route::post('/store/purchase_confirm', [HomeController::class, 'purchaseConfirm'])->name('myhabbo.item.purchase_confirm');
-        //Route::post('/store/purchase_stickers', [HomeController::class, 'purchaseDone'])->name('myhabbo.item.purchase_done');
-
         Route::get('/trax_song/{id}', [WidgetController::class, 'getTraxSong'])->name('myhabbo.trax_song.get');
         Route::post('/traxplayer/select_song', [WidgetController::class, 'saveTraxSong'])->name('myhabbo.trax_song.select_song');
 
@@ -583,22 +571,6 @@ Route::middleware('admin')->group(function () {
             Route::post('/fansites', [FansiteController::class, 'fansitesSave'])->name('housekeeping.site.fansites.save');
             Route::post('/fansites/delete', [FansiteController::class, 'fansitesDelete'])->name('housekeeping.site.fansites.delete');
 
-            //Maybe in future :v
-            //Route::get('/site/collectables', 'welcomemsg')->name('admin.site.collectables');
-            //Route::post('/site/collectables', 'welcomemsgSave')->name('admin.site.collectables.save');
-            //Route::get('/site/collectables_edit', 'welcomemsg')->name('admin.site.collectables_edit');
-            //Route::post('/site/collectables_edit', 'welcomemsgSave')->name('admin.site.collectables_edit.save');
-
-            //Route::get('/site/content', 'welcomemsg')->name('admin.site.content');
-            //Route::post('/site/content', 'welcomemsgSave')->name('admin.site.content.save');
-            //Route::get('/site/banners', 'welcomemsg')->name('admin.site.banners');
-            //Route::post('/site/banners', 'welcomemsgSave')->name('admin.site.banners.save');
-            //Route::get('/site/add_homes', 'welcomemsg')->name('admin.site.add_homes');
-            //Route::post('/site/add_homes', 'welcomemsgSave')->name('admin.site.add_homes.save');
-            //Route::get('/site/faq', 'welcomemsg')->name('admin.site.faq');
-            //Route::post('/site/faq', 'welcomemsgSave')->name('admin.site.faq.save');
-            //Route::get('/site/newsletter', 'welcomemsg')->name('admin.site.newsletter');
-            //Route::post('/site/newsletter', 'welcomemsgSave')->name('admin.site.newsletter.save');
             Route::get('/articles/create', [HousekeepingArticleController::class, 'articleCreate'])->name('housekeeping.site.articles.create');
             Route::post('/articles/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.articles.create.save');
             Route::get('/articles', [HousekeepingArticleController::class, 'articles'])->name('housekeeping.site.articles');
