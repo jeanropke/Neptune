@@ -70,7 +70,7 @@
                         <div style="text-align: center; vertical-align: middle;">{{ $articles->withQueryString()->links('layouts.housekeeping.pagination') }}</div>
                     </div>
                     <script>
-                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.articles.delete') }}');
+                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.articles.delete') }}', 'tr');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

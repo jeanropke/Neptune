@@ -65,7 +65,7 @@
                     </div>
                     <div style="text-align: center; vertical-align: middle;">{!! $boxpages->links('layouts.housekeeping.pagination') !!}</div>
                     <script>
-                        GenericManager.initialise('.delete-box-page', '<p>Are you sure you want to delete this box page? This cannot be undone!</p>', '{{ route('housekeeping.site.boxes.pages.delete') }}');
+                        GenericManager.initialise('.delete-box-page', '<p>Are you sure you want to delete this box page? This cannot be undone!</p>', '{{ route('housekeeping.site.boxes.pages.delete') }}', 'tr');
                     </script>
                 </div>
             </td>

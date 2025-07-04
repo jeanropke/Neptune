@@ -76,7 +76,7 @@
                     </div>
                     <div style="text-align: center; vertical-align: middle;">{!! $categories->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                     <script>
-                        GenericManager.initialise('.delete-categories', '<p>Are you sure you want to delete this category? This cannot be undone!</p>', '{{ route('housekeeping.site.menu.categories.delete') }}');
+                        GenericManager.initialise('.delete-categories', '<p>Are you sure you want to delete this category? This cannot be undone!</p>', '{{ route('housekeeping.site.menu.categories.delete') }}', 'tr');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

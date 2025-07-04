@@ -126,7 +126,7 @@
                     <script>
                         FurniPicker.initialise();
                         VoucherManager.initialise(12);
-                        GenericManager.initialise('.delete-voucher', '<p>Are you sure you want to delete this voucher? This cannot be undone!</p>', '{{ route('housekeeping.credits.vouchers.delete') }}');
+                        GenericManager.initialise('.delete-voucher', '<p>Are you sure you want to delete this voucher? This cannot be undone!</p>', '{{ route('housekeeping.credits.vouchers.delete') }}', 'tr');
                     </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <script>
-                        GenericManager.initialise('.delete-cataloguepackage', '<p>Are you sure you want to delete this catalogue package? This cannot be undone!</p>', '{{ route('housekeeping.furniture.catalogue.packages.delete') }}');
+                        GenericManager.initialise('.delete-cataloguepackage', '<p>Are you sure you want to delete this catalogue package? This cannot be undone!</p>', '{{ route('housekeeping.furniture.catalogue.packages.delete') }}', 'tr');
                     </script>
                     <div style="text-align: center; vertical-align: middle;">{!! $packages->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>

@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <script>
-                        GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this item definition? This cannot be undone!</p>', '{{ route('housekeeping.furniture.items.delete') }}');
+                        GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this item definition? This cannot be undone!</p>', '{{ route('housekeeping.furniture.items.delete') }}', 'tr');
                     </script>
                     <div style="text-align: center; vertical-align: middle;">{!! $items->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>

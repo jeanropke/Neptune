@@ -148,14 +148,14 @@ var LogManager = {
 
 var GenericManager = {
     useFadeout: true,
-    initialise: function (div, message, url) {
+    initialise: function (div, message, url, hideElement) {
         $(div).click((e) => {
             e.preventDefault();
             $this = $(e.target).closest(div);
-            Dialog.showConfirmDialog(message, () => { this.delete($this.data('id'), url) });
+            Dialog.showConfirmDialog(message, () => { this.delete($this.data('id'), url, $this.closest(hideElement)) });
         });
     },
-    delete: function (id, url) {
+    delete: function (id, url, hideElement) {
         Dialog.setAsWaitDialog($("#confirm-dialog"));
         $.ajax(url, {
             data: { id: id },
@@ -165,8 +165,8 @@ var GenericManager = {
             $("#confirm-dialog-close").click(() => { Dialog.closeConfirmDialog(); });
 
             if (this.useFadeout) {
-                $(`[data-id=${id}]`).fadeOut("slow", function () {
-                    $(`[data-id=${id}]`).remove();
+                hideElement.fadeOut("slow", function () {
+                    hideElement.remove();
                 });
             }
         });

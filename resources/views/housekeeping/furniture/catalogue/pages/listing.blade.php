@@ -104,7 +104,7 @@
                     </div>
                     <script>
                         GenericManager.initialise('.delete-cataloguepage', '<p>Are you sure you want to delete this catalogue page? This cannot be undone!</p>',
-                            '{{ route('housekeeping.furniture.catalogue.pages.delete') }}');
+                            '{{ route('housekeeping.furniture.catalogue.pages.delete') }}', 'tr');
                     </script>
 
                     <div style="text-align: center; vertical-align: middle;">{!! $pages->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>

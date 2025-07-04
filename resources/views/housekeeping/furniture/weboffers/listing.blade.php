@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <script>
-                        GenericManager.initialise('.delete-offer', '<p>Are you sure you want to delete this web offer? This cannot be undone!</p>', '{{ route('housekeeping.furniture.weboffers.delete') }}');
+                        GenericManager.initialise('.delete-offer', '<p>Are you sure you want to delete this web offer? This cannot be undone!</p>', '{{ route('housekeeping.furniture.weboffers.delete') }}', 'tr');
                     </script>
                     <div style="text-align: center; vertical-align: middle;">{!! $offers->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
                 </div>
