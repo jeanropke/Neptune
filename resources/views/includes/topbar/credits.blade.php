@@ -1,5 +1,5 @@
 @auth
-    <h3>{{ trans_choice('master.auth_credits', user()->credits, ['credits' => user()->credits]) }}</h3>
+    <h3>{!! trans_choice('master.auth_credits', user()->credits, ['credits' => '<span id="amount-credits" class="amount habbocredits">' . user()->credits . '</span>']) !!}</h3>
 @endauth
 @guest
     <h3>{!! trans('master.guest_credits', ['url' => '/login']) !!}</h3>
