@@ -48,6 +48,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\XmasCalendarController;
 use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
@@ -153,6 +154,8 @@ Route::middleware('user')->group(function () {
         Route::get('/habbowood/filmakers', fn() => view('entertainment.habbowood.filmakers'))->name('entertainment.habbowood.filmakers');
         Route::get('/habbowood/help', fn() => view('entertainment.habbowood.help'))->name('entertainment.habbowood.help');
         Route::get('/habbowood/end', fn() => view('entertainment.habbowood.end'))->name('entertainment.habbowood.end');
+
+        Route::get('/xmas/calendar', fn() => view('entertainment.xmas06.calendar'))->name('entertainment.xmas06.calendar');
     });
 
     //HabboMovies
@@ -190,10 +193,10 @@ Route::middleware('user')->group(function () {
     });
 
     Route::prefix('community')->group(function () {
-        Route::get('/', function() { return view('community.index'); })->name('community.index');
-        Route::get('/avatar', function() { return view('community.avatar'); })->name('community.avatar');
-        Route::get('/mgm_sendlink_invite', function() { return view('community.mgm_sendlink_invite'); })->name('community.mgm_sendlink_invite');
-        Route::get('/mgm_sendlink', function() { return view('community.mgm_sendlink'); })->name('community.mgm_sendlink');
+        Route::get('/', fn() => view('community.index'))->name('community.index');
+        Route::get('/avatar', fn() => view('community.avatar'))->name('community.avatar');
+        Route::get('/mgm_sendlink_invite', fn() => view('community.mgm_sendlink_invite'))->name('community.mgm_sendlink_invite');
+        Route::get('/mgm_sendlink', fn() => view('community.mgm_sendlink'))->name('community.mgm_sendlink');
         Route::post('/mgm_sendlink', [CommunityController::class, 'sendlinkPreview'])->name('community.mgm_sendlink.preview');
         Route::get('/fansites', [CommunityController::class, 'fansites'])->name('community.fansites');
 
@@ -232,8 +235,8 @@ Route::middleware('user')->group(function () {
         Route::get('/collectibles', [CreditsController::class, 'collectibles']);
     });
 
-    Route::prefix('discussions')->group(function() {
-        Route::prefix('actions')->group(function() {
+    Route::prefix('discussions')->group(function () {
+        Route::prefix('actions')->group(function () {
             Route::post('/newtopic', [DiscussionController::class, 'newTopic'])->name('discussions.actions.newtopic');
             Route::post('/previewtopic', [DiscussionController::class, 'previewTopic'])->name('discussions.actions.previewtopic');
             Route::post('/savetopic', [DiscussionController::class, 'saveTopic'])->name('discussions.actions.savetopic');
@@ -341,7 +344,7 @@ Route::middleware('user')->group(function () {
         Route::post('/save/{id}', [HomeController::class, 'saveHome'])->name('myhabbo.save');
         Route::get('/startSession/{homeId}', [HomeController::class, 'startSession'])->name('myhabbo.startSession');
 
-        Route::prefix('tag')->group(function() {
+        Route::prefix('tag')->group(function () {
             Route::post('/add', [TagController::class, 'addTag'])->name('myhabbo.tag.add');
             Route::post('/list', [TagController::class, 'listTag'])->name('myhabbo.tag.list');
             Route::post('/remove', [TagController::class, 'removeTag'])->name('myhabbo.tag.remove');
@@ -366,7 +369,7 @@ Route::middleware('user')->group(function () {
         Route::post('/store/items', [WebStoreController::class, 'loadItems'])->name('myhabbo.item.load_items');
         Route::post('/store/background_warning', [WebStoreController::class, 'backgroundWarning'])->name('myhabbo.store.background_warning');
 
-        Route::prefix('groups')->group(function() {
+        Route::prefix('groups')->group(function () {
             Route::post('/memberlist', [GroupMemberController::class, 'listing'])->name('myhabbo.groups.memberlist');
             Route::post('/memberlist_avatarinfo', [GroupMemberController::class, 'avatarinfo'])->name('myhabbo.groups.avatarinfo');
 
@@ -402,7 +405,7 @@ Route::middleware('user')->group(function () {
         Route::post('/linktool/search', [CommunityController::class, 'linktoolSearch'])->name('myhabbo.linktool.search');
     });
 
-    Route::prefix('habblet')->group(function() {
+    Route::prefix('habblet')->group(function () {
         Route::post('/ajax/collectiblesConfirm', [CreditsController::class, 'habbletAjaxCollectiblesConfirm'])->name('habblet.ajax.collectibles.confirm');
         Route::post('/ajax/collectiblesPurchase', [CreditsController::class, 'habbletAjaxCollectiblesPurchase'])->name('habblet.ajax.collectibles.purchase');
 
@@ -440,7 +443,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/{page?}', [ProfileController::class, 'save'])->name('profile.save');
     });
 
-    Route::prefix('mod')->group(function() {
+    Route::prefix('mod')->group(function () {
         Route::post('/add_discussionpost_report', [ReportController::class, 'addDiscussionpostReport'])->name('mod.add_discussionpost_report');
         Route::post('/add_groupdesc_report', [ReportController::class, 'addGroupdescReport'])->name('mod.add_groupdesc_report');
         Route::post('/add_groupname_report', [ReportController::class, 'addGroupnameReport'])->name('mod.add_groupname_report');
@@ -450,7 +453,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/add_room_report', [ReportController::class, 'addRoomReport'])->name('mod.add_room_report');
         Route::post('/add_stickie_report', [ReportController::class, 'addStickieReport'])->name('mod.add_stickie_report');
     });
-
 });
 
 Route::middleware('guest')->group(function () {
@@ -487,12 +489,16 @@ Route::middleware('guest')->group(function () {
         Route::get('login', [HousekeepingAuthController::class, 'login'])->name('housekeeping.account.login');
         Route::post('account/submit', [HousekeepingAuthController::class, 'doLogin'])->middleware('guest', 'throttle:3,1')->name('housekeeping.account.submit');
     });
-
 });
 
 //Admin routes
 Route::middleware('admin')->group(function () {
 
+    Route::prefix('api')->group(function () {
+        Route::prefix('xmas06')->group(function () {
+            Route::get('/calendar', [XmasCalendarController::class, 'calendar']);
+        });
+    });
     Route::prefix('housekeeping')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.dashboard');
@@ -517,7 +523,7 @@ Route::middleware('admin')->group(function () {
             Route::post('/welcomemsg', [ServerGeneralController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
         });
 
-        Route::prefix('furniture')->group(function() {
+        Route::prefix('furniture')->group(function () {
             Route::get('/catalogue', [CatalogueController::class, 'catalogue'])->name('housekeeping.furniture.catalogue.pages');
             Route::get('/catalogue/edit/{id}', [CatalogueController::class, 'catalogueEdit'])->name('housekeeping.furniture.catalogue.pages.edit');
             Route::post('/catalogue/save', [CatalogueController::class, 'catalogueSave'])->name('housekeeping.furniture.catalogue.pages.save');
@@ -552,7 +558,6 @@ Route::middleware('admin')->group(function () {
             Route::get('/weboffers/add', [WebOfferController::class, 'webOffersAdd'])->name('housekeeping.furniture.weboffers.add');
             Route::post('/weboffers/add', [WebOfferController::class, 'webOffersAddSave'])->name('housekeeping.furniture.weboffers.add.save');
             Route::post('/weboffers/delete', [WebOfferController::class, 'webOffersDelete'])->name('housekeeping.furniture.weboffers.delete');
-
         });
 
         Route::prefix('site')->group(function () {
@@ -643,8 +648,8 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('neptunecms')->group(function () {
             //NeptuneCMS pages
-            Route::get('/', function () { return view('housekeeping.neptunecms.index'); })->name('housekeeping.neptunecms');
-            Route::get('/credits', function () { return view('housekeeping.neptunecms.credits'); })->name('housekeeping.neptunecms.credits');
+            Route::get('/', fn() => view('housekeeping.neptunecms.index'))->name('housekeeping.neptunecms');
+            Route::get('/credits', fn() => view('housekeeping.neptunecms.credits'))->name('housekeeping.neptunecms.credits');
         });
 
         Route::prefix('users')->group(function () {
@@ -666,10 +671,9 @@ Route::middleware('admin')->group(function () {
             Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture.give');
             Route::post('/furniture/remove', [UserController::class, 'toolsFurnitureRemove'])->name('housekeeping.users.furniture.remove');
             Route::post('/empty/hand', [UserController::class, 'toolsEmptyHand'])->name('housekeeping.users.empty.hand');
-
         });
 
-        Route::prefix('editors')->group(function() {
+        Route::prefix('editors')->group(function () {
             Route::get('/guestroom/listing', [HousekeepingEditorController::class, 'guestroomListing'])->name('housekeeping.editor.guestroom.listing');
             Route::get('/guestroom/edit/{id}', [HousekeepingEditorController::class, 'guestroomEdit'])->name('housekeeping.editor.guestroom.edit');
             Route::post('/guestroom/edit', [HousekeepingEditorController::class, 'guestroomSave'])->name('housekeeping.editor.guestroom.edit.save');
@@ -692,7 +696,7 @@ Route::middleware('admin')->group(function () {
             Route::get('/vouchers/history', [HousekeepingCreditsController::class, 'vouchersHistory'])->name('housekeeping.credits.vouchers.history');
         });
 
-        Route::prefix('moderation')->group(function() {
+        Route::prefix('moderation')->group(function () {
             Route::get('/reports/website', [HouseekeepingReportController::class, 'website'])->name('housekeeping.moderation.reports.website');
             Route::get('/reports/website/view/{id}', [HouseekeepingReportController::class, 'websiteView'])->name('housekeeping.moderation.reports.website.view');
             Route::post('/reports/website/save', [HouseekeepingReportController::class, 'websiteViewSave'])->name('housekeeping.moderation.reports.website.save');
@@ -711,7 +715,7 @@ Route::middleware('admin')->group(function () {
             Route::post('/homes/stickies/restore', [HouseekeepingHomeController::class, 'stickiesRestore'])->name('housekeeping.moderation.homes.stickies.restore');
         });
 
-        Route::prefix('logs')->group(function() {
+        Route::prefix('logs')->group(function () {
             Route::get('staff', [LogController::class, 'staff'])->name('housekeeping.logs.staff');
             Route::post('staff/details', [LogController::class, 'staffMessageDetails'])->name('housekeeping.logs.staff.details');
             Route::post('staff/clear', [LogController::class, 'staffClear'])->name('housekeeping.logs.staff.clear');
@@ -736,12 +740,12 @@ Route::middleware('admin')->group(function () {
 });
 
 
-Route::prefix('habbo-imaging')->group(function() {
+Route::prefix('habbo-imaging')->group(function () {
     Route::get('/avatarimage{figure?}', [HabboImaging::class, 'avatarimage'])->name('habboimaging.avatarimage');
     Route::get('/badge/{badge}', [HabboImaging::class, 'badge'])->name('habboimaging.badge');
     Route::get('/photo/{photo}', [HabboImaging::class, 'photo'])->name('habboimaging.photo');
 });
 
-Route::fallback(function(){
+Route::fallback(function () {
     return view('errors.404');
 });
