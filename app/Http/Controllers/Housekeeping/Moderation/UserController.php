@@ -259,4 +259,14 @@ class UserController extends Controller
 
         return view('housekeeping.ajax.dialog_result')->with(['status' => 'success', 'message' => 'Hand has been cleared!']);
     }
+
+    public function online(Request $request)
+    {
+        if (!user()->hasPermission('can_access_housekeeping'))
+            return view('housekeeping.accessdenied');
+
+        $online = User::where('online', 1)->paginate(25);
+
+        return view('housekeeping.moderation.users.online', compact('online'));
+    }
 }

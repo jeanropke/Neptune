@@ -671,6 +671,8 @@ Route::middleware('admin')->group(function () {
             Route::post('/furniture', [UserController::class, 'toolsFurnitureGive'])->name('housekeeping.users.furniture.give');
             Route::post('/furniture/remove', [UserController::class, 'toolsFurnitureRemove'])->name('housekeeping.users.furniture.remove');
             Route::post('/empty/hand', [UserController::class, 'toolsEmptyHand'])->name('housekeeping.users.empty.hand');
+
+            Route::get('/online', [UserController::class, 'online'])->name('housekeeping.users.online');
         });
 
         Route::prefix('editors')->group(function () {

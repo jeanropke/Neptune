@@ -43,7 +43,7 @@
                                                                             <strong>Members</strong>
                                                                         </td>
                                                                         <td class="homepage_sub_row">
-                                                                            {{ $usersTotal }} (<a href="">{{ emu_config('players.online') }} online</a>)
+                                                                            {{ $usersTotal }} (<a href="{{ route('housekeeping.users.online') }}">{{ emu_config('players.online') }} online</a>)
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

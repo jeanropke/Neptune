@@ -137,11 +137,9 @@
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.logs.console') }}" style="text-decoration:none;{{ $submenu == 'logs.console' ? 'font-weight: bold;' : '' }}">Console logs</a>
     </div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.onlinelist') }}" style="text-decoration:none;{{ $submenu == 'onlinelist' ? 'font-weight: bold;' : '' }}">Online Users</a>
+        <a href="{{ route('housekeeping.users.online') }}" style="text-decoration:none;{{ $submenu == 'online' ? 'font-weight: bold;' : '' }}">Online Users</a>
     </div>
-    --}}
 </div>
 <br />
