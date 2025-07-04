@@ -30,11 +30,18 @@
                                                         {{-- <p class="last">1/3 of Totem</p> --}}
                                                         <p id="collectibles-purchase">
                                                             @auth
-                                                                <a href="#" class="colorlink orange last collectibles-purchase-current"><span>Purchase</span></a>
+                                                                <a href="#"
+                                                                    class="colorlink orange last collectibles-purchase-current {{ $online ? '' : 'disabled-button' }}"><span>Purchase</span></a>
                                                             @endauth
 
-                                                            <span class="collectibles-timeleft">Available Until: <span
-                                                                    id="collectibles-timeleft-value">{{ Carbon\CarbonInterval::seconds($time)->cascade()->format('%dd %hh %imin %ss') }}</span></span>
+                                                            <span class="collectibles-timeleft">
+                                                                @if ($online)
+                                                                    Available Until: <span
+                                                                        id="collectibles-timeleft-value">{{ Carbon\CarbonInterval::seconds($time)->cascade()->format('%dd %hh %imin %ss') }}</span>
+                                                                @else
+                                                                    Not available when {{ cms_config('hotel.name.short') }} Hotel in offline
+                                                                @endif
+                                                            </span>
                                                         </p>
 
                                                         <div class="clear"></div>

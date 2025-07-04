@@ -3,7 +3,7 @@
     <img src="{{ cms_config('furni.large.url') }}/{{ $cata->getNormalizedName() }}.png" alt="" align="left" style="margin:10px;">
     <p><b>{{ isset($error) ? 'Error' : 'Success' }}</b></p>
     <p>
-        {!! isset($error) ? 'You cannot buy this item.' : "You've succesfully bought a <b>{$cata->name}</b>!" !!}
+        {!! isset($error) ? $error : "You've succesfully bought a <b>{$cata->name}</b>!" !!}
     </p>
     <p>
     </p><table align="right">

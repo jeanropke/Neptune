@@ -32,16 +32,22 @@ class CreditsController extends Controller
         $time = ($interval * 86400) - $tick;
 
         return view('credits.collectibles', [
-            'collectable' => $collectable,
-            'time'        => $time,
+            'collectable'   => $collectable,
+            'time'          => $time,
+            'online'        => is_hotel_online()
         ]);
     }
 
     public function habbletAjaxCollectiblesConfirm()
     {
-        $collectable = Collectable::with('item')
-            ->latest('reuse_time')
-            ->firstOrFail();
+        $collectable = Collectable::with('item')->latest('reuse_time')->firstOrFail();
+
+        if (!is_hotel_online()) {
+            return view('habblet.ajax.collectibles_success', [
+                'collectable' => $collectable,
+                'error'       => 'You cannot purchase a collectable when ' . cms_config('hotel.name.short') . ' Hotel is offline'
+            ]);
+        }
 
         return view('habblet.ajax.collectibles_confirm', compact('collectable'));
     }
@@ -54,16 +60,21 @@ class CreditsController extends Controller
             return view('credits.ajax.purchase_login');
         }
 
-        $collectable = Collectable::with('item')
-            ->latest('reuse_time')
-            ->firstOrFail();
+        $collectable = Collectable::with('item')->latest('reuse_time')->firstOrFail();
+
+        if (!is_hotel_online()) {
+            return view('habblet.ajax.collectibles_success', [
+                'collectable' => $collectable,
+                'error'       => 'You cannot purchase a collectable when ' . cms_config('hotel.name.short') . ' Hotel is offline'
+            ]);
+        }
 
         $price = $collectable->getPrice();
 
         if ($user->credits < $price) {
             return view('habblet.ajax.collectibles_success', [
                 'collectable' => $collectable,
-                'error'       => true
+                'error'       => 'You cannot purchase this collectable'
             ]);
         }
 
@@ -86,7 +97,6 @@ class CreditsController extends Controller
             return;
         }
 
-        $user = user();
         $code = $request->code;
 
         $voucher = Voucher::where('voucher_code', $code)->first();
@@ -148,20 +158,18 @@ class CreditsController extends Controller
 
     public function purchaseConfirmation(Request $request)
     {
-        if (!Auth::check()) {
+        $user = user();
+        if (!$user) {
             return view('credits.ajax.purchase_login');
         }
 
-        $pack = ItemOffer::query()
-            ->where('salecode', $request->product)
-            ->where('enabled', '1')
-            ->first();
+        $pack = ItemOffer::query()->where('salecode', $request->product)->where('enabled', '1')->first();
 
         if (!$pack) {
             return $this->purchaseResult('Invalid starter pack.', 'error');
         }
 
-        if ($pack->price > user()->credits) {
+        if ($pack->price > $user->credits) {
             return $this->purchaseResult('You don\'t have enough credits to purchase this pack.', 'error');
         }
 
@@ -184,7 +192,7 @@ class CreditsController extends Controller
         if (!$pack)
             return $this->purchaseResult('Invalid starter pack.', 'error');
 
-        if ($pack->price > user()->credits)
+        if ($pack->price > $user->credits)
             return $this->purchaseResult('You don\'t have enough credits to purchase this pack.', 'error');
 
 
@@ -193,15 +201,15 @@ class CreditsController extends Controller
 
         $items = $pack->getItems();
         foreach ($items as $item) {
-            user()->giveItem($item->definition_id, $item->item_specialspriteid);
+            $user->giveItem($item->definition_id, $item->item_specialspriteid);
         }
 
         $homeItems = $pack->getHomeItems();
         foreach ($homeItems as $homeItem) {
-            user()->giveHomeItem($homeItem->id);
+            $user->giveHomeItem($homeItem->id);
         }
-        user()->updateCredits(-$pack->price);
-        user()->refreshHand();
+        $user->updateCredits(-$pack->price);
+        $user->refreshHand();
 
         return $this->purchaseResult('Purchase successful! Your items are on their way!', 'success');
     }
