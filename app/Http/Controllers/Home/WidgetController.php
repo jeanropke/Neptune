@@ -198,7 +198,7 @@ class WidgetController extends Controller
         $message = Guestbook::find($request->entryId);
 
         //staffs with permissions can delete too
-        if ($guestbook->user_id == user()->id || user()->id == $message->user_id || user()->hasPermission('cms_home_can_delete_message')) {
+        if ($guestbook->user_id == user()->id || user()->id == $message->user_id) {
 
             if (!$message)
                 return;
