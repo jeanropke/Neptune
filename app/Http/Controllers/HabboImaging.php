@@ -7,11 +7,24 @@ use App\Classes\BadgeImage;
 use App\Classes\PhotoPallets\GreyscalePalette;
 use App\Classes\PhotoRenderer;
 use App\Models\Furni\Photo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class HabboImaging extends Controller
 {
+    public function gethabboimage(Request $request)
+    {
+        $user = User::select(['username', 'figure'])->where('username', $request->habboname)->first();
+        if(!$user)
+            return response(null, 404);
+
+        //return 'http://127.0.0.1/habbo-imaging/avatarimage?figure=2850121001180012650112001002200e4dac22227285c553161f22dcd8a064a.gif';
+        $request->figure = $user->figure . '002200';
+
+        return $this->avatarimage($request);
+    }
+
     public function avatarimage(Request $request)
     {
         //                                      1550518001240022850630005 01 22 00
@@ -31,7 +44,7 @@ class HabboImaging extends Controller
         $inputHeadDirection = isset($request->head_direction) ? (int)$request->head_direction : $inputDirection;
         $inputGesture       = isset($request->gesture) ? strtolower($request->gesture) : 'std';
         $inputSize          = isset($request->size) ? strtolower($request->size) : 'n';
-        $inputFormat        = isset($request->img_format) ? strtolower($request->img_format) : 'png';
+        $inputFormat        = isset($request->img_format) ? strtolower($request->img_format) : 'gif';
         $inputFrame         = isset($request->frame) ? strtolower($request->frame) : '0';
         $inputHeadOnly      = isset($request->headonly) ? (bool)$request->headonly : false;
 

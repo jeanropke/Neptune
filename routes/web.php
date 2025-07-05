@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CreditsController;
+use App\Http\Controllers\ECardController;
 use App\Http\Controllers\EntertainmentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Group\DiscussionController;
@@ -154,9 +155,15 @@ Route::middleware('user')->group(function () {
         Route::get('/habbowood/filmakers', fn() => view('entertainment.habbowood.filmakers'))->name('entertainment.habbowood.filmakers');
         Route::get('/habbowood/help', fn() => view('entertainment.habbowood.help'))->name('entertainment.habbowood.help');
         Route::get('/habbowood/end', fn() => view('entertainment.habbowood.end'))->name('entertainment.habbowood.end');
-
-        Route::get('/xmas/calendar', fn() => view('entertainment.xmas06.calendar'))->name('entertainment.xmas06.calendar');
     });
+
+    Route::prefix('xmas06')->group(function () {
+        Route::get('/', fn() => view('xmas06.calendar'))->name('xmas06.calendar');
+        Route::get('/deals', fn() => view('xmas06.deals'))->name('xmas06.deals');
+        Route::get('/furni', fn() => view('xmas06.furni'))->name('xmas06.furni');
+        Route::get('/ecard', fn() => view('xmas06.ecard'))->name('xmas06.ecard');
+    });
+
 
     //HabboMovies
     Route::prefix('habbomovies')->group(function () {
@@ -485,6 +492,14 @@ Route::middleware('admin')->group(function () {
     Route::prefix('api')->group(function () {
         Route::prefix('xmas06')->group(function () {
             Route::get('/calendar', [XmasCalendarController::class, 'calendar']);
+        });
+
+        Route::prefix('ecard')->group(function () {
+            Route::post('/gateway', [ECardController::class, 'gateway']);
+        });
+
+        Route::prefix('user')->group(function () {
+            Route::get('/gethabboimage', [HabboImaging::class, 'getHabboImage']);
         });
     });
     Route::prefix('housekeeping')->group(function () {
