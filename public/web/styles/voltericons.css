@@ -17,3 +17,20 @@
     width: 9px;
     height: 10px;
 }
+
+
+
+@font-face {
+    font-family: '12_Volter_9pt_st';
+    src: url('../fonts/12_Volter_9pt_st.ttf');
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+}
+
+
+@font-face {
+    font-family: '35_Volter';
+    src: url('../fonts/35_Volter.ttf');
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+}
