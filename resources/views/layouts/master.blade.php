@@ -29,7 +29,8 @@
             "splashScreen": false,
             "allowScriptAccess": true,
             "playerVersion": 11,
-            "quality": "low"
+            "quality": "low",
+            "logLevel": "info" // trace or debug or info
         };
     </script>
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/prototype.js"></script>
@@ -37,7 +38,7 @@
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/builder.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbo.js"></script>
     <script language="JavaScript" type="text/javascript" src="{{ cms_config('site.web.url') }}/js/habbowood.js"></script>
-        <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
+    <script type="text/javascript" src="{{ cms_config('site.web.url') }}/js/swfobject.js"></script>
 
     <script>
         Ajax.Responders.register({

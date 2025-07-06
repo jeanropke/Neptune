@@ -13,7 +13,7 @@
 
                         <div class="nobox-content">
                             <div align="center" flashstopped_p="true">
-                                {{--<script language="javascript">
+                                {{-- <script language="javascript">
                                     var language = "en";
                                     var siteurl = document.URL;
                                     var cardparam = document.URL.split("?")[1];
@@ -29,7 +29,7 @@
                                         '" quality="high" pluginspage="https://web.archive.org/web/20070110034333/http://www.macromedia.com/go/getflashplayer" base="https://web.archive.org/web/20070110034333/http://www.habbochristmas.com/06/" type="application/x-shockwave-flash" width="732" height="473"></embed>';
                                     embedString += '</object>';
                                     document.write(embedString);
-                                </script>--}}
+                                </script> --}}
 
                                 <div id="flashcontent">
                                     You need to have a Flash player installed on your computer before being
@@ -38,11 +38,15 @@
                                 </div>
 
                                 <script type="text/javascript" language="JavaScript">
-                                    var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/xmas06/ecard.swf?lang=us", "dummyid40", "732", "473", "7");
+                                    var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/xmas06/ecard.swf?lang=us&time={{ now() }}", "dummyid40", "732", "473", "7");
+                                    swfobj.addParam("allowScriptAccess", "always");
                                     swfobj.addParam("site", "site");
                                     swfobj.addParam("movie", "{{ cms_config('site.web.url') }}/flash/xmas06/ecard.swf?undefined&amp;lang=us&amp;");
                                     swfobj.addVariable("base", "{{ cms_config('site.web.url') }}/flash/xmas06");
-                                    swfobj.addVariable("base_url", "{{ url('/') }}");
+                                    swfobj.addVariable("siteurl", "{{ url('/') }}");
+                                    @if(request()->card)
+                                    swfobj.addVariable("cardid", "{{ request()->card }}");
+                                    @endif
                                     swfobj.addVariable("token", "{{ csrf_token() }}");
                                     swfobj.addVariable("quality", "high");
                                     swfobj.addVariable("bgcolor", "#ffffff");

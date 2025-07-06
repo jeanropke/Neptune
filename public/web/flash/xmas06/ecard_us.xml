@@ -1,22 +1,21 @@
 <texts>
 	<start1>start1</start1>
 	<start2>start2</start2>
-	<sendown>sendown</sendown>
-	<mod4_txt1>mod4_txt1</mod4_txt1>
-	<mod4_txt2>mod4_txt2</mod4_txt2>
-	<mod4_txt3>mod4_txt3</mod4_txt3>
-	<send>send</send>
-	<mod3_txt1>mod3_txt1</mod3_txt1>
-	<mod3_txt2>mod3_txt2</mod3_txt2>
-	<mod2_txt1>mod2_txt1</mod2_txt1>
-	<mod1_go>mod1_go</mod1_go>
-	<mod1_txt1>mod1_txt1</mod1_txt1>
-	<mod1_txt2>mod1_txt2</mod1_txt2>
-	<mod1_e1>mod1_e1</mod1_e1>
-	<sendnew>sendnew</sendnew>
+	<mod1_txt1>Your Habbo Name</mod1_txt1>
+	<mod1_txt2>You can search your own Habbo or use someone else.</mod1_txt2>
+	<mod1_e1>This Habbo does not exist</mod1_e1>
+	<mod1_go>Search</mod1_go>
+	<mod2_txt1>Select a Background</mod2_txt1>	
+	<mod3_txt1>Headline</mod3_txt1>
+	<mod3_txt2>Message</mod3_txt2>	
+	<mod4_txt1>Friend Name</mod4_txt1>
+	<mod4_txt2>Friend Email</mod4_txt2>
+	<mod4_txt3>Your Email</mod4_txt3>
+	<sendown>Send Your own</sendown>
+	<send>Send</send>
+	<sendnew>Send new</sendnew>
 	<box_msg>box_msg</box_msg>
-	<hotelurl>http://127.0.0.1</hotelurl>
-	
+	<hotelurl>http://127.0.0.1</hotelurl>	
 </texts>
 
 
