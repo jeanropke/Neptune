@@ -45,8 +45,8 @@
                                 </div>
 
                                 <script type="text/javascript" language="JavaScript">
-                                    var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/xmas06/main.swf?language=us", "test_flash", "400", "400", "7");
-                                    swfobj.addParam("base", "{{ cms_config('site.web.url') }}/flash/xmas06");
+                                    var swfobj = new SWFObject("{{ cms_config('site.web.url') }}/flash/xmas06/main.swf?language=us&date={{ now() }}", "test_flash", "400", "400", "7");
+                                    swfobj.addVariable("base", "{{ cms_config('site.web.url') }}/flash/xmas06");
                                     swfobj.addVariable("calendar_url", "{{ url('/') }}/api/xmas06/calendar");
                                     swfobj.addVariable("quality", "high");
                                     swfobj.addVariable("bgcolor", "#ffffff");

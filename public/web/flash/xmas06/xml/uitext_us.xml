@@ -3,13 +3,13 @@
   <t n="ecard_body"><![CDATA[Create a festive mood! Send a card to a friend.]]></t>
   <t n="ecard_link"><![CDATA[http://www.habbo.xx]]></t>
   <t n="ecard_button"><![CDATA[Send Card]]></t>
-  
+
   <t n="gift_request_title"><![CDATA[Gift Request]]></t>
   <t n="gift_request_body"><![CDATA[Get what you want as a gift! Send a request for Habbo Coins!]]></t>
   <t n="gift_request_senderfield"><![CDATA[Your Name]]></t>
   <t n="gift_request_emailfield"><![CDATA[Recipient's Email]]></t>
   <t n="gift_request_button"><![CDATA[Send Request]]></t>
-  
+
   <t n="gift_purchase_title"><![CDATA[Habbo Coins]]></t>
   <t n="gift_purchase_body"><![CDATA[Click here to find out about the best Habbo Coin deals!]]></t>
   <t n="gift_purchase_button"><![CDATA[Buy Coins]]></t>

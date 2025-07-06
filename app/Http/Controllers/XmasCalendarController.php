@@ -25,62 +25,16 @@ class XmasCalendarController extends Controller
         <present>
             <bodycopy>bodycopy</bodycopy>
             <title>title</title>
-            <image>image</image>
+            <image>x_14.gif</image>
             <button>
-                <text>text</text>
-                <link>link</link>
-            </button>
-            <button>
-                <text>text</text>
-                <link>link</link>
-            </button>
-        </present>
-    </daily>
-    <daily>
-        <title>title</title>
-        <title2>title2</title2>
-        <weather1>weather1</weather1>
-        <weather2>weather2</weather2>
-        <pre-dance>pre-dance</pre-dance>
-        <croc>croc</croc>
-        <post-dance>post-dance</post-dance>
-        <end1>giveget</end1>
-        <end2>giveget</end2>
-        <present>
-            <bodycopy>bodycopy</bodycopy>
-            <title>title</title>
-            <image>image</image>
-            <button>
-                <text>text</text>
-                <link>link</link>
-            </button>
-            <button>
-                <text>text</text>
-                <link>link</link>
-            </button>
-        </present>
-    </daily>
-    <daily>
-        <title>title</title>
-        <title2>title2</title2>
-        <weather1>weather1</weather1>
-        <weather2>weather2</weather2>
-        <pre-dance>pre-dance</pre-dance>
-        <croc>croc</croc>
-        <post-dance>post-dance</post-dance>
-        <end1>giveget</end1>
-        <end2>giveget</end2>
-        <present>
-            <bodycopy>bodycopy</bodycopy>
-            <title>title</title>
-            <image>image</image>
-            <button>
-                <text>text</text>
-                <link>link</link>
-            </button>
-            <button>
-                <text>text</text>
-                <link>link</link>
+                <btn>
+                    <text>button1</text>
+                    <link>link1</link>
+                </btn>
+                <btn>
+                    <text>button2</text>
+                    <link>link2</link>
+                </btn>
             </button>
         </present>
     </daily>

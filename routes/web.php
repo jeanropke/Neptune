@@ -486,22 +486,28 @@ Route::middleware('guest')->group(function () {
     });
 });
 
+Route::prefix('api')->group(function () {
+    Route::prefix('xmas06')->group(function () {
+        Route::get('/calendar', [XmasCalendarController::class, 'calendar']);
+    });
+
+    Route::prefix('ecard')->group(function () {
+        Route::post('/gateway', [ECardController::class, 'gateway']);
+        Route::get('/parse', [ECardController::class, 'parse']);
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::get('/gethabboimage', [HabboImaging::class, 'getHabboImage']);
+    });
+});
+
+Route::get('/framework/services/getflashconfig', fn() => "statistics_automatic=true&statistics_automaticsession=true&statistics_sitename=Habbo&gateway_defaultservice=serv&loaded=true");
+
+
 //Admin routes
 Route::middleware('admin')->group(function () {
 
-    Route::prefix('api')->group(function () {
-        Route::prefix('xmas06')->group(function () {
-            Route::get('/calendar', [XmasCalendarController::class, 'calendar']);
-        });
 
-        Route::prefix('ecard')->group(function () {
-            Route::post('/gateway', [ECardController::class, 'gateway']);
-        });
-
-        Route::prefix('user')->group(function () {
-            Route::get('/gethabboimage', [HabboImaging::class, 'getHabboImage']);
-        });
-    });
     Route::prefix('housekeeping')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.dashboard');
