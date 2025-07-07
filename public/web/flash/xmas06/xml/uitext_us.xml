@@ -1,7 +1,7 @@
 <uitext>
   <t n="ecard_title"><![CDATA[Habbo E-Card]]></t>
   <t n="ecard_body"><![CDATA[Create a festive mood! Send a card to a friend.]]></t>
-  <t n="ecard_link"><![CDATA[http://www.habbo.xx]]></t>
+  <t n="ecard_link"><![CDATA[http://127.0.0.1/xmas/ecard]]></t>
   <t n="ecard_button"><![CDATA[Send Card]]></t>
 
   <t n="gift_request_title"><![CDATA[Gift Request]]></t>
@@ -13,5 +13,5 @@
   <t n="gift_purchase_title"><![CDATA[Habbo Coins]]></t>
   <t n="gift_purchase_body"><![CDATA[Click here to find out about the best Habbo Coin deals!]]></t>
   <t n="gift_purchase_button"><![CDATA[Buy Coins]]></t>
-  <t n="gift_purchase_link"><![CDATA[http://www.habbo.com/credits]]></t>
+  <t n="gift_purchase_link"><![CDATA[http://127.0.0.1/credits]]></t>
 </uitext>
