@@ -49,6 +49,7 @@
                                     swfobj.addVariable("base", "{{ cms_config('site.web.url') }}/flash/xmas06");
                                     swfobj.addVariable("calendar_url", "{{ url('/') }}/api/xmas06/calendar");
                                     swfobj.addVariable("giftrequest_url", "{{ url('/') }}/api/xmas06/giftrequest");
+                                    swfobj.addVariable("bypass_movies", "true");
                                     swfobj.addVariable("quality", "high");
                                     swfobj.addVariable("bgcolor", "#ffffff");
 
