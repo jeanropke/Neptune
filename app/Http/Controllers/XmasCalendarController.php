@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Xmas\GiftRequest;
 use Illuminate\Http\Request;
 
 class XmasCalendarController extends Controller
@@ -40,5 +41,29 @@ class XmasCalendarController extends Controller
     </daily>
 </days>', 200)
             ->header('Content-Type', 'application/xml');
+    }
+
+    public function giftRequest(Request $request)
+    {
+        $recentRequests = GiftRequest::where('ip_address', $request->ip())
+            ->where('created_at', '>', now()->subMinutes(5))
+            ->count();
+
+        if ($recentRequests > 3) {
+            return 'SPAM';
+        }
+
+        $request->validate([
+            'from'  => 'required|exists:users,username',
+            'to'    => 'required|email'
+        ]);
+
+        GiftRequest::create([
+            'username'      => $request->from,
+            'email'         => $request->to,
+            'ip_address'    => $request->ip()
+        ]);
+
+        return response('OK', 200);
     }
 }

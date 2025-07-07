@@ -489,6 +489,7 @@ Route::middleware('guest')->group(function () {
 Route::prefix('api')->group(function () {
     Route::prefix('xmas06')->group(function () {
         Route::get('/calendar', [XmasCalendarController::class, 'calendar']);
+        Route::get('/giftrequest', [XmasCalendarController::class, 'giftRequest']);
     });
 
     Route::prefix('ecard')->group(function () {
