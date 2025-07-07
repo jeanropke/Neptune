@@ -64,7 +64,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Actividades</h3>
+                                    <h3>Activities</h3>
                                 </div>
                             </div>
                         </div>
@@ -75,47 +75,36 @@
                             <table width="100%" border="0" id="table2">
                                 <tbody>
                                     <tr>
-                                        <td valign="top" bgcolor="#9dd1e7"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/stripes.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-9dd1e7, #184d64);"><img vspace="5"
-                                                hspace="10" border="0" align="bottom"
-                                                src="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.fr/c_images/SALAS/teatronavidad.png" alt=""></td>
-                                        <td valign="top" bgcolor="#9dd1e7"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/snow.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-9dd1e7, #184d64);"><b>Oro, Incienso y
-                                                Mirra: viernes 22 a las 17:00 horas</b><br>Habbolosa y los Staffilokokos, con los Linces, ponen en escena una obra maestra en el
-                                            Teatro.<br><a href="https://web.archive.org/web/20070102140105/http://www.habbo.com.mx/client?forwardId=1&amp;roomId=58" target="client"
+                                        <td valign="top" bgcolor="#9dd1e7" background="{{ cms_config('site.c_images.url') }}/album1782/stripes.gif" align="left"><img vspace="5"
+                                                hspace="10" border="0" align="bottom" src="{{ cms_config('site.c_images.url') }}/SALAS/teatronavidad.png" alt=""></td>
+                                        <td valign="top" bgcolor="#9dd1e7" background="{{ cms_config('site.c_images.url') }}/album1782/snow.gif" align="left">
+                                            <b>Gold, Frankincense, and Myrrh: Friday 22nd at 5:00 PM</b>
+                                            <br>
+                                            Habbolosa and the Staffilokokos, together with the Linces, bring a masterpiece to the stage at the Theater.
+                                            <br><a href="{{ url('/') }}/client?forwardId=1&amp;roomId=58" target="client"
                                                 onclick="roomForward(this, '58', 'public', false); return false;">
-                                                Ir a la Sala
+                                                Go to the Room
                                             </a>
 
 
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td valign="top" bgcolor="#e6efef"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/stripes.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-e6efef, #1e2e2e);"> <img vspace="5"
-                                                hspace="10" border="0"
-                                                src="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.fi/c_images/album1528/lido_icon.png" alt=""></td>
-                                        <td valign="top" bgcolor="#e6efef"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/snow.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-e6efef, #1e2e2e);"><span
-                                                style="font-weight: bold;">Karaoke de Rastancicos: jueves 21 a las 17:00 horas</span><br>Santa Rasta está 'depre'. Ven a Punto de
-                                            Encuentro, de Estarqui, para cantarle unos buenos Rastancicos.<br>
+                                        <td valign="top" bgcolor="#e6efef" background="{{ cms_config('site.c_images.url') }}/album1782/stripes.gif" align="left"><img
+                                                vspace="5" hspace="10" border="0" src="{{ cms_config('site.c_images.url') }}/album1528/lido_icon.png" alt=""></td>
+                                        <td valign="top" bgcolor="#e6efef" background="{{ cms_config('site.c_images.url') }}/album1782/snow.gif" align="left"><span
+                                                style="font-weight: bold;">Rastancicos Karaoke: Thursday 21st at 5:00 PM</span>
+                                            <br>
+                                            Santa Rasta is feeling down. Come to Estarqui's Meeting Point to sing some cheerful Rastancicos for him.
+                                            <br>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td valign="top" bgcolor="#9dd1e7"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/stripes.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-9dd1e7, #184d64);"> <img vspace="5"
-                                                hspace="10" border="0"
-                                                src="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.fi/c_images/album1528/bb_redicon.png" alt=""></td>
-                                        <td valign="top" bgcolor="#9dd1e7"
-                                            background="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.co.uk/c_images/album1782/snow.gif" align="left"
-                                            data-darkreader-inline-bgcolor="" style="--darkreader-inline-bgcolor: var(--darkreader-background-9dd1e7, #184d64);"><b>Fiesta Jamaica:
-                                                viernes 22 a las 17:00 horas<br></b>En las Salas que se añadiremos a la Planta Jamaica va a tener lugar la mayor fiesta playera nunca
-                                            vista.
+                                        <td valign="top" bgcolor="#9dd1e7" background="{{ cms_config('site.c_images.url') }}/album1782/stripes.gif" align="left"> <img
+                                                vspace="5" hspace="10" border="0" src="{{ cms_config('site.c_images.url') }}/album1528/bb_redicon.png" alt=""></td>
+                                        <td valign="top" bgcolor="#9dd1e7" background="{{ cms_config('site.c_images.url') }}/album1782/snow.gif" align="left">
+                                            <b>Jamaica Party: Friday 22nd at 5:00 PM</b>
+                                            <br>In the rooms that we will add to the Jamaica Floor, the biggest beach party ever seen will take place.
                                         </td>
                                     </tr>
                                 </tbody>
@@ -202,12 +191,12 @@
 
                             <!--INSTRUCTIONS:
 
-                        To change the images, edit the line starting 'var images'
-                        To change the text that accompanies the images, edit the line starting 'var captions'. IMPORTANT: make sure you write the same
-                        amount of text for each image, otherwise the page will resize every 6 seconds.
-                        Make sure you include the "randCaption" text too - this is shown when users have disable javascript in their browsers
+                                To change the images, edit the line starting 'var images'
+                                To change the text that accompanies the images, edit the line starting 'var captions'. IMPORTANT: make sure you write the same
+                                amount of text for each image, otherwise the page will resize every 6 seconds.
+                                Make sure you include the "randCaption" text too - this is shown when users have disable javascript in their browsers
 
-                        !-->
+                                !-->
                             <br><a target="_self" href="{{ url('/') }}/xmas06/deals">Click to buy these useful Christmas items!</a><br><br><span
                                 style="font-weight: bold;">&nbsp;</span>
                             <div class="clear"></div>
@@ -221,18 +210,18 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Envía una Postal</h3>
+                                    <h3>Send an E-card</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="body">
 
                             <a href="{{ url('/') }}/xmas06/ecard" target="_self"><img vspace="10" hspace="10" border="0" align="left"
-                                    src="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.com/c_images/album1777/Card_carrying.gif" alt=""></a>Comparte
-                            el
-                            espíritu de la Navidad con tus amigos. Utiliza una postal electrónica para ello. Al fin y al cabo, la Navidad se ha modernizado mucho. ¡Ah! ¡Avísales de que
-                            en el Calendario de Adviento pueden descargarse un montón de regalos!<br><br style="font-weight: bold;"><a
-                                href="/web/20070102140105/http://www.habbo.com.mx/navidad/ecard.html" target="_self">¡Enviar una postal!</a><br><span style="font-weight: bold;">
+                                    src="{{ cms_config('site.c_images.url') }}/album1777/Card_carrying.gif" alt=""></a>
+                                    Share the Christmas spirit with your friends.
+                                    Use an e-card to do so. After all, Christmas has become quite modern.
+                                    Oh! And let them know that they can get lots of gifts from the Advent Calendar!<br><br style="font-weight: bold;">
+                                    <a href="{{ url('/') }}/xmas06/ecard" target="_self">Send an E-card</a><br><span style="font-weight: bold;">
                                 <br></span>
                             <div class="clear"></div>
                         </div>
@@ -244,19 +233,17 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>¡El secreto de Santa!</h3>
+                                    <h3>Santa’s Secret!</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="body">
 
                             <br><img width="46" vspace="0" hspace="10" height="78" border="0" align="left"
-                                src="https://web.archive.org/web/20070102140105im_/http://images.habbohotel.com/c_images/album175/scifirocket_red.gif" id="galleryImage"
-                                alt="scifirocket red">Ya sabemos cómo consiguió Santa Rasta que nevara en Jamaica. ¡Con la Humareda roja! Consigue el nuevo Raro del Catálogo por 25
-                            Créditos. En poco tiempo desaparecerá.<br><br>
+                                src="{{ cms_config('site.c_images.url') }}/album175/scifirocket_red.gif" id="galleryImage"
+                                alt="scifirocket red">We already know how Rasta Santa made it snow in Jamaica. With the Red Smoke! Get the new Rare item from the Catalog for 25 Credits. It will disappear soon.<br><br>
                             <div id="purchase_2">
-                                La Humareda Roja cuesta 25 Créditos. Para conseguir más, por favor visita las <a href="/web/20070102140105/http://www.habbo.com.mx/credits">páginas de
-                                    Créditos</a><br>
+                                The Red Smoke costs 25 Credits. To get more, please visit the <a href="{{ url('/') }}/credits">Credits pages</a>.<br>
                                 <span id="purchase_2_purchase"></span>
                                 <x-purchase_button id="purchase_2" product="a1 scifirocket" />
                             </div>
