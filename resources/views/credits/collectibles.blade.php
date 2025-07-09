@@ -39,7 +39,7 @@
                                                                     Available Until: <span
                                                                         id="collectibles-timeleft-value">{{ Carbon\CarbonInterval::seconds($time)->cascade()->format('%dd %hh %imin %ss') }}</span>
                                                                 @else
-                                                                    Not available when {{ cms_config('hotel.name.short') }} Hotel in offline
+                                                                    Not available when {{ cms_config('hotel.name.short') }} Hotel is offline
                                                                 @endif
                                                             </span>
                                                         </p>

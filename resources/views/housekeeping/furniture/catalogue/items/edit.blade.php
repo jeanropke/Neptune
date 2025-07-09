@@ -30,7 +30,7 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="40%" valign="middle">
-                                        <input type="text" name="page_id" size="30" value="{{ old('page_id') ?? $item->page_id }}">
+                                        <input type="number" name="page_id" size="30" value="{{ old('page_id') ?? $item->page_id }}">
                                     </td>
                                 </tr>
                                 <tr>
