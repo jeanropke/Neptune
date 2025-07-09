@@ -19,9 +19,8 @@
 
                             Näin ostat joulutavaraa tältä sivulta:<br><br>1. Selaa läpi sivun tavaravalikoimaa. <br><br>2. Kun löydät mieleisesi tavaran, klikkaa "Osta"-painiketta.
                             <br><br>3. Ostamasi tavara ilmestyy hahmosi isolle kämmenelle.<br><br>Joulutavarat myynnissä 22.12. klo 15 asti.<br><img vspace="9" hspace="9"
-                                border="0" align="left"
-                                src="{{ cms_config('site.c_images.url') }}/album1784/Xmas_defeat_Rasta.gif"
-                                style="width: 68px; height: 112px;" alt=""><br><br><br><br><br><br><br><br><br><br><span style="font-weight: bold;"></span><br>
+                                border="0" align="left" src="{{ cms_config('site.c_images.url') }}/album1784/Xmas_defeat_Rasta.gif" style="width: 68px; height: 112px;"
+                                alt=""><br><br><br><br><br><br><br><br><br><br><span style="font-weight: bold;"></span><br>
                             <div class="clear"></div>
                         </div>
                         <div class="bottom">
@@ -47,45 +46,41 @@
                                 <tbody>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="60" height="136" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_19.gif" id="galleryImage20"
-                                                    alt="x-19" title="x-19" name="photo_j20"></a></td>
-                                        <td align="center"><a>
-                                                <img width="60" height="136" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/Xmastree2.gif" id="galleryImage6"
-                                                    alt="Xmastree2" title="Xmastree2" name="photo_j6"></a></td>
-                                        <td align="center"><a>
-                                                <img width="59" height="136" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_18.gif" id="galleryImage19"
+                                                <img width="59" height="136" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_18.gif" id="galleryImage19"
                                                     alt="x-18" title="x-18" name="photo_j19"></a></td>
+                                        <td align="center"><a>
+                                                <img width="60" height="136" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/Xmastree2.gif" id="galleryImage6"
+                                                    alt="Xmastree2" title="Xmastree2" name="photo_j6"></a></td>
+                                        <td align="center"><a><img width="60" height="136" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_19.gif"
+                                                    id="galleryImage20" alt="x-19" title="x-19" name="photo_j20">
+                                            </a></td>
                                     </tr>
                                     <tr>
-                                        <td>Joulukuusi 2<br></td>
-                                        <td>Joulukuusi 3<br></td>
-                                        <td>Joulukuusi 1<br></td>
+                                        <td>Christmas Tree 1<br></td>
+                                        <td>Christmas Tree 2<br></td>
+                                        <td>Christmas Tree 3<br></td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div id="purchase_1">
-                                                Joulukuusi 2 maksaa 10 Habbo-kolikkoa. <br>
-                                                <span id="purchase_1_purchase"></span>
-                                                <x-purchase_button id="purchase_1" product="A2 tree4" />
+                                                Christmas Tree 1 costs 10 Habbo credits. <br>
+                                                <x-purchase_button id="purchase_1" product="a2 tree3" />
                                             </div>
                                             <br>
                                             <br>
                                         </td>
                                         <td>
                                             <div id="purchase_2">
-                                                Joulukuusi 3 maksaa 10 Habbo-kolikkoa. <br>
+                                                Christmas Tree 2 costs 10 Habbo credits. <br>
                                                 <span id="purchase_2_purchase"></span>
                                                 <x-purchase_button id="purchase_2" product="A2 tree5" />
                                             </div>
                                         </td>
                                         <td>
                                             <div id="purchase_3">
-                                                Joulukuusi 1 maksaa 10 Habbo-kolikkoa. <br>
+                                                Christmas Tree 3 costs 10 Habbo credits. <br>
                                                 <span id="purchase_3_purchase"></span>
-                                                <x-purchase_button id="purchase_3" product="a2 tree3" />
+                                                <x-purchase_button id="purchase_3" product="A2 tree4" />
                                             </div>
                                         </td>
                                     </tr>
@@ -156,8 +151,7 @@
                                     <tr>
                                         <td align="center"><a>
                                                 <img width="40" height="45" border="0" name="photo_j12" title="Gingerbreadhouse" alt="Gingerbreadhouse"
-                                                    id="galleryImage12"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/Gingerbreadhouse.gif"></a>
+                                                    id="galleryImage12" src="{{ cms_config('site.c_images.url') }}/album1780/Gingerbreadhouse.gif"></a>
                                         </td>
                                         <td align="center"><a>
                                                 <img width="47" height="46" border="0" name="photo_j4" title="ham" alt="ham" id="galleryImage4"
@@ -254,12 +248,10 @@
                                 <tbody>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="48" height="98" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/reindeerposter.gif"
+                                                <img width="48" height="98" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/reindeerposter.gif"
                                                     id="galleryImage2" alt="reindeerposter" title="reindeerposter" name="photo_j2"></a></td>
                                         <td align="center"><a>
-                                                <img width="48" height="98" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_10.gif" id="galleryImage16"
+                                                <img width="48" height="98" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_10.gif" id="galleryImage16"
                                                     alt="x-10" title="x-10" name="photo_j16"></a></td>
                                     </tr>
                                     <tr>
@@ -285,15 +277,13 @@
                                     </tr>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="52" height="89" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/santaposter.gif"
+                                                <img width="52" height="89" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/santaposter.gif"
                                                     id="galleryImage3" alt="santaposter" title="santaposter" name="photo_j3"></a></td>
                                         <td align="center">
                                             <img src="{{ cms_config('site.c_images.url') }}/album1780/snowmanposter.gif">
                                         </td>
                                         <td align="center"><a>
-                                                <img width="22" height="28" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/Xmasduck.gif"
+                                                <img width="22" height="28" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/Xmasduck.gif"
                                                     id="galleryImage5" alt="Xmasduck" title="Xmasduck" name="photo_j5"></a></td>
                                     </tr>
                                     <tr>
@@ -328,16 +318,13 @@
                                     </tr>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="62" height="44" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_27.gif" id="galleryImage24"
+                                                <img width="62" height="44" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_27.gif" id="galleryImage24"
                                                     alt="x-27" title="x-27" name="photo_j24"></a></td>
                                         <td align="center"><a>
-                                                <img width="34" height="30" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_28.gif" id="galleryImage25"
+                                                <img width="34" height="30" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_28.gif" id="galleryImage25"
                                                     alt="x-28" title="x-28" name="photo_j25"></a></td>
                                         <td align="center"><a>
-                                                <img width="18" height="53" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_29.gif" id="galleryImage26"
+                                                <img width="18" height="53" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_29.gif" id="galleryImage26"
                                                     alt="x-29" title="x-29" name="photo_j26"></a></td>
                                     </tr>
                                     <tr>
@@ -374,16 +361,13 @@
                                     </tr>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="50" height="62" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/Goldenstarlarge.gif"
+                                                <img width="50" height="62" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/Goldenstarlarge.gif"
                                                     id="galleryImage11" alt="Goldenstarlarge" title="Goldenstarlarge" name="photo_j11"></a></td>
                                         <td align="center"><a>
-                                                <img width="28" height="40" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_2.gif" id="galleryImage14"
+                                                <img width="28" height="40" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_2.gif" id="galleryImage14"
                                                     alt="x-2" title="x-2" name="photo_j14"></a></td>
                                         <td align="center"><a>
-                                                <img width="51" height="51" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/goldentinsel.gif"
+                                                <img width="51" height="51" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/goldentinsel.gif"
                                                     id="galleryImage13" alt="goldentinsel" title="goldentinsel" name="photo_j13"></a></td>
                                     </tr>
                                     <tr>
@@ -419,15 +403,10 @@
                                     </tr>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="51" height="51" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album1780/goldentinsel.gif"
+                                                <img width="51" height="51" border="0" src="{{ cms_config('site.c_images.url') }}/album1780/goldentinsel.gif"
                                                     id="galleryImage1" alt="goldentinsel" title="goldentinsel" name="photo_j1"></a></td>
-                                        <td align="center"><img
-                                                src="{{ cms_config('site.c_images.url') }}/album1780/siverstar_big.gif"
-                                                alt=""><br></td>
-                                        <td align="center"><img
-                                                src="{{ cms_config('site.c_images.url') }}/album1780/silverstar_small.gif"
-                                                alt=""><br></td>
+                                        <td align="center"><img src="{{ cms_config('site.c_images.url') }}/album1780/siverstar_big.gif" alt=""><br></td>
+                                        <td align="center"><img src="{{ cms_config('site.c_images.url') }}/album1780/silverstar_small.gif" alt=""><br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">Koristenauha (hopea)<br></td>
@@ -488,15 +467,13 @@
                                     </tr>
                                     <tr>
                                         <td align="center"><a>
-                                                <img width="15" height="33" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_23.gif" id="galleryImage22"
+                                                <img width="15" height="33" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_23.gif" id="galleryImage22"
                                                     alt="x-23" title="x-23" name="photo_j22"></a></td>
                                         <td align="center">
                                             <img src="{{ cms_config('site.c_images.url') }}/album1780/whitecandlesonaplate.gif">
                                         </td>
                                         <td align="center"><a>
-                                                <img width="47" height="38" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_26.gif" id="galleryImage21"
+                                                <img width="47" height="38" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_26.gif" id="galleryImage21"
                                                     alt="x-26" title="x-26" name="photo_j21"></a></td>
                                     </tr>
                                     <tr>
@@ -529,15 +506,13 @@
                                     </tr>
                                     <tr>
                                         <td align="center">
-                                            <img  src="{{ cms_config('site.c_images.url') }}/album1780/menorah.gif">
+                                            <img src="{{ cms_config('site.c_images.url') }}/album1780/menorah.gif">
                                         </td>
                                         <td align="center"><a>
-                                                <img width="31" height="49" border="0"
-                                                    src="{{ cms_config('site.c_images.url') }}/album81/x_22.gif" id="galleryImage23"
+                                                <img width="31" height="49" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_22.gif" id="galleryImage23"
                                                     alt="x-22" title="x-22" name="photo_j23"></a></td>
                                         <td align="center"><img vspace="0" hspace="0" border="0" align="bottom"
-                                                src="{{ cms_config('site.c_images.url') }}/album1780/Singleredcandle.gif"
-                                                alt=""> </td>
+                                                src="{{ cms_config('site.c_images.url') }}/album1780/Singleredcandle.gif" alt=""> </td>
                                     </tr>
                                     <tr>
                                         <td align="center">Kynttelikkö</td>
