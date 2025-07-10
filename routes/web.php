@@ -268,6 +268,7 @@ Route::middleware('user')->group(function () {
 
     Route::prefix('iot')->group(function () {
         Route::get('/go', [HelpController::class, 'iotGo'])->name('iot.go');
+        Route::post('/go', [HelpController::class, 'iotNext'])->name('iot.next');
     });
 
     Route::get('/home', [HomeController::class, 'homeTutorial'])->name('home.user.tutorial');

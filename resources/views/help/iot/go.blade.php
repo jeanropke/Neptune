@@ -1,97 +1,48 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.iot')
 
-<head>
-    <title>Habbo Help Tool</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+@section('title', '')
 
-    <link href="{{ cms_config('site.web.url') }}/iot/styles/style.css" type="text/css" rel="stylesheet">
-    <link href="{{ cms_config('site.web.url') }}/iot/styles/style-iot.css" type="text/css" rel="stylesheet">
-</head>
-
-<body>
-    <div id="">
-        <table id="" border="0" cellpadding="0" cellspacing="0" width="720">
+@section('content')
+    <form method="post" action="go">
+        <input type="hidden" name="sid" value="58">
+        @csrf
+        <table border="0" cellspacing="0" cellpadding="0" class="ihead">
             <tbody>
                 <tr>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_left.gif) no-repeat; width: 8px; height: 77px;">
-                        &nbsp;</td>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_mid.gif) repeat-x;" valign="top">
-                        <div style="margin: 0; padding: 10px 0 0 27px; height: 67px;"><img src="{{ url('/') }}/c_images/WebLogos/habbo_logo_br.gif">
-                        </div>
+                    <td class="icon"><img src="{{ cms_config('site.web.url') }}/iot/header_images/Western2/1.gif" alt=" " width="47" height="37">
                     </td>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_left.gif) no-repeat; width: 3px; height: 77px;">
+                    <td class="text">
+                        <h2>DO YOU ALREADY HAVE A HABBO ACCOUNT?</h2>
                     </td>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_mid.gif) repeat-x; height: 77px;">
-                        <div style="height: 43px; padding: 31px 0 0 4px; margin: 0; color: #fff; text-transform: uppercase; font-weight: bold; display: block;">
-                            Habbo Help Tool</div>
-                    </td>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_header_mid.gif) repeat-x; height: 54px; padding: 23px 0 0 0;" align="right"
-                        valign="top"></td>
-                    <td style="background: url({{ cms_config('site.web.url') }}/iot/images/process/top_right.gif) no-repeat; width: 26px; height: 77px;">
-                        &nbsp;</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div id="main-content-process">
-        <div style="height: 4px;"></div>
-        <div style="height: 18px; padding: 0 0 0 12px;">&nbsp;</div>
-        <div class="portlet">
-            <div class="portlet-top-process">
-                <div class="portlet-process-header">&nbsp;</div>
-            </div>
-            <div class="portlet-body-process">
-                <div class="imaindiv">
-                    <form method="post" action="go"><input type="hidden" name="sid" value="51">
-                        <table border="0" cellspacing="0" cellpadding="0" class="ihead">
-                            <tbody>
-                                <tr>
-                                    <td class="icon"><img src="{{ cms_config('site.web.url') }}/iot/header_images/Western2/1.gif" alt=" " width="47" height="37"></td>
-                                    <td class="text">
-                                        <h2>DO YOU ALREADY HAVE A HABBO ACCOUNT?</h2>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br>
-
-                        <table border="0" cellspacing="0" cellpadding="0" class="content-table">
-                            <tbody>
-                                <tr>
-                                    <td valign="middle" align="left" style="width: 300px;">
-                                        <div class="iinfodiv">
-                                            <br>
-                                            <a href="?event=Member&amp;sid=58">Yes</a>
-                                            <br><br>
-                                            <a href="?event=Not member&amp;sid=58">No</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="portlet-bottom-process"></div>
-        </div>
-    </div>
-    <div id="footer-process">
-        <div id="footer-top-process" style="font-size:8px">&nbsp;</div>
-        <div id="footer-body-process">
-            <table border="0" width="100%" cellpadding="0" cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td align="center">© 2006 Sulake Corporation Ltd. HABBO is a registered trademark of Sulake
-                            Corporation Oy in the European Union, the USA, Japan, the People's Republic of China and
-                            various other jurisdictions. All rights reserved.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="footer-bottom-process">&nbsp;</div>
-    </div>
-</body>
-
-</html>
+        <br>
+        <table border="0" cellspacing="0" cellpadding="0" class="content-table">
+            <tbody>
+                <tr>
+                    <td valign="middle" align="left" style="width: 300px;">
+                        <div class="iinfodiv">
+                            <b><input type="radio" name="event" value="Member">Yes, I use Habbo</b><br><br>
+                            <b><input type="radio" name="event" value="Not member">No, I am not a user</b>
+                            <br><br>
+                            <div style="padding-left: 10px;">
+                                <table height="21" border="0" cellpadding="0" cellspacing="0" class="button">
+                                    <tbody>
+                                        <tr>
+                                            <td class="button-left-side"></td>
+                                            <td class="middle">
+                                                <input type="submit" class="proceedbutton" value="Next">
+                                            </td>
+                                            <td class="button-right-side-arrow"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+@endsection
