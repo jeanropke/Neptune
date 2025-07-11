@@ -311,4 +311,9 @@ class AuthController extends Controller
 
         Auth::login($user);
     }
+
+    public function accountActivation()
+    {
+
+    }
 }

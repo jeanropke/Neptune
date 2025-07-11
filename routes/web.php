@@ -79,8 +79,11 @@ Route::middleware('user')->group(function () {
     Route::get('/article/{url}', [ArticleController::class, 'show'])->name('article.show');
     Route::get('/articles', [ArticleController::class, 'articles'])->name('article.articles');
 
-    Route::get('account/logout', [AuthController::class, 'logout'])->name('account.logout');
-    Route::get('/account/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
+    Route::prefix('account')->group(function () {
+        Route::get('/account_activation', fn() => view('auth.account_activation'))->name('account.account_activation');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
+        Route::get('/disconnected', [AuthController::class, 'accountDisconnected'])->name('account.disconnect');
+    });
 
     Route::get('/tag/search', [TagController::class, 'search'])->name('tag.search');
 
@@ -90,6 +93,7 @@ Route::middleware('user')->group(function () {
         if (!$room) return redirect('404');
         return view('room')->with('room', $room);
     });
+
     //HotelController
     Route::prefix('hotel')->group(function () {
         Route::get('/', fn() => view('hotel.index'))->name('hotel.index');
