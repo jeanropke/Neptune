@@ -10,16 +10,18 @@
                 <td valign="top" style="width: 202px;" class="habboPage-col">
                     <div class="v2box red light">
                         <div class="headline">
-                            <h3>Joulutavarat</h3>
+                            <h3>Christmas goods</h3>
                         </div>
                         <div class="border">
                             <div></div>
                         </div>
                         <div class="body">
-
-                            Näin ostat joulutavaraa tältä sivulta:<br><br>1. Selaa läpi sivun tavaravalikoimaa. <br><br>2. Kun löydät mieleisesi tavaran, klikkaa "Osta"-painiketta.
-                            <br><br>3. Ostamasi tavara ilmestyy hahmosi isolle kämmenelle.<br><br>Joulutavarat myynnissä 22.12. klo 15 asti.<br><img vspace="9" hspace="9"
-                                border="0" align="left" src="{{ cms_config('site.c_images.url') }}/album1784/Xmas_defeat_Rasta.gif" style="width: 68px; height: 112px;"
+                            How to buy Christmas items from this page:<br><br>
+                            1. Browse through the selection of items on the page.<br><br>
+                            2. When you find an item you like, click the "Purchase" button.<br><br>
+                            3. The item you purchase will appear on your character's large palm.<br><br>
+                            Christmas items are on sale until December 22nd at 3:00 PM.<br><img vspace="9" hspace="9" border="0" align="left"
+                                src="{{ cms_config('site.c_images.url') }}/album1784/Xmas_defeat_Rasta.gif" style="width: 68px; height: 112px;"
                                 alt=""><br><br><br><br><br><br><br><br><br><br><span style="font-weight: bold;"></span><br>
                             <div class="clear"></div>
                         </div>
@@ -34,7 +36,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Joulukuuset</h3>
+                                    <h3>Christmas Trees</h3>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +99,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Jouluruokaa</h3>
+                                    <h3>Christmas Food</h3>
                                 </div>
                             </div>
                         </div>
@@ -117,29 +119,26 @@
                                                     src="{{ cms_config('site.c_images.url') }}/album1780/xmaspudding.gif"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center"><br>Habbo-kakku</td>
-                                        <td align="center"><br>Kalkkuna</td>
-                                        <td align="center"> <br>Joulukakku<br></td>
+                                        <td align="center"><br>Habbo Cake</td>
+                                        <td align="center"><br>Roast Turkey</td>
+                                        <td align="center"> <br>Holiday Pudding<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_4">
-                                                Habbo-kakku maksaa 4 Habbo-kolikkoa. <br>
-                                                <span id="purchase_4_purchase"></span>
+                                                Habbo Cake costs 4 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_4" product="a2 habbocake" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_5">
-                                                Jouluankka maksaa 2 Habbo-kolikkoa. <br>
-                                                <span id="purchase_5_purchase"></span>
+                                                Roast Turkey costs 2 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_5" product="a1 jouluank" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_6">
-                                                Joulukakku maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_6_purchase"></span>
+                                                Holiday Pudding costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_6" product="A2 KAKKU" />
                                             </div>
                                         </td>
@@ -159,21 +158,19 @@
                                         <td>&nbsp;</td>
                                     </tr>
                                     <tr>
-                                        <td align="center"><br>Piparkakkutalo</td>
+                                        <td align="center"><br>Gingerbread House</td>
                                         <td align="center"><br>Kinkku</td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_7">
-                                                Piparkakkutalo maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_7_purchase"></span>
+                                                Gingerbread House costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_7" product="a1 house" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_8">
-                                                Kinkku maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_8_purchase"></span>
+                                                Ham costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_8" product="A2 ham" />
                                             </div>
                                         </td>
@@ -190,7 +187,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Joulukukat</h3>
+                                    <h3>Christmas Flowers</h3>
                                 </div>
                             </div>
                         </div>
@@ -207,21 +204,19 @@
                                                     src="{{ cms_config('site.c_images.url') }}/album81/x_15.gif"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Punainen Hyasintti<br></td>
-                                        <td align="center">Joulutähti</td>
+                                        <td align="center">Pink Hyacinth<br></td>
+                                        <td align="center">Poinsetta</td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_9">
-                                                Punainen Hyasintti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_9_purchase"></span>
+                                                Pink Hyacinth costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_9" product="A2 HYASINTTIP" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_10">
-                                                Joulutähti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_10_purchase"></span>
+                                                Poinsetta costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_10" product="A2 JOULUTAHTI" />
                                             </div>
                                         </td>
@@ -238,7 +233,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Julisteet ja koristeet</h3>
+                                    <h3>Posters and Decorations</h3>
                                 </div>
                             </div>
                         </div>
@@ -253,25 +248,33 @@
                                         <td align="center"><a>
                                                 <img width="48" height="98" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_10.gif" id="galleryImage16"
                                                     alt="x-10" title="x-10" name="photo_j16"></a></td>
+                                        <td align="center"><a>
+                                                <img width="48" height="98" border="0" src="{{ cms_config('site.c_images.url') }}/album81/x_8.gif" id="galleryImage36"
+                                                    alt="x-8" title="x-8" name="photo_j36"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Porot taivaalla<br></td>
-                                        <td align="center">Talven ihmemaa<br></td>
+                                        <td align="center">Reindeer Poster<br></td>
+                                        <td align="center">Winter Wonderland<br></td>
+                                        <td align="center">Three Wise Men Poster<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_11">
-                                                Porot taivaalla maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_11_purchase"></span>
+                                                Reindeer Poster costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_11" product="poster 25" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_12">
-                                                Talven ihmemaa maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_12_purchase"></span>
+                                                Winter Wonderland costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_12" product="poster 22" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div id="purchase_31">
+                                                Three Wise Men Poster costs 3 Habbo credits. <br>
+                                                <x-purchase_button id="purchase_31" product="poster 24" />
                                             </div>
                                         </td>
                                     </tr>
@@ -287,31 +290,28 @@
                                                     id="galleryImage5" alt="Xmasduck" title="Xmasduck" name="photo_j5"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Joulupukki</td>
-                                        <td align="center">Lumiukko</td>
-                                        <td align="center">Jouluankka</td>
+                                        <td align="center">Santa Poster</td>
+                                        <td align="center">Snowman Poster</td>
+                                        <td align="center">Christmas Duck</td>
 
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_13">
-                                                Joulupukki maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_13_purchase"></span>
+                                                Santa Poster costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_13" product="poster 23" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_14">
-                                                Lumiukko maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_14_purchase"></span>
+                                                Snowman Poster costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_14" product="poster 20" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_15">
-                                                Jouluankka maksaa 2 Habbo-kolikkoa. <br>
-                                                <span id="purchase_15_purchase"></span>
+                                                Christmas Duck costs 2 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_15" product="a1 jouluank" />
                                             </div>
                                         </td>
@@ -328,32 +328,28 @@
                                                     alt="x-29" title="x-29" name="photo_j26"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Koristeköynnös</td>
+                                        <td align="center">Holly Garland</td>
                                         <td align="center">Mistelinoksa</td>
-                                        <td align="center">Joulusukka</td>
+                                        <td align="center">Stocking</td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_16">
-
-                                                Koristeköynnös maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_16_purchase"></span>
+                                                Holly Garland costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_16" product="poster 27" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_17">
-                                                Mistelinoksa maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_17_purchase"></span>
+                                                Mistletoe costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_17" product="poster 30" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_18">
-                                                Joulusukka maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_18_purchase"></span>
+                                                Stocking costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_18" product="poster 26" />
                                             </div>
                                             <br><br>
@@ -371,31 +367,28 @@
                                                     id="galleryImage13" alt="goldentinsel" title="goldentinsel" name="photo_j13"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Kultainen tähti<br></td>
-                                        <td align="center">Kultainen pikkutähti<br></td>
-                                        <td align="center">Koristenauha (kultainen)<br></td>
+                                        <td align="center">Large gold star<br></td>
+                                        <td align="center">Small gold star<br></td>
+                                        <td align="center">Tinsel (gold)<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_19">
-                                                Kultainen tähti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_19_purchase"></span>
+                                                Large gold star costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_19" product="poster 48" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_20">
-                                                Kultainen pikkutähti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_20_purchase"></span>
+                                                Small gold star costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_20" product="poster 46" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_21">
-                                                Koristenauha maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_21_purchase"></span>
+                                                Tinsel (gold) costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_21" product="poster 29" />
                                             </div>
                                             <br><br>
@@ -409,30 +402,27 @@
                                         <td align="center"><img src="{{ cms_config('site.c_images.url') }}/album1780/silverstar_small.gif" alt=""><br></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Koristenauha (hopea)<br></td>
-                                        <td align="center">Hopeinen tähti<br></td>
-                                        <td align="center">Hopeinen pikkutähti<br></td>
+                                        <td align="center">Tinsel (silver)<br></td>
+                                        <td align="center">Large silver star<br></td>
+                                        <td align="center">Small silver star<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_22">
-                                                Koristenauha maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_22_purchase"></span>
+                                                Tinsel (silver) costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_22" product="poster 28" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_23">
-                                                Hopeinen tähti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_23_purchase"></span>
+                                                Large silver star costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_23" product="poster 49" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_24">
-                                                Hopeinen pikkutähti maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_24_purchase"></span>
+                                                Small silver star costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_24" product="poster 47" />
                                             </div>
                                         </td>
@@ -449,7 +439,7 @@
                         <div class="headline">
                             <div class="headline-inner">
                                 <div class="headline-inner-inner">
-                                    <h3>Kynttilät </h3>
+                                    <h3>Candles</h3>
                                 </div>
                             </div>
                         </div>
@@ -477,29 +467,26 @@
                                                     alt="x-26" title="x-26" name="photo_j21"></a></td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Valkoinen kynttilä<br></td>
-                                        <td align="center">Valkeat kynttilät<br></td>
-                                        <td align="center">Punaiset kynttilät<br></td>
+                                        <td align="center">White Candle<br></td>
+                                        <td align="center">White Candles<br></td>
+                                        <td align="center">Red Candles<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_25">
-                                                Punainen kynttilä maksaa 2 Habbo-kolikkoa. <br>
-                                                <span id="purchase_25_purchase"></span>
+                                                White Candle costs 2 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_25" product="A1 KYNTTILA2" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_26">
-                                                Valkeat kynttilät maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_26_purchase"></span>
+                                                White Candles costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_26" product="A2 KYNTTILAT1" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_27">
-                                                Punaiset kynttilät maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_27_purchase"></span>
+                                                Red Candles costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_27" product="A2 KYNTTILAT2" />
                                             </div>
                                         </td>
@@ -515,30 +502,27 @@
                                                 src="{{ cms_config('site.c_images.url') }}/album1780/Singleredcandle.gif" alt=""> </td>
                                     </tr>
                                     <tr>
-                                        <td align="center">Kynttelikkö</td>
-                                        <td align="center">Sähkökynttilät</td>
-                                        <td align="center">Punainen kynttilä<br></td>
+                                        <td align="center">Menorah</td>
+                                        <td align="center">Electric Candles</td>
+                                        <td align="center">Red Candle<br></td>
                                     </tr>
                                     <tr>
                                         <td align="center">
                                             <div id="purchase_28">
-                                                Kynttelikkö maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_28_purchase"></span>
+                                                Menorah costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_28" product="a2 menorah" />
                                             </div>
                                             <br><br>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_29">
-                                                Sähkökynttilät maksaa 3 Habbo-kolikkoa. <br>
-                                                <span id="purchase_29_purchase"></span>
+                                                Electric Candles costs 3 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_29" product="A2 KYNTTELI" />
                                             </div>
                                         </td>
                                         <td align="center">
                                             <div id="purchase_30">
-                                                Punainen kynttilä maksaa 2 Habbo-kolikkoa. <br>
-                                                <span id="purchase_30_purchase"></span>
+                                                Red Candle costs 2 Habbo credits. <br>
                                                 <x-purchase_button id="purchase_30" product="A1 KYNTTILA2" />
                                             </div>
                                         </td>
