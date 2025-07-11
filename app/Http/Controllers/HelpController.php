@@ -68,11 +68,17 @@ class HelpController extends Controller
                 break;
 
             case 76:
-                session(['issue' => $request->issue_type]);
+                if (!$request->issue)
+                    return view('help.iot.step3');
+
+                session(['issue' => $request->issue]);
                 return view('help.iot.step4');
                 break;
 
             case 63:
+                if (!$request->message)
+                    return view('help.iot.step4');
+
                 HelpTicket::create([
                     'username'  => session('name'),
                     'email'     => session('email'),

@@ -39,7 +39,7 @@
                 </td>
                 <td class="iactiontd" align="center">
                     <b>Issue</b><br>
-                    <select name="issue_type">
+                    <select name="issue">
                         <option value="">-</option>
                         <option value="habbo_credits">A problem with Habbo Credits purchase</option>
                         <option value="password_issue">My Habbo password/my child's Habbo password</option>
