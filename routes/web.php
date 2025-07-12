@@ -523,17 +523,6 @@ Route::middleware('admin')->group(function () {
             Route::get('/', [ServerGeneralController::class, 'index'])->name('housekeeping.server');
             Route::post('/', [ServerGeneralController::class, 'serverSave'])->name('housekeeping.server.save');
 
-            //Route::get('/startup', [ServerController::class, 'serverStartup'])->name('housekeeping.server.startup');
-            //Route::post('/startup', [ServerController::class, 'serverStartupInit'])->name('housekeeping.server.startup');
-
-            // Kepler does not have wordfilter
-            //Route::get('/wordfilter', [ServerController::class, 'wordfilter'])->name('housekeeping.server.wordfilter');
-            //Route::post('/wordfilter', [ServerController::class, 'wordfilterSave'])->name('housekeeping.server.wordfilter.save');
-            //Route::get('/wordfilter/add', [ServerController::class, 'wordfilterAdd'])->name('housekeeping.server.wordfilter.add');
-            //Route::post('/wordfilter/add', [ServerController::class, 'wordfilterCreate'])->name('housekeeping.server.wordfilter.add');
-            //Route::get('/wordfilter/{word}', [ServerController::class, 'wordfilter'])->name('housekeeping.server.wordfilter.edit');
-            //Route::post('/wordfilter/{word}', [ServerController::class, 'wordfilterEditSave'])->name('housekeeping.server.wordfilter_edit.save');
-            //Route::get('/wordfilter/{word}/delete', [ServerController::class, 'wordfilterDelete'])->name('housekeeping.server.wordfilter.delete');
             Route::get('/welcomemsg', [ServerGeneralController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
             Route::post('/welcomemsg', [ServerGeneralController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
         });
