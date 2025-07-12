@@ -11,10 +11,6 @@ class TagController extends Controller
 {
     public function search(Request $request)
     {
-        $request->validate([
-            'tag' => 'required|string|max:255'
-        ]);
-
         $related = Tag::select('tag', DB::raw('COUNT(tag) AS count'))
             ->inRandomOrder()
             ->groupBy('tag')
