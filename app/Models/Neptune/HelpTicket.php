@@ -2,7 +2,10 @@
 
 namespace App\Models\Neptune;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HelpTicket extends Model
 {
@@ -13,6 +16,26 @@ class HelpTicket extends Model
         'email',
         'issue',
         'message',
-        'picked_by'
+        'picked_by',
+        'status'
     ];
+
+    public function getStatusLabelAttribute(): string
+    {
+        return match ($this->status) {
+            0 => 'open',
+            1 => 'pending',
+            2 => 'closed'
+        };
+    }
+
+    public function picker(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'picked_by');
+    }
+
+    public function responses(): HasMany
+    {
+        return $this->hasMany(HelpTicketResponse::class, 'ticket_id');
+    }
 }

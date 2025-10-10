@@ -35,6 +35,7 @@ use App\Http\Controllers\Housekeeping\Moderation\HomeController as Houseekeeping
 use App\Http\Controllers\Housekeeping\Moderation\LogController;
 use App\Http\Controllers\Housekeeping\Moderation\RemoteController;
 use App\Http\Controllers\Housekeeping\Moderation\ReportController as HouseekeepingReportController;
+use App\Http\Controllers\Housekeeping\Moderation\SupportController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
@@ -703,6 +704,9 @@ Route::middleware('admin')->group(function () {
             Route::get('/homes/stickies', [HouseekeepingHomeController::class, 'stickies'])->name('housekeeping.moderation.homes.stickies');
             Route::post('/homes/stickies/delete', [HouseekeepingHomeController::class, 'stickiesDelete'])->name('housekeeping.moderation.homes.stickies.delete');
             Route::post('/homes/stickies/restore', [HouseekeepingHomeController::class, 'stickiesRestore'])->name('housekeeping.moderation.homes.stickies.restore');
+
+            Route::get('/support', [SupportController::class, 'listing'])->name('housekeeping.moderation.support.listing');
+            Route::get('/support/view/{id}', [SupportController::class, 'view'])->name('housekeeping.moderation.support.view');
         });
 
         Route::prefix('logs')->group(function () {

@@ -107,12 +107,10 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ cms_config('site.web.url') }}/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Customer Support</div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.users.helper') }}" style="text-decoration:none;{{ $submenu == 'helper' ? 'font-weight: bold;' : '' }}">Help Queries</a>
+        <a href="{{ route('housekeeping.moderation.support.listing') }}" style="text-decoration:none;{{ $submenu == 'support.listing' ? 'font-weight: bold;' : '' }}">Help Queries</a>
     </div>
-    --}}
 </div>
 <br />
 <div class="menuouterwrap">
