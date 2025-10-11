@@ -4,8 +4,8 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Carbon;
 
-    $articles = Article::where('is_deleted', '0')
-        ->when(!user()?->hasPermission('can_create_site_news'), function($query) { return $query->where('publish_date', '<', now()); })
+    $articles = Article::where('is_published', '1')
+        ->when(!user()?->hasPermission('can_create_site_news'), function($query) { return $query->where('is_future_published', '0'); })
         ->orderBy('created_at', 'desc');
 
     $top_stories = $articles->take(3)->get();
@@ -17,9 +17,9 @@
         @foreach ($top_stories as $article)
             {
                 text: "{{ $article->short_text }}",
-                image: '<img width="425" height="178" border="0" src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ $article->image }}" />',
+                image: '<img width="425" height="178" border="0" src="{{ $article->topstory_image }}" />',
                 links: [
-                    '<a href="/article/{{ $article->url }}">Read More!</a>',
+                    '<a href="/article/{{ $article->id }}">Read More!</a>',
                     '<a href="/client" target="client" onclick="openOrFocusHabbo(this); return false;">Enter Hotel</a>'
                 ]
             },
@@ -44,7 +44,7 @@
         <div id="promobody">
             @if ($top_stories->count() > 0)
                 <p id="promoimage">
-                    <img width="425" height="178" border="0" src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ $top_stories[0]->image }}"></a>
+                    <img width="425" height="178" border="0" src="{{ $top_stories[0]->topstory_image }}"></a>
                 </p>
 
                 <div class="promotext">
@@ -52,7 +52,7 @@
                 </div>
                 <div id="promolinks">
                     <ul id="promolinks-list">
-                        <li><a href="/article/{{ $top_stories[0]->url }}">Read More!</a></li>
+                        <li><a href="/article/{{ $top_stories[0]->id }}">Read More!</a></li>
                         <li><a href="/client" target="client" onclick="openOrFocusHabbo(this); return false;">Enter Hotel</a>
                         </li>
                     </ul>
@@ -69,11 +69,11 @@
         @foreach ($articles as $article)
             <div class="newsitem">
                 <h3><span class="articledate">[{{ $article->created_at->format('d/m/y') }}]</span>
-                    <a href="/article/{{ $article->url }}">{{ $article->title_resolved }}</a>
+                    <a href="/article/{{ $article->id }}">{{ $article->title_resolved }}</a>
                 </h3>
 
                 <p>
-                    {{ $article->short_text }}
+                    {{ $article->short_story }}
                 </p>
             </div>
         @endforeach

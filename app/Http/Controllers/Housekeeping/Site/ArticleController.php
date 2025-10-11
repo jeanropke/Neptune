@@ -15,7 +15,7 @@ class ArticleController extends Controller
         abort_unless_permission('can_create_site_news');
 
         return view('housekeeping.site.articles.create')->with([
-            'ts_images' => array_map('basename', File::files('web/images/top_story_images')),
+            'ts_images' => array_map(fn($f) => pathinfo($f, PATHINFO_FILENAME), File::files('web/images/top_story_images'))
         ]);
     }
 
@@ -31,22 +31,25 @@ class ArticleController extends Controller
         ]);
 
         $article = Article::create([
-            'title'             => $request->title,
-            'image'             => $request->topstory,
-            'short_text'        => $request->short_text,
-            'long_text'         => $request->long_text,
-            'author_id'         => user()->id,
-            'author_override'   => $request->author_override,
-            'publish_date'      => Carbon::parse($request->publish_date)
+            'title'                 => $request->title,
+            'author_id'             => user()->id,
+            'author_override'       => $request->author_override ?? '',
+            'short_story'           => $request->short_text,
+            'full_story'            => $request->long_text,
+            'topstory'              => $request->topstory,
+            'topstory_override'     => $request->topstory_override ?? '',
+            'article_image'         => $request->article_image ?? '',
+            'is_published'          => $request->is_published ?? 0,
+            'is_future_published'   => $request->is_future_published ?? 0,
+            'created_at'            => now()
         ]);
 
-        $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
-        $url = str_replace(" ", "_", $url);
-        $url = strtolower($url);
-
-        $article->update([
-            'url' => $article->id . '_' . $url
-        ]);
+        //$url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
+        //$url = str_replace(" ", "_", $url);
+        //$url = strtolower($url);
+        //$article->update([
+        //    'url' => $article->id . '_' . $url
+        //]);
 
         create_staff_log('site.articles.create', $request);
 
@@ -58,7 +61,7 @@ class ArticleController extends Controller
         abort_unless_permission('can_create_site_news');
 
         return view('housekeeping.site.articles.listing')->with([
-            'articles'  => Article::where('is_deleted', '0')->orderBy('created_at', 'desc')->with('author')->paginate(15)
+            'articles'  => Article::where('is_published', '1')->orderBy('created_at', 'desc')->with('author')->paginate(15)
         ]);
     }
 
@@ -72,7 +75,7 @@ class ArticleController extends Controller
             return redirect()->route('housekeeping.site.article')->with('message', 'Article not found!');
 
         return view('housekeeping.site.articles.edit')->with([
-            'ts_images' => array_map('basename', File::files('web/images/top_story_images')),
+            'ts_images' => array_map(fn($f) => pathinfo($f, PATHINFO_FILENAME), File::files('web/images/top_story_images')),
             'article'   => $article
         ]);
     }
@@ -93,19 +96,22 @@ class ArticleController extends Controller
         if (!$article)
             return redirect()->route('housekeeping.site.article')->with('message', 'Article not found!');
 
-        $url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
-        $url = str_replace(" ", "_", $url);
-        $url = strtolower($url);
+        //$url = preg_replace("/[^\w\s]/", "", iconv("UTF-8", "ASCII//TRANSLIT", $request->title));
+        //$url = str_replace(" ", "_", $url);
+        //$url = strtolower($url);
 
         $article->update([
-            'title'             => $request->title,
-            'image'             => $request->topstory,
-            'short_text'        => $request->short_text,
-            'long_text'         => $request->long_text,
-            'author_id'         => user()->id,
-            'author_override'   => $request->author_override,
-            'publish_date'      => Carbon::parse($request->publish_date),
-            'url'               => $article->id . '_' . $url
+            'title'                 => $request->title,
+            'author_id'             => user()->id,
+            'author_override'       => $request->author_override,
+            'short_story'           => $request->short_text,
+            'full_story'            => $request->long_text,
+            'topstory'              => $request->topstory,
+            'topstory_override'     => $request->topstory_override ?? '',
+            'article_image'         => $request->article_image ?? '',
+            'is_published'          => $request->is_published,
+            'is_future_published'   => $request->is_future_published ?? 0,
+            'created_at'            => now()
         ]);
 
         create_staff_log('site.articles.edit.save', $request);

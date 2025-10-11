@@ -29,8 +29,8 @@
                             <ul>
                                 @foreach($articles as $article)
                                 <li>
-                                    <span class="articledate">[{{ $article->publish_date_resolved->format('m/d/y') }}]</span>
-                                    <a href="/article/{{ $article->url }}">{{ $article->title_resolved }}</a>
+                                    <span class="articledate">[{{ $article->created_at->format('m/d/y') }}]</span>
+                                    <a href="/article/{{ $article->id }}">{{ $article->title_resolved }}</a>
                                 </li>
                                 @endforeach
                             </ul>

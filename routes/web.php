@@ -591,8 +591,6 @@ Route::middleware('admin')->group(function () {
             Route::get('/articles/create', [HousekeepingArticleController::class, 'articleCreate'])->name('housekeeping.site.articles.create');
             Route::post('/articles/create', [HousekeepingArticleController::class, 'articleCreateSave'])->name('housekeeping.site.articles.create.save');
             Route::get('/articles', [HousekeepingArticleController::class, 'articles'])->name('housekeeping.site.articles');
-            Route::get('/articles/restore', [HousekeepingArticleController::class, 'articlesRestore'])->name('housekeeping.site.articles.restore');
-            Route::post('/articles/restore', [HousekeepingArticleController::class, 'articleRestore'])->name('housekeeping.site.articles.restore.post');
             Route::get('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEdit'])->name('housekeeping.site.articles.edit');
             Route::post('/articles/edit/{id}', [HousekeepingArticleController::class, 'articleEditSave'])->name('housekeeping.site.articles.edit.save');
             Route::post('/articles/delete', [HousekeepingArticleController::class, 'articleDelete'])->name('housekeeping.site.articles.delete');

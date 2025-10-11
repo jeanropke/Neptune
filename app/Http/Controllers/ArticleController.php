@@ -6,12 +6,12 @@ use App\Models\Neptune\Article;
 
 class ArticleController extends Controller
 {
-    public function show(string $url)
+    public function show(string $id)
     {
         $user = user();
-        $article = Article::where('url', $url)->firstOrFail();
+        $article = Article::find($id);
 
-        if ($article->is_deleted == '1' || (!$user || !$user->hasPermission('can_create_site_news')) && $article->publish_date_resolved > now()) {
+        if ($article->is_published != '1' || (!$user || !$user->hasPermission('can_create_site_news')) && $article->is_future_published) {
             abort(404);
         }
 
@@ -29,10 +29,10 @@ class ArticleController extends Controller
 
     private function getSidebarArticles($user, int $limit)
     {
-        $query = Article::where('is_deleted', '0')->orderByDesc('created_at');
+        $query = Article::where('is_published', '1')->orderByDesc('created_at');
 
-        if (!$user || !$user->hasPermission('can_create_site_news')) {
-            $query->where('publish_date', '<', now());
+        if ($user && $user->hasPermission('can_create_site_news')) {
+            $query->orWhere('is_future_published', '1');
         }
 
         return $query->limit($limit)->get();

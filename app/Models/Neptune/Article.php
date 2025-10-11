@@ -8,24 +8,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
-    protected $table = 'cms_articles';
+    protected $table = 'site_articles';
 
     protected $fillable = [
-        'url',
-        'image',
         'title',
-        'short_text',
-        'long_text',
+        'short_story',
+        'full_story',
         'author_id',
         'author_override',
-        'publish_date',
-        'is_deleted',
-        'created_at',
-        'updated_at'
+        'topstory',
+        'topstory_override',
+        'article_image',
+        'is_published',
+        'is_future_published',
+        'views',
+        'created_at'
     ];
 
+    public $timestamps = false;
+
+    protected $dates = ['created_at'];
+
     protected $casts = [
-        'publish_date'  => 'datetime'
+        'created_at' => 'datetime'
     ];
 
     public function author(): BelongsTo
@@ -38,14 +43,19 @@ class Article extends Model
         return $this->author_override ?: $this->author?->username;
     }
 
-    public function getPublishDateResolvedAttribute()
+    public function getTopstoryImageAttribute(): ?string
     {
-        return $this->publish_date ?: $this->created_at;
+        return $this->topstory_override ?: cms_config('site.web.url') . '/images/top_story_images/' . $this->topstory . '.gif';
+    }
+
+    public function getShortTextAttribute(): ?string
+    {
+        return str_replace(["\r", "\n"], '', $this->short_story);
     }
 
     public function getTitleResolvedAttribute()
     {
-        if (user() && user()->hasPermission('can_create_site_news') && $this->publish_date_resolved > now()) {
+        if (user() && user()->hasPermission('can_create_site_news') && $this->is_future_published) {
             return '[NOT YET RELEASED] ' . $this->title;
         }
 

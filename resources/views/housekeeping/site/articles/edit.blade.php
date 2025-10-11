@@ -70,14 +70,10 @@
                     @if ($errors->any())
                         <p><strong>{{ $errors->first() }}</strong></p>
                     @endif
-                    <form action="{{ route('housekeeping.site.articles.edit.save', $article->id) }}" method="post" name="theAdminForm" id="theAdminForm">
+                    <form action="{{ route('housekeeping.site.articles.edit.save', $article->id) }}" method="post" name="theAdminForm" id="theAdminForm" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="tableborder">
-                            <div class="tableheaderalt">Edit News Article ({{ $article->title }}) -
-                                @if ($article->is_deleted)
-                                    <i>(Deleted)</i>
-                                @endif
-                            </div>
+                            <div class="tableheaderalt">{{ $article->title }} - Edit News Article</div>
                             <table width="100%" cellspacing="0" cellpadding="5" align="center" border="0">
                                 <input type="number" value="{{ $article->id }}" name="id" hidden>
                                 <tr>
@@ -90,16 +86,34 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Topstory Image</b>
-                                        <div class="graytext">The URL to the topstory image. </div>
+                                        <div class="graytext">Select an existing topstory image. </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ $article->image }}" id="ts_preview" data-url="{{ cms_config('site.web.url') }}/images/top_story_images/%icon%">
+                                        <img src="{{ $article->topstory_image }}" id="ts_preview" data-url="{{ cms_config('site.web.url') }}/images/top_story_images/%icon%.gif">
                                         <br>
                                         <select name="topstory" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($ts_images as $ts_img)
-                                                <option value="{{ $ts_img }}" {{ $ts_img == (old('topstory') ?? $article->image) ? 'selected' : '' }}>{{ $ts_img }}</option>
+                                                <option value="{{ $ts_img }}" {{ $ts_img == (old('topstory') ?? $article->topstory) ? 'selected' : '' }}>{{ $ts_img }}
+                                                </option>
                                             @endforeach
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Topstory Image Override</b>
+                                        <div class="graytext">The URL to the topstory image you want. Optional.</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="topstory_override" value="{{ old('topstory_override') ?? $article->topstory_override }}" size="30"
+                                            class="textinput">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>article_image</b>
+                                        <div class="graytext">article_image</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="article_image" value="{{ old('article_image') ?? $article->article_image }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -109,7 +123,7 @@
                                         </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <textarea name="short_text" cols="60" rows="5" wrap="soft" id="sub_desc" class="multitext">{{ old('short_text') ?? $article->short_text }}</textarea>
+                                        <textarea name="short_text" cols="60" rows="5" wrap="soft" id="sub_desc" class="multitext">{{ old('short_text') ?? $article->short_story }}</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +133,7 @@
                                         </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <textarea name="long_text" cols="60" rows="5" wrap="soft" id="article" class="multitext">{{ old('long_text') ?? $article->long_text }}</textarea>
+                                        <textarea name="long_text" cols="60" rows="5" wrap="soft" id="article" class="multitext">{{ old('long_text') ?? $article->full_story }}</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -132,12 +146,33 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>is_published</b>
+                                        <div class="graytext">is_published</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="is_published" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ 0 == (old('is_published') ?? $article->is_published) ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ 1 == (old('is_published') ?? $article->is_published) ? 'selected' : '' }}>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>is_future_published</b>
+                                        <div class="graytext">is_future_published</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="is_future_published" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ 0 == (old('is_future_published') ?? $article->is_future_published) ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ 1 == (old('is_future_published') ?? $article->is_future_published) ? 'selected' : '' }}>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Future Release</b>
                                         <div class="graytext">In case you want to set a release date for the article.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="datetime-local" name="publish_date" value="{{ old('publish_date') ?? $article->publish_date }}" size="30"
-                                            class="textinput">
+                                        <input type="datetime-local" name="created_at" value="{{ old('created_at') ?? $article->created_at }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>

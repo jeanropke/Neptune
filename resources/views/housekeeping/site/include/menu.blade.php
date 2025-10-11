@@ -72,10 +72,6 @@
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.site.articles', false) }}" style="text-decoration:none;{{ $submenu == 'articles' ? 'font-weight: bold;' : '' }}">Manage Existing News Items</a>
     </div>
-    <div class="menulinkwrap">&nbsp;
-        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.site.articles.restore', false) }}" style="text-decoration:none;{{ $submenu == 'articles.restore' ? 'font-weight: bold;' : '' }}">Restore Articles</a>
-    </div>
 </div>
 <br />
 <div class="menuouterwrap">

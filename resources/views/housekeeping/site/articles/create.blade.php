@@ -86,16 +86,34 @@
                                 </tr>
                                 <tr>
                                     <td class="tablerow1" width="40%" valign="middle"><b>Topstory Image</b>
-                                        <div class="graytext">The URL to the topstory image.</div>
+                                        <div class="graytext">Select an existing topstory image. </div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ old('topstory') ?? $ts_images[0] }}" id="ts_preview" data-url="{{ cms_config('site.web.url') }}/images/top_story_images/%icon%">
+                                        <img src="{{ cms_config('site.web.url') }}/images/top_story_images/{{ old('topstory') }}.gif" id="ts_preview" data-url="{{ cms_config('site.web.url') }}/images/top_story_images/%icon%.gif">
                                         <br>
                                         <select name="topstory" id="ts_image" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($ts_images as $ts_img)
-                                                <option value="{{ $ts_img }}" {{ $ts_img == old('topstory') ? 'selected' : '' }}>{{ $ts_img }}</option>
+                                                <option value="{{ $ts_img }}" {{ $ts_img == old('topstory') ? 'selected' : '' }}>{{ $ts_img }}
+                                                </option>
                                             @endforeach
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Topstory Image Override</b>
+                                        <div class="graytext">The URL to the topstory image you want. Optional.</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="topstory_override" value="{{ old('topstory_override') }}" size="30"
+                                            class="textinput">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>article_image</b>
+                                        <div class="graytext">article_image</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <input type="text" name="article_image" value="{{ old('article_image') }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -123,7 +141,30 @@
                                         <div class="graytext">If you want to use 'Hotel Management' or something like that.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="author_override" value="" size="30" class="textinput">
+                                        <input type="text" name="author_override" value="{{ old('author_override') }}" size="30"
+                                            class="textinput">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>is_published</b>
+                                        <div class="graytext">is_published</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="is_published" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ 0 == old('is_published') ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ 1 == old('is_published') ? 'selected' : '' }}>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>is_future_published</b>
+                                        <div class="graytext">is_future_published</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="is_future_published" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ 0 == old('is_future_published') ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ 1 == old('is_future_published') ? 'selected' : '' }}>Yes</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -131,12 +172,12 @@
                                         <div class="graytext">In case you want to set a release date for the article.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="datetime-local" name="publish_date" value="" size="30" class="textinput">
+                                        <input type="datetime-local" name="created_at" value="{{ old('created_at') }}" size="30" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
-                                        <input type="submit" value="Publish Article" class="realbutton" accesskey="s">
+                                        <input type="submit" value="Update Article" class="realbutton" accesskey="s">
                                     </td>
                                 </tr>
                             </table>

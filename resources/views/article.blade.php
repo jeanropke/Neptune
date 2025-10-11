@@ -18,8 +18,8 @@
                                 <ul>
                                     @foreach($articles as $art)
                                     <li>
-                                        <span class="articledate">{{ $art->publish_date_resolved->format('d/m/y') }}</span>
-                                        <a href="/article/{{ $art->url }}">{{ $art->title_resolved }}</a>
+                                        <span class="articledate">{{ $art->created_at->format('d/m/y') }}</span>
+                                        <a href="/article/{{ $art->id }}">{{ $art->title_resolved }}</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -42,10 +42,10 @@
                         <div class="v3box-body">
                             <div class="article-full">
                                 <i class="article-author">Published at
-                                    {{ $article->publish_date_resolved->format('F j, Y') }}</i><br><br>
+                                    {{ $article->created_at->format('F j, Y') }}</i><br><br>
                                 <p class="teaser"><b>{{ $article->short_text }}</b></p><br>
                                 <div>
-                                    {!! $article->long_text !!}
+                                    {!! $article->full_story !!}
                                 </div>
 
                                 <br />

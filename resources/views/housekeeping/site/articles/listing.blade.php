@@ -23,8 +23,8 @@
                                 <td class="tablesubheader" width="28%">Title</td>
                                 <td class="tablesubheader" width="10%" align="center">Date</td>
                                 <td class="tablesubheader" width="10%" align="center">Author</td>
+                                <td class="tablesubheader" width="12%" align="center">Published</td>
                                 <td class="tablesubheader" width="10%" align="center">Edit</td>
-                                <td class="tablesubheader" width="12%" align="center">Delete</td>
                             </tr>
                             @forelse($articles as $article)
                                 <tr>
@@ -47,13 +47,11 @@
                                         {{ $article->author_name }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.site.articles.edit', $article->id) }}">
-                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit">
-                                        </a>
+                                        {{ $article->is_published ? 'Yes' : 'No' }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="#" class="delete-article" data-id="{{ $article->id }}">
-                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/delete.gif" alt="Delete">
+                                        <a href="{{ route('housekeeping.site.articles.edit', $article->id) }}">
+                                            <img src="{{ cms_config('site.web.url') }}/housekeeping/images/edit.gif" alt="Edit">
                                         </a>
                                     </td>
                                 </tr>
@@ -69,9 +67,6 @@
                         </div>
                         <div style="text-align: center; vertical-align: middle;">{{ $articles->withQueryString()->links('layouts.housekeeping.pagination') }}</div>
                     </div>
-                    <script>
-                        GenericManager.initialise('.delete-article', '<p>Are you sure you want to delete this article?</p>', '{{ route('housekeeping.site.articles.delete') }}', 'tr');
-                    </script>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>
