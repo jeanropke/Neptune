@@ -83,7 +83,7 @@ class Group extends Model
         if ($this->owner && (!$name || stripos($this->owner->username, $name) !== false)) {
             $members->prepend((object)[
                 'user'        => $this->owner,
-                'member_rank' => '3',
+                'member_rank' => '1',
                 'user_id'     => $this->owner_id
             ]);
         }
@@ -169,7 +169,7 @@ class Group extends Model
             $member->user->setFavouriteGroup(0);
         }
 
-        $member->delete();
+        Member::where([['group_id', $member->group_id], ['user_id', $member->user_id]])->delete();
 
         return true;
     }

@@ -5,13 +5,12 @@
             <li id="group-memberlist-{{ $member->user_id }}">
                 <div class="group-memberlist-member">
                     <div class="group-memberlist-cb">
-
-                        @if ($myself->member_rank <= $member->member_rank && $myself->member_rank >= 2)
+                        @if ($myself->member_rank >= $member->member_rank)
                             <input type="checkbox" disabled="disabled" style="margin: 0; padding: 0; vertical-align: middle" />
                         @else
                             @if ($member->member_rank == 2)
                                 <input type="checkbox" id="group-memberlist-a-{{ $member->user_id }}" style="margin: 0; padding: 0; vertical-align: middle" />
-                            @elseif($member->member_rank == 1)
+                            @elseif($member->member_rank == 3)
                                 <input type="checkbox" id="group-memberlist-m-{{ $member->user_id }}" style="margin: 0; padding: 0; vertical-align: middle" />
                             @endif
                         @endif
@@ -19,7 +18,7 @@
                     <span>{{ $member->user->username }}</span>
                     <div class="group-memberlist-open"></div>
                     <div style="float: right; height: 16px; margin-top: 1px">
-                        @if ($member->member_rank == 3)
+                        @if ($member->member_rank == 1)
                             <img src="{{ cms_config('site.web.url') }}/images/groups/owner_icon.gif" width="15" height="15" alt="" title="" />
                         @endif
                         @if ($member->member_rank == 2)
