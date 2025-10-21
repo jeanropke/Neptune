@@ -132,17 +132,17 @@ class WidgetController extends Controller
         $page = $request->pageNumber;
         $search = $request->searchString;
 
-        $members = $group->members()->where('users.username', 'LIKE', '%' . $search . '%');
+        $members = $group->allMembers($search);
         $totalPages = ceil($members->count() / 20);
 
         return view('home.widgets.ajax.memberwidget')->with([
             'members'           => $members,
-            'pageFriends'       => $members->skip(($page - 1) * 20)->take(20)->get(),
+            'pageFriends'       => $members->skip(($page - 1) * 20)->take(20),
             'totalPages'        => $totalPages,
             'currentFriends'    => ($page - 1) * 20 + 1,
             'toFriends'         => (($page - 1) * 20) + 1,
             'page'              => $page,
-            'item'              => HomeItem::find($request->widgetId),
+            'item'              => Sticker::find($request->widgetId),
             'owner'             => $group
         ]);
     }

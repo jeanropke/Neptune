@@ -3,7 +3,7 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3><span class="header-left">&nbsp;</span><span class="header-middle">Members of the group (<span
-                            id="avatar-list-size">{{ $owner->members->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
+                            id="avatar-list-size">{{ $owner->allMembers()->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
             </div>
         </div>
         <div class="widget-body">
@@ -17,7 +17,7 @@
 
                 <div id="avatarlist-content">
 
-                    @php($members = $owner->members()->take(20))
+                    @php($members = $owner->allMembers()->take(20))
                     @include('home.widgets.ajax.memberwidget')
 
                     <script type="text/javascript">

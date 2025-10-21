@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Group\Member;
 use App\Models\Group\Thread;
-use App\Models\Home\HomeItem;
 use App\Models\Home\Sticker;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -64,16 +63,35 @@ class Group extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function admins(): HasMany
-    {
-        return $this->hasMany(Member::class, 'group_id')
-            ->where('member_rank', '>=', '2')
-            ->with('user');
-    }
-
     public function memberships(): HasMany
     {
         return $this->hasMany(Member::class, 'group_id');
+    }
+
+    public function allMembers(?string $name = null)
+    {
+        $query = $this->memberships()
+            ->where('is_pending', 0)
+            ->with('user');
+
+        if ($name) {
+            $query->whereHas('user', function ($q) use ($name) {
+                $q->where('username', 'like', "%{$name}%");
+            });
+        }
+
+        $members = $query->get();
+
+        if ($this->owner && (!$name || stripos($this->owner->username, $name) !== false)) {
+            $members->prepend((object)[
+                'user'        => $this->owner,
+                'member_rank' => '3',
+                'user_id'     => $this->owner_id
+            ]);
+        }
+
+
+        return $members;
     }
 
     public function members(): HasMany
@@ -100,7 +118,6 @@ class Group extends Model
         return "groups/{$this->id}/id";
     }
 
-    //->with('replies');
     public function threads(): HasMany
     {
         return $this->hasMany(Thread::class, 'group_id')->with('replies');
@@ -113,9 +130,7 @@ class Group extends Model
 
     public function getMember($userId = null)
     {
-        if ($this->owner_id == $userId)
-            return User::find($userId);
-        return $this->memberships()->where('user_id', $userId ?? user()->id)->first();
+        return $this->allMembers()->where('user_id', $userId ?? user()->id)->first();
     }
 
     public function addMember(?int $userId = null): bool

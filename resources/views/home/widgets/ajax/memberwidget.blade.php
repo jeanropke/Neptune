@@ -1,6 +1,6 @@
 <div class="avatar-widget-list-container">
     <ul id="avatar-list-list" class="avatar-widget-list">
-        @foreach ($members->get() as $member)
+        @foreach ($members as $member)
             <li id="avatar-list-{{ $item->id }}-{{ $member->user->id }}" title="{{ $member->user->username }}">
                 <div class="avatar-list-open">
                     <a href="#" id="avatar-list-open-link-{{ $item->id }}-{{ $member->user->id }}" class="avatar-list-open-link"></a>
