@@ -15,25 +15,41 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $group->name }}
-                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group" title="Exclusive group" class="header-bar-group-status">
+                                @if ($group->group_type == 1)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group"
+                                        title="Exclusive group" class="header-bar-group-status">
+                                @elseif($group->group_type == 2)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_closed_big.gif" width="18" height="16" alt="Private group"
+                                        title="Private group" class="header-bar-group-status">
+                                @endif
                             </span>
 
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
-                                @auth
-                                    @if ($group->getMember(user()->id))
-                                        <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
-                                            <span>Leave group</span>
+                            @auth
+                                @if ($group->getMember(user()->id))
+                                    <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
+                                        <span>Leave group</span>
+                                    </a>
+                                @elseif($group->group_type == 1)
+                                    @if ($group->pendingMembers()->where('user_id', user()->id)->first())
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Pending request</span>
                                         </a>
                                     @else
                                         <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
-                                            <span>Join group</span>
+                                            <span>Ask to join group</span>
                                         </a>
                                     @endif
-                                    <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
-                                        <span>Create your own Group</span>
+                                @else
+                                    <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                        <span>Join group</span>
                                     </a>
-                                @endauth
+                                @endif
+                                <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
+                                    <span>Create your own Group</span>
+                                </a>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -71,7 +87,9 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                            @if (
+                                                                ($group->forum_premission == 1 && $group->getMember(user()->id)) ||
+                                                                    ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
                                                                 <input type="hidden" id="email-verfication-ok" value="1" />
                                                                 <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
                                                             @endif
@@ -116,7 +134,8 @@
                                                                     href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $thread->id }}/id">{{ $thread->topic_title }}</a>
                                                                 @if (!$thread->is_open)
                                                                     <span class="topiclist-row-topicsticky">
-                                                                        <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread" alt="Closed Thread">
+                                                                        <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread"
+                                                                            alt="Closed Thread">
                                                                     </span>
                                                                 @endif
                                                                 (page
@@ -155,7 +174,9 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                            @if (
+                                                                ($group->forum_premission == 1 && $group->getMember(user()->id)) ||
+                                                                    ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
                                                                 <input type="hidden" id="email-verfication-ok" value="1" />
                                                                 <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
                                                             @endif
@@ -228,4 +249,9 @@
             </script>
         </div>
     </div>
+    <script language="JavaScript" type="text/javascript">
+        Event.onDOMReady(function() {
+            initView({{ $group->id }});
+        });
+    </script>
 @endsection

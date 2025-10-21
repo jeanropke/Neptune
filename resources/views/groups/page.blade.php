@@ -5,7 +5,9 @@
 @section('content')
 
     <script language="JavaScript" type="text/javascript">
-        Event.onDOMReady(function() { initView({{ $owner->id }}); });
+        Event.onDOMReady(function() {
+            initView({{ $owner->id }});
+        });
     </script>
 
     @if (user() && user()->id == $owner->owner_id)
@@ -108,7 +110,13 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $owner->name }}
-                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group" title="Exclusive group" class="header-bar-group-status">
+                                @if ($owner->group_type == 1)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group"
+                                        title="Exclusive group" class="header-bar-group-status">
+                                @elseif($owner->group_type == 2)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_closed_big.gif" width="18" height="16" alt="Private group"
+                                        title="Private group" class="header-bar-group-status">
+                                @endif
                             </span>
                             @auth
                                 @if ($owner->getMember(user()->id) && !$editing)
@@ -130,6 +138,16 @@
                                         <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
                                             <span>Leave group</span>
                                         </a>
+                                    @elseif($owner->group_type == 1)
+                                        @if ($owner->pendingMembers()->where('user_id', user()->id)->first())
+                                            <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                                <span>Pending request</span>
+                                            </a>
+                                        @else
+                                            <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                                <span>Ask to join group</span>
+                                            </a>
+                                        @endif
                                     @else
                                         <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
                                             <span>Join group</span>

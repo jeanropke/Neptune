@@ -23,7 +23,7 @@
                 <div id="group-type-area">
                     <p>
                         <label for="group_type" id="group_type_text" style="width: 45%;display: inline-block;">Edit Group type:</label>
-                        <select id="group_type" id="group_type" style="width: 50%;">
+                        <select id="group_type" id="group_type" style="width: 50%;" {{ $group->group_type == 3 ? 'disabled' : '' }}>
                             <option value="0" {{ $group->group_type == 0 ? 'selected' : '' }}>Regular</option>
                             <option value="1" {{ $group->group_type == 1 ? 'selected' : '' }}>Exclusive</option>
                             <option value="2" {{ $group->group_type == 2 ? 'selected' : '' }}>Private</option>

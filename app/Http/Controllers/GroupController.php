@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogue\CatalogueItem;
 use App\Models\Catalogue\Item;
 use App\Models\Group;
+use App\Models\Group\Member;
 use App\Models\GroupMember;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
@@ -56,6 +57,39 @@ class GroupController extends Controller
             return view('groups.actions.join')->with('message', 'You are the owner of this group.');
         }
 
+        if($group->allMembers()->count() >= 500 && $group->group_type != 3) {
+            return view('groups.actions.join')->with([
+                'group'   => $group,
+                'message' => 'This group is full'
+            ]);
+        }
+
+        if ($group->group_type == 2) {
+            return view('groups.actions.join')->with([
+                'group'   => $group,
+                'message' => 'You cannot join this group'
+            ]);
+        }
+
+        if ($group->group_type == 1 && !$group->getMember()) {
+            if ($group->pendingMembers()->where('user_id', user()->id)->first()) {
+                return view('groups.actions.join')->with([
+                    'group'   => $group,
+                    'message' => 'You already asked to join this group'
+                ]);
+            }
+            Member::create([
+                'group_id'      => $group->id,
+                'user_id'       => user()->id,
+                'is_pending'    => '1',
+                'member_rank'   => '3'
+            ]);
+            return view('groups.actions.join')->with([
+                'group'   => $group,
+                'message' => 'You asked to join this group'
+            ]);
+        }
+
         if ($group->addMember(user()->id)) {
             return view('groups.actions.join')->with([
                 'group'   => $group,
@@ -78,7 +112,7 @@ class GroupController extends Controller
         }
 
         if ($group->owner_id == user()->id) {
-            return view('groups.actions.confirm_leave')->with('message', 'Group owners cannot leave their own group.');
+            return view('groups.actions.confirm_leave_owner');
         }
 
         return view('groups.actions.confirm_leave')->with('group', $group);
@@ -232,7 +266,7 @@ class GroupController extends Controller
         $group->update([
             'name'              => $request->name,
             'description'       => $request->description,
-            'group_type'        => $request->type,
+            'group_type'        => $group->group_type == '3' ? '3' : $request->type,
             'forum_type'        => $request->forumType,
             'forum_premission'  => $request->newTopicPermission,
             'alias'             => $request->url

@@ -114,6 +114,13 @@ class GroupMemberController extends Controller implements HasMiddleware
 
     public function accept(Request $request)
     {
+        if($this->allMembers()->count() >= 500 && $this->group_type != 3) {
+            return view('groups.actions.join')->with([
+                'group'   => $this,
+                'message' => 'This group is full'
+            ]);
+        }
+
         $request->group->pendingMembers()
             ->whereIn('user_id', $this->extractTargets($request))
             ->each(function ($member) {
