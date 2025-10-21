@@ -20,6 +20,8 @@ class Member extends Model
         'updated_at'
     ];
 
+    public $incrementing = false;
+    protected $primaryKey = null;
     public $timestamps = false;
 
     public function user(): BelongsTo

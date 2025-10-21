@@ -31,17 +31,14 @@ class GroupMemberController extends Controller implements HasMiddleware
         $perPage = 16;
         $isPending = (bool) $request->pending;
 
-        $query = $isPending ? $group->pendingMembers() : $group->members()->with('user');
-        if (!$isPending && $request->filled('searchString')) {
-            $query->where('username', 'LIKE', '%' . Str::lower($request->searchString) . '%');
-        }
+        $query = $isPending ? $group->pendingMembers($request->searchString) : $group->allMembers($request->searchString);
 
         $total = $query->count();
-        $members = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
+        $members = $query->skip(($page - 1) * $perPage)->take($perPage);
 
         $data = [
             'pending' => 'Pending members (' . $group->pendingMembers()->count() . ')',
-            'members' => 'Members (' . $group->memberships()->count() . ')',
+            'members' => 'Members (' . $group->allMembers()->count() . ')',
         ];
 
         return response(
@@ -104,32 +101,40 @@ class GroupMemberController extends Controller implements HasMiddleware
     public function remove(Request $request)
     {
         $ids = $this->extractTargets($request);
-        $request->group->members()->whereIn('user_id', $ids)->delete();
+        $request->group->pendingMembers()->whereIn('user_id', $ids)->delete();
         User::whereIn('id', $ids)->where('favourite_group', $request->group->id)->update(['favourite_group' => 0]);
         return response('OK');
     }
 
     public function confirmAccept(Request $request)
     {
-        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('username')->implode(', ');
+        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('user.username')->implode(', ');
         return view('groups.member.confirm_accept', compact('targets'));
     }
 
     public function accept(Request $request)
     {
-        $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->update(['is_pending' => 0]);
+        $request->group->pendingMembers()
+            ->whereIn('user_id', $this->extractTargets($request))
+            ->each(function ($member) {
+                $member->update(['is_pending' => 0]);
+            });
+
         return response('OK');
     }
 
     public function confirmDecline(Request $request)
     {
-        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('username')->implode(', ');
+        $targets = $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->pluck('user.username')->implode(', ');
         return view('groups.member.confirm_decline', compact('targets'));
     }
 
     public function decline(Request $request)
     {
-        $request->group->pendingMembers()->whereIn('user_id', $this->extractTargets($request))->delete();
+        $request->group->pendingMembers()
+            ->whereIn('user_id', $this->extractTargets($request))->each(function ($member) {
+                $member->delete();
+            });
         return response('OK');
     }
 }

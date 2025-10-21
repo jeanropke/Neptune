@@ -70,9 +70,7 @@ class Group extends Model
 
     public function allMembers(?string $name = null)
     {
-        $query = $this->memberships()
-            ->where('is_pending', 0)
-            ->with('user');
+        $query = $this->memberships()->where('is_pending', 0)->with('user');
 
         if ($name) {
             $query->whereHas('user', function ($q) use ($name) {
@@ -90,7 +88,6 @@ class Group extends Model
             ]);
         }
 
-
         return $members;
     }
 
@@ -104,9 +101,17 @@ class Group extends Model
             ->select('groups_memberships.*', 'users.username');
     }
 
-    public function pendingMembers()
+    public function pendingMembers(?string $name = null)
     {
-        return $this->memberships()->where('is_pending', 1)->with('user');
+        $query = $this->memberships()->where('is_pending', 1)->with('user');
+
+        if ($name) {
+            $query->whereHas('user', function ($q) use ($name) {
+                $q->where('username', 'like', "%{$name}%");
+            });
+        }
+
+        return $query->get();
     }
 
     public function getUrlAttribute(): string
