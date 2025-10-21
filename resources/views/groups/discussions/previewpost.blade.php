@@ -44,7 +44,7 @@
                 <tbody>
                     <tr>
                         <td class="post-header-link">
-                            <div class="topiclist-row-content">RE: {{ $topic->subject }}<br><span
+                            <div class="topiclist-row-content">RE: {{ $topic->topic_title }}<br><span
                                     class="topiclist-lastpost-time">{{ $post->created_at->format('j.n.Y H:i:s') }}</span>
                             </div>
                         </td>

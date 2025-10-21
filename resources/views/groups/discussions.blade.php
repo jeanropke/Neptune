@@ -58,8 +58,10 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            <input type="hidden" id="email-verfication-ok" value="1" />
-                                                            <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
+                                                            @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                                <input type="hidden" id="email-verfication-ok" value="1" />
+                                                                <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
+                                                            @endif
                                                         @endauth
                                                         @guest()
                                                             Please sign in to post new threads
@@ -71,8 +73,7 @@
                                                             @if ($i == $threads->currentPage())
                                                                 <span style="font-weight: bold">{{ $i }}</span>
                                                             @else
-                                                                <a
-                                                                    href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
+                                                                <a href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
                                                             @endif
                                                         @endfor
                                                     </td>
@@ -93,11 +94,13 @@
                                                 @forelse ($threads as $thread)
                                                     <tr class="topiclist-row-{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                                         <td class="topiclist-rowtopic" valign="top">
-                                                            @if($thread->is_stickied)
-                                                            <div class="topiclist-row-topicsticky"><img src="{{ url('/') }}/web/images/groups/Sticky.gif" alt="Sticky"></div>
+                                                            @if ($thread->is_stickied)
+                                                                <div class="topiclist-row-topicsticky"><img src="{{ url('/') }}/web/images/groups/Sticky.gif" alt="Sticky">
+                                                                </div>
                                                             @endif
                                                             <div class="topiclist-row-content">
-                                                                <a class="topic-list-link" href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $thread->id }}/id">{{ $thread->topic_title }}</a>
+                                                                <a class="topic-list-link"
+                                                                    href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $thread->id }}/id">{{ $thread->topic_title }}</a>
                                                                 @if (!$thread->is_open)
                                                                     <span class="topiclist-row-topicsticky">
                                                                         <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread" alt="Closed Thread">
@@ -139,8 +142,10 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            <input type="hidden" id="email-verfication-ok" value="1" />
-                                                            <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
+                                                            @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                                <input type="hidden" id="email-verfication-ok" value="1" />
+                                                                <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
+                                                            @endif
                                                         @endauth
                                                         @guest()
                                                             Please sign in to post new threads
@@ -152,8 +157,7 @@
                                                             @if ($i == $threads->currentPage())
                                                                 <span style="font-weight: bold">{{ $i }}</span>
                                                             @else
-                                                                <a
-                                                                    href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
+                                                                <a href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
                                                             @endif
                                                         @endfor
                                                     </td>

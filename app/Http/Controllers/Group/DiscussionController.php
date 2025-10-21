@@ -74,6 +74,8 @@ class DiscussionController extends Controller
 
         $group = Group::find($validated['groupId']);
 
+        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
+
         $thread = Thread::create([
             'poster_id'     => user()->id,
             'group_id'      => $group->id,
@@ -133,16 +135,19 @@ class DiscussionController extends Controller
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
+        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
+
         $reply = Reply::find($request->postId);
         $reply->update([
             'message'       => $request->message,
             'is_edited'     => 1
         ]);
 
-        return response(route('groups.topic.view', [
-            'groupId' => $group->id,
-            'topicId' => $topic->id
-        ]));
+        return view('groups.discussions.includes.viewtopic', [
+            'topic'   => $topic->refresh(),
+            'group'   => $group,
+            'replies' => $topic->replies()->with('author')->paginate(10)
+        ]);
     }
 
     public function savePost(Request $request)
@@ -160,6 +165,8 @@ class DiscussionController extends Controller
         }
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
+
+        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
 
         Reply::create([
             'thread_id' => $topic->id,

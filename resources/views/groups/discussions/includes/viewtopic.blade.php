@@ -9,12 +9,13 @@
                 <a href="{{ url('/') }}/{{ $group->url }}/discussions" class="colorlink noarrow">
                     <span class="to-topics">To Threads</span>
                 </a>
-
                 @auth
-                    @if ($topic->is_open)
-                        <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
-                            <span>Post Reply</span>
-                        </a>
+                    @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                        @if ($topic->is_open)
+                            <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
+                                <span>Post Reply</span>
+                            </a>
+                        @endif
                     @endif
 
                     {{-- TODO: check for group admin --}}
@@ -103,7 +104,7 @@
                                 <td class="post-header-link">
                                     <div class="topiclist-row-content">
                                         {{ $loop->first ? '' : 'RE:' }}
-                                        {{ $topic->topic_title }}
+                                        {{ $topic->topic_title }}<br>
                                         <span class="topiclist-lastpost-time">{{ $reply->created_at->format('j.n.Y H:i:s') }}</span>
                                     </div>
                                 </td>
@@ -220,10 +221,12 @@
         <tr>
             <td>
                 @auth
-                    @if ($topic->is_open)
-                        <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button">
-                            <span>Post Reply</span>
-                        </a>
+                    @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                        @if ($topic->is_open)
+                            <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button">
+                                <span>Post Reply</span>
+                            </a>
+                        @endif
                     @endif
                 @endauth
                 @if (!$topic->is_open)

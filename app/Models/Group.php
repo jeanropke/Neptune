@@ -125,7 +125,7 @@ class Group extends Model
 
     public function threads(): HasMany
     {
-        return $this->hasMany(Thread::class, 'group_id')->with('replies');
+        return $this->hasMany(Thread::class, 'group_id')->with('replies')->withMax('replies', 'created_at')->orderByDesc('replies_max_created_at');;
     }
 
     public function filterByUsername(?string $query)

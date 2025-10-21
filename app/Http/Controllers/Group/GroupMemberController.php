@@ -89,7 +89,7 @@ class GroupMemberController extends Controller implements HasMiddleware
 
     public function revokeRights(Request $request)
     {
-        $request->group->members()->whereIn('user_id', $this->extractTargets($request))->update(['member_rank' => '1']);
+        $request->group->members()->whereIn('user_id', $this->extractTargets($request))->update(['member_rank' => '3']);
         return response('OK');
     }
 
