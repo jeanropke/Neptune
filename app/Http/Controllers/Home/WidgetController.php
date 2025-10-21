@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\GameHistory;
 use App\Models\Group;
 use App\Models\Home\Guestbook;
 use App\Models\Home\HomeRating;
@@ -400,7 +401,7 @@ class WidgetController extends Controller
 
         return view('home.widgets.ajax.highscorelistwidget')->with([
             'item'          => $sticker,
-            'highscores'    => $sticker->loadScores($startDate, $endDate),
+            'highscores'    => GameHistory::loadScores($request->gameId, $startDate, $endDate),
             'type'          => $request->type,
             'start'         => $startDate,
             'end'           => $endDate
@@ -435,7 +436,7 @@ class WidgetController extends Controller
 
         return view('home.widgets.ajax.highscorelistpaging')->with([
             'item'          => $sticker,
-            'highscores'    => $sticker->loadScores($startDate, $endDate, $page)
+            'highscores'    => GameHistory::loadScores($request->gameId, $startDate, $endDate, $page)
         ]);
     }
 }

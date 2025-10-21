@@ -13,7 +13,7 @@
             <div class="widget-content">
 
                 <div id="highscorelist-scores-{{ $item->id }}">
-                    @php($highscores = $item->loadScores())
+                    @php($highscores = \App\Models\GameHistory::loadScores($item->extra_data))
                     @include('home.widgets.ajax.highscorelistwidget', ['type' => 'week', 'start' => $highscores->start, 'end' => $highscores->end])
                 </div>
                 <div class="clear"></div>
