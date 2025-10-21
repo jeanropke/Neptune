@@ -19,6 +19,6 @@
     makeDialogDraggable($("join-group-dialog"));
     Event.observe($("group-action-ok"), "click", function(e) {
         Event.stop(e);
-        location.href = habboReqPath + "/groups/{{ $group->getUrl() }}";
+        location.href = habboReqPath + "/{{ $group->url }}";
     });
 </script>
