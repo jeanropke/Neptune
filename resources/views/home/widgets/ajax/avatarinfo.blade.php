@@ -30,17 +30,19 @@
             </p>
         </div>
         <div>
-            @if (user() && $group->owner_id == user()->id && $group->getMember($user->id)->member_rank <= 2)
-                @if ($group->getMember($user->id)->member_rank == 2)
-                    <a href="#" class="avatar-info-rights-revoke toolbutton"><span>Revoke rights</span></a>
-                @else
-                    <a href="#" class="avatar-info-rights-give toolbutton"><span>Give rights</span></a>
-                @endif
+            @if (user() && $group->owner_id == user()->id)
+                @if ($group->owner_id != $user->id)
+                    @if ($group->getMember($user->id)->member_rank == 2)
+                        <a href="#" class="avatar-info-rights-revoke toolbutton"><span>Revoke rights</span></a>
+                    @else
+                        <a href="#" class="avatar-info-rights-give toolbutton"><span>Give rights</span></a>
+                    @endif
 
-                @if ($user->id == user()->id)
-                    <a href="#" class="avatar-info-rights-leave toolbutton"><span>Leave group</span></a>
-                @else
-                    <a href="#" class="avatar-info-rights-remove toolbutton"><span>Remove</span></a>
+                    @if ($user->id == user()->id)
+                        <a href="#" class="avatar-info-rights-leave toolbutton"><span>Leave group</span></a>
+                    @else
+                        <a href="#" class="avatar-info-rights-remove toolbutton"><span>Remove</span></a>
+                    @endif
                 @endif
             @endif
         </div>
