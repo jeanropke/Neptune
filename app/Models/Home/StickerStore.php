@@ -4,19 +4,33 @@ namespace App\Models\Home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StoreItem extends Model
+class StickerStore extends Model
 {
-    protected $table = 'cms_homes_store_items';
+    protected $table = 'cms_stickers_catalogue';
 
     protected $fillable = [
-        'caption',
-        'class',
-        'category',
+        'name',
+        'description',
+        'type',
+        'data',
         'price',
-        'type'
+        'amount',
+        'category_id',
+        'min_rank',
+        'widget_type'
     ];
 
     public $timestamps = false;
+
+    public function getShortTypeAttribute(): string
+    {
+        return match ((int) $this->type) {
+            2       => 'w', //widgets
+            4       => 'b', //backgrounds
+            5       => 'w', //group widgets
+            default => 's'  //stickers
+        };
+    }
 
     public function getFullType(): string
     {

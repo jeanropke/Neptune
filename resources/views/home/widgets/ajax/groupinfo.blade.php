@@ -3,8 +3,8 @@
         <div class="groups-info-close-container">
             <a href="#" class="groups-info-close"></a>
         </div>
-        <div class="groups-info-icon"><a href="{{ $group->url }}"><img src="{{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.png"></a></div>
-        <h4><a href="{{ $group->url }}">{{ $group->name }}</a></h4>
+        <div class="groups-info-icon"><a href="{{ url('/') }}/{{ $group->url }}"><img src="{{ cms_config('site.groupbadge.url') }}{{ $group->badge }}.png"></a></div>
+        <h4><a href="{{ url('/') }}/{{ $group->url }}">{{ $group->name }}</a></h4>
         <p>
             Group created:<br />
             <b>{{ $group->created_at->format('M d, Y') }}</b>

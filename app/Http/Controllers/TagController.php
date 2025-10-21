@@ -32,7 +32,7 @@ class TagController extends Controller
         });
 
         $result = Tag::where('tag', $request->tag)
-            ->with('holder.tags')
+            ->with(['room', 'user', 'group'])
             ->paginate(10);
 
         return view('tag.search', compact('related', 'result'));

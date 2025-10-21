@@ -930,6 +930,7 @@ HighscoreListWidget.prototype = {
         }
     },
     selectGameId: function () {
+        console.log("selectGameId");
         var A = $("highscorelist-game");
         $A(A.options).each(function (C) {
             if (C.value == this.gameId) {
@@ -963,13 +964,12 @@ HighscoreListWidget.prototype = {
     setGameId: function (A) {
         if (A != "" && A != this.gameId) {
             closeEditMenu();
-            Element.wait(this.scoresEl);
+            this.scoresEl.innerHTML =  getProgressNode();
             new Ajax.Request(habboReqPath + "/myhabbo/highscorelist/setGameId", {
                 method: "post",
                 parameters: {
                     widgetId: this.widgetId,
-                    gameId: A,
-                    _token: _token
+                    gameId: A
                 },
                 onComplete: function (C) {
                     this.scoresEl.innerHTML = C.responseText;
@@ -979,11 +979,11 @@ HighscoreListWidget.prototype = {
         }
     },
     _loadScores: function (C, E, D) {
-        var A = habboReqPath + "/myhabbo/highscorelist/scores";
+        var A = "/myhabbo/highscorelist/scores";
         if (D != -1) {
-            A = habboReqPath + "/myhabbo/highscorelist/page"
+            A = "/myhabbo/highscorelist/page"
         } else {
-            Element.wait(this.scoresEl)
+            this.scoresEl.innerHTML =  getProgressNode();
         }
         new Ajax.Request(habboReqPath + A, {
             method: "post",
@@ -992,8 +992,7 @@ HighscoreListWidget.prototype = {
                 gameId: this.gameId,
                 type: C,
                 period: E,
-                page: ((D != -1) ? D : 0),
-                _token: _token
+                page: ((D != -1) ? D : 0)
             },
             onComplete: function (F) {
                 if (D != -1) {

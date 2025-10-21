@@ -6,7 +6,7 @@
     <tbody>
         <tr>
             <td><a href="#" class="colorlink noarrow" style="margin-left: 5px;" onclick='cancelGroupPurchase(); return false;'><span><b>Cancel</b></span><i></i></a></td>
-            <td> <a href="#" class="colorlink" onclick='showGroupPurchaseResult("{{ $product->sale_code }}", "{{ $name }}", "{{ $description }}", "Create a group"); return false;'><span><b>Purchase</b></span><i></i></a>
+            <td> <a href="#" class="colorlink" onclick='showGroupPurchaseResult("{{ $product->salecode }}", "{{ $name }}", "{{ $description }}", "Create a group"); return false;'><span><b>Purchase</b></span><i></i></a>
             </td>
         </tr>
     </tbody>

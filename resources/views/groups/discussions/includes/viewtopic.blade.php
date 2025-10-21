@@ -3,18 +3,32 @@
         <tr>
             <td class="post-header-link" valign="top" style="width: 148px;">Writer: <a
                     href="{{ url('/') }}/home/{{ $topic->author->username }}">{{ $topic->author->username }}</a></td>
-            <td class="post-header-name" valign="top">Subject: <span class="topic-name">{{ $topic->subject }} (Started:
+            <td class="post-header-name" valign="top">Subject: <span class="topic-name">{{ $topic->topic_title }} (Started:
                     {{ $topic->created_at->format('j.n.Y') }}) </span></td>
             <td align="right">
-                <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions" class="colorlink noarrow">
+                <a href="{{ url('/') }}/{{ $group->url }}/discussions" class="colorlink noarrow">
                     <span class="to-topics">To Threads</span>
                 </a>
-                <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
-                    <span>Post Reply</span>
-                </a>
-                <a href="#" class="colorlink noarrow" id="topic-settings">
-                    <span>Settings</span>
-                </a>
+
+                @auth
+                    @if ($topic->is_open)
+                        <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
+                            <span>Post Reply</span>
+                        </a>
+                    @endif
+
+                    {{-- TODO: check for group admin --}}
+                    <a href="#" class="colorlink noarrow" id="topic-settings">
+                        <span>Settings</span>
+                    </a>
+                @endauth
+                @if (!$topic->is_open)
+                    <span class="topic-closed">
+                        <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread">
+                        Closed Thread
+                    </span>
+                @endif
+
                 <br clear="all">
                 <input type="hidden" id="spam-message" value="Spam detected!">
                 <input type="hidden" id="settings_dialog_header" value="Topic settings">
@@ -32,10 +46,10 @@
                 <input type="hidden" id="current-page" value="{{ $replies->currentPage() }}">
                 View page:
                 @for ($i = 1; $i <= $replies->lastPage(); $i++)
-                    @if($i == $replies->currentPage())
-                    <span style="font-weight: bold"> {{ $i }}</span>
+                    @if ($i == $replies->currentPage())
+                        <span style="font-weight: bold"> {{ $i }}</span>
                     @else
-                    <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
+                        <a href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
                     @endif
                 @endfor
             </td>
@@ -49,27 +63,26 @@
                             <tr>
                                 <td colspan="2" class="online">
                                     <a href="{{ url('/') }}/home/{{ $author->username }}">{{ $author->username }}</a>
-                                    @if($author->isOnline())
-                                    <img alt="online" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_online_anim.gif">
+                                    @if ($author->isOnline())
+                                        <img alt="online" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_online_anim.gif">
                                     @else
-                                    <img alt="offline" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_offline.gif">
+                                        <img alt="offline" src="{{ cms_config('site.web.url') }}/images/myhabbo/habbo_offline.gif">
                                     @endif
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="post-list-posts">Messages: {{ $author->cmsSettings->discussions_posts }}</td>
+                                <td colspan="2" class="post-list-posts">Messages: {{ $author->replies()->count() }}</td>
                             </tr>
                             <tr>
-                                <td class="post-list-creator-avatar"><img
-                                        src="{{ cms_config('site.avatarimage.url') }}{{ $author->figure }}&direction=2&head_direction=2"
+                                <td class="post-list-creator-avatar"><img src="{{ cms_config('site.avatarimage.url') }}{{ $author->figure }}&direction=2&head_direction=2"
                                         alt="" class="tabmenu-image myimage" id="myimage"></td>
                                 <td class="post-list-creator-badge">
                                     <div class="group-badges-container">
-                                        @if($author->getFavoriteGroup())
-                                        <img src="{{ cms_config('site.groupbadge.url') }}{{ $author->getFavoriteGroup()->badge }}.gif"><br>
+                                        @if ($author->getFavoriteGroup())
+                                            <img src="{{ cms_config('site.groupbadge.url') }}{{ $author->getFavoriteGroup()->badge }}.gif"><br>
                                         @endif
-                                        @if($author->badge)
-                                        <img src="{{ cms_config('site.badges.url') }}/{{ $author->badge }}.gif">
+                                        @if ($author->badge)
+                                            <img src="{{ cms_config('site.badges.url') }}/{{ $author->badge }}.gif">
                                         @endif
                                     </div>
                                 </td>
@@ -88,8 +101,11 @@
                         <tbody>
                             <tr>
                                 <td class="post-header-link">
-                                    <div class="topiclist-row-content">{{ $loop->first ? '' : 'RE:' }} {{ $topic->subject }}<br><span
-                                            class="topiclist-lastpost-time">{{ $reply->created_at->format('j.n.Y H:i:s') }}</span></div>
+                                    <div class="topiclist-row-content">
+                                        {{ $loop->first ? '' : 'RE:' }}
+                                        {{ $topic->topic_title }}
+                                        <span class="topiclist-lastpost-time">{{ $reply->created_at->format('j.n.Y H:i:s') }}</span>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -100,26 +116,32 @@
                             <tr>
                                 <td valign="top">
                                     <div class="post-list-report-element">
-                                        @if(!$reply->hidden_by_staff)
-                                            @auth
-                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/quote_button.gif" width="19" height="18" class="quote-post verify-email" id="quote-post-{{ $reply->id }}" />
-                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18" class="delete-post" id="delete-post-{{ $reply->id }}" />
+                                        @auth
+                                            @if (!$topic->is_opened)
+                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/quote_button.gif" width="19" height="18"
+                                                    class="quote-post verify-email" id="quote-post-{{ $reply->id }}" />
+                                            @endif
+                                            <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/delete_entry_button.gif" width="19" height="18"
+                                                class="delete-post" id="delete-post-{{ $reply->id }}" />
+                                            @if (!$topic->is_opened)
                                                 @if ($author->id != user()->id)
-                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-post" id="report-post-{{ $reply->id }}" />
+                                                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18"
+                                                        class="report-post" id="report-post-{{ $reply->id }}" />
                                                 @else
-                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/icon_edit.gif" width="19" height="18" class="edit-post verify-email" id="edit-post-{{ $reply->id }}" />
+                                                    <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/icon_edit.gif" width="19" height="18"
+                                                        class="edit-post verify-email" id="edit-post-{{ $reply->id }}" />
                                                 @endif
-                                            @endauth
-                                        @endif
+                                            @endif
+                                        @endauth
                                     </div>
-                                    @if($reply->hidden_by_staff)
-                                    <i>Message removed by Hotel Staff</i>
-                                    @else
                                     <div class="post-list-content-element">
+                                        @if ($reply->is_edited)
+                                            <span class="topiclist-row-content">Edited ({{ $reply->modified_at->format('j.n.Y H:i:s') }}): </span>
+                                            <br>
+                                        @endif
                                         {!! bb_format($reply->message) !!}
                                         <input type="hidden" id="{{ $reply->id }}-message" value="{{ $reply->message }}">
                                     </div>
-                                    @endif
                                 </td>
                             </tr>
                             <tr>
@@ -139,73 +161,85 @@
                 <div id="new-post-preview-container"></div>
             </td>
         </tr>
-        <tr id="new-post-entry-message" style="background-color:#E5E5E5;">
-            <td class="new-post-entry-label">
-                <div class="new-post-entry-label" id="new-post-entry-label">Post: </div>
-            </td>
-            <td colspan="2">
-                <table border="0" cellpadding="0" cellspacing="0" style="margin: 5px; width: 98%;">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="hidden" id="edit-type">
-                                <input type="hidden" id="post-id">
-                                <input type="hidden" id="topic-id" value="{{ $topic->id }}">
-                                <input type="hidden" id="group-id" value="{{ $group->id }}">
-                                <textarea cols="66" rows="5" name="message" id="post-message"></textarea>
-                                <script type="text/javascript">
-                                    bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("post-message");
-                                    bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
-                                    var colors = {
-                                        "red": ["#d80000", "Red"],
-                                        "orange": ["#fe6301", "Orange"],
-                                        "yellow": ["#ffce00", "Yellow"],
-                                        "green": ["#6cc800", "Green"],
-                                        "cyan": ["#00c6c4", "Cyan"],
-                                        "blue": ["#0070d7", "Blue"],
-                                        "gray": ["#828282", "Gray"],
-                                        "black": ["#000000", "Black"]
-                                    };
-                                    bbcodeToolbar.addColorSelect("Colour", colors, false);
-                                </script>
-                                <div id="linktool-inline">
-                                    <div id="linktool-scope">
-                                        <label for="linktool-query-input">Create link:</label>
-                                        <input type="radio" name="scope" class="linktool-scope" value="1" checked="checked">Habbos
-                                        <input type="radio" name="scope" class="linktool-scope" value="2">Rooms
-                                        <input type="radio" name="scope" class="linktool-scope" value="3">Groups&nbsp;
-                                        <input id="linktool-query" type="text" size="25" name="query" value="">
-                                    </div>
-                                    <a href="#" class="colorlink orange" id="linktool-find"><span>Find</span></a>
-                                    <div class="clear" style="height: 0;"><!-- --></div>
-                                    <div id="linktool-results">
-                                    </div>
+        @auth
+            <tr id="new-post-entry-message" style="background-color:#E5E5E5;">
+                <td class="new-post-entry-label">
+                    <div class="new-post-entry-label" id="new-post-entry-label">Post: </div>
+                </td>
+                <td colspan="2">
+                    <table border="0" cellpadding="0" cellspacing="0" style="margin: 5px; width: 98%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" id="edit-type">
+                                    <input type="hidden" id="post-id">
+                                    <input type="hidden" id="topic-id" value="{{ $topic->id }}">
+                                    <input type="hidden" id="group-id" value="{{ $group->id }}">
+                                    <textarea cols="66" rows="5" name="message" id="post-message"></textarea>
                                     <script type="text/javascript">
-                                        linkTool = new LinkTool(bbcodeToolbar.textarea);
+                                        bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("post-message");
+                                        bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
+                                        var colors = {
+                                            "red": ["#d80000", "Red"],
+                                            "orange": ["#fe6301", "Orange"],
+                                            "yellow": ["#ffce00", "Yellow"],
+                                            "green": ["#6cc800", "Green"],
+                                            "cyan": ["#00c6c4", "Cyan"],
+                                            "blue": ["#0070d7", "Blue"],
+                                            "gray": ["#828282", "Gray"],
+                                            "black": ["#000000", "Black"]
+                                        };
+                                        bbcodeToolbar.addColorSelect("Colour", colors, false);
                                     </script>
-                                </div>
-                                <br><br>
-                                <a href="#" class="colorlink noarrow dialogbutton" id="post-form-cancel"><span>Cancel</span></a>
-                                <a href="#" class="colorlink dialogbutton" id="post-form-preview"><span>Preview</span></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
+                                    <div id="linktool-inline">
+                                        <div id="linktool-scope">
+                                            <label for="linktool-query-input">Create link:</label>
+                                            <input type="radio" name="scope" class="linktool-scope" value="1" checked="checked">Habbos
+                                            <input type="radio" name="scope" class="linktool-scope" value="2">Rooms
+                                            <input type="radio" name="scope" class="linktool-scope" value="3">Groups&nbsp;
+                                            <input id="linktool-query" type="text" size="25" name="query" value="">
+                                        </div>
+                                        <a href="#" class="colorlink orange" id="linktool-find"><span>Find</span></a>
+                                        <div class="clear" style="height: 0;"><!-- --></div>
+                                        <div id="linktool-results">
+                                        </div>
+                                        <script type="text/javascript">
+                                            linkTool = new LinkTool(bbcodeToolbar.textarea);
+                                        </script>
+                                    </div>
+                                    <br><br>
+                                    <a href="#" class="colorlink noarrow dialogbutton" id="post-form-cancel"><span>Cancel</span></a>
+                                    <a href="#" class="colorlink dialogbutton" id="post-form-preview"><span>Preview</span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        @endauth
         <tr>
             <td>
                 @auth
-                <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button"><span>Post Reply</span></a>
+                    @if ($topic->is_open)
+                        <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button">
+                            <span>Post Reply</span>
+                        </a>
+                    @endif
                 @endauth
+                @if (!$topic->is_open)
+                    <span class="topic-closed">
+                        <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread">
+                        Closed Thread
+                    </span>
+                @endif
             </td>
             <td align="right" colspan="2">
                 View page:
                 @for ($i = 1; $i <= $replies->lastPage(); $i++)
-                    @if($i == $replies->currentPage())
-                    <span style="font-weight: bold"> {{ $i }}</span>
+                    @if ($i == $replies->currentPage())
+                        <span style="font-weight: bold"> {{ $i }}</span>
                     @else
-                    <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
+                        <a href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
                     @endif
                 @endfor
             </td>

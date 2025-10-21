@@ -92,25 +92,27 @@
                                     @foreach ($result as $entry)
                                         <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="image" style="width:39px;">
-                                                @if ($entry->holder_type == 'user')
-                                                    <img src="{{ cms_config('site.avatarimage.url') }}{{ $entry->holder->figure }}114400" alt="" align="left">
-                                                @else
-                                                    <img src="{{ cms_config('site.groupbadge.url') }}{{ $entry->holder->badge }}.gif">
+                                                @if ($entry->owner_type == 'user')
+                                                    <img src="{{ cms_config('site.avatarimage.url') }}{{ $entry->user->figure }}114400" alt="" align="left">
+                                                @elseif($entry->owner_type == 'group')
+                                                    <img src="{{ cms_config('site.groupbadge.url') }}{{ $entry->owner->badge }}.gif">
                                                 @endif
-
                                             </td>
                                             <td class="text">
-                                                @if ($entry->holder_type == 'user')
-                                                    <a href="{{ url('/') }}/home/{{ $entry->holder->username }}">{{ $entry->holder->username }}</a><br>
-                                                    {{ $entry->holder->motto }}
-                                                @else
-                                                    <a href="{{ url('/') }}/groups/{{ $entry->holder->getUrl() }}">{{ $entry->holder->name }}</a><br>
-                                                    {{ $entry->holder->description }}
+                                                @if ($entry->owner_type == 'user')
+                                                    <a href="{{ url('/') }}/home/{{ $entry->owner->username }}">{{ $entry->owner->username }}</a><br>
+                                                    {{ $entry->user->motto }}
+                                                @elseif($entry->owner_type == 'group')
+                                                    <a href="{{ url('/') }}/{{ $entry->owner->url }}">{{ $entry->owner->name }}</a><br>
+                                                    {{ $entry->owner->description }}
+                                                @elseif($entry->owner_type == 'room')
+                                                    <a href="{{ url('/') }}/client?forwardId=2&roomId={{ $entry->owner->id }}">{{ $entry->owner->name }}</a><br>
+                                                    {{ $entry->owner->description }}
                                                 @endif
                                                 <br>
                                                 <div class="tag-list">
                                                     <ul class="tag-list">
-                                                        @foreach ($entry->holder->tags as $tag)
+                                                        @foreach ($entry->owner->tags as $tag)
                                                             <li class="tag-search-rowholder">
                                                                 <span class="tag-search-rowholder">
                                                                     <a href="{{ url('/') }}/tag/search?tag={{ $tag->tag }}" style="font-size:10px">{{ $tag->tag }}</a>
@@ -130,7 +132,8 @@
                                                                         @endif
                                                                     @endauth
                                                                     @guest
-                                                                        <img border="0" class="tag-none-link" src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_dim.gif">
+                                                                        <img border="0" class="tag-none-link"
+                                                                            src="{{ cms_config('site.web.url') }}/images/buttons/tags/tag_button_dim.gif">
                                                                     @endguest
                                                                 </span>
                                                             </li>
@@ -146,52 +149,52 @@
                             </table>
 
                             @if ($result->count() > 0)
-                            @php
-                                $currentPage = $result->currentPage();
-                                $lastPage = $result->lastPage();
+                                @php
+                                    $currentPage = $result->currentPage();
+                                    $lastPage = $result->lastPage();
 
-                                $before = min($currentPage - 1, 4);
-                                $after = 9 - $before;
+                                    $before = min($currentPage - 1, 4);
+                                    $after = 9 - $before;
 
-                                $startPage = max($currentPage - $before, 1);
-                                $endPage = min($currentPage + $after, $lastPage);
-
-                                $visiblePages = $endPage - $startPage + 1;
-                                if ($visiblePages < 10) {
-                                    $missing = 10 - $visiblePages;
-
-                                    $startPage = max($startPage - $missing, 1);
+                                    $startPage = max($currentPage - $before, 1);
+                                    $endPage = min($currentPage + $after, $lastPage);
 
                                     $visiblePages = $endPage - $startPage + 1;
                                     if ($visiblePages < 10) {
-                                        $endPage = min($endPage + (10 - $visiblePages), $lastPage);
+                                        $missing = 10 - $visiblePages;
+
+                                        $startPage = max($startPage - $missing, 1);
+
+                                        $visiblePages = $endPage - $startPage + 1;
+                                        if ($visiblePages < 10) {
+                                            $endPage = min($endPage + (10 - $visiblePages), $lastPage);
+                                        }
                                     }
-                                }
-                            @endphp
+                                @endphp
 
-                            <p class="search-result-navigation">
-                                @if ($result->currentPage() == 1)
-                                    First
-                                @else
-                                    <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page=1">First</a>
-                                @endif
-
-                                @for ($i = $startPage; $i <= $endPage; $i++)
-                                    @if ($result->currentPage() == $i)
-                                        {{ $i }}
+                                <p class="search-result-navigation">
+                                    @if ($result->currentPage() == 1)
+                                        First
                                     @else
-                                        <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page={{ $i }}">{{ $i }}</a>
+                                        <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page=1">First</a>
                                     @endif
-                                @endfor
 
-                                @if ($result->currentPage() == $result->lastPage())
-                                    Last
-                                @else
-                                    <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page={{ $result->lastPage() }}">Last</a>
-                                @endif
+                                    @for ($i = $startPage; $i <= $endPage; $i++)
+                                        @if ($result->currentPage() == $i)
+                                            {{ $i }}
+                                        @else
+                                            <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page={{ $i }}">{{ $i }}</a>
+                                        @endif
+                                    @endfor
+
+                                    @if ($result->currentPage() == $result->lastPage())
+                                        Last
+                                    @else
+                                        <a href="{{ url('/') }}/tag/search?tag={{ request()->tag }}&page={{ $result->lastPage() }}">Last</a>
+                                    @endif
 
 
-                            </p>
+                                </p>
                             @endif
                             <div class="clear"></div>
                         </div>

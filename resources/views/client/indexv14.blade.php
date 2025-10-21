@@ -79,40 +79,6 @@
         </div>
     </div>
     <div>
-        {{--
-        <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,0,0,0" id="Theme"
-            width="960" height="540">
-            <param name="src" value="{{ site . loaderDcr }}">
-            <param name="swRemote"
-                value="swSaveEnabled='true' swVolume='true' swRestart='false' swPausePlay='false' swFastForward='false' swTitle='Themehotel' swContextMenu='true' ">
-            <param name="swStretchStyle" value="stage">
-            <param name="swText" value="">
-            <param name="bgColor" value="#000000">
-            <param name="sw6"
-                value="client.connection.failed.url={{ site . sitePath }}/clientutils.php?key=connection_failed;external.variables.txt={{ site . loaderVariables }}">
-            {{ forward }}
-            <param name="sw9" value="{{ shortcut }}account_id={{ playerDetails . id }}">
-            <param name="sw8" value="use.sso.ticket=1;sso.ticket={{ ssoTicket }}">
-            <param name="sw2" value="connection.info.host={{ site . loaderGameIp }};connection.info.port={{ site . loaderGamePort }}">
-            <param name="sw4" value="site.url={{ site . sitePath }};url.prefix={{ site . sitePath }}">
-            <param name="sw3" value="connection.mus.host={{ site . loaderMusIp }};connection.mus.port={{ site . loaderMusPort }}">
-            <param name="sw1" value="client.allow.cross.domain=1;client.notify.cross.domain=0">
-            <param name="sw7" value="external.texts.txt={{ site . loaderTexts }}">
-            <param name="sw5" value="client.reload.url={{ site . sitePath }}/client.php?x=reauthenticate;client.fatal.error.url={{ site . sitePath }}/clientutils.php?key=error">
-            <!--[if IE]>client.pluginerror.message<![endif]-->
-            <embed src="{{ site . loaderDcr }}" bgColor="#000000" width="960" height="540"
-                swRemote="swSaveEnabled='true' swVolume='true' swRestart='false' swPausePlay='false' swFastForward='false' swTitle='Themehotel' swContextMenu='true'"
-                swStretchStyle="stage" swText="" type="application/x-director" pluginspage="http://www.macromedia.com/shockwave/download/" {{ forwardSub }}
-                sw6="client.connection.failed.url={{ site . sitePath }}/clientutils.php?key=connection_failed;external.variables.txt={{ site . loaderVariables }}"
-                sw9="{{ shortcut }}account_id={{ playerDetails . id }}" sw8="use.sso.ticket=1;sso.ticket={{ ssoTicket }}"
-                sw2="connection.info.host={{ site . loaderGameIp }};connection.info.port={{ site . loaderGamePort }}"
-                sw4="site.url={{ site . sitePath }};url.prefix={{ site . sitePath }}" sw3="connection.mus.host={{ site . loaderMusIp }};connection.mus.port={{ site . loaderMusPort }}"
-                sw1="client.allow.cross.domain=1;client.notify.cross.domain=0" sw7="external.texts.txt={{ site . loaderTexts }}"
-                sw5="client.reload.url={{ site . sitePath }}/client.php?x=reauthenticate;client.fatal.error.url={{ site . sitePath }}/clientutils.php?key=error"></embed>
-            <noembed>client.pluginerror.message</noembed>
-        </object>
-        --}}
-
         <object classid="clsid:166B1BCA-3F9C-11CF-8075-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=10,8,5,1,0" id="habbo"
             width="720" height="540">
             <param name="src" value="{{ cms_config('connection.mus.host') }}">

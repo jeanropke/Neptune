@@ -1,8 +1,9 @@
+
 @php(
-    $guestbook = \App\Models\Home\Guestbook::where([['widget_id', '=', $item->id], ['deleted_by', '=', null]])->orderBy('created_at', 'desc')->get()
+    $guestbook = \App\Models\Home\Guestbook::where([['group_id', '=', $item->group_id]])->orWhere([['home_id', '=', $item->home_id]])->orderBy('created_at', 'desc')->get()
 )
 <div class="movable widget GuestbookWidget" id="widget-{{ $item->id }}" style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
-    <div class="w_skin_{{ $item->skin }}">
+    <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3>

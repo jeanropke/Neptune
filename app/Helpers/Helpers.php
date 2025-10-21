@@ -111,7 +111,7 @@ function bb_format($str)
         '/\[i\](.*?)\[\/i\]/is',
         '/\[u\](.*?)\[\/u\]/is',
         '/\[s\](.*?)\[\/s\]/is',
-        '/\[quote\](.*?)\[\/quote\]/is',
+        //'/\[quote\]((?:(?!\[\/quote\]).|(?R))*?)\[\/quote\]/is',
         '/\[link\=(.*?)\](.*?)\[\/link\]/is',
         '/\[url\=(.*?)\](.*?)\[\/url\]/is',
         '/\[color\=(.*?)\](.*?)\[\/color\]/is',
@@ -130,7 +130,7 @@ function bb_format($str)
         '<em>$1</em>',
         '<u>$1</u>',
         '<s>$1</s>',
-        "<div class='bbcode-quote'>$1</div>",
+        //"<div class='bbcode-quote'>$1</div>",
         "<a href='$1'>$2</a>",
         "<a href='$1'>$2</a>",
         "<font color='$1'>$2</font>",
@@ -145,6 +145,11 @@ function bb_format($str)
     );
 
     $str = htmlspecialchars($str, ENT_QUOTES);
+
+    while (preg_match('/\[quote\](.*?)\[\/quote\]/s', $str)) {
+        $str = preg_replace('/\[quote\](.*?)\[\/quote\]/s', "<div class='bbcode-quote'>$1</div>", $str);
+    }
+
     $str = preg_replace($simple_search, $simple_replace, $str);
     return $str;
 }

@@ -144,23 +144,23 @@
             <div id="mypage-top-spacer"></div>
 
             @php($items = $owner->homeItems)
-            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->store->class : '' }}">
+            <div id="mypage-bg" class="b_{{ $owner->homeBackground() }}">
                 <div id="playground">
-                    @foreach ($items->whereNotNull(['x'], ['y'], ['z']) as $item)
+                    @foreach ($items as $item)
                         @switch($item->store->type)
-                            @case('s')
-                                {{-- sticker --}}
+                            {{-- sticker --}}
+                            @case('1')
                                 @include('home.sticker')
                             @break
 
-                            @case('commodity')
-                                {{-- stickie --}}
-                                @include('home.stickie')
+                            {{-- widget --}}
+                            @case('2')
+                                @include('home.widgets.' . strtolower($item->store->data))
                             @break
 
-                            @case('w')
-                                {{-- widget --}}
-                                @include('home.widgets.' . strtolower($item->store->class))
+                            {{-- stickie --}}
+                            @case('3')
+                                @include('home.stickie')
                             @break
                         @endswitch
                     @endforeach
@@ -218,7 +218,7 @@
                     <form method="post" id="guestbook-form">
                         <p>
                             Warning: max 200 characters
-                            <input type="hidden" name="ownerId" value="441794" />
+                            <input type="hidden" name="ownerId" value="{{ $owner->id }}" />
                         </p>
                         <div>
                             <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
@@ -267,7 +267,8 @@
         <div id="edit-save" style="display:none;"></div>
         <div id="edit-menu" class="menu">
             <div class="menu-header">
-                <div class="menu-exit" id="edit-menu-exit"><img src="{{ cms_config('site.web.url') }}/images/dialogs/menu-exit.gif" alt="" width="11" height="11" /></div>
+                <div class="menu-exit" id="edit-menu-exit"><img src="{{ cms_config('site.web.url') }}/images/dialogs/menu-exit.gif" alt="" width="11"
+                        height="11" /></div>
                 <h3>Edit</h3>
             </div>
             <div class="menu-body">
@@ -381,9 +382,18 @@
             }
         </style>
         <script>
-            Event.observe('stickers-button', 'click', function (e) { Event.stop(e); WebStore.open('stickers'); }, false);
-            Event.observe('widgets-button', 'click', function (e) { Event.stop(e); WebStore.open('widgets'); }, false);
-            Event.observe('backgrounds-button', 'click', function (e) { Event.stop(e); WebStore.open('backgrounds'); }, false);
+            Event.observe('stickers-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('stickers');
+            }, false);
+            Event.observe('widgets-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('widgets');
+            }, false);
+            Event.observe('backgrounds-button', 'click', function(e) {
+                Event.stop(e);
+                WebStore.open('backgrounds');
+            }, false);
         </script>
     @endif
 @stop

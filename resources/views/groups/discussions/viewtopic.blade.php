@@ -1,6 +1,6 @@
 @extends('layouts.master', ['body' => 'viewmode', 'menuId' => 'home_group', 'skipHeadline' => true])
 
-@section('title', "Group Discussions: {$group->name} ~ {$topic->subject}")
+@section('title', "Group Discussions: {$group->name} ~ {$topic->topic_title}")
 
 @section('content')
     <div id="mypage-wrapper">
@@ -25,9 +25,9 @@
             </div>
             <div id="grouptabs">
                 <ul>
-                    <li><a href="{{ $group->url }}">Front Page</a></li>
+                    <li><a href="{{ url('/') }}/{{ $group->url }}">Front Page</a></li>
                     <li id="selected">
-                        <a href="{{ $group->url }}/discussions">Discussion Forum</a>
+                        <a href="{{ url('/') }}/{{ $group->url }}/discussions">Discussion Forum</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
                         <td valign="top" style="width: 741px;" class="habboPage-col rightmost">
                             <div class="v2box blue light" id="discussionbox">
                                 <div class="headline">
-                                    <h3>{{ $topic->subject }}</h3>
+                                    <h3>{{ $topic->topic_title }}</h3>
                                 </div>
                                 <div class="border">
                                     <div></div>

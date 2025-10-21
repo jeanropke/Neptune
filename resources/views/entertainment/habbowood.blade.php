@@ -25,9 +25,9 @@
                                         var swfobj = new SWFObject("{{ cms_config('site.c_images.url') }}/album2045/frontpageloop_04_05.swf", "frontpageloop", "534", "325", "7");
                                         swfobj.addVariable("localization_url", "/web/xml/habbowood_intro.xml");
                                         swfobj.addVariable("shoot_movie_url", "/habbomovies/private/openeditor");
-                                        swfobj.addVariable("watch_movie_url", "/entertainment/habbowood/movies.html");
-                                        swfobj.addVariable("meet_filmmakers_url", "/entertainment/habbowood/filmakers.html");
-                                        swfobj.addVariable("competition_url", "/entertainment/habbowood/index.html");
+                                        swfobj.addVariable("watch_movie_url", "/entertainment/habbowood/movies");
+                                        swfobj.addVariable("meet_filmmakers_url", "/entertainment/habbowood/filmakers");
+                                        swfobj.addVariable("competition_url", "/entertainment/habbowood");
                                         swfobj.addParam("base", "/flash/");
                                         swfobj.addParam("allowScriptAccess", "always");
                                         swfobj.addParam("menu", "false");

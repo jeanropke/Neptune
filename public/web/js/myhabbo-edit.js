@@ -343,7 +343,7 @@ function openEditMenu(e, id, type, elementId, ownerId) {
 			$("edit-menu-gb-availability").style.display = "block";
 		}
 
-		if (Element.hasClassName(element, "HighScoresWidget")) {
+		if (Element.hasClassName(element, "HighscoreListWidget")) {
 			$("highscorelist-edit-menu").style.display = "block";
 		}
 

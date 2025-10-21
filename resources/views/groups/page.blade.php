@@ -170,9 +170,9 @@
 
             <div id="grouptabs">
                 <ul>
-                    <li id="selected"><a href="{{ $owner->url }}">Front Page</a></li>
+                    <li id="selected"><a href="{{ url('/') }}/{{ $owner->url }}">Front Page</a></li>
                     <li>
-                        <a href="{{ $owner->url }}/discussions">Discussion Forum</a>
+                        <a href="{{ url('/') }}/{{ $owner->url }}/discussions">Discussion Forum</a>
                     </li>
                 </ul>
             </div>
@@ -181,29 +181,30 @@
 
             <div id="mypage-top-spacer"></div>
             @php($items = $owner->items)
-            <div id="mypage-bg" class="b_{{ $items->where('data', 'background')->first() ? $items->where('data', 'background')->first()->store->class : '' }}">
+            <div id="mypage-bg" class="b_{{ $owner->background }}">
                 <div id="playground">
-                    @foreach ($items->whereNotNull(['x'], ['y'], ['z']) as $item)
-                        @php($itemStore = $item->store)
-                        @switch($itemStore->type)
-                            @case('s')
-                                {{-- sticker --}}
+                    @foreach ($items as $item)
+                        @switch($item->store->type)
+                            {{-- sticker --}}
+                            @case('1')
                                 @include('home.sticker')
                             @break
 
-                            @case('commodity')
-                                {{-- stickie --}}
-                                @include('home.stickie')
+                            {{-- widget --}}
+                            @case('5')
+                                @include('home.widgets.' . strtolower($item->store->data))
                             @break
 
-                            @case('gw')
-                                {{-- widget --}}
-                                @include('home.widgets.' . strtolower($itemStore->class))
+                            {{-- stickie --}}
+                            @case('3')
+                                @include('home.stickie')
                             @break
                         @endswitch
                     @endforeach
                 </div>
                 <div id="mypage-ad">
+                    <div id="ad_sidebar">
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,7 +253,7 @@
                     <form method="post" id="guestbook-form">
                         <p>
                             Warning: max 200 characters
-                            <input type="hidden" name="ownerId" value="441794" />
+                            <input type="hidden" name="ownerId" value="{{ $owner->id }}" />
                         </p>
                         <div>
                             <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>

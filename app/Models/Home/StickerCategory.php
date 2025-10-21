@@ -5,21 +5,20 @@ namespace App\Models\Home;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class StoreCategory extends Model
+class StickerCategory extends Model
 {
-    protected $table = 'cms_homes_store_categories';
+    protected $table = 'cms_stickers_categories';
 
     protected $fillable = [
-        'caption',
-        'order_num',
+        'name',
         'min_rank',
-        'type'
+        'category_type'
     ];
 
     public $timestamps = false;
 
     public function items(): HasMany
     {
-        return $this->hasMany(StoreItem::class, 'category', 'id');
+        return $this->hasMany(StickerStore::class, 'category_id');
     }
 }

@@ -15,8 +15,8 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $group->name }}
-                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group" title="Exclusive group"
-                                    class="header-bar-group-status">
+                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group"
+                                    title="Exclusive group" class="header-bar-group-status">
                             </span>
 
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
@@ -27,9 +27,9 @@
             </div>
             <div id="grouptabs">
                 <ul>
-                    <li><a href="{{ $group->url }}">Front Page</a></li>
+                    <li><a href="{{ url('/') }}/{{ $group->url }}">Front Page</a></li>
                     <li id="selected">
-                        <a href="{{ $group->url }}/discussions">Discussion Forum</a>
+                        <a href="{{ url('/') }}/{{ $group->url }}/discussions">Discussion Forum</a>
                     </li>
                 </ul>
             </div>
@@ -39,7 +39,6 @@
             <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
             <input type="hidden" id="group-id" value="{{ $group->id }}">
             <input type="hidden" id="group-url" value="{{ $group->url }}">
-            @php($topics = $group->topics()->with('author')->paginate(10))
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-1col">
                 <tbody>
                     <tr>
@@ -68,12 +67,12 @@
                                                     </td>
 
                                                     <td class="topiclist-viewpage" colspan="3" align="right">View page:
-                                                        @for ($i = 1; $i <= $topics->lastPage(); $i++)
-                                                            @if ($i == $topics->currentPage())
+                                                        @for ($i = 1; $i <= $threads->lastPage(); $i++)
+                                                            @if ($i == $threads->currentPage())
                                                                 <span style="font-weight: bold">{{ $i }}</span>
                                                             @else
                                                                 <a
-                                                                    href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions?page={{ $i }}">{{ $i }}</a>
+                                                                    href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
                                                             @endif
                                                         @endfor
                                                     </td>
@@ -91,35 +90,42 @@
                                                         <div class="topiclist-divider"></div>
                                                     </td>
                                                 </tr>
-
-                                                @forelse ($topics as $topic)
+                                                @forelse ($threads as $thread)
                                                     <tr class="topiclist-row-{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                                         <td class="topiclist-rowtopic" valign="top">
+                                                            @if($thread->is_stickied)
+                                                            <div class="topiclist-row-topicsticky"><img src="{{ url('/') }}/web/images/groups/Sticky.gif" alt="Sticky"></div>
+                                                            @endif
                                                             <div class="topiclist-row-content">
-                                                                <a class="topic-list-link"
-                                                                    href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id">{{ $topic->subject }}</a>
+                                                                <a class="topic-list-link" href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $thread->id }}/id">{{ $thread->topic_title }}</a>
+                                                                @if (!$thread->is_open)
+                                                                    <span class="topiclist-row-topicsticky">
+                                                                        <img src="{{ url('/') }}/web/images/groups/status_closed.gif" title="Closed Thread" alt="Closed Thread">
+                                                                    </span>
+                                                                @endif
                                                                 (page
-                                                                @php($replies = $topic->replies()->paginate(10))
+                                                                @php($replies = $thread->replies()->paginate(10))
                                                                 @for ($i = 1; $i <= $replies->lastPage(); $i++)
                                                                     <a
-                                                                        href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions/{{ $topic->id }}/id?page={{ $i }}">{{ $i }}</a>
+                                                                        href="{{ url('/') }}/{{ $group->url }}/discussions/{{ $thread->id }}/id?page={{ $i }}">{{ $i }}</a>
                                                                 @endfor)
                                                                 <br>
                                                                 <span><a class="topiclist-row-openername"
-                                                                        href="{{ url('/') }}/home/{{ $topic->author->username }}">{{ $topic->author->username }}</a></span>
+                                                                        href="{{ url('/') }}/home/{{ $thread->author->username }}">{{ $thread->author->username }}</a></span>
 
-                                                                <span class="topiclist-row-latestpost-date">{{ $topic->created_at->format('d/m/y') }}</span>
-                                                                <span class="topiclist-row-latestpost-date">({{ $topic->created_at->format('h:i A') }})</span>
+                                                                <span class="topiclist-row-latestpost-date">{{ $thread->created_at->format('d/m/y') }}</span>
+                                                                <span class="topiclist-row-latestpost-date">({{ $thread->created_at->format('h:i A') }})</span>
                                                             </div>
                                                         </td>
                                                         <td class="topiclist-lastpost" valign="top">
-                                                        @php($latest = $topic->latestReply())
-                                                        {{ $latest->created_at->format('d/m/y') }} <span class="topiclist-lastpost-time">{{ $latest->created_at->format('h:i A') }}</span><br>
-                                                        <span class="topiclist-row-writtenby">by:</span> <a class="topiclist-row-openername"
-                                                            href="{{ url('/') }}/home/{{ $latest->author->username }}">{{ $latest->author->username }}</a>
+                                                            @php($latest = $thread->latestReply())
+                                                            {{ $latest->created_at->format('d/m/y') }} <span
+                                                                class="topiclist-lastpost-time">{{ $latest->created_at->format('h:i A') }}</span><br>
+                                                            <span class="topiclist-row-writtenby">by:</span> <a class="topiclist-row-openername"
+                                                                href="{{ url('/') }}/home/{{ $latest->author->username }}">{{ $latest->author->username }}</a>
                                                         </td>
-                                                        <td class="topiclist-replies" valign="top">{{ $topic->replies }}</td>
-                                                        <td class="topiclist-views" valign="top">{{ $topic->views }}</td>
+                                                        <td class="topiclist-replies" valign="top">{{ $thread->visibleReplies()->count() }}</td>
+                                                        <td class="topiclist-views" valign="top">{{ $thread->views }}</td>
                                                     </tr>
                                                 @empty
                                                 @endforelse
@@ -142,11 +148,12 @@
                                                     </td>
 
                                                     <td class="topiclist-viewpage" colspan="3" align="right">View page:
-                                                        @for ($i = 1; $i <= $topics->lastPage(); $i++)
-                                                            @if ($i == $topics->currentPage())
-                                                            <span style="font-weight: bold">{{ $i }}</span>
+                                                        @for ($i = 1; $i <= $threads->lastPage(); $i++)
+                                                            @if ($i == $threads->currentPage())
+                                                                <span style="font-weight: bold">{{ $i }}</span>
                                                             @else
-                                                            <a href="{{ url('/') }}/groups/{{ $group->id }}/id/discussions?page={{ $i }}">{{ $i }}</a>
+                                                                <a
+                                                                    href="{{ url('/') }}/{{ $group->url }}/discussions?page={{ $i }}">{{ $i }}</a>
                                                             @endif
                                                         @endfor
                                                     </td>

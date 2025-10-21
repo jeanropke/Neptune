@@ -253,10 +253,12 @@ Route::middleware('user')->group(function () {
             Route::post('/previewtopic', [DiscussionController::class, 'previewTopic'])->name('discussions.actions.previewtopic');
             Route::post('/savetopic', [DiscussionController::class, 'saveTopic'])->name('discussions.actions.savetopic');
             Route::post('/previewpost', [DiscussionController::class, 'previewPost'])->name('discussions.actions.previewpost');
+            Route::post('/updatepost', [DiscussionController::class, 'updatePost'])->name('discussions.actions.updatepost');
             Route::post('/savepost', [DiscussionController::class, 'savePost'])->name('discussions.actions.savepost');
             Route::post('/deletepost', [DiscussionController::class, 'deletePost'])->name('discussions.actions.deletepost');
 
             Route::post('/opentopicsettings', [DiscussionController::class, 'openTopicSettings'])->name('discussions.actions.opentopicsettings');
+            Route::post('/savetopicsettings', [DiscussionController::class, 'saveTopicSettings'])->name('discussions.actions.savetopicsettings');
             Route::post('/confirm_delete_topic', [DiscussionController::class, 'confirmDeleteTopic'])->name('discussions.actions.confirm_delete_topic');
             Route::post('/deletetopic', [DiscussionController::class, 'deleteTopic'])->name('discussions.actions.deletetopic');
         });
@@ -317,6 +319,7 @@ Route::middleware('user')->group(function () {
         });
 
         Route::get('/{groupId}/id/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view');
+        Route::get('/{alias}/discussions/{topicId}/id', [DiscussionController::class, 'viewTopic'])->name('groups.topic.view.alias');
     });
 
     Route::prefix('myhabbo')->group(function () {
@@ -344,6 +347,9 @@ Route::middleware('user')->group(function () {
         Route::post('/widget/add', [WidgetController::class, 'widgetAdd'])->name('myhabbo.widget.add');
         Route::post('/rating/reset_ratings', [WidgetController::class, 'ratingsReset'])->name('myhabbo.rating.reset');
         Route::post('/photolist/photopaging', [WidgetController::class, 'photoPaging'])->name('myhabbo.badgelist.photopaging');
+        Route::post('/highscorelist/scores', [WidgetController::class, 'highscorelistScores'])->name('myhabbo.highscorelist.scores');
+        Route::post('/highscorelist/setGameId', [WidgetController::class, 'highscorelistSetGameId'])->name('myhabbo.highscorelist.setGameId');
+        Route::post('/highscorelist/page', [WidgetController::class, 'highscorelistPage'])->name('myhabbo.highscorelist.page');
 
         Route::post('/noteeditor/editor', [NoteEditorController::class, 'editor'])->name('myhabbo.noteeditor.editor');
         Route::post('/noteeditor/preview', [NoteEditorController::class, 'preview'])->name('myhabbo.noteeditor.preview');

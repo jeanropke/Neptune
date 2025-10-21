@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Models\Home\Guestbook;
-use App\Models\Home\HomeItem;
 use App\Models\Home\HomeRating;
 use App\Models\Home\HomeSong;
+use App\Models\Home\Sticker;
 use App\Models\Photo;
 use App\Models\PhotoLike;
 use App\Models\User;
-use App\Models\UserBadge;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,30 +21,30 @@ class WidgetController extends Controller
     public function widgetAdd(Request $request)
     {
         $widgetId = $request->widgetId;
-        $widget = HomeItem::find($widgetId);
+        $widget = Sticker::find($widgetId);
         if (!$widget)
             return 'ERROR';
 
-        if ($widget->owner_id != user()->id)
+        if ($widget->user_id != user()->id)
             return 'ERROR';
 
         $session = user()->homeSession;
-        if (!$session)
-            return 'error: placeSticker > session expired';
+        if ($session) {
+            // group edition stuff go here
+            if ($session->group_id)
+                $owner = Group::find($session->group_id);
+        }
 
         $owner = user();
-        if($session->group_id)
-            $owner = Group::find($session->group_id);
 
         $widget->update([
-            'home_id'   => $session->home_id,
-            'group_id'  => $session->group_id,
             'x'         => 20,
             'y'         => 30,
             'z'         => $request->zindex,
+            'is_placed' => '1'
         ]);
 
-        return response(view('home.widgets.' . $widget->store->class)->with(['item' => $widget, 'owner' => $owner, 'editing' => true]), 200)
+        return response(view('home.widgets.' . $widget->store->data)->with(['item' => $widget, 'owner' => $owner, 'editing' => true]), 200)
             ->header('Content-Type', 'application/json')
             ->header('X-JSON', json_encode(array('id' => $widgetId)));
     }
@@ -127,7 +127,7 @@ class WidgetController extends Controller
     public function membersPaging(Request $request)
     {
         $group = Group::find($request->_groupspage_requested_group);
-        if(!$group) return;
+        if (!$group) return;
 
         $page = $request->pageNumber;
         $search = $request->searchString;
@@ -164,11 +164,14 @@ class WidgetController extends Controller
         $ownerId    = $request->ownerId;
         $widgetId   = $request->widgetId;
         $message    = $request->message;
+        $widget     = HomeItem::find($widgetId);
 
         $guestbook = Guestbook::create([
-            'user_id'   => user()->id,
-            'message'   => $message,
-            'widget_id' => $widgetId
+            'user_id'       => user()->id,
+            'message'       => $message,
+            'home_id'       => $widget->home_id ?? 0,
+            'group_id'      => $widget->group_id ?? 0,
+            'created_at'    => now()
         ]);
 
         return view('home.widgets.ajax.guestbook.add')->with([
@@ -372,6 +375,67 @@ class WidgetController extends Controller
             'photos'        => $photos,
             'totalPages'    => $totalPages,
             'page'          => $page
+        ]);
+    }
+
+    public function highscorelistScores(Request $request)
+    {
+        $sticker = Sticker::find($request->widgetId);
+        $period = Carbon::parse($request->period);
+
+        switch ($request->type) {
+            case 'week':
+                $startDate  = $period->copy()->startOfDay();
+                $endDate    = $period->copy()->addDays(6)->endOfDay();
+                break;
+            case 'month':
+                $startDate  = $period->copy()->startOfMonth();
+                $endDate    = $period->copy()->endOfMonth();
+                break;
+            case 'all':
+                $startDate  = Carbon::parse('01/01/2015');
+                $endDate    = Carbon::now();
+                break;
+        }
+
+        return view('home.widgets.ajax.highscorelistwidget')->with([
+            'item'          => $sticker,
+            'highscores'    => $sticker->loadScores($startDate, $endDate),
+            'type'          => $request->type,
+            'start'         => $startDate,
+            'end'           => $endDate
+        ]);
+    }
+
+    public function highscorelistSetGameId(Request $request)
+    {
+        return $request->all();
+    }
+
+    public function highscorelistPage(Request $request)
+    {
+        $sticker = Sticker::find($request->widgetId);
+        $period = Carbon::parse($request->period);
+        $page = $request->page;
+
+        switch ($request->type) {
+            case 'week':
+                $startDate  = $period->copy()->startOfDay();
+                $endDate    = $period->copy()->addDays(6)->endOfDay();
+                break;
+            case 'month':
+                $startDate  = $period->copy()->startOfMonth();
+                $endDate    = $period->copy()->endOfMonth();
+                break;
+            case 'all':
+                $startDate  = Carbon::parse('01/01/2015');
+                $endDate    = Carbon::now();
+                break;
+        }
+
+        return view('home.widgets.ajax.highscorelistpaging')->with([
+            'item'          => $sticker,
+            'highscores'    => $sticker->loadScores($startDate, $endDate, $page)
         ]);
     }
 }

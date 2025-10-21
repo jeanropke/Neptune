@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Group\Member;
-use App\Models\Group\Topic;
+use App\Models\Group\Thread;
 use App\Models\Home\HomeItem;
+use App\Models\Home\Sticker;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,7 +25,16 @@ class Group extends Model
         'group_type',
         'forum_type',
         'forum_premission',
-        'alias'
+        'alias',
+        'created_at'
+    ];
+
+    public $timestamps = false;
+
+    protected $dates = ['created_at'];
+
+    protected $casts = [
+        'created_at' => 'datetime'
     ];
 
     public function ensureGroupHomeItems()
@@ -31,17 +42,16 @@ class Group extends Model
         if ($this->items->isEmpty()) {
             $defaultItems = [
                 // guestbookwidget
-                ['x' => 40,  'y' => 34,  'z' => 6, 'item_id' => 12, 'skin' => 'defaultskin'],
+                ['x' => 40,  'y' => 34,  'z' => 6, 'sticker_id' => 11100, 'skin' => '1'],
                 // groupinfowidget
-                ['x' => 433, 'y' => 40,  'z' => 3, 'item_id' => 13, 'skin' => 'defaultskin'],
-                // bg_pattern_abstract2
-                ['x' => 0,   'y' => 0,   'z' => 0, 'item_id' => 28, 'data' => 'background']
+                ['x' => 433, 'y' => 40,  'z' => 3, 'sticker_id' => 11000, 'skin' => '1']
             ];
 
             foreach ($defaultItems as $item) {
-                HomeItem::create(array_merge([
-                    'owner_id' => $this->owner_id,
-                    'group_id' => $this->id
+                Sticker::create(array_merge([
+                    'user_id'   => $this->owner_id,
+                    'group_id'  => $this->id,
+                    'is_placed' => '1'
                 ], $item));
             }
 
@@ -84,15 +94,16 @@ class Group extends Model
     public function getUrlAttribute(): string
     {
         if ($this->alias) {
-            return "/groups/{$this->alias}";
+            return "groups/{$this->alias}";
         }
 
-        return "/groups/{$this->id}/id";
+        return "groups/{$this->id}/id";
     }
 
-    public function topics(): HasMany
+    //->with('replies');
+    public function threads(): HasMany
     {
-        return $this->hasMany(Topic::class)->where('is_deleted', false);
+        return $this->hasMany(Thread::class, 'group_id')->with('replies');
     }
 
     public function filterByUsername(?string $query)
@@ -102,6 +113,8 @@ class Group extends Model
 
     public function getMember($userId = null)
     {
+        if ($this->owner_id == $userId)
+            return User::find($userId);
         return $this->memberships()->where('user_id', $userId ?? user()->id)->first();
     }
 
@@ -182,13 +195,13 @@ class Group extends Model
         $this->tags()->where('tag', $tag)->delete();
     }
 
-    public function tags(): MorphMany
+    public function tags(): HasMany
     {
-        return $this->morphMany(Tag::class, 'holder');
+        return $this->hasMany(Tag::class);
     }
 
     public function items(): HasMany
     {
-        return $this->hasMany(HomeItem::class, 'group_id')->with('store');
+        return $this->hasMany(Sticker::class, 'group_id')->where('is_placed', '1')->with('store');
     }
 }

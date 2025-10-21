@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class HomeSession extends Model
 {
-    protected $table = 'cms_homes_sessions';
+    protected $table = 'homes_edit_sessions';
 
     protected $fillable = [
-        'user_id', 'home_id', 'group_id', 'expires_at'
+        'user_id', 'expire'
     ];
 
     public $timestamps = false;

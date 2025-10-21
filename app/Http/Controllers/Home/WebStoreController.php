@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Home\HomeItem;
-use App\Models\Home\StoreCategory;
-use App\Models\Home\StoreItem;
+use App\Models\Home\Sticker;
+use App\Models\Home\StickerCategory;
+use App\Models\Home\StickerStore;
 use Illuminate\Http\Request;
 
 class WebStoreController extends Controller
 {
     public function storeMain(Request $request)
     {
-        $type = $request->type === 'backgrounds' ? 'b' : 's';
-        $categories = StoreCategory::where('type', $type)->with('items')->orderBy('order_num')->get();
+        $type = $request->type === 'stickers' ? '1' : '2';
+        $categories = StickerCategory::where('category_type', $type)->orderBy('name')->with('items')->get();
         $items = $categories->first()?->items ?? collect();
 
         $data = [];
@@ -21,7 +21,7 @@ class WebStoreController extends Controller
             $first = $items->first();
             $data = [
                 'itemCount'       => 1,
-                'previewCssClass' => "{$first->type}_{$first->class}_pre",
+                'previewCssClass' => "{$first->shortType}_{$first->data}_pre",
                 'titleKey'        => ''
             ];
         }
@@ -36,25 +36,25 @@ class WebStoreController extends Controller
 
     public function loadItems(Request $request)
     {
-        $items = StoreItem::where('category', $request->categoryId)->get();
+        $items = StickerStore::where('category_id', $request->categoryId)->get();
         return view('home.store.items', compact('items'));
     }
 
     public function preview(Request $request)
     {
-        $item = StoreItem::find($request->productId);
+        $item = StickerStore::find($request->productId);
         if (!$item) {
             return "Invalid item id: '{$request->productId}'";
         }
 
         $data = [[
             'itemCount'       => $item->amount,
-            'previewCssClass' => "{$item->type}_{$item->class}_pre",
-            'titleKey'        => $item->caption,
+            'previewCssClass' => "{$item->shortType}_{$item->data}_pre",
+            'titleKey'        => $item->name,
         ]];
 
-        if ($item->type === 'b') {
-            $data[0]['bgCssClass'] = "{$item->type}_{$item->class}";
+        if ($item->type == '2') {
+            $data[0]['bgCssClass'] = "{$item->shortType}_{$item->data}";
         }
 
         return response(
@@ -67,7 +67,7 @@ class WebStoreController extends Controller
 
     public function purchaseConfirm(Request $request)
     {
-        $item = StoreItem::find($request->productId);
+        $item = StickerStore::find($request->productId);
         return view('home.store.purchase_confirm', compact('item'));
     }
 
@@ -88,17 +88,15 @@ class WebStoreController extends Controller
 
     private function handlePurchase($itemId, bool $isBackground = false)
     {
-        $store = StoreItem::find($itemId);
+        $store = StickerStore::find($itemId);
         if (!$store) {
             return response('ERROR');
         }
 
-        HomeItem::create([
-            'owner_id' => user()->id,
-            'type'     => $store->getFullType(),
-            'amount'   => $isBackground ? 1 : $store->amount,
-            'item_id'  => $store->id,
-            'data'     => $isBackground ? 'background' : null,
+        Sticker::create([
+            'user_id'       => user()->id,
+            'amount'        => $isBackground ? 1 : $store->amount,
+            'sticker_id'    => $store->id
         ]);
 
         user()->updateCredits(-$store->price);

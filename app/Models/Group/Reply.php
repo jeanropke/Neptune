@@ -8,40 +8,42 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reply extends Model
 {
-    protected $table = 'cms_groups_replies';
+    protected $table = 'cms_forum_replies';
 
     protected $fillable = [
-        'topic_id',
-        'user_id',
+        'thread_id',
         'message',
+        'poster_id',
         'is_edited',
-        'is_deleted',
-        'hidden_by_staff'
+        'is_deleted'
     ];
 
+    public $timestamps = false;
+
     protected $casts = [
-        'is_edited' => 'boolean',
-        'is_deleted' => 'boolean',
-        'hidden_by_staff' => 'boolean',
+        'created_at'    => 'datetime',
+        'modified_at'   => 'datetime',
+        'is_edited'     => 'boolean',
+        'is_deleted'    => 'boolean'
     ];
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id')->with('cmsSettings');
+        return $this->belongsTo(User::class, 'poster_id');
     }
 
-    public function topic(): BelongsTo
+    public function thread(): BelongsTo
     {
-        return $this->belongsTo(Topic::class, 'topic_id');
+        return $this->belongsTo(Topic::class, 'thread_id');
     }
 
-    public function markAsDeleted(): void
+    public function markAsDeleted()
     {
         if ($this->is_deleted) {
             return;
         }
 
-        $this->author?->cmsSettings?->decrement('discussions_posts');
+        $this->load('author.cmsSettings');
 
         $this->update(['is_deleted' => true]);
     }

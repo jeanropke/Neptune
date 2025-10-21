@@ -9,8 +9,10 @@ Discussions.prototype = {
             Event.observe($('group-topiclist-list'), 'click', this.handleActions.bindAsEventListener(this));
         }
 
-        Event.observe($('create-post-message-lower-button'), 'click', createNewPost);
-        Event.observe($('create-post-message-button'), 'click', createNewPost);
+        if ($('create-post-message-lower-button'))
+            Event.observe($('create-post-message-lower-button'), 'click', createNewPost);
+        if ($('create-post-message-button'))
+            Event.observe($('create-post-message-button'), 'click', createNewPost);
     },
 
     handleActions: function (e) {
@@ -91,7 +93,7 @@ Discussions.prototype = {
     }
 };
 
-var edit_function = function(postId) {
+var edit_function = function (postId) {
     Element.show("new-post-entry-message");
     Element.show("new-post-entry-label");
     var editText = document.getElementById(postId + '-message');
@@ -104,7 +106,7 @@ var edit_function = function(postId) {
 
 }
 
-var quote_function = function(postId) {
+var quote_function = function (postId) {
     console.log(postId);
     Element.show("new-post-entry-message");
     Element.show("new-post-entry-label");
@@ -163,6 +165,7 @@ var newtopic_function = function (e) {
         method: "post", evalScripts: true, parameters: params,
         onComplete: function (req, json) {
             Event.observe("post-form-preview", "click", previewtopic_function, false);
+            Event.observe("post-form-cancel", "click", cancel_newtopic_function, false);
             $("new-topic-name").focus();
             Element.scrollTo('post-message');
         }
@@ -356,6 +359,7 @@ var delete_function = function (postId) {
 }
 
 var createNewPost = function (e) {
+    console.log('createNewPost');
     Event.stop(e);
     document.getElementById('post-message').value = "";
     document.getElementById('post-id').value = null;
@@ -366,9 +370,10 @@ var createNewPost = function (e) {
     Element.hide("create-post-message-button");
     Element.hide("create-post-message-lower-button");
     Event.observe("post-form-cancel", "click", cancel_new_post, false);
+    console.log('createNewPost');
 }
 
-var cancel_new_post = function(e) {
+var cancel_new_post = function (e) {
     Event.stop(e);
     Element.show("create-post-message-button");
     Element.show("create-post-message-lower-button");
@@ -381,8 +386,8 @@ var closeTopicSettings = function (e) {
     hideOverlay();
 }
 
-var topic_settings_function = function () {
-
+var topic_settings_function = function (e) {
+    Event.stop(e);
     var topicIdHidden = document.getElementById('topic-id');
     var groupIdHidden = document.getElementById('group-id');
     var groupUrlHidden = document.getElementById('group-url');

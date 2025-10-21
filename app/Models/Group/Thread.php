@@ -8,28 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Topic extends Model
+class Thread extends Model
 {
-    protected $table = 'cms_groups_topics';
+    protected $table = 'cms_forum_threads';
 
     protected $fillable = [
-        'group_id',
-        'user_id',
-        'subject',
+        'topic_title',
+        'poster_id',
+        'is_open',
+        'is_stickied',
         'views',
-        'replies',
-        'latest_comment',
-        'is_deleted'
+        'group_id',
+        'created_at',
+        'modified_at'
     ];
 
+    public $timestamps = false;
+
     protected $casts = [
-        'is_deleted' => 'boolean',
-        'latest_comment' => 'datetime',
+        'created_at' => 'datetime',
+        'modified_at' => 'datetime',
     ];
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'poster_id');
     }
 
     public function group(): BelongsTo
@@ -37,9 +40,13 @@ class Topic extends Model
         return $this->belongsTo(Group::class, 'group_id');
     }
 
+    public function reply() {
+        return $this->hasOne(Reply::class);
+    }
+
     public function replies(): HasMany
     {
-        return $this->hasMany(Reply::class, 'topic_id')->where('is_deleted', false)->with('author');
+        return $this->hasMany(Reply::class, 'thread_id');
     }
 
     public function latestReply()
@@ -49,7 +56,7 @@ class Topic extends Model
 
     public function visibleRepliesPaginated(int $perPage = 10)
     {
-        return $this->replies()->where('is_deleted', false)->orderBy('created_at', 'asc')->paginate($perPage);
+        return $this->replies()->where('is_deleted', false)->with('author')->orderBy('created_at', 'asc')->paginate($perPage);
     }
 
     public function visibleReplies()

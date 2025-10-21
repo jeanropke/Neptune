@@ -2,13 +2,13 @@
     <div id="inventory-items">
         <ul id="inventory-item-list">
             @foreach ($widgets as $widget)
-                <li id="inventory-item-p-{{ $widget->id }}" title="{{ $widget->caption }}" class="webstore-widget-item {{ ($widget->home_id || $widget->x) ? 'webstore-widget-disabled' : '' }}">
-                    <div class="webstore-item-preview w_{{ $widget->store->class }}_pre">
+                <li id="inventory-item-p-{{ $widget->id }}" title="{{ $widget->name }}" class="webstore-widget-item {{ $widget->is_placed ? 'webstore-widget-disabled' : '' }}">
+                    <div class="webstore-item-preview w_{{ $widget->data }}_pre">
                         <div class="webstore-item-mask">
                         </div>
                     </div>
                     <div class="webstore-widget-description">
-                        <h3>{{ $widget->caption }}</h3>
+                        <h3>{{ $widget->name }}</h3>
                         <p>{{ $widget->description }}</p>
                     </div>
                 </li>

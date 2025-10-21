@@ -1,4 +1,4 @@
-<div class="movable sticker s_{{ $item->store->class }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}" id="sticker-{{ $item->id }}">
+<div class="movable sticker s_{{ $item->store->data }}" style="left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }}" id="sticker-{{ $item->id }}">
     @if ($editing)
         <img src="{{ cms_config('site.web.url') }}/images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="sticker-{{ $item->id }}-edit" />
         <script language="JavaScript" type="text/javascript">

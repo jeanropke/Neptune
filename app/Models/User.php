@@ -4,20 +4,22 @@ namespace App\Models;
 
 use App\Models\Furni\Photo;
 use App\Models\Group\Member;
+use App\Models\Group\Reply;
 use App\Models\Habbowood\Movie;
+use App\Models\Home\Background;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
 use App\Models\Home\HomeSong;
+use App\Models\Home\Sticker;
 use App\Models\Neptune\Permission;
-use App\Models\Neptune\UserSettings;
 use App\Models\Room;
 use App\Models\User\Badge;
 use App\Models\User\IPLog;
+use App\Models\User\Statistic;
 use App\Models\User\Subscription;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -43,8 +45,6 @@ class User extends Authenticatable
         'rank',
         'allow_stalking',
         'allow_friend_requests',
-        'badge',
-        'badge_active',
         'battleball_points',
         'snowstorm_points',
         'club_subscribed',
@@ -206,6 +206,12 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getBadgeAttribute()
+    {
+        $badge = $this->badges()->where([['equipped', '1'], ['slot_id', '>', '0']])->orderBy('slot_id')->first();
+        return $badge ? $badge->badge : null;
+    }
+
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class, 'photo_user_id')->with('furni')->orderBy('timestamp', 'DESC');
@@ -221,9 +227,15 @@ class User extends Authenticatable
         return $this->hasMany(Room::class, 'owner_id')->orderBy('name', 'ASC');
     }
 
-    public function groups(): HasMany
+    public function groups()
     {
-        return $this->hasMany(Member::class, 'user_id')->orderBy('created_at', 'DESC');
+        //return $this->hasMany(Member::class, 'user_id')->orderBy('created_at', 'DESC');
+        return Group::where('owner_id', $this->id)
+            ->orWhereHas('memberships', function ($q) {
+                $q->where('user_id', $this->id)
+                    ->where('is_pending', 0);
+            })
+            ->get();
     }
 
     public function getFavoriteGroup()
@@ -255,7 +267,7 @@ class User extends Authenticatable
 
     public function isOnline()
     {
-        return $this->online;
+        return $this->is_online;
     }
 
     public function hasPermission($permission)
@@ -271,9 +283,14 @@ class User extends Authenticatable
         return Permission::find($this->rank);
     }
 
-    public function cmsSettings(): HasOne
+    public function statistics(): HasOne
     {
-        return $this->hasOne(UserSettings::class, 'user_id');
+        return $this->hasOne(Statistic::class);
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Reply::class, 'poster_id')->where('is_deleted', '0');
     }
 
     public function traxSongs(): HasMany
@@ -283,22 +300,22 @@ class User extends Authenticatable
 
     public function homeItems(): HasMany
     {
-        return $this->hasMany(HomeItem::class, 'home_id')->with('store');
+        return $this->hasMany(Sticker::class, 'user_id')->where([['is_placed', '1'], ['group_id', '<=', '0']])->with('store');
     }
 
-    public function tags(): MorphMany
+    public function tags(): HasMany
     {
-        return $this->morphMany(Tag::class, 'holder');
+        return $this->hasMany(Tag::class);
     }
 
     public function addTag($tag)
     {
         $tag = Str::lower($tag);
-        if (!$this->tags()->where('tag', $tag)->exists()) {
+        $tag = Str::trim($tag);
+        if (!$this->tags()->where('tag', $tag)->exists() && Str::length($tag) > 0) {
             $this->tags()->insert([
                 'tag'           => $tag,
-                'holder_id'     => $this->id,
-                'holder_type'   => 'user'
+                'user_id'       => $this->id
             ]);
             return 'valid';
         }
@@ -310,6 +327,11 @@ class User extends Authenticatable
         $this->tags()->where('tag', $tag)->delete();
     }
 
+    public function homeBackground()
+    {
+        return $this->hasOne(Background::class, 'user_id')->first()->background;
+    }
+
     public function homeSession(): HasOne
     {
         return $this->hasOne(HomeSession::class, 'user_id');
@@ -318,35 +340,35 @@ class User extends Authenticatable
     public function ensureHomeItems()
     {
         if ($this->homeItems->isEmpty()) {
+            Background::create(['user_id' => $this->id]);
             $defaultItems = [
-                ['x' => '125',    'y' => '38',    'z' => '131', 'item_id' => '15',  'data' => 'Remember![br]Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.[br]Deleted notes will not be funded.[br][br]', 'skin' => 'noteitskin'],
-                ['x' => '56',     'y' => '229',   'z' => '151', 'item_id' => '15',  'data' => 'Welcome to a brand new Habbo Home page![br]This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo [br]trap off with colourful notes and showcase your Habbo rooms! To [br]start editing just click the edit button.[br][br]', 'skin' => 'speechbubbleskin'],
-                ['x' => '110',    'y' => '409',   'z' => '170', 'item_id' => '15',  'data' => 'Where are my friends?[br]To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin' => 'notepadskin'],
+                ['x' => '125',    'y' => '38',    'z' => '131', 'sticker_id' => '13',  'text' => 'Remember![br]Posting personal information about yourself or your friends, including addresses, phone numbers or email, and getting round the filter will result in your note being deleted.[br]Deleted notes will not be funded.[br][br]', 'skin_id' => '4', 'is_placed' => '1'],
+                ['x' => '56',     'y' => '229',   'z' => '151', 'sticker_id' => '13',  'text' => 'Welcome to a brand new Habbo Home page![br]This is the place where you can express yourself with a wild and unique variety of stickers, hoot yo [br]trap off with colourful notes and showcase your Habbo rooms! To [br]start editing just click the edit button.[br][br]', 'skin_id' => '2', 'is_placed' => '1'],
+                ['x' => '110',    'y' => '409',   'z' => '170', 'sticker_id' => '13',  'text' => 'Where are my friends?[br]To add your buddy list to your page click edit and look in your widgets inventory. After placing it on the page you can move it all over the place and even change how it looks. Go on!', 'skin_id' => '5', 'is_placed' => '1'],
                 //Profile Widget
-                ['x' => '455',    'y' => '27',    'z' => '129', 'item_id' => '1', 'skin' => 'defaultskin'],
+                ['x' => '455',    'y' => '27',    'z' => '129', 'sticker_id' => '10100', 'skin_id' => '1', 'is_placed' => '1'],
                 //Rooms Widget
-                ['x' => '440',    'y' => '321',   'z' => '177', 'item_id' => '6', 'skin' => 'defaultskin'],
-                //High Scores Widg
-                ['x' => '383',    'y' => '491',   'z' => '179', 'item_id' => '7', 'skin' => 'goldenskin'],
+                ['x' => '440',    'y' => '321',   'z' => '177', 'sticker_id' => '10700', 'skin_id' => '1', 'is_placed' => '1'],
+                //High Scores Widget
+                ['x' => '383',    'y' => '491',   'z' => '179', 'sticker_id' => '10300', 'skin_id' => '6', 'is_placed' => '1'],
                 //needle_3
-                ['x' => '109',    'y' => '19',    'z' => '134', 'item_id' => '18'],
-                //sticker_spaceduc
-                ['x' => '275',    'y' => '367',   'z' => '152', 'item_id' => '24'],
+                ['x' => '109',    'y' => '19',    'z' => '134', 'sticker_id' => '161', 'is_placed' => '1'],
+                //sticker_spaceduck
+                ['x' => '275',    'y' => '367',   'z' => '152', 'sticker_id' => '123', 'is_placed' => '1'],
                 //paper_clip_1
-                ['x' => '183',    'y' => '373',   'z' => '171', 'item_id' => '21'],
-                //bg_pattern_abstr
-                ['x' => '0',      'y' => '0',     'z' => '0',   'item_id' => '28',  'data' => 'background'],
+                ['x' => '183',    'y' => '373',   'z' => '171', 'sticker_id' => '220', 'is_placed' => '1'],
+
                 // Inventory items
                 //needle_1
-                ['item_id' => '16'],
+                ['sticker_id' => '159', 'is_placed' => '0'],
                 //needle_2
-                ['item_id' => '17']
+                ['sticker_id' => '160', 'is_placed' => '0']
             ];
 
             foreach ($defaultItems as $item) {
-                HomeItem::create(array_merge([
-                    'owner_id'  => $this->id,
-                    'home_id'   => $this->id
+                Sticker::create(array_merge([
+                    'user_id'   => $this->id,
+                    'is_placed' => 1
                 ], $item));
             }
 

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Group;
 use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Models\Group\Reply;
-use App\Models\Group\Topic;
+use App\Models\Group\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DiscussionController extends Controller
 {
@@ -17,9 +18,14 @@ class DiscussionController extends Controller
 
     protected function validateGroupAndTopic(Request $request): array
     {
-        $group = Group::findOrFail($request->groupId);
-        $topic = Topic::findOrFail($request->topicId);
-        abort_if($topic->group_id !== $group->id, 404);
+
+        if ($request->groupId)
+            $group = Group::findOrFail($request->groupId);
+        else
+            $group = Group::where('alias', $request->alias)->first();
+
+        $topic = Thread::findOrFail($request->topicId);
+        abort_if(($topic->group_id !== $group->id || $topic->reply->is_deleted), 404);
         return [$group, $topic];
     }
 
@@ -32,14 +38,25 @@ class DiscussionController extends Controller
     public function previewTopic(Request $request)
     {
         $this->authorizeUser();
-        $validated = $request->validate([
-            'topicName' => 'required|string|max:100',
-            'message'   => 'required|string|max:5000',
-        ]);
+        //$validated = $request->validate([
+        //    'topicName' => 'required|string|max:100',
+        //    'message'   => 'required|string|max:5000',
+        //]);
+
+        //$validator = Validator::make($request->all(), [
+        //    'topicName' => 'required|string|max:100',
+        //    'message'   => 'required|string|max:5000',
+        //]);
+
+        //if ($validator->fails()) {
+        //    return view('groups.discussions.includes.error', [
+        //        'message' => 'Please supply a valid message.'
+        //    ]);
+        //}
 
         $topic = (object) [
-            'subject'       => $validated['topicName'],
-            'message'       => $validated['message'],
+            'subject'       => 'topicName',
+            'message'       => 'message',
             'created_at'    => now()
         ];
 
@@ -56,28 +73,22 @@ class DiscussionController extends Controller
         ]);
 
         $group = Group::find($validated['groupId']);
-        $now = now();
 
-        $topic = Topic::create([
-            'user_id'        => user()->id,
-            'group_id'       => $group->id,
-            'subject'        => $validated['topicName'],
-            'latest_comment' => $now
+        $thread = Thread::create([
+            'poster_id'     => user()->id,
+            'group_id'      => $group->id,
+            'topic_title'   => $validated['topicName']
         ]);
 
         Reply::create([
-            'topic_id'   => $topic->id,
-            'user_id'    => user()->id,
-            'message'    => $validated['message'],
-            'created_at' => $now,
-            'updated_at' => $now
+            'thread_id' => $thread->id,
+            'poster_id' => user()->id,
+            'message'   => $validated['message']
         ]);
-
-        user()->cmsSettings->increment('discussions_posts');
 
         return response(route('groups.topic.view', [
             'groupId' => $group->id,
-            'topicId' => $topic->id
+            'topicId' => $thread->id
         ]));
     }
 
@@ -85,10 +96,15 @@ class DiscussionController extends Controller
     {
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
+        if (!session('hasViewedDiscussion' . $topic->id)) {
+            session(['hasViewedDiscussion' . $topic->id => true]);
+            $topic->increment('views');
+        }
+
         return view('groups.discussions.viewtopic', [
             'topic'   => $topic,
             'group'   => $group,
-            'replies' => $topic->replies()->paginate(10)
+            'replies' => $topic->visibleRepliesPaginated()
         ]);
     }
 
@@ -105,33 +121,56 @@ class DiscussionController extends Controller
         return view('groups.discussions.previewpost', compact('topic', 'post'));
     }
 
-    public function savePost(Request $request)
+    public function updatePost(Request $request)
     {
         $this->authorizeUser();
-
-        $request->validate([
-            'topicId' => 'required|integer|exists:cms_groups_topics,id',
-            'groupId' => 'required|integer|exists:groups_details,id',
-            'message' => 'required|string|max:5000',
+        $validated = $request->validate([
+            'groupId'   => 'required|integer',
+            'topicId'   => 'required|integer',
+            'message'   => 'required|string|max:5000',
+            'postId'    => 'required|integer|exists:cms_forum_replies,id'
         ]);
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        $topic->update(['latest_comment' => now()]);
-        $topic->increment('replies');
-
-        Reply::create([
-            'topic_id' => $topic->id,
-            'user_id'  => user()->id,
-            'message'  => $request->message
+        $reply = Reply::find($request->postId);
+        $reply->update([
+            'message'       => $request->message,
+            'is_edited'     => 1
         ]);
 
-        user()->cmsSettings->increment('discussions_posts');
+        return response(route('groups.topic.view', [
+            'groupId' => $group->id,
+            'topicId' => $topic->id
+        ]));
+    }
+
+    public function savePost(Request $request)
+    {
+        $this->authorizeUser();
+
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|string|max:5000',
+        ]);
+
+        if ($validator->fails()) {
+            return view('groups.discussions.includes.error', [
+                'message' => 'Please supply a valid message.'
+            ]);
+        }
+
+        [$group, $topic] = $this->validateGroupAndTopic($request);
+
+        Reply::create([
+            'thread_id' => $topic->id,
+            'poster_id' => user()->id,
+            'message'   => $request->message
+        ]);
 
         return view('groups.discussions.includes.viewtopic', [
             'topic'   => $topic->refresh(),
             'group'   => $group,
-            'replies' => $topic->replies()->paginate(10)
+            'replies' => $topic->replies()->with('author')->paginate(10)
         ]);
     }
 
@@ -142,18 +181,12 @@ class DiscussionController extends Controller
         [$group, $topic] = $this->validateGroupAndTopic($request);
         $reply = Reply::findOrFail($request->postId);
 
-        abort_if($reply->topic_id !== $topic->id, 404);
+        abort_if($reply->thread_id !== $topic->id, 404);
 
         $isAdmin = $group->admins()->where('user_id', user()->id)->exists();
-        abort_unless($isAdmin, 403);
+        abort_unless($isAdmin, 404);
 
         $reply->markAsDeleted();
-        $topic->decrement('replies');
-
-        $latest = $topic->latestReply();
-        $topic->update([
-            'latest_comment' => $latest?->created_at ?? $topic->created_at
-        ]);
 
         return response()->json([
             'success' => true,
@@ -161,9 +194,38 @@ class DiscussionController extends Controller
         ]);
     }
 
-    public function openTopicSettings()
+    public function openTopicSettings(Request $request)
     {
-        return view('groups.discussions.ajax.topicsettings');
+        $this->authorizeUser();
+
+        [$group, $topic] = $this->validateGroupAndTopic($request);
+        $topic = Thread::findOrFail($request->topicId);
+
+        abort_if($group->id !== $topic->group_id, 404);
+
+        return view('groups.discussions.ajax.topicsettings')->with('topic', $topic);
+    }
+
+    public function saveTopicSettings(Request $request)
+    {
+        $this->authorizeUser();
+
+        [$group, $topic] = $this->validateGroupAndTopic($request);
+        $topic = Thread::findOrFail($request->topicId);
+
+        abort_if($group->id !== $topic->group_id, 404);
+
+        $topic->update([
+            'is_open'       => !$request->topicClosed,
+            'is_stickied'   => $request->topicSticky,
+            'topic_title'   => $request->topicName
+        ]);
+
+        return view('groups.discussions.includes.viewtopic', [
+            'topic'   => $topic,
+            'group'   => $group,
+            'replies' => $topic->visibleRepliesPaginated()
+        ]);
     }
 
     public function confirmDeleteTopic()

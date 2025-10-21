@@ -1,5 +1,5 @@
 <div class="movable widget GroupsWidget" id="widget-{{ $item->id }}" style=" left: {{ $item->x }}px; top: {{ $item->y }}px; z-index: {{ $item->z }};">
-    <div class="w_skin_{{ $item->skin }}">
+    <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3><span class="header-left">&nbsp;</span><span class="header-middle">My Groups (<span id="groups-list-size">{{ $owner->groups()->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>

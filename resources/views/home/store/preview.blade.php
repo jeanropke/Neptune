@@ -1,6 +1,6 @@
 <div id="webstore-preview-box"></div>
 <div style="width: 110px; float: right;">
-    <h4 title="">{{ $item->caption }}</h4>
+    <h4 title="">{{ $item->name }}</h4>
     <div id="webstore-preview-price">
         Price:<br><b>
             {{ $item->price }} credit

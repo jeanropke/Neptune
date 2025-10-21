@@ -4,12 +4,13 @@ namespace App\Models\Home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HomeRating extends Model
+class Background extends Model
 {
-    protected $table = 'homes_ratings';
+    protected $table = 'homes_details';
 
     protected $fillable = [
-        'user_id', 'home_id', 'rating'
+        'user_id',
+        'background'
     ];
 
     public $timestamps = false;

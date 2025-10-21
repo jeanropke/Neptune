@@ -2,19 +2,29 @@
 
 namespace App\Models\Home;
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Guestbook extends Model
 {
-    protected $table = 'cms_homes_guestbook';
+    protected $table = 'cms_guestbook_entries';
 
     protected $fillable = [
         'user_id',
         'message',
-        'widget_id',
-        'deleted_by'
+        'home_id',
+        'group_id',
+        'created_at'
+    ];
+
+    public $timestamps = false;
+
+    protected $dates = ['created_at'];
+
+    protected $casts = [
+        'created_at' => 'datetime'
     ];
 
     public function author(): BelongsTo
@@ -22,22 +32,11 @@ class Guestbook extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function widget(): BelongsTo
+    public function owner(): BelongsTo
     {
-        return $this->belongsTo(HomeItem::class, 'widget_id')->with('owner');
-    }
+        if($this->group_id)
+            return $this->belongsTo(Group::class, 'group_id');
 
-    public function deletedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'deleted_by');
-    }
-
-    public function getHomeOwner()
-    {
-        if (!$this->widget) {
-            return (object) ['username' => "Widget not found ({$this->widget_id})"];
-        }
-
-        return $this->widget->owner;
+        return $this->belongsTo(User::class, 'home_id');
     }
 }

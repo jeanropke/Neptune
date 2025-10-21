@@ -3,7 +3,7 @@
         <ul id="webstore-item-list">
             @foreach ($items as $item)
                 <li id="webstore-item-{{ $item->id }}" title="{{ $item->caption }}">
-                    <div class="webstore-item-preview {{ $item->type }}_{{ $item->class }}_pre">
+                    <div class="webstore-item-preview {{ $item->shortType }}_{{ $item->data }}_pre">
                         <div class="webstore-item-mask">
                             @if ($item->amount > 1)
                                 <div class="webstore-item-count">
@@ -29,12 +29,13 @@
     <div id="webstore-preview">
         @isset($items)
             @php($firstItem = $items->first())
-            @isset($firstItem)
-                <div id="webstore-preview-box">
-                </div>
-                <div style="width: 110px; float: right;">
+            <div id="webstore-preview-box"></div>
+            <div style="width: 110px; float: right;">
+                @isset($firstItem)
                     <h4 title="">{{ $firstItem->caption }}</h4>
+
                     <div id="webstore-preview-price">
+
                         Price:<br><b>
                             {{ $firstItem->price }} credit
                         </b>
@@ -50,8 +51,8 @@
                     </div>
 
                     <span id="webstore-preview-bg-text" style="display: none">Preview</span>
-                </div>
-            @endisset
+                @endisset
+            </div>
         @endisset
     </div>
 </div>

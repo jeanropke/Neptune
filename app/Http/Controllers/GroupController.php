@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogue\CatalogueItem;
+use App\Models\Catalogue\Item;
 use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
 use App\Models\Home\StoreItem;
+use App\Models\Neptune\ItemOffer;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -374,9 +376,15 @@ class GroupController extends Controller
 
     public function discussions(Request $request)
     {
-        $group = $request->id ? Group::with('items')->findOrFail($request->id) : Group::with('items')->where('alias', $request->alias)->firstOrFail();
+        $group = $request->id ? Group::findOrFail($request->id) : Group::where('alias', $request->alias)->firstOrFail();
+        $threads = $group->threads()
+            ->whereHas('reply', function ($query) {
+                $query->where('is_deleted', '0');
+            })
+            ->with(['reply', 'author'])
+            ->paginate(10);
 
-        return view('groups.discussions', compact('group'));
+        return view('groups.discussions')->with(['group' => $group, 'threads' => $threads]);
     }
 
     #region Group purchase
@@ -389,7 +397,7 @@ class GroupController extends Controller
             return response('Unauthorized', 401);
         }
 
-        $groupProduct = CatalogueItem::where('sale_code', $request->product)->first();
+        $groupProduct = ItemOffer::where('salecode', $request->product)->first();
 
         if (!$groupProduct) {
             return response('Product not found', 404);
@@ -414,7 +422,7 @@ class GroupController extends Controller
             return response('Unauthorized', 401);
         }
 
-        $groupProduct = CatalogueItem::where('sale_code', $request->product)->first();
+        $groupProduct = ItemOffer::where('salecode', $request->product)->first();
 
         if (!$groupProduct) {
             return response('Product not found', 404);
@@ -454,7 +462,7 @@ class GroupController extends Controller
             return response('Unauthorized', 401);
         }
 
-        $groupProduct = CatalogueItem::where('sale_code', $request->product)->first();
+        $groupProduct = ItemOffer::where('salecode', $request->product)->first();
         if (!$groupProduct) {
             return response('Product not found', 404);
         }
@@ -476,12 +484,6 @@ class GroupController extends Controller
             'owner_id'    => $user->id,
             'name'        => $name,
             'description' => $request->description ?? ''
-        ]);
-
-        GroupMember::create([
-            'group_id'    => $group->id,
-            'user_id'     => $user->id,
-            'member_rank' => 3
         ]);
 
         $user->updateCredits(-$groupProduct->price);

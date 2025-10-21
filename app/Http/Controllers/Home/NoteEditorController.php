@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Home\HomeItem;
-use App\Models\Home\StoreItem;
+use App\Models\Home\Sticker;
+use App\Models\Home\StickerStore;
 use Illuminate\Http\Request;
 
 class NoteEditorController extends Controller
@@ -22,12 +22,12 @@ class NoteEditorController extends Controller
     public function preview(Request $request)
     {
         $item = (object) [
-            'x'    => 0,
-            'y'    => 0,
-            'z'    => 0,
-            'skin' => $this->resolveSkin($request->skin),
-            'id'   => -1,
-            'data' => $request->noteText,
+            'x'         => 0,
+            'y'         => 0,
+            'z'         => 0,
+            'skinName' => $this->resolveSkin($request->skin),
+            'id'        => -1,
+            'text'      => $request->noteText,
         ];
 
         return view('home.noteeditor.preview', compact('item'));
@@ -35,35 +35,28 @@ class NoteEditorController extends Controller
 
     public function place(Request $request)
     {
-        $store = StoreItem::where('type', 'commodity')->first();
-        $item = HomeItem::where([
-            ['owner_id', user()->id],
-            ['item_id', $store->id],
-            ['home_id', null],
-            ['group_id', null],
-        ])->first();
-
-        if (!$item || !user()->homeSession) {
+        $stickie = Sticker::where([['sticker_id', '13'], ['is_placed', '0']])->first();
+        if (!$stickie/* || !user()->homeSession*/) {
             return response('BACK');
         }
 
-        $item->update([
-            'home_id'  => user()->homeSession->home_id,
-            'group_id' => user()->homeSession->group_id,
-            'data'     => $request->noteText,
-            'skin'     => $this->resolveSkin($request->skin),
-            'x'        => 20,
-            'y'        => 30,
-            'z'        => 40,
+        $stickie->update([
+            //'group_id'  => user()->homeSession->group_id,
+            'text'      => $request->noteText,
+            'skin_id'   => $request->skin,
+            'x'         => 20,
+            'y'         => 30,
+            'z'         => 40,
+            'is_placed' => 1
         ]);
 
         return response(view('home.stickie', [
-            'item'    => $item,
+            'item'    => $stickie,
             'zindex'  => $request->zindex,
             'editing' => true,
         ]), 200)
             ->header('Content-Type', 'application/json')
-            ->header('X-JSON', json_encode($item->id));
+            ->header('X-JSON', json_encode($stickie->id));
     }
 
     public function purchase()
@@ -73,20 +66,20 @@ class NoteEditorController extends Controller
 
     public function purchaseDone()
     {
-        $store = StoreItem::where('type', 'commodity')->first();
+        $stickie = StickerStore::find(13);
 
-        if (!$store) {
+        if (!$stickie) {
             return response('ERROR');
         }
 
-        for ($i = 0; $i <= $store->amount; $i++) {
-            HomeItem::create([
-                'owner_id' => user()->id,
-                'item_id'  => $store->id,
+        for ($i = 0; $i <= $stickie->amount; $i++) {
+            Sticker::create([
+                'user_id'       => user()->id,
+                'sticker_id'    => $stickie->id,
             ]);
         }
 
-        user()->updateCredits(-$store->price);
+        user()->updateCredits(-$stickie->price);
 
         return response('OK');
     }
