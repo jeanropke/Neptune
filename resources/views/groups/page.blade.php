@@ -108,6 +108,7 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $owner->name }}
+                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group" title="Exclusive group" class="header-bar-group-status">
                             </span>
                             @auth
                                 @if ($owner->getMember(user()->id) && !$editing)

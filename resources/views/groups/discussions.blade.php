@@ -15,12 +15,25 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $group->name }}
-                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group"
-                                    title="Exclusive group" class="header-bar-group-status">
+                                <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group" title="Exclusive group" class="header-bar-group-status">
                             </span>
 
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
+                                @auth
+                                    @if ($group->getMember(user()->id))
+                                        <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
+                                            <span>Leave group</span>
+                                        </a>
+                                    @else
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Join group</span>
+                                        </a>
+                                    @endif
+                                    <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
+                                        <span>Create your own Group</span>
+                                    </a>
+                                @endauth
                         </div>
                     </div>
                 </div>

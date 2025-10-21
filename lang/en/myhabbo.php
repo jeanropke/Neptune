@@ -2,9 +2,9 @@
 
 return [
     'group' => [
-        'rank_1'    => 'Member',
+        'rank_1'    => 'Owner',
         'rank_2'    => 'Administrator',
-        'rank_3'    => 'Owner',
+        'rank_3'    => 'Member',
     ],
 
 ];
