@@ -31,8 +31,6 @@
                                         <div class="v3box-content">
                                             <div class="v3box-body">
                                                 <div id="scores_1" class="component">
-
-
                                                     <table class="scores">
                                                         <thead>
                                                             <tr class="scores-header">
@@ -42,25 +40,18 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr class="odd">
-                                                                <td class="scores-position">#.</td>
-                                                                <td class="scores-name"><a href="{{ url('/') }}/home/username">username</a>
-                                                                </td>
-                                                                <td class="scores-total">score</td>
-                                                            </tr>
-                                                            <tr class="even">
-                                                                <td class="scores-position">#.</td>
-                                                                <td class="scores-name"><a href="{{ url('/') }}/home/username">username</a>
-                                                                </td>
-                                                                <td class="scores-total">score</td>
-                                                            </tr>
+                                                            @foreach ($highscores->stats->take(10) as $stat)
+                                                                <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
+                                                                    <td class="scores-position">{{ $loop->index + 1 }}.</td>
+                                                                    <td class="scores-name"><a href="{{ url('/') }}/home/{{ $stat->username }}">{{ $stat->username }}</a>
+                                                                    </td>
+                                                                    <td class="scores-total">{{ $stat->total_score }}</td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
-
-
                                                 </div>
                                                 <br>
-
                                                 <img width="37" vspace="0" hspace="5" height="37" border="0" align="left"
                                                     src="{{ cms_config('site.badges.url') }}/TC1.gif" id="galleryImage" alt="TC1">Each week, the top 20 Battle Ball players
                                                 earn this special badge that you can't get anywhere else!

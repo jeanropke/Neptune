@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameHistory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
     public function index()
     {
-        return view('games.index');
+        $gameId = 1; //Battle ball
+        return view('games.index')->with([
+            'highscores'    => GameHistory::loadScores($gameId),
+        ]);
     }
 
     public function dive()
