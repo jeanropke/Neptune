@@ -170,7 +170,7 @@ class WidgetController extends Controller
         $guestbook = Guestbook::create([
             'user_id'       => user()->id,
             'message'       => $message,
-            'home_id'       => $widget->home_id ?? 0,
+            'home_id'       => $widget->user_id ?? 0,
             'group_id'      => $widget->group_id ?? 0,
             'created_at'    => now()
         ]);
@@ -220,7 +220,9 @@ class WidgetController extends Controller
         $widgetId       = $request->widgetId;
         $lastEntryId    = $request->lastEntryId;
 
-        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
+        $guestbook = Sticker::find($widgetId);
+
+        $messages = Guestbook::where([['home_id', $guestbook->user_id], ['group_id', $guestbook->group_id], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
 
         return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')

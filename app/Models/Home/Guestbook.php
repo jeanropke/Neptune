@@ -32,11 +32,22 @@ class Guestbook extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function owner(): BelongsTo
+    public function user(): BelongsTo
     {
-        if($this->group_id)
-            return $this->belongsTo(Group::class, 'group_id');
-
         return $this->belongsTo(User::class, 'home_id');
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class, 'group_id');
+    }
+
+    public function getOwnerAttribute()
+    {
+        if ($this->group_id) {
+            return $this->group;
+        }
+
+        return $this->user;
     }
 }
