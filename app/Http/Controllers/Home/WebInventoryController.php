@@ -158,9 +158,6 @@ class WebInventoryController extends Controller
             $session = HomeSession::where('user_id', user()->id)->first();
 
         $groupId = $session?->group_id;
-        $type = $groupId ? '5' : '2';
-
-
 
         if($session?->group_id) {
             return StickerStore::where([['type', 5], ['data', '!=', 'groupinfowidget']])
