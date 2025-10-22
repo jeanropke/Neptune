@@ -102,6 +102,12 @@ div.w_habbomovieswidget_pre {
     background-position: 50% 50%;
 }
 
+div.w_photoswidget_pre {
+    background-image: url(../../../web/images/myhabbo/widgets/photos_preview.gif);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
 div.commodity_stickienote_pre {
     background-image: url(../../../web/images/stickies/note_thumbnail_store.gif);
     background-repeat: no-repeat;
