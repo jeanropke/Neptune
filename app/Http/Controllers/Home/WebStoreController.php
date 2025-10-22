@@ -53,7 +53,7 @@ class WebStoreController extends Controller
             'titleKey'        => $item->name,
         ]];
 
-        if ($item->type == '2') {
+        if ($item->type == '4') {
             $data[0]['bgCssClass'] = "{$item->shortType}_{$item->data}";
         }
 
@@ -91,6 +91,13 @@ class WebStoreController extends Controller
         $store = StickerStore::find($itemId);
         if (!$store) {
             return response('ERROR');
+        }
+
+        //background check
+        if($store->type == 4) {
+            $sticker = Sticker::where([['user_id', user()->id], ['sticker_id', $store->id]]);
+            if($sticker->count() > 0)
+                return view('home.store.error')->with('message', 'You can\'t purchase an already owned background!');
         }
 
         Sticker::create([
