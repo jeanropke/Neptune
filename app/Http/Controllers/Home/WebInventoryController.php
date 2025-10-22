@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group\GroupSession;
+use App\Models\Home\HomeSession;
 use App\Models\Home\Sticker;
 use App\Models\Home\StickerStore;
 use Illuminate\Http\Request;
@@ -64,19 +66,21 @@ class WebInventoryController extends Controller
 
     public function placeSticker(Request $request)
     {
-        $item = HomeItem::find($request->selectedStickerId);
-        $session = user()->homeSession;
+        $item = Sticker::find($request->selectedStickerId);
+        $session = GroupSession::where('user_id', user()->id)->first();
+        if (!$session)
+            $session = HomeSession::where('user_id', user()->id)->first();
 
-        if (!$item || !$session || $item->owner_id != user()->id) {
+        if (!$item || !$session || $item->user_id != user()->id) {
             return response('ERROR');
         }
 
         $item->update([
-            'home_id'   => $session->home_id,
-            'group_id'  => $session->group_id,
+            'group_id'  => $session?->group_id ?? '0',
             'x'         => 20,
             'y'         => 30,
             'z'         => $request->zindex,
+            'is_placed' => '1'
         ]);
 
         return response(view('home.sticker', [
@@ -128,10 +132,10 @@ class WebInventoryController extends Controller
         $userId = user()->id;
 
         return match ($type) {
-            'backgrounds' => Sticker::where('owner_id', $userId)->where('type', 'b')->with('store')
-                ->join('cms_homes_store_items', 'cms_homes_store_items.id', 'cms_homes.item_id')
-                ->select('cms_homes.*', 'cms_homes_store_items.class', DB::raw('count(cms_homes.item_id) as amount'))
-                ->groupBy('cms_homes.item_id')->get(),
+            'backgrounds' => Sticker::where('user_id', $userId)->where('type', '4')->with('store')
+                ->join('cms_stickers_catalogue', 'cms_stickers_catalogue.id', 'cms_stickers.sticker_id')
+                ->select('cms_stickers.*', 'cms_stickers_catalogue.data', DB::raw('count(cms_stickers.sticker_id) as amount'))
+                ->groupBy('cms_stickers.sticker_id')->get(),
 
             'stickers' => Sticker::where([
                 ['user_id', $userId],
@@ -150,21 +154,23 @@ class WebInventoryController extends Controller
 
     private function getWidgets()
     {
-        $session = user()->homeSession;
+        $session = GroupSession::where('user_id', user()->id)->first();
+        if (!$session)
+            $session = HomeSession::where('user_id', user()->id)->first();
+
         $groupId = $session?->group_id;
         $type = $groupId ? '5' : '2';
 
-        return StickerStore::where([
-            ['type', $type],
-            ['data', '!=', 'profilewidget']
-        ])
+
+
+        if($session?->group_id) {
+            return StickerStore::where([['type', 5], ['data', '!=', 'groupinfowidget']])
             ->leftJoin('cms_stickers', 'cms_stickers.sticker_id', 'cms_stickers_catalogue.id')
-            //->select(
-            //    'cms_homes.*',
-            //    'cms_homes_store_items.class',
-            //    'cms_homes_store_items.caption',
-            //    'cms_homes_store_items.description'
-            //)
-            ->get();
+            ->where([['user_id', user()->id], ['group_id', $session?->group_id]])->get();
+        }
+
+        return StickerStore::where([['type', 2], ['data', '!=', 'profilewidget']])
+            ->leftJoin('cms_stickers', 'cms_stickers.sticker_id', 'cms_stickers_catalogue.id')
+            ->where([['user_id', user()->id]])->get();
     }
 }

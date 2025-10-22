@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GameHistory;
-use App\Models\Home\HomeInventory;
-use App\Models\Home\HomeItem;
+use App\Models\Group\GroupSession;
+use App\Models\Home\Background;
 use App\Models\Home\HomeSession;
 use App\Models\Home\HomeUpdate;
 use App\Models\Home\Sticker;
 use App\Models\Home\StickerStore;
-use App\Models\Home\StoreCategory;
-use App\Models\Home\StoreItem;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,13 +24,15 @@ class HomeController extends Controller
     {
         $owner = User::where('username', $username)->with('homeItems')->firstOrFail();
 
+        $session = HomeSession::where('user_id', $owner->id)->first();
+
         $owner->ensureHomeItems();
 
         if ($owner->cmsSettings && !$owner->cmsSettings->home_public)
             return view('home.private')->with(['user' => $owner]);
 
         return view('home')->with([
-            'editing' => session('editing'),
+            'editing' => $owner && $session?->user_id == $owner->id,
             'owner'   => $owner
         ]);
     }
@@ -57,9 +54,14 @@ class HomeController extends Controller
             return redirect("/");
         }
 
-        session(['editing' => true]);
+        GroupSession::where('user_id', user()->id)?->delete();
 
-         //we need to create some items in case this user does not have them
+        HomeSession::create([
+            'user_id'   => user()->id,
+            'expire'    => time() + 3600, // 1 hour
+        ]);
+
+        //we need to create some items in case this user does not have them
         //like some widgets
         $widgets = StickerStore::where('type', '2')->get();
         foreach ($widgets as $widget) {
@@ -74,133 +76,62 @@ class HomeController extends Controller
 
     public function saveHome($userId, Request $request)
     {
-        $stickienotes = $request->stickienotes;
-        $widgets = $request->widgets;
-        $stickers = $request->stickers;
         $background = $request->background;
 
-        $note = explode('/', $stickienotes);
-        $widget = explode('/', $widgets);
-        $sticker = explode('/', $stickers);
-        $background = explode(':', $background);
+        $this->updatePositions($request->stickienotes);
+        $this->updatePositions($request->widgets);
+        $this->updatePositions($request->stickers);
 
-        foreach ($note as $raw) {
-            if (strlen($raw) == 0)
-                continue;
+        $background = explode(':', $request->background);
+        if (!empty($background[0])) {
+            $item = Sticker::find($background[0]);
+            if (!$item) return;
+            if ($item->user_id != user()->id) return;
+            if ($item->store->type != 4) return;
 
-            $bits = explode(':', $raw);
-            $id = $bits[0];
-            $data = $bits[1];
-
-            if (!empty($data) && !empty($id) && is_numeric($id)) {
-                $coordinates = explode(',', $data);
-                $x = $coordinates[0];
-                $y = $coordinates[1];
-                $z = $coordinates[2];
-                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
-                    $home = Sticker::find($id);
-                    if (!$home)
-                        return;
-
-                    $home->update([
-                        'x' => $x,
-                        'y' => $y,
-                        'z' => $z,
-                    ]);
-                }
-            }
+            Background::find(user()->id)->update(['background' => $item->store->data]);
         }
 
-        foreach ($widget as $raw) {
-            if (strlen($raw) == 0)
-                continue;
+        HomeSession::where('user_id', user()->id)->delete();
 
-            $bits = explode(':', $raw);
-            $id = $bits[0];
-            $data = $bits[1];
-            if (!empty($data) && !empty($id) && is_numeric($id)) {
-                $coordinates = explode(',', $data);
-                $x = $coordinates[0];
-                $y = $coordinates[1];
-                $z = $coordinates[2];
-                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
-                    $home = Sticker::find($id);
-                    if (!$home)
-                        return;
-
-                    $home->update([
-                        'x' => $x,
-                        'y' => $y,
-                        'z' => $z,
-                    ]);
-                }
-            }
-        }
-
-        foreach ($sticker as $raw) {
-            if (strlen($raw) == 0)
-                continue;
-
-            $bits = explode(':', $raw);
-            $id = $bits[0];
-            $data = $bits[1];
-            if (!empty($data) && !empty($id) && is_numeric($id)) {
-                $coordinates = explode(',', $data);
-                $x = $coordinates[0];
-                $y = $coordinates[1];
-                $z = $coordinates[2];
-                if (is_numeric($x) && is_numeric($y) && is_numeric($z)) {
-                    $home = Sticker::find($id);
-                    if (!$home)
-                        return;
-
-                    $home->update([
-                        'x' => $x,
-                        'y' => $y,
-                        'z' => $z,
-                    ]);
-                }
-            }
-        }
-
-        //if (!empty($background[1])) {
-        //    $bg = str_replace('b_', '', $background[1]);
-        //    $storeItem = StoreItem::where([
-        //        ['type', 'b'],
-        //        ['class', $bg]
-        //    ])->first();
-        //    if (!$storeItem)
-        //        return;
-//
-        //    $bgInUse = HomeItem::where([['data', 'background'], ['home_id', $session->user_id]])->first();
-        //    if ($bgInUse) {
-        //        $bgInUse->update([
-        //            'home_id'   => null,
-        //            'group_id'  => null
-        //        ]);
-        //    }
-        //    $home = HomeItem::where([['data', 'background'], ['owner_id', $session->user_id], ['item_id', $storeItem->id]])->first();
-        //    if ($home) {
-        //        $home->update([
-        //            'home_id'   => $session->home_id,
-        //            'group_id'  => $session->group_id
-        //        ]);
-        //    }
-        //}
-
-        session(['editing' => false]);
-
-        //HomeUpdate::updateOrCreate(
-        //    ['user_id' =>  user()->id],
-        //    ['updated_at' => Carbon::now()]
-        //);
+        HomeUpdate::updateOrCreate(['user_id' => user()->id], ['updated_at' => now()]);
 
         echo '<script language="JavaScript" type="text/javascript">waitAndGo("../../home/' . $userId . '/id");</script>';
     }
 
+    private function updatePositions(?string $input): void
+    {
+        if (empty($input)) return;
+
+        foreach (explode('/', $input) as $raw) {
+            if (empty($raw)) continue;
+
+            $bits = explode(':', $raw);
+            if (count($bits) < 2) continue;
+
+            [$id, $data] = $bits;
+            if (!is_numeric($id) || empty($data)) continue;
+
+            $coords = explode(',', $data);
+            if (count($coords) !== 3) continue;
+
+            [$x, $y, $z] = $coords;
+            if (!is_numeric($x) || !is_numeric($y) || !is_numeric($z)) continue;
+
+            $sticker = Sticker::find($id);
+            if (!$sticker || $sticker->user_id != user()->id) continue;
+
+            $sticker->update([
+                'x' => $x,
+                'y' => $y,
+                'z' => $z,
+            ]);
+        }
+    }
+
     public function cancelHome(Request $request)
     {
-        session(['editing' => false]);
+        HomeSession::where('user_id', user()->id)->delete();
     }
 
     public function skinEdit(Request $request)
@@ -208,7 +139,6 @@ class HomeController extends Controller
         $itemId = null;
         $cssClass = null;
         $type = null;
-        $skinId =  $request->skinId;
 
         if ($request->stickieId) {
             $itemId = $request->stickieId;
@@ -222,39 +152,10 @@ class HomeController extends Controller
             $type = 'widget';
         }
 
-        switch ($skinId) {
-            case 1:
-                $skin = 'defaultskin';
-                break;
-            case 2:
-                $skin = 'speechbubbleskin';
-                break;
-            case 3:
-                $skin = 'metalskin';
-                break;
-            case 4:
-                $skin = 'noteitskin';
-                break;
-            case 5:
-                $skin = 'notepadskin';
-                break;
-            case 6:
-                $skin = 'goldenskin';
-                break;
-            case 7:
-                $skin = 'hc_machineskin';
-                break;
-            case 8:
-                $skin = 'hc_pillowskin';
-                break;
-            case 9:
-                $skin = 'nakedskin';
-                break;
-            default:
-                $skin = 'defaultskin';
-                break;
-        }
-        Sticker::find($itemId)->update(['skin_id' => $skinId]);
-        header('X-JSON: {"cssClass": "' . $cssClass . $skin . '", "type": "' . $type . '", "id": "' . $itemId . '"}');
+        $sticker = Sticker::find($itemId);
+        if ($sticker->user_id != user()->id) return;
+
+        $sticker->update(['skin_id' => $request->skinId]);
+        header('X-JSON: {"cssClass": "' . $cssClass . $sticker->skin_name . '", "type": "' . $type . '", "id": "' . $itemId . '"}');
     }
 }

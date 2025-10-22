@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catalogue\CatalogueItem;
-use App\Models\Catalogue\Item;
 use App\Models\Group;
+use App\Models\Group\GroupSession;
 use App\Models\Group\Member;
-use App\Models\GroupMember;
 use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
+use App\Models\Home\Sticker;
+use App\Models\Home\StickerStore;
 use App\Models\Home\StoreItem;
 use App\Models\Neptune\ItemOffer;
 use Illuminate\Http\Request;
@@ -22,9 +22,12 @@ class GroupController extends Controller
         $group->ensureGroupHomeItems();
 
         $user = user();
+        $session = GroupSession::where([
+            'user_id'   => $user->id
+        ])->first();
 
         return view('groups.page')->with([
-            'editing' => $user && $user->homeSession && $user->homeSession->group_id == $group->id,
+            'editing' => $user && $session?->group_id == $group->id,
             'owner'   => $group,
         ]);
     }
@@ -57,7 +60,7 @@ class GroupController extends Controller
             return view('groups.actions.join')->with('message', 'You are the owner of this group.');
         }
 
-        if($group->allMembers()->count() >= 500 && $group->group_type != 3) {
+        if ($group->allMembers()->count() >= 500 && $group->group_type != 3) {
             return view('groups.actions.join')->with([
                 'group'   => $group,
                 'message' => 'This group is full'
@@ -312,44 +315,38 @@ class GroupController extends Controller
             return abort(403, 'Unauthorized');
         }
 
-        $session = $user->homeSession;
+        HomeSession::where('user_id', user()->id)?->delete();
+
+        $session = GroupSession::where('user_id', $user->id)->first();
 
         if ($session) {
             if ($session->group_id) {
                 return redirect("groups/{$session->group_id}/id");
             }
-            return redirect("home/{$session->home_id}/id");
         }
 
-        HomeSession::create([
-            'user_id'    => $user->id,
-            'home_id'    => $request->homeId,
-            'group_id'   => $request->groupId,
-            'expires_at' => time() + 3600, // 1 hour
+        GroupSession::create([
+            'user_id'   => $user->id,
+            'group_id'  => $group->id,
+            'expire'    => time() + 3600, // 1 hour
         ]);
-
 
         //we need to create some items in case this user does not have them
         //like some widgets
-        $widgets = StoreItem::where('type', 'gw')->get();
+        $widgets = StickerStore::where([['type', '5'], ['min_rank', '>=', $user->rank]])->get();
         foreach ($widgets as $widget) {
-            HomeItem::firstOrCreate(
-                [
-                    'item_id'  => $widget->id,
-                    'owner_id' => $user->id,
-                    'group_id' => $group->id,
-                ],
-                [
-                    'skin' => 'defaultskin',
-                ]
-            );
+            $item = Sticker::where([['user_id', $group->owner_id], ['sticker_id', $widget->id], ['group_id', $group->id]])->first();
+            if (!$item) {
+                Sticker::insert(['user_id' => $group->owner_id, 'sticker_id' => $widget->id, 'group_id' => $group->id, 'skin' => '1']);
+            }
         }
+
         return redirect()->back();
     }
 
     public function saveEditing(Request $request)
     {
-        $session = user()->homeSession;
+        $session = GroupSession::where('user_id', user()->id)->first();
         if (!$session) return;
 
         $this->updatePositions($request->stickienotes);
@@ -360,22 +357,17 @@ class GroupController extends Controller
         if (!empty($background[1])) {
             $bg = str_replace('b_', '', $background[1]);
 
-            $storeItem = StoreItem::where([['type', 'b'], ['class', $bg]])->first();
+            $storeItem = StickerStore::where([['type', '4'], ['data', $bg]])->first();
             if (!$storeItem) return;
 
-            HomeItem::where([
-                ['data', 'background'],
-                ['group_id', $session->group_id]
-            ])->update(['group_id' => null]);
-
-            HomeItem::where([
-                ['data', 'background'],
-                ['owner_id', $session->user_id],
-                ['item_id', $storeItem->id]
-            ])->update(['group_id' => $session->group_id]);
+            $group = Group::find($session->group_id);
+            if($group->owner_id == user()->id) {
+                $group->background = $storeItem->data;
+                $group->save();
+            }
         }
 
-        $session->delete();
+        GroupSession::where('user_id', user()->id)->delete();
     }
 
     private function updatePositions(?string $input): void
@@ -397,10 +389,10 @@ class GroupController extends Controller
             [$x, $y, $z] = $coords;
             if (!is_numeric($x) || !is_numeric($y) || !is_numeric($z)) continue;
 
-            $home = HomeItem::find($id);
-            if (!$home || $home->home_id) continue;
+            $sticker = Sticker::find($id);
+            if (!$sticker || $sticker->user_id != user()->id) continue;
 
-            $home->update([
+            $sticker->update([
                 'x' => $x,
                 'y' => $y,
                 'z' => $z,
