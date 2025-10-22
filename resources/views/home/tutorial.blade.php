@@ -59,11 +59,11 @@
                                 <ul class="groups-toplist toplist toplist-avatars">
                                     @foreach ($latests as $home)
                                         <li class="{{ round(($loop->index+1)/2) % 2 ? 'even' : 'odd' }}"
-                                            style="background-image: url({{ cms_config('site.avatarimage.url') }}{{ $home->getUser()->figure }}114400)">
+                                            style="background-image: url({{ cms_config('site.avatarimage.url') }}{{ $home->user->figure }}114400)">
                                             <div class="toplist-item">
                                                 <div class="group-index">{{ $loop->index + 1 }}.</div>
                                                 <div class="group-link">
-                                                    <a href="{{ url('/') }}/home/{{ $home->getUser()->username }}">{{ $home->getUser()->username }}</a>
+                                                    <a href="{{ url('/') }}/home/{{ $home->user->username }}">{{ $home->user->username }}</a>
                                                 </div>
                                             </div>
                                         </li>
