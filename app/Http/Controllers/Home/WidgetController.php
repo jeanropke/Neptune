@@ -346,17 +346,18 @@ class WidgetController extends Controller
     public function widgetDelete(Request $request)
     {
         $widgetId = $request->widgetId;
-        $widget = HomeItem::find($widgetId);
+        $widget = Sticker::find($widgetId);
         if (!$widget)
             return 'ERROR';
 
-        if ($widget->owner_id != user()->id)
+        if ($widget->user_id != user()->id)
             return 'ERROR';
 
         $widget->update([
-            'x'         => null,
-            'y'         => null,
-            'z'         => null
+            'x'         => 0,
+            'y'         => 0,
+            'z'         => 0,
+            'is_placed' => 0
         ]);
 
         return response('SUCCESS', 200)
@@ -410,12 +411,24 @@ class WidgetController extends Controller
 
     public function highscorelistSetGameId(Request $request)
     {
-        return $request->all();
+        $widget = Sticker::find($request->widgetId);
+        $widget->update(['extra_data' => $request->gameId]);
+
+        $startDate  = now()->startOfDay();
+        $endDate    = now()->addDays(6)->endOfDay();
+
+        return view('home.widgets.ajax.highscorelistwidget')->with([
+            'item'          => $widget,
+            'highscores'    => GameHistory::loadScores($request->gameId),
+            'type'          => 'week',
+            'start'         => $startDate,
+            'end'           => $endDate
+        ]);
     }
 
     public function highscorelistPage(Request $request)
     {
-        $sticker = Sticker::find($request->widgetId);
+        $widget = Sticker::find($request->widgetId);
         $period = Carbon::parse($request->period);
         $page = $request->page;
 
@@ -435,7 +448,7 @@ class WidgetController extends Controller
         }
 
         return view('home.widgets.ajax.highscorelistpaging')->with([
-            'item'          => $sticker,
+            'item'          => $widget,
             'highscores'    => GameHistory::loadScores($request->gameId, $startDate, $endDate, $page)
         ]);
     }
