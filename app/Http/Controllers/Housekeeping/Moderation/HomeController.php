@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Home\Guestbook;
-use App\Models\Home\HomeItem;
+use App\Models\Home\Sticker;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         abort_unless_permission('can_manage_guestbook');
 
-        $messages = Guestbook::where('message', 'LIKE', "%$request->q%")->with(['author', 'deletedBy', 'widget'])->orderBy('created_at', 'DESC');
+        $messages = Guestbook::where('message', 'LIKE', "%$request->q%")->with(['author', 'user', 'group'])->orderBy('created_at', 'DESC');
         return view('housekeeping.moderation.home.guestbook')->with([
             'messages' => $messages->paginate(20)
         ]);
@@ -61,7 +61,7 @@ class HomeController extends Controller
     {
         abort_unless_permission('can_manage_stickies');
 
-        $stickies = HomeItem::where([['data', 'LIKE', "%$request->q%"], ['item_id', '15']])->with(['owner', 'deletedBy']);
+        $stickies = Sticker::where([['text', 'LIKE', "%$request->q%"], ['sticker_id', '13']])->with(['owner']);
 
         return view('housekeeping.moderation.home.stickies')->with([
             'stickies' => $stickies->paginate(20)

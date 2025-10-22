@@ -23,6 +23,7 @@ class DashboardController extends Controller
         $today = time() - (60 * 60 * 24);
 
         $usersTotal     = User::count();
+        $usersOnline    = User::where('is_online', 1)->count();
         $visitsMonth    = User::where('last_online', '>', $thirtyDaysAgo)->count();
         $visitsToday    = User::where('last_online', '>', $today)->count();
         $roomsUsers     = Room::count();
@@ -37,6 +38,7 @@ class DashboardController extends Controller
 
         return view('housekeeping.index', compact(
             'usersTotal',
+            'usersOnline',
             'visitsMonth',
             'visitsToday',
             'roomsUsers',

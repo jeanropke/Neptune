@@ -44,7 +44,6 @@
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
                                 <td class="tablesubheader" width="65%">Message</td>
                                 <td class="tablesubheader" width="10%">Author</td>
-                                <td class="tablesubheader" width="10%" align="center">Deleted by</td>
                                 <td class="tablesubheader" width="10%" align="center">Action</td>
                             </tr>
                             @forelse($stickies as $stickie)
@@ -53,13 +52,10 @@
                                         {{ $stickie->id }}
                                     </td>
                                     <td class="tablerow2">
-                                        {{ $stickie->data }}
+                                        {{ $stickie->text }}
                                     </td>
                                     <td class="tablerow2">
                                         {{ $stickie->owner->username }}
-                                    </td>
-                                    <td class="tablerow2" align="center">
-                                        {{ $stickie->deletedBy?->username }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $stickie->owner->username }}">Remote ban</a> -

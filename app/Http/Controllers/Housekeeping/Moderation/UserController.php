@@ -265,7 +265,7 @@ class UserController extends Controller
         if (!user()->hasPermission('can_access_housekeeping'))
             return view('housekeeping.accessdenied');
 
-        $online = User::where('online', 1)->paginate(25);
+        $online = User::where('is_online', 1)->paginate(25);
 
         return view('housekeeping.moderation.users.online', compact('online'));
     }
