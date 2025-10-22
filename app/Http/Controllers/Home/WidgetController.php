@@ -165,7 +165,7 @@ class WidgetController extends Controller
         $ownerId    = $request->ownerId;
         $widgetId   = $request->widgetId;
         $message    = $request->message;
-        $widget     = HomeItem::find($widgetId);
+        $widget     = Sticker::find($widgetId);
 
         $guestbook = Guestbook::create([
             'user_id'       => user()->id,
@@ -193,7 +193,7 @@ class WidgetController extends Controller
 
     public function guestbookRemove(Request $request)
     {
-        $guestbook = HomeItem::find($request->widgetId);
+        $guestbook = Sticker::find($request->widgetId);
         //if guestbook does not exists, exit
         //yes, there is a delete animation, but no data is deleted
         if (!$guestbook)
@@ -208,7 +208,9 @@ class WidgetController extends Controller
                 return;
 
             //just hide the message
-            $message->update(['deleted_by' => user()->id]);
+            //$message->update(['deleted_by' => user()->id]);
+            //I dont like to delete stuff :/
+            $message->delete();
         }
     }
 
@@ -218,7 +220,7 @@ class WidgetController extends Controller
         $widgetId       = $request->widgetId;
         $lastEntryId    = $request->lastEntryId;
 
-        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['deleted_by', '=', null], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
+        $messages = Guestbook::where([['widget_id', '=', $widgetId], ['id', '<', $lastEntryId]])->orderBy('created_at', 'desc')->take(20)->get();
 
         return response(view('home.widgets.ajax.guestbook.list', ['messages' => $messages, 'ownerId' => $ownerId]), 200)
             ->header('Content-Type', 'application/json')
@@ -227,8 +229,8 @@ class WidgetController extends Controller
 
     public function guestbookConfigure(Request $request)
     {
-        $widget = HomeItem::find($request->widgetId);
-        if ($widget->owner_id != user()->id) return;
+        $widget = Sticker::find($request->widgetId);
+        if ($widget->user_id != user()->id) return;
 
         $widget->update([
             'data' => $widget->data == 'public' ? 'private' : 'public'
@@ -282,16 +284,16 @@ class WidgetController extends Controller
             'widgetId'  => 'required|numeric'
         ]);
 
-        $widget = HomeItem::find($request->widgetId);
+        $widget = Sticker::find($request->widgetId);
         $song = HomeSong::find($request->songId);
 
         if ($song->user_id != user()->id)
             return 'ERROR.SONG';
 
-        if ($widget->home_id != user()->id)
+        if ($widget->user_id != user()->id)
             return 'ERROR.WIDGET';
 
-        $widget->update(['data' => $request->songId]);
+        $widget->update(['extra_data' => $request->songId]);
 
         return view('home.widgets.ajax.traxplayer')->with([
             'widget'    => $widget,
