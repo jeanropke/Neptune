@@ -134,6 +134,25 @@ class HomeController extends Controller
         HomeSession::where('user_id', user()->id)->delete();
     }
 
+    public function deleteStickie(Request $request)
+    {
+        $stickieId = $request->stickieId;
+        $stickie = Sticker::find($stickieId);
+        if (!$stickie)
+            return 'ERROR';
+
+        if ($stickie->user_id != user()->id)
+            return 'ERROR';
+
+        $stickie->update([
+            'is_placed' => '0'
+        ]);
+
+        return response('SUCCESS', 200)
+            ->header('Content-Type', 'application/json')
+            ->header('X-JSON', json_encode($stickieId));
+    }
+
     public function skinEdit(Request $request)
     {
         $itemId = null;
