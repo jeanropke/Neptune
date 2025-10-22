@@ -96,17 +96,16 @@ class WebInventoryController extends Controller
 
     public function removeSticker(Request $request)
     {
-        $sticker = HomeItem::find($request->stickerId);
-        if (!$sticker || $sticker->owner_id != user()->id) {
+        $sticker = Sticker::find($request->stickerId);
+        if (!$sticker || $sticker->user_id != user()->id) {
             return response('ERROR');
         }
 
         $sticker->update([
-            'home_id'  => null,
-            'group_id' => null,
-            'x'        => null,
-            'y'        => null,
-            'z'        => null,
+            'x'         => 0,
+            'y'         => 0,
+            'z'         => 0,
+            'is_placed' => 0
         ]);
 
         return response('SUCCESS', 200)
