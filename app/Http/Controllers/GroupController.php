@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Group\GroupSession;
 use App\Models\Group\Member;
-use App\Models\Home\HomeItem;
 use App\Models\Home\HomeSession;
 use App\Models\Home\Sticker;
 use App\Models\Home\StickerStore;
-use App\Models\Home\StoreItem;
 use App\Models\Neptune\ItemOffer;
 use Illuminate\Http\Request;
 
@@ -22,9 +20,7 @@ class GroupController extends Controller
         $group->ensureGroupHomeItems();
 
         $user = user();
-        $session = GroupSession::where([
-            'user_id'   => $user->id
-        ])->first();
+        $session = GroupSession::where('user_id', $group?->owner_id)->first();
 
         return view('groups.page')->with([
             'editing' => $user && $session?->group_id == $group->id,
@@ -317,7 +313,7 @@ class GroupController extends Controller
 
         HomeSession::where('user_id', user()->id)?->delete();
 
-        $session = GroupSession::where('user_id', $user->id)->first();
+        $session = GroupSession::where('user_id', $group->owner_id)->first();
 
         if ($session) {
             if ($session->group_id) {
@@ -326,7 +322,7 @@ class GroupController extends Controller
         }
 
         GroupSession::create([
-            'user_id'   => $user->id,
+            'user_id'   => $group->owner_id,
             'group_id'  => $group->id,
             'expire'    => time() + 3600, // 1 hour
         ]);
