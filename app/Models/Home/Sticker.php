@@ -44,7 +44,7 @@ class Sticker extends Model
             6 => 'goldenskin',
             7 => 'hc_machineskin',
             8 => 'hc_pillowskin',
-            9 => 'nakedskin',
+            9 => 'nakedskin-c',
             default => 'defaultskin',
         };
     }
