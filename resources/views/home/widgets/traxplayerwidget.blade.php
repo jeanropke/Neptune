@@ -4,7 +4,10 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">TRAXPLAYER</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;TRAXPLAYER&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
                 </h3>
             </div>
         </div>
@@ -22,7 +25,6 @@
                         @endforeach
                     </select>
                 </div>
-
                 @elseif($item->data == null)
                 You don't have a selected Trax song
                 @else

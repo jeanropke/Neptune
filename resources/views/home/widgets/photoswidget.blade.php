@@ -2,8 +2,10 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">My Photos</span>
-                    <span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;My Photos&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
                 </h3>
             </div>
         </div>
@@ -13,7 +15,7 @@
                     @include('home.widgets.ajax.photoswidget', ['photos' => $owner->photos()->get(), 'page' => 1, 'totalPages' => $owner->photos->count()])
                     <script type="text/javascript">
                         Event.onDOMReady(function() {
-                            window.photoWidget16 = new PhotosWidget('{{ $owner->id }}', '{{ $item->id }}');
+                            window.photoWidget{{ $item->id }} = new PhotosWidget('{{ $owner->id }}', '{{ $item->id }}');
                         });
                     </script>
                 </div>

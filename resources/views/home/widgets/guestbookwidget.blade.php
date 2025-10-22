@@ -1,4 +1,3 @@
-
 @php(
     $guestbook = \App\Models\Home\Guestbook::where([['group_id', '=', $item->group_id]])->orWhere([['home_id', '=', $item->home_id]])->orderBy('created_at', 'desc')->get()
 )
@@ -7,14 +6,14 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3>
-                    <span class="header-left">&nbsp;</span><span class="header-middle">Guestbook(<span id="guestbook-size">{{ $guestbook->count() }}</span>)
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;Guestbook(<span id="guestbook-size">{{ $guestbook->count() }}</span>)
                         <span id="guestbook-type" class="{{ $item->data }}">
                             <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive.gif" title="Apenas Amigos" alt="Apenas Amigos" />
-
-                        </span></span>
-                    <span class="header-right">&nbsp;
-                        @include('home.edit_button', ['type' => 'widget'])
+                        </span>
+                        &nbsp;
                     </span>
+                    <span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span>
                 </h3>
             </div>
         </div>

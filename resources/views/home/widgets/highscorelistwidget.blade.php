@@ -3,9 +3,9 @@
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
                 <h3>
-                    <span class="header-left">&nbsp;</span>
-                    <span class="header-middle">HIGH SCORES</span>
-                    <span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;HIGH SCORES&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
                 </h3>
             </div>
         </div>

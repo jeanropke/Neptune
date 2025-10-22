@@ -2,8 +2,11 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">Members of the group (<span
-                            id="avatar-list-size">{{ $owner->allMembers()->count() }}</span>)</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;Members of the group (<span id="avatar-list-size">{{ $owner->allMembers()->count() }}</span>)&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
+                </h3>
             </div>
         </div>
         <div class="widget-body">

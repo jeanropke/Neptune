@@ -3,12 +3,13 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">My
-                        Rating</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;My Rating&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
                 </h3>
             </div>
         </div>
-
         <div class="widget-body">
             <div class="widget-content">
                 <div id="rating-main">
@@ -26,13 +27,13 @@
                             <ul id="rating-unit_ul1" class="rating-unit-rating">
                                 <li class="rating-current-rating" style="width:{{ ceil($average * 150)/5 }}px;" />
                                 @if(Auth::check())
-                                @if($owner->id != user()->id && \App\Models\Home\HomeRating::where([['user_id', user()->id], ['home_id', $owner->id]])->count() == 0)
-                                <li><a href="#" class="r1-unit rater">1</a></li>
-                                <li><a href="#" class="r2-unit rater">2</a></li>
-                                <li><a href="#" class="r3-unit rater">3</a></li>
-                                <li><a href="#" class="r4-unit rater">4</a></li>
-                                <li><a href="#" class="r5-unit rater">5</a></li>
-                                @endif
+                                    @if($owner->id != user()->id && \App\Models\Home\HomeRating::where([['user_id', user()->id], ['home_id', $owner->id]])->count() == 0)
+                                    <li><a href="#" class="r1-unit rater">1</a></li>
+                                    <li><a href="#" class="r2-unit rater">2</a></li>
+                                    <li><a href="#" class="r3-unit rater">3</a></li>
+                                    <li><a href="#" class="r4-unit rater">4</a></li>
+                                    <li><a href="#" class="r5-unit rater">5</a></li>
+                                    @endif
                                 @endif
                             </ul>
                         </div>

@@ -2,8 +2,11 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">Badges & Achievements</span><span class="header-right">@include('home.edit_button', ['type' => 'widget'])
-                    </span></h3>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;Badges & Achievements&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
+                </h3>
             </div>
         </div>
         <div class="widget-body">

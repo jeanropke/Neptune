@@ -3,7 +3,11 @@
     <div class="w_skin_{{ $item->skinName }}">
         <div class="widget-corner" id="widget-{{ $item->id }}-handle">
             <div class="widget-headline">
-                <h3><span class="header-left">&nbsp;</span><span class="header-middle">MY ROOMS</span><span class="header-right">&nbsp;@include('home.edit_button', ['type' => 'widget'])</span></h3>
+                <h3>
+                    <span class="header-left"></span>
+                    <span class="header-middle">&nbsp;MY ROOMS&nbsp;</span>
+                    <span class="header-right">@include('home.edit_button', ['type' => 'widget'])</span>
+                </h3>
             </div>
         </div>
         <div class="widget-body">
@@ -37,7 +41,6 @@
                                     </div>
                                     <img src="{{ cms_config('site.web.url') }}/images/myhabbo/buttons/report_button.gif" width="19" height="18" class="report-button report-r" id="name-{{ $room->id }}-report" style="display: none;margin-top: -1px;">
                                     <br class="clear">
-
                                 </td>
                             </tr>
                             @empty
