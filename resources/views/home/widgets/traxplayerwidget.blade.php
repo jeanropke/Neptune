@@ -25,14 +25,14 @@
                         @endforeach
                     </select>
                 </div>
-                @elseif($item->data == null)
+                @elseif($item->extra_data == null)
                 You don't have a selected Trax song
                 @else
                 <div id="traxplayer-content" style="text-align:center;"></div>
                 <embed type="application/x-shockwave-flash" src="{{ cms_config('site.web.url') }}/flash/traxplayer/traxplayer.swf"
                     name="traxplayer" quality="high" base="{{ cms_config('site.web.url') }}/flash/traxplayer/"
                     allowscriptaccess="always" menu="false" wmode="transparent"
-                    flashvars="songUrl={{ url('/') }}/myhabbo/trax_song/{{ $item->data }}&amp;sampleUrl={{ url('') }}/dcr/sound/mp3/"
+                    flashvars="songUrl={{ url('/') }}/myhabbo/trax_song/{{ $item->extra_data }}&amp;sampleUrl={{ url('') }}/dcr/sound/mp3/"
                     height="66" width="210" />
                 @endif
                 <div class="clear"></div>
