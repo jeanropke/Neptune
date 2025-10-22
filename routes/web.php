@@ -729,7 +729,6 @@ Route::middleware('admin')->group(function () {
             Route::get('/', fn() => view('housekeeping.help.index'))->name('housekeeping.help.index');
             Route::get('/bugs', fn() => view('housekeeping.help.bugs'))->name('housekeeping.help.bugs');
             Route::get('/version', fn() => view('housekeeping.help.version'))->name('housekeeping.help.version');
-            Route::post('/version', [HouseekeepingHelpController::class, 'versionChecker'])->name('housekeeping.help.version.checker');
         });
 
         Route::post('furnipicker', [FurniPickerController::class, 'listing'])->name('furnipicker.listing');

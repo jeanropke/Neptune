@@ -8,9 +8,5 @@
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif " border="0 " alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.help.bugs') }}" style="text-decoration: none; {{ $submenu == 'help.bugs' ? 'font-weight: bold;' : '' }}">Found a bug?</a>
     </div>
-    <div class="menulinkwrap ">&nbsp;
-        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif " border="0 " alt="" valign="absmiddle">&nbsp;
-        <a href="{{ route('housekeeping.help.version') }}" style="text-decoration: none; {{ $submenu == 'help.version' ? 'font-weight: bold;' : '' }}">Version Checker</a>
-    </div>
 </div>
 <br />
