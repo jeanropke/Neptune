@@ -10,7 +10,7 @@
         });
     </script>
 
-    @if (user() && user()->id == $owner->owner_id)
+    @if (user() && user()->id == $owner->owner_id && !$editing)
         <script language="JavaScript" type="text/javascript">
             Event.onDOMReady(function() {
                 attachGroupBadgeEditorButtonObserver({{ $owner->id }}, "group-tools-badge", "Badge Editor");
