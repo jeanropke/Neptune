@@ -2,6 +2,7 @@
 
 namespace App\Models\Home;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -32,6 +33,11 @@ class Sticker extends Model
     public function store(): BelongsTo
     {
         return $this->belongsTo(StickerStore::class, 'sticker_id');
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function getSkinNameAttribute(): ?string
