@@ -94,17 +94,18 @@ class WebStoreController extends Controller
         }
 
         //background check
-        if($store->type == 4) {
+        if ($store->type == 4) {
             $sticker = Sticker::where([['user_id', user()->id], ['sticker_id', $store->id]]);
-            if($sticker->count() > 0)
+            if ($sticker->count() > 0)
                 return view('home.store.error')->with('message', 'You can\'t purchase an already owned background!');
         }
 
-        Sticker::create([
-            'user_id'       => user()->id,
-            'amount'        => $isBackground ? 1 : $store->amount,
-            'sticker_id'    => $store->id
-        ]);
+        for ($i = 0; $i < $store->amount; $i++) {
+            Sticker::create([
+                'user_id'       => user()->id,
+                'sticker_id'    => $store->id
+            ]);
+        }
 
         user()->updateCredits(-$store->price);
 
