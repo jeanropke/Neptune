@@ -66,8 +66,8 @@
                                     <li @if($page=='figure' )id="selected" @endif><a href="/profile">{{ strtoupper(cms_config('hotel.name.short')) }}</a>
                                     <li @if($page=='motto' )id="selected" @endif><a href="/profile/motto">MOTTO</a>
                                     <li @if($page=='email' )id="selected" @endif><a href="/profile/email">EMAIL</a>
-                                    <li @if($page=='password' )id="selected" @endif><a class="last-tab"
-                                            href="/profile/password">PASSWORD</a>
+                                    <li @if($page=='password' )id="selected" @endif><a href="/profile/password">PASSWORD</a>
+                                    <li @if($page=='privacy' )id="selected" @endif><a class="last-tab" href="/profile/privacy">PRIVACY</a>
                                 </ul>
                             </div>
                             <br clear="all" />

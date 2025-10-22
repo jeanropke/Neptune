@@ -50,9 +50,11 @@
                         id="motto-{{ $owner->id }}-report" style="display: none;margin-top: -1px;">
                     <div class="clear"></div>
                 </div>
-                <div class="profile-friend-request">
-                    <a href="#" class="toolbutton" id="add-friend"><span>Add as friend</span></a>
-                </div>
+                @if ($owner->allow_friend_requests)
+                    <div class="profile-friend-request">
+                        <a href="#" class="toolbutton" id="add-friend"><span>Add as friend</span></a>
+                    </div>
+                @endif
                 <br clear="all" style="display: block; height: 1px">
                 <div id="profile-tags-panel">
                     <div id="profile-tag-list">

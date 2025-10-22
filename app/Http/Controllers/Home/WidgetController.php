@@ -63,17 +63,23 @@ class WidgetController extends Controller
         if (!Auth::check())
             return;
 
-        if (user()->id == $request->accountId)
+        $user = User::find($request->accountId);
+
+        if (user()->id == $user->id)
+            return;
+
+        if (!$user->allow_friend_requests)
             return;
 
         $table = DB::table('messenger_requests');
-        $pending = $table->where([['from_id', user()->id], ['to_id', $request->accountId]])->orWhere([['to_id', user()->id], ['from_id', $request->accountId]])->count();
+        $pending = $table->where([['from_id', user()->id], ['to_id', $user->id]])->orWhere([['to_id', user()->id], ['from_id', $user->id]])->count();
+
         if ($pending > 0)
             return;
 
         $table->insert([
             'from_id'   => user()->id,
-            'to_id'     => $request->accountId,
+            'to_id'     => $user->id,
         ]);
     }
 

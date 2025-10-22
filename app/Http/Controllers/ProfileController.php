@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     public function figure(string $page = 'figure')
     {
-        $allowedPages = ['figure', 'motto', 'password', 'email'];
+        $allowedPages = ['figure', 'motto', 'password', 'email', 'privacy'];
 
         if (!in_array($page, $allowedPages)) {
             abort(404);
@@ -20,7 +20,7 @@ class ProfileController extends Controller
 
     public function save(string $page = 'index', Request $request)
     {
-        $allowedPages = ['figure', 'motto', 'password', 'email'];
+        $allowedPages = ['figure', 'motto', 'password', 'email', 'privacy'];
 
         if (!in_array($page, $allowedPages)) {
             abort(404);
@@ -64,6 +64,15 @@ class ProfileController extends Controller
 
                 $user->update(['password' => Hash::make($validated['newpassword'])]);
                 return back()->with('status', 'Password updated!');
+
+            case 'privacy':
+                $user->update([
+                    'profile_visible'       => $request->profile_visible == 'EVERYONE',
+                    'wordfilter_enabled'    => $request->wordfilter_enabled == 'ENABLED',
+                    'allow_friend_requests' => $request->allow_friend_requests == 'ENABLED',
+                    'online_status_visible' => $request->online_status_visible == 'EVERYBODY',
+                ]);
+                return back()->with('status', 'Privacy updated!');
         }
 
         return back();

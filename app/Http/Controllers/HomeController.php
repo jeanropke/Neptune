@@ -28,8 +28,8 @@ class HomeController extends Controller
 
         $owner->ensureHomeItems();
 
-        if ($owner->cmsSettings && !$owner->cmsSettings->home_public)
-            return view('home.private')->with(['user' => $owner]);
+        if (user()?->id != $owner->id && !$owner->profile_visible)
+            return view('home.private')->with('owner', $owner);
 
         return view('home')->with([
             'editing' => $owner && $session?->user_id == $owner->id,

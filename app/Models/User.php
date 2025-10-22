@@ -45,6 +45,9 @@ class User extends Authenticatable
         'rank',
         'allow_stalking',
         'allow_friend_requests',
+        'online_status_visible',
+        'profile_visible',
+        'wordfilter_enabled',
         'battleball_points',
         'snowstorm_points',
         'club_subscribed',
@@ -267,7 +270,9 @@ class User extends Authenticatable
 
     public function isOnline()
     {
-        return $this->is_online;
+        if($this->online_status_visible)
+            return $this->is_online;
+        return false;
     }
 
     public function hasPermission($permission)
