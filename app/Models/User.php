@@ -357,6 +357,8 @@ class User extends Authenticatable
                 ['x' => '275',    'y' => '367',   'z' => '152', 'sticker_id' => '123', 'is_placed' => '1'],
                 //paper_clip_1
                 ['x' => '183',    'y' => '373',   'z' => '171', 'sticker_id' => '220', 'is_placed' => '1'],
+                //bg_pattern_abstract2
+                ['sticker_id' => '2379', 'is_placed' => '0'],
 
                 // Inventory items
                 //needle_1
