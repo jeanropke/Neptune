@@ -35,7 +35,7 @@ class NoteEditorController extends Controller
 
     public function place(Request $request)
     {
-        $stickie = Sticker::where([['sticker_id', '13'], ['is_placed', '0']])->first();
+        $stickie = Sticker::where([['sticker_id', '13'], ['is_placed', '0'], ['text', '']])->first();
         if (!$stickie/* || !user()->homeSession*/) {
             return response('BACK');
         }
