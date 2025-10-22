@@ -1,5 +1,5 @@
 @if ($item)
-    <div class="webstore-item-preview {{ $item->type }}_{{ $item->class }}_pre">
+    <div class="webstore-item-preview {{ $item->short_type }}_{{ $item->data }}_pre">
         <div class="webstore-item-mask">
         </div>
     </div>
