@@ -29,7 +29,7 @@
                                                     <span class="habbomovies-movie-name">{{ $movie->title }}</span>
                                                     <span class="habbomovies-movie-created">Created: {{ $movie->created_at->format('M j, Y h:i:s A') }}</span>
                                                     <span class="habbomovies-movie-by">By: <b><a href="{{ url('/') }}/home/{{ $movie->author->username }}">{{ $movie->author->username }}</a></b></span>
-                                                    <span class="habbomovies-movie-category">Category: {{ $movie->getGenre() }}</span>
+                                                    <span class="habbomovies-movie-category">Category: {{ trans("habbowood.genre.$movie->genre") }}</span>
                                                     <span class="habbomovies-movie-url">URL:</span>
                                                 </div>
                                                 <div class="habbomovies-director-avatar">
