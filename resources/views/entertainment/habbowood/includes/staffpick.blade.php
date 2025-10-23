@@ -7,7 +7,7 @@ become our finalists!<br><br><br>
                 @php($movie = $pick->movie)
                 <tr>
                     <td valign="top" class="list-movie-item">
-                        <img class="genre-image" src="{{ cms_config('site.web.url') }}/images/habbomovies/genres/action.gif" border="0">
+                        <img class="genre-image" src="{{ cms_config('site.web.url') }}/images/habbomovies/genres/{{ $movie->genre }}.gif" border="0">
                     </td>
                     <td valign="top" class="list-movie-name">
                         <a href="{{ url('/') }}/entertainment/habbowood/movies/{{ $movie->id }}">
