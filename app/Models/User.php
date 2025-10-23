@@ -201,8 +201,8 @@ class User extends Authenticatable
     {
         if (!$this->badges()->where('badge', $code)->exists()) {
             $this->badges()->insert([
-                'badge'           => $code,
-                'user_id'     => $this->id
+                'badge'     => $code,
+                'user_id'   => $this->id
             ]);
             return true;
         }
