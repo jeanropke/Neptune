@@ -455,6 +455,16 @@ var save_topic_settings_function = function (e) {
         groupParam = "groupUrl=" + encodeURIComponent(groupUrlHidden.value);
     }
 
+    if (topicName.length == 0) {
+        $("topic-name-error").innerHTML = "myhabbo.discussion.error.topic_name_empty";
+        $("topic-name-error").style.display = "block";
+        return;
+    } else {
+        $("topic-name-error").innerHTML = "";
+        $("topic-name-error").style.display = "none";
+    }
+
+
     var form = document.getElementById('topic-settings-form');
     var type_group = form.topic_type;
     for (var i = 0; i < type_group.length; i++) {

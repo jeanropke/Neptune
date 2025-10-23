@@ -7,7 +7,7 @@
             <input type="text" size="38" maxlength="32" name="topic_name" id="topic_name"
                 onkeyup="validateGroupElements('topic_name', 32, 'myhabbo.topic.name.max.length.exceeded');" value="{{ $topic->topic_title}}">
         </div>
-        <div id="topic-name-error"></div>
+        <div id="topic-name-error" class="error"></div>
         <div id="topic_name_message_error" class="error"></div>
     </div>
     <div id="topic-type-area">

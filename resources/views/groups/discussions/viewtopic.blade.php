@@ -15,48 +15,77 @@
                         <div class="box-content clearfix">
                             <span id="header-bar-text">
                                 Group Home: {{ $group->name }}
+                                @if ($group->group_type == 1)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_exclusive_big.gif" width="18" height="16" alt="Exclusive group"
+                                        title="Exclusive group" class="header-bar-group-status">
+                                @elseif($group->group_type == 2)
+                                    <img src="{{ cms_config('site.web.url') }}/images/groups/status_closed_big.gif" width="18" height="16" alt="Private group"
+                                        title="Private group" class="header-bar-group-status">
+                                @endif
                             </span>
-
-                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions/{{ $topic->id }}/id" id="tell-button"
+                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
+                            @auth
+                                @if ($group->getMember(user()->id))
+                                    <a href="#" class="toolbutton leave-group" id="leave-group-button" style="float: right">
+                                        <span>Leave group</span>
+                                    </a>
+                                @elseif($group->group_type == 1)
+                                    @if ($group->pendingMembers()->where('user_id', user()->id)->first())
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Pending request</span>
+                                        </a>
+                                    @else
+                                        <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                            <span>Ask to join group</span>
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="#" class="toolbutton join-group" id="join-group-button" style="float: right">
+                                        <span>Join group</span>
+                                    </a>
+                                @endif
+                                <a href="{{ url('/') }}/hotel/groups" class="toolbutton" id="creategrp-button">
+                                    <span>Create your own Group</span>
+                                </a>
+                            @endauth
                         </div>
                     </div>
                 </div>
             </div>
             <div id="grouptabs">
-                <ul>
-                    <li><a href="{{ url('/') }}/{{ $group->url }}">Front Page</a></li>
-                    <li id="selected">
-                        <a href="{{ url('/') }}/{{ $group->url }}/discussions">Discussion Forum</a>
-                    </li>
-                </ul>
+                @include('groups.tabs', ['selected' => 'forum'])
             </div>
             <br clear="all">
             <div id="mypage-top-spacer"></div>
             <link href="{{ cms_config('site.web.url') }}/styles/discussions.css" type="text/css" rel="stylesheet">
             <link href="{{ cms_config('site.web.url') }}/styles/myhabbo/control.textarea.css" type="text/css" rel="stylesheet" />
-            <input type="hidden" id="email-verfication-ok" value="1"/>
+            <input type="hidden" id="email-verfication-ok" value="1" />
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="content-1col">
                 <tbody>
                     <tr>
                         <td style="width: 8px;"></td>
                         <td valign="top" style="width: 741px;" class="habboPage-col rightmost">
                             <div class="v2box blue light" id="discussionbox">
-                                <div class="headline">
-                                    <h3>{{ $topic->topic_title }}</h3>
-                                </div>
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                                <div class="body">
-                                    <div id="group-postlist-container">
-                                        @include('groups.discussions.includes.viewtopic')
+                                @if (!$group->canViewForum())
+                                    @include('groups.discussions.includes.nopermission')
+                                @else
+                                    <div class="headline">
+                                        <h3>Group {{ $group->name }}</h3>
                                     </div>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="bottom">
-                                    <div></div>
-                                </div>
+                                    <div class="border">
+                                        <div></div>
+                                    </div>
+                                    <div class="body">
+                                        <div id="group-postlist-container">
+                                            @include('groups.discussions.includes.viewtopic')
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="bottom">
+                                        <div></div>
+                                    </div>
+                                @endif
                             </div>
                         </td>
                         <td style="width: 4px;"></td>
@@ -121,4 +150,9 @@
             </div>
         </div>
     </div>
+    <script language="JavaScript" type="text/javascript">
+        Event.onDOMReady(function() {
+            initView({{ $group->id }});
+        });
+    </script>
 @stop

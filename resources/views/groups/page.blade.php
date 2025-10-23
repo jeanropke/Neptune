@@ -188,12 +188,7 @@
             @endif
 
             <div id="grouptabs">
-                <ul>
-                    <li id="selected"><a href="{{ url('/') }}/{{ $owner->url }}">Front Page</a></li>
-                    <li>
-                        <a href="{{ url('/') }}/{{ $owner->url }}/discussions">Discussion Forum</a>
-                    </li>
-                </ul>
+                @include('groups.tabs', ['group' => $owner, 'selected' => 'page'])
             </div>
 
             <br clear="all">

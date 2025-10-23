@@ -264,7 +264,7 @@ class GroupController extends Controller
 
         $group->update([
             'name'              => $request->name,
-            'description'       => $request->description,
+            'description'       => $request->description ?? '',
             'group_type'        => $group->group_type == '3' ? '3' : $request->type,
             'forum_type'        => $request->forumType,
             'forum_premission'  => $request->newTopicPermission,

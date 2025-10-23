@@ -35,16 +35,16 @@
                                 bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("post-message");
                                 bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
                                 var colors = {
-                                    "red": ["#d80000", "Punainen"],
-                                    "orange": ["#fe6301", "Oranssi"],
-                                    "yellow": ["#ffce00", "Keltainen"],
-                                    "green": ["#6cc800", "Vihreä"],
-                                    "cyan": ["#00c6c4", "Turkoosi"],
-                                    "blue": ["#0070d7", "Sininen"],
-                                    "gray": ["#828282", "Harmaa"],
-                                    "black": ["#000000", "Musta"]
+                                    "red": ["#d80000", "Red"],
+                                    "orange": ["#fe6301", "Orange"],
+                                    "yellow": ["#ffce00", "Yellow"],
+                                    "green": ["#6cc800", "Green"],
+                                    "cyan": ["#00c6c4", "Cyan"],
+                                    "blue": ["#0070d7", "Blue"],
+                                    "gray": ["#828282", "Gray"],
+                                    "black": ["#000000", "Black"]
                                 };
-                                bbcodeToolbar.addColorSelect("Väri", colors, false);
+                                bbcodeToolbar.addColorSelect("Colours", colors, false)
                             </script>
                             <div id="linktool-inline">
                                 <div id="linktool-scope">

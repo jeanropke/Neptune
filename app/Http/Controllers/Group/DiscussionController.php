@@ -74,7 +74,7 @@ class DiscussionController extends Controller
 
         $group = Group::find($validated['groupId']);
 
-        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
+        abort_if(!$group->canForumPost(), 404);
 
         $thread = Thread::create([
             'poster_id'     => user()->id,
@@ -98,9 +98,11 @@ class DiscussionController extends Controller
     {
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        if (!session('hasViewedDiscussion' . $topic->id)) {
-            session(['hasViewedDiscussion' . $topic->id => true]);
-            $topic->increment('views');
+        if ($group->canViewForum()) {
+            if (!session('hasViewedDiscussion' . $topic->id)) {
+                session(['hasViewedDiscussion' . $topic->id => true]);
+                $topic->increment('views');
+            }
         }
 
         return view('groups.discussions.viewtopic', [
@@ -135,7 +137,7 @@ class DiscussionController extends Controller
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
+        abort_if(!$group->canReplyForum(), 404);
 
         $reply = Reply::find($request->postId);
         $reply->update([
@@ -166,7 +168,8 @@ class DiscussionController extends Controller
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        abort_if(!($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false)), 404);
+
+        abort_if(!$group->canReplyForum(), 404);
 
         Reply::create([
             'thread_id' => $topic->id,
@@ -190,8 +193,7 @@ class DiscussionController extends Controller
 
         abort_if($reply->thread_id !== $topic->id, 404);
 
-        $isAdmin = $group->admins()->where('user_id', user()->id)->exists();
-        abort_unless($isAdmin, 404);
+        abort_unless($group->isAdmin(), 404);
 
         $reply->markAsDeleted();
 
@@ -222,11 +224,13 @@ class DiscussionController extends Controller
 
         abort_if($group->id !== $topic->group_id, 404);
 
-        $topic->update([
-            'is_open'       => !$request->topicClosed,
-            'is_stickied'   => $request->topicSticky,
-            'topic_title'   => $request->topicName
-        ]);
+        if ($group->isAdmin() || user()->hasPermission('can_manage_forums')) {
+            $topic->update([
+                'is_open'       => !$request->topicClosed,
+                'is_stickied'   => $request->topicSticky,
+                'topic_title'   => $request->topicName ?? $topic->topic_title
+            ]);
+        }
 
         return view('groups.discussions.includes.viewtopic', [
             'topic'   => $topic,
@@ -246,8 +250,7 @@ class DiscussionController extends Controller
 
         [$group, $topic] = $this->validateGroupAndTopic($request);
 
-        $isAdmin = $group->admins()->where('user_id', user()->id)->exists();
-        abort_unless($isAdmin, 403);
+        abort_unless($group->isAdmin(), 404);
 
         $topic->markAsDeleted();
 

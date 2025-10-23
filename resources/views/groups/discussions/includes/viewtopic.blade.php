@@ -10,7 +10,7 @@
                     <span class="to-topics">To Threads</span>
                 </a>
                 @auth
-                    @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                    @if ($group->canReplyForum())
                         @if ($topic->is_open)
                             <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-button">
                                 <span>Post Reply</span>
@@ -18,10 +18,11 @@
                         @endif
                     @endif
 
-                    {{-- TODO: check for group admin --}}
-                    <a href="#" class="colorlink noarrow" id="topic-settings">
-                        <span>Settings</span>
-                    </a>
+                    @if($group->isAdmin() || user()->hasPermission('can_manage_forums'))
+                        <a href="#" class="colorlink noarrow" id="topic-settings">
+                            <span>Settings</span>
+                        </a>
+                    @endif
                 @endauth
                 @if (!$topic->is_open)
                     <span class="topic-closed">
@@ -221,7 +222,7 @@
         <tr>
             <td>
                 @auth
-                    @if ($group->forum_premission == 1 && $group->getMember(user()->id) || ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                    @if ($group->canReplyForum())
                         @if ($topic->is_open)
                             <a href="#" class="colorlink dialogbutton verify-email" id="create-post-message-lower-button">
                                 <span>Post Reply</span>

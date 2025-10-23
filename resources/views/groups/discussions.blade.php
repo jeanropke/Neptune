@@ -23,7 +23,6 @@
                                         title="Private group" class="header-bar-group-status">
                                 @endif
                             </span>
-
                             <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
                             @auth
@@ -55,12 +54,7 @@
                 </div>
             </div>
             <div id="grouptabs">
-                <ul>
-                    <li><a href="{{ url('/') }}/{{ $group->url }}">Front Page</a></li>
-                    <li id="selected">
-                        <a href="{{ url('/') }}/{{ $group->url }}/discussions">Discussion Forum</a>
-                    </li>
-                </ul>
+                @include('groups.tabs', ['selected' => 'forum'])
             </div>
             <br clear="all">
             <div id="mypage-top-spacer"></div>
@@ -74,6 +68,9 @@
                         <td style="width: 8px;"></td>
                         <td valign="top" style="width: 741px;" class="habboPage-col rightmost">
                             <div class="v2box blue light" id="discussionbox">
+                                @if (!$group->canViewForum())
+                                    @include('groups.discussions.includes.nopermission')
+                                @else
                                 <div class="headline">
                                     <h3>Group {{ $group->name }} discussions page 1 of 1</h3>
                                 </div>
@@ -87,9 +84,7 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            @if (
-                                                                ($group->forum_premission == 1 && $group->getMember(user()->id)) ||
-                                                                    ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                            @if ($group->canForumPost())
                                                                 <input type="hidden" id="email-verfication-ok" value="1" />
                                                                 <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
                                                             @endif
@@ -174,9 +169,7 @@
                                                 <tr class="topiclist-index">
                                                     <td class="topiclist-newtopic">
                                                         @auth
-                                                            @if (
-                                                                ($group->forum_premission == 1 && $group->getMember(user()->id)) ||
-                                                                    ($group->forum_premission == 2 && $group->getMember(user()->id) ? $group->getMember(user()->id)->member_rank < 3 : false))
+                                                            @if ($group->canForumPost())
                                                                 <input type="hidden" id="email-verfication-ok" value="1" />
                                                                 <a href="#" id="newtopic-upper" class="new-button verify-email newtopic-icon" style="float:left">New Thread</a>
                                                             @endif
@@ -196,12 +189,14 @@
                                                         @endfor
                                                     </td>
                                                 </tr>
+                                                {{-- this sucks
                                                 <tr class="topiclist-columncaption">
                                                     <td class="topiclist-columncaption-topic">Thread/Thread Starter</td>
                                                     <td class="topiclist-columncaption-lastpost">Last Post</td>
                                                     <td class="topiclist-columncaption-replies">Replies</td>
                                                     <td class="topiclist-columncaption-views">Views</td>
                                                 </tr>
+                                                --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -210,6 +205,7 @@
                                 <div class="bottom">
                                     <div></div>
                                 </div>
+                                @endif
                             </div>
 
                         </td>

@@ -63,6 +63,11 @@ class Group extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
+    public function isAdmin()
+    {
+        return $this->getMember()->member_rank <= 2;
+    }
+
     public function memberships(): HasMany
     {
         return $this->hasMany(Member::class, 'group_id');
@@ -135,7 +140,7 @@ class Group extends Model
 
     public function getMember($userId = null)
     {
-        return $this->allMembers()->where('user_id', $userId ?? user()->id)->first();
+        return $this->allMembers()->where('user_id', $userId ?? user()?->id)->first();
     }
 
     public function addMember(?int $userId = null): bool
@@ -223,5 +228,49 @@ class Group extends Model
     public function items(): HasMany
     {
         return $this->hasMany(Sticker::class, 'group_id')->where('is_placed', '1')->with('store');
+    }
+
+    // functions from kepler :p
+    public function canViewForum()
+    {
+        // public
+        if ($this->forum_type == 0) {
+            return true;
+        }
+
+        return $this->getMember(user()?->id) != null;
+    }
+
+    public function canReplyForum()
+    {
+        // public
+        if ($this->forum_type == 0 && $this->forum_premission == 0) {
+            return true;
+        }
+
+        return $this->getMember(user()?->id) != null;
+    }
+
+    public function canForumPost()
+    {
+        // everyone can post
+        if ($this->forum_premission == 0 && $this->canViewForum()) {
+            return true;
+        }
+
+        $member = $this->getMember(user()?->id);
+
+        // admin only
+        if ($this->forum_premission == 2) {
+            //owner || admin
+            return $member && ($member->member_rank == 1 || $member->member_rank == 2);
+        }
+
+        // members only
+        if ($this->forum_premission == 1) {
+            return $member != null;
+        }
+
+        return false;
     }
 }
