@@ -185,7 +185,46 @@ class UserController extends Controller
         if (!user()->hasPermission('can_edit_users'))
             return view('housekeeping.ajax.accessdenied_dialog');
 
-        return redirect()->back()->with('message', 'Not implemented yet! Kepler does not save on database which user is online.');
+        // for credits
+        if ($request->credits) {
+            if ($request->online) {
+                User::where('is_online', 1)->get()->each(function ($user) use ($request) {
+                    $user->updateCredits($request->credits);
+                });
+
+                return redirect()->back()->with('message', 'All online users received ' . $request->credits . ' credits.');
+            }
+
+            User::get()->each(function ($user) use ($request) {
+                $user->updateCredits($request->credits);
+            });
+
+            return redirect()->back()->with('message', 'All users received ' . $request->credits . ' credits.');
+        }
+
+        if ($request->code) {
+            if ($request->online) {
+                User::where('is_online', 1)->get()->each(function ($user) use ($request) {
+                    $user->giveBadge($request->code);
+                });
+
+                return redirect()->back()->with('message', 'All online users received badge ' . $request->code);
+            }
+
+            User::get()->each(function ($user) use ($request) {
+                $user->giveBadge($request->code);
+            });
+
+            return redirect()->back()->with('message', 'All users received badge ' . $request->code);
+        }
+
+        if ($request->remove_code) {
+            Badge::where('badge', $request->remove_code)->delete();
+
+            return redirect()->back()->with('message', 'Badge ' . $request->remove_code . ' removed from all users');
+        }
+
+        return redirect()->back()->with('message', '...?');
     }
 
     public function toolsFurniture(Request $request)

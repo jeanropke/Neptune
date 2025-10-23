@@ -28,7 +28,7 @@
                                         <div class="graytext">The amount of credits everybody gets.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="credits" value="" size="3" maxlength="5" class="textinput">
+                                        <input type="text" name="credits" value="" size="5" maxlength="5" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -61,7 +61,7 @@
                                         <div class="graytext">What's the badgecode everybody gets?</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="code" value="" size="3" maxlength="3" class="textinput">
+                                        <input type="text" name="code" value="" size="5" maxlength="5" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +94,7 @@
                                         <div class="graytext">What badge do you want to take off, fill in the badge code.</div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <input type="text" name="code" value="" size="3" maxlength="3" class="textinput">
+                                        <input type="text" name="remove_code" value="" size="5" maxlength="5" class="textinput">
                                     </td>
                                 </tr>
                                 <tr>
