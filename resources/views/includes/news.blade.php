@@ -5,11 +5,14 @@
     use Illuminate\Support\Carbon;
 
     $articles = Article::where('is_published', '1')
-        ->when(!user()?->hasPermission('can_create_site_news'), function($query) { return $query->where('is_future_published', '0'); })
+        ->when(!user()?->hasPermission('can_create_site_news'), function ($query) {
+            return $query->where('is_future_published', '0');
+        })
         ->orderBy('created_at', 'desc');
 
     $top_stories = $articles->take(3)->get();
-    $articles = $articles->skip(3)->take(5)->get();
+    $stories = $articles->skip(3)->take(3)->get();
+    $oldstories = $articles->skip(6)->take(2)->get();
 @endphp
 
 <script type="text/javascript">
@@ -66,7 +69,7 @@
         <h2>What's New</h2>
     </div>
     <div id="newsbox-text">
-        @foreach ($articles as $article)
+        @foreach ($stories as $article)
             <div class="newsitem">
                 <h3><span class="articledate">[{{ $article->created_at->format('d/m/y') }}]</span>
                     <a href="/article/{{ $article->id }}">{{ $article->title_resolved }}</a>
@@ -77,6 +80,18 @@
                 </p>
             </div>
         @endforeach
+
+        @if ($oldstories->count() > 0)
+            <div class="hr">&nbsp;</div>
+            @foreach ($oldstories as $oldstory)
+                <div class="newsitem oldnewsitem">
+                    <h3>
+                        <span class="articledate">[{{ $oldstory->created_at->format('d/m/y') }}]</span>
+                        <a href="/article/{{ $oldstory->id }}">{{ $oldstory->title_resolved }}</a>
+                    </h3>
+                </div>
+            @endforeach
+        @endif
 
     </div>
     <div id="newsbox-footer">
