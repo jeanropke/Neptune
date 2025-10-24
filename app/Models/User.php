@@ -17,6 +17,7 @@ use App\Models\User\Badge;
 use App\Models\User\IPLog;
 use App\Models\User\Statistic;
 use App\Models\User\Subscription;
+use App\Models\User\Transaction;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -273,6 +274,10 @@ class User extends Authenticatable
         if($this->online_status_visible)
             return $this->is_online;
         return false;
+    }
+
+    public function transactions(): HasMany {
+        return $this->hasMany(Transaction::class);
     }
 
     public function hasPermission($permission)

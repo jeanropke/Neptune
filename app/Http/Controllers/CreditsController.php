@@ -17,7 +17,7 @@ class CreditsController extends Controller
         if (!Auth::check())
             return redirect()->route('credits.index');
 
-        return view('credits.transactions')->with(['transactions' => UserTransaction::where('user_id', Auth::user()->id)->orderBy('timestamp', 'DESC')->take(100)->get()]);
+        return view('credits.transactions')->with(['transactions' => user()->transactions()->where('is_visible', '1')->orderBy('created_at', 'DESC')->simplePaginate(25)]);
     }
 
     public function collectibles()
