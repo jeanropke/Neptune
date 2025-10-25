@@ -1,17 +1,3 @@
-/*
- * Really easy field validation with Prototype
- * http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
- * Andrew Tetlaw
- * Version 1.3 (2006-05-15)
- * Thanks:
- *  Mike Rumble http://www.mikerumble.co.uk/ for onblur idea
- *  Analgesia for spotting a typo
- *  Paul Shannon http://www.paulshannon.com for the reset idea
- *  Ted Wise for the focus-on-first-error idea
- * 
- * 
- * http://creativecommons.org/licenses/by-sa/2.5/
- */
 Validator = Class.create();
 
 Validator.prototype = {
@@ -31,7 +17,8 @@ Validation.prototype = {
 			immediate : false,
 			focusOnError : true,
 			skipValidation : false,
-			beforeSubmit : false
+			beforeSubmit : false,
+			afterSuccesfulValidation : false
 		}, options || {});
 		this.form = $(form);
 		Event.observe(this.form,'submit',this.onSubmit.bind(this),false);
@@ -57,6 +44,10 @@ Validation.prototype = {
             }
             if(this.options.focusOnError) {
 				$$('.validation-failed').first().focus();
+			}
+		} else {
+			if (this.options.afterSuccesfulValidation) {
+				this.options.afterSuccesfulValidation();
 			}
 		}
 	},
@@ -85,7 +76,7 @@ Object.extend(Validation, {
 		var prop = '__advice'+name;
 		if(Validation.isVisible(this) && !v.test($F(this))) {
 			Validation.addError(this, name, v.error);
-			
+
 			this[prop] = true;
 			this.removeClassName('validation-passed');
 			this.addClassName('validation-failed');
@@ -110,7 +101,7 @@ Object.extend(Validation, {
 	reset : function(elm) {
 		var cn = elm.classNames();
 		cn.each(function(value) {
-			if(elm['__advice'+value]) {
+			if(elm['__advice'+value] && $('advice-' + value + '-' + elm.id)) {
 				$('advice-' + value + '-' + elm.id).remove();
 				elm['__advice'+value] = '';
 			}
@@ -182,7 +173,7 @@ Validation.addAllThese([
 				return Validation.get('IsEmpty').test(v) || !isNaN(test);
 			}],
 	['validate-email', 'Please enter a valid email address. For example fred@domain.com .', function (v) {
-				return Validation.get('IsEmpty').test(v) || /\w{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/.test(v)
+				return Validation.get('IsEmpty').test(v) || /^[\w\-.%]{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/.test(v)
 			}],
 	['validate-date-au', 'Please use this date format: dd/mm/yyyy. For example 17/03/2006 for the 17th of March, 2006.', function(v) {
 				if(!Validation.get('IsEmpty').test(v)) {

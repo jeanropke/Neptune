@@ -1,7 +1,38 @@
 @extends('layouts.login')
 @section('title', 'Forgotten password!')
 @section('content')
-<div id="process-wrapper">
+    <style type="text/css">
+        #accountlist-form-errors {
+            display: none
+        }
+
+        #forgottenpw-form-errors {
+            display: none
+        }
+
+        div.left-column {
+            float: left;
+            width: 50%
+        }
+
+        div.right-column {
+            float: right;
+            width: 49%
+        }
+
+        label {
+            display: block
+        }
+
+        input {
+            width: 98%
+        }
+
+        input.process-button {
+            width: auto;
+            float: right
+        }
+    </style>
     <div id="process-header">
         <div id="process-header-body">
             <div id="process-header-content">
@@ -33,12 +64,33 @@
                                 </div>
                             </div>
 
+                            @session('success_email')
+                                <div class="content-ok">
+                                    <div class="content-ok-body">
+                                        {{ $value }}
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="content-ok-bottom">
+                                    <div class="content-ok-bottom-body"></div>
+                                </div>
+                            @endsession
+                            @session('error_email')
+                                <div class="content-red">
+                                    <div class="content-red-body">
+                                        {{ $value }}
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="content-red-bottom">
+                                    <div class="content-red-bottom-body"></div>
+                                </div>
+                            @endsession
 
-                            <img vspace="0" hspace="10" border="0" align="right"
-                                src="{{ url('/') }}/gordon/c_images/album1358/frank_shocked.gif" alt="">
+
+                            <img vspace="0" hspace="10" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album1358/frank_shocked.gif" alt="">
                             <h4>I can't remember my password!</h4>
-                            <p>Don't panic! Please enter your account information below and we'll send you an email
-                                telling you how to reset your password.</p>
+                            <p>Don't panic! Please enter your account information below and we'll send you an email telling you how to reset your password.</p>
                             <div class="clear"></div>
                             <div class="content-white-outer">
                                 <div class="content-white">
@@ -46,24 +98,19 @@
 
                                         <div class="content-white-content">
                                             <form method="post" action="forgot" id="forgottenpw-form">
+                                                @csrf
                                                 <p>
-                                                    <label for="forgottenpw-username" class="registration-text">{{ cms_config('hotel.name.short') }}
-                                                        name</label>
-                                                    <input type="text" class="required-username" name="habboName"
-                                                        id="forgottenpw-username" value="">
+                                                    <label for="forgottenpw-username" class="registration-text">Habbo name</label>
+                                                    <input type="text" class="required-username" name="habboName" id="forgottenpw-username" value="">
                                                 </p>
 
                                                 <p>
-                                                    <label for="forgottenpw-email" class="registration-text">Email
-                                                        address</label>
-                                                    <input type="text" class="required-email" name="emailAddress"
-                                                        id="forgottenpw-email" value="">
+                                                    <label for="forgottenpw-email" class="registration-text">Email address</label>
+                                                    <input type="text" class="required-email" name="emailAddress" id="forgottenpw-email" value="">
                                                 </p>
 
                                                 <p>
-                                                    <input type="submit" value="Request password email"
-                                                        name="actionForgot" class="process-button"
-                                                        id="forgottenpw-submit">
+                                                    <input type="submit" value="Request password email" name="actionForgot" class="process-button" id="forgottenpw-submit">
                                                 </p>
                                                 <input type="hidden" value="default" name="origin">
                                             </form>
@@ -105,38 +152,35 @@
                                 </div>
                             </div>
 
-
-                            <img vspace="0" hspace="10" border="0" align="right"
-                                src="{{ url('/') }}/gordon/c_images/album1358/frank_sorry.gif" alt="">
-                            <h4>I can't remember my {{ cms_config('hotel.name.short') }} name!</h4>
-                            <p>No problem - just enter your email address below and we'll send you a list of your
-                                accounts.</p>
-
-                            <div class="clear"></div>
-                            @if($errors->any())
-                            <div id="login-errors" style="display: block">
-                                <div class="content-red">
-                                    <div class="content-red-body" id="login-errors-content"> {{ $errors->first() }}
-                                        <div class="clear"></div>
-                                    </div>
-                                </div>
-                                <div class="content-red-bottom">
-                                    <div class="content-red-bottom-body"></div>
-                                </div>
-                            </div>
-                            @endif
-                            @if(session('status'))
-                            <div id="login-errors" style="display: block">
+                            @session('success_owner')
                                 <div class="content-ok">
-                                    <div class="content-ok-body" id="login-errors-content"> {{ session('status') }}
+                                    <div class="content-ok-body">
+                                        {{ $value }}
                                         <div class="clear"></div>
                                     </div>
                                 </div>
                                 <div class="content-ok-bottom">
                                     <div class="content-ok-bottom-body"></div>
                                 </div>
-                            </div>
-                            @endif
+                            @endsession
+                            @session('error_owner')
+                                <div class="content-red">
+                                    <div class="content-red-body">
+                                        {{ $value }}
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="content-red-bottom">
+                                    <div class="content-red-bottom-body"></div>
+                                </div>
+                            @endsession
+
+                                {{ config('mail.host') }} a
+                            <img vspace="0" hspace="10" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album1358/frank_sorry.gif" alt="">
+                            <h4>I can't remember my Habbo name!</h4>
+                            <p>No problem - just enter your email address below and we'll send you a list of your accounts.</p>
+
+                            <div class="clear"></div>
 
                             <div class="content-white-outer">
                                 <div class="content-white">
@@ -144,17 +188,14 @@
 
                                         <div class="content-white-content">
                                             <form method="post" action="forgot" id="accountlist-form">
-                                                {{ csrf_field() }}
+                                                @csrf
                                                 <p>
-                                                    <label for="accountlist-owner-email" class="registration-text">Email
-                                                        address</label>
-                                                    <input type="text" class="required-owner-email"
-                                                        name="ownerEmailAddress" id="accountlist-owner-email" value="">
+                                                    <label for="accountlist-owner-email" class="registration-text">Email address</label>
+                                                    <input type="text" class="required-owner-email" name="ownerEmailAddress" id="accountlist-owner-email" value="">
                                                 </p>
 
                                                 <p>
-                                                    <input type="submit" value="Get my accounts" name="actionList"
-                                                        class="process-button" id="accountlist-submit">
+                                                    <input type="submit" value="Get my accounts" name="actionList" class="process-button" id="accountlist-submit">
                                                 </p>
                                                 <input type="hidden" value="default" name="origin">
                                             </form>
@@ -183,12 +224,14 @@
                     </div>
                     <div class="content-top">
                         <div class="content">
-                            <img vspace="0" hspace="10" border="0" align="left"
-                                src="{{ url('/') }}/gordon/c_images/album1358/frank_thumbup.gif" alt="">
+
+
+                            <img vspace="0" hspace="10" border="0" align="left" src="{{ cms_config('site.c_images.url') }}/album1358/frank_thumbup.gif"
+                                alt="">
                             <h4>False alarm - I've remembered</h4>
-                            <p>Great stuff! If you forget again, just pop back here and we'll help you.<br><br><a
-                                    target="_self" href="{{ url('/') }}/login">Sign in to {{ cms_config('hotel.name.short') }}</a><br>
-                                <a href="{{ url('/') }}">Go back to the homepage &gt;&gt;</a></p>
+                            <p>Great stuff! If you forget again, just pop back here and we'll help you.<br><br><a target="_self" href="{{ url('/') }}/account/login">Sign in to
+                                    Habbo</a><br><a target="_blank" href="{{ url('/') }}/">Go back to the homepage &gt;&gt;</a></p>
+
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -213,7 +256,7 @@
                         addError: selectiveAddError
                     });
                     Validation.addAllThese([
-                        ['required-username', 'Please enter your {{ cms_config('hotel.name.short') }} name', function(v) {
+                        ['required-username', 'Please enter your Habbo name', function(v) {
                             return !Validation.get('IsEmpty').test(v);
                         }],
                         ['required-email', 'Please enter your correct email address', function(v) {
@@ -232,6 +275,7 @@
                             alValidation.reset();
                         },
                         afterSuccesfulValidation: function(e) {
+                            console.log('afterSuccesfulValidation');
                             $('forgottenpw-submit').disabled = true;
                         }
                     });
@@ -243,44 +287,28 @@
                             fpValidation.reset();
                         },
                         afterSuccesfulValidation: function(e) {
+                            console.log('afterSuccesfulValidation');
                             $('accountlist-submit').disabled = true;
                         }
                     });
                 }
                 initFormValidation();
             </script>
-            <style type="text/css">
-                #accountlist-form-errors {
-                    display: none
-                }
 
-                #forgottenpw-form-errors {
-                    display: none
-                }
+            <div id="footer">
+                <div id="footer-top">
+                    <div id="footer-content">© 2006 Sulake Corporation Ltd. HABBO is a registered trademark of Sulake Corporation Oy in the European Union, the USA, Japan, the
+                        People's Republic of China and various other jurisdictions. All rights reserved.</div>
+                </div>
+                <div id="footer-bottom">
+                    <div id="footer-bottom-content"></div>
+                </div>
+            </div>
 
-                div.left-column {
-                    float: left;
-                    width: 50%;
-                }
 
-                div.right-column {
-                    float: right;
-                    width: 49%
-                }
-
-                label {
-                    display: block
-                }
-
-                input {
-                    width: 98%
-                }
-
-                input.process-button {
-                    width: auto;
-                    float: right
-                }
-            </style>
         </div>
     </div>
-    @stop
+    <div id="outer-bottom">
+        <div id="outer-bottom-content"></div>
+    </div>
+@stop

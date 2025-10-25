@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccountListMail;
 use App\Mail\ResetPasswordMail;
 use App\Models\CmsUserSettings;
 use App\Models\Neptune\UserSettings;
@@ -28,40 +29,68 @@ class AuthController extends Controller
 
     public function forgotPasswordMyAccounts(Request $request)
     {
-        $user = DB::table('users')->where('mail', '=', $request->ownerEmailAddress)->get();
+        // forgot my accounts page
+        if ($request->ownerEmailAddress) {
+            $users = User::where('email', $request->ownerEmailAddress)->select('username')->get();
 
-        if (count($user) < 1) {
-            return redirect()->back()->withErrors(['error' => trans('User does not exist')]);
+            if ($users->count() == 0) {
+                return redirect()->back()->with('error_owner', trans('error.auth.no_accounts')); // We couldn’t find any Habbo accounts linked to this email address.
+            }
+
+            if($this->sendAccountEmail($request->ownerEmailAddress, $users))
+                return redirect()->back()->with('success_owner', trans('success.auth.reset_link')); // A list with all accounts registred in this email has been sent to your email address.
+
+            return redirect()->back()->with('error_owner', trans('error.auth.network')); // A Network Error occurred. Please try again.
         }
 
-        $token = Str::random(60);
-        DB::table('cms_password_reset')->updateOrInsert(
-            ['email' => $request->ownerEmailAddress],
-            ['token' => $token, 'created_at' => now()]
-        );
+        if ($request->emailAddress) {
+            $user = User::where([['email', $request->emailAddress], ['username', $request->habboName]])->select(['username', 'email'])->first();
+            if (!$user) {
+                return redirect()->back()->with('error_email', trans('error.auth.no_account')); // We couldn’t find any Habbo account matching the username and email address you entered.
+            }
 
-        if ($this->sendResetEmail($request->ownerEmailAddress, $token)) {
-            return redirect()->back()->with('status', trans('A reset link has been sent to your email address.'));
-        } else {
-            return redirect()->back()->withErrors(['error' => trans('A Network Error occurred. Please try again.')]);
+            $token = Str::random(38);
+            DB::table('cms_password_reset')->updateOrInsert(
+                ['username'     => $user->username],
+                ['token'        => $token, 'created_at'   => now()]
+            );
+
+            if($this->sendResetEmail($user, $token))
+                return redirect()->back()->with('success_email', trans('success.auth.reset_link')); // A reset link has been sent to your email address.
+
+            return redirect()->back()->with('error_email', trans('error.auth.network')); // A Network Error occurred. Please try again.
+        }
+
+        return redirect()->back();
+    }
+
+    private function sendAccountEmail($email, $users)
+    {
+        $data = [
+            'email' => $email,
+            'users' => $users
+        ];
+        try {
+            Mail::to($email)->send(new AccountListMail($data));
+            return true;
+        } catch (\Exception $e) {
+            return false;
         }
     }
 
-    private function sendResetEmail($email, $token)
+    private function sendResetEmail($user, $token)
     {
-        $user = DB::table('users')->where('mail', $email)->select('username', 'mail')->first();
-
-        $data = [
-            'link' => env('APP_URL') . '/account/password/reset/' . $token,
-            'user' => $user
+         $data = [
+            'token'     => $token,
+            'user'  => $user
         ];
 
-        //try {
-        //    Mail::to($email)->send(new ResetPasswordMail($data));
-        //    return true;
-        //} catch (\Exception $e) {
-        //    return false;
-        //}
+        try {
+            Mail::to($user->email)->send(new ResetPasswordMail($data));
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function forgotPasswordReset($token)
@@ -71,7 +100,7 @@ class AuthController extends Controller
             return redirect()->route('auth.login');
 
         $secondsPassed = Carbon::now()->diffInSeconds(Carbon::parse($reset->created_at));
-        if ($secondsPassed >= 43200) //12 hours check
+        if ($secondsPassed >= 7200) //2 hours check
             return redirect()->route('auth.login');
 
         return view('auth.forgot_password_update')->with('token', $token);
@@ -83,16 +112,20 @@ class AuthController extends Controller
         $retypedPassword = $request->input('retypedPassword');
         $token = $request->input('reset_token');
 
-        $reset = DB::table('cms_password_reset')->whereRaw("BINARY token = '$token'");
+        $reset = DB::table('cms_password_reset')->where('token', $token);
         if (!$reset->first())
             return redirect()->route('auth.login');
 
+        $secondsPassed = Carbon::now()->diffInSeconds(Carbon::parse($reset->created_at));
+        if ($secondsPassed >= 7200) //2 hours check
+            return redirect()->route('auth.login');
+
         $request->validate([
-            'password'          => 'required|min:6|max:30',
-            'retypedPassword'   => 'required|min:6|max:30|same:password'
+            'password'          => 'required|min:8|max:30',
+            'retypedPassword'   => 'required|min:8|max:30|same:password'
         ]);
 
-        $user = User::where('mail', $reset->first()->email)->first();
+        $user = User::where('username', $reset->first()->username)->first();
         if (!$user)
             return redirect()->route('auth.login');
 
@@ -312,8 +345,5 @@ class AuthController extends Controller
         Auth::login($user);
     }
 
-    public function accountActivation()
-    {
-
-    }
+    public function accountActivation() {}
 }

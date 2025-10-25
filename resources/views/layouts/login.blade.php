@@ -10,8 +10,8 @@
     <link href="/web/styles/boxes.css" type="text/css" rel="stylesheet" />
     <link href="/web/styles/process.css" type="text/css" rel="stylesheet" />
 
-    <link rel="icon" href="{{ cms_config('site.web.url') }}/images/favicon.gif" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ cms_config('site.web.url') }}/images/favicon.gif" type="image/x-icon">
+    <link rel="icon" href="{{ cms_config('site.web.url') }}/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ cms_config('site.web.url') }}/images/favicon.ico" type="image/x-icon">
 
     <script language="JavaScript" type="text/javascript">
         var habboReqPath = "{{ url('/') }}/";
@@ -32,7 +32,6 @@
     <meta name="description" content="">
 
     <meta name="build" content="{{ config('cms.name') }} v{{ config('cms.version') }} - [{{ config('cms.title') }}] - {{ config('cms.stable') }} - {{ config('cms.build') }}" />
-</head>
 </head>
 
 <body id="{{ isset($body) ? $body : 'process' }}">

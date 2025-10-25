@@ -20,9 +20,7 @@
                 </div>
                 <div class="content-top">
                     <div class="content">
-
                         <div class="processbox-inner">
-
                             <h4>
                                 <font style="font-size: 11pt">JOIN NOW - IT'S EASY AND FREE!</font>
                             </h4>
@@ -125,8 +123,24 @@
                         </div>
 
                         <div class="processbox-inner">
-
-
+                            <p>
+                                <br>
+                                <img vspace="0" hspace="0" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album109/reindeer_1_small.gif"
+                                    alt="">
+                                <span style="font-weight: bold;">TOP REASONS TO REGISTER</span><br>
+                            </p>
+                            <ul>
+                                <li>Create your own Habbo character and Home page<br></li>
+                                <li>Meet your friends and find new ones<br>
+                                </li>
+                                <li>Decorate your own room
+                                </li>
+                                <li>It’s more fun than not joining!</li>
+                            </ul>
+                            <ul>
+                                <li><span style="font-weight: bold;">It's completely free!</span></li>
+                            </ul><br><br>
+                            <p></p>
                         </div>
 
                         <div class="clear"></div>
@@ -204,11 +218,22 @@
                             </div>
                         </div>
                         <div class="processbox-inner">
-                            <p> <br />
-                                <span style="font-weight: bold;">FORGOT YOUR PASSWORD?</span><br />
-                                <br />
-                                If you have forgotten your password please use the <a href="/account/password/forgot">Password Retrieval System</a>.<br />
-                                <br />
+                            <p>
+                                <br>
+                                <span style="font-weight: bold;">FORGOTTEN YOUR PASSWORD?</span>
+                                <br><br>
+
+                                If you have forgotten your password or username please visit the <a href="{{ url('/') }}/account/password/forgot" target="_blank">Account
+                                    Restore</a> page.
+                                <br><br>
+                            </p>
+                            <h4>Security Information</h4>
+                            <p>
+                                <img vspace="10" hspace="10" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album209/encryption_pc_ie.gif"
+                                    alt="">
+                                The real Habbo site is encrypted to protect you and your data. You can check whether or not this site is encrypted by looking for
+                                the nice looking padlock at the bottom of your web browser.
+                                <br><br>
                             </p>
                         </div>
                         <div class="clear"></div>
