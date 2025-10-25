@@ -1,7 +1,7 @@
 @extends('layouts.email_template')
 
 @section('content')
-    <img vspace="0" hspace="10" border="0" align="left" src="http://45.170.165.242/c_images/album1358/frank_thumbup.gif" alt="">
+    <img vspace="0" hspace="10" border="0" align="left" src="{{ url('/') }}/c_images/album1358/frank_thumbup.gif" alt="">
     <h4>Hey there {{ $user->username }}</h4>
     <p>A little rubber duck told us that you needed to change the password for the Habbo
         account registered with the following email: <b>{{ $user->email }}</b></p>

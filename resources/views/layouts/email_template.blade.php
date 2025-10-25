@@ -52,7 +52,7 @@
         border-width: 2px;
     }
 </style>
-<table background="http://45.170.165.242/web/images/bg_patterns/habbo.gif" bgcolor="#e8eaed" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table background="{{ url('/') }}/web/images/bg_patterns/habbo.gif" bgcolor="#e8eaed" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody>
         <tr height="25px">
             <td align="center" valign="top" style="position: relative;"></td>
@@ -62,9 +62,9 @@
                 <!-- top -->
                 <table width="736" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                     <tr>
-                        <td align="center" valign="top" background="http://45.170.165.242/web/images/mail/top.gif"
+                        <td align="center" valign="top" background="{{ url('/') }}/web/images/mail/top.gif"
                             style="height:79px;max-height: 79px;min-height: 79px; background-repeat:no-repeat; background-position:center; background-size:cover; text-align:center;">
-                            <img src="http://45.170.165.242/web/images/logos/habbo_logo_nourl.gif" alt="Logo" width="160"
+                            <img src="{{ url('/') }}/web/images/logos/habbo_logo_nourl.gif" alt="Logo" width="160"
                                 style="display:block; margin-top: 11px; margin-left: 33px;">
                         </td>
                     </tr>
@@ -72,20 +72,20 @@
                 <!-- body -->
                 <table width="736" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                     <tr>
-                        <td align="center" valign="top" background="http://45.170.165.242/web/images/mail/outer-body.gif">
+                        <td align="center" valign="top" background="{{ url('/') }}/web/images/mail/outer-body.gif">
                             <!-- headline -->
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td height="9"></td>
                                 </tr>
                                 <tr>
-                                    <td width="718" height="30" align="center" valign="top" background="http://45.170.165.242/web/images/mail/headline.gif"></td>
+                                    <td width="718" height="30" align="center" valign="top" background="{{ url('/') }}/web/images/mail/headline.gif"></td>
                                 </tr>
                             </table>
                             <!-- content -->
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td width="718" background="http://45.170.165.242/web/images/mail/content.gif">
+                                    <td width="718" background="{{ url('/') }}/web/images/mail/content.gif">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
                                                 <td style="padding: 9px">
@@ -100,7 +100,7 @@
                             <!-- bottom -->
                             <table width="718" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                                 <tr>
-                                    <td height="5px" align="center" valign="top" background="http://45.170.165.242/web/images/mail/content-bottom.gif"
+                                    <td height="5px" align="center" valign="top" background="{{ url('/') }}/web/images/mail/content-bottom.gif"
                                         style="height:5px;max-height: 5px;min-height: 5px; background-repeat:no-repeat;">
                                     </td>
                                 </tr>
@@ -122,7 +122,7 @@
                 <!-- bottom -->
                 <table width="736" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                     <tr>
-                        <td align="center" height="9px" valign="top" background="http://45.170.165.242/web/images/mail/outer-bottom.gif"
+                        <td align="center" height="9px" valign="top" background="{{ url('/') }}/web/images/mail/outer-bottom.gif"
                             style="height:9px;max-height: 9px;min-height: 9px; background-repeat:no-repeat;">
                         </td>
                     </tr>
