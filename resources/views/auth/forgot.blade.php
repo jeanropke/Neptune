@@ -175,7 +175,6 @@
                                 </div>
                             @endsession
 
-                                {{ config('mail.host') }} a
                             <img vspace="0" hspace="10" border="0" align="right" src="{{ cms_config('site.c_images.url') }}/album1358/frank_sorry.gif" alt="">
                             <h4>I can't remember my Habbo name!</h4>
                             <p>No problem - just enter your email address below and we'll send you a list of your accounts.</p>
