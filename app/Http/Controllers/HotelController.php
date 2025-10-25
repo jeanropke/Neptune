@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Group\Member;
 use App\Models\Neptune\Permission;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

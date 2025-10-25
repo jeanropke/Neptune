@@ -63,9 +63,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $dates = ['created_at'];
+    protected $dates = ['created_at', 'last_online'];
 
     protected $casts = [
+        'last_online'       => 'datetime',
         'email_verified_at' => 'datetime',
         'online'            => 'boolean'
     ];

@@ -26,17 +26,19 @@
                                             @forelse($staffs->where('rank', $rank->id) as $staff)
                                                 <tr class="{{ $loop->index % 2 ? 'even' : 'odd' }}">
                                                     <td class="style1">
-                                                        <p style="height: 64px; overflow: hidden;"><b>
-                                                                <img width="64" hspace="5" height="110" align="right" style="margin-top: -19px;"
-                                                                    src="{{ cms_config('site.avatarimage.url') }}{{ $staff->figure }}&gesture=sml&direction=4&head_direction=4"
-                                                                    alt="">{{ cms_config('hotel.name.short') }} name</b>: <a
-                                                                href="{{ url('/') }}/home/{{ $staff->username }}" target="_blank">{{ $staff->username }}</a> ~ <img
-                                                                src="{{ cms_config('site.web.url') }}/images/myhabbo/{{ $staff->online ? 'habbo_online_anim' : 'habbo_offline' }}.gif"><br>
-                                                            <b>{{ cms_config('hotel.name.short') }} since</b>:
-                                                            {{ $staff->created_at->format('F Y') }}<br>
-                                                            <b>Motto</b>: {{ $staff->motto }}<br>
-                                                            <b>Last online</b>:
-                                                            {{ $staff->online ? 'Online now' : \Carbon\Carbon::createFromTimeStamp($staff->last_online)->diffForHumans() }}<br>
+                                                        <p style="height: 64px; overflow: hidden;">
+                                                            <b>
+                                                                <img width="64" hspace="5" height="110" align="right" style="margin-top: -19px;" src="{{ cms_config('site.avatarimage.url') }}{{ $staff->figure }}&gesture=sml&direction=4&head_direction=4" alt="">
+                                                                {{ cms_config('hotel.name.short') }} name</b>:
+                                                                <a href="{{ url('/') }}/home/{{ $staff->username }}" target="_blank">{{ $staff->username }}</a> ~
+                                                                <img src="{{ cms_config('site.web.url') }}/images/myhabbo/{{ $staff->isOnline() ? 'habbo_online_anim' : 'habbo_offline' }}.gif">
+                                                                <br>
+                                                            <b>{{ cms_config('hotel.name.short') }} since</b>: {{ $staff->created_at->format('F Y') }}
+                                                            <br>
+                                                            <b>Motto</b>: {{ $staff->motto }}
+                                                            <br>
+                                                            <b>Last online</b>: {{ $staff->isOnline() ? 'Online now' : $staff->last_online->diffForHumans() }}
+                                                            <br>
                                                         </p>
                                                         <div align="right"></div>
                                                     </td>
