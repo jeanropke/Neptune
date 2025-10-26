@@ -60,12 +60,10 @@
 <br />
 <div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ cms_config('site.web.url') }}/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Credits</div>
-    {{--
     <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.credits.transactions') }}" style="text-decoration:none;{{ $submenu == 'transactions' ? 'font-weight: bold;' : '' }}">Transaction logs</a>
     </div>
-    --}}
     <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.credits.vouchers') }}" style="text-decoration:none;{{ $submenu == 'vouchers' ? 'font-weight: bold;' : '' }}">Voucher Management</a>

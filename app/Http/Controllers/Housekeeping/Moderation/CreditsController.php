@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Housekeeping\Moderation;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue\Item as CatalogueItem;
 use App\Models\User;
+use App\Models\User\Transaction;
 use App\Models\Voucher;
 use App\Models\Voucher\History;
 use App\Models\Voucher\Item;
@@ -99,5 +100,20 @@ class CreditsController extends Controller
         return view('housekeeping.moderation.credits.vouchers_history', [
             'vouchers' => $query->paginate(15),
         ]);
+    }
+
+    public function transactions(Request $request)
+    {
+        abort_unless_permission('can_edit_server_wordfilter');
+
+        $logs = Transaction::when($request->filled('username'), function ($query) use ($request) {
+            $query->whereHas('user', function ($sub) use ($request) {
+                $sub->where('username', $request->username);
+            });
+        })
+            ->with('user')
+            ->paginate(25);
+
+        return view('housekeeping.moderation.credits.transactions')->with('logs', $logs);
     }
 }
