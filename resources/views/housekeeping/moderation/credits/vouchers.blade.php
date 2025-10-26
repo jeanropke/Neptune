@@ -104,7 +104,7 @@
                                         {{ $voucher->is_single_use ? 'Yes' : 'No' }}
                                     </td>
                                     <td class="tablerow2" align="center" id="furni-picker-listing">
-                                        @foreach ($voucher->items as $item)
+                                        @foreach ($voucher->groupedItems() as $item)
                                             <div class="slot" style="height: 56px; line-height: 9;">
                                                 <div class="image" style="background-image: url({{ cms_config('furni.small.url') }}/{{ $item->getNormalizedName() }}_icon.png)"><b>x{{ $item->amount }}</b></div>
                                             </div>
