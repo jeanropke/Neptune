@@ -204,11 +204,10 @@ class Group extends Model
     public function addTag($tag): string
     {
         $tag = Str::lower($tag);
-        if (!$this->tags()->where('tag', $tag)->exists()) {
+        if (!$this->tags()->where('tag', $tag)->exists() && Str::length($tag) < 20) {
             $this->tags()->insert([
-                'tag'           => $tag,
-                'holder_id'     => $this->id,
-                'holder_type'   => 'group'
+                'tag'       => $tag,
+                'group_id'  => $this->id
             ]);
             return 'valid';
         }
