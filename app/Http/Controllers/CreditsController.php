@@ -119,7 +119,7 @@ class CreditsController extends Controller
 
         $itemsRedeemed = [];
 
-        foreach ($voucher->getItems() as $item) {
+        foreach ($voucher->items as $item) {
             $cataItem = Item::where('sale_code', $item->catalogue_sale_code)->first();
             if ($cataItem) {
                 for ($i = 0; $i < $item->amount; $i++) {
