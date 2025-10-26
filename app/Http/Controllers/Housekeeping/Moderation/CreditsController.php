@@ -59,32 +59,45 @@ class CreditsController extends Controller
 
     public function vouchersDelete(Request $request)
     {
-        if (!user()->hasPermission('can_create_vouchers'))
-            return view('housekeeping.ajax.accessdenied_dialog');
+        abort_unless_permission('can_create_vouchers');
 
         $voucher = Voucher::where('voucher_code', $request->id)->first();
 
-        if (!$voucher)
-            return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'This voucher does not exist!']);
+        if (!$voucher) {
+            return view('housekeeping.ajax.dialog_result', [
+                'status'  => 'error',
+                'message' => 'This voucher does not exist!',
+            ]);
+        }
 
         if ($voucher->is_single_use > 0) {
             $voucher->deleteItems();
-            Voucher::where('voucher_code', $request->id)->delete();
+            $voucher->delete();
         }
 
         create_staff_log('credits.vouchers.delete', $request);
 
-        return view('housekeeping.ajax.dialog_result')->with(['status' => 'error', 'message' => 'Voucher deleted!']);
+        return view('housekeeping.ajax.dialog_result', [
+            'status'  => 'success',
+            'message' => 'Voucher deleted!',
+        ]);
     }
 
     public function vouchersHistory(Request $request)
     {
         abort_unless_permission('can_create_vouchers');
 
-        $user = User::where('username', $request->username)->first();
-        if ($user)
-            return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', History::where('user_id', $user->id)->paginate(15));
+        $query = History::with('user');
 
-        return view('housekeeping.moderation.credits.vouchers_history')->with('vouchers', History::with('user')->paginate(15));
+        if ($request->filled('username')) {
+            $user = User::where('username', $request->username)->first();
+            if ($user) {
+                $query->where('user_id', $user->id);
+            }
+        }
+
+        return view('housekeeping.moderation.credits.vouchers_history', [
+            'vouchers' => $query->paginate(15),
+        ]);
     }
 }

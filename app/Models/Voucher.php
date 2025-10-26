@@ -14,11 +14,11 @@ class Voucher extends Model
         'voucher_code', 'credits', 'expiry_date', 'is_single_use'
     ];
 
-    public $primaryKey = 'voucher_code';
-
-    protected $keyType = 'string';
+    protected $primaryKey = 'voucher_code';
 
     public $incrementing = false;
+
+    protected $keyType = 'string';
 
     public $timestamps = false;
 
