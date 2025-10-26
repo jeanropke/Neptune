@@ -29,7 +29,7 @@
                                 <td class="tablesubheader" width="15%" align="center">Created at</td>
                             </tr>
                             @foreach ($ips as $ip)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2"><strong>{{ $user->username }}</strong>
                                         <div class="desctext">
                                             {{ $ip->ip_address }} [<a href="http://who.is/whois-ip/ip-address/{{ $ip->ip_address }}/" target="_blank">WHOIS</a>]

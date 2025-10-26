@@ -24,7 +24,7 @@
                                 <td class="tablesubheader" width="20%" align="center">Date</td>
                             </tr>
                             @forelse ($logs as $log)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2" align="center">
                                         {{ $log->user->username }} (ID: {{ $log->user_id }})
                                     </td>

@@ -65,7 +65,7 @@
                                 <td class="tablesubheader" width="10%" align="center">Edit</td>
                             </tr>
                             @foreach ($users as $user)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $user->id }}
                                     </td>

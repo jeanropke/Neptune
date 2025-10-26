@@ -36,7 +36,7 @@
                                 <td class="tablesubheader" width="6%" align="center">View Report</td>
                             </tr>
                             @foreach ($tickets as $ticket)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $ticket->id }}
                                     </td>

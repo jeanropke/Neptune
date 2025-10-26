@@ -108,7 +108,7 @@
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
                             @forelse ($partners as $partner)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2" align="center">
                                         {{ $partner->id }}
                                     </td>

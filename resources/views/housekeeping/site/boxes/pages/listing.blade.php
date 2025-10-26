@@ -32,7 +32,7 @@
                                     <td class="tablesubheader" width="12%" align="center">Delete</td>
                                 </tr>
                                 @foreach ($boxpages as $boxpage)
-                                    <tr>
+                                    <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                         <td class="tablerow1" align="center">
                                             {{ $boxpage->id }}
                                         </td>

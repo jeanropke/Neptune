@@ -24,7 +24,7 @@
                                 <td class="tablesubheader" width="20%" align="center">Expires on</td>
                             </tr>
                             @forelse ($bans as $ban)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $ban->ban_type }}
                                     <td class="tablerow1" align="center">

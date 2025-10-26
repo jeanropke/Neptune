@@ -63,7 +63,7 @@
                                 <td class="tablesubheader" width="20%" align="center">Created at</td>
                             </tr>
                             @forelse ($chats as $chat)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1">
                                         {{ $chat->user->username }} (ID: {{ $chat->user_id }})
                                         <div class="desctext">

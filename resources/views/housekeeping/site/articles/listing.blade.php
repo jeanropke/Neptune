@@ -27,7 +27,7 @@
                                 <td class="tablesubheader" width="10%" align="center">Edit</td>
                             </tr>
                             @forelse($articles as $article)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $article->id }}
                                     </td>

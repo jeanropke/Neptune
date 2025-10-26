@@ -64,7 +64,7 @@
                                 <td class="tablesubheader" width="15%" align="center">Conversation</td>
                             </tr>
                             @forelse ($messages as $message)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $message->id }}
                                     </td>

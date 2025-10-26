@@ -51,7 +51,7 @@
                                 <td class="tablesubheader" width="10%" align="center">Delete</td>
                             </tr>
                             @forelse($assets as $asset)
-                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : '' }}">
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $asset->id }}
                                     </td>

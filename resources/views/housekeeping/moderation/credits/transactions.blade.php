@@ -53,7 +53,7 @@
                                 <td class="tablesubheader" width="15%" align="center">Date</td>
                             </tr>
                             @forelse ($logs as $log)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1">
                                         <a href="{{ route('housekeeping.credits.transactions', ['username' => $log->user->username]) }}">{{ $log->user->username }}</a>
                                     </td>

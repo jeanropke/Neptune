@@ -26,7 +26,7 @@
                             </tr>
 
                             @forelse ($online as $user)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">{{ $user->id }}</td>
                                     <td class="tablerow2"><strong>{{ $user->username }}</strong>
                                         <div class="desctext">{{ $user->ip_current }} [<a href="http://who.is/whois-ip/ip-address/{{ $user->ip_current }}/" target="_blank">WHOIS</a>]

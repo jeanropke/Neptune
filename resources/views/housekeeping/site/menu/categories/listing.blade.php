@@ -31,7 +31,7 @@
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
                             @forelse($categories as $category)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $category->id }}
                                     </td>

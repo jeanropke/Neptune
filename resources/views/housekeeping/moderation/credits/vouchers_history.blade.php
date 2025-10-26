@@ -50,7 +50,7 @@
                                 <td class="tablesubheader" width="35%" align="center">Items</td>
                             </tr>
                             @forelse ($vouchers as $voucher)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow1" align="center">
                                         {{ $voucher->voucher_code }}
                                     </td>

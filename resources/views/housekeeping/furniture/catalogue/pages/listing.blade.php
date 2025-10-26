@@ -55,7 +55,7 @@
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
                             @forelse ($pages as $page)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2" align="center">
                                         {{ $page->id }}
                                     </td>

@@ -52,7 +52,7 @@
                                 <td class="tablesubheader" width="15%" align="center">Delete</td>
                             </tr>
                             @forelse($words as $w)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2">
                                         <strong>{{ $w->word }}</strong>
                                     </td>

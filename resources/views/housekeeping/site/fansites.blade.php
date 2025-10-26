@@ -88,7 +88,7 @@
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
                             @forelse ($fansites as $fansite)
-                                <tr>
+                                <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td class="tablerow2" align="center">
                                         {{ $fansite->id }}
                                     </td>
