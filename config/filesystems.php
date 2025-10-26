@@ -67,6 +67,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'habboimaging' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/habboimaging'),
+            'url' => env('APP_URL') . '/storage/habboimaging',
+            'visibility' => 'public',
+        ],
+
         'public_root' => [
             'driver' => 'local',
             'root' => public_path(),

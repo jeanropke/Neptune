@@ -10,6 +10,7 @@ use App\Models\Furni\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class HabboImaging extends Controller
 {
@@ -54,16 +55,15 @@ class HabboImaging extends Controller
 
         $expandedstyle = $inputFigure . ".s-" . (($inputSize == "s" || $inputSize == "l") ? $inputSize : 'n') . ($inputHeadOnly ? "h" : "") . ".g-" . $inputGesture . ".d-" . $inputDirection . ".h-" . $inputHeadDirection . ".a-" . implode("-", str_replace("=", "", $inputAction)) . ".f-" . implode("-", str_replace("=", "", $inputFrame));
         $hash = md5($expandedstyle);
-        $path = storage_path('habboimaging/figure');
+        $path = Storage::disk('habboimaging')->path('figure');
 
         if (!File::exists($path))
             File::makeDirectory($path, 0755, true);
 
 
         $cacheName =  $path . "/avatar_" . $expandedstyle . "." . $inputFormat;
-        $resourceCache = true;
 
-        if ($resourceCache && file_exists($cacheName)) {
+        if (cms_config('habboimaging.figure.cached') && file_exists($cacheName)) {
             return response(file_get_contents($cacheName), 200)
                 ->header('Content-Type', 'image/' . $inputFormat)
                 ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
@@ -75,7 +75,7 @@ class HabboImaging extends Controller
             $image = $avatarImage->Generate($inputFormat);
             if ($image !== false) {
 
-                if ($resourceCache) {
+                if (cms_config('habboimaging.figure.cached')) {
                     $fp = fopen($cacheName, "w");
                     fwrite($fp, $image);
                     fclose($fp);
@@ -94,17 +94,15 @@ class HabboImaging extends Controller
 
     public function badge(Request $request)
     {
-        $path = storage_path('habboimaging/badges');
+        $path = Storage::disk('habboimaging')->path('badges');
         $badge = substr($request->badge, 0, 24);
-
 
         $badgeImage = new BadgeImage($badge);
 
         $code = $badgeImage->getBadgeCode();
         $cacheName =  "$path/$code.gif";
-        $resourceCache = true;
 
-        if ($resourceCache && file_exists($cacheName)) {
+        if (cms_config('habboimaging.badges.cached') && file_exists($cacheName)) {
             return response(file_get_contents($cacheName), 200)
                 ->header('Content-Type', 'image/gif')
                 ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
@@ -115,7 +113,7 @@ class HabboImaging extends Controller
             $badgeImage = new BadgeImage($badge);
             $image = $badgeImage->Generate();
 
-            if ($resourceCache) {
+            if (cms_config('habboimaging.badges.cached')) {
                 $fp = fopen($cacheName, "w");
                 fwrite($fp, $image);
                 fclose($fp);
@@ -136,11 +134,10 @@ class HabboImaging extends Controller
         $photo = Photo::find($request->photo);
         if (!$photo) return;
 
-        $path = storage_path('habboimaging/photos');
+        $path = Storage::disk('habboimaging')->path('photos');
         $cacheName =  "$path/photo_$request->photo.png";
-        $resourceCache = true;
 
-        if ($resourceCache && file_exists($cacheName)) {
+        if (cms_config('habboimaging.photos.cached') && file_exists($cacheName)) {
             return response(file_get_contents($cacheName), 200)
                 ->header('Content-Type', 'image/png')
                 ->header('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT\n\n')
@@ -153,7 +150,7 @@ class HabboImaging extends Controller
             $renderer = new PhotoRenderer($pallete->getPalette(), 'SEPIA');
             $image = $renderer->createImage($photo->photo_data);
 
-            if ($resourceCache) {
+            if (cms_config('habboimaging.photos.cached')) {
                 $fp = fopen($cacheName, "w");
                 fwrite($fp, $image);
                 fclose($fp);

@@ -43,6 +43,7 @@ use App\Http\Controllers\Housekeeping\Server\WordfilterController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
+use App\Http\Controllers\Housekeeping\Site\CacheController;
 use App\Http\Controllers\Housekeeping\Site\FansiteController;
 use App\Http\Controllers\Housekeeping\Site\HHAssetController;
 use App\Http\Controllers\Housekeeping\Site\MenuController;
@@ -646,6 +647,15 @@ Route::middleware('admin')->group(function () {
             Route::post('/hh_assets/delete', [HHAssetController::class, 'delete'])->name('housekeeping.site.hh_assets.delete');
             Route::get('/hh_assets/generate', [HHAssetController::class, 'generate'])->name('housekeeping.site.hh_assets.generate');
             Route::post('/hh_assets/generate', [HHAssetController::class, 'generatePost'])->name('housekeeping.site.hh_assets.generate.post');
+
+            Route::get('/cache/settings', [CacheController::class, 'settings'])->name('housekeeping.site.cache.settings');
+            Route::post('/cache/settings', [CacheController::class, 'settingsSave'])->name('housekeeping.site.cache.settings.save');
+            Route::get('/cache/badges', [CacheController::class, 'badgesListing'])->name('housekeeping.site.cache.badges');
+            Route::post('/cache/badges/delete', [CacheController::class, 'badgesDelete'])->name('housekeeping.site.cache.badges.delete');
+            Route::get('/cache/figures', [CacheController::class, 'figuresListing'])->name('housekeeping.site.cache.figures');
+            Route::post('/cache/figures/delete', [CacheController::class, 'figuresDelete'])->name('housekeeping.site.cache.figures.delete');
+            Route::get('/cache/photos', [CacheController::class, 'photosListing'])->name('housekeeping.site.cache.photos');
+            Route::post('/cache/photos/delete', [CacheController::class, 'photosDelete'])->name('housekeeping.site.cache.photos.delete');
         });
 
         Route::prefix('neptunecms')->group(function () {

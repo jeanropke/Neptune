@@ -122,6 +122,26 @@
     </div>
 </div>
 <br />
+<div class="menuouterwrap">
+    <div class="menucatwrap"><img src="{{ cms_config('site.web.url') }}/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Cached Content</div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.cache.settings') }}" style="text-decoration:none;{{ $submenu == 'cache.settings' ? 'font-weight: bold;' : '' }}">Settings</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.cache.figures') }}" style="text-decoration:none;{{ $submenu == 'cache.figures' ? 'font-weight: bold;' : '' }}">Figures</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.cache.badges') }}" style="text-decoration:none;{{ $submenu == 'cache.badges' ? 'font-weight: bold;' : '' }}">Group Badges</a>
+    </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.site.cache.photos') }}" style="text-decoration:none;{{ $submenu == 'cache.photos' ? 'font-weight: bold;' : '' }}">Photos</a>
+    </div>
+</div>
+<br />
 {{--<div class="menuouterwrap">
     <div class="menucatwrap"><img src="{{ cms_config('site.web.url') }}/housekeeping/images/menu_title_bullet.gif" style="vertical-align:bottom" border="0" /> Database Tools</div>
     <div class="menulinkwrap">&nbsp;
