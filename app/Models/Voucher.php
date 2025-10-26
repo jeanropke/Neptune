@@ -11,7 +11,10 @@ class Voucher extends Model
     protected $table = 'vouchers';
 
     protected $fillable = [
-        'voucher_code', 'credits', 'expiry_date', 'is_single_use'
+        'voucher_code',
+        'credits',
+        'expiry_date',
+        'is_single_use'
     ];
 
     protected $primaryKey = 'voucher_code';
@@ -27,10 +30,10 @@ class Voucher extends Model
         return $this->hasMany(Item::class, 'voucher_code', 'voucher_code');
     }
 
-    public function getGroupedItems()
+    public function groupedItems()
     {
         return $this->items()
-            ->select('catalogue_sale_code', DB::raw('COUNT(catalogue_sale_code) AS amount'))
+            ->select('catalogue_sale_code', DB::raw('COUNT(*) as amount'))
             ->groupBy('catalogue_sale_code')
             ->get();
     }
