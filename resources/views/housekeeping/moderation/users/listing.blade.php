@@ -81,7 +81,7 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         @if ($user->last_online)
-                                            {{ \Carbon\Carbon::createFromTimeStamp($user->last_online)->diffForHumans() }}
+                                            {{ $user->last_online->diffForHumans() }}
                                         @else
                                             Never online
                                         @endif
