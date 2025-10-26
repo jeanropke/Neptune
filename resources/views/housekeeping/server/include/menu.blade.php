@@ -5,12 +5,11 @@
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.server') }}" style="text-decoration:none;{{ $submenu == 'server' ? 'font-weight: bold;' : '' }}">General Configuration</a>
     </div>
-{{--
+
    <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.server.wordfilter', false) }}" style="text-decoration:none;{{ $submenu == 'wordfilter' ? 'font-weight: bold;' : '' }}">Wordfilter Options</a>
     </div>
---}}
 
     <div class="menulinkwrap">&nbsp;
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;

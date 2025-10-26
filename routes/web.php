@@ -38,6 +38,7 @@ use App\Http\Controllers\Housekeeping\Moderation\ReportController as Houseekeepi
 use App\Http\Controllers\Housekeeping\Moderation\SupportController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
+use App\Http\Controllers\Housekeeping\Server\WordfilterController;
 use App\Http\Controllers\Housekeeping\Site\AdvertisementController;
 use App\Http\Controllers\Housekeeping\Site\ArticleController as HousekeepingArticleController;
 use App\Http\Controllers\Housekeeping\Site\BoxController;
@@ -532,6 +533,13 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/welcomemsg', [ServerGeneralController::class, 'welcomemsg'])->name('housekeeping.server.welcomemsg');
             Route::post('/welcomemsg', [ServerGeneralController::class, 'welcomemsgSave'])->name('housekeeping.server.welcomemsg.save');
+
+            Route::get('/wordfilter', [WordfilterController::class, 'listing'])->name('housekeeping.server.wordfilter');
+            Route::get('/wordfilter/new', [WordfilterController::class, 'new'])->name('housekeeping.server.wordfilter.new');
+            Route::get('/wordfilter/edit/{word}', [WordfilterController::class, 'edit'])->name('housekeeping.server.wordfilter.edit');
+            Route::post('/wordfilter/save', [WordfilterController::class, 'save'])->name('housekeeping.server.wordfilter.save');
+            Route::post('/wordfilter/delete', [WordfilterController::class, 'delete'])->name('housekeeping.server.wordfilter.delete');
+
         });
 
         Route::prefix('furniture')->group(function () {
