@@ -89,6 +89,10 @@
         <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
         <a href="{{ route('housekeeping.moderation.unban') }}" style="text-decoration:none;{{ $submenu == 'moderation.unban' ? 'font-weight: bold;' : '' }}">Unbanning</a>
     </div>
+    <div class="menulinkwrap">&nbsp;
+        <img src="{{ cms_config('site.web.url') }}/housekeeping/images/item_bullet.gif" border="0" alt="" valign="absmiddle">&nbsp;
+        <a href="{{ route('housekeeping.moderation.tags') }}" style="text-decoration:none;{{ $submenu == 'moderation.tags' ? 'font-weight: bold;' : '' }}">Tags</a>
+    </div>
 </div>
 <br />
 <div class="menuouterwrap">

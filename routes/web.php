@@ -36,6 +36,7 @@ use App\Http\Controllers\Housekeeping\Moderation\LogController;
 use App\Http\Controllers\Housekeeping\Moderation\RemoteController;
 use App\Http\Controllers\Housekeeping\Moderation\ReportController as HouseekeepingReportController;
 use App\Http\Controllers\Housekeeping\Moderation\SupportController;
+use App\Http\Controllers\Housekeeping\Moderation\TagController as HouseekeepingTagController;
 use App\Http\Controllers\Housekeeping\Moderation\UserController;
 use App\Http\Controllers\Housekeeping\Server\ServerGeneralController;
 use App\Http\Controllers\Housekeeping\Server\WordfilterController;
@@ -720,6 +721,9 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/support', [SupportController::class, 'listing'])->name('housekeeping.moderation.support.listing');
             Route::get('/support/view/{id}', [SupportController::class, 'view'])->name('housekeeping.moderation.support.view');
+
+            Route::get('/tags', [HouseekeepingTagController::class, 'listing'])->name('housekeeping.moderation.tags');
+            Route::post('/tags/delete', [HouseekeepingTagController::class, 'delete'])->name('housekeeping.moderation.tags.delete');
         });
 
         Route::prefix('logs')->group(function () {
