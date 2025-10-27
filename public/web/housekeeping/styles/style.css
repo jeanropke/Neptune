@@ -1515,16 +1515,18 @@ ins,
     padding-left: 0;
     list-style: none;
 }
+.page-link a, .page-link span  {
+    padding: .5rem .75rem;
+}
 
 .page-link {
     position: relative;
-    display: block;
+    display: grid;
     margin-left: -1px;
     line-height: 1.25;
     color: #acbfd9;
     background-color: #fff;
     border: 1px solid #dee2e6;
-    padding: .5rem .75rem;
 }
 
 .page-link:hover {
