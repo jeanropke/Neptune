@@ -9,6 +9,11 @@
             // General options
             selector: '#article',
             theme : "advanced",
+            width: "100%",
+            height: 400,
+            convert_urls: true,
+            relative_urls: false,
+            remove_script_host: false,
             //plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
 
             // Theme options
