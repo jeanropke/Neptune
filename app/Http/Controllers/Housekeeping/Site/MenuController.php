@@ -40,7 +40,8 @@ class MenuController extends Controller
             'caption'   => 'required',
             'icon'      => 'required',
             'order_num' => 'required|numeric',
-            'min_rank'  => 'required|numeric'
+            'min_rank'  => 'required|numeric',
+            'visible'   => 'required|in:0,1'
         ]);
 
         $category = Menu::find($request->id);
@@ -54,7 +55,8 @@ class MenuController extends Controller
             'url'       => $request->url ?? '',
             'icon'      => $request->icon,
             'order_num' => $request->order_num,
-            'min_rank'  => $request->min_rank
+            'min_rank'  => $request->min_rank,
+            'visible'   => $request->visible
         ]);
 
         return redirect()->route('housekeeping.site.menu.categories.edit', $category->id)->with('message',  'Category edited!');
@@ -75,7 +77,8 @@ class MenuController extends Controller
             'caption'   => 'required',
             'icon'      => 'required',
             'order_num' => 'required|numeric',
-            'min_rank'  => 'required|numeric'
+            'min_rank'  => 'required|numeric',
+            'visible'   => 'required|in:0,1'
         ]);
 
         $menu = Menu::create([
@@ -84,7 +87,8 @@ class MenuController extends Controller
             'icon'      => $request->icon,
             'order_num' => $request->order_num,
             'min_rank'  => $request->min_rank,
-            'parent_id' => '-1'
+            'parent_id' => '-1',
+            'visible'   => $request->visible
         ]);
 
         create_staff_log('site.menus.categories.save', $request);
@@ -147,7 +151,8 @@ class MenuController extends Controller
             'caption'   => 'required',
             'parent_id' => 'required|exists:cms_menu,id',
             'order_num' => 'required|numeric',
-            'min_rank'  => 'required|numeric'
+            'min_rank'  => 'required|numeric',
+            'visible'   => 'required|in:0,1'
         ]);
 
         $subcategory = Menu::find($request->id);
@@ -159,7 +164,8 @@ class MenuController extends Controller
             'url'       => $request->url ?? '',
             'parent_id' => $request->parent_id,
             'order_num' => $request->order_num,
-            'min_rank'  => $request->min_rank
+            'min_rank'  => $request->min_rank,
+            'visible'   => $request->visible
         ]);
 
         create_staff_log('site.menus.subcategories.save', $request);
@@ -183,7 +189,8 @@ class MenuController extends Controller
             'caption'   => 'required',
             'parent_id' => 'required|exists:cms_menu,id',
             'order_num' => 'required|numeric',
-            'min_rank'  => 'required|numeric'
+            'min_rank'  => 'required|numeric',
+            'visible'   => 'required|in:0,1'
         ]);
 
         $subcategory = Menu::create([
@@ -191,7 +198,8 @@ class MenuController extends Controller
             'url'       => $request->url ?? '',
             'parent_id' => $request->parent_id,
             'order_num' => $request->order_num,
-            'min_rank'  => $request->min_rank
+            'min_rank'  => $request->min_rank,
+            'visible'   => $request->visible
         ]);
 
         create_staff_log('site.menus.subcategories.create', $request);

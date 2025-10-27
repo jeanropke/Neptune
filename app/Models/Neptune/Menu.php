@@ -15,7 +15,8 @@ class Menu extends Model
         'icon',
         'parent_id',
         'order_num',
-        'min_rank'
+        'min_rank',
+        'visible'
     ];
 
     public $timestamps = false;

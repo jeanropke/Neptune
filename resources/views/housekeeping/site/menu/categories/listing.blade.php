@@ -21,11 +21,12 @@
                         <table cellpadding="4" cellspacing="0" width="100%">
                             <tr>
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
-                                <td class="tablesubheader" width="30%">Caption</td>
+                                <td class="tablesubheader" width="25%">Caption</td>
                                 <td class="tablesubheader" width="20%" align="center">Icon</td>
                                 <td class="tablesubheader" width="20%" align="center">Url</td>
                                 <td class="tablesubheader" width="5%" align="center">Order</td>
                                 <td class="tablesubheader" width="5%" align="center">Min Rank</td>
+                                <td class="tablesubheader" width="5%" align="center">Visible</td>
                                 <td class="tablesubheader" width="5%" align="center">Sub Menus</td>
                                 <td class="tablesubheader" width="5%" align="center">Edit</td>
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
@@ -49,6 +50,9 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $category->min_rank }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $category->visible ? 'Yes' : 'No' }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $category->submenus->count() }} - <a href="{{ route('housekeeping.site.menu.subcategories.listing') }}?parent_id={{ $category->id }}">See them</a>

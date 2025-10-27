@@ -68,6 +68,17 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Visible</b>
+                                        <div class="graytext">Should this subcategory show up on the menu?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="visible" id="visible" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ old('visible') ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ old('visible') ? 'selected' : '' }}>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" class="tablesubheader" colspan="2">
                                         <input type="submit" value="Save Sub Category" class="realbutton" accesskey="s">
                                     </td>

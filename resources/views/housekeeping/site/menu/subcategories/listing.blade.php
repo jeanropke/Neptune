@@ -22,10 +22,11 @@
                             <tr>
                                 <td class="tablesubheader" width="5%" align="center">ID</td>
                                 <td class="tablesubheader" width="5%" align="center">Parent ID</td>
-                                <td class="tablesubheader" width="30%">Caption</td>
+                                <td class="tablesubheader" width="25%">Caption</td>
                                 <td class="tablesubheader" width="20%" align="center">Url</td>
                                 <td class="tablesubheader" width="5%" align="center">Order</td>
                                 <td class="tablesubheader" width="5%" align="center">Min Rank</td>
+                                <td class="tablesubheader" width="5%" align="center">Visible</td>
                                 <td class="tablesubheader" width="5%" align="center">Edit</td>
                                 <td class="tablesubheader" width="5%" align="center">Delete</td>
                             </tr>
@@ -48,6 +49,9 @@
                                     </td>
                                     <td class="tablerow2" align="center">
                                         {{ $subcategory->min_rank }}
+                                    </td>
+                                    <td class="tablerow2" align="center">
+                                        {{ $subcategory->visible ? 'Yes' : 'No' }}
                                     </td>
                                     <td class="tablerow2" align="center">
                                         <a href="{{ route('housekeeping.site.menu.subcategories.edit', $subcategory->id) }}">

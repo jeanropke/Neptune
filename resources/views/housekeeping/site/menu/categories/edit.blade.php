@@ -45,7 +45,8 @@
                                         <div class="graytext"></div>
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
-                                        <img src="{{ cms_config('site.c_images.url') }}/navi_icons/{{ $category->icon }}.gif" id="icon_preview" data-url="{{ cms_config('site.c_images.url') }}/navi_icons/%icon%.gif">
+                                        <img src="{{ cms_config('site.c_images.url') }}/navi_icons/{{ $category->icon }}.gif" id="icon_preview"
+                                            data-url="{{ cms_config('site.c_images.url') }}/navi_icons/%icon%.gif">
                                         <br>
                                         <select name="icon" id="icon_selector" class="textinput" style="margin-top: 5px;" size="1">
                                             @foreach ($icons as $icon)
@@ -68,6 +69,17 @@
                                     </td>
                                     <td class="tablerow2" width="60%" valign="middle">
                                         <input type="text" name="min_rank" value="{{ old('min_rank') ?? $category->min_rank }}" size="30" class="textinput">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tablerow1" width="40%" valign="middle"><b>Visible</b>
+                                        <div class="graytext">Should this category show up on the menu?</div>
+                                    </td>
+                                    <td class="tablerow2" width="60%" valign="middle">
+                                        <select name="visible" id="visible" class="textinput" style="margin-top: 5px;" size="1">
+                                            <option value="0" {{ $category->visible ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ $category->visible ? 'selected' : '' }}>Yes</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>

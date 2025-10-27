@@ -25,6 +25,9 @@ class UserGroup
             }
             return redirect('maintenance');
         }
+
+        abort_if(!cms_menu_permission(request()->path()), 404);
+
         return $next($request);
     }
 }

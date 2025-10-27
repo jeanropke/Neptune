@@ -180,7 +180,27 @@ function create_staff_log($page, $request)
 
 function cms_menu($parent = -1)
 {
-    return Menu::where([['parent_id', $parent], ['min_rank', '<=', Auth::check() ? user()->rank : 1]])->orderBy('order_num', 'ASC')->get();
+    return Menu::where([['parent_id', $parent], ['min_rank', '<=', user()->rank ?? 1], ['visible', 1]])->orderBy('order_num', 'ASC')->get();
+}
+
+function cms_menu_permission($url)
+{
+    $menu = Menu::where('url', $url)->first();
+
+    if (!$menu) {
+        return true;
+    }
+
+    $userRank = user()->rank ?? 1;
+
+    $requiredRank = $menu->min_rank;
+
+    if ($menu->parent_id) {
+        $parentRank = Menu::where('id', $menu->parent_id)->value('min_rank');
+        $requiredRank = max($requiredRank, $parentRank);
+    }
+
+    return $userRank >= $requiredRank;
 }
 
 function rcon($key, $data = [])
