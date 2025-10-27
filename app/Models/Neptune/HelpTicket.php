@@ -17,15 +17,17 @@ class HelpTicket extends Model
         'issue',
         'message',
         'picked_by',
-        'status'
+        'status',
+        'token'
     ];
 
     public function getStatusLabelAttribute(): string
     {
         return match ($this->status) {
             0 => 'open',
-            1 => 'pending',
-            2 => 'closed'
+            1 => 'waiting_user',
+            2 => 'waiting_staff',
+            3 => 'closed'
         };
     }
 

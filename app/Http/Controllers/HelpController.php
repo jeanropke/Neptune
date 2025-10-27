@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Neptune\HelpTicket;
+use App\Models\Neptune\HelpTicketResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Str;
 
 class HelpController extends Controller
 {
@@ -84,6 +85,7 @@ class HelpController extends Controller
                     'email'     => session('email'),
                     'issue'     => session('issue'),
                     'message'   => $request->message,
+                    'token'     => Str::random(64)
                 ]);
 
                 session()->forget(['name', 'email', 'issue']);
@@ -94,5 +96,32 @@ class HelpController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function iotTicket(Request $request)
+    {
+        $ticket = HelpTicket::find($request->id);
+        if ($ticket->token != $request->token || $ticket->status == 3)
+            return abort(404);
+
+        return view('help.iot.ticket')->with('ticket', $ticket);
+    }
+
+    public function iotTicketSend(Request $request)
+    {
+        $ticket = HelpTicket::find($request->id);
+        if ($ticket->token != $request->token || $ticket->status == 3)
+            return abort(404);
+
+        HelpTicketResponse::create([
+            'ticket_id'     => $ticket->id,
+            'message'       => $request->message,
+            'response_by'   => null,
+            'email_sent'    => 1
+        ]);
+
+        $ticket->update(['status' => 2]);
+
+        return view('help.iot.done');
     }
 }

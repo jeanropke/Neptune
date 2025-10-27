@@ -279,6 +279,9 @@ Route::middleware('user')->group(function () {
     Route::prefix('iot')->group(function () {
         Route::get('/go', [HelpController::class, 'iotGo'])->name('iot.go');
         Route::post('/go', [HelpController::class, 'iotNext'])->name('iot.next');
+        Route::get('/ticket', [HelpController::class, 'iotTicket'])->name('iot.ticket');
+        Route::post('/ticket', [HelpController::class, 'iotTicketSend'])->name('iot.ticket.send');
+
     });
 
     Route::get('/home', [HomeController::class, 'homeTutorial'])->name('home.user.tutorial');
@@ -731,6 +734,9 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/support', [SupportController::class, 'listing'])->name('housekeeping.moderation.support.listing');
             Route::get('/support/view/{id}', [SupportController::class, 'view'])->name('housekeeping.moderation.support.view');
+            Route::post('/support/view/preview', [SupportController::class, 'preview'])->name('housekeeping.moderation.support.preview');
+            Route::post('/support/view/send', [SupportController::class, 'send'])->name('housekeeping.moderation.support.send');
+            Route::post('/support/view/close', [SupportController::class, 'close'])->name('housekeeping.moderation.support.close');
 
             Route::get('/tags', [HouseekeepingTagController::class, 'listing'])->name('housekeeping.moderation.tags');
             Route::post('/tags/delete', [HouseekeepingTagController::class, 'delete'])->name('housekeeping.moderation.tags.delete');

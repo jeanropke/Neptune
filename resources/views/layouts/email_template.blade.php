@@ -11,12 +11,19 @@
         padding: 0
     }
 
-    a {
+    #preview-response a, a {
         color: #f16100;
         font-weight: bold;
     }
 
-    .process-button {
+    #preview-response a:link,
+    #preview-response a:hover,
+    #preview-response a:visited,
+    #preview-response a:active {
+    }
+
+    .process-button,
+    #preview-response .process-button {
         padding: 2px 8px;
         font-size: 12px;
         background-color: #FC6303;
