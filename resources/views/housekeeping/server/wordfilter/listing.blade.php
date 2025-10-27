@@ -40,7 +40,7 @@
                     </div>
                     <br />
 
-                    <div style="text-align: center; vertical-align: middle;">{!! $words->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $words->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <div class="tableborder">
                         <div class="tableheaderalt">Wordfilter Options</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
@@ -91,7 +91,7 @@
                         GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this wordfilter? This cannot be undone!</p>',
                             '{{ route('housekeeping.server.wordfilter.delete') }}', 'tr');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $words->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $words->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

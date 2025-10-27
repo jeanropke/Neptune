@@ -123,6 +123,7 @@
                             @endforelse
                         </table>
                     </div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $vouchers->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <script>
                         FurniPicker.initialise();
                         VoucherManager.initialise(12);

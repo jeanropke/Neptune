@@ -78,7 +78,7 @@
                         GenericManager.initialise('.delete-stickie', '<p>Are you sure you want to delete this stickie? The stickie will be hidden!</p>', '{{ route('housekeeping.moderation.homes.stickies.delete') }}');
                         GenericManager.initialise('.restore-stickie', '<p>Are you sure you want to restore this stickie?</p>', '{{ route('housekeeping.moderation.homes.stickies.restore') }}');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $stickies->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $stickies->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

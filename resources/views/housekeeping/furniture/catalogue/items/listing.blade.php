@@ -108,7 +108,7 @@
                     <script>
                         GenericManager.initialise('.delete-catalogueitem', '<p>Are you sure you want to delete this catalogue item? This cannot be undone!</p>', '{{ route('housekeeping.furniture.catalogue.items.delete') }}', 'tr');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $items->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $items->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

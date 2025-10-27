@@ -58,7 +58,7 @@
                             <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.boxes.create') }}">Create New Box</a></span></div>
                         </div>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $boxes->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $boxes->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <script>
                         GenericManager.initialise('.delete-box', '<p>Are you sure you want to delete this box? This cannot be undone!</p>', '{{ route('housekeeping.site.boxes.delete') }}', 'tr');
                     </script>

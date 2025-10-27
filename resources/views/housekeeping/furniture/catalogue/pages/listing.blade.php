@@ -107,7 +107,7 @@
                             '{{ route('housekeeping.furniture.catalogue.pages.delete') }}', 'tr');
                     </script>
 
-                    <div style="text-align: center; vertical-align: middle;">{!! $pages->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $pages->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

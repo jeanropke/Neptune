@@ -70,7 +70,7 @@
                                         {{ $message->created_at->format('M j, Y h:i:s A') }}
                                     </td>
                                     <td class="tablerow2" align="center">
-                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={ $message->author->username }}">Remote ban</a> -
+                                        <a href="{{ route('housekeeping.moderation.remote.ban') }}?username={{ $message->author->username }}">Remote ban</a> -
                                         @if ($message->deletedBy)
                                             <span class="restore-message" data-id="{{ $message->id }}">Restore</span>
                                         @else
@@ -90,7 +90,7 @@
                         GenericManager.initialise('.delete-message', '<p>Are you sure you want to delete this message? This action cannot be undone!</p>', '{{ route('housekeeping.moderation.homes.guestbook.delete') }}');
                         GenericManager.initialise('.restore-message', '<p>Are you sure you want to restore this message?</p>', '{{ route('housekeeping.moderation.homes.guestbook.restore') }}');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $messages->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $messages->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

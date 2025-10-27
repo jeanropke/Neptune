@@ -131,7 +131,7 @@
                         GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this fansite? This cannot be undone!</p>',
                             '{{ route('housekeeping.site.fansites.delete') }}');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $fansites->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $fansites->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

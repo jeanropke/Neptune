@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $assets->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $assets->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <script>
                         GenericManager.initialise('.delete-box', '<p>Are you sure you want to delete Habbo Home asset? This cannot be undone!</p>',
                             '{{ route('housekeeping.site.hh_assets.delete') }}', 'tr');

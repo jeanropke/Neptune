@@ -154,7 +154,7 @@
                         GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this partner? This cannot be undone!</p>',
                             '{{ route('housekeeping.site.partners.delete') }}');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $partners->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $partners->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

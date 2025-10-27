@@ -65,7 +65,7 @@
                             <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.articles.create') }}">Compose New News Item</a></span>
                             </div>
                         </div>
-                        <div style="text-align: center; vertical-align: middle;">{{ $articles->withQueryString()->links('layouts.housekeeping.pagination') }}</div>
+                        <div style="text-align: center; vertical-align: middle;">{{ $articles->withQueryString()->links('includes.housekeeping.pagination') }}</div>
                     </div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

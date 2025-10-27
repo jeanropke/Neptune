@@ -40,7 +40,7 @@
                     </div>
                     <br />
 
-                    <div style="text-align: center; vertical-align: middle;">{!! $tags->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $tags->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <div class="tableborder">
                         <div class="tableheaderalt">Tags Listing</div>
                         <table cellpadding="4" cellspacing="0" width="100%">
@@ -81,7 +81,7 @@
                     <script>
                         GenericManager.initialise('.delete-item', '<p>Are you sure you want to delete this tag from all groups, users ands rooms? This action cannot be undone!</p>', '{{ route('housekeeping.moderation.tags.delete') }}', 'tr');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $tags->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $tags->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

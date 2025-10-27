@@ -44,7 +44,7 @@
                         </table>
                     </div>
                     <div style="text-align: center; vertical-align: middle;">
-                        {!! $ips->links('layouts.housekeeping.pagination') !!}
+                        {!! $ips->links('includes.housekeeping.pagination') !!}
                     </div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->

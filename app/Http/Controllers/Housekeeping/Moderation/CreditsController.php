@@ -17,7 +17,7 @@ class CreditsController extends Controller
     {
         abort_unless_permission('can_create_vouchers');
 
-        $vouchers = Voucher::get();
+        $vouchers = Voucher::paginate(25);
 
         return view('housekeeping.moderation.credits.vouchers', compact('vouchers'));
     }

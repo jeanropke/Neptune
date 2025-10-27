@@ -70,7 +70,7 @@
                             <div class="fauxbutton-wrapper"><span class="fauxbutton"><a href="{{ route('housekeeping.site.menu.subcategories.create') }}">Create New Subcategory</a></span></div>
                         </div>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $subcategories->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $subcategories->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                     <script>
                         GenericManager.initialise('.delete-subcategory', '<p>Are you sure you want to delete this sub category? This cannot be undone!</p>', '{{ route('housekeeping.site.menu.subcategories.delete') }}', 'tr');
                     </script>

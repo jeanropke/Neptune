@@ -84,7 +84,7 @@
                             @endforelse
                         </table>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $logs->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $logs->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

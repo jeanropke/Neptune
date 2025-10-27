@@ -91,7 +91,7 @@
                         GenericManager.initialise('.delete-publicroom', '<p>Are you sure you want to delete this publicroom? This cannot be undone!</p>',
                             '{{ route('housekeeping.editor.publicroom.delete') }}', 'tr');
                     </script>
-                    <div style="text-align: center; vertical-align: middle;">{!! $rooms->withQueryString()->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $rooms->withQueryString()->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>

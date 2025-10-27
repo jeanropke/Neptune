@@ -44,7 +44,7 @@
                             @endforelse
                         </table>
                     </div>
-                    <div style="text-align: center; vertical-align: middle;">{!! $bans->links('layouts.housekeeping.pagination') !!}</div>
+                    <div style="text-align: center; vertical-align: middle;">{!! $bans->links('includes.housekeeping.pagination') !!}</div>
                 </div>
                 <!-- / RIGHT CONTENT BLOCK -->
             </td>
