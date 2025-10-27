@@ -42,6 +42,11 @@ class EntertainmentController extends Controller
         return view('entertainment.habbowood.sharemovie', compact('movie'));
     }
 
+    public function habbowoodShareMovieTell()
+    {
+        return view('entertainment.habbowood.sharemovie_tell');
+    }
+
     public function habbowoodMyMovies()
     {
         $user = user();

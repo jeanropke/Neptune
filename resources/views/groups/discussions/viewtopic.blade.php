@@ -23,7 +23,7 @@
                                         title="Private group" class="header-bar-group-status">
                                 @endif
                             </span>
-                            <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink={{ $group->url }}/discussions" id="tell-button"
+                            <a href="{{ url('/') }}/community/mgm_sendlink_invite?sendLink={{ $group->url }}/discussions" id="tell-button"
                                 class="toolbutton tell"><span>Tell a friend</span></a>
                             @auth
                                 @if ($group->getMember(user()->id))

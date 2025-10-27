@@ -22,7 +22,7 @@
                                             <form action="{{ url('/') }}/community/mgm_sendlink#invite_1" method="post" id="invite_1_invitation_form">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="invite_1_sent" value="true">
-
+                                                <input type="hidden" name="invite_1_page" value="{{ request()->page }}">
 
                                                 <div class="blackbubble">
                                                     <div class="blackbubble-body">

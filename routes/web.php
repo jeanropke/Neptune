@@ -157,6 +157,7 @@ Route::middleware('user')->group(function () {
         Route::get('/habbowood/movies', [EntertainmentController::class, 'habbowoodMovies'])->name('entertainment.habbowood.movies');
         Route::get('/habbowood/movies/{id}', [EntertainmentController::class, 'habbowoodMoviePlayer'])->name('entertainment.habbowood.movieplayer');
         Route::get('/habbowood/sharemovie/{movie}', [EntertainmentController::class, 'habbowoodShareMovie'])->name('entertainment.habbowood.sharemovie');
+        Route::get('/habbowood/sharemovie_tell', [EntertainmentController::class, 'habbowoodShareMovieTell'])->name('entertainment.habbowood.sharemovie_tell');
         Route::get('/habbowood/mymovies', [EntertainmentController::class, 'habbowoodMyMovies'])->name('entertainment.habbowood.mymovies');
         Route::get('/habbowood/embed', fn() => view('entertainment.habbowood.embed'))->name('entertainment.habbowood.embed');
         Route::get('/habbowood/movieshc', fn() => view('entertainment.habbowood.movieshc'))->name('entertainment.habbowood.movieshc');

@@ -121,7 +121,7 @@
                                 </a>
                             @endauth
                             @if (!$editing)
-                                <a href="{{ url('/') }}/community/mgm_sendlink_invite.html?sendLink=/home/{{ $owner->username }}" id="tell-button"
+                                <a href="{{ url('/') }}/community/mgm_sendlink_invite?sendLink=/home/{{ $owner->username }}" id="tell-button"
                                     class="toolbutton tell"><span>Tell a friend</span></a>
                             @endif
                         </div>

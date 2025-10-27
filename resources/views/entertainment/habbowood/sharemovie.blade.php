@@ -80,7 +80,7 @@
                                     <p>Share this movie with all your friends!<br></p>
                                     <p><br></p>
                                     <p>
-                                        <a class="colorlink orange" href="{{ url('/') }}/entertainment/habbowood/sharemovie_tell.html?page=/entertainment/habbowood/movies/{{ $movie->id }}">
+                                        <a class="colorlink orange" href="{{ url('/') }}/entertainment/habbowood/sharemovie_tell?page=/entertainment/habbowood/movies/{{ $movie->id }}">
                                             <span>Tell my friend about this movie</span>
                                         </a>
                                         <span style="font-weight: bold;">&nbsp;</span>
