@@ -92,7 +92,7 @@ class GameHistory extends Model
         $statsWithUsername = $statsCollection->map(function ($stat) use ($users) {
             return (object) [
                 ...$stat,
-                'username' => $users[$stat['user_id']]->username ?? '--',
+                'username' => $users[$stat['user_id']]->username ?? 'userid:' . $stat['user_id'],
             ];
         });
 

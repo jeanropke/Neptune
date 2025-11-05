@@ -397,6 +397,7 @@ class WidgetController extends Controller
 
         switch ($request->type) {
             case 'week':
+                $period =  $period->isMonday() ? $period : $period->previous(Carbon::MONDAY);
                 $startDate  = $period->copy()->startOfDay();
                 $endDate    = $period->copy()->addDays(6)->endOfDay();
                 break;
@@ -405,7 +406,7 @@ class WidgetController extends Controller
                 $endDate    = $period->copy()->endOfMonth();
                 break;
             case 'all':
-                $startDate  = Carbon::parse('01/01/2015');
+                $startDate  = Carbon::parse(cms_config('hotel.created.at'));
                 $endDate    = Carbon::now();
                 break;
         }
@@ -444,6 +445,7 @@ class WidgetController extends Controller
 
         switch ($request->type) {
             case 'week':
+                $period =  $period->isMonday() ? $period : $period->previous(Carbon::MONDAY);
                 $startDate  = $period->copy()->startOfDay();
                 $endDate    = $period->copy()->addDays(6)->endOfDay();
                 break;
